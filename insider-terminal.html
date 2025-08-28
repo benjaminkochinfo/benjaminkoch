@@ -154,8 +154,30 @@ function drawChart(canvas, spec){
 var __daySentences = new Set();
 function splitSents(t){ const m=t.match(/[^.!?]+(?:[.!?]+|$)/g)||[]; return m.map(s=>s.trim()).filter(Boolean); }
 function rewriteOnce(s,i){
-  let out=s.replace(/\bpolicy\b/gi,'policy mix').replace(/\bcarry\b/gi,'carry income').replace(/\bliquidity\b/gi,'liquidity plumbing').replace(/\bvolatility\b/gi,'vol').replace(/\bnarratives?\b/gi,'stories').replace(/\boperators\b/gi,'hands').replace(/\bout(rage|rage)\b/gi,'indignation').replace(/\bdiscipline\b/gi,'rigor').replace(/\bpatience\b/gi,'forbearance').replace(/\bcentral banks?\b/gi,'the committee').replace(/\bquantitative tightening\b/gi,'QT').replace(/\bquantitative easing\b/gi,'QE').replace(/\bpivot\b/gi,'reset').replace(/\bpanic\b/gi,'hurry').replace(/\bcollapse\b/gi,'re-pricing').replace(/\boptimism\b/gi,'constructive bias');
-  if(out.includes(';') && i%2===1){ const parts=out.split(';'); if(parts.length===2) out=parts[1].trim()+'. '+parts[0].trim()+'.'; }
+    let out = s
+    .replace(/\bpolicy\b/gi,'policy mix')
+    .replace(/\bcarry\b/gi,'carry income')
+    .replace(/\bliquidity\b/gi,'liquidity plumbing')
+    .replace(/\bvolatility\b/gi,'vol')
+    .replace(/\bnarratives?\b/gi,'stories')
+    .replace(/\boperators\b/gi,'hands')
+    .replace(/\bout(rage|rage)\b/gi,'indignation')
+    .replace(/\bdiscipline\b/gi,'rigor')
+    .replace(/\bpatience\b/gi,'forbearance')
+    .replace(/\bcentral banks?\b/gi,'the committee')
+    .replace(/\bquantitative tightening\b/gi,'QT')
+    .replace(/\bquantitative easing\b/gi,'QE')
+    .replace(/\bpivot\b/gi,'reset')
+    .replace(/\bpanic\b/gi,'hurry')
+    .replace(/\bcollapse\b/gi,'re-pricing')
+    .replace(/\boptimism\b/gi,'constructive bias')
+    .replace(/\bvol surface\b/gi,'vol surface')
+    .replace(/\bpositioning\b/gi, i%2 ? 'stance' : 'positioning')
+    .replace(/\bstory\b/gi, i%2 ? 'narrative' : 'story');
+  // Occasionally swap clause order for variety
+  if(out.includes(';') && i%2===1){
+    const parts=out.split(';'); if(parts.length===2) out=parts[1].trim()+'. '+parts[0].trim()+'.';
+  }
   return out;
 }
 function uniquePara(text){
@@ -165,26 +187,34 @@ function uniquePara(text){
 
 // ==== openers / deks
 const OPENERS = [
-  h=>`Ignore the theatrics; the incentive trail points here: ${h}.`,
-  h=>`Under the noise floor, cash‑flow math rewrites the story: ${h}.`,
+ h=>`Ignore the theatrics; the incentive trail points here: ${h}.`,
+  h=>`Under the noise floor, cash-flow math rewrites the story: ${h}.`,
   h=>`When policy bluffs, the curve answers. Today’s answer: ${h}.`,
   h=>`Liquidity is a temperament test; the calm pass first: ${h}.`,
   h=>`Vol doesn’t vanish—it charges rent. The invoice reads: ${h}.`,
   h=>`Positioning is a mirror; today it stops lying: ${h}.`,
-  h=>`Sequence first, spectacle last. The tape’s message: ${h}.`
+  h=>`Sequence first, spectacle last. The tape’s message: ${h}.`,
+  h=>`Price is the judge; time is the jury; narratives are the audience: ${h}.`,
+  h=>`The curve speaks in schedules; headlines speak in pleas: ${h}.`,
+  h=>`Cash flows whisper what press releases won’t: ${h}.`,
+  h=>`If the story needs applause, the trade needs mercy: ${h}.`,
+  h=>`Collaterals don’t argue; they settle: ${h}.`,
+  h=>`Basis narrows, excuses widen—pick a side: ${h}.`,
+  h=>`The patient don’t predict; they collect. Today’s collection: ${h}.`,
+  h=>`When correlations wobble, signal persists. The signal is: ${h}.`
 ];
 const DEK_VERBS = {
-  markets: ["maps incentives", "prices patience", "tests positioning", "rewards structure", "disciplines drama"],
-  policy: ["moves cash‑flows", "quietly rewrites borders", "tightens collateral", "reopens channels", "narrows discretion"],
-  behaviour: ["taxes impatience", "prices bias", "teaches forbearance", "punishes FOMO", "rewards sequencing"],
-  energy: ["translates scarcity", "argues in barrels", "lets freight decide", "leans on storage", "pays crack spreads"],
-  fx: ["listens to real yields", "steepens the story", "tests carry", "prices divergence", "favors liquidity"],
-  housing: ["meets wages", "reopens credit boxes", "disciplines stories", "finds a behavioural floor", "normalizes issuance"],
-  commodities: ["relearns gravity", "prices logistics", "reopens arbitrage", "normalizes supply", "compresses vol"],
-  metals: ["flags scarcity", "prices forbearance", "tracks funding", "tests patience", "remembers basis"],
-  coffee: ["tightens differentials", "listens to weather", "normalizes premiums", "keeps carry alive", "rewards hedgers"],
-  agri: ["resets margins", "prices inputs", "moves with weather", "honors storage", "disciplines basis"],
-  central: ["moves reserves", "re-maps collateral", "tightens the joints", "lets balance sheets speak", "prices discretion"]
+   markets: ["maps incentives", "prices patience", "tests positioning", "rewards structure", "disciplines drama", "compresses stories", "pays sequences"],
+  policy: ["moves cash-flows", "quietly rewrites borders", "tightens collateral", "reopens channels", "narrows discretion", "rearranges liabilities", "audits fiction"],
+  behaviour: ["taxes impatience", "prices bias", "teaches forbearance", "punishes FOMO", "rewards sequencing", "disciplines reflex", "rerates attention"],
+  energy: ["translates scarcity", "argues in barrels", "lets freight decide", "leans on storage", "pays crack spreads", "resolves with inventories", "balances throughput"],
+  fx: ["listens to real yields", "steepens the story", "tests carry", "prices divergence", "favors liquidity", "rations virtue", "funds the silence"],
+  housing: ["meets wages", "reopens credit boxes", "disciplines stories", "finds a behavioural floor", "normalizes issuance", "teaches amortization", "sizes affordability"],
+  commodities: ["relearns gravity", "prices logistics", "reopens arbitrage", "normalizes supply", "compresses vol", "rewards hedgers", "taxes noise"],
+  metals: ["flags scarcity", "prices forbearance", "tracks funding", "tests patience", "remembers basis", "sorts paper from physical", "grades credibility"],
+  coffee: ["tightens differentials", "listens to weather", "normalizes premiums", "keeps carry alive", "rewards hedgers", "teaches restraint", "resolves with harvests"],
+  agri: ["resets margins", "prices inputs", "moves with weather", "honors storage", "disciplines basis", "listens to freight", "pays predictability"],
+  central: ["moves reserves", "re-maps collateral", "tightens the joints", "lets balance sheets speak", "prices discretion", "hides policy in plumbing", "teaches patience in basis"]
 };
 function craftDek(title, sectionKey){
   const verbs = DEK_VERBS[sectionKey] || DEK_VERBS.markets;
@@ -199,24 +229,35 @@ const POOLS = {
     "Macro surprises fade and the variance migrates from headlines to allocation choices.",
     "Carry income is real only where the collateral stack is honest; elsewhere it's theatre with a tab.",
     "Term premia move like forbearance does: slowly, then convincingly.",
-    "Cross‑asset confirms the message: stress leaks out of funding faster than it leaves social feeds.",
+    "Cross-asset confirms the message: stress leaks out of funding faster than it leaves social feeds.",
     "The vol surface votes with cash; you either respect it or donate.",
     "If you need cheerleaders to hold risk, you sized it wrong.",
     "Stop renting headlines; own the sequence and the basis that pays.",
     "Positioning still pretends to be conviction until real cash calls its bluff.",
     "Liquidity is a rented story; collateral is the owned one.",
     "When reflex funds chase heat, basis quietly invoices them.",
-    "The curve is not a mood—it’s a schedule with teeth."
+    "The curve is not a mood—it’s a schedule with teeth.",
+    "Breadth whispers before momentum concedes; the whisper is expensive to ignore.",
+    "Compression isn’t a narrative; it’s a registry of who learned to wait.",
+    "Outliers are tuition; compounding is graduation.",
+    "The tape remembers every plea for mercy; math remembers none.",
+    "Vol-of-vol cooled first; risk budgets followed with relief—not euphoria.",
+    "Fat tails don’t vanish; they charge a premium for indifference.",
+    "When liquidity thins, only habits compound; the rest compounds regret."
   ],
   policy: [
-    "Supervision works like gravity—slow, constant, and indifferent to speeches.",
-    "Collateral frameworks, not tweets, redraw cross‑border risk at the margin.",
-    "Jurisdiction arbitrage is the quietest source of alpha; it's also the most durable.",
+    "Supervision works like gravity—slow, constant, indifferent to speeches.",
+    "Collateral frameworks, not tweets, redraw cross-border risk at the margin.",
+    "Jurisdiction arbitrage is the quietest source of alpha; it’s also the most durable.",
     "Policy trades one constraint for another; follow the plumbing, not the podium.",
     "When rules rewrite collateral, flows migrate before consensus notices.",
     "Tax regimes migrate faster than diplomats; basis trades follow.",
     "Supervision speaks in silence; the curve translates it.",
-    "Policy does not create value; it rearranges liabilities and time."
+    "Policy does not create value; it rearranges liabilities and time.",
+    "Legibility is policy’s true instrument; opacity is a surcharge on impatience.",
+    "Sanctions are basis shocks with press conferences attached.",
+    "Treaties travel slowly; incentives cross borders daily.",
+    "The footnote is the message; the headline is the decoy."
   ],
   behaviour: [
     "Bias is a cost; markets extract it one impatience at a time.",
@@ -226,17 +267,24 @@ const POOLS = {
     "The reflex is indignation; the edge is composure—twice over if needed.",
     "The reflex is indignation; the profit is restraint.",
     "Bias is the only leverage most hands can’t hedge.",
-    "When the crowd narrates, price negotiates."
+    "When the crowd narrates, price negotiates.",
+    "FOMO decorates losers’ diaries; patience decorates ledgers.",
+    "Discipline is a savings account; drama is an overdraft.",
+    "Conviction without cash flow is a mood; conviction with sequence is a plan.",
+    "When attention is expensive, silence gets paid."
   ],
   energy: [
     "Inventories and freight set the conversation; opinions show up late and leave early.",
-    "Products relearn cycles the way students learn discipline: slowly, then all at once.",
+    "Products relearn cycles as students relearn discipline: slowly, then all at once.",
     "Tightness is arithmetic, not attitude; the curve knows.",
     "Crack spreads translate scarcity into schedules.",
     "Storage math vetoes drama; logistics price the patience.",
     "Barrels remember arithmetic after headlines forget.",
     "Inventory turns don’t care about applause.",
-    "Refining margins tutor the impatient."
+    "Refining margins tutor the impatient.",
+    "Spreads don’t opine; they settle calculus with steel and distance.",
+    "Pipeline constraints don’t trend on social, but they trend in cash.",
+    "When prompt tightens, marketing loosens; traders adapt or donate."
   ],
   fx: [
     "Growth divergence—not virtue—explains the dollar’s posture.",
@@ -246,7 +294,10 @@ const POOLS = {
     "Funding costs speak fluent FX; size the silence in between.",
     "Crosses don’t arbitrate virtue; they price funding.",
     "Carry is a tip jar until jurisdiction closes the bar.",
-    "Real yields keep score when stories beg for mercy."
+    "Real yields keep score when stories beg for mercy.",
+    "Terms of trade don’t tweet; they settle the argument anyway.",
+    "The smile isn’t a meme; it’s a budget for patience.",
+    "Interventions rent time; reforms buy it."
   ],
   housing: [
     "Affordability stabilizes where wages outrun rents; the floor is behavioural as much as financial.",
@@ -256,7 +307,9 @@ const POOLS = {
     "The floor forms where patience meets payrolls; watch permits, not posts.",
     "Builders obey rates; buyers obey paychecks; politicians obey polls.",
     "Credit boxes are reopening where reputations already did.",
-    "Refis are a memory; amortization is the discipline."
+    "Refis are a memory; amortization is the discipline.",
+    "Price isn’t a right—it’s a function of credit and time.",
+    "Rent caps write headlines; zoning writes outcomes."
   ],
   commodities: [
     "Logistics normalize; curves remember gravity.",
@@ -265,7 +318,9 @@ const POOLS = {
     "Arbitrage reopens and the noise gets priced out.",
     "Freight and storage arbitrate the argument; basis settles it.",
     "Storage vetoes speeches; logistics sentence the theatrics.",
-    "Arb corridors reopen, and noise goes broke quietly."
+    "Arb corridors reopen, and noise goes broke quietly.",
+    "Term structures confess the truth faster than analysts do.",
+    "Convergence isn’t a plot twist; it’s the contract’s oath."
   ],
   metals: [
     "Copper tests courage; gold prices forbearance; both remember funding first.",
@@ -274,7 +329,9 @@ const POOLS = {
     "Refined versus mined tells you where the constraint lives.",
     "Metals reconnect with funding—again, and convincingly.",
     "Copper grades courage; gold grades forbearance.",
-    "Paper claims wait for physical manners to return."
+    "Paper claims wait for physical manners to return.",
+    "When lease rates blush, narratives confess.",
+    "Refining spreads don’t lie; they educate."
   ],
   coffee: [
     "Arabica remains tight as differentials repair; logistics finally cooperate.",
@@ -283,7 +340,9 @@ const POOLS = {
     "Weather trades money; weather maps trade edge.",
     "Arabica’s scarcity educates the impatient—twice if necessary.",
     "Softs punish wishful thinking with basis math.",
-    "Weather is the only influencer that clears in cash."
+    "Weather is the only influencer that clears in cash.",
+    "Seasonals whisper; basis decides.",
+    "A harvest is a balance sheet with rain."
   ],
   agri: [
     "Wheat resets margins on freight; corn watches inputs and learns.",
@@ -292,7 +351,8 @@ const POOLS = {
     "Storage is policy for agriculture; it always was.",
     "Freight costs decide who earns carry and who narrates it.",
     "Hedgers farm volatility; tourists farm excuses.",
-    "Freight lanes vote before analysts do."
+    "Freight lanes vote before analysts do.",
+    "Crush margins teach the same lesson every cycle: pay attention."
   ],
   central: [
     "Balance sheets whisper what communiqués won’t admit.",
@@ -302,7 +362,12 @@ const POOLS = {
     "Reverse repos tell the truth when speeches won’t.",
     "The reset is a rumor; the plumbing is the fact.",
     "PEPP is a verb; QT is a temperament test.",
-    "The discount window teaches more than conferences do."
+    "The discount window teaches more than conferences do.",
+    "Minutes narrate; H.4.1 testifies.",
+    "Reserve scarcity is a tone, not a headline.",
+    "Collateral haircuts legislate faster than parliaments.",
+    "QE buys time; credibility spends it.",
+    "Swap lines are diplomacy without speeches."
   ]
 };
 const OPTIMISM = [
@@ -310,7 +375,10 @@ const OPTIMISM = [
   "Harvest the easy basis and let the hard trades prove they deserve capital.",
   "Scale what works; starve what argues back.",
   "Keep risk sized to your sleep, not to the loudest story.",
-  "Let the funding math veto the drama."
+  "Let the funding math veto the drama.",
+  "Keep the habit compounding; let luck arrive embarrassed.",
+  "Make patience your edge and sequence your risk.",
+  "If it doesn’t pay in basis or cash flow, it’s a hobby."
 ];
 function craftParagraphs(headline, sectionKey){
   const open = OPENERS[Math.floor(Math.random()*OPENERS.length)](headline);
