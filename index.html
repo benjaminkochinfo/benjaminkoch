@@ -22,6 +22,10 @@
       font-family: Arial, sans-serif;
       background-color: white;
       color: #222;
+      -webkit-user-select: none; /* Disable text selection */
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
     header {
       background-color: var(--ecb-blue);
@@ -70,6 +74,15 @@
     .dissertation-box {
       font-family: 'Garamond', serif;
     }
+    /* Custom link style for Dissertation */
+    .dissertation-box a {
+      color: inherit;          /* use surrounding text color */
+      text-decoration: none;   /* remove underline */
+    }
+    .dissertation-box a:hover {
+      font-weight: bold;       /* bold on hover */
+      text-decoration: underline; /* underline on hover */
+    }
     footer {
       background-color: var(--harvard-crimson);
       color: white;
@@ -94,7 +107,7 @@
     <a href="#media">Media</a>
     <a href="#contact">Contact</a>
     <a href="https://insightcompass.substack.com/" target="_blank">Insight Compass</a>
-      </nav>
+  </nav>
   <main>
     <section id="about">
       <h2>About</h2>
@@ -105,7 +118,7 @@
       <h2>Selected Publications</h2>
       <ul>
         <li><a href="https://www.researchgate.net/profile/Benjamin-Koch-12/research" target="_blank">Published Working Papers | ResearchGate</a></li>
-                       </ul>
+      </ul>
       <div class="papers-box">
         <h3>Latest Working Papers</h3>
         <ul>
@@ -179,5 +192,29 @@ was subsequently divided for print and publication into two volumes:
   <footer>
     <p>&copy; 2025 - Dr. Benjamin Koch | This website constitutes a personal and non-commercial platform, made available solely for private, informational, and academic purposes, without any claim to completeness, accuracy, or commercial relevance. No cookies, trackers, scripts, or analytics – ensuring privacy compliance. Device-responsive layout using flexbox and media queries. All contents indexable by search engines.</p>
   </footer>
+
+  <script>
+    // Disable right-click
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    // Disable copy and cut
+    document.addEventListener('copy', function(e) {
+      e.preventDefault();
+    });
+    document.addEventListener('cut', function(e) {
+      e.preventDefault();
+    });
+    // Disable paste
+    document.addEventListener('paste', function(e) {
+      e.preventDefault();
+    });
+    // Optional: Block keyboard shortcuts like Ctrl+C, Ctrl+X, Ctrl+S
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 's', 'u', 'a'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
