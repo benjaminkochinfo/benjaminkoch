@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Psychological Online Consulting | Dr. Benjamin Koch</title>
+<meta content="Online psychological consulting and coaching by Dr. Benjamin Koch (PhD, Psychology, USA). Focus on clarity, decisions, relationships, and complex life situations. Not psychotherapy." name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+
+<style>
+    :root {
+      --bg-dark: #050816;
+      --bg-soft: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.25);
+      --accent-2: #a855f7;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148,163,184,0.4);
+      --radius-xl: 1.4rem;
+    }
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #020617 0, #000 55%, #020617 100%);
+      color: #e5e7eb;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #0ea5e9;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, rgba(15,23,42,0.96), rgba(15,23,42,0.9));
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148,163,184,0.35);
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .nav-link {
+      font-size: .9rem;
+    }
+
+    .hero {
+      padding: 5.5rem 0 3.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .3rem .8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: .78rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.25), rgba(15,23,42,0.98));
+    }
+
+    .hero-badge span.dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+    }
+
+    .hero h1 {
+      font-weight: 700;
+      font-size: clamp(2.1rem, 3vw + 1.2rem, 3.2rem);
+      letter-spacing: -.03em;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 40rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: .78rem;
+      background: rgba(15,23,42,0.98);
+      color: #e5e7eb;
+    }
+
+    .pill i {
+      font-size: .9rem;
+      color: var(--accent);
+    }
+
+    .glass-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.12), rgba(15,23,42,0.98));
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 28px 80px rgba(15,23,42,0.95);
+    }
+
+    .section {
+      padding: 3.5rem 0;
+    }
+
+    .section-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--text-muted);
+      margin-bottom: .4rem;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+    }
+
+    .card-soft {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.04), rgba(15,23,42,0.98));
+      border-radius: 1.3rem;
+      border: 1px solid rgba(148,163,184,0.45);
+    }
+
+    .card-soft .card-body {
+      padding: 1.5rem 1.6rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: .72rem;
+      color: var(--text-muted);
+    }
+
+    .chip i {
+      font-size: .85rem;
+      color: var(--accent);
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .pricing-tagline {
+      max-width: 38rem;
+      color: var(--text-muted);
+    }
+
+    .whereby-link {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .85rem;
+      background: rgba(15,23,42,0.98);
+      padding: .3rem .6rem;
+      border-radius: .6rem;
+      border: 1px solid rgba(148,163,184,0.5);
+    }
+
+    footer {
+      border-top: 1px solid rgba(55,65,81,0.8);
+      font-size: .8rem;
+      color: var(--text-muted);
+      padding: 1.5rem 0 1.8rem;
+      background: rgba(3,7,18,0.96);
+    }
+
+    @media (max-width: 991.98px) {
+      .hero {
+        padding-top: 4.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<div class="container">
+<a class="navbar-brand" href="#top">
+      Benjamin Koch · PhD (Psychology, USA)
+    </a>
+<button aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler ms-2" data-bs-target="#navMain" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse order-lg-1" id="navMain">
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+<li class="nav-item"><a class="nav-link" href="#frame">Frame</a></li>
+<li class="nav-item"><a class="nav-link" href="#fees">Fees</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="https://benjaminkoch.info/">Main site</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<main id="top">
+<section class="hero">
+<div class="container">
+<div class="row align-items-center g-4">
+<div class="col-lg-7">
+<div class="hero-badge mb-3">
+<span>Online Consulting &amp; Coaching · International · Confidential</span>
+<span class="dot"></span>
+</div>
+<h1 class="mb-2">
+            Psychological Coaching
+            <br/>
+            for complex life situations
+          </h1>
+<p class="hero-sub mb-3">
+            Online 1:1 and relationship consulting grounded in psychology, economics and
+            international law. No therapy label, no insurance logic – a calm space for
+            decisions, relationships and roles, open to everyday people and leaders alike.
+          </p>
+<p class="mb-4">
+<strong>Online only:</strong> encrypted video sessions via Whereby
+            (browser-based, no account required for you as a client), from smartphone
+            or computer.
+          </p>
+<div class="d-flex flex-wrap gap-2 mb-4">
+<div class="pill">
+<i class="bi bi-camera-video"></i>
+<span>Online sessions (DE/EN, Whereby)</span>
+</div>
+<div class="pill">
+<i class="bi bi-shield-lock"></i>
+<span>Encrypted &amp; confidential</span>
+</div>
+<div class="pill">
+<i class="bi bi-diagram-3"></i>
+<span>Psychology · Economics · Law</span>
+</div>
+</div>
+<div class="d-flex flex-wrap gap-2">
+<a class="btn btn-light" href="#contact">
+<span>Request an initial call</span>
+</a>
+<a class="btn btn-outline-light" href="#services">
+<span>Explore services</span>
+</a>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="glass-card p-3 p-lg-4 mt-3 mt-lg-0">
+<div class="row g-3 align-items-center">
+<div class="col-4">
+<div class="ratio ratio-1x1">
+<div class="rounded-4 overflow-hidden bg-dark position-relative">
+<div class="position-absolute top-50 start-50 translate-middle text-center">
+<i class="bi bi-mindfulness" style="font-size:2.2rem;color:var(--accent);"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="col-8">
+<h2 class="h5 mb-1">Dr. Benjamin Koch</h2>
+<p class="small mb-1">
+                  PhD (Psychology, USA)
+                </p>
+<p class="small text-secondary mb-2">
+                  Online consulting &amp; coaching · Not psychotherapy
+                </p>
+<div class="d-flex flex-wrap gap-2 mb-2">
+<span class="chip">
+<i class="bi bi-globe2"></i>
+<span>Online only</span>
+</span>
+<span class="chip">
+<i class="bi bi-people"></i>
+<span>Individuals &amp; couples</span>
+</span>
+</div>
+<p class="small text-secondary mb-0">
+                  I work with people whose everyday life contains complexity: demanding roles,
+                  international context, responsibility for others – and a wish for more clarity
+                  and inner stability.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="about">
+<div class="container">
+<div class="section-label">About this work</div>
+<h2 class="section-title">What this space is – and what it is not</h2>
+<div class="row g-4">
+<div class="col-lg-7">
+<p>
+            This is a calm, structured online space for people who carry a lot – in their heads, on
+            their calendar, or in their relationships. The focus is on clarity, resilience and
+            long-range thinking rather than diagnosis or pathology.
+          </p>
+<p>
+            You might be a professional in a demanding environment, a young parent balancing roles,
+            a student facing choices, or simply someone in a life transition. The common thread is
+            that you want to see more clearly and act more deliberately.
+          </p>
+<p class="small text-secondary mb-0">
+            This is not psychotherapy, not crisis intervention, and not a substitute for medical
+            or psychiatric treatment. If you are in acute distress or at risk of self-harm, please
+            contact local emergency services or a crisis hotline in your country.
+          </p>
+</div>
+<div class="col-lg-5">
+<div class="row g-3">
+<div class="col-sm-6">
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-bullseye"></i>
+<span>Main focus</span>
+</div>
+<ul class="small mb-0">
+<li>Clarity in life decisions</li>
+<li>Role conflicts &amp; expectations</li>
+<li>Overload &amp; mental pressure</li>
+<li>Complex relationships &amp; dynamics</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-diagram-3"></i>
+<span>Approach</span>
+</div>
+<ul class="small mb-0">
+<li>Psychology &amp; behavioural science</li>
+<li>Economics &amp; incentives</li>
+<li>International law &amp; structures</li>
+<li>Clarity, commitment &amp; continuity</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-12">
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-magic"></i>
+<span>Format</span>
+</div>
+<ul class="small mb-0">
+<li>1:1 video sessions (Whereby)</li>
+<li>Calm, structured conversations</li>
+<li>Optionally: short notes after sessions</li>
+<li>No labels, no bureaucracy, no insurance logic</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="services">
+<div class="container">
+<div class="section-label">Services</div>
+<h2 class="section-title">What we can work on together</h2>
+<div class="row g-4">
+<div class="col-lg-7">
+<div class="card-soft mb-3">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-compass"></i>
+<span>Clarity and decisions</span>
+</div>
+<ul class="small mb-0">
+<li>Decisions with long-term consequences (career, partnership, place to live)</li>
+<li>Stuck between options: seeing trade-offs clearly</li>
+<li>Moving from analysis paralysis to structured decisions</li>
+<li>Aligning everyday habits with what you say you want</li>
+</ul>
+</div>
+</div>
+<div class="card-soft mb-3">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-people"></i>
+<span>Relationships, roles, and boundaries</span>
+</div>
+<ul class="small mb-0">
+<li>Roles in relationships (partner, parent, child, professional)</li>
+<li>Boundary-setting vs. guilt and expectations</li>
+<li>Being “the responsible one” in family or work</li>
+<li>Communication patterns that drain you vs. give energy</li>
+</ul>
+</div>
+</div>
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-lightning-charge"></i>
+<span>Overload, pressure, and mental load</span>
+</div>
+<ul class="small mb-0">
+<li>Feeling constantly “on” and never really offline</li>
+<li>Balancing responsibility at work and at home</li>
+<li>Living with a full mental to-do list</li>
+<li>Creating anchors of stability in a fast, unpredictable context</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-journal-text"></i>
+<span>Structure of the work</span>
+</div>
+<ul class="small mb-3">
+<li>Online video sessions via Whereby</li>
+<li>Flexible scheduling across time zones</li>
+<li>Calm, focused 1:1 conversations</li>
+<li>Clear differentiation from therapy or medical treatment</li>
+</ul>
+<p class="small text-secondary mb-0">
+              You remain fully responsible for your own decisions and actions. The work is about
+              gaining insight, clarity, and structure – not about telling you what to do.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="frame">
+<div class="container">
+<div class="section-label">Frame</div>
+<h2 class="section-title">Practical frame &amp; boundaries</h2>
+<div class="row g-4">
+<div class="col-lg-7">
+<div class="card-soft mb-3">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-bounding-box"></i>
+<span>What this is not</span>
+</div>
+<ul class="small mb-0">
+<li>Not psychotherapy or medical treatment</li>
+<li>Not crisis intervention or emergency support</li>
+<li>Not a substitute for psychiatric or medical care</li>
+<li>Not legal, tax, or financial advice</li>
+</ul>
+</div>
+</div>
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-check2-circle"></i>
+<span>For whom this is suitable</span>
+</div>
+<ul class="small mb-0">
+<li>People who can reflect and take responsibility for their own actions</li>
+<li>People who want to understand patterns, not just fix symptoms</li>
+<li>People who are willing to commit to changes in habits or structures</li>
+<li>People who value calm, precise, and honest conversations</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-exclamation-triangle"></i>
+<span>If you are in acute crisis</span>
+</div>
+<p class="small mb-2">
+              If you are in acute psychological crisis, at risk of harming yourself or others, or
+              experiencing severe symptoms (e.g. psychosis, severe depression, suicidal thoughts),
+              please contact local emergency services, a crisis hotline, or a licensed mental health
+              professional in your country.
+            </p>
+<p class="small text-secondary mb-0">
+              This online consulting space cannot provide emergency care or crisis intervention and
+              does not replace local, in-person support structures.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="fees">
+<div class="container">
+<div class="section-label">Fees</div>
+<div class="d-flex justify-content-between align-items-end mb-3">
+<h2 class="section-title mb-0">Transparent online fees</h2>
+</div>
+<p class="pricing-tagline mb-4">
+        Fees are aligned with typical rates for individual, private coaching and consulting.
+        Billing is per session, invoiced directly to you (no insurance).
+      </p>
+<div class="row g-4">
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body d-flex flex-column">
+<div class="chip mb-2">
+<i class="bi bi-circle"></i>
+<span>Single session</span>
+</div>
+<h3 class="h6 mb-1">Clarity Session – 60 min</h3>
+<p class="small text-secondary mb-2">
+                One focused session on a clearly defined topic, with space for reflection and
+                practical next steps.
+              </p>
+<p class="price mb-1">
+<span class="text-secondary">Temporarily inactive.</span>
+</p>
+<ul class="small mb-3">
+<li>Online only (Whereby)</li>
+<li>60 minutes</li>
+<li>Suitable for a specific question or decision</li>
+</ul>
+<div class="mt-auto">
+<p class="small text-secondary mb-0">
+                  This format is suitable if you want to explore one central topic or decision
+                  without starting a longer process.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card-soft h-100 border border-2" style="border-color: var(--accent);">
+<div class="card-body d-flex flex-column">
+<div class="chip mb-2">
+<i class="bi bi-stars"></i>
+<span>Intensive session</span>
+</div>
+<h3 class="h6 mb-1">Deep Dive – 90 min</h3>
+<p class="small text-secondary mb-2">
+                Extended time for complex topics, relationship constellations or situations that
+                cannot be meaningfully approached in 60 minutes.
+              </p>
+<p class="price mb-1">
+<span class="text-secondary">Temporarily inactive.</span>
+</p>
+<ul class="small mb-3">
+<li>Online only (Whereby)</li>
+<li>90 minutes</li>
+<li>Space for multiple angles and patterns</li>
+<li>Optional brief written summary after the session</li>
+</ul>
+<div class="mt-auto">
+<p class="small text-secondary mb-0">
+                  This format is suitable if your situation has several intertwined strands –
+                  relationships, work, family – and you want to see the bigger picture.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body d-flex flex-column">
+<div class="chip mb-2">
+<i class="bi bi-layers"></i>
+<span>Packages</span>
+</div>
+<h3 class="h6 mb-1">Structured process</h3>
+<p class="small text-secondary mb-2">
+                For people who want to work over several sessions on a core topic – for example
+                a transition period, a relationship pattern, or establishing new habits.
+              </p>
+<p class="price mb-1">
+<span class="text-secondary">Temporarily inactive.</span>
+</p>
+<ul class="small mb-3">
+<li>Typically 3 × 90-minute sessions</li>
+<li>Online only (Whereby)</li>
+<li>Focus on continuity and integration between sessions</li>
+<li>Optional: short check-ins by e-mail between sessions</li>
+</ul>
+<div class="mt-auto">
+<p class="small text-secondary mb-0">
+                  Packages offer a clearer frame: we define together what you want to understand,
+                  change, or stabilise, and keep orienting towards that over time.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="small text-secondary mt-3 mb-0">
+        No therapy services, no insurance billing, no emergency coverage. All work is private,
+        online, and focused on clarity, structure, and long-term orientation.
+      </p>
+</div>
+</section>
+<section class="section" id="contact">
+<div class="container">
+<div class="section-label">Contact</div>
+<div class="row g-4">
+<div class="col-lg-7">
+<h2 class="section-title">Contact for online consulting</h2>
+<p>
+            If you are interested in online consulting or have questions about whether this frame
+            fits your situation, you can simply send an e-mail to:
+          </p>
+<p>
+<strong><a href="mailto:email@benjaminkoch.info">email@benjaminkoch.info</a></strong>
+</p>
+<p class="small mb-1">
+            You may (optionally) include a short topic in the subject line, such as:
+          </p>
+<ul class="small">
+<li>Clarity and decisions</li>
+<li>Role conflicts and expectations</li>
+<li>Overload and mental pressure</li>
+<li>Relationships and boundaries</li>
+<li>Other (a few words are enough)</li>
+</ul>
+<p class="small text-secondary mb-0">
+            Indicating a topic is helpful but not required. There is no automated data collection,
+            no contact form, and no tracking.
+          </p>
+</div>
+<div class="col-lg-5">
+<div class="card-soft">
+<div class="card-body">
+<h3 class="h6 mb-2">Legal &amp; privacy note</h3>
+<p class="small mb-2">
+              This page describes a personal, private online consulting framework. It does not
+              offer psychotherapy, medical treatment, legal advice, tax advice, or investment
+              advice, and it does not replace those services.
+            </p>
+<p class="small mb-2">
+              No guarantees are given regarding completeness, accuracy, or timeliness of the
+              content. Nothing on this page constitutes a binding offer or a professional
+              recommendation.
+            </p>
+<p class="small text-secondary mb-0">
+              No cookies, trackers, analytics tools, or advertising scripts are used. Communication
+              is handled via standard e-mail providers and Whereby for video.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+<div>
+        © <span id="year"></span> Benjamin Koch. All rights reserved.
+      </div>
+<div>
+        Personal, non-commercial website · No cookies, no trackers, no analytics.
+      </div>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Set current year in footer
+  var yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+</script>
+</body>
+</html>

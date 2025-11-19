@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Benjamin Koch · Economics & Law Foresight</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Online indicators and foresight themes by Dr. Benjamin Koch, connecting economics, law and systemic resilience. No individual advice.">
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #020617;
+      --bg-soft: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.25);
+      --accent-2: #a855f7;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148,163,184,0.4);
+      --radius-xl: 1.4rem;
+    }
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #0f172a 0, #020617 42%, #000 72%, #020617 100%);
+      color: #e5e7eb;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #0ea5e9;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, rgba(15,23,42,0.98), rgba(15,23,42,0.96));
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(148,163,184,0.45);
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .nav-link {
+      font-size: .9rem;
+    }
+
+    .hero {
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-badge {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,0.96));
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding-right: .75rem;
+    }
+
+    .hero-badge span:last-child {
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+    }
+
+    .hero h1 {
+      font-weight: 700;
+      font-size: clamp(2.1rem, 3vw + 1.2rem, 3.1rem);
+      letter-spacing: -.03em;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 40rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem .8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      font-size: .78rem;
+      background: rgba(15,23,42,0.98);
+      color: #e5e7eb;
+    }
+
+    .pill i {
+      font-size: .9rem;
+      color: var(--accent);
+    }
+
+    .glass-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.12), rgba(15,23,42,0.98));
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 28px 80px rgba(15,23,42,0.96);
+    }
+
+    .glass-card .card-body {
+      padding: 1.4rem 1.6rem;
+    }
+
+    .section {
+      padding: 3.5rem 0;
+    }
+
+    .section-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--text-muted);
+      margin-bottom: .4rem;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+    }
+
+    .card-soft {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.04), rgba(15,23,42,0.98));
+      border-radius: 1.3rem;
+      border: 1px solid rgba(148,163,184,0.45);
+    }
+
+    .card-soft .card-body {
+      padding: 1.5rem 1.6rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: .72rem;
+      color: var(--text-muted);
+    }
+
+    .chip i {
+      font-size: .85rem;
+      color: var(--accent);
+    }
+
+    .indicator-tag {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--text-muted);
+    }
+
+    .indicator-code {
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      font-size: .85rem;
+    }
+
+    canvas {
+      max-height: 260px;
+    }
+
+    .select-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--text-muted);
+    }
+
+    .whereby-link {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .85rem;
+      background: rgba(15,23,42,0.98);
+      padding: .3rem .6rem;
+      border-radius: .6rem;
+      border: 1px solid rgba(148,163,184,0.5);
+    }
+
+    footer {
+      border-top: 1px solid rgba(55,65,81,0.8);
+      font-size: .8rem;
+      color: var(--text-muted);
+      padding: 1.4rem 0 1.6rem;
+      background: rgba(3,7,18,0.96);
+    }
+
+    @media (max-width: 991.98px) {
+      .hero {
+        padding-top: 4.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#top">
+      Benjamin Koch · Economics & Law Foresight
+    </a>
+    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse order-lg-1" id="navMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#about">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="#indicators">Indicators</a></li>
+        <li class="nav-item"><a class="nav-link" href="#method">Method</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://benjaminkoch.info/">Main site</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <div class="hero-badge px-3 py-2 mb-3 d-inline-flex align-items-center gap-2">
+            <span>Economics · Law · Systemic Foresight</span>
+            <span style="width:4px;height:4px;border-radius:999px;background:#22c55e;"></span>
+          </div>
+          <h1 class="mb-3">
+            <span>Proprietary indicators<br>for a complex world</span>
+          </h1>
+          <p class="hero-sub mb-3">
+            This page presents a selection of proprietary macroeconomic and
+            legal-regulatory indicators, conceptual models and long-term trend work.
+            No individual advice, no investment recommendations – but structured
+            orientation in an evolving system.
+          </p>
+          <p class="mb-4">
+            Focus: Short-, medium- and long-term developments at the intersection of
+            economics, law and institutions – with a particular emphasis on Europe
+            and transatlantic dynamics.
+          </p>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <div class="pill">
+              <i class="bi bi-diagram-3"></i>
+              <span>Cross-domain indicators (KMRI, TPVI, GDFI)</span>
+            </div>
+            <div class="pill">
+              <i class="bi bi-graph-up-arrow"></i>
+              <span>Short, medium &amp; long horizons</span>
+            </div>
+            <div class="pill">
+              <i class="bi bi-globe2"></i>
+              <span>Macro, legal, institutional context</span>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#indicators" class="btn btn-light">
+              <span>Explore indicators</span>
+            </a>
+            <a href="#contact" class="btn btn-outline-light">
+              <span>Contact for publications</span>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="glass-card mt-3 mt-lg-0">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <div class="indicator-tag mb-1">Composite indicators</div>
+                  <div class="indicator-code">KMRI · TPVI · GDFI</div>
+                </div>
+                <span class="chip">
+                  <i class="bi bi-shield-lock"></i>
+                  <span>Proprietary construction</span>
+                </span>
+              </div>
+              <p class="small text-secondary mb-2">
+                KMRI, TPVI and GDFI are synthetic indicators developed to capture
+                macro-financial resilience, transmission channels and geo-economic
+                fragmentation beyond single variables.
+              </p>
+              <ul class="small mb-0">
+                <li>KMRI – multi-dimensional resilience indicator.</li>
+                <li>TPVI – term premium &amp; volatility integration.</li>
+                <li>GDFI – geo-financial fragmentation index.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-6">
+          <div class="section-label">Profile</div>
+          <h2 class="section-title">Working at the economics–law interface</h2>
+          <p>
+            Markets never operate in a vacuum: they are embedded in legal orders,
+            institutions and political decision-making. The indicators and models presented
+            here aim to make that embedding more measurable – without claiming to remove
+            uncertainty.
+          </p>
+          <p>
+            The focus is not on single prices or headlines, but on structural tensions:
+            resilience, adaptability, path dependence, regulatory inertia and their
+            interaction with economic cycles.
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="card-soft h-100">
+                <div class="card-body">
+                  <div class="chip mb-2">
+                    <i class="bi bi-layers"></i>
+                    <span>Cross-linking</span>
+                  </div>
+                  <ul class="small mb-0">
+                    <li>Economics (macro &amp; finance).</li>
+                    <li>Law (regulatory &amp; institutional).</li>
+                    <li>Political economy &amp; incentives.</li>
+                    <li>Complex systems &amp; resilience.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="card-soft h-100">
+                <div class="card-body">
+                  <div class="chip mb-2">
+                    <i class="bi bi-activity"></i>
+                    <span>Use cases</span>
+                  </div>
+                  <ul class="small mb-0">
+                    <li>Strategic foresight &amp; scenario work.</li>
+                    <li>Risk mapping and impact chains.</li>
+                    <li>Policy debates &amp; institutional design.</li>
+                    <li>Academic &amp; think tank discussions.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="card-soft">
+                <div class="card-body">
+                  <div class="chip mb-2">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span>Important note</span>
+                  </div>
+                  <p class="small mb-0">
+                    This page does not provide individual investment, legal or policy advice.
+                    The indicators are conceptual tools for discussion, not signals for
+                    specific trades or legal positions.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="indicators" class="section">
+    <div class="container">
+      <div class="section-label">Indicators &amp; themes</div>
+
+      <!-- Core indicator cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="chip mb-2">
+                <i class="bi bi-activity"></i>
+                <span>KMRI</span>
+              </div>
+              <h3 class="h6 mb-1">Koch Macro Resilience Index</h3>
+              <p class="small mb-0">
+                Aggregated metric for macroeconomic and institutional shock absorption:
+                fiscal space, institutional capacity to act, social tension levels.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="chip mb-2">
+                <i class="bi bi-graph-up"></i>
+                <span>TPVI</span>
+              </div>
+              <h3 class="h6 mb-1">Transatlantic Policy Volatility Indicator</h3>
+              <p class="small mb-0">
+                Measure of frequency, direction and communication quality of economically
+                and legally relevant policy signals across the Atlantic – including
+                reversals and signal clarity.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="chip mb-2">
+                <i class="bi bi-diagram-3"></i>
+                <span>RSAC</span>
+              </div>
+              <h3 class="h6 mb-1">Regulatory Shock Absorption Curve</h3>
+              <p class="small mb-0">
+                Functional curve showing how fast and at what intensity regulatory systems
+                internalise, dampen or transmit external shocks to other domains.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio formats -->
+      <div class="mb-3">
+        <div class="section-label">Portfolio</div>
+        <h3 class="h5 mb-1">Formats: outlook, analysis, impact</h3>
+        <p class="small text-secondary mb-3">
+          The work spans several time horizons and publication formats. It aims to make
+          patterns visible rather than provide day-to-day market calls.
+        </p>
+
+        <div class="row g-3 mb-2">
+          <div class="col-md-4">
+            <div class="card-soft h-100">
+              <div class="card-body">
+                <div class="chip mb-2">
+                  <i class="bi bi-lightning-charge"></i>
+                  <span>Short term</span>
+                </div>
+                <h4 class="h6 mb-1">Signals &amp; notes</h4>
+                <ul class="small mb-2">
+                  <li>Short notes on regulatory or policy impulses.</li>
+                  <li>Quick framing of new data points.</li>
+                  <li>Signalling structural breaks vs. noise.</li>
+                </ul>
+                <p class="small text-secondary mb-0">
+                  Not for intraday trading, but as contextual signal.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card-soft h-100">
+              <div class="card-body">
+                <div class="chip mb-2">
+                  <i class="bi bi-hourglass-split"></i>
+                  <span>Medium term</span>
+                </div>
+                <h4 class="h6 mb-1">Thematic reports &amp; dossiers</h4>
+                <ul class="small mb-2">
+                  <li>In-depth analysis of sectors, policy fields, regions.</li>
+                  <li>Linking data, legal texts &amp; institutional dynamics.</li>
+                  <li>Scenarios over 12–36 months.</li>
+                </ul>
+                <p class="small text-secondary mb-0">
+                  Basis for strategic discussions, not for single-stock picks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card-soft h-100">
+              <div class="card-body">
+                <div class="chip mb-2">
+                  <i class="bi bi-calendar3"></i>
+                  <span>Long term</span>
+                </div>
+                <h4 class="h6 mb-1">Frameworks &amp; narrative lines</h4>
+                <ul class="small mb-2">
+                  <li>Conceptual models for path dependence.</li>
+                  <li>Long-run analysis of regulatory regimes.</li>
+                  <li>Narrative lines for decade-long horizons.</li>
+                </ul>
+                <p class="small text-secondary mb-0">
+                  Designed for institutions, foundations and long-term oriented actors.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="small text-secondary mb-0">
+          Note: This overview describes formats and working logic. It is explicitly not
+          an offer to conclude advisory contracts with private individuals.
+        </p>
+      </div>
+
+      <!-- Chart + theme explanation -->
+      <div class="row g-4 mt-4">
+        <div class="col-lg-8">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-md-center mb-3">
+                <div class="flex-grow-1">
+                  <label class="form-label small mb-1">Theme</label>
+                  <select id="themeSelectEN" class="form-select form-select-sm">
+                    <option value="eu_telecom_resilience">EU telecom &amp; infrastructure resilience</option>
+                    <option value="energy_price_shocks">Energy price shocks &amp; regulation</option>
+                    <option value="sovereign_debt_structure">Sovereign debt structure</option>
+                    <option value="banking_union_stress">Banking union &amp; stress transmission</option>
+                    <option value="housing_affordability">Housing market &amp; affordability</option>
+                    <option value="labour_market_flex_security">Labour market: flex &amp; security</option>
+                    <option value="digital_platform_regulation">Digital platform regulation</option>
+                    <option value="climate_policy_investment">Climate policy &amp; investment paths</option>
+                    <option value="health_system_resilience">Health system resilience</option>
+                    <option value="supply_chain_fragility">Supply chain fragility</option>
+                    <option value="demographic_transition">Demographic transition</option>
+                    <option value="fiscal_monetary_interaction">Fiscal–monetary interaction</option>
+                    <option value="macroprudential_cycle">Macroprudential cycle</option>
+                    <option value="capital_flow_regime">Capital flow regime</option>
+                    <option value="euro_area_fragmentation">Euro area financial fragmentation</option>
+                    <option value="transatlantic_policy_divergence">Transatlantic policy divergence</option>
+                    <option value="geo_financial_fragmentation">Geo-financial fragmentation</option>
+                  </select>
+                </div>
+
+                <div class="flex-shrink-0">
+                  <label class="form-label small mb-1">Horizon</label>
+                  <select id="horizonSelect" class="form-select form-select-sm">
+                    <option value="short">Short</option>
+                    <option value="medium">Medium</option>
+                    <option value="long">Long</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <div>
+                    <span class="indicator-tag">Normalised indicator level</span>
+                  </div>
+                  <span class="chip">
+                    <i class="bi bi-graph-up"></i>
+                    <span>0 – 1 scale</span>
+                  </span>
+                </div>
+                <div class="border rounded-3 border-secondary-subtle p-2 p-md-3" style="background: radial-gradient(circle at top left, rgba(15,23,42,0.2), rgba(15,23,42,0.96));">
+                  <canvas id="chartMain"></canvas>
+                </div>
+              </div>
+
+              <p class="small text-secondary mb-0">
+                The chart shows a stylised, normalised time series for the selected theme.
+                It is not a forecast, but a way of visualising structural stress, resilience
+                or fragmentation levels over different horizons.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="mb-2 d-flex justify-content-between align-items-center">
+                <span class="indicator-tag">Current selection</span>
+                <span class="chip">
+                  <i class="bi bi-compass"></i>
+                  <span>Thematic lens</span>
+                </span>
+              </div>
+              <h3 class="h6 mb-1" id="indicatorTitle">
+                KMRI – EU telecom &amp; infrastructure resilience
+              </h3>
+              <p class="small mb-2" id="indicatorSummary"></p>
+              <ul class="small mb-0" id="indicatorBullets"></ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="method" class="section">
+    <div class="container">
+      <div class="section-label">Method &amp; construction</div>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="card-soft mb-3">
+            <div class="card-body">
+              <div class="chip mb-2">
+                <i class="bi bi-diagram-3"></i>
+                <span>Indicator construction</span>
+              </div>
+              <ul class="small mb-0">
+                <li>Combines observable data with structural assumptions and scenario logic.</li>
+                <li>Uses normalisation and smoothing to avoid overreaction to single data points.</li>
+                <li>Incorporates legal and institutional constraints explicitly.</li>
+                <li>Designed to support structured discussion, not mechanical decision rules.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card-soft">
+            <div class="card-body">
+              <div class="chip mb-2">
+                <i class="bi bi-shield-check"></i>
+                <span>What these indicators are not</span>
+              </div>
+              <ul class="small mb-0">
+                <li>Not trading signals or investment recommendations.</li>
+                <li>Not a substitute for due diligence or legal analysis.</li>
+                <li>Not calibrated to any single institution’s balance sheet or mandate.</li>
+                <li>Not designed for automated decision-making.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="chip mb-2">
+                <i class="bi bi-lightbulb"></i>
+                <span>Possible applications</span>
+              </div>
+              <ul class="small mb-0">
+                <li>Foresight work in institutions and think tanks.</li>
+                <li>Scenario construction and narrative stress tests.</li>
+                <li>Connecting legal reforms with macro-financial outcomes.</li>
+                <li>Communicating complex dynamics to non-technical audiences.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <h2 class="section-title">Contact for publications &amp; cooperation</h2>
+          <p>
+            For enquiries regarding publications, talks, discussion formats, background
+            conversations or cooperation in the field of economics &amp; law, please simply
+            send an e-mail to:
+            <br>
+            <strong><a href="mailto:email@benjaminkoch.info">email@benjaminkoch.info</a></strong>
+          </p>
+          <p class="small mb-1">
+            You may optionally indicate a topic in the subject line, for example:
+          </p>
+          <ul class="small">
+            <li>Publication / quote / interview</li>
+            <li>Talk / panel / online format</li>
+            <li>Cooperation request (institution / think tank)</li>
+            <li>Technical / methodological question on indicators</li>
+            <li>Other</li>
+          </ul>
+          <p class="small text-secondary mb-0">
+            Indicating a topic is helpful but not required. No contact forms, cookies or
+            tracking tools are used.
+          </p>
+        </div>
+
+        <div class="col-lg-5">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+    <div>
+      © <span id="year"></span> Benjamin Koch. All rights reserved.
+    </div>
+    <div>
+      Personal, non-commercial website · No cookies, no trackers, no analytics.
+    </div>
+  </div>
+</footer>
+
+<script>
+  let currentLang = 'en';
+  let currentThemeKey = 'eu_telecom_resilience';
+  let currentHorizonKey = 'short';
+  let mainChart = null;
+
+  const BASE_SERIES = {
+    KMRI: {
+      short:  [0.62, 0.58, 0.64, 0.69, 0.67, 0.71, 0.76, 0.73, 0.78, 0.75, 0.79, 0.77],
+      medium: [0.55, 0.52, 0.49, 0.61, 0.68, 0.72, 0.69, 0.74, 0.70, 0.76, 0.73, 0.78],
+      long:   [0.48, 0.45, 0.51, 0.57, 0.54, 0.60, 0.67, 0.63, 0.70, 0.66, 0.72, 0.69, 0.75, 0.71, 0.77, 0.74]
+    },
+    TPVI: {
+      short:  [0.42, 0.71, 0.55, 0.83, 0.49, 0.77, 0.61, 0.69, 0.58, 0.72, 0.63, 0.68],
+      medium: [0.40, 0.55, 0.60, 0.78, 0.52, 0.70, 0.58, 0.63, 0.57, 0.62, 0.59, 0.61],
+      long:   [0.38, 0.44, 0.52, 0.64, 0.56, 0.66, 0.60, 0.62, 0.58, 0.59, 0.57, 0.58, 0.56, 0.57, 0.55, 0.56]
+    },
+    GDFI: {
+      short:  [0.35, 0.39, 0.44, 0.52, 0.58, 0.63, 0.69, 0.71, 0.68, 0.72, 0.70, 0.73],
+      medium: [0.32, 0.36, 0.40, 0.49, 0.55, 0.60, 0.65, 0.68, 0.66, 0.69, 0.68, 0.70],
+      long:   [0.30, 0.33, 0.37, 0.44, 0.50, 0.55, 0.60, 0.63, 0.65, 0.67, 0.68, 0.69, 0.70, 0.71, 0.72, 0.73]
+    }
+  };
+
+  const THEMES = {
+    eu_telecom_resilience: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'EU telecom & infrastructure resilience',
+      summary_en: 'Assesses the robustness of telecom infrastructure, regulation and investment paths against shocks.',
+      bullets_en: [
+        'Combines infrastructure, regulatory and investment data.',
+        'Particular focus on long-term stability of critical networks.',
+        'Explicitly accounts for build-out cycles and roaming architectures.'
+      ]
+    },
+    energy_price_shocks: {
+      code: 'RSAC',
+      indicatorKey: 'rsac',
+      label_en: 'Energy price shocks & regulation',
+      summary_en: 'Examines how quickly and at what intensity energy price shocks are absorbed or transmitted by regulation.',
+      bullets_en: [
+        'Links market prices, levies and compensation schemes.',
+        'Shows time lags between shock and end users.',
+        'Includes interventions such as caps, subsidies and taxes.'
+      ]
+    },
+    sovereign_debt_structure: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Sovereign debt structure',
+      summary_en: 'Maps the resilience of sovereign debt portfolios to interest rate and growth risks.',
+      bullets_en: [
+        'Considers maturities, currency mix and investor base.',
+        'Highlights vulnerabilities to interest rate regime shifts.',
+        'Assesses interaction with fiscal rules and debt brakes.'
+      ]
+    },
+    banking_union_stress: {
+      code: 'TPVI',
+      indicatorKey: 'tpvi',
+      label_en: 'Banking union & stress transmission',
+      summary_en: 'Focuses on policy-regulatory volatility in the European banking architecture.',
+      bullets_en: [
+        'Combines supervisory signals, resolution regimes and market reactions.',
+        'Highlights phases of elevated communication uncertainty.',
+        'Reflects debates on deposit insurance, resolution funds and backstops.'
+      ]
+    },
+    housing_affordability: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Housing market & affordability',
+      summary_en: 'Captures tensions between incomes, financing conditions and housing costs.',
+      bullets_en: [
+        'Normalises income, rent and price dynamics.',
+        'Includes regulatory interventions such as rent caps and subsidies.',
+        'Tracks shifts between renting, owning and intermediate forms.'
+      ]
+    },
+    labour_market_flex_security: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Labour market: flexibility & security',
+      summary_en: 'Looks at the balance between flexibility, protection and transition mechanisms in labour markets.',
+      bullets_en: [
+        'Combines employment dynamics with institutional protection.',
+        'Shows structural tensions in reform cycles.',
+        'Integrates bargaining structures, social security and transitions.'
+      ]
+    },
+    digital_platform_regulation: {
+      code: 'TPVI',
+      indicatorKey: 'tpvi',
+      label_en: 'Digital platform regulation',
+      summary_en: 'Examines how regulatory regimes reshape digital market power and data flows.',
+      bullets_en: [
+        'Incorporates competition law, platform rules and enforcement.',
+        'Highlights phases of regulatory tightening or loosening.',
+        'Links legal changes to investment and innovation responses.'
+      ]
+    },
+    climate_policy_investment: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Climate policy & investment paths',
+      summary_en: 'Looks at how climate policy frameworks channel capital into transition or delay it.',
+      bullets_en: [
+        'Combines carbon pricing, subsidies and standards.',
+        'Assesses credibility and stability of policy paths.',
+        'Links policy signals to investment and stranded asset risk.'
+      ]
+    },
+    health_system_resilience: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Health system resilience',
+      summary_en: 'Focuses on the combination of funding, capacity and institutional learning ability.',
+      bullets_en: [
+        'Evaluates capacity and response patterns to shocks.',
+        'Explicitly includes governance structures.',
+        'Links long-term funding with crisis response capability.'
+      ]
+    },
+    supply_chain_fragility: {
+      code: 'GDFI',
+      indicatorKey: 'gdfi',
+      label_en: 'Supply chain fragility',
+      summary_en: 'Captures concentration, substitutability and geopolitical exposure in supply chains.',
+      bullets_en: [
+        'Combines trade, logistics and input-output data.',
+        'Highlights chokepoints and concentration risks.',
+        'Reflects diversification or reshoring trends over time.'
+      ]
+    },
+    demographic_transition: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Demographic transition',
+      summary_en: 'Looks at ageing, migration and dependency ratios as structural forces.',
+      bullets_en: [
+        'Normalises demographic indicators for comparability.',
+        'Links demographic trends to fiscal and labour market pressure.',
+        'Includes timing and speed of demographic shifts.'
+      ]
+    },
+    fiscal_monetary_interaction: {
+      code: 'TPVI',
+      indicatorKey: 'tpvi',
+      label_en: 'Fiscal–monetary interaction',
+      summary_en: 'Assesses how fiscal stance and monetary policy reinforce or offset each other.',
+      bullets_en: [
+        'Tracks interest rate, spread and inflation dynamics.',
+        'Highlights phases of fiscal dominance or tight monetary regimes.',
+        'Links policy mixes to financial stability considerations.'
+      ]
+    },
+    macroprudential_cycle: {
+      code: 'TPVI',
+      indicatorKey: 'tpvi',
+      label_en: 'Macroprudential cycle',
+      summary_en: 'Focuses on the build-up and release of macro-financial buffers.',
+      bullets_en: [
+        'Incorporates countercyclical buffers, capital requirements and tools.',
+        'Examines interaction with credit growth and asset prices.',
+        'Highlights timing and communication of macroprudential moves.'
+      ]
+    },
+    capital_flow_regime: {
+      code: 'GDFI',
+      indicatorKey: 'gdfi',
+      label_en: 'Capital flow regime',
+      summary_en: 'Looks at the stability and direction of cross-border capital flows.',
+      bullets_en: [
+        'Combines portfolio flows, FDI and banking positions.',
+        'Highlights phases of sudden stops or surges.',
+        'Links policy frameworks to capital flow volatility.'
+      ]
+    },
+    euro_area_fragmentation: {
+      code: 'GDFI',
+      indicatorKey: 'gdfi',
+      label_en: 'Euro area financial fragmentation',
+      summary_en: 'Examines divergence in financial conditions within the euro area.',
+      bullets_en: [
+        'Normalises spreads, funding costs and collateral usage.',
+        'Highlights fragmentation episodes and re-integration.',
+        'Links policy tools to reduction of fragmentation risk.'
+      ]
+    },
+    transatlantic_policy_divergence: {
+      code: 'TPVI',
+      indicatorKey: 'tpvi',
+      label_en: 'Transatlantic policy divergence',
+      summary_en: 'Maps structural differences in EU–US macro, regulatory and trade policy.',
+      bullets_en: [
+        'Captures differences in inflation regimes and policy responses.',
+        'Highlights regulatory and supervisory divergences.',
+        'Reflects long-run shifts in trade and investment ties.'
+      ]
+    },
+    geo_financial_fragmentation: {
+      code: 'GDFI',
+      indicatorKey: 'gdfi',
+      label_en: 'Geo-financial fragmentation',
+      summary_en: 'Looks at the re-wiring of global finance into blocs and spheres of influence.',
+      bullets_en: [
+        'Combines sanctions, payment systems and capital market splits.',
+        'Highlights phases of accelerated fragmentation.',
+        'Reflects the shift from multilateral to bloc-based architectures.'
+      ]
+    }
+  };
+
+  function getCurrentThemeConfig() {
+    return THEMES[currentThemeKey] || THEMES.eu_telecom_resilience;
+  }
+
+  function updateIndicatorText() {
+    const theme = getCurrentThemeConfig();
+    const titleEl = document.getElementById('indicatorTitle');
+    const summaryEl = document.getElementById('indicatorSummary');
+    const bulletsEl = document.getElementById('indicatorBullets');
+    if (!titleEl || !summaryEl || !bulletsEl) return;
+
+    const label = theme.label_en || theme.label;
+    titleEl.textContent = theme.code + ' – ' + label;
+    summaryEl.textContent = theme.summary_en || theme.summary || '';
+
+    bulletsEl.innerHTML = '';
+    const bullets = theme.bullets_en || theme.bullets || [];
+    bullets.forEach(function (b) {
+      const li = document.createElement('li');
+      li.textContent = b;
+      bulletsEl.appendChild(li);
+    });
+  }
+
+  function setLanguage(lang) {
+    currentLang = 'en';
+    updateMainChart();
+    updateIndicatorText();
+  }
+
+  function syncThemeSelects() {
+    const selectEN = document.getElementById('themeSelectEN');
+    if (!selectEN) return;
+    if (selectEN.value !== currentThemeKey) selectEN.value = currentThemeKey;
+  }
+
+  function initMainChart() {
+    const canvas = document.getElementById('chartMain');
+    if (!canvas || !window.Chart) {
+      console.error('Chart.js or canvas not available');
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+    gradient.addColorStop(0, 'rgba(56,189,248,0.35)');
+    gradient.addColorStop(0.5, 'rgba(56,189,248,0.18)');
+    gradient.addColorStop(1, 'rgba(15,23,42,0)');
+
+    const baseOptions = {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Indicator level',
+          data: [],
+          fill: true,
+          backgroundColor: gradient,
+          borderColor: 'rgba(56,189,248,0.9)',
+          tension: 0.28,
+          pointRadius: 0,
+          pointHitRadius: 6,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            intersect: false,
+            mode: 'index',
+            callbacks: {
+              label: function (context) {
+                const v = context.parsed.y;
+                if (typeof v !== 'number') return '';
+                return ' ' + v.toFixed(2) + ' (normalised)';
+              }
+            }
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: 'rgba(148,163,184,0.8)',
+              font: { size: 10 }
+            }
+          },
+          y: {
+            min: 0,
+            max: 1,
+            grid: {
+              color: 'rgba(55,65,81,0.7)'
+            },
+            ticks: {
+              color: 'rgba(148,163,184,0.8)',
+              font: { size: 10 },
+              callback: function (value) {
+                return value.toFixed(1);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    mainChart = new Chart(ctx, baseOptions);
+    updateMainChart();
+  }
+
+  function updateMainChart() {
+    if (!mainChart) return;
+    const theme = getCurrentThemeConfig();
+    const series = BASE_SERIES[theme.code] || BASE_SERIES.KMRI;
+    const data = series[currentHorizonKey] || series.short;
+    const labels = data.map(function (_, i) { return 't' + (i + 1); });
+
+    mainChart.data.labels = labels;
+    mainChart.data.datasets[0].data = data;
+    mainChart.update();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const selectEN = document.getElementById('themeSelectEN');
+    if (selectEN) {
+      selectEN.addEventListener('change', function () {
+        currentThemeKey = this.value;
+        syncThemeSelects();
+        updateMainChart();
+        updateIndicatorText();
+      });
+    }
+
+    const horizonSelect = document.getElementById('horizonSelect');
+    if (horizonSelect) {
+      horizonSelect.addEventListener('change', function () {
+        currentHorizonKey = this.value;
+        updateMainChart();
+      });
+    }
+
+    initMainChart();
+    syncThemeSelects();
+    updateIndicatorText();
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
