@@ -813,6 +813,9 @@
                     <option value="euro_area_fragmentation">Euro area financial fragmentation</option>
                     <option value="transatlantic_policy_divergence">Transatlantic policy divergence</option>
                     <option value="geo_financial_fragmentation">Geo-financial fragmentation</option>
+                    <option value="agri_input_price_stability">Agricultural input price stability</option>
+                    <option value="global_commodity_cost_cycle">Global commodity cost cycle</option>
+                    <option value="education_cost_burden">Education cost burden &amp; accessibility</option>
                   </select>
                 </div>
 
@@ -866,6 +869,7 @@
                     <button class="toolbar-btn toolbar-btn-range" data-range="6M">6M</button>
                     <button class="toolbar-btn toolbar-btn-range" data-range="1Y">1Y</button>
                     <button class="toolbar-btn toolbar-btn-range" data-range="5Y">5Y</button>
+                    <button class="toolbar-btn toolbar-btn-range" data-range="10Y">10Y</button>
                   </div>
                   <div class="terminal-window-actions">
                     <div class="actions-left">
@@ -1056,21 +1060,23 @@
   let rangeButtons = [];
 
   // Map horizons to preferred range buttons
+  // short = 3–6M → 6M, medium = 1–5Y → 5Y, long = 5–10Y → 10Y
   const RANGE_MAPPING = {
-    short: '1M',
-    medium: '1Y',
-    long: '5Y'
+    short: '6M',
+    medium: '5Y',
+    long: '10Y'
   };
 
-  // Map ranges back to horizons when user clicks range buttons
+  // Map ranges back to horizons when user clicks a range button
   const HORIZON_FROM_RANGE = {
     '1D': 'short',
     '1W': 'short',
     '1M': 'short',
-    '3M': 'medium',
-    '6M': 'medium',
+    '3M': 'short',
+    '6M': 'short',
     '1Y': 'medium',
-    '5Y': 'long'
+    '5Y': 'medium',
+    '10Y': 'long'
   };
 
   const BASE_SERIES = {
@@ -1277,6 +1283,39 @@
         'Combines sanctions, payment systems and capital market splits.',
         'Highlights phases of accelerated fragmentation.',
         'Reflects the shift from multilateral to bloc-based architectures.'
+      ]
+    },
+    agri_input_price_stability: {
+      code: 'KMRI',
+      indicatorKey: 'kmri',
+      label_en: 'Agricultural input price stability',
+      summary_en: 'Tracks volatility and cost pressure in agricultural input markets such as fertilisers, feed, energy and transport.',
+      bullets_en: [
+        'Combines fertiliser, feed, energy and logistics sub-indices.',
+        'Captures exposure of food supply chains to external shocks.',
+        'Links agricultural input inflation to broader cost-pass-through.'
+      ]
+    },
+    global_commodity_cost_cycle: {
+      code: 'TPVI',
+      indicatorKey: 'tpvi',
+      label_en: 'Global commodity cost cycle',
+      summary_en: 'Measures cyclical and structural shifts in international commodity markets across energy, metals and raw materials.',
+      bullets_en: [
+        'Integrates energy, industrial metals and bulk commodities.',
+        'Highlights phases of supply tightness and demand compression.',
+        'Connects commodity cycles to global industrial activity.'
+      ]
+    },
+    education_cost_burden: {
+      code: 'GDFI',
+      indicatorKey: 'gdfi',
+      label_en: 'Education cost burden & accessibility',
+      summary_en: 'Normalises long-run dynamics of education-related expenses relative to income, mobility and demographic structures.',
+      bullets_en: [
+        'Tracks tuition, fees, materials and housing related to education.',
+        'Normalises relative to disposable income and demographic pressure.',
+        'Reflects financing mechanisms, subsidies and structural inequality.'
       ]
     }
   };
