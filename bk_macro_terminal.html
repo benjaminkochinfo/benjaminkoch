@@ -1,0 +1,2376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BK Macro · Indicator Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="Macro indicator dashboard with BK indices (KMRI, TPVI, GDFI, RSAC) and a ForumFlow-WSB crowd-flow strip.">
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #020617;
+      --bg-soft: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.25);
+      --accent-2: #a855f7;
+      --text-muted: #9ca3af;
+      --border-soft: rgba(148,163,184,0.4);
+      --radius-xl: 1.4rem;
+    }
+
+    * { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #0f172a 0, #020617 40%, #000 75%, #020617 100%);
+      color: #e5e7eb;
+    }
+    body.bk-fullscreen-open { overflow: hidden; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: #0ea5e9; }
+
+    .navbar {
+      background: linear-gradient(to right, rgba(15,23,42,0.98), rgba(15,23,42,0.96));
+      border-bottom: 1px solid rgba(148,163,184,0.45);
+      backdrop-filter: blur(16px);
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .nav-link { font-size: .85rem; }
+
+    main { padding-top: 4.5rem; }
+
+    .hero {
+      padding: 2.75rem 0 2rem;
+    }
+
+    .hero-badge {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,0.96));
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding-right: .75rem;
+    }
+
+    .hero-title {
+      font-weight: 700;
+      font-size: clamp(2.1rem, 3vw + 1rem, 3.1rem);
+      letter-spacing: -.03em;
+      margin-bottom: .5rem;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 40rem;
+      font-size: .95rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .35rem .8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      font-size: .78rem;
+      background: rgba(15,23,42,0.98);
+      color: #e5e7eb;
+    }
+
+    .pill i { font-size: .9rem; color: var(--accent); }
+
+    .section-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--text-muted);
+      margin-bottom: .4rem;
+    }
+
+    .card-soft {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.04), rgba(15,23,42,0.98));
+      border-radius: 1.2rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.85);
+    }
+
+    .card-soft .card-body { padding: 1.25rem 1.4rem; }
+
+    .terminal-shell {
+      position: relative;
+      border-radius: .9rem;
+      background: #020617;
+      border: 1px solid rgba(15,23,42,0.95);
+      box-shadow:
+        inset 0 0 0 1px rgba(15,23,42,0.95),
+        0 22px 60px rgba(0,0,0,0.95);
+      overflow: hidden;
+    }
+
+    .terminal-shell.fullscreen {
+      position: fixed;
+      inset: 0;
+      margin: 0;
+      border-radius: 0;
+      z-index: 2000;
+      box-shadow: none;
+      max-width: none;
+    }
+
+    .fullscreen-btn {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      z-index: 30;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.96);
+      color: rgba(209,213,219,0.95);
+      border-radius: 3px;
+      padding: 2px 6px;
+      font-size: .7rem;
+      cursor: pointer;
+    }
+    .fullscreen-btn i { font-size: .8rem; }
+    .terminal-shell.fullscreen .fullscreen-btn {
+      background: #0f172a;
+    }
+
+    .terminal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .4rem .7rem;
+      background: linear-gradient(to right, #111827, #020617);
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: rgba(209,213,219,0.96);
+      white-space: nowrap;
+    }
+
+    .terminal-top-title { overflow: hidden; text-overflow: ellipsis; }
+    .terminal-top-meta  { opacity: .9; }
+
+    .terminal-fkeys {
+      background: #020617;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      padding: .15rem .7rem .22rem;
+      font-size: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: rgba(156,163,175,0.9);
+      display: flex;
+      gap: .55rem;
+    }
+
+    .terminal-toolbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .3rem;
+      padding: .3rem .7rem .35rem;
+      background: #020617;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      font-size: .65rem;
+    }
+
+    .toolbar-label {
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: rgba(148,163,184,0.9);
+      margin-right: .2rem;
+    }
+
+    .toolbar-btn {
+      border: 1px solid rgba(55,65,81,0.9);
+      background: #020617;
+      color: rgba(148,163,184,0.9);
+      padding: .14rem .38rem;
+      border-radius: 2px;
+      font-size: .63rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      cursor: default;
+    }
+
+    .toolbar-btn.active-range {
+      background: #f97316;
+      border-color: #f97316;
+      color: #020617;
+      font-weight: 600;
+    }
+
+    .terminal-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .25rem .7rem .3rem;
+      background: #020617;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      font-size: .63rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(156,163,175,0.9);
+    }
+
+    .terminal-actions-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+    }
+
+    .terminal-action {
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: .12rem .4rem;
+      border-radius: 2px;
+      background: #020617;
+      color: rgba(209,213,219,0.9);
+      cursor: pointer;
+    }
+
+    .terminal-action-icon {
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: .1rem .25rem;
+      border-radius: 2px;
+      background: #020617;
+      color: rgba(209,213,219,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+    }
+
+    .terminal-body {
+      position: relative;
+      padding: .4rem .45rem .25rem;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #022c3a 100%);
+    }
+
+    .terminal-legend {
+      position: absolute;
+      top: .55rem;
+      left: .55rem;
+      padding: .3rem .48rem .34rem;
+      background: rgba(15,23,42,0.94);
+      border-radius: .3rem;
+      border: 1px solid rgba(75,85,99,0.9);
+      font-size: .66rem;
+      color: rgba(209,213,219,0.96);
+      z-index: 5;
+      min-width: 160px;
+    }
+
+    .terminal-legend-title {
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .6rem;
+      margin-bottom: .16rem;
+      color: rgba(156,163,175,0.95);
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .35rem;
+      margin-bottom: .03rem;
+    }
+
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 2px;
+      border-radius: 999px;
+    }
+
+    .legend-val { font-variant-numeric: tabular-nums; }
+
+    .terminal-chart {
+      position: relative;
+      height: 250px;
+    }
+
+    .terminal-shell.fullscreen .terminal-chart {
+      height: calc(100vh - 135px) !important;
+    }
+
+    .terminal-chart canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .terminal-status {
+      padding: .25rem .7rem .32rem;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      background: #020617;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .75rem;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: rgba(148,163,184,0.9);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.35);
+      margin-right: .35rem;
+      display: inline-block;
+    }
+
+    .status-label { opacity: .8; }
+    .status-value { color: #e5e7eb; }
+
+    .indicator-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .3rem .7rem;
+      border-radius: .75rem;
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: .72rem;
+      background: rgba(15,23,42,0.98);
+      color: var(--text-muted);
+    }
+
+    .indicator-chip i { color: var(--accent-2); }
+
+    footer {
+      border-top: 1px solid rgba(55,65,81,0.8);
+      font-size: .8rem;
+      color: var(--text-muted);
+      padding: 1.3rem 0 1.5rem;
+      background: rgba(3,7,18,0.97);
+      margin-top: 2rem;
+    }
+
+    .chart-grid .chart-block {
+      cursor: move;
+      transition: opacity .15s ease;
+    }
+    .chart-grid .chart-block.dragging {
+      opacity: .45;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero { padding-top: 2.3rem; }
+    }
+
+    @media (max-width: 575.98px) {
+      .terminal-top-meta { display:none; }
+      .terminal-fkeys { font-size: .54rem; }
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#top">BK Macro · Indicator Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#dash">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#forumflow">ForumFlow-WSB</a></li>
+        <li class="nav-item"><a class="nav-link" href="#indicators">Indicators</a></li>
+        <li class="nav-item"><a class="nav-link" href="#extras">Multi-view</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://benjaminkoch.info/">Main site</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section id="dash" class="hero">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <div class="hero-badge px-3 py-2 mb-3">
+            <span>Research dashboard · projected indicators</span>
+            <span style="width:4px;height:4px;border-radius:999px;background:#22c55e;"></span>
+          </div>
+          <h1 class="hero-title">Macro indicator dashboard with crowd-flow signal</h1>
+          <p class="hero-sub mb-3">
+            A research-grade, single-view dashboard that combines BK indicator families
+            (KMRI, TPVI, GDFI, RSAC) with a ForumFlow-WSB crowd-flow strip across
+            intraday, weekly and monthly horizons.
+          </p>
+          <p class="hero-sub mb-3">
+            The layout is designed for projected indicator series and policy
+            narratives – a structured way to observe how fundamental and
+            crowd-driven dynamics interact over time.
+          </p>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <div class="pill">
+              <i class="bi bi-diagram-3"></i>
+              <span>KMRI · TPVI · GDFI · RSAC</span>
+            </div>
+            <div class="pill">
+              <i class="bi bi-people"></i>
+              <span>ForumFlow-WSB intraday / week / month</span>
+            </div>
+            <div class="pill">
+              <i class="bi bi-columns-gap"></i>
+              <span>Multi-chart view with overlays & volume</span>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap align-items-center gap-2">
+            <span class="section-label mb-0" style="letter-spacing:.16em;">Scenario lens</span>
+            <select id="scenarioSelect" class="form-select form-select-sm"
+                    style="width:auto;min-width:260px;max-width:100%;background:#020617;color:#e5e7eb;border-color:#4b5563;">
+              <option value="baseline">Baseline · neutral macro configuration</option>
+              <option value="energy">Energy transition stress</option>
+              <option value="easing">Policy easing bias</option>
+              <option value="riskoff">Risk-off phase · fragmentation</option>
+              <option value="tech">Tech upcycle · growth tilt</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card-soft">
+            <div class="card-body">
+              <div class="section-label mb-1">Concept</div>
+              <p class="small mb-2">
+                Primary panel with benchmark overlays, a cross-indicator matrix,
+                multi-view sector windows and a dedicated ForumFlow-WSB section.
+              </p>
+              <p class="small mb-1">
+                <strong>ForumFlow-WSB crowd strip.</strong> A structured crowd-tone
+                index on a −1 to +1 scale:
+              </p>
+              <ul class="small mb-1">
+                <li>Intraday: short-horizon activity strip.</li>
+                <li>Week: regime-style risk-on / risk-off profile.</li>
+                <li>Month: structural bias of the current cycle.</li>
+              </ul>
+              <p class="small text-secondary mb-0">
+                The page layout is built for real BK indicator time series and
+                scenario-linked narratives.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN TERMINAL ROW -->
+  <section class="pb-3">
+    <div class="container">
+      <div class="row g-4 chart-grid">
+        <!-- Primary price / overlay / ForumFlow strip -->
+        <div class="col-12 chart-block">
+          <div class="terminal-shell">
+            <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+              <i class="bi bi-arrows-fullscreen"></i>
+            </button>
+            <div class="terminal-top">
+              <span class="terminal-top-title" id="mainTitle">
+                BK Macro Composite · Price + KMRI + ForumFlow-WSB strip
+              </span>
+              <span class="terminal-top-meta" id="mainMeta">
+                Line · Overlay · Volume · Projected indicator layout
+              </span>
+            </div>
+            <div class="terminal-fkeys">
+              <span>F1 HELP</span><span>F2 CROWD</span><span>F3 KMRI</span><span>F4 TPVI</span>
+              <span>F5 GDFI</span><span>F6 RSAC</span><span>F7 SCREEN</span><span>F8 EXPORT</span>
+            </div>
+            <div class="terminal-toolbar">
+              <span class="toolbar-label">Asset</span>
+              <select id="assetSelect" class="form-select form-select-sm"
+                      style="width:auto;min-width:260px;background:#020617;color:#e5e7eb;border-color:#4b5563;">
+                <!-- 10 asset-style themes -->
+                <option value="BK Macro Composite">BK Macro Composite</option>
+                <option value="BK Real Economy Basket">BK Real Economy Basket</option>
+                <option value="BK Telecom & Infrastructure">BK Telecom & Infrastructure</option>
+                <option value="BK Energy & Utilities">BK Energy & Utilities</option>
+                <option value="BK Housing & Rents">BK Housing & Rents</option>
+                <option value="BK Food & Essentials">BK Food & Essentials</option>
+                <option value="BK Cost-of-Living Pressure">BK Cost-of-Living Pressure</option>
+                <option value="BK Labour Income Momentum">BK Labour Income Momentum</option>
+                <option value="BK Education & Skills Capital">BK Education & Skills Capital</option>
+                <option value="BK Health & Care Demand">BK Health & Care Demand</option>
+              </select>
+              <span class="toolbar-label ms-2">Overlay</span>
+              <select id="overlaySelect" class="form-select form-select-sm"
+                      style="width:auto;min-width:270px;background:#020617;color:#e5e7eb;border-color:#4b5563;">
+                <!-- 10 overlay-style themes -->
+                <option value="BK Policy Volatility Gauge">BK Policy Volatility Gauge</option>
+                <option value="BK Financial Conditions Index">BK Financial Conditions Index</option>
+                <option value="BK Fragmentation Index">BK Fragmentation Index</option>
+                <option value="BK Core Inflation Composite">BK Core Inflation Composite</option>
+                <option value="BK Income vs. Prices Spread">BK Income vs. Prices Spread</option>
+                <option value="BK Demographic Resilience Score">BK Demographic Resilience Score</option>
+                <option value="BK Trade & Supply Chains Monitor">BK Trade & Supply Chains Monitor</option>
+                <option value="BK Climate & Transition Risk">BK Climate & Transition Risk</option>
+                <option value="BK Capital Investment Pulse">BK Capital Investment Pulse</option>
+                <option value="BK Institutional Confidence Index">BK Institutional Confidence Index</option>
+              </select>
+              <span class="toolbar-label ms-2">Range</span>
+              <button class="toolbar-btn main-range-btn" data-range="3M">3M</button>
+              <button class="toolbar-btn main-range-btn active-range" data-range="6M">6M</button>
+              <button class="toolbar-btn main-range-btn" data-range="1Y">1Y</button>
+              <button class="toolbar-btn main-range-btn" data-range="5Y">5Y</button>
+              <span class="toolbar-label ms-2">Theme</span>
+              <span id="mainThemeLabel" style="font-size:.7rem;letter-spacing:.14em;">KMRI · Macro composite</span>
+            </div>
+            <div class="terminal-actions">
+              <div class="terminal-actions-left">
+                <span class="terminal-action">Track</span>
+                <span class="terminal-action">Annotate</span>
+                <span class="terminal-action">Narrative</span>
+                <span class="terminal-action">Zoom</span>
+                <span class="terminal-action">Compare</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <span id="scenarioStatusLabel">Scenario: Baseline</span>
+                <span class="terminal-action" id="popoutMainBtn">Popout</span>
+                <span class="terminal-action-icon" title="Settings"><i class="bi bi-gear-fill"></i></span>
+              </div>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-legend">
+                <div class="terminal-legend-title">Normalised lines</div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#facc15;"></span>
+                    <span>Asset</span>
+                  </div>
+                  <span class="legend-val" id="legendAsset">0.00</span>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#38bdf8;"></span>
+                    <span>Overlay</span>
+                  </div>
+                  <span class="legend-val" id="legendOverlay">0.00</span>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#a855f7;"></span>
+                    <span>ForumFlow-WSB strip</span>
+                  </div>
+                  <span class="legend-val" id="legendStrip">0.00</span>
+                </div>
+              </div>
+              <div class="terminal-chart" id="mainChartShell">
+                <canvas id="mainChart"></canvas>
+              </div>
+            </div>
+            <div class="terminal-status">
+              <div class="d-flex align-items-center flex-wrap gap-2">
+                <span class="status-dot"></span>
+                <span class="status-label">Mode</span>
+                <span class="status-value" id="statusMode">Indicator projection layout</span>
+                <span class="status-label ms-2">KMRI</span>
+                <span class="status-value" id="statusKMRI">0.00</span>
+                <span class="status-label ms-2">TPVI</span>
+                <span class="status-value" id="statusTPVI">0.00</span>
+                <span class="status-label ms-2">GDFI</span>
+                <span class="status-value" id="statusGDFI">0.00</span>
+              </div>
+              <div class="text-end">
+                <span class="status-label me-1">Last update</span>
+                <span class="status-value" id="statusUpdated"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRICE+VOLUME and CROSS-INDICATOR PANEL -->
+        <div class="col-lg-7 chart-block">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">Price · Volume micro-panel</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-bar-chart-steps"></i>
+                  <span>Line + histogram · dual axis</span>
+                </span>
+              </div>
+              <div class="terminal-shell" style="box-shadow:none;border-radius:.8rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title" id="pvTitle">Asset vs volume</span>
+                  <span class="terminal-top-meta">Close, normalised · relative volume</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">Series</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#facc15;"></span>
+                        <span>Price</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#38bdf8;"></span>
+                        <span>Volume (bars)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:210px;">
+                    <canvas id="priceVolumeChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Last</span>
+                    <span class="status-value" id="pvLast">0.00</span>
+                    <span class="status-label ms-2">Volume</span>
+                    <span class="status-value" id="pvVol">0</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Range</span>
+                    <span class="status-value">20 latest points</span>
+                  </div>
+                </div>
+              </div>
+              <p class="small text-secondary mt-2 mb-0">
+                Stylised closing levels and relative volume for the currently selected
+                indicator-linked asset theme. Volumes are scaled for visual comparison.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 chart-block">
+          <div class="card-soft h-100" id="indicators">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">Cross-indicator matrix</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-diagram-3"></i>
+                  <span>KMRI · TPVI · GDFI composite</span>
+                </span>
+              </div>
+              <div class="terminal-shell" style="box-shadow:none;border-radius:.8rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">BK indices · normalised 0–1</span>
+                  <span class="terminal-top-meta">Quarterly stylised path</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">BK indices</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#22c55e;"></span>
+                        <span>KMRI</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#f97316;"></span>
+                        <span>TPVI</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#38bdf8;"></span>
+                        <span>GDFI</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:210px;">
+                    <canvas id="kmriChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">KMRI</span>
+                    <span class="status-value" id="kmriLast">0.00</span>
+                    <span class="status-label ms-2">TPVI</span>
+                    <span class="status-value" id="tpviLast">0.00</span>
+                    <span class="status-label ms-2">GDFI</span>
+                    <span class="status-value" id="gdfiLast">0.00</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Theme set</span>
+                    <span class="status-value">Resilience · volatility · fragmentation</span>
+                  </div>
+                </div>
+              </div>
+              <p class="small text-secondary mt-2 mb-0">
+                KMRI (macro resilience), TPVI (policy volatility) and GDFI
+                (geo-financial fragmentation) together provide a high-level backdrop
+                for the crowd-flow and sector-level panels.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- extra main multiview charts -->
+      <div class="row g-4 chart-grid mt-3">
+        <div class="col-lg-6 chart-block">
+          <div class="terminal-shell">
+            <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+              <i class="bi bi-arrows-fullscreen"></i>
+            </button>
+            <div class="terminal-top">
+              <span class="terminal-top-title">Core vs headline vs income spread</span>
+              <span class="terminal-top-meta">Macro spread panel · 0–1</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-legend">
+                <div class="terminal-legend-title">Macro spread lines</div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#38bdf8;"></span>
+                    <span>Core inflation composite</span>
+                  </div>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#f97316;"></span>
+                    <span>Headline basket</span>
+                  </div>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#22c55e;"></span>
+                    <span>Labour income momentum</span>
+                  </div>
+                </div>
+              </div>
+              <div class="terminal-chart" style="height:230px;">
+                <canvas id="macroSpreadChart"></canvas>
+              </div>
+            </div>
+            <div class="terminal-status">
+              <div>
+                <span class="status-label">Use</span>
+                <span class="status-value">Price vs income alignment</span>
+              </div>
+              <div>
+                <span class="status-label">View</span>
+                <span class="status-value">Medium-horizon panel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 chart-block">
+          <div class="terminal-shell">
+            <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+              <i class="bi bi-arrows-fullscreen"></i>
+            </button>
+            <div class="terminal-top">
+              <span class="terminal-top-title">Policy mix & financial conditions</span>
+              <span class="terminal-top-meta">TPVI · conditions · ForumFlow overlay</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-legend">
+                <div class="terminal-legend-title">Policy-conditions lines</div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#f97316;"></span>
+                    <span>TPVI policy volatility</span>
+                  </div>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#38bdf8;"></span>
+                    <span>Financial conditions</span>
+                  </div>
+                </div>
+                <div class="legend-row">
+                  <div class="legend-left">
+                    <span class="legend-color" style="background:#a855f7;"></span>
+                    <span>ForumFlow-WSB (scaled)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="terminal-chart" style="height:230px;">
+                <canvas id="policyMixChart"></canvas>
+              </div>
+            </div>
+            <div class="terminal-status">
+              <div>
+                <span class="status-label">Use</span>
+                <span class="status-value">Narrative on policy stance</span>
+              </div>
+              <div>
+                <span class="status-label">View</span>
+                <span class="status-value">Overlay with crowd response</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ForumFlow-WSB SECTION -->
+  <section id="forumflow" class="pb-4 pt-1">
+    <div class="container">
+      <div class="row g-4 chart-grid">
+        <div class="col-lg-7 chart-block">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">ForumFlow-WSB crowd strip</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-people"></i>
+                  <span>Crowd tone · −1 … +1</span>
+                </span>
+              </div>
+              <p class="small mb-3">
+                ForumFlow-WSB is a synthetic crowd-tone index summarising the balance
+                between high-risk positioning and capital on the sidelines. Values
+                near +1 indicate broad risk-seeking behaviour; values near −1 reflect
+                sustained de-risking. Intraday dynamics emulate short-horizon flow,
+                while weekly and monthly views capture regimes and cycles.
+              </p>
+
+              <div class="terminal-shell">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title" id="wsbTitle">ForumFlow-WSB · Intraday tape</span>
+                  <span class="terminal-top-meta" id="wsbMeta">Linked to crowd-flow strip · −1…+1</span>
+                </div>
+                <div class="terminal-toolbar">
+                  <span class="toolbar-label">Horizon</span>
+                  <button class="toolbar-btn wsb-btn active-range" data-mode="intraday">Intraday</button>
+                  <button class="toolbar-btn wsb-btn" data-mode="week">1W regime</button>
+                  <button class="toolbar-btn wsb-btn" data-mode="month">1M cycle</button>
+                  <span class="toolbar-label ms-2">Tone</span>
+                  <span id="wsbToneLabel" style="font-size:.7rem;letter-spacing:.14em;">Calibrating…</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">ForumFlow sentiment</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#a855f7;"></span>
+                        <span>Index level</span>
+                      </div>
+                      <span class="legend-val" id="wsbLast">0.00</span>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#4ade80;"></span>
+                        <span>Risk-seeking threshold</span>
+                      </div>
+                      <span class="legend-val">+0.40</span>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#f97316;"></span>
+                        <span>De-risking threshold</span>
+                      </div>
+                      <span class="legend-val">−0.40</span>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:230px;">
+                    <canvas id="wsbChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Mode</span>
+                    <span class="status-value" id="wsbStatusMode">Intraday tape · linked</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Last refresh</span>
+                    <span class="status-value" id="wsbUpdated"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Extra gauge: Participation-Conviction -->
+              <div class="terminal-shell mt-3" style="box-shadow:none;border-radius:.9rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">Participation-Conviction Gauge</span>
+                  <span class="terminal-top-meta">Flow intensity vs conviction · proxy for chase behaviour</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">Gauge series</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#4ade80;"></span>
+                        <span>Participation-conviction level</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:160px;">
+                    <canvas id="pcgChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Gauge</span>
+                    <span class="status-value" id="pcgLast">0.00</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Interpretation</span>
+                    <span class="status-value" id="pcgInterpret">Neutral participation</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="small text-secondary mt-2 mb-0">
+                The Participation-Conviction Gauge highlights phases where flows and
+                conviction reinforce each other – the episodes often described
+                informally as “fear of missing out” or “all-in” conditions – in a
+                more neutral, researchable format.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-asset ForumFlow snapshot -->
+        <div class="col-lg-5 chart-block">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">ForumFlow cross-asset snapshot</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-grid-3x3-gap"></i>
+                  <span>Current crowd tilts & mixes</span>
+                </span>
+              </div>
+              <p class="small mb-2">
+                Stylised allocation snapshot across broad themes: growth/tech,
+                cyclicals, defensives, digital assets and macro hedges – linked to
+                the active ForumFlow-WSB horizon.
+              </p>
+
+              <div class="terminal-shell" style="box-shadow:none;border-radius:.9rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">ForumFlow cross-asset bias</span>
+                  <span class="terminal-top-meta">Bars · linked to crowd strip</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">Tilts</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#22c55e;"></span>
+                        <span>Overweight (positive)</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#f97316;"></span>
+                        <span>Underweight (negative)</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:220px;">
+                    <canvas id="sentimentChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Scale</span>
+                    <span class="status-value">−1 = net underweight · +1 = net overweight</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Linked horizon</span>
+                    <span class="status-value" id="sentimentLinked">Intraday</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NEW: ForumFlow activity & volume stream -->
+              <div class="terminal-shell mt-3" style="box-shadow:none;border-radius:.9rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">ForumFlow activity & volume</span>
+                  <span class="terminal-top-meta">Daily / weekly / monthly stream</span>
+                </div>
+                <div class="terminal-toolbar">
+                  <span class="toolbar-label">Horizon</span>
+                  <button class="toolbar-btn sent-act-btn active-range" data-mode="daily">Daily</button>
+                  <button class="toolbar-btn sent-act-btn" data-mode="weekly">Weekly</button>
+                  <button class="toolbar-btn sent-act-btn" data-mode="monthly">Monthly</button>
+                  <span class="toolbar-label ms-2">Linked</span>
+                  <span id="sentActLinkedLabel" style="font-size:.7rem;letter-spacing:.14em;">
+                    ForumFlow configuration
+                  </span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">Activity streams</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#38bdf8;"></span>
+                        <span>Volume (bars)</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#22c55e;"></span>
+                        <span>Activity line</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:180px;">
+                    <canvas id="sentActChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Last volume</span>
+                    <span class="status-value" id="sentActVolLast">0</span>
+                    <span class="status-label ms-2">Activity</span>
+                    <span class="status-value" id="sentActActLast">0.00</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Mode</span>
+                    <span class="status-value" id="sentActModeLabel">Daily strip</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="small text-secondary mt-2 mb-0">
+                Bars move with the active ForumFlow mode: intraday updates every few
+                seconds, while weekly and monthly settings emphasise persistence
+                rather than noise. The activity stream adds a clean map of
+                participation and flow over daily, weekly and monthly horizons.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRA MULTI-VIEW ROW -->
+  <section id="extras" class="pb-4 pt-1">
+    <div class="container">
+      <div class="section-label mb-2">Additional indicator views</div>
+      <div class="row g-4 chart-grid">
+        <div class="col-lg-4 chart-block">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">RSAC stress channel</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-activity"></i>
+                  <span>RSAC mini-panel</span>
+                </span>
+              </div>
+              <div class="terminal-shell" style="box-shadow:none;border-radius:.8rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">RSAC · Regional stress & adjustment</span>
+                  <span class="terminal-top-meta">Normalised · 0–1</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">RSAC</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#f97316;"></span>
+                        <span>Stress channel</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:160px;">
+                    <canvas id="rsacChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">RSAC</span>
+                    <span class="status-value" id="rsacLast">0.00</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Signal</span>
+                    <span class="status-value">Higher values = more stress</span>
+                  </div>
+                </div>
+              </div>
+              <p class="small text-secondary mt-2 mb-0">
+                RSAC captures regional strain vs adjustment capacity –
+                useful alongside KMRI and GDFI when scanning for non-linear risks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 chart-block">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">Housing & cost-of-living</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-house-door"></i>
+                  <span>Housing vs living costs</span>
+                </span>
+              </div>
+              <div class="terminal-shell" style="box-shadow:none;border-radius:.8rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">Housing pressure vs cost-of-living</span>
+                  <span class="terminal-top-meta">Two-line comparison</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">Affordability lines</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#38bdf8;"></span>
+                        <span>Housing pressure</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#a855f7;"></span>
+                        <span>Cost-of-living composite</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:160px;">
+                    <canvas id="housingChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Housing</span>
+                    <span class="status-value" id="housingLast">0.00</span>
+                  </div>
+                  <div>
+                    <span class="status-label">Cost-of-living</span>
+                    <span class="status-value" id="colLast">0.00</span>
+                  </div>
+                </div>
+              </div>
+              <p class="small text-secondary mt-2 mb-0">
+                Alignment or divergence between housing pressure and broader
+                cost-of-living indicators helps anchor affordability narratives.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 chart-block">
+          <div class="card-soft h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="section-label mb-0">Labour & income dynamics</span>
+                <span class="indicator-chip">
+                  <i class="bi bi-briefcase"></i>
+                  <span>Income vs resilience</span>
+                </span>
+              </div>
+              <div class="terminal-shell" style="box-shadow:none;border-radius:.8rem;">
+                <button class="fullscreen-btn" type="button" title="Toggle fullscreen">
+                  <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+                <div class="terminal-top">
+                  <span class="terminal-top-title">Labour income vs KMRI</span>
+                  <span class="terminal-top-meta">Co-movement gauge</span>
+                </div>
+                <div class="terminal-body">
+                  <div class="terminal-legend">
+                    <div class="terminal-legend-title">Income & resilience</div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#22c55e;"></span>
+                        <span>Labour income momentum</span>
+                      </div>
+                    </div>
+                    <div class="legend-row">
+                      <div class="legend-left">
+                        <span class="legend-color" style="background:#facc15;"></span>
+                        <span>KMRI overlay</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="terminal-chart" style="height:160px;">
+                    <canvas id="labourChart"></canvas>
+                  </div>
+                </div>
+                <div class="terminal-status">
+                  <div>
+                    <span class="status-label">Income</span>
+                    <span class="status-value" id="labourLast">0.00</span>
+                  </div>
+                  <div>
+                    <span class="status-label">KMRI overlay</span>
+                    <span class="status-value" id="labourKmriLast">0.00</span>
+                  </div>
+                </div>
+              </div>
+              <p class="small text-secondary mt-2 mb-0">
+                Labour-income momentum relative to KMRI provides a quick sense of
+                how households experience macro resilience on the ground.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+    <span>© <span id="year"></span> Benjamin Koch. All rights reserved.</span>
+    <span>Research view for projected indicators · No cookies, no trackers, no analytics.</span>
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // --- helpers ---------------------------------------------------------------
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function timestamp(){
+    const d=new Date();
+    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+
+      " "+pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
+  }
+
+  // simple synthetic generator used as placeholder
+  function genSeries(len, base, vol){
+    const arr=[];
+    let v=base;
+    for(let i=0;i<len;i++){
+      const step=(Math.random()-0.5)*vol;
+      v=Math.max(0,Math.min(1,v+step));
+      arr.push(+v.toFixed(3));
+    }
+    return arr;
+  }
+
+  // Crosshair plugin
+  const crosshairPlugin = {
+    id: "bkCrosshair",
+    afterDatasetsDraw(chart){
+      const tooltip = chart.tooltip;
+      if(!tooltip || !tooltip._active || !tooltip._active.length) return;
+      const ctx = chart.ctx;
+      const x = tooltip._active[0].element.x;
+      const area = chart.chartArea;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x, area.top);
+      ctx.lineTo(x, area.bottom);
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3,3]);
+      ctx.strokeStyle = "rgba(148,163,184,0.7)";
+      ctx.stroke();
+      ctx.restore();
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    if(window.Chart){
+      Chart.register(crosshairPlugin);
+      // global padding so data starts below legend box
+      Chart.defaults.layout = Chart.defaults.layout || {};
+      Chart.defaults.layout.padding = { top: 26, right: 6, bottom: 6, left: 6 };
+    }
+
+    // --- FULLSCREEN TOGGLE ---------------------------------------------------
+    let fullscreenShell = null;
+    let fullscreenScrollY = 0;
+
+    function enterFullscreen(shell){
+      if(fullscreenShell === shell) return;
+      if(fullscreenShell) exitFullscreen();
+      fullscreenShell = shell;
+      fullscreenScrollY = window.scrollY;
+      document.body.classList.add("bk-fullscreen-open");
+      shell.classList.add("fullscreen");
+      window.scrollTo(0,0);
+      window.dispatchEvent(new Event("resize"));
+    }
+
+    function exitFullscreen(){
+      if(!fullscreenShell) return;
+      fullscreenShell.classList.remove("fullscreen");
+      fullscreenShell = null;
+      document.body.classList.remove("bk-fullscreen-open");
+      window.scrollTo(0, fullscreenScrollY);
+      window.dispatchEvent(new Event("resize"));
+    }
+
+    document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
+      btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        const shell = this.closest(".terminal-shell");
+        if(shell.classList.contains("fullscreen")) {
+          exitFullscreen();
+        } else {
+          enterFullscreen(shell);
+        }
+      });
+    });
+
+    // escape key exits fullscreen
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape") exitFullscreen();
+    });
+
+    // --- DRAG & DROP ARRANGEMENT --------------------------------------------
+    function setupDragAndDrop(){
+      document.querySelectorAll(".chart-grid").forEach(grid=>{
+        let dragEl = null;
+
+        function getDragAfterElement(container, y){
+          const draggableElements = [...container.querySelectorAll(".chart-block:not(.dragging)")];
+          return draggableElements.reduce((closest, child)=>{
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if(offset < 0 && offset > closest.offset){
+              return { offset, element: child };
+            } else {
+              return closest;
+            }
+          }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        grid.querySelectorAll(".chart-block").forEach(block=>{
+          block.setAttribute("draggable","true");
+
+          block.addEventListener("dragstart", e=>{
+            dragEl = block;
+            block.classList.add("dragging");
+          });
+
+          block.addEventListener("dragend", e=>{
+            dragEl = null;
+            block.classList.remove("dragging");
+          });
+
+          block.addEventListener("dragover", e=>{
+            if(!dragEl) return;
+            e.preventDefault();
+            const afterElement = getDragAfterElement(grid, e.clientY);
+            if(afterElement == null){
+              grid.appendChild(dragEl);
+            } else {
+              grid.insertBefore(dragEl, afterElement);
+            }
+          });
+        });
+      });
+    }
+    setupDragAndDrop();
+
+    // --- SCENARIO LENS ------------------------------------------------------
+    const SCENARIOS = {
+      baseline: {
+        label: "Baseline",
+        asset: "BK Macro Composite",
+        overlay: "BK Financial Conditions Index",
+        wsbBase: 0.52,
+        wsbVol: 0.08
+      },
+      energy: {
+        label: "Energy transition stress",
+        asset: "BK Energy & Utilities",
+        overlay: "BK Climate & Transition Risk",
+        wsbBase: 0.45,
+        wsbVol: 0.09
+      },
+      easing: {
+        label: "Policy easing bias",
+        asset: "BK Real Economy Basket",
+        overlay: "BK Policy Volatility Gauge",
+        wsbBase: 0.58,
+        wsbVol: 0.07
+      },
+      riskoff: {
+        label: "Risk-off phase",
+        asset: "BK Cost-of-Living Pressure",
+        overlay: "BK Fragmentation Index",
+        wsbBase: 0.40,
+        wsbVol: 0.09
+      },
+      tech: {
+        label: "Tech upcycle",
+        asset: "BK Telecom & Infrastructure",
+        overlay: "BK Capital Investment Pulse",
+        wsbBase: 0.60,
+        wsbVol: 0.09
+      }
+    };
+
+    let currentScenarioKey = "baseline";
+
+    const scenarioSelect = document.getElementById("scenarioSelect");
+    const scenarioStatusLabel = document.getElementById("scenarioStatusLabel");
+    const assetSelect = document.getElementById("assetSelect");
+    const overlaySelect = document.getElementById("overlaySelect");
+
+    scenarioSelect.addEventListener("change", function(){
+      const key = this.value;
+      const sc = SCENARIOS[key] || SCENARIOS.baseline;
+      currentScenarioKey = key;
+      scenarioStatusLabel.textContent = "Scenario: " + sc.label;
+      document.getElementById("statusMode").textContent =
+        "Scenario lens · " + sc.label;
+
+      // steer asset & overlay selectors
+      assetSelect.value = sc.asset;
+      overlaySelect.value = sc.overlay;
+      assetSelect.dispatchEvent(new Event("change"));
+      overlaySelect.dispatchEvent(new Event("change"));
+
+      // steer ForumFlow intraday regime
+      WSB_MODES.intraday.base = sc.wsbBase;
+      WSB_MODES.intraday.vol  = sc.wsbVol;
+
+      // reset ForumFlow series under new lens
+      applyScenarioToWSB();
+      refreshSentiment();
+      refreshPCG();
+      if (typeof setSentActMode === "function") {
+        setSentActMode(currentWSBMode==="intraday"?"daily":currentWSBMode==="week"?"weekly":"monthly");
+        linkSentActLabel();
+      }
+    });
+
+    // popout main dashboard (dual-monitor / multi-window)
+    document.getElementById("popoutMainBtn").addEventListener("click", function(){
+      window.open(window.location.href, "_blank", "noopener");
+    });
+
+    // --- MAIN CHART ---------------------------------------------------------
+    const mainCtx = document.getElementById("mainChart").getContext("2d");
+    const mainLabels = Array.from({length:60}, (_,i)=>"t"+(i+1));
+    let assetData = genSeries(60,0.6,0.08);
+    let overlayData = genSeries(60,0.55,0.07);
+    let stripData = genSeries(60,0.5,0.10);
+
+    const mainChart = new Chart(mainCtx,{
+      type:"line",
+      data:{
+        labels: mainLabels,
+        datasets:[
+          {
+            label:"Asset",
+            data: assetData,
+            borderColor:"#facc15",
+            backgroundColor:"rgba(250,204,21,0.1)",
+            borderWidth:2,
+            tension:0.25,
+            pointRadius:0,
+            pointHitRadius:5,
+            yAxisID:"y"
+          },
+          {
+            label:"Overlay",
+            data: overlayData,
+            borderColor:"#38bdf8",
+            backgroundColor:"rgba(56,189,248,0.08)",
+            borderWidth:1.7,
+            borderDash:[4,3],
+            tension:0.25,
+            pointRadius:0,
+            pointHitRadius:5,
+            yAxisID:"y"
+          },
+          {
+            label:"ForumFlow-WSB strip",
+            data: stripData,
+            borderColor:"#a855f7",
+            backgroundColor:"rgba(168,85,247,0.12)",
+            borderWidth:1.6,
+            tension:0.3,
+            pointRadius:0,
+            pointHitRadius:4,
+            yAxisID:"y1"
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:"index",intersect:false},
+        animation:{duration:650,easing:"easeOutCubic"},
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            enabled:true,
+            backgroundColor:"#020617",
+            borderColor:"rgba(56,189,248,0.6)",
+            borderWidth:1,
+            padding:10,
+            displayColors:true,
+            callbacks:{
+              label(ctx){
+                const v = ctx.parsed.y;
+                return " "+ctx.dataset.label+": "+(typeof v==="number"?v.toFixed(2):"");
+              }
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{color:"rgba(31,41,55,0.8)",borderColor:"rgba(55,65,81,1)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:10}}
+          },
+          y:{
+            min:0,max:1,
+            grid:{color:"rgba(31,41,55,0.9)",borderColor:"rgba(55,65,81,1)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:10},callback:v=>v.toFixed(1)}
+          },
+          y1:{
+            position:"right",
+            min:0,max:1,
+            grid:{drawOnChartArea:false},
+            ticks:{display:false}
+          }
+        }
+      }
+    });
+
+    function refreshMainLegend(){
+      const a = assetData[assetData.length-1] || 0;
+      const o = overlayData[overlayData.length-1] || 0;
+      const s = stripData[stripData.length-1] || 0;
+      document.getElementById("legendAsset").textContent = a.toFixed(2);
+      document.getElementById("legendOverlay").textContent = o.toFixed(2);
+      document.getElementById("legendStrip").textContent = (s*2-1).toFixed(2); // convert 0–1 to −1…+1
+    }
+
+    let kmriVal = 0.65, tpviVal = 0.55, gdfiVal = 0.48;
+    function refreshHeaderStatus(){
+      document.getElementById("statusKMRI").textContent = kmriVal.toFixed(2);
+      document.getElementById("statusTPVI").textContent = tpviVal.toFixed(2);
+      document.getElementById("statusGDFI").textContent = gdfiVal.toFixed(2);
+      document.getElementById("statusUpdated").textContent = timestamp();
+    }
+
+    refreshMainLegend();
+    refreshHeaderStatus();
+
+    // dropdowns
+    assetSelect.addEventListener("change", function(){
+      const label = this.value;
+      document.getElementById("mainTitle").textContent =
+        label+" · Price + KMRI + ForumFlow-WSB strip";
+      assetData = genSeries(60,0.55+Math.random()*0.1,0.08);
+      mainChart.data.datasets[0].data = assetData;
+      mainChart.update();
+      refreshMainLegend();
+    });
+
+    overlaySelect.addEventListener("change", function(){
+      const ov = this.value;
+      document.getElementById("mainThemeLabel").textContent = "Overlay · "+ov;
+      overlayData = genSeries(60,0.5+Math.random()*0.1,0.07);
+      mainChart.data.datasets[1].data = overlayData;
+      mainChart.update();
+      refreshMainLegend();
+    });
+
+    document.querySelectorAll(".main-range-btn").forEach(btn=>{
+      btn.addEventListener("click", function(){
+        document.querySelectorAll(".main-range-btn").forEach(b=>b.classList.remove("active-range"));
+        this.classList.add("active-range");
+        const r = this.dataset.range;
+        const vol = (r==="3M"?0.09:r==="6M"?0.07:r==="1Y"?0.06:0.05);
+        assetData = genSeries(60,0.6,vol);
+        overlayData = genSeries(60,0.55,vol*0.9);
+        stripData = genSeries(60,0.5,0.1);
+        mainChart.data.datasets[0].data = assetData;
+        mainChart.data.datasets[1].data = overlayData;
+        mainChart.data.datasets[2].data = stripData;
+        mainChart.update();
+        refreshMainLegend();
+      });
+    });
+
+    // --- PRICE + VOLUME -----------------------------------------------------
+    const pvCtx = document.getElementById("priceVolumeChart").getContext("2d");
+    const pvLabels = Array.from({length:20},(_,i)=>"t"+(i+1));
+    let pvPrice = genSeries(20,0.6,0.06);
+    let pvVol = Array.from({length:20},()=>Math.round(40+Math.random()*60));
+
+    const pvChart = new Chart(pvCtx,{
+      data:{
+        labels: pvLabels,
+        datasets:[
+          {
+            type:"line",
+            label:"Price",
+            data: pvPrice,
+            borderColor:"#facc15",
+            backgroundColor:"rgba(250,204,21,0.08)",
+            borderWidth:2,
+            tension:0.3,
+            pointRadius:0,
+            yAxisID:"y"
+          },
+          {
+            type:"bar",
+            label:"Volume",
+            data: pvVol,
+            backgroundColor:"rgba(56,189,248,0.4)",
+            borderWidth:0,
+            yAxisID:"y1"
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:"index",intersect:false},
+        plugins:{legend:{display:false},tooltip:{enabled:true}},
+        scales:{
+          x:{
+            grid:{color:"rgba(31,41,55,0.8)",borderColor:"rgba(55,65,81,1)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
+          },
+          y:{
+            min:0,max:1,
+            grid:{color:"rgba(31,41,55,0.9)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9},callback:v=>v.toFixed(1)}
+          },
+          y1:{
+            position:"right",
+            grid:{drawOnChartArea:false},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
+          }
+        }
+      }
+    });
+
+    function refreshPVStatus(){
+      const lastPrice = pvPrice[pvPrice.length-1] || 0;
+      const lastVol = pvVol[pvVol.length-1] || 0;
+      document.getElementById("pvLast").textContent = lastPrice.toFixed(2);
+      document.getElementById("pvVol").textContent = lastVol.toString();
+    }
+    refreshPVStatus();
+
+    // --- KMRI / TPVI / GDFI -------------------------------------------------
+    const kmriCtx = document.getElementById("kmriChart").getContext("2d");
+    const kmLabels = Array.from({length:16},(_,i)=>"Q"+(i+1));
+    const kmriSeries = genSeries(16,0.62,0.05);
+    const tpviSeries = genSeries(16,0.55,0.06);
+    const gdfiSeries = genSeries(16,0.50,0.04);
+
+    const kmriChart = new Chart(kmriCtx,{
+      type:"line",
+      data:{
+        labels: kmLabels,
+        datasets:[
+          {
+            label:"KMRI",
+            data: kmriSeries,
+            borderColor:"#22c55e",
+            backgroundColor:"rgba(34,197,94,0.1)",
+            borderWidth:1.8,
+            tension:0.25,
+            pointRadius:0
+          },
+          {
+            label:"TPVI",
+            data: tpviSeries,
+            borderColor:"#f97316",
+            borderWidth:1.6,
+            tension:0.25,
+            pointRadius:0,
+            borderDash:[4,3]
+          },
+          {
+            label:"GDFI",
+            data: gdfiSeries,
+            borderColor:"#38bdf8",
+            borderWidth:1.6,
+            tension:0.25,
+            pointRadius:0
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:"index",intersect:false},
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{
+            grid:{color:"rgba(31,41,55,0.8)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
+          },
+          y:{
+            min:0,max:1,
+            grid:{color:"rgba(31,41,55,0.9)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9},callback:v=>v.toFixed(1)}
+          }
+        }
+      }
+    });
+
+    function refreshIndicatorFooter(){
+      const k = kmriSeries[kmriSeries.length-1] || 0;
+      const t = tpviSeries[tpviSeries.length-1] || 0;
+      const g = gdfiSeries[gdfiSeries.length-1] || 0;
+      document.getElementById("kmriLast").textContent = k.toFixed(2);
+      document.getElementById("tpviLast").textContent = t.toFixed(2);
+      document.getElementById("gdfiLast").textContent = g.toFixed(2);
+      kmriVal = k; tpviVal = t; gdfiVal = g;
+      refreshHeaderStatus();
+    }
+    refreshIndicatorFooter();
+
+    // --- Extra main multiview charts ---------------------------------------
+    const macroSpreadCtx = document.getElementById("macroSpreadChart").getContext("2d");
+    const macroLabels = Array.from({length:36},(_,i)=>"t"+(i+1));
+    const coreSeries = genSeries(36,0.55,0.05);
+    const headlineSeries = genSeries(36,0.6,0.06);
+    const incomeSeries = genSeries(36,0.58,0.05);
+
+    new Chart(macroSpreadCtx,{
+      type:"line",
+      data:{
+        labels: macroLabels,
+        datasets:[
+          {
+            label:"Core inflation",
+            data: coreSeries,
+            borderColor:"#38bdf8",
+            borderWidth:1.8,
+            tension:0.28,
+            pointRadius:0
+          },
+          {
+            label:"Headline basket",
+            data: headlineSeries,
+            borderColor:"#f97316",
+            borderWidth:1.8,
+            tension:0.28,
+            pointRadius:0
+          },
+          {
+            label:"Labour income",
+            data: incomeSeries,
+            borderColor:"#22c55e",
+            borderWidth:1.8,
+            tension:0.28,
+            pointRadius:0
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}},
+          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}}
+        }
+      }
+    });
+
+    const policyMixCtx = document.getElementById("policyMixChart").getContext("2d");
+    const policyLabels = Array.from({length:36},(_,i)=>"t"+(i+1));
+    const tpviMixSeries = genSeries(36,0.55,0.07);
+    const condSeries = genSeries(36,0.5,0.05);
+    const flowScaledSeries = genSeries(36,0.5,0.08);
+
+    new Chart(policyMixCtx,{
+      type:"line",
+      data:{
+        labels: policyLabels,
+        datasets:[
+          {
+            label:"TPVI",
+            data: tpviMixSeries,
+            borderColor:"#f97316",
+            borderWidth:1.8,
+            tension:0.28,
+            pointRadius:0
+          },
+          {
+            label:"Financial conditions",
+            data: condSeries,
+            borderColor:"#38bdf8",
+            borderWidth:1.8,
+            tension:0.28,
+            pointRadius:0
+          },
+          {
+            label:"ForumFlow-WSB (scaled)",
+            data: flowScaledSeries,
+            borderColor:"#a855f7",
+            borderWidth:1.6,
+            tension:0.28,
+            pointRadius:0,
+            borderDash:[4,3]
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}},
+          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}}
+        }
+      }
+    });
+
+    // --- ForumFlow-WSB INDICATOR -------------------------------------------
+    const wsbCtx = document.getElementById("wsbChart").getContext("2d");
+    const WSB_MODES = {
+      intraday: {
+        labels: Array.from({length:40},(_,i)=> (9+i/4).toFixed(2).replace(".",":")),
+        base: 0.52, vol: 0.08
+      },
+      week: {
+        labels:["Mon","Tue","Wed","Thu","Fri"],
+        base:0.45, vol:0.05
+      },
+      month: {
+        labels:Array.from({length:20},(_,i)=>"D"+(i+1)),
+        base:0.48, vol:0.04
+      }
+    };
+    let currentWSBMode = "intraday";
+    let wsbData = genSeries(WSB_MODES.intraday.labels.length, WSB_MODES.intraday.base, WSB_MODES.intraday.vol);
+
+    const wsbChart = new Chart(wsbCtx,{
+      type:"line",
+      data:{
+        labels: WSB_MODES.intraday.labels,
+        datasets:[
+          {
+            label:"ForumFlow-WSB",
+            data: wsbData.map(v=>v*2-1), // project to −1…+1
+            borderColor:"#a855f7",
+            backgroundColor:"rgba(168,85,247,0.15)",
+            borderWidth:2,
+            tension:0.25,
+            pointRadius:0
+          },
+          {
+            label:"Risk-seeking threshold",
+            data: WSB_MODES.intraday.labels.map(()=>0.4),
+            borderColor:"#4ade80",
+            borderWidth:1,
+            borderDash:[4,3],
+            pointRadius:0,
+            fill:false
+          },
+          {
+            label:"De-risking threshold",
+            data: WSB_MODES.intraday.labels.map(()=>-0.4),
+            borderColor:"#f97316",
+            borderWidth:1,
+            borderDash:[4,3],
+            pointRadius:0,
+            fill:false
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:"index",intersect:false},
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            enabled:true,
+            callbacks:{
+              label(ctx){
+                const v = ctx.parsed.y;
+                return " "+ctx.dataset.label+": "+(typeof v==="number"?v.toFixed(2):"");
+              }
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{color:"rgba(31,41,55,0.8)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
+          },
+          y:{
+            min:-1,max:1,
+            grid:{color:"rgba(31,41,55,0.9)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
+          }
+        }
+      }
+    });
+
+    function describeTone(val){
+      if(val > 0.6) return "Broad risk-seeking bias";
+      if(val > 0.3) return "Constructive risk appetite";
+      if(val < -0.6) return "Persistent de-risking";
+      if(val < -0.3) return "Cautious positioning";
+      return "Balanced / two-way flow";
+    }
+
+    function refreshWSBText(){
+      const last = wsbData[wsbData.length-1]*2-1;
+      document.getElementById("wsbLast").textContent = last.toFixed(2);
+      document.getElementById("wsbToneLabel").textContent = describeTone(last);
+      document.getElementById("wsbUpdated").textContent = timestamp();
+      document.getElementById("wsbStatusMode").textContent =
+        currentWSBMode==="intraday" ? "Intraday tape · linked" :
+        currentWSBMode==="week" ? "Weekly regime view" :
+        "Monthly structural view";
+    }
+    refreshWSBText();
+
+    function applyScenarioToWSB(){
+      const sc = SCENARIOS[currentScenarioKey] || SCENARIOS.baseline;
+      const cfg = WSB_MODES[currentWSBMode];
+      const base = currentWSBMode==="intraday" ? sc.wsbBase : cfg.base;
+      const vol  = currentWSBMode==="intraday" ? sc.wsbVol  : cfg.vol;
+      wsbData = genSeries(cfg.labels.length, base, vol);
+      wsbChart.data.labels = cfg.labels;
+      wsbChart.data.datasets[0].data = wsbData.map(v=>v*2-1);
+      wsbChart.data.datasets[1].data = cfg.labels.map(()=>0.4);
+      wsbChart.data.datasets[2].data = cfg.labels.map(()=>-0.4);
+      wsbChart.update();
+      refreshWSBText();
+    }
+
+    document.querySelectorAll(".wsb-btn").forEach(btn=>{
+      btn.addEventListener("click", function(){
+        document.querySelectorAll(".wsb-btn").forEach(b=>b.classList.remove("active-range"));
+        this.classList.add("active-range");
+        currentWSBMode = this.dataset.mode;
+        applyScenarioToWSB();
+        document.getElementById("wsbTitle").textContent =
+          "ForumFlow-WSB · "+(currentWSBMode==="intraday"?"Intraday tape":currentWSBMode==="week"?"1W regime":"1M cycle");
+        document.getElementById("sentimentLinked").textContent =
+          currentWSBMode==="intraday"?"Intraday":currentWSBMode==="week"?"Weekly":"Monthly";
+        refreshSentiment();
+        refreshPCG();
+        if (typeof setSentActMode === "function") {
+          setSentActMode(currentWSBMode==="intraday"?"daily":currentWSBMode==="week"?"weekly":"monthly");
+          linkSentActLabel();
+        }
+      });
+    });
+
+    // auto-update intraday mode every 15s (placeholder behaviour)
+    setInterval(function(){
+      if(currentWSBMode!=="intraday") return;
+      const sc = SCENARIOS[currentScenarioKey] || SCENARIOS.baseline;
+      const baseStep = sc.wsbBase;
+      wsbData.push(Math.max(0,Math.min(1, wsbData[wsbData.length-1] +
+        (Math.random()-0.5)*sc.wsbVol*1.2 + (baseStep-0.5)*0.02)));
+      if(wsbData.length>WSB_MODES.intraday.labels.length) wsbData.shift();
+      wsbChart.data.datasets[0].data = wsbData.map(v=>v*2-1);
+      wsbChart.data.datasets[1].data = wsbChart.data.labels.map(()=>0.4);
+      wsbChart.data.datasets[2].data = wsbChart.data.labels.map(()=>-0.4);
+      wsbChart.update("none");
+      refreshWSBText();
+
+      // nudge main strip + cross-asset snapshot + PCG
+      stripData.push(wsbData[wsbData.length-1]);
+      if(stripData.length>60) stripData.shift();
+      mainChart.data.datasets[2].data = stripData;
+      mainChart.update("none");
+      refreshMainLegend();
+      refreshSentiment();
+      refreshPCG();
+    },15000);
+
+    // --- Participation-Conviction Gauge ------------------------------------
+    const pcgCtx = document.getElementById("pcgChart").getContext("2d");
+    const pcgLabels = Array.from({length:30},(_,i)=>"p"+(i+1));
+    let pcgData = genSeries(30,0.5,0.07);
+    const pcgChart = new Chart(pcgCtx,{
+      type:"line",
+      data:{
+        labels: pcgLabels,
+        datasets:[{
+          label:"Participation-Conviction",
+          data: pcgData,
+          borderColor:"#4ade80",
+          backgroundColor:"rgba(74,222,128,0.18)",
+          borderWidth:1.8,
+          tension:0.35,
+          pointRadius:0
+        }]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{
+            grid:{color:"rgba(31,41,55,0.7)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}
+          },
+          y:{
+            min:0,max:1,
+            grid:{color:"rgba(31,41,55,0.9)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8},callback:v=>v.toFixed(1)}
+          }
+        }
+      }
+    });
+
+    function interpretPCG(v){
+      if(v>0.7) return "High-intensity participation phase";
+      if(v>0.55) return "Elevated participation and conviction";
+      if(v<0.3) return "Low-participation environment";
+      if(v<0.45) return "Cautious or selective participation";
+      return "Neutral participation";
+    }
+
+    function refreshPCG(){
+      const lastFlow = wsbData[wsbData.length-1]*2-1;
+      const intens = Math.min(1,Math.max(0,0.5 + Math.abs(lastFlow)*0.4 + (Math.random()-0.5)*0.06));
+      pcgData.push(+intens.toFixed(3));
+      if(pcgData.length>pcgLabels.length) pcgData.shift();
+      pcgChart.data.datasets[0].data = pcgData;
+      pcgChart.update("none");
+      document.getElementById("pcgLast").textContent = intens.toFixed(2);
+      document.getElementById("pcgInterpret").textContent = interpretPCG(intens);
+    }
+    refreshPCG();
+
+    // --- ForumFlow CROSS-ASSET SNAPSHOT (tilts) -----------------------------
+    const sentCtx = document.getElementById("sentimentChart").getContext("2d");
+    const sentLabels = ["Growth & tech","Cyclicals","Defensives","Digital assets","Macro hedges"];
+    let sentValues = [0.6,0.4,0.1,0.7,-0.2];
+
+    const sentChart = new Chart(sentCtx,{
+      type:"bar",
+      data:{
+        labels: sentLabels,
+        datasets:[{
+          label:"ForumFlow tilt",
+          data: sentValues,
+          backgroundColor: function(ctx){
+            const v = ctx.raw;
+            if(v>0.4) return "rgba(34,197,94,0.7)";
+            if(v<-0.4) return "rgba(248,113,113,0.8)";
+            return "rgba(56,189,248,0.7)";
+          },
+          borderWidth:0
+        }]
+      },
+      options:{
+        indexAxis:"y",
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{
+            min:-1,max:1,
+            grid:{color:"rgba(31,41,55,0.9)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
+          },
+          y:{
+            grid:{color:"rgba(31,41,55,0.6)"},
+            ticks:{color:"rgba(148,163,184,0.9)",font:{size:9}}
+          }
+        }
+      }
+    });
+
+    function refreshSentiment(){
+      const last = wsbData[wsbData.length-1]*2-1;
+      const bias = last;
+      sentValues = [
+        bias*0.9,
+        bias*0.7,
+        -bias*0.4,
+        bias*1.1,
+        -bias*0.6
+      ].map(v=>Math.max(-1,Math.min(1,v)));
+      sentChart.data.datasets[0].data = sentValues;
+      sentChart.update("none");
+    }
+    refreshSentiment();
+
+    // --- ForumFlow ACTIVITY & VOLUME STREAM --------------------------------
+    const sentActCtx = document.getElementById("sentActChart").getContext("2d");
+    const SENT_ACT_MODES = {
+      daily:  { labels: Array.from({length:10},(_,i)=>"D"+(i+1)) },
+      weekly: { labels: Array.from({length:10},(_,i)=>"W"+(i+1)) },
+      monthly:{ labels: Array.from({length:12},(_,i)=>"M"+(i+1)) }
+    };
+    let currentSentActMode = "daily";
+    let sentActVolData = [];
+    let sentActActData = [];
+
+    const sentActChart = new Chart(sentActCtx,{
+      data:{
+        labels: [],
+        datasets:[
+          {
+            type:"bar",
+            label:"Volume",
+            data: [],
+            backgroundColor:"rgba(56,189,248,0.55)",
+            borderWidth:0,
+            yAxisID:"y1"
+          },
+          {
+            type:"line",
+            label:"Activity",
+            data: [],
+            borderColor:"#22c55e",
+            backgroundColor:"rgba(34,197,94,0.18)",
+            borderWidth:1.8,
+            tension:0.35,
+            pointRadius:0,
+            yAxisID:"y"
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:"index",intersect:false},
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{
+            grid:{color:"rgba(31,41,55,0.7)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}
+          },
+          y:{
+            min:0,max:1,
+            grid:{color:"rgba(31,41,55,0.9)"},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8},callback:v=>v.toFixed(1)}
+          },
+          y1:{
+            position:"right",
+            grid:{drawOnChartArea:false},
+            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}
+          }
+        }
+      }
+    });
+
+    function refreshSentActStatus(){
+      const v = sentActVolData[sentActVolData.length-1] || 0;
+      const a = sentActActData[sentActActData.length-1] || 0;
+      document.getElementById("sentActVolLast").textContent = v.toString();
+      document.getElementById("sentActActLast").textContent = a.toFixed(2);
+    }
+
+    function setSentActMode(mode){
+      currentSentActMode = mode;
+      const cfg = SENT_ACT_MODES[mode] || SENT_ACT_MODES.daily;
+      const n = cfg.labels.length;
+      sentActVolData = Array.from({length:n},()=>Math.round(40+Math.random()*60));
+      sentActActData = genSeries(n,0.5,0.08);
+      sentActChart.data.labels = cfg.labels;
+      sentActChart.data.datasets[0].data = sentActVolData;
+      sentActChart.data.datasets[1].data = sentActActData;
+      sentActChart.update();
+      refreshSentActStatus();
+      document.getElementById("sentActModeLabel").textContent =
+        mode==="daily" ? "Daily strip" : mode==="weekly" ? "Weekly stream" : "Monthly stream";
+    }
+
+    function linkSentActLabel(){
+      const mode = currentWSBMode;
+      const label = mode==="intraday"?"Intraday-linked daily":
+                    mode==="week"?"Weekly-linked stream":"Monthly-linked stream";
+      const el = document.getElementById("sentActLinkedLabel");
+      if(el) el.textContent = label;
+    }
+
+    document.querySelectorAll(".sent-act-btn").forEach(btn=>{
+      btn.addEventListener("click", function(){
+        document.querySelectorAll(".sent-act-btn").forEach(b=>b.classList.remove("active-range"));
+        this.classList.add("active-range");
+        setSentActMode(this.dataset.mode);
+        linkSentActLabel();
+      });
+    });
+
+    setSentActMode("daily");
+    linkSentActLabel();
+
+    // --- RSAC MINI PANEL ----------------------------------------------------
+    const rsacCtx = document.getElementById("rsacChart").getContext("2d");
+    const rsacLabels = Array.from({length:24},(_,i)=>"m"+(i+1));
+    const rsacSeries = genSeries(24,0.5,0.08);
+    const rsacChart = new Chart(rsacCtx,{
+      type:"line",
+      data:{
+        labels: rsacLabels,
+        datasets:[{
+          label:"RSAC",
+          data: rsacSeries,
+          borderColor:"#f97316",
+          backgroundColor:"rgba(249,115,22,0.18)",
+          borderWidth:1.8,
+          tension:0.3,
+          pointRadius:0
+        }]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}},
+          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}}
+        }
+      }
+    });
+    document.getElementById("rsacLast").textContent =
+      (rsacSeries[rsacSeries.length-1] || 0).toFixed(2);
+
+    // --- Housing & cost-of-living panel ------------------------------------
+    const housingCtx = document.getElementById("housingChart").getContext("2d");
+    const housingLabels = Array.from({length:24},(_,i)=>"m"+(i+1));
+    const housingSeries = genSeries(24,0.6,0.06);
+    const colSeries = genSeries(24,0.55,0.05);
+
+    const housingChart = new Chart(housingCtx,{
+      type:"line",
+      data:{
+        labels: housingLabels,
+        datasets:[
+          {
+            label:"Housing pressure",
+            data: housingSeries,
+            borderColor:"#38bdf8",
+            backgroundColor:"rgba(56,189,248,0.15)",
+            borderWidth:1.8,
+            tension:0.3,
+            pointRadius:0
+          },
+          {
+            label:"Cost-of-living",
+            data: colSeries,
+            borderColor:"#a855f7",
+            borderWidth:1.6,
+            tension:0.3,
+            pointRadius:0
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}},
+          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}}
+        }
+      }
+    });
+    document.getElementById("housingLast").textContent =
+      (housingSeries[housingSeries.length-1] || 0).toFixed(2);
+    document.getElementById("colLast").textContent =
+      (colSeries[colSeries.length-1] || 0).toFixed(2);
+
+    // --- Labour & income panel ---------------------------------------------
+    const labourCtx = document.getElementById("labourChart").getContext("2d");
+    const labourLabels = Array.from({length:24},(_,i)=>"m"+(i+1));
+    const labourSeries = genSeries(24,0.58,0.06);
+    const labourKmriSeries = genSeries(24,0.62,0.05);
+
+    const labourChart = new Chart(labourCtx,{
+      type:"line",
+      data:{
+        labels: labourLabels,
+        datasets:[
+          {
+            label:"Labour income",
+            data: labourSeries,
+            borderColor:"#22c55e",
+            backgroundColor:"rgba(34,197,94,0.18)",
+            borderWidth:1.8,
+            tension:0.3,
+            pointRadius:0
+          },
+          {
+            label:"KMRI overlay",
+            data: labourKmriSeries,
+            borderColor:"#facc15",
+            borderWidth:1.6,
+            tension:0.3,
+            pointRadius:0,
+            borderDash:[4,3]
+          }
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}},
+          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}}
+        }
+      }
+    });
+    document.getElementById("labourLast").textContent =
+      (labourSeries[labourSeries.length-1] || 0).toFixed(2);
+    document.getElementById("labourKmriLast").textContent =
+      (labourKmriSeries[labourKmriSeries.length-1] || 0).toFixed(2);
+  });
+</script>
+</body>
+</html>
