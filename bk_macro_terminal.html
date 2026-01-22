@@ -15,8 +15,6 @@
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-
   <style>
     :root {
       --bg-dark: #020617;
@@ -1280,1097 +1278,1637 @@
 <!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // --- helpers ---------------------------------------------------------------
-  function pad(n){ return String(n).padStart(2,"0"); }
-  function timestamp(){
-    const d=new Date();
-    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+
-      " "+pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
-  }
 
-  // simple synthetic generator used as placeholder
-  function genSeries(len, base, vol){
-    const arr=[];
-    let v=base;
-    for(let i=0;i<len;i++){
-      const step=(Math.random()-0.5)*vol;
-      v=Math.max(0,Math.min(1,v+step));
-      arr.push(+v.toFixed(3));
-    }
-    return arr;
-  }
 
-  // Crosshair plugin
-  const crosshairPlugin = {
-    id: "bkCrosshair",
-    afterDatasetsDraw(chart){
-      const tooltip = chart.tooltip;
-      if(!tooltip || !tooltip._active || !tooltip._active.length) return;
-      const ctx = chart.ctx;
-      const x = tooltip._active[0].element.x;
-      const area = chart.chartArea;
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(x, area.top);
-      ctx.lineTo(x, area.bottom);
-      ctx.lineWidth = 1;
-      ctx.setLineDash([3,3]);
-      ctx.strokeStyle = "rgba(148,163,184,0.7)";
-      ctx.stroke();
-      ctx.restore();
-    }
+/* Bloomberg-style canvas charts (proxy-free) for BK Macro Terminal
+   - Deterministic “moc” historical shapes per series (stable across range selection)
+   - Auto-updating last point
+   - Crosshair, tooltip, pan/zoom, double-click reset
+   - Future space + last-price extension + orange reference line
+   - Fullscreen toggle for main chart (and any chart via Alt+Click)
+*/
+
+(function(){
+  const $ = (id)=>document.getElementById(id);
+
+  // ---------- time / formatting ----------
+  const pad2 = (n)=> (n<10?"0":"")+n;
+  const fmtDateUTC = (d)=>{
+    const mm=pad2(d.getUTCMonth()+1), dd=pad2(d.getUTCDate()), yy=String(d.getUTCFullYear()).slice(-2);
+    return `${mm}/${dd}/${yy}`;
   };
+  const clamp = (v,a,b)=> Math.max(a, Math.min(b, v));
+  const round3 = (x)=> (Math.round(x*1000)/1000).toFixed(3);
+  const dpr = ()=> Math.max(1, window.devicePixelRatio || 1);
 
-  document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    if(window.Chart){
-      Chart.register(crosshairPlugin);
-      // global padding so data starts below legend box
-      Chart.defaults.layout = Chart.defaults.layout || {};
-      Chart.defaults.layout.padding = { top: 26, right: 6, bottom: 6, left: 6 };
+  // ---------- deterministic generator ----------
+  function hashSeed(str){
+    let h=2166136261>>>0;
+    for(let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
     }
+    return h>>>0;
+  }
+  function seeded(seed){
+    let x = seed|0;
+    return ()=>{ x ^= x<<13; x ^= x>>>17; x ^= x<<5; return (x>>>0)/4294967296; };
+  }
+  function makeSeries({seedStr, days=365*10, base=100, drift=0.01, vol=0.8, shockAt=0.72, shock=-2.2, meanRev=0.0012,
+                     shockMode="down", cycleAmp=0, cyclePeriod=180, jumpProb=0, jumpScale=1.0}){
+    const rnd = seeded(hashSeed(seedStr));
+    const end = new Date();
+    const start = new Date(end.getTime() - days*24*60*60*1000);
+    let x = base;
+    const anchor = base;
+    const out = [];
 
-    // --- FULLSCREEN TOGGLE ---------------------------------------------------
-    let fullscreenShell = null;
-    let fullscreenScrollY = 0;
+    // deterministic "macro texture": gentle cycle + rare jumps + regime shock
+    for(let i=0;i<=days;i++){
+      const t = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()+i));
+      const eps = (rnd()*2-1)*vol;
 
-    function enterFullscreen(shell){
-      if(fullscreenShell === shell) return;
-      if(fullscreenShell) exitFullscreen();
-      fullscreenShell = shell;
-      fullscreenScrollY = window.scrollY;
-      document.body.classList.add("bk-fullscreen-open");
-      shell.classList.add("fullscreen");
-      window.scrollTo(0,0);
-      window.dispatchEvent(new Event("resize"));
-    }
+      const cyc = cycleAmp ? (cycleAmp * Math.sin((2*Math.PI*i)/Math.max(10, cyclePeriod))) : 0;
 
-    function exitFullscreen(){
-      if(!fullscreenShell) return;
-      fullscreenShell.classList.remove("fullscreen");
-      fullscreenShell = null;
-      document.body.classList.remove("bk-fullscreen-open");
-      window.scrollTo(0, fullscreenScrollY);
-      window.dispatchEvent(new Event("resize"));
-    }
+      let jump = 0;
+      if(jumpProb && rnd() < jumpProb){
+        const sign = (rnd() < 0.5 ? -1 : 1);
+        jump = sign * jumpScale * (0.5 + rnd());
+      }
 
-    document.querySelectorAll(".fullscreen-btn").forEach(btn=>{
-      btn.addEventListener("click", function(e){
-        e.stopPropagation();
-        const shell = this.closest(".terminal-shell");
-        if(shell.classList.contains("fullscreen")) {
-          exitFullscreen();
-        } else {
-          enterFullscreen(shell);
+      // late-regime "shock" (can be down-only or two-sided)
+      let s = 0;
+      if(i/days > shockAt){
+        const mag = Math.abs(shock) * (rnd()*0.6 + 0.4);
+        if(String(shockMode||"down") === "both"){
+          s = (rnd() < 0.5 ? -mag : mag);
+        }else if(String(shockMode||"down") === "up"){
+          s = +mag;
+        }else{
+          s = -mag; // default down
         }
+      }
+
+      x = x + drift + eps + cyc + jump + s - meanRev*(x-anchor);
+      out.push({t, v:x});
+    }
+    return out;
+  }
+
+  // ---------- ticks ----------
+  function niceTicks(min, max, target=6){
+    const span = (max-min) || 1;
+    const raw = span/target;
+    const pow = Math.pow(10, Math.floor(Math.log10(raw)));
+    const steps = [1,2,2.5,5,10];
+    let step = steps[0]*pow;
+    for(const s of steps){
+      const cand = s*pow;
+      if(raw<=cand){ step=cand; break; }
+    }
+    const start = Math.floor(min/step)*step;
+    const end   = Math.ceil(max/step)*step;
+    const ticks=[];
+    for(let v=start; v<=end+1e-12; v+=step) ticks.push(v);
+    return ticks;
+  }
+
+  // ---------- chart core ----------
+  class BloombergCanvasChart{
+    constructor(canvas, {title="", unit="", seedStr="SERIES", base=100, drift=0.01, vol=0.8, shockAt=0.72, shock=-2.2, meanRev=0.0012,
+      shockMode="down", cycleAmp=0, cyclePeriod=180, jumpProb=0, jumpScale=1.0,
+      kind="standard", overlays=[], volumeSpec=null,
+      compares=[], compareEnabled=[]}){
+
+      this.canvas = canvas;
+      this.ctx = canvas.getContext("2d", {alpha:false});
+      this.title = title;
+      this.unit = unit;
+
+      // ---------- real-time streaming microstructure ----------
+      // Per-chart state so each panel has distinct “personality” (smooth vs jumpy), while remaining realistic.
+      this.rt = {
+        enabled: true,
+        // how fast the x-axis moves: smaller => faster tape. tuned to feel “terminal-like” without tearing.
+        pointStepMs: 520,       // ~1.9 “points” per second (visual density), independent of tick cadence
+        xOffset: 0,             // fractional progress towards next index (0..1)
+        lastAdvanceTs: performance.now(),
+        // volatility regime: mean-reverting sigma + occasional jumps
+        sigmaBase: Math.max(1e-9, (Math.abs(base)||1) * (0.00055 + 0.00055*Math.min(2.5, Math.abs(vol)||1))),
+        sigmaNow:  0,
+        driftTick: (drift||0) * 0.02, // tiny per-tick drift
+        trend: 0,
+        jumpProb: Math.max(0, Math.min(0.025, (jumpProb||0)*0.08 + 0.004)),
+        jumpScale: Math.max(0.6, Math.min(3.8, (jumpScale||1.0))),
+        smoothness: Math.max(0.55, Math.min(0.92, 0.82 - 0.08*Math.min(2.5, Math.abs(vol)||1))), // higher = smoother
+        // deterministic RNG stream for tick noise (per chart)
+        tickSeed: 0,
+      };
+      this.rt.sigmaNow = this.rt.sigmaBase;
+      this.rt.tickSeed = hashSeed("TICK|" + seedStr);
+
+      // Gaussian helper (Box–Muller) using seeded uniform RNG.
+      this._gauss = (u1,u2)=>{
+        u1 = Math.max(1e-12, u1);
+        return Math.sqrt(-2*Math.log(u1)) * Math.cos(2*Math.PI*u2);
+      };
+
+      // rendering mode: standard | strip | priceVolume
+      this.kind = kind || "standard";
+      this.overlays = Array.isArray(overlays) ? overlays : [];
+      this.volumeSpec = volumeSpec;
+
+      // per-chart toggle for threshold/regime overlays
+      this.overlaysEnabled = true; // {seedStr, base, drift, vol, shock, meanRev}
+
+      this.seedStr = seedStr;
+      this.base=base; this.drift=drift; this.vol=vol; this.shock=shock; this.meanRev=meanRev;
+      this.shockAt=shockAt; this.shockMode=shockMode; this.cycleAmp=cycleAmp; this.cyclePeriod=cyclePeriod; this.jumpProb=jumpProb; this.jumpScale=jumpScale;
+      // comparison overlays (toggleable)
+      this.compares = Array.isArray(compares) ? compares : [];
+      this.compareEnabled = new Set(Array.isArray(compareEnabled) ? compareEnabled : []);
+      if(this.compareEnabled.size===0){
+        for(const c of this.compares){ if(c && c.key) this.compareEnabled.add(c.key); }
+      }
+      this.compareSeries = new Map();
+      this._rebuildCompares();
+
+
+      this.futurePadPx = 90;
+      this.points = makeSeries({seedStr, base, drift, vol, shockAt, shock, meanRev, shockMode, cycleAmp, cyclePeriod, jumpProb, jumpScale});
+
+      // streaming tween state (Bloomberg-feel continuous tail drawing)
+      this.stream = {
+        enabled: true,            // ALWAYS stream (no hover gating)
+        tickIntervalMs: 50,       // driven externally by scheduler; kept for reference
+        tweenMs: 120,             // tail animation duration (<= tick interval)
+        pointStepMs: Math.round(380 + 320*this.rt.smoothness), // per-chart cadence (smoother charts scroll slower)
+        xOffset: 0,               // fractional scroll between points
+        lastAdvanceTs: performance.now(),
+        prevLast: null,
+        nextLast: null,
+        tweenStartTs: performance.now(),
+        isPrimed: false
+      };
+
+      // optional volume track (used by priceVolume panels)
+      if(this.kind === "priceVolume"){
+        const vs = this.volumeSpec || {};
+        const vSeed = vs.seedStr || (seedStr + "|VOL");
+        const vBase = vs.base ?? 1_000_000;
+        const vDrift = vs.drift ?? 80;
+        const vVol = vs.vol ?? 20_000;
+        const vShock = vs.shock ?? 60_000;
+        const vMeanRev = vs.meanRev ?? 0.0008;
+        this.volumePoints = makeSeries({seedStr: vSeed, base: vBase, drift: vDrift, vol: vVol, shock: vShock, meanRev: vMeanRev});
+      } else {
+        this.volumePoints = null;
+      }
+      this.rangeKey = "3M";
+      this.view = {i0:0, i1:this.points.length, y0:0, y1:0, dragging:false, dragX:0, dragI0:0, dragI1:0, hoverX:null, hoverY:null};
+      this.hoverIndex = null;
+      this.hoverValue = null;
+      this.applyRange(this.rangeKey, true);
+
+      this.tooltip = this._ensureTooltip();
+      this.resize();
+      this.bind();
+      this.render();
+    }
+
+    
+    _rebuildCompares(){
+      this.compareSeries.clear();
+      for(const c of this.compares){
+        const seedStr = c.seedStr || ("CMP|" + c.key);
+        const base = (c.base ?? this.base);
+        const drift = (c.drift ?? this.drift);
+        const vol = (c.vol ?? this.vol);
+        const shock = (c.shock ?? this.shock);
+        const meanRev = (c.meanRev ?? this.meanRev);
+        const pts = makeSeries({seedStr, base, drift, vol, shock, meanRev});
+        this.compareSeries.set(c.key, pts);
+      }
+    }
+
+    setCompareEnabled(key, on){
+      if(on) this.compareEnabled.add(key);
+      else this.compareEnabled.delete(key);
+      this.render();
+    }
+
+
+    setOverlaysEnabled(on){
+      this.overlaysEnabled = !!on;
+      this.render();
+    }
+
+    replaceCompares(compares){
+      this.compares = Array.isArray(compares) ? compares : [];
+      this.compareEnabled = new Set();
+      for(const c of this.compares){ if(c.defaultOn) this.compareEnabled.add(c.key); }
+      this._rebuildCompares();
+      this.applyRange(this.rangeKey, true);
+      this.render();
+    }
+_ensureTooltip(){
+      // reuse existing tooltip container if present (parent .overlay .tooltip), else create minimal
+      const wrap = this.canvas.parentElement;
+      let tt = wrap?.querySelector?.(".tooltip");
+      if(tt) return tt;
+
+      const ov = document.createElement("div");
+      ov.style.position="absolute";
+      ov.style.inset="0";
+      ov.style.pointerEvents="none";
+      ov.innerHTML = `<div class="tooltip" style="
+        position:absolute; display:none; min-width:240px;
+        background:rgba(10,11,13,.92); border:1px solid #232838; border-radius:10px;
+        padding:10px; font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        color:#e9e9e9; box-shadow:0 10px 24px rgba(0,0,0,.35);
+      "></div>`;
+      wrap.style.position = wrap.style.position || "relative";
+      wrap.appendChild(ov);
+      return ov.querySelector(".tooltip");
+    }
+
+    resize(){
+      const rect = this.canvas.getBoundingClientRect();
+      const W = Math.max(10, Math.floor(rect.width));
+      const H = Math.max(10, Math.floor(rect.height));
+      const scale = dpr();
+      this.W=W; this.H=H;
+      this.canvas.width = Math.floor(W*scale);
+      this.canvas.height = Math.floor(H*scale);
+      this.ctx.setTransform(scale,0,0,scale,0,0);
+      this.render();
+    }
+
+    applyRange(key, silent=false){
+      this.rangeKey = key;
+      const pts = this.points;
+      const lastT = pts[pts.length-1].t;
+      let days;
+      let startT;
+      if(key==="1D"){ days=1; startT = new Date(lastT.getTime() - 1*24*60*60*1000); }
+      else if(key==="1W"){ days=7; startT = new Date(lastT.getTime() - 7*24*60*60*1000); }
+      else if(key==="1M"){ days=30; startT = new Date(lastT.getTime() - 30*24*60*60*1000); }
+      else if(key==="3M"){ days=92; startT = new Date(lastT.getTime() - 92*24*60*60*1000); }
+      else if(key==="6M"){ days=182; startT = new Date(lastT.getTime() - 182*24*60*60*1000); }
+      else if(key==="YTD"){ startT = new Date(Date.UTC(lastT.getUTCFullYear(),0,1,0,0,0)); }
+      else if(key==="1Y"){ days=365; startT = new Date(lastT.getTime() - 365*24*60*60*1000); }
+      else if(key==="5Y"){ days=365*5; startT = new Date(lastT.getTime() - (365*5)*24*60*60*1000); }
+      else if(key==="10Y"){ days=365*10; startT = new Date(lastT.getTime() - (365*10)*24*60*60*1000); }
+      else if(key==="MAX" || key==="ALL"){ startT = pts[0]?.t || new Date(lastT.getTime() - (365*10)*24*60*60*1000); }
+      else { days=92; startT = new Date(lastT.getTime() - 92*24*60*60*1000); }
+
+      let i0=0;
+      while(i0<pts.length && pts[i0].t < startT) i0++;
+      this.view.i0 = clamp(i0, 0, Math.max(0, pts.length-2));
+      this.view.i1 = pts.length;
+      this.recomputeY();
+      if(!silent) this.render();
+    }
+
+    recomputeY(){
+      const pts=this.points;
+      const {i0,i1}=this.view;
+
+      let lo=Infinity, hi=-Infinity;
+
+      // primary series
+      for(let i=i0;i<i1;i++){
+        const v=pts[i].v;
+        if(v<lo) lo=v;
+        if(v>hi) hi=v;
+      }
+
+      // include enabled compare overlays so they are never clipped
+      if(this.compares.length){
+        for(const c of this.compares){
+          if(!this.compareEnabled.has(c.key)) continue;
+          const cpts = this.compareSeries.get(c.key);
+          if(!cpts || cpts.length<2) continue;
+          const j0 = Math.min(i0, cpts.length-2);
+          const j1 = Math.min(i1, cpts.length);
+          for(let j=j0;j<j1;j++){
+            const v=cpts[j].v;
+            if(v<lo) lo=v;
+            if(v>hi) hi=v;
+          }
+        }
+      }
+
+      const pad=(hi-lo)*0.10 || (Math.abs(hi)||1)*0.02;
+      this.view.y0 = lo - pad;
+      this.view.y1 = hi + pad;
+    }
+
+    dataRightX(){
+      const padR=52;
+      return (this.W-padR) - this.futurePadPx;
+    }
+    fullRightX(){
+      const padR=52;
+      return (this.W-padR);
+    }
+    mapX(i){
+      const {i0,i1}=this.view;
+      const padL=16;
+      const x0=padL;
+      const x1=this.dataRightX();
+      // Continuous time-scroll: we shift the x-mapping by a fractional offset that advances with real time.
+      // This creates the Bloomberg-like “tape” motion without redrawing jitter/flicker.
+      const off = (this.rt && isFinite(this.rt.xOffset)) ? this.rt.xOffset : 0;
+      const t=( (i - i0) - off )/Math.max(1,(i1-i0-1));
+      return x0 + t*(x1-x0);
+    }
+    mapY(v){
+      const {y0,y1}=this.view;
+      const padT=12, padB=24;
+      const yTop=padT, yBot=this.H-padB;
+      const t=(v-y0)/(y1-y0||1);
+      return yBot - t*(yBot-yTop);
+    }
+    nearestIndexFromX(x){
+      const {i0,i1}=this.view;
+      const padL=16;
+      const x0=padL, x1=this.dataRightX();
+      const t=(x-x0)/(x1-x0);
+      const i=Math.round(i0 + clamp(t,0,1)*(i1-i0-1));
+      return clamp(i,i0,i1-1);
+    }
+
+    showTooltip(mx,my){
+      const pts=this.points;
+      const i=this.nearestIndexFromX(mx);
+      const p=pts[i];
+      const px=this.mapX(i);
+      const py=this.mapY(p.v);
+
+      this.view.hoverX=px; this.view.hoverY=py;
+
+      this.hoverIndex = i;
+      this.hoverValue = p.v;
+
+      const ref = pts[this.view.i0]?.v ?? pts[0].v;
+      const chg = p.v - ref;
+      const pct = (chg/ref)*100;
+
+      const tt=this.tooltip;
+      tt.style.display="block";
+      tt.innerHTML = `
+        <div style="color:#a7a7a7">${this.title || "Series"}</div>
+        <div style="margin-top:6px;"><span style="color:#7c7c7c">Date</span> ${fmtDateUTC(p.t)} <span style="color:#7c7c7c">UTC</span></div>
+        <div><span style="color:#7c7c7c">Value</span> ${round3(p.v)} ${this.unit||""}</div>
+        <div><span style="color:#7c7c7c">Δ vs ref</span> ${(chg>=0?"+":"") + round3(chg)} (${(pct>=0?"+":"") + (Math.round(pct*100)/100).toFixed(2)}%)</div>
+      `;
+      const tw=260, th=92;
+      const ox = (px < this.W/2) ? px + 12 : px - (tw + 12);
+      const oy = clamp(py - th/2, 8, this.H - th - 8);
+      tt.style.transform = `translate(${ox}px, ${oy}px)`;
+
+      this.render();
+    }
+
+    hideTooltip(){
+      this.tooltip.style.display="none";
+      this.view.hoverX=null; this.view.hoverY=null;
+      this.hoverIndex = null;
+      this.hoverValue = null;
+      this.render();
+    }
+
+    bind(){
+      // hover
+      this.canvas.addEventListener("mousemove",(e)=>{
+        const r=this.canvas.getBoundingClientRect();
+        const x=e.clientX-r.left;
+        const y=e.clientY-r.top;
+
+        if(this.view.dragging){
+          const dx=x-this.view.dragX;
+          const span=this.view.dragI1 - this.view.dragI0;
+          const padL=16;
+          const x0=padL, x1=this.dataRightX();
+          const frac = dx/(x1-x0);
+          const shift = Math.round(-frac*span);
+
+          const pts=this.points;
+          let ni0=this.view.dragI0+shift;
+          let ni1=this.view.dragI1+shift;
+          if(ni0<0){ ni1-=ni0; ni0=0; }
+          if(ni1>pts.length){
+            const over=ni1-pts.length;
+            ni0-=over; ni1=pts.length; ni0=Math.max(0,ni0);
+          }
+          if(ni1-ni0<30) return;
+
+          this.view.i0=ni0; this.view.i1=ni1;
+          this.recomputeY();
+          this.showTooltip(x,y);
+          return;
+        }
+
+        this.showTooltip(x,y);
       });
-    });
+      this.canvas.addEventListener("mouseleave",()=>this.hideTooltip());
 
-    // escape key exits fullscreen
-    document.addEventListener("keydown", function(e){
-      if(e.key === "Escape") exitFullscreen();
-    });
+      // pan
+      this.canvas.addEventListener("mousedown",(e)=>{
+        const r=this.canvas.getBoundingClientRect();
+        this.view.dragging=true;
+        this.view.dragX = e.clientX-r.left;
+        this.view.dragI0 = this.view.i0;
+        this.view.dragI1 = this.view.i1;
+      });
+      window.addEventListener("mouseup",()=>{ this.view.dragging=false; });
 
-    // --- DRAG & DROP ARRANGEMENT --------------------------------------------
-    function setupDragAndDrop(){
-      document.querySelectorAll(".chart-grid").forEach(grid=>{
-        let dragEl = null;
+      // zoom
+      this.canvas.addEventListener("wheel",(e)=>{
+        e.preventDefault();
+        const r=this.canvas.getBoundingClientRect();
+        const x=e.clientX-r.left;
+        const iCenter=this.nearestIndexFromX(x);
+        const pts=this.points;
+        const span=this.view.i1 - this.view.i0;
+        const zoom = (e.deltaY>0) ? 1.18 : 0.85;
+        let newSpan=Math.round(span*zoom);
+        newSpan=clamp(newSpan, 60, pts.length);
 
-        function getDragAfterElement(container, y){
-          const draggableElements = [...container.querySelectorAll(".chart-block:not(.dragging)")];
-          return draggableElements.reduce((closest, child)=>{
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if(offset < 0 && offset > closest.offset){
-              return { offset, element: child };
-            } else {
-              return closest;
-            }
-          }, { offset: Number.NEGATIVE_INFINITY }).element;
+        const frac=(iCenter - this.view.i0)/span;
+        let ni0=Math.round(iCenter - frac*newSpan);
+        let ni1=ni0+newSpan;
+        if(ni0<0){ ni1-=ni0; ni0=0; }
+        if(ni1>pts.length){
+          const over=ni1-pts.length;
+          ni0-=over; ni1=pts.length; ni0=Math.max(0,ni0);
+        }
+        if(ni1-ni0<30) return;
+
+        this.view.i0=ni0; this.view.i1=ni1;
+        this.recomputeY();
+        this.render();
+      }, {passive:false});
+
+      // reset
+      this.canvas.addEventListener("dblclick",()=> this.applyRange(this.rangeKey));
+    }
+
+    _tailValue(){
+      const s = this.stream;
+      if(!s || !s.isPrimed || s.prevLast==null || s.nextLast==null) return null;
+      const t = (performance.now() - s.tweenStartTs) / (s.tweenMs || 1);
+      const tt = 1 - Math.pow(1 - Math.max(0, Math.min(1, t)), 3); // easeOutCubic
+      return s.prevLast + (s.nextLast - s.prevLast) * tt;
+    }
+    _isTweening(){
+      const s = this.stream;
+      if(!s || !s.isPrimed) return false;
+      return (performance.now() - s.tweenStartTs) < (s.tweenMs || 0);
+    }
+    _primeTail(target){
+      const s = this.stream;
+      if(!s) return;
+      const current = this._tailValue();
+      const fallback = this.points?.length ? this.points[this.points.length-1].v : target;
+      s.prevLast = (current!=null) ? current : fallback;
+      s.nextLast = target;
+      s.tweenStartTs = performance.now();
+      s.isPrimed = true;
+    }
+
+
+    // Advance the “tape” continuously based on real time (not tick cadence).
+    // Returns true if the chart should repaint this frame.
+    advance(now){
+      const s = this.stream;
+      if(!s || !s.enabled) return false;
+      if(document.hidden){
+        s.lastAdvanceTs = now;
+        return false;
+      }
+      const dt = Math.max(0, now - (s.lastAdvanceTs || now));
+      s.lastAdvanceTs = now;
+
+      // x-axis continuous scroll
+      s.xOffset += dt / Math.max(120, s.pointStepMs);
+
+      // When we pass an index boundary, shift the window by one point and append a fresh point.
+      // This makes the line *grow* and *move* like a true real-time chart.
+      let shifted = false;
+      while(s.xOffset >= 1){
+        s.xOffset -= 1;
+        const pts = this.points;
+        if(pts && pts.length > 2){
+          const last = pts[pts.length-1];
+          const prev = pts[pts.length-2];
+
+          // Keep time moving forward (UTC), but we mostly use it for cursor labels.
+          const tPrev = last.t instanceof Date ? last.t : new Date();
+          const tNew = new Date(tPrev.getTime() + 60*1000); // “1 minute per point” visual cadence
+
+          // Start new point at the last value (the tick engine will move it immediately).
+          const vNew = last.v;
+
+          pts.push({t: tNew, v: vNew});
+          pts.shift();
+
+          // shift volume series (if any)
+          if(this.volumePoints && this.volumePoints.length === pts.length){
+            // already shifted by virtue of pts length changes, but keep consistent
+          }else if(this.volumePoints && this.volumePoints.length){
+            // keep volume aligned: append, shift
+            const vpts = this.volumePoints;
+            const tvPrev = vpts[vpts.length-1]?.t || tPrev;
+            const tvNew = new Date((tvPrev instanceof Date ? tvPrev : new Date()).getTime() + 60*1000);
+            const vvNew = vpts[vpts.length-1]?.v ?? 0;
+            vpts.push({t: tvNew, v: vvNew});
+            vpts.shift();
+          }
+
+          // When the window shifts, recompute view bounds more often to avoid sudden rescale flicker.
+          this._recalcViewBounds(true);
+          shifted = true;
+        }
+      }
+
+      // repaint while: tail tweening, tick flash decaying, or xOffset moving (always non-zero during scroll)
+      const needs = shifted || this._isTweening() || (this._tickFlashTs && (now-this._tickFlashTs)<260) || (s.xOffset>0.0001);
+      return needs;
+    }
+
+    tickUpdate(){
+      this._tickN = (this._tickN || 0) + 1;
+      // tick flash (Bloomberg “right-edge” pulse)
+      this._tickFlashTs = performance.now();
+      this._tickFlashN = (this._tickFlashN || 0) + 1;
+      // streaming update: set a new target for the last point; the renderer interpolates the tail continuously
+      const pts=this.points;
+      if(pts.length<10) return;
+      const last=pts[pts.length-1];
+      const prev=pts[pts.length-2];
+      const st = this.rt;
+      // Deterministic per-chart RNG stream (but evolving each tick)
+      st.tickSeed = (st.tickSeed + 0x9e3779b9 + (this._tickN|0)) >>> 0;
+      const r1 = seeded(st.tickSeed)();
+      const r2 = seeded(st.tickSeed ^ 0xA5A5A5A5)();
+      const z  = this._gauss(r1, r2);
+
+      // Slow-moving volatility regime + weak trend (adds realism: clusters + mean reversion)
+      st.trend = (st.trend * 0.985) + (z * st.sigmaBase * 0.018);
+      st.sigmaNow = (st.sigmaNow * 0.992) + (st.sigmaBase * 0.008) + (Math.abs(z) * st.sigmaBase * 0.006);
+
+      
+      // --- realism layers: session regimes + volatility waves + order-flow imbalance + close/print accel ---
+      const nowDt = new Date();
+      const hr = nowDt.getHours() + nowDt.getMinutes()/60;
+      // Rough global session profile (Berlin local): Asia (1-7), Europe (8-16), US overlap (15-21), after-hours (22-24/0)
+      let session = 0.65;
+      if(hr>=1 && hr<7) session = 0.75;          // Asia: steadier
+      else if(hr>=7 && hr<15) session = 0.95;    // Europe morning: active
+      else if(hr>=15 && hr<21) session = 1.15;   // US overlap: most volatile
+      else session = 0.60;                       // late: calmer
+
+      // Volatility clustering wave (slow sinusoid + random walk envelope)
+      st._volPhase = (st._volPhase==null) ? seeded(hashSeed("VP|" + this.seedStr))()*Math.PI*2 : st._volPhase;
+      st._volPhase += 0.012 + 0.004*seeded(st.tickSeed ^ 0xBADC0DE)(); // slow drift
+      const wave = 0.78 + 0.35*Math.sin(st._volPhase) + 0.10*Math.sin(st._volPhase*0.27);
+      st._volEnv = (st._volEnv==null) ? wave : (st._volEnv*0.992 + wave*0.008);
+
+      // Order-flow imbalance (OFI) random walk that skews micro-moves (bid/ask pressure illusion)
+      st._ofi = (st._ofi==null) ? 0 : st._ofi;
+      const ofStep = (seeded(st.tickSeed ^ 0xFACEFEED)()*2-1) * 0.10;
+      st._ofi = clamp(st._ofi*0.985 + ofStep, -1, 1);
+
+      // End-of-minute “print” acceleration: last ~4.5s slightly faster/jerkier (Bloomberg-y)
+      const ms = performance.now() % 60000;
+      const accel = (ms > 55500) ? (1 + (ms-55500)/4500 * 0.55) : 1.0;
+      // Spread microstructure (bid/ask ladder illusion): spread widens with vol and compresses in calm regimes.
+      // Stored for rendering as a subtle right-edge band + bid/ask stubs (Bloomberg feel, low-flicker).
+      st._sprBase = (st._sprBase==null) ? (this.base * 0.0012) : st._sprBase; // ~12bp baseline (scaled)
+      const volScale = clamp((st.sigmaNow / Math.max(1e-9, st.sigmaBase)), 0.7, 2.2);
+      const sprWave = 0.75 + 0.55*st._volEnv;
+      const sprSess = 0.85 + 0.35*(session-0.6); // slightly wider in active sessions
+      const sprAcc  = 0.90 + 0.25*(accel-1.0);
+      const spread = st._sprBase * volScale * sprWave * sprSess * sprAcc;
+
+      // Bid/ask mid oscillation with OFI skew
+      const micro = (seeded(st.tickSeed ^ 0xC001D00D)()*2-1) * spread * 0.22;
+      const ofiSkew = st._ofi * spread * 0.18;
+      this._bbSpread = spread;
+      this._bbMidSkew = ofiSkew;
+      this._bbMicro = micro;
+
+// Occasional jumps (rare, but visible)
+      let jump = 0;
+      const rj = seeded(st.tickSeed ^ 0x1337BEEF)();
+      if(rj < st.jumpProb){
+        const sign = (seeded(st.tickSeed ^ 0xDEADBEEF)() < 0.5) ? -1 : 1;
+        jump = sign * st.jumpScale * st.sigmaBase * (0.6 + 1.2*seeded(st.tickSeed ^ 0xC0FFEE)());
+      }
+
+      // Micro move with smoothing (prevents flicker; terminal-like continuous tape)
+      const rawMove = ((st.driftTick + st.trend) + (st._ofi * st.sigmaBase * 0.12)) + (z * st.sigmaNow * session * st._volEnv * accel) + jump;
+      const prevTarget = (this.stream && this.stream.nextLast!=null) ? this.stream.nextLast : prev.v;
+      const target = prevTarget + rawMove * (0.55 + 0.9*(1 - st.smoothness));
+      // Derive a synthetic bid/ask around the evolving last (mid) with micro + OFI skew.
+      const mid = target + (this._bbMicro||0) + (this._bbMidSkew||0);
+      this._bbBid = mid - (this._bbSpread||0)/2;
+      this._bbAsk = mid + (this._bbSpread||0)/2;
+      this._bbBAts = performance.now();
+
+
+      this._primeTail(target);
+      // keep the stored last value equal to the target so y-scaling includes it
+      last.v = target;
+
+      // volume track update (if present) tied to absolute return (more realistic microstructure)
+      if(this.volumePoints && this.volumePoints.length === pts.length){
+        const vpts = this.volumePoints;
+        const vlast = vpts[vpts.length-1];
+        const vprev = vpts[vpts.length-2];
+        const ret = Math.abs((last.v - prev.v) / (Math.abs(prev.v) || 1));
+        const vs = seeded(hashSeed("VOL|" + this.seedStr + "|" + this._tickN + "|" + Math.floor(performance.now())))();
+        const vj = (vs*2-1) * (Math.abs(vprev.v)*0.0012);
+        // spike volume on bigger moves, with mild mean reversion
+        vlast.v = Math.max(0, vprev.v + vj + (ret * (Math.abs(vprev.v) * 2.5)));
+      }
+
+      // update compare overlays (keep them “alive” too)
+      for(const [k, cpts] of this.compareSeries.entries()){
+        if(cpts.length<10) continue;
+        const clast=cpts[cpts.length-1];
+        const cprev=cpts[cpts.length-2];
+        const cs = seeded(hashSeed((k||"CMP") + "|" + this.seedStr + "|" + this._tickN + "|" + Math.floor(performance.now())))();
+        const cj = (cs*2-1) * (Math.abs(cprev.v)*0.0006);
+        clast.v = cprev.v + cj;
+      }
+
+      // keep y-scaling stable; recompute occasionally or if we approach bounds
+      const pad = (this.view.y1 - this.view.y0) * 0.03;
+      const vNow = last.v;
+      if((this._tickN % 8 === 0) || vNow < (this.view.y0 + pad) || vNow > (this.view.y1 - pad)){
+        this.recomputeY();
+      }
+      // No immediate render here: RAF loop repaints continuously while tweening.
+    }
+
+    render(){
+      const ctx=this.ctx, W=this.W, H=this.H, pts=this.points;
+      // base
+      ctx.fillStyle="#0a0b0d";
+      ctx.fillRect(0,0,W,H);
+      if(!pts || pts.length<2) return;
+
+      const {i0,i1,y0,y1}=this.view;
+      const tailOverride = this._tailValue();
+      const padL=16, padR=52, padT=12, padB=24;
+      const x0=padL, xRight=this.fullRightX();
+      const yTop=padT, yBot=H-padB;
+
+      // vertical grid
+      ctx.lineWidth=1;
+      ctx.strokeStyle="#1c1f26";
+      ctx.beginPath();
+      const vCount=10;
+      for(let k=0;k<=vCount;k++){
+        const x=x0 + (xRight-x0)*(k/vCount);
+        ctx.moveTo(x,yTop); ctx.lineTo(x,yBot);
+      }
+      ctx.stroke();
+
+      // horizontal grid
+      const yticks=niceTicks(y0,y1,7);
+      ctx.strokeStyle="#161820";
+      ctx.beginPath();
+      for(const tv of yticks){
+        const y=this.mapY(tv);
+        ctx.moveTo(x0,y); ctx.lineTo(xRight,y);
+      }
+      ctx.stroke();
+
+      // right labels
+      ctx.fillStyle="#a9a9a9";
+      ctx.font=`12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+      ctx.textAlign="left"; ctx.textBaseline="middle";
+      for(const tv of yticks){
+        const y=this.mapY(tv);
+        const label=(Math.abs(tv)>=1000)?Math.round(tv).toString():tv.toFixed(2);
+        ctx.fillText(label, xRight+8, y);
+      }
+
+      // orange ref line (period open)
+      const ref=pts[i0]?.v ?? pts[0].v;
+      const yRef=this.mapY(ref);
+      ctx.strokeStyle="#ff9f1a";
+      ctx.setLineDash([2,3]);
+      ctx.beginPath(); ctx.moveTo(x0,yRef); ctx.lineTo(xRight,yRef); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // additional overlays (threshold bands, regime markers, etc.)
+      if(this.overlaysEnabled && this.overlays && this.overlays.length){
+        ctx.font=`11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+        ctx.textAlign="left"; ctx.textBaseline="middle";
+        for(const ol of this.overlays){
+          if(!ol) continue;
+          const y = this.mapY(ol.y);
+          ctx.strokeStyle = ol.color || "rgba(255,255,255,.22)";
+          ctx.lineWidth = 1;
+          ctx.setLineDash(ol.dash || [4,4]);
+          ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(xRight,y); ctx.stroke();
+          ctx.setLineDash([]);
+          if(ol.label){
+            const txt = String(ol.label);
+            const tw = ctx.measureText(txt).width;
+            ctx.fillStyle="rgba(10,11,13,.85)";
+            ctx.fillRect(x0+6, y-9, tw+10, 18);
+            ctx.strokeStyle="rgba(255,255,255,.14)";
+            ctx.strokeRect(x0+6, y-9, tw+10, 18);
+            ctx.fillStyle=ol.textColor || "#cfcfcf";
+            ctx.fillText(txt, x0+11, y);
+          }
+        }
+      }
+
+      // render modes
+      if(this.kind === "strip"){
+        // ForumFlow-style strip: centered baseline, signed bars (cyan for positive, red for negative)
+        const mid = (yTop + yBot) / 2;
+        // midline
+        ctx.strokeStyle = "rgba(255,255,255,.16)";
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x0, mid); ctx.lineTo(xRight, mid); ctx.stroke();
+
+        // bars
+        const amp = (yBot - yTop) * 0.40;
+        for(let i=i0;i<i1;i++){
+          const x = this.mapX(i);
+          const v = pts[i].v;
+          const dv = v - ref; // ref acts as baseline anchor
+          const h = clamp(dv / (Math.abs(ref)||1), -1, 1) * amp;
+          ctx.strokeStyle = (h>=0) ? "rgba(56,189,248,.85)" : "rgba(248,113,113,.75)";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(x, mid);
+          ctx.lineTo(x, mid - h);
+          ctx.stroke();
         }
 
-        grid.querySelectorAll(".chart-block").forEach(block=>{
-          block.setAttribute("draggable","true");
+        // last marker + extension
+        const lastV = (tailOverride!=null)?tailOverride:pts[i1-1].v;
+        const dvLast = lastV - ref;
+        const hLast = clamp(dvLast / (Math.abs(ref)||1), -1, 1) * amp;
+        const yLast = mid - hLast;
+        const lastX = this.mapX(i1-1);
 
-          block.addEventListener("dragstart", e=>{
-            dragEl = block;
-            block.classList.add("dragging");
-          });
+        ctx.strokeStyle="rgba(243,245,247,.85)";
+        ctx.lineWidth=1.0;
+        ctx.beginPath(); ctx.moveTo(lastX,yLast); ctx.lineTo(xRight,yLast); ctx.stroke();
 
-          block.addEventListener("dragend", e=>{
-            dragEl = null;
-            block.classList.remove("dragging");
-          });
+        // last label (shows strip value)
+        const label = round3(lastV);
+        ctx.font=`12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+        const tw = ctx.measureText(label).width;
+        const boxW = tw+16, boxH=18;
+        const bx = xRight+2;
+        const by = clamp(yLast-boxH/2, yTop+2, yBot-boxH-2);
+        ctx.fillStyle="rgba(10,11,13,.95)";
+        ctx.fillRect(bx,by,boxW,boxH);
+        ctx.strokeStyle="rgba(255,255,255,.18)";
+        ctx.strokeRect(bx,by,boxW,boxH);
+        ctx.fillStyle="#f3f5f7";
+        ctx.textAlign="left"; ctx.textBaseline="middle";
+        ctx.fillText(label, bx+8, by+boxH/2);
 
-          block.addEventListener("dragover", e=>{
-            if(!dragEl) return;
-            e.preventDefault();
-            const afterElement = getDragAfterElement(grid, e.clientY);
-            if(afterElement == null){
-              grid.appendChild(dragEl);
-            } else {
-              grid.insertBefore(dragEl, afterElement);
-            }
-          });
+      } else {
+
+      ctx.beginPath();
+      for(let i=i0;i<i1;i++){
+        const x=this.mapX(i);
+        const y=this.mapY((i===i1-1 && tailOverride!=null)?tailOverride:pts[i].v);
+        if(i===i0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      const lastX=this.mapX(i1-1);
+      ctx.lineTo(lastX,yBot);
+      ctx.lineTo(this.mapX(i0), yBot);
+      ctx.closePath();
+
+      const g=ctx.createLinearGradient(0,yTop,0,yBot);
+      g.addColorStop(0,"#0b2a5a");
+      g.addColorStop(1,"#08224a");
+      ctx.fillStyle=g;
+      ctx.globalAlpha=0.92;
+      ctx.fill();
+      ctx.globalAlpha=1;
+
+      // white line
+      ctx.beginPath();
+      for(let i=i0;i<i1;i++){
+        const x=this.mapX(i);
+        const y=this.mapY((i===i1-1 && tailOverride!=null)?tailOverride:pts[i].v);
+        if(i===i0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle="#f3f5f7";
+      ctx.lineWidth=1.2;
+      ctx.stroke();
+
+      // comparison overlays (toggleable) — mapped as % change vs window ref (so lines are visible & comparable)
+      if(this.compares.length){
+        const palette = ["rgba(56,189,248,.85)","rgba(168,85,247,.75)","rgba(34,211,238,.70)","rgba(250,204,21,.55)","rgba(248,113,113,.65)"];
+        let pi=0;
+
+        const refP = (pts[i0]?.v ?? pts[0].v);
+        for(const c of this.compares){
+          if(!this.compareEnabled.has(c.key)) continue;
+          const cpts = this.compareSeries.get(c.key);
+          if(!cpts || cpts.length<2) continue;
+
+          // align by index (same synthetic calendar); if lengths differ, clamp
+          const j0 = Math.min(i0, cpts.length-2);
+          const j1 = Math.min(i1, cpts.length);
+
+          const refC = (cpts[j0]?.v ?? cpts[0].v);
+          if(!isFinite(refC) || refC===0) continue;
+
+          ctx.beginPath();
+          for(let j=j0;j<j1;j++){
+            const x=this.mapX(j);
+            const pct = (cpts[j].v - refC) / refC;
+            const vMapped = refP * (1 + pct);     // map compare into main price space
+            const y=this.mapY(vMapped);
+            if(j===j0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.strokeStyle = c.color || palette[pi % palette.length];
+          ctx.lineWidth = 1.05;
+          ctx.stroke();
+          pi++;
+        }
+      }
+
+ctx.stroke();
+
+      // extend last price into future space
+      const lastV=(tailOverride!=null)?tailOverride:pts[i1-1].v;
+      const yLast=this.mapY(lastV);
+      ctx.strokeStyle="rgba(243,245,247,.85)";
+      ctx.lineWidth=1.0;
+      ctx.beginPath();
+      ctx.moveTo(lastX,yLast);
+      ctx.lineTo(xRight,yLast);
+      ctx.stroke();
+
+      // last price label box
+      const label=round3(lastV);
+      ctx.font=`12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+      const tw=ctx.measureText(label).width;
+      const boxW=tw+16, boxH=18;
+      const bx=xRight+2;
+      const by=clamp(yLast-boxH/2, yTop+2, yBot-boxH-2);
+      ctx.fillStyle="rgba(10,11,13,.95)";
+      ctx.fillRect(bx,by,boxW,boxH);
+      ctx.strokeStyle="rgba(255,255,255,.18)";
+      ctx.strokeRect(bx,by,boxW,boxH);
+      ctx.fillStyle="#f3f5f7";
+      ctx.textAlign="left"; ctx.textBaseline="middle";
+      ctx.fillText(label, bx+8, by+boxH/2);
+
+      // volume bars (priceVolume panels)
+      if(this.kind === "priceVolume" && this.volumePoints && this.volumePoints.length){
+        const vpts = this.volumePoints;
+        // compute range
+        let vlo=Infinity, vhi=-Infinity;
+        for(let i=i0;i<i1;i++){
+          const v=vpts[i]?.v;
+          if(v==null) continue;
+          if(v<vlo) vlo=v;
+          if(v>vhi) vhi=v;
+        }
+        const vPad = (vhi-vlo)*0.10 || (Math.abs(vhi)||1)*0.05;
+        vlo -= vPad; vhi += vPad;
+
+        const volTop = yBot - Math.round((yBot-yTop)*0.22);
+        const volBot = yBot;
+
+        // separator
+        ctx.strokeStyle="rgba(255,255,255,.12)";
+        ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(x0, volTop); ctx.lineTo(xRight, volTop); ctx.stroke();
+
+        // bars
+        const barW = Math.max(1, (this.mapX(i0+1) - this.mapX(i0)) * 0.65);
+        for(let i=i0;i<i1;i++){
+          const x = this.mapX(i) - barW/2;
+          const vv = vpts[i]?.v ?? 0;
+          const t = (vv - vlo) / (vhi - vlo || 1);
+          const h = clamp(t,0,1) * (volBot - volTop - 6);
+          // neutral gray-blue, but brighten on “up” days
+          const up = (i>0 ? (pts[i].v - pts[i-1].v) : 0) >= 0;
+          ctx.fillStyle = up ? "rgba(56,189,248,.22)" : "rgba(248,113,113,.18)";
+          ctx.fillRect(x, volBot - h, barW, h);
+        }
+
+        // volume label (left)
+        ctx.font=`11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+        ctx.fillStyle="#8a8a8a";
+        ctx.textAlign="left"; ctx.textBaseline="top";
+        ctx.fillText("VOL", x0+2, volTop+3);
+      }
+
+
+      }
+
+      // bottom date labels
+      ctx.fillStyle="#8a8a8a";
+      ctx.textAlign="center"; ctx.textBaseline="top";
+      const tCount=6;
+      for(let k=0;k<=tCount;k++){
+        const i=Math.round(i0 + (i1-i0-1)*(k/tCount));
+        const x=this.mapX(i);
+        ctx.fillText(fmtDateUTC(pts[i].t), x, yBot+6);
+      }
+
+
+      // --- right-edge "last tick" pulse (Bloomberg-style, low-flicker) ---
+      // Multi-stroke glow with exponential decay: readable ticks without “strobing”.
+      if(this._tickFlashTs){
+        const age = performance.now() - this._tickFlashTs;
+        if(age < 320){
+          const a = Math.exp(-age/110); // smooth decay
+          const xPulse = xRight + 0.5;
+          const yLast = this.mapY(this._tailValue(), yTop, yBot);
+          // Subtle bid/ask band + stubs (no flicker): decays with the same pulse envelope.
+          if(this._bbBid!=null && this._bbAsk!=null){
+            const yBid = this.mapY(this._bbBid, yTop, yBot);
+            const yAsk = this.mapY(this._bbAsk, yTop, yBot);
+            const bandTop = Math.min(yBid, yAsk);
+            const bandBot = Math.max(yBid, yAsk);
+
+            ctx.fillStyle = `rgba(243,245,247,${0.02 + 0.06*a})`;
+            ctx.fillRect(xRight - 36, bandTop, 36, Math.max(1, bandBot-bandTop));
+
+            // bid/ask stubs
+            ctx.strokeStyle = `rgba(243,245,247,${0.08 + 0.22*a})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath(); ctx.moveTo(xRight - 22, yBid); ctx.lineTo(xRight, yBid); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(xRight - 22, yAsk); ctx.lineTo(xRight, yAsk); ctx.stroke();
+          }
+
+
+          ctx.save();
+
+          // vertical glow (3 passes: wide -> thin)
+          ctx.strokeStyle = `rgba(243,245,247,${0.08 + 0.18*a})`;
+          ctx.lineWidth = 3.5;
+          ctx.beginPath(); ctx.moveTo(xPulse, yTop); ctx.lineTo(xPulse, yBot); ctx.stroke();
+
+          ctx.strokeStyle = `rgba(243,245,247,${0.10 + 0.34*a})`;
+          ctx.lineWidth = 2.0;
+          ctx.beginPath(); ctx.moveTo(xPulse, yTop); ctx.lineTo(xPulse, yBot); ctx.stroke();
+
+          ctx.strokeStyle = `rgba(243,245,247,${0.14 + 0.62*a})`;
+          ctx.lineWidth = 1.1;
+          ctx.beginPath(); ctx.moveTo(xPulse, yTop); ctx.lineTo(xPulse, yBot); ctx.stroke();
+
+          // last-price stub (2 passes) to “prove” the refresh happened
+          ctx.strokeStyle = `rgba(243,245,247,${0.06 + 0.26*a})`;
+          ctx.lineWidth = 2.0;
+          ctx.beginPath(); ctx.moveTo(xRight - 28, yLast); ctx.lineTo(xRight, yLast); ctx.stroke();
+
+          ctx.strokeStyle = `rgba(243,245,247,${0.10 + 0.50*a})`;
+          ctx.lineWidth = 1.0;
+          ctx.beginPath(); ctx.moveTo(xRight - 22, yLast); ctx.lineTo(xRight, yLast); ctx.stroke();
+
+          ctx.restore();
+        }
+      }
+
+      // crosshair + Bloomberg-style cursor labels
+      if(this.view.hoverX!==null){
+        ctx.strokeStyle="rgba(243,245,247,.28)";
+        ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(this.view.hoverX,yTop); ctx.lineTo(this.view.hoverX,yBot); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x0,this.view.hoverY); ctx.lineTo(xRight,this.view.hoverY); ctx.stroke();
+
+        // top date label (above cursor)
+        const idx = (this.hoverIndex!=null) ? this.hoverIndex : this.nearestIndexFromX(this.view.hoverX);
+        const dp = pts[idx];
+        if(dp){
+          const dateTxt = fmtDateUTC(dp.t) + " UTC";
+          ctx.font=`11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+          const dtw = ctx.measureText(dateTxt).width;
+          const bh = 18, bw = dtw + 16;
+          const bx0 = clamp(this.view.hoverX - bw/2, x0, xRight - bw);
+          const by0 = yTop + 2;
+          ctx.fillStyle="rgba(10,11,13,.95)";
+          ctx.fillRect(bx0, by0, bw, bh);
+          ctx.strokeStyle="rgba(255,255,255,.18)";
+          ctx.strokeRect(bx0, by0, bw, bh);
+          ctx.fillStyle="#f3f5f7";
+          ctx.textAlign="center"; ctx.textBaseline="middle";
+          ctx.fillText(dateTxt, bx0 + bw/2, by0 + bh/2);
+
+          // right value label at cursor (like Bloomberg)
+          const vTxt = round3(dp.v) + (this.unit ? (" " + this.unit) : "");
+          const vtw = ctx.measureText(vTxt).width;
+          const vbw = vtw + 16, vbh = 18;
+          const vbx = xRight + 2;
+          const vby = clamp(this.view.hoverY - vbh/2, yTop+2, yBot - vbh - 2);
+          ctx.fillStyle="rgba(10,11,13,.95)";
+          ctx.fillRect(vbx, vby, vbw, vbh);
+          ctx.strokeStyle="rgba(255,255,255,.18)";
+          ctx.strokeRect(vbx, vby, vbw, vbh);
+          ctx.fillStyle="#f3f5f7";
+          ctx.textAlign="left"; ctx.textBaseline="middle";
+          ctx.fillText(vTxt, vbx + 8, vby + vbh/2);
+        }
+      }
+}
+  }
+
+  // ---------- fullscreen overlay (no layout changes) ----------
+  function ensureFSOverlay(){
+    if(document.getElementById("bkFsOverlay")) return;
+    const style=document.createElement("style");
+    style.textContent = `
+      #bkFsOverlay{position:fixed; inset:0; background:#050607; z-index:9999; display:none;}
+      #bkFsOverlay.on{display:block;}
+      #bkFsInner{position:absolute; inset:10px; border:1px solid #141821; border-radius:14px; overflow:hidden; background:#0a0b0d;
+        box-shadow:0 30px 90px rgba(0,0,0,.6);}
+      #bkFsTop{padding:10px 12px; background:linear-gradient(180deg,#101118,#0b0c0e); border-bottom:1px solid #171a20;
+        display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
+      #bkFsTitle{font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; color:#dcdcdc;}
+      #bkFsExit{font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+        color:#cfcfcf; padding:8px 10px; border:1px solid #1c2030; background:rgba(255,255,255,.02); border-radius:8px; cursor:pointer;}
+      #bkFsExit:hover{background:rgba(255,255,255,.04);}
+      
+      #bkFsControls{padding:8px 12px; border-bottom:1px solid #171a20; background:#0b0c0e; display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+      #bkFsRanges{display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+      .bkRangeBtn{font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+        color:#cfcfcf; padding:7px 8px; border:1px solid #1c2030; background:rgba(255,255,255,.02); border-radius:8px; cursor:pointer; user-select:none;}
+      .bkRangeBtn:hover{background:rgba(255,255,255,.04);}
+      .bkRangeBtn.active{border-color:#2b3550; box-shadow: inset 0 -2px 0 #ff9f1a;}
+      #bkFsCompares{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+      .bkCmp{display:flex; gap:6px; align-items:center; font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; color:#cfcfcf;}
+      .bkCmp input{accent-color:#ff9f1a;}
+
+      #bkFsMount{position:relative;}
+      #bkFsMount canvas{width:100% !important; height:calc(100vh - 140px) !important; display:block;}
+    `;
+    document.head.appendChild(style);
+
+    const ov=document.createElement("div");
+    ov.id="bkFsOverlay";
+    ov.innerHTML = `
+      <div id="bkFsInner">
+        <div id="bkFsTop">
+          <div id="bkFsTitle">—</div>
+          <div id="bkFsExit">Exit Fullscreen (Esc)</div>
+        </div>
+        <div id="bkFsControls">
+          <div id="bkFsRanges"></div>
+          <div id="bkFsCompares"></div>
+        </div>
+        <div id="bkFsMount"></div>
+      </div>
+    `;
+    document.body.appendChild(ov);
+
+    const exit=()=>exitFS();
+    ov.addEventListener("mousedown",(e)=>{ if(e.target===ov) exit(); });
+    document.getElementById("bkFsExit").addEventListener("click", exit);
+  }
+
+  let fsState = {on:false, canvas:null, parent:null, next:null, chart:null, mount:null, titleEl:null};
+
+  function enterFS(chart, title){
+    ensureFSOverlay();
+    const ov=document.getElementById("bkFsOverlay");
+    const mount=document.getElementById("bkFsMount");
+    const titleEl=document.getElementById("bkFsTitle");
+
+    const canvas=chart.canvas;
+    fsState = {
+      on:true, canvas, parent: canvas.parentNode, next: canvas.nextSibling, chart,
+      mount, titleEl
+    };
+
+    titleEl.textContent = title || chart.title || "Chart";
+    // build fullscreen controls (range + compare toggles)
+    const rangesEl = document.getElementById("bkFsRanges");
+    const comparesEl = document.getElementById("bkFsCompares");
+    if(rangesEl){
+      const keys = ["1D","1W","1M","3M","6M","YTD","1Y","5Y","10Y","MAX"];
+      rangesEl.innerHTML = keys.map(k=>`<div class="bkRangeBtn" data-r="${k}">${k}</div>`).join("");
+      const setActive = ()=>{
+        rangesEl.querySelectorAll(".bkRangeBtn").forEach(b=>{
+          b.classList.toggle("active", b.getAttribute("data-r") === chart.rangeKey);
+        });
+      };
+      rangesEl.querySelectorAll(".bkRangeBtn").forEach(b=>{
+        b.addEventListener("click", ()=>{
+          const r = b.getAttribute("data-r");
+          chart.applyRange(r);
+          setActive();
         });
       });
+      setActive();
     }
-    setupDragAndDrop();
-
-    // --- SCENARIO LENS ------------------------------------------------------
-    const SCENARIOS = {
-      baseline: {
-        label: "Baseline",
-        asset: "BK Macro Composite",
-        overlay: "BK Financial Conditions Index",
-        wsbBase: 0.52,
-        wsbVol: 0.08
-      },
-      energy: {
-        label: "Energy transition stress",
-        asset: "BK Energy & Utilities",
-        overlay: "BK Climate & Transition Risk",
-        wsbBase: 0.45,
-        wsbVol: 0.09
-      },
-      easing: {
-        label: "Policy easing bias",
-        asset: "BK Real Economy Basket",
-        overlay: "BK Policy Volatility Gauge",
-        wsbBase: 0.58,
-        wsbVol: 0.07
-      },
-      riskoff: {
-        label: "Risk-off phase",
-        asset: "BK Cost-of-Living Pressure",
-        overlay: "BK Fragmentation Index",
-        wsbBase: 0.40,
-        wsbVol: 0.09
-      },
-      tech: {
-        label: "Tech upcycle",
-        asset: "BK Telecom & Infrastructure",
-        overlay: "BK Capital Investment Pulse",
-        wsbBase: 0.60,
-        wsbVol: 0.09
+    if(comparesEl){
+      if(chart.compares && chart.compares.length){
+        comparesEl.innerHTML = chart.compares.map((c,idx)=>`
+          <label class="bkCmp" title="${c.label || c.key}">
+            <input type="checkbox" data-k="${c.key}" ${chart.compareEnabled.has(c.key) ? "checked":""}/>
+            <span>${c.label || c.key}</span>
+          </label>
+        `).join("");
+        comparesEl.querySelectorAll("input[type=checkbox]").forEach(cb=>{
+          cb.addEventListener("change", ()=>{
+            chart.setCompareEnabled(cb.getAttribute("data-k"), cb.checked);
+          });
+        });
+      }else{
+        comparesEl.innerHTML = `<span style="color:#7c7c7c; font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;">Overlays: none</span>`;
       }
-    };
-
-    let currentScenarioKey = "baseline";
-
-    const scenarioSelect = document.getElementById("scenarioSelect");
-    const scenarioStatusLabel = document.getElementById("scenarioStatusLabel");
-    const assetSelect = document.getElementById("assetSelect");
-    const overlaySelect = document.getElementById("overlaySelect");
-
-    scenarioSelect.addEventListener("change", function(){
-      const key = this.value;
-      const sc = SCENARIOS[key] || SCENARIOS.baseline;
-      currentScenarioKey = key;
-      scenarioStatusLabel.textContent = "Scenario: " + sc.label;
-      document.getElementById("statusMode").textContent =
-        "Scenario lens · " + sc.label;
-
-      // steer asset & overlay selectors
-      assetSelect.value = sc.asset;
-      overlaySelect.value = sc.overlay;
-      assetSelect.dispatchEvent(new Event("change"));
-      overlaySelect.dispatchEvent(new Event("change"));
-
-      // steer ForumFlow intraday regime
-      WSB_MODES.intraday.base = sc.wsbBase;
-      WSB_MODES.intraday.vol  = sc.wsbVol;
-
-      // reset ForumFlow series under new lens
-      applyScenarioToWSB();
-      refreshSentiment();
-      refreshPCG();
-      if (typeof setSentActMode === "function") {
-        setSentActMode(currentWSBMode==="intraday"?"daily":currentWSBMode==="week"?"weekly":"monthly");
-        linkSentActLabel();
-      }
-    });
-
-    // popout main dashboard (dual-monitor / multi-window)
-    document.getElementById("popoutMainBtn").addEventListener("click", function(){
-      window.open(window.location.href, "_blank", "noopener");
-    });
-
-    // --- MAIN CHART ---------------------------------------------------------
-    const mainCtx = document.getElementById("mainChart").getContext("2d");
-    const mainLabels = Array.from({length:60}, (_,i)=>"t"+(i+1));
-    let assetData = genSeries(60,0.6,0.08);
-    let overlayData = genSeries(60,0.55,0.07);
-    let stripData = genSeries(60,0.5,0.10);
-
-    const mainChart = new Chart(mainCtx,{
-      type:"line",
-      data:{
-        labels: mainLabels,
-        datasets:[
-          {
-            label:"Asset",
-            data: assetData,
-            borderColor:"#facc15",
-            backgroundColor:"rgba(250,204,21,0.1)",
-            borderWidth:2,
-            tension:0.25,
-            pointRadius:0,
-            pointHitRadius:5,
-            yAxisID:"y"
-          },
-          {
-            label:"Overlay",
-            data: overlayData,
-            borderColor:"#38bdf8",
-            backgroundColor:"rgba(56,189,248,0.08)",
-            borderWidth:1.7,
-            borderDash:[4,3],
-            tension:0.25,
-            pointRadius:0,
-            pointHitRadius:5,
-            yAxisID:"y"
-          },
-          {
-            label:"ForumFlow-WSB strip",
-            data: stripData,
-            borderColor:"#a855f7",
-            backgroundColor:"rgba(168,85,247,0.12)",
-            borderWidth:1.6,
-            tension:0.3,
-            pointRadius:0,
-            pointHitRadius:4,
-            yAxisID:"y1"
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        interaction:{mode:"index",intersect:false},
-        animation:{duration:650,easing:"easeOutCubic"},
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            enabled:true,
-            backgroundColor:"#020617",
-            borderColor:"rgba(56,189,248,0.6)",
-            borderWidth:1,
-            padding:10,
-            displayColors:true,
-            callbacks:{
-              label(ctx){
-                const v = ctx.parsed.y;
-                return " "+ctx.dataset.label+": "+(typeof v==="number"?v.toFixed(2):"");
-              }
-            }
-          }
-        },
-        scales:{
-          x:{
-            grid:{color:"rgba(31,41,55,0.8)",borderColor:"rgba(55,65,81,1)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:10}}
-          },
-          y:{
-            min:0,max:1,
-            grid:{color:"rgba(31,41,55,0.9)",borderColor:"rgba(55,65,81,1)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:10},callback:v=>v.toFixed(1)}
-          },
-          y1:{
-            position:"right",
-            min:0,max:1,
-            grid:{drawOnChartArea:false},
-            ticks:{display:false}
-          }
-        }
-      }
-    });
-
-    function refreshMainLegend(){
-      const a = assetData[assetData.length-1] || 0;
-      const o = overlayData[overlayData.length-1] || 0;
-      const s = stripData[stripData.length-1] || 0;
-      document.getElementById("legendAsset").textContent = a.toFixed(2);
-      document.getElementById("legendOverlay").textContent = o.toFixed(2);
-      document.getElementById("legendStrip").textContent = (s*2-1).toFixed(2); // convert 0–1 to −1…+1
     }
 
-    let kmriVal = 0.65, tpviVal = 0.55, gdfiVal = 0.48;
-    function refreshHeaderStatus(){
-      document.getElementById("statusKMRI").textContent = kmriVal.toFixed(2);
-      document.getElementById("statusTPVI").textContent = tpviVal.toFixed(2);
-      document.getElementById("statusGDFI").textContent = gdfiVal.toFixed(2);
-      document.getElementById("statusUpdated").textContent = timestamp();
+    mount.innerHTML="";
+    mount.appendChild(canvas);
+    ov.classList.add("on");
+    setTimeout(()=>chart.resize(), 60);
+  }
+
+  function exitFS(){
+    if(!fsState.on) return;
+    const ov=document.getElementById("bkFsOverlay");
+    const {canvas,parent,next,chart}=fsState;
+
+    if(next) parent.insertBefore(canvas, next);
+    else parent.appendChild(canvas);
+
+    ov.classList.remove("on");
+    fsState = {on:false, canvas:null, parent:null, next:null, chart:null, mount:null, titleEl:null};
+
+    setTimeout(()=>chart.resize(), 60);
+  }
+
+  // ---------- bind charts to existing canvases ----------
+  const chartMap = new Map();
+  const chartMeta = new Map(); // chart -> baseline params
+  function registerMeta(chart, meta){ if(chart) chartMeta.set(chart, meta); }
+
+  function bindChart(canvasId, cfg){
+    const c = $(canvasId);
+    if(!c) return null;
+    const chart = new BloombergCanvasChart(c, cfg);
+    chartMap.set(canvasId, chart);
+    return chart;
+  }
+
+  // Use existing select values to seed main chart (stable drawing per selection)
+  function currentScenario(){ return $("scenarioSelect")?.value || "baseline"; }
+  function currentAsset(){ return $("assetSelect")?.value || "BK Macro Composite"; }
+  function currentOverlay(){ return $("overlaySelect")?.value || "BK Policy Volatility Gauge"; }
+  function currentTheme(){ return document.documentElement.getAttribute("data-theme") || "default"; }
+
+
+  function scenarioParams(s){
+    // multipliers tuned for visually realistic regime shifts
+    switch(String(s||"baseline")){
+      case "energy":  return {driftMul:0.90, volMul:1.45, shockMul:1.65, meanRevMul:0.95};
+      case "easing":  return {driftMul:1.10, volMul:0.92, shockMul:0.85, meanRevMul:1.05};
+      case "riskoff": return {driftMul:0.80, volMul:1.70, shockMul:1.95, meanRevMul:0.95};
+      case "tech":    return {driftMul:1.25, volMul:1.10, shockMul:1.05, meanRevMul:0.98};
+      case "baseline":
+      default:        return {driftMul:1.00, volMul:1.00, shockMul:1.00, meanRevMul:1.00};
     }
+  }
 
-    refreshMainLegend();
-    refreshHeaderStatus();
+  
+  function buildComparesFor(asset, overlay, scenario){
+    // Toggleable comparison overlays: synthetic but stable; keyed to current selections
+    const a = asset || "BK Macro Composite";
+    const o = overlay || "Overlay";
+    const s = scenario || "baseline";
+    return [
+      {key:"OVR", label:"Overlay", seedStr:`CMP|OVR|${s}|${a}|${o}`, base:100, drift:0.018, vol:0.50, shock:-1.2, meanRev:0.0012, defaultOn:true},
+      {key:"TPVI", label:"TPVI", seedStr:`CMP|TPVI|${s}|${a}|${o}`, base:0.42, drift:0.0002, vol:0.006, shock:0.03, meanRev:0.03},
+      {key:"GDFI", label:"GDFI", seedStr:`CMP|GDFI|${s}|${a}|${o}`, base:0.38, drift:0.0001, vol:0.005, shock:0.02, meanRev:0.03},
+      {key:"WSB", label:"ForumFlow", seedStr:`CMP|WSB|${s}|${a}|${o}`, base:0.02, drift:0.0, vol:0.02, shock:0.06, meanRev:0.06},
+      {key:"USD", label:"USD / DXY", seedStr:`CMP|USD|${s}|${a}`, base:98, drift:-0.002, vol:0.18, shock:-0.6, meanRev:0.0016},
+      {key:"R10", label:"Rates / 10Y", seedStr:`CMP|R10|${s}|${a}`, base:4.5, drift:0.0004, vol:0.03, shock:0.08, meanRev:0.004},
+      {key:"EQ",  label:"Equities", seedStr:`CMP|EQ|${s}|${a}`, base:100, drift:0.025, vol:0.65, shock:-2.0, meanRev:0.0011},
+      {key:"CMD", label:"Commodities", seedStr:`CMP|CMD|${s}|${a}`, base:100, drift:0.012, vol:0.55, shock:1.4, meanRev:0.0013},
+    ];
+  }
 
-    // dropdowns
-    assetSelect.addEventListener("change", function(){
-      const label = this.value;
-      document.getElementById("mainTitle").textContent =
-        label+" · Price + KMRI + ForumFlow-WSB strip";
-      assetData = genSeries(60,0.55+Math.random()*0.1,0.08);
-      mainChart.data.datasets[0].data = assetData;
-      mainChart.update();
-      refreshMainLegend();
-    });
 
-    overlaySelect.addEventListener("change", function(){
-      const ov = this.value;
-      document.getElementById("mainThemeLabel").textContent = "Overlay · "+ov;
-      overlayData = genSeries(60,0.5+Math.random()*0.1,0.07);
-      mainChart.data.datasets[1].data = overlayData;
-      mainChart.update();
-      refreshMainLegend();
-    });
 
-    document.querySelectorAll(".main-range-btn").forEach(btn=>{
-      btn.addEventListener("click", function(){
-        document.querySelectorAll(".main-range-btn").forEach(b=>b.classList.remove("active-range"));
-        this.classList.add("active-range");
-        const r = this.dataset.range;
-        const vol = (r==="3M"?0.09:r==="6M"?0.07:r==="1Y"?0.06:0.05);
-        assetData = genSeries(60,0.6,vol);
-        overlayData = genSeries(60,0.55,vol*0.9);
-        stripData = genSeries(60,0.5,0.1);
-        mainChart.data.datasets[0].data = assetData;
-        mainChart.data.datasets[1].data = overlayData;
-        mainChart.data.datasets[2].data = stripData;
-        mainChart.update();
-        refreshMainLegend();
-      });
-    });
-
-    // --- PRICE + VOLUME -----------------------------------------------------
-    const pvCtx = document.getElementById("priceVolumeChart").getContext("2d");
-    const pvLabels = Array.from({length:20},(_,i)=>"t"+(i+1));
-    let pvPrice = genSeries(20,0.6,0.06);
-    let pvVol = Array.from({length:20},()=>Math.round(40+Math.random()*60));
-
-    const pvChart = new Chart(pvCtx,{
-      data:{
-        labels: pvLabels,
-        datasets:[
-          {
-            type:"line",
-            label:"Price",
-            data: pvPrice,
-            borderColor:"#facc15",
-            backgroundColor:"rgba(250,204,21,0.08)",
-            borderWidth:2,
-            tension:0.3,
-            pointRadius:0,
-            yAxisID:"y"
-          },
-          {
-            type:"bar",
-            label:"Volume",
-            data: pvVol,
-            backgroundColor:"rgba(56,189,248,0.4)",
-            borderWidth:0,
-            yAxisID:"y1"
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        interaction:{mode:"index",intersect:false},
-        plugins:{legend:{display:false},tooltip:{enabled:true}},
-        scales:{
-          x:{
-            grid:{color:"rgba(31,41,55,0.8)",borderColor:"rgba(55,65,81,1)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
-          },
-          y:{
-            min:0,max:1,
-            grid:{color:"rgba(31,41,55,0.9)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9},callback:v=>v.toFixed(1)}
-          },
-          y1:{
-            position:"right",
-            grid:{drawOnChartArea:false},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
-          }
-        }
-      }
-    });
-
-    function refreshPVStatus(){
-      const lastPrice = pvPrice[pvPrice.length-1] || 0;
-      const lastVol = pvVol[pvVol.length-1] || 0;
-      document.getElementById("pvLast").textContent = lastPrice.toFixed(2);
-      document.getElementById("pvVol").textContent = lastVol.toString();
-    }
-    refreshPVStatus();
-
-    // --- KMRI / TPVI / GDFI -------------------------------------------------
-    const kmriCtx = document.getElementById("kmriChart").getContext("2d");
-    const kmLabels = Array.from({length:16},(_,i)=>"Q"+(i+1));
-    const kmriSeries = genSeries(16,0.62,0.05);
-    const tpviSeries = genSeries(16,0.55,0.06);
-    const gdfiSeries = genSeries(16,0.50,0.04);
-
-    const kmriChart = new Chart(kmriCtx,{
-      type:"line",
-      data:{
-        labels: kmLabels,
-        datasets:[
-          {
-            label:"KMRI",
-            data: kmriSeries,
-            borderColor:"#22c55e",
-            backgroundColor:"rgba(34,197,94,0.1)",
-            borderWidth:1.8,
-            tension:0.25,
-            pointRadius:0
-          },
-          {
-            label:"TPVI",
-            data: tpviSeries,
-            borderColor:"#f97316",
-            borderWidth:1.6,
-            tension:0.25,
-            pointRadius:0,
-            borderDash:[4,3]
-          },
-          {
-            label:"GDFI",
-            data: gdfiSeries,
-            borderColor:"#38bdf8",
-            borderWidth:1.6,
-            tension:0.25,
-            pointRadius:0
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        interaction:{mode:"index",intersect:false},
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{
-            grid:{color:"rgba(31,41,55,0.8)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
-          },
-          y:{
-            min:0,max:1,
-            grid:{color:"rgba(31,41,55,0.9)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9},callback:v=>v.toFixed(1)}
-          }
-        }
-      }
-    });
-
-    function refreshIndicatorFooter(){
-      const k = kmriSeries[kmriSeries.length-1] || 0;
-      const t = tpviSeries[tpviSeries.length-1] || 0;
-      const g = gdfiSeries[gdfiSeries.length-1] || 0;
-      document.getElementById("kmriLast").textContent = k.toFixed(2);
-      document.getElementById("tpviLast").textContent = t.toFixed(2);
-      document.getElementById("gdfiLast").textContent = g.toFixed(2);
-      kmriVal = k; tpviVal = t; gdfiVal = g;
-      refreshHeaderStatus();
-    }
-    refreshIndicatorFooter();
-
-    // --- Extra main multiview charts ---------------------------------------
-    const macroSpreadCtx = document.getElementById("macroSpreadChart").getContext("2d");
-    const macroLabels = Array.from({length:36},(_,i)=>"t"+(i+1));
-    const coreSeries = genSeries(36,0.55,0.05);
-    const headlineSeries = genSeries(36,0.6,0.06);
-    const incomeSeries = genSeries(36,0.58,0.05);
-
-    new Chart(macroSpreadCtx,{
-      type:"line",
-      data:{
-        labels: macroLabels,
-        datasets:[
-          {
-            label:"Core inflation",
-            data: coreSeries,
-            borderColor:"#38bdf8",
-            borderWidth:1.8,
-            tension:0.28,
-            pointRadius:0
-          },
-          {
-            label:"Headline basket",
-            data: headlineSeries,
-            borderColor:"#f97316",
-            borderWidth:1.8,
-            tension:0.28,
-            pointRadius:0
-          },
-          {
-            label:"Labour income",
-            data: incomeSeries,
-            borderColor:"#22c55e",
-            borderWidth:1.8,
-            tension:0.28,
-            pointRadius:0
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}},
-          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}}
-        }
-      }
-    });
-
-    const policyMixCtx = document.getElementById("policyMixChart").getContext("2d");
-    const policyLabels = Array.from({length:36},(_,i)=>"t"+(i+1));
-    const tpviMixSeries = genSeries(36,0.55,0.07);
-    const condSeries = genSeries(36,0.5,0.05);
-    const flowScaledSeries = genSeries(36,0.5,0.08);
-
-    new Chart(policyMixCtx,{
-      type:"line",
-      data:{
-        labels: policyLabels,
-        datasets:[
-          {
-            label:"TPVI",
-            data: tpviMixSeries,
-            borderColor:"#f97316",
-            borderWidth:1.8,
-            tension:0.28,
-            pointRadius:0
-          },
-          {
-            label:"Financial conditions",
-            data: condSeries,
-            borderColor:"#38bdf8",
-            borderWidth:1.8,
-            tension:0.28,
-            pointRadius:0
-          },
-          {
-            label:"ForumFlow-WSB (scaled)",
-            data: flowScaledSeries,
-            borderColor:"#a855f7",
-            borderWidth:1.6,
-            tension:0.28,
-            pointRadius:0,
-            borderDash:[4,3]
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}},
-          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}}
-        }
-      }
-    });
-
-    // --- ForumFlow-WSB INDICATOR -------------------------------------------
-    const wsbCtx = document.getElementById("wsbChart").getContext("2d");
-    const WSB_MODES = {
-      intraday: {
-        labels: Array.from({length:40},(_,i)=> (9+i/4).toFixed(2).replace(".",":")),
-        base: 0.52, vol: 0.08
-      },
-      week: {
-        labels:["Mon","Tue","Wed","Thu","Fri"],
-        base:0.45, vol:0.05
-      },
-      month: {
-        labels:Array.from({length:20},(_,i)=>"D"+(i+1)),
-        base:0.48, vol:0.04
-      }
-    };
-    let currentWSBMode = "intraday";
-    let wsbData = genSeries(WSB_MODES.intraday.labels.length, WSB_MODES.intraday.base, WSB_MODES.intraday.vol);
-
-    const wsbChart = new Chart(wsbCtx,{
-      type:"line",
-      data:{
-        labels: WSB_MODES.intraday.labels,
-        datasets:[
-          {
-            label:"ForumFlow-WSB",
-            data: wsbData.map(v=>v*2-1), // project to −1…+1
-            borderColor:"#a855f7",
-            backgroundColor:"rgba(168,85,247,0.15)",
-            borderWidth:2,
-            tension:0.25,
-            pointRadius:0
-          },
-          {
-            label:"Risk-seeking threshold",
-            data: WSB_MODES.intraday.labels.map(()=>0.4),
-            borderColor:"#4ade80",
-            borderWidth:1,
-            borderDash:[4,3],
-            pointRadius:0,
-            fill:false
-          },
-          {
-            label:"De-risking threshold",
-            data: WSB_MODES.intraday.labels.map(()=>-0.4),
-            borderColor:"#f97316",
-            borderWidth:1,
-            borderDash:[4,3],
-            pointRadius:0,
-            fill:false
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        interaction:{mode:"index",intersect:false},
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            enabled:true,
-            callbacks:{
-              label(ctx){
-                const v = ctx.parsed.y;
-                return " "+ctx.dataset.label+": "+(typeof v==="number"?v.toFixed(2):"");
-              }
-            }
-          }
-        },
-        scales:{
-          x:{
-            grid:{color:"rgba(31,41,55,0.8)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
-          },
-          y:{
-            min:-1,max:1,
-            grid:{color:"rgba(31,41,55,0.9)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
-          }
-        }
-      }
-    });
-
-    function describeTone(val){
-      if(val > 0.6) return "Broad risk-seeking bias";
-      if(val > 0.3) return "Constructive risk appetite";
-      if(val < -0.6) return "Persistent de-risking";
-      if(val < -0.3) return "Cautious positioning";
-      return "Balanced / two-way flow";
-    }
-
-    function refreshWSBText(){
-      const last = wsbData[wsbData.length-1]*2-1;
-      document.getElementById("wsbLast").textContent = last.toFixed(2);
-      document.getElementById("wsbToneLabel").textContent = describeTone(last);
-      document.getElementById("wsbUpdated").textContent = timestamp();
-      document.getElementById("wsbStatusMode").textContent =
-        currentWSBMode==="intraday" ? "Intraday tape · linked" :
-        currentWSBMode==="week" ? "Weekly regime view" :
-        "Monthly structural view";
-    }
-    refreshWSBText();
-
-    function applyScenarioToWSB(){
-      const sc = SCENARIOS[currentScenarioKey] || SCENARIOS.baseline;
-      const cfg = WSB_MODES[currentWSBMode];
-      const base = currentWSBMode==="intraday" ? sc.wsbBase : cfg.base;
-      const vol  = currentWSBMode==="intraday" ? sc.wsbVol  : cfg.vol;
-      wsbData = genSeries(cfg.labels.length, base, vol);
-      wsbChart.data.labels = cfg.labels;
-      wsbChart.data.datasets[0].data = wsbData.map(v=>v*2-1);
-      wsbChart.data.datasets[1].data = cfg.labels.map(()=>0.4);
-      wsbChart.data.datasets[2].data = cfg.labels.map(()=>-0.4);
-      wsbChart.update();
-      refreshWSBText();
-    }
-
-    document.querySelectorAll(".wsb-btn").forEach(btn=>{
-      btn.addEventListener("click", function(){
-        document.querySelectorAll(".wsb-btn").forEach(b=>b.classList.remove("active-range"));
-        this.classList.add("active-range");
-        currentWSBMode = this.dataset.mode;
-        applyScenarioToWSB();
-        document.getElementById("wsbTitle").textContent =
-          "ForumFlow-WSB · "+(currentWSBMode==="intraday"?"Intraday tape":currentWSBMode==="week"?"1W regime":"1M cycle");
-        document.getElementById("sentimentLinked").textContent =
-          currentWSBMode==="intraday"?"Intraday":currentWSBMode==="week"?"Weekly":"Monthly";
-        refreshSentiment();
-        refreshPCG();
-        if (typeof setSentActMode === "function") {
-          setSentActMode(currentWSBMode==="intraday"?"daily":currentWSBMode==="week"?"weekly":"monthly");
-          linkSentActLabel();
-        }
-      });
-    });
-
-    // auto-update intraday mode every 15s (placeholder behaviour)
-    setInterval(function(){
-      if(currentWSBMode!=="intraday") return;
-      const sc = SCENARIOS[currentScenarioKey] || SCENARIOS.baseline;
-      const baseStep = sc.wsbBase;
-      wsbData.push(Math.max(0,Math.min(1, wsbData[wsbData.length-1] +
-        (Math.random()-0.5)*sc.wsbVol*1.2 + (baseStep-0.5)*0.02)));
-      if(wsbData.length>WSB_MODES.intraday.labels.length) wsbData.shift();
-      wsbChart.data.datasets[0].data = wsbData.map(v=>v*2-1);
-      wsbChart.data.datasets[1].data = wsbChart.data.labels.map(()=>0.4);
-      wsbChart.data.datasets[2].data = wsbChart.data.labels.map(()=>-0.4);
-      wsbChart.update("none");
-      refreshWSBText();
-
-      // nudge main strip + cross-asset snapshot + PCG
-      stripData.push(wsbData[wsbData.length-1]);
-      if(stripData.length>60) stripData.shift();
-      mainChart.data.datasets[2].data = stripData;
-      mainChart.update("none");
-      refreshMainLegend();
-      refreshSentiment();
-      refreshPCG();
-    },15000);
-
-    // --- Participation-Conviction Gauge ------------------------------------
-    const pcgCtx = document.getElementById("pcgChart").getContext("2d");
-    const pcgLabels = Array.from({length:30},(_,i)=>"p"+(i+1));
-    let pcgData = genSeries(30,0.5,0.07);
-    const pcgChart = new Chart(pcgCtx,{
-      type:"line",
-      data:{
-        labels: pcgLabels,
-        datasets:[{
-          label:"Participation-Conviction",
-          data: pcgData,
-          borderColor:"#4ade80",
-          backgroundColor:"rgba(74,222,128,0.18)",
-          borderWidth:1.8,
-          tension:0.35,
-          pointRadius:0
-        }]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{
-            grid:{color:"rgba(31,41,55,0.7)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}
-          },
-          y:{
-            min:0,max:1,
-            grid:{color:"rgba(31,41,55,0.9)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8},callback:v=>v.toFixed(1)}
-          }
-        }
-      }
-    });
-
-    function interpretPCG(v){
-      if(v>0.7) return "High-intensity participation phase";
-      if(v>0.55) return "Elevated participation and conviction";
-      if(v<0.3) return "Low-participation environment";
-      if(v<0.45) return "Cautious or selective participation";
-      return "Neutral participation";
-    }
-
-    function refreshPCG(){
-      const lastFlow = wsbData[wsbData.length-1]*2-1;
-      const intens = Math.min(1,Math.max(0,0.5 + Math.abs(lastFlow)*0.4 + (Math.random()-0.5)*0.06));
-      pcgData.push(+intens.toFixed(3));
-      if(pcgData.length>pcgLabels.length) pcgData.shift();
-      pcgChart.data.datasets[0].data = pcgData;
-      pcgChart.update("none");
-      document.getElementById("pcgLast").textContent = intens.toFixed(2);
-      document.getElementById("pcgInterpret").textContent = interpretPCG(intens);
-    }
-    refreshPCG();
-
-    // --- ForumFlow CROSS-ASSET SNAPSHOT (tilts) -----------------------------
-    const sentCtx = document.getElementById("sentimentChart").getContext("2d");
-    const sentLabels = ["Growth & tech","Cyclicals","Defensives","Digital assets","Macro hedges"];
-    let sentValues = [0.6,0.4,0.1,0.7,-0.2];
-
-    const sentChart = new Chart(sentCtx,{
-      type:"bar",
-      data:{
-        labels: sentLabels,
-        datasets:[{
-          label:"ForumFlow tilt",
-          data: sentValues,
-          backgroundColor: function(ctx){
-            const v = ctx.raw;
-            if(v>0.4) return "rgba(34,197,94,0.7)";
-            if(v<-0.4) return "rgba(248,113,113,0.8)";
-            return "rgba(56,189,248,0.7)";
-          },
-          borderWidth:0
-        }]
-      },
-      options:{
-        indexAxis:"y",
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{
-            min:-1,max:1,
-            grid:{color:"rgba(31,41,55,0.9)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:9}}
-          },
-          y:{
-            grid:{color:"rgba(31,41,55,0.6)"},
-            ticks:{color:"rgba(148,163,184,0.9)",font:{size:9}}
-          }
-        }
-      }
-    });
-
-    function refreshSentiment(){
-      const last = wsbData[wsbData.length-1]*2-1;
-      const bias = last;
-      sentValues = [
-        bias*0.9,
-        bias*0.7,
-        -bias*0.4,
-        bias*1.1,
-        -bias*0.6
-      ].map(v=>Math.max(-1,Math.min(1,v)));
-      sentChart.data.datasets[0].data = sentValues;
-      sentChart.update("none");
-    }
-    refreshSentiment();
-
-    // --- ForumFlow ACTIVITY & VOLUME STREAM --------------------------------
-    const sentActCtx = document.getElementById("sentActChart").getContext("2d");
-    const SENT_ACT_MODES = {
-      daily:  { labels: Array.from({length:10},(_,i)=>"D"+(i+1)) },
-      weekly: { labels: Array.from({length:10},(_,i)=>"W"+(i+1)) },
-      monthly:{ labels: Array.from({length:12},(_,i)=>"M"+(i+1)) }
-    };
-    let currentSentActMode = "daily";
-    let sentActVolData = [];
-    let sentActActData = [];
-
-    const sentActChart = new Chart(sentActCtx,{
-      data:{
-        labels: [],
-        datasets:[
-          {
-            type:"bar",
-            label:"Volume",
-            data: [],
-            backgroundColor:"rgba(56,189,248,0.55)",
-            borderWidth:0,
-            yAxisID:"y1"
-          },
-          {
-            type:"line",
-            label:"Activity",
-            data: [],
-            borderColor:"#22c55e",
-            backgroundColor:"rgba(34,197,94,0.18)",
-            borderWidth:1.8,
-            tension:0.35,
-            pointRadius:0,
-            yAxisID:"y"
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        interaction:{mode:"index",intersect:false},
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{
-            grid:{color:"rgba(31,41,55,0.7)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}
-          },
-          y:{
-            min:0,max:1,
-            grid:{color:"rgba(31,41,55,0.9)"},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8},callback:v=>v.toFixed(1)}
-          },
-          y1:{
-            position:"right",
-            grid:{drawOnChartArea:false},
-            ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}
-          }
-        }
-      }
-    });
-
-    function refreshSentActStatus(){
-      const v = sentActVolData[sentActVolData.length-1] || 0;
-      const a = sentActActData[sentActActData.length-1] || 0;
-      document.getElementById("sentActVolLast").textContent = v.toString();
-      document.getElementById("sentActActLast").textContent = a.toFixed(2);
-    }
-
-    function setSentActMode(mode){
-      currentSentActMode = mode;
-      const cfg = SENT_ACT_MODES[mode] || SENT_ACT_MODES.daily;
-      const n = cfg.labels.length;
-      sentActVolData = Array.from({length:n},()=>Math.round(40+Math.random()*60));
-      sentActActData = genSeries(n,0.5,0.08);
-      sentActChart.data.labels = cfg.labels;
-      sentActChart.data.datasets[0].data = sentActVolData;
-      sentActChart.data.datasets[1].data = sentActActData;
-      sentActChart.update();
-      refreshSentActStatus();
-      document.getElementById("sentActModeLabel").textContent =
-        mode==="daily" ? "Daily strip" : mode==="weekly" ? "Weekly stream" : "Monthly stream";
-    }
-
-    function linkSentActLabel(){
-      const mode = currentWSBMode;
-      const label = mode==="intraday"?"Intraday-linked daily":
-                    mode==="week"?"Weekly-linked stream":"Monthly-linked stream";
-      const el = document.getElementById("sentActLinkedLabel");
-      if(el) el.textContent = label;
-    }
-
-    document.querySelectorAll(".sent-act-btn").forEach(btn=>{
-      btn.addEventListener("click", function(){
-        document.querySelectorAll(".sent-act-btn").forEach(b=>b.classList.remove("active-range"));
-        this.classList.add("active-range");
-        setSentActMode(this.dataset.mode);
-        linkSentActLabel();
-      });
-    });
-
-    setSentActMode("daily");
-    linkSentActLabel();
-
-    // --- RSAC MINI PANEL ----------------------------------------------------
-    const rsacCtx = document.getElementById("rsacChart").getContext("2d");
-    const rsacLabels = Array.from({length:24},(_,i)=>"m"+(i+1));
-    const rsacSeries = genSeries(24,0.5,0.08);
-    const rsacChart = new Chart(rsacCtx,{
-      type:"line",
-      data:{
-        labels: rsacLabels,
-        datasets:[{
-          label:"RSAC",
-          data: rsacSeries,
-          borderColor:"#f97316",
-          backgroundColor:"rgba(249,115,22,0.18)",
-          borderWidth:1.8,
-          tension:0.3,
-          pointRadius:0
-        }]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}},
-          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}}
-        }
-      }
-    });
-    document.getElementById("rsacLast").textContent =
-      (rsacSeries[rsacSeries.length-1] || 0).toFixed(2);
-
-    // --- Housing & cost-of-living panel ------------------------------------
-    const housingCtx = document.getElementById("housingChart").getContext("2d");
-    const housingLabels = Array.from({length:24},(_,i)=>"m"+(i+1));
-    const housingSeries = genSeries(24,0.6,0.06);
-    const colSeries = genSeries(24,0.55,0.05);
-
-    const housingChart = new Chart(housingCtx,{
-      type:"line",
-      data:{
-        labels: housingLabels,
-        datasets:[
-          {
-            label:"Housing pressure",
-            data: housingSeries,
-            borderColor:"#38bdf8",
-            backgroundColor:"rgba(56,189,248,0.15)",
-            borderWidth:1.8,
-            tension:0.3,
-            pointRadius:0
-          },
-          {
-            label:"Cost-of-living",
-            data: colSeries,
-            borderColor:"#a855f7",
-            borderWidth:1.6,
-            tension:0.3,
-            pointRadius:0
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}},
-          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}}
-        }
-      }
-    });
-    document.getElementById("housingLast").textContent =
-      (housingSeries[housingSeries.length-1] || 0).toFixed(2);
-    document.getElementById("colLast").textContent =
-      (colSeries[colSeries.length-1] || 0).toFixed(2);
-
-    // --- Labour & income panel ---------------------------------------------
-    const labourCtx = document.getElementById("labourChart").getContext("2d");
-    const labourLabels = Array.from({length:24},(_,i)=>"m"+(i+1));
-    const labourSeries = genSeries(24,0.58,0.06);
-    const labourKmriSeries = genSeries(24,0.62,0.05);
-
-    const labourChart = new Chart(labourCtx,{
-      type:"line",
-      data:{
-        labels: labourLabels,
-        datasets:[
-          {
-            label:"Labour income",
-            data: labourSeries,
-            borderColor:"#22c55e",
-            backgroundColor:"rgba(34,197,94,0.18)",
-            borderWidth:1.8,
-            tension:0.3,
-            pointRadius:0
-          },
-          {
-            label:"KMRI overlay",
-            data: labourKmriSeries,
-            borderColor:"#facc15",
-            borderWidth:1.6,
-            tension:0.3,
-            pointRadius:0,
-            borderDash:[4,3]
-          }
-        ]
-      },
-      options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{grid:{color:"rgba(31,41,55,0.8)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}},
-          y:{min:0,max:1,grid:{color:"rgba(31,41,55,0.9)"},ticks:{color:"rgba(148,163,184,0.8)",font:{size:8}}}
-        }
-      }
-    });
-    document.getElementById("labourLast").textContent =
-      (labourSeries[labourSeries.length-1] || 0).toFixed(2);
-    document.getElementById("labourKmriLast").textContent =
-      (labourKmriSeries[labourKmriSeries.length-1] || 0).toFixed(2);
+  const mainChart = bindChart("mainChart", {
+    title: "BK Macro Composite",
+    seedStr: "MAIN|" + currentScenario() + "|" + currentAsset() + "|" + currentOverlay() + "|" + currentTheme(),
+    base: 100, drift: 0.006, vol: 0.68, shock: 1.9, meanRev: 0.0016, shockMode: "both", cycleAmp: 0.22, cyclePeriod: 260, jumpProb: 0.012, jumpScale: 0.85,
+    compares: buildComparesFor(currentAsset(), currentOverlay(), currentScenario())
   });
+
+  registerMeta(mainChart, {key:"MAIN", base:100, drift:0.006, vol:0.68, shock:1.9, meanRev:0.0016, unit:"", shockMode:"both", cycleAmp:0.22, cyclePeriod:260, jumpProb:0.012, jumpScale:0.85});
+
+  // Boot: main chart fully zoomed-out to horizon and overlays ON
+  try{ mainChart?.applyRange("10Y", true); mainChart?.render(); }catch(e){}
+
+  const priceVol = bindChart("priceVolumeChart", {
+    title: "Price · Volume micro-panel",
+    kind: "priceVolume",
+    seedStr: "PV|" + currentScenario() + "|" + currentAsset(),
+    base: 100, drift: 0.02, vol: 0.62, shock: -1.2, meanRev: 0.0012
+  });
+
+  registerMeta(priceVol, {key:"PV", base:100, drift:0.02, vol:0.62, shock:-1.2, meanRev:0.0012, unit:""});
+
+  const kmri = bindChart("kmriChart", { title:"KMRI", seedStr:"KMRI", base:0.55, drift:0.0002, vol:0.004, shock:-0.02, meanRev:0.01,
+    overlays:[
+      {y:0.45,label:"LOW",color:"rgba(248,113,113,.55)",dash:[4,4]},
+      {y:0.55,label:"MID",color:"rgba(255,159,26,.55)",dash:[4,4]},
+      {y:0.65,label:"HIGH",color:"rgba(56,189,248,.45)",dash:[4,4]},
+    ]
+  });
+
+  registerMeta(kmri, {key:"KMRI", base:0.55, drift:0.0002, vol:0.004, shock:-0.02, meanRev:0.01, unit:""});
+  const spread = bindChart("macroSpreadChart", { title:"Core vs headline vs income spread", seedStr:"SPREAD", base:0.50, drift:0.0001, vol:0.004, shock:0.02, meanRev:0.01 });
+
+  registerMeta(spread, {key:"SPREAD", base:0.5, drift:0.0001, vol:0.004, shock:0.02, meanRev:0.01, unit:""});
+  const policy = bindChart("policyMixChart", { title:"Policy mix & financial conditions", seedStr:"POLICY", base:0.50, drift:0.0001, vol:0.004, shock:0.02, meanRev:0.01 });
+
+  registerMeta(policy, {key:"POLICY", base:0.5, drift:0.0001, vol:0.004, shock:0.02, meanRev:0.01, unit:""});
+
+  const wsb = bindChart("wsbChart", { title:"ForumFlow-WSB strip", kind:"strip", seedStr:"WSB", base:0.02, drift:0.0, vol:0.02, shock:0.06, meanRev:0.06 });
+
+  registerMeta(wsb, {key:"WSB", base:0.02, drift:0.0, vol:0.02, shock:0.06, meanRev:0.06, unit:""});
+  const pcg = bindChart("pcgChart", { title:"Participation-Conviction Gauge", seedStr:"PCG", base:0.25, drift:0.0002, vol:0.01, shock:0.03, meanRev:0.03 });
+
+  registerMeta(pcg, {key:"PCG", base:0.25, drift:0.0002, vol:0.01, shock:0.03, meanRev:0.03, unit:""});
+  const snap = bindChart("sentimentChart", { title:"ForumFlow cross-asset snapshot", seedStr:"SNAP", base:0.0, drift:0.0, vol:0.02, shock:0.04, meanRev:0.08 });
+
+  registerMeta(snap, {key:"SNAP", base:0.0, drift:0.0, vol:0.02, shock:0.04, meanRev:0.08, unit:""});
+  const act = bindChart("sentActChart", { title:"ForumFlow activity & volume", seedStr:"ACT", base:0.10, drift:0.0, vol:0.015, shock:0.04, meanRev:0.08 });
+
+  registerMeta(act, {key:"ACT", base:0.1, drift:0.0, vol:0.015, shock:0.04, meanRev:0.08, unit:""});
+
+  const rsac = bindChart("rsacChart", { title:"RSAC stress channel", seedStr:"RSAC", base:0.45, drift:0.0001, vol:0.004, shock:0.03, meanRev:0.02 });
+
+  registerMeta(rsac, {key:"RSAC", base:0.45, drift:0.0001, vol:0.004, shock:0.03, meanRev:0.02, unit:""});
+  const housing = bindChart("housingChart", { title:"Housing & cost-of-living", seedStr:"HOUSE", base:0.55, drift:0.0001, vol:0.004, shock:0.03, meanRev:0.02 });
+
+  registerMeta(housing, {key:"HOUSE", base:0.55, drift:0.0001, vol:0.004, shock:0.03, meanRev:0.02, unit:""});
+  const labour = bindChart("labourChart", { title:"Labour & income dynamics", seedStr:"LAB", base:0.50, drift:0.0001, vol:0.004, shock:0.03, meanRev:0.02 });
+
+  registerMeta(labour, {key:"LAB", base:0.5, drift:0.0001, vol:0.004, shock:0.03, meanRev:0.02, unit:""});
+
+  // initial scenario/theme sync
+  refreshAllSeeds();
+
+  // ---------- range buttons (existing data-range="3M|6M|1Y|5Y") ----------
+  function setRangeAll(rangeKey){
+    // keep behaviour focused on main + related panels (most visible), but safe to apply to all
+    for(const ch of chartMap.values()){
+      ch.applyRange(rangeKey, false);
+    }
+  }
+  document.querySelectorAll("[data-range]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const r = btn.getAttribute("data-range");
+      setRangeAll(r);
+    });
+  });
+  // ---------- selectors update ALL charts (scenario + asset + overlay) ----------
+  function refreshAllSeeds(){
+    const s = currentScenario();
+    const a = currentAsset();
+    const o = currentOverlay();
+    const sp = scenarioParams(s);
+
+    // Scenario label (keeps your layout intact)
+    const lbl = $("scenarioStatusLabel");
+    if(lbl){
+      const map = {baseline:"Baseline", energy:"Energy transition stress", easing:"Policy easing bias", riskoff:"Risk-off phase · fragmentation", tech:"Tech upcycle · growth tilt"};
+      lbl.textContent = "Scenario: " + (map[s] || s);
+    }
+
+    for(const ch of chartMap.values()){
+      const meta = chartMeta.get(ch);
+      if(!meta) continue;
+
+      // Every chart is tied to the same lens so the entire dashboard pivots coherently
+      ch.seedStr = `${meta.key}|${s}|${a}|${o}`;
+
+      const drift = (meta.drift ?? ch.drift) * sp.driftMul;
+      const vol   = (meta.vol   ?? ch.vol)   * sp.volMul;
+      const shock = (meta.shock ?? ch.shock) * sp.shockMul;
+      const meanRev = (meta.meanRev ?? ch.meanRev) * sp.meanRevMul;
+
+      let base = meta.base ?? ch.base;
+      // subtle regime tilt for the primary “price” panels only
+      if((meta.key==="MAIN" || meta.key==="PV")){
+        if(s==="riskoff") base = base * 0.985;
+        if(s==="tech")   base = base * 1.012;
+        if(s==="energy") base = base * 0.995;
+        if(s==="easing") base = base * 1.005;
+      }
+
+      ch.points = makeSeries({seedStr: ch.seedStr, base, drift, vol, shockAt: (ch.shockAt ?? 0.72), shock, meanRev, shockMode: (ch.shockMode ?? "down"), cycleAmp: (ch.cycleAmp ?? 0), cyclePeriod: (ch.cyclePeriod ?? 180), jumpProb: (ch.jumpProb ?? 0), jumpScale: (ch.jumpScale ?? 1.0)});
+      ch.applyRange(ch.rangeKey, true);
+
+      if(ch === mainChart){
+        ch.title = a;
+        ch.replaceCompares(buildComparesFor(a, o, s));
+      }
+
+      ch.resize();
+      ch.render();
+    }
+
+    // status ribbon values (KMRI / TPVI / GDFI / RSAC)
+    const setTxt = (id, val)=>{
+      const el = $(id);
+      if(el && val!=null && Number.isFinite(val)) el.textContent = round3(val);
+    };
+    setTxt("statusKMRI", kmri?.points?.[kmri.points.length-1]?.v);
+    // prefer compare overlays from main chart for TPVI/GDFI if present
+    const tpviV = mainChart?.compareSeries?.get?.("TPVI")?.at?.(-1)?.v;
+    const gdfiV = mainChart?.compareSeries?.get?.("GDFI")?.at?.(-1)?.v;
+    setTxt("statusTPVI", tpviV ?? null);
+    setTxt("statusGDFI", gdfiV ?? null);
+
+    const theme = $("mainThemeLabel");
+    if(theme) theme.textContent = `KMRI · ${a}`;
+  }
+
+  $("scenarioSelect")?.addEventListener("change", refreshAllSeeds);
+  $("assetSelect")?.addEventListener("change", refreshAllSeeds);
+  $("overlaySelect")?.addEventListener("change", refreshAllSeeds);
+
+  // ---------- popout / fullscreen ----------
+  // existing button id in your page
+  $("popoutMainBtn")?.addEventListener("click", ()=>{
+    if(mainChart) enterFS(mainChart, `${currentAsset()} · ${currentOverlay()} · ${currentScenario()}`);
+  });
+
+
+  // Add unobtrusive per-chart fullscreen button (does not alter layout flow)
+  (function addMiniFSButtons(){
+    const css = document.createElement("style");
+    css.textContent = `
+      .bkMiniFsBtn{position:absolute; top:8px; right:8px; z-index:5;
+        font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+        color:#cfcfcf; padding:6px 8px; border:1px solid #1c2030; background:rgba(10,11,13,.65);
+        border-radius:8px; cursor:pointer; user-select:none; backdrop-filter: blur(6px);}
+      .bkMiniFsBtn:hover{background:rgba(10,11,13,.80);}
+    `;
+    document.head.appendChild(css);
+
+    document.querySelectorAll("canvas").forEach(c=>{
+      const wrap = c.parentElement;
+      if(!wrap) return;
+      wrap.style.position = wrap.style.position || "relative";
+      if(wrap.querySelector(".bkMiniFsBtn")) return;
+      const btn = document.createElement("div");
+      btn.className="bkMiniFsBtn";
+      btn.textContent="Fullscreen";
+      btn.title="Fullscreen (Alt+Click also works)";
+      btn.addEventListener("click",(e)=>{
+        e.stopPropagation();
+        for(const [id,ch] of chartMap.entries()){
+          if(ch.canvas===c){ enterFS(ch, ch.title); break; }
+        }
+      });
+      wrap.appendChild(btn);
+    });
+
+
+// Per-chart overlay controls (local to each chart window)
+(function addPerChartOverlayControls(){
+  const css = document.createElement("style");
+  css.textContent = `
+    .bkOvBtn{position:absolute; top:8px; right:90px; z-index:6;
+      font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+      color:#cfcfcf; padding:6px 8px; border:1px solid #1c2030; background:rgba(10,11,13,.65);
+      border-radius:8px; cursor:pointer; user-select:none; backdrop-filter: blur(6px);}
+    .bkOvBtn:hover{background:rgba(10,11,13,.80);}
+    .bkOvPanel{position:absolute; top:40px; right:8px; z-index:7; min-width:220px; max-width:260px;
+      border:1px solid rgba(148,163,184,.22); background:rgba(2,6,23,.96); border-radius:12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.55); padding:10px 10px 8px; display:none;}
+    .bkOvPanel.on{display:block;}
+    .bkOvHdr{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;}
+    .bkOvTitle{font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; color:#e5e7eb; letter-spacing:.06em;}
+    .bkOvClose{font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; color:#9ca3af; cursor:pointer;}
+    .bkOvClose:hover{color:#e5e7eb;}
+    .bkOvSec{margin-top:6px; padding-top:8px; border-top:1px solid rgba(148,163,184,.14);}
+    .bkOvLbl{color:#a7a7a7; font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px;}
+    .bkOvItem{display:flex; align-items:center; gap:8px; margin:6px 0;}
+    .bkOvItem input{accent-color:#ff9f1a;}
+    .bkOvItem span{color:#e5e7eb; font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;}
+    .bkOvHint{color:#7c7c7c; font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; margin-top:6px;}
+  `;
+  document.head.appendChild(css);
+
+  function chartForCanvas(c){
+    for(const ch of chartMap.values()){ if(ch && ch.canvas===c) return ch; }
+    return null;
+  }
+
+  function closeAll(){
+    document.querySelectorAll(".bkOvPanel.on").forEach(p=>p.classList.remove("on"));
+  }
+
+  document.addEventListener("mousedown",(e)=>{
+    const t = e.target;
+    if(t.closest && (t.closest(".bkOvPanel") || t.closest(".bkOvBtn"))) return;
+    closeAll();
+  });
+
+  document.querySelectorAll("canvas").forEach(c=>{
+    const wrap = c.parentElement;
+    if(!wrap) return;
+
+    const ch = chartForCanvas(c);
+    if(!ch) return;
+
+    wrap.style.position = wrap.style.position || "relative";
+    if(wrap.querySelector(".bkOvBtn")) return;
+
+    const btn = document.createElement("div");
+    btn.className="bkOvBtn";
+    btn.textContent="Overlays";
+    btn.title="Toggle overlays for this chart";
+
+    const panel = document.createElement("div");
+    panel.className="bkOvPanel";
+    panel.innerHTML = `
+      <div class="bkOvHdr">
+        <div class="bkOvTitle">CHART OVERLAYS</div>
+        <div class="bkOvClose">Close</div>
+      </div>
+      <div class="bkOvItem">
+        <input type="checkbox" class="bkOvThresh"/>
+        <span>Threshold / regime lines</span>
+      </div>
+      <div class="bkOvSec bkOvCmpSec">
+        <div class="bkOvLbl">Compare</div>
+        <div class="bkOvCmpList"></div>
+        <div class="bkOvHint">These toggles are per-chart and persist while the page is open.</div>
+      </div>
+    `;
+
+    const close = panel.querySelector(".bkOvClose");
+    close.addEventListener("click", ()=> panel.classList.remove("on"));
+
+    // Threshold overlays toggle
+    const threshCb = panel.querySelector(".bkOvThresh");
+    const hasThresh = Array.isArray(ch.overlays) && ch.overlays.length>0;
+    threshCb.checked = !!ch.overlaysEnabled;
+    threshCb.disabled = !hasThresh;
+    if(!hasThresh){
+      panel.querySelector(".bkOvItem span").textContent = "Threshold / regime lines (none)";
+    }
+    threshCb.addEventListener("change", ()=> ch.setOverlaysEnabled(threshCb.checked));
+
+    // Compare overlays list
+    const cmpSec = panel.querySelector(".bkOvCmpSec");
+    const cmpList = panel.querySelector(".bkOvCmpList");
+    if(Array.isArray(ch.compares) && ch.compares.length){
+      cmpList.innerHTML = ch.compares.map(c=>`
+        <label class="bkOvItem" title="${c.label || c.key}">
+          <input type="checkbox" data-k="${c.key}">
+          <span>${c.label || c.key}</span>
+        </label>
+      `).join("");
+
+      cmpList.querySelectorAll("input[type=checkbox]").forEach(cb=>{
+        const k = cb.getAttribute("data-k");
+        cb.checked = ch.compareEnabled.has(k);
+        cb.addEventListener("change", ()=> ch.setCompareEnabled(k, cb.checked));
+      });
+    }else{
+      cmpSec.querySelector(".bkOvLbl").textContent = "Compare";
+      cmpList.innerHTML = `<div class="bkOvHint">No compare overlays registered for this chart.</div>`;
+    }
+
+    btn.addEventListener("click",(e)=>{
+      e.stopPropagation();
+      // refresh checkbox states (in case they were toggled elsewhere, e.g. fullscreen)
+      threshCb.checked = !!ch.overlaysEnabled;
+      if(Array.isArray(ch.compares) && ch.compares.length){
+        cmpList.querySelectorAll("input[type=checkbox]").forEach(cb=>{
+          const k = cb.getAttribute("data-k");
+          cb.checked = ch.compareEnabled.has(k);
+        });
+      }
+      const isOn = panel.classList.contains("on");
+      closeAll();
+      if(!isOn) panel.classList.add("on");
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+  });
+})();
+
+  })();
+
+  // Alt+Click any canvas => fullscreen
+  document.querySelectorAll("canvas").forEach(c=>{
+    c.addEventListener("click",(e)=>{
+      if(!e.altKey) return;
+      for(const [id,ch] of chartMap.entries()){
+        if(ch.canvas===c){ enterFS(ch, ch.title); break; }
+      }
+    });
+  });
+
+  window.addEventListener("keydown",(e)=>{
+    if(e.key==="Escape") exitFS();
+  });
+
+  // ---------- realtime tick scheduler ----------
+// Bloomberg-style: decouple tick generation from paint.
+// Ticks: high-cadence “tape” updates. Paint: requestAnimationFrame (display refresh).
+const BK_TICK_MS = 40; // ~25Hz tick tape (tune 30–120)
+let bkLastTick = performance.now();
+
+function bkTickAll(){
+  for(const ch of chartMap.values()){
+    if(ch && typeof ch.tickUpdate === "function") ch.tickUpdate();
+  }
+}
+
+// Primary: requestAnimationFrame catch-up loop (smooth, drift-free)
+function bkTickLoop(ts){
+  // If the tab is backgrounded, avoid accumulating backlog.
+  if(document.hidden){
+    bkLastTick = ts;
+    requestAnimationFrame(bkTickLoop);
+    return;
+  }
+
+  // Catch-up loop: never “miss” ticks if a frame is late.
+  // This keeps the tape feeling continuous and deterministic.
+  let n=0;
+  while((ts - bkLastTick) >= BK_TICK_MS && n < 6){
+    bkLastTick += BK_TICK_MS;
+    bkTickAll();
+    n++;
+  }
+  requestAnimationFrame(bkTickLoop);
+}
+requestAnimationFrame(bkTickLoop);
+
+// Fallback timers (guarantee autonomous streaming even if RAF is throttled)
+// 1) Tick generation at BK_TICK_MS cadence
+setInterval(()=>{
+  if(document.hidden) return;
+  try{ bkTickAll(); }catch(e){}
+}, BK_TICK_MS);
+
+// 2) Low-flicker paint heartbeat (~30fps max) so charts never depend on pointer events
+setInterval(()=>{
+  if(document.hidden) return;
+  const now = performance.now();
+  for(const ch of chartMap.values()){
+    if(!ch) continue;
+    try{
+      if(typeof ch.advance === "function") ch.advance(now);
+      ch.render();
+    }catch(e){}
+  }
+}, 33);
+
+// ---------- continuous render loop (Bloomberg-feel: smooth tape, low flicker) ----------
+  (function animate(ts){
+    const now = ts || performance.now();
+    for(const ch of chartMap.values()){
+      if(!ch) continue;
+      // advance continuous time-scroll; repaint if anything is moving/decaying
+      let needs = false;
+      if(typeof ch.advance === "function") needs = !!ch.advance(now);
+      // Always repaint while: tail tweening, tick flash pulse decaying, or continuous scroll fraction non-zero
+      if(!needs && ch._isTweening && ch._isTweening()) needs = true;
+      if(!needs && ch._tickFlashTs && (now - ch._tickFlashTs) < 260) needs = true;
+      if(!needs && ch.stream && ch.stream.xOffset && ch.stream.xOffset > 0.0001) needs = true;
+      if(needs){ ch.render(); }
+    }
+    requestAnimationFrame(animate);
+  })(performance.now());
+
+
+
+  // ---------- resize ----------
+  window.addEventListener("resize", ()=>{
+    for(const ch of chartMap.values()) ch.resize();
+  });
+
+})();
+
+
 </script>
 </body>
 </html>

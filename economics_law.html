@@ -1,22 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Benjamin Koch · Economics & Law Foresight</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Online indicators and foresight themes by Dr. Benjamin Koch, connecting economics, law and systemic resilience. No individual advice.">
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-
-  <style>
+<meta charset="utf-8"/>
+<title>Benjamin Koch · Economics &amp; Law Foresight</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Online indicators and foresight themes by Dr. Benjamin Koch, connecting economics, law and systemic resilience. No individual advice." name="description"/>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<style>
     :root {
       --bg-dark: #020617;
       --bg-soft: #020617;
@@ -478,623 +478,620 @@
         font-size: .55rem;
       }
     }
-  </style>
+  
+
+/* Fullscreen support */
+#chartCard:fullscreen{
+  width:100vw;
+  height:100vh;
+  margin:0;
+  border-radius:0;
+}
+#chartCard:fullscreen .terminal-chart-canvas{
+  height: calc(100vh - 210px);
+}
+#chartCard:fullscreen .card-body{
+  height: 100%;
+}
+#chartCard:fullscreen canvas{
+  width:100% !important;
+  height:100% !important;
+}
+
+
+    /* Fullscreen: make the chart truly edge-to-edge and responsive */
+    #chartCard:fullscreen{
+      width:100vw; height:100vh;
+      margin:0; padding:0;
+      border-radius:0;
+      background: #050b15;
+      overflow:hidden;
+    }
+    #chartCard:fullscreen .card-body{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      padding:14px 16px 16px;
+    }
+    #chartCard:fullscreen .terminal-chart-canvas{
+      flex:1 1 auto;
+      min-height:0;
+      height:auto !important;
+    }
+    #chartCard:fullscreen .terminal-chart-canvas canvas{
+      width:100% !important;
+      height:100% !important;
+      display:block;
+    }
+    #chartCard:fullscreen .terminal-status-bar{
+      margin-top:10px;
+    }
+    @media (prefers-reduced-motion: reduce){
+      #chartCard:fullscreen { scroll-behavior:auto; }
+    }
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#top">
-      Benjamin Koch · Economics & Law Foresight
+<div class="container">
+<a class="navbar-brand" href="#top">
+      Benjamin Koch · Economics &amp; Law Foresight
     </a>
-    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse order-lg-1" id="navMain">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="#about">Profile</a></li>
-        <li class="nav-item"><a class="nav-link" href="#indicators">Indicators</a></li>
-        <li class="nav-item"><a class="nav-link" href="#method">Method</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://benjaminkoch.info/">Main site</a></li>
-      </ul>
-    </div>
-  </div>
+<button class="navbar-toggler ms-2" data-bs-target="#navMain" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse order-lg-1" id="navMain">
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+<li class="nav-item"><a class="nav-link" href="#about">Profile</a></li>
+<li class="nav-item"><a class="nav-link" href="#indicators">Indicators</a></li>
+<li class="nav-item"><a class="nav-link" href="#method">Method</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="https://benjaminkoch.info/">Main site</a></li>
+</ul>
+</div>
+</div>
 </nav>
-
 <main id="top">
-  <section class="hero">
-    <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-          <div class="hero-badge px-3 py-2 mb-3 d-inline-flex align-items-center gap-2">
-            <span>Economics · Law · Systemic Foresight</span>
-            <span style="width:4px;height:4px;border-radius:999px;background:#22c55e;"></span>
-          </div>
-          <h1 class="mb-3">
-            <span>Proprietary indicators<br>for a complex world</span>
-          </h1>
-          <p class="hero-sub mb-3">
+<section class="hero">
+<div class="container">
+<div class="row align-items-center g-4">
+<div class="col-lg-7">
+<div class="hero-badge px-3 py-2 mb-3 d-inline-flex align-items-center gap-2">
+<span>Economics · Law · Systemic Foresight</span>
+<span style="width:4px;height:4px;border-radius:999px;background:#22c55e;"></span>
+</div>
+<h1 class="mb-3">
+<span>Proprietary indicators<br/>for a complex world</span>
+</h1>
+<p class="hero-sub mb-3">
             This page presents a selection of proprietary macroeconomic and
             legal-regulatory indicators, conceptual models and long-term trend work.
             No individual advice, no investment recommendations – but structured
             orientation in an evolving system.
           </p>
-          <p class="mb-4">
+<p class="mb-4">
             Focus: Short-, medium- and long-term developments at the intersection of
             economics, law and institutions – with a particular emphasis on Europe
             and transatlantic dynamics.
           </p>
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <div class="pill">
-              <i class="bi bi-diagram-3"></i>
-              <span>Cross-domain indicators (KMRI, TPVI, GDFI)</span>
-            </div>
-            <div class="pill">
-              <i class="bi bi-graph-up-arrow"></i>
-              <span>Short, medium &amp; long horizons</span>
-            </div>
-            <div class="pill">
-              <i class="bi bi-globe2"></i>
-              <span>Macro, legal, institutional context</span>
-            </div>
-          </div>
-          <div class="d-flex flex-wrap gap-2">
-            <a href="#indicators" class="btn btn-light">
-              <span>Explore indicators</span>
-            </a>
-            <a href="#contact" class="btn btn-outline-light">
-              <span>Contact for publications</span>
-            </a>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="glass-card mt-3 mt-lg-0">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start mb-2">
-                <div>
-                  <div class="indicator-tag mb-1">Composite indicators</div>
-                  <div class="indicator-code">KMRI · TPVI · GDFI</div>
-                </div>
-                <span class="chip">
-                  <i class="bi bi-shield-lock"></i>
-                  <span>Proprietary construction</span>
-                </span>
-              </div>
-              <p class="small text-secondary mb-2">
+<div class="d-flex flex-wrap gap-2 mb-4">
+<div class="pill">
+<i class="bi bi-diagram-3"></i>
+<span>Cross-domain indicators (KMRI, TPVI, GDFI)</span>
+</div>
+<div class="pill">
+<i class="bi bi-graph-up-arrow"></i>
+<span>Short, medium &amp; long horizons</span>
+</div>
+<div class="pill">
+<i class="bi bi-globe2"></i>
+<span>Macro, legal, institutional context</span>
+</div>
+</div>
+<div class="d-flex flex-wrap gap-2">
+<a class="btn btn-light" href="#indicators">
+<span>Explore indicators</span>
+</a>
+<a class="btn btn-outline-light" href="#contact">
+<span>Contact for publications</span>
+</a>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="glass-card mt-3 mt-lg-0">
+<div class="card-body">
+<div class="d-flex justify-content-between align-items-start mb-2">
+<div>
+<div class="indicator-tag mb-1">Composite indicators</div>
+<div class="indicator-code">KMRI · TPVI · GDFI</div>
+</div>
+<span class="chip">
+<i class="bi bi-shield-lock"></i>
+<span>Proprietary construction</span>
+</span>
+</div>
+<p class="small text-secondary mb-2">
                 KMRI, TPVI and GDFI are synthetic indicators developed to capture
                 macro-financial resilience, transmission channels and geo-economic
                 fragmentation beyond single variables.
               </p>
-              <ul class="small mb-0">
-                <li>KMRI – multi-dimensional resilience indicator.</li>
-                <li>TPVI – term premium &amp; volatility integration.</li>
-                <li>GDFI – geo-financial fragmentation index.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="section">
-    <div class="container">
-      <div class="row g-4 align-items-start">
-        <div class="col-lg-6">
-          <div class="section-label">Profile</div>
-          <h2 class="section-title">Working at the economics–law interface</h2>
-          <p>
+<ul class="small mb-0">
+<li>KMRI – multi-dimensional resilience indicator.</li>
+<li>TPVI – term premium &amp; volatility integration.</li>
+<li>GDFI – geo-financial fragmentation index.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="about">
+<div class="container">
+<div class="row g-4 align-items-start">
+<div class="col-lg-6">
+<div class="section-label">Profile</div>
+<h2 class="section-title">Working at the economics–law interface</h2>
+<p>
             Markets never operate in a vacuum: they are embedded in legal orders,
             institutions and political decision-making. The indicators and models presented
             here aim to make that embedding more measurable – without claiming to remove
             uncertainty.
           </p>
-          <p>
+<p>
             The focus is not on single prices or headlines, but on structural tensions:
             resilience, adaptability, path dependence, regulatory inertia and their
             interaction with economic cycles.
           </p>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <div class="card-soft h-100">
-                <div class="card-body">
-                  <div class="chip mb-2">
-                    <i class="bi bi-layers"></i>
-                    <span>Cross-linking</span>
-                  </div>
-                  <ul class="small mb-0">
-                    <li>Economics (macro &amp; finance).</li>
-                    <li>Law (regulatory &amp; institutional).</li>
-                    <li>Political economy &amp; incentives.</li>
-                    <li>Complex systems &amp; resilience.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-6">
-              <div class="card-soft h-100">
-                <div class="card-body">
-                  <div class="chip mb-2">
-                    <i class="bi bi-activity"></i>
-                    <span>Use cases</span>
-                  </div>
-                  <ul class="small mb-0">
-                    <li>Strategic foresight &amp; scenario work.</li>
-                    <li>Risk mapping and impact chains.</li>
-                    <li>Policy debates &amp; institutional design.</li>
-                    <li>Academic &amp; think tank discussions.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12">
-              <div class="card-soft">
-                <div class="card-body">
-                  <div class="chip mb-2">
-                    <i class="bi bi-exclamation-circle"></i>
-                    <span>Important note</span>
-                  </div>
-                  <p class="small mb-0">
+</div>
+<div class="col-lg-6">
+<div class="row g-3">
+<div class="col-sm-6">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-layers"></i>
+<span>Cross-linking</span>
+</div>
+<ul class="small mb-0">
+<li>Economics (macro &amp; finance).</li>
+<li>Law (regulatory &amp; institutional).</li>
+<li>Political economy &amp; incentives.</li>
+<li>Complex systems &amp; resilience.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-activity"></i>
+<span>Use cases</span>
+</div>
+<ul class="small mb-0">
+<li>Strategic foresight &amp; scenario work.</li>
+<li>Risk mapping and impact chains.</li>
+<li>Policy debates &amp; institutional design.</li>
+<li>Academic &amp; think tank discussions.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-12">
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-exclamation-circle"></i>
+<span>Important note</span>
+</div>
+<p class="small mb-0">
                     This page does not provide individual investment, legal or policy advice.
                     The indicators are conceptual tools for discussion, not signals for
                     specific trades or legal positions.
                   </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="indicators" class="section">
-    <div class="container">
-      <div class="section-label">Indicators &amp; themes</div>
-
-      <!-- Core indicator cards -->
-      <div class="row g-3 mb-4">
-        <div class="col-md-4">
-          <div class="card-soft h-100">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-activity"></i>
-                <span>KMRI</span>
-              </div>
-              <h3 class="h6 mb-1">Koch Macro Resilience Index</h3>
-              <p class="small mb-0">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="indicators">
+<div class="container">
+<div class="section-label">Indicators &amp; themes</div>
+<!-- Core indicator cards -->
+<div class="row g-3 mb-4">
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-activity"></i>
+<span>KMRI</span>
+</div>
+<h3 class="h6 mb-1">Koch Macro Resilience Index</h3>
+<p class="small mb-0">
                 Aggregated metric for macroeconomic and institutional shock absorption:
                 fiscal space, institutional capacity to act, social tension levels.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card-soft h-100">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-graph-up"></i>
-                <span>TPVI</span>
-              </div>
-              <h3 class="h6 mb-1">Transatlantic Policy Volatility Indicator</h3>
-              <p class="small mb-0">
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-graph-up"></i>
+<span>TPVI</span>
+</div>
+<h3 class="h6 mb-1">Transatlantic Policy Volatility Indicator</h3>
+<p class="small mb-0">
                 Measure of frequency, direction and communication quality of economically
                 and legally relevant policy signals across the Atlantic – including
                 reversals and signal clarity.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card-soft h-100">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-diagram-3"></i>
-                <span>RSAC</span>
-              </div>
-              <h3 class="h6 mb-1">Regulatory Shock Absorption Curve</h3>
-              <p class="small mb-0">
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-diagram-3"></i>
+<span>RSAC</span>
+</div>
+<h3 class="h6 mb-1">Regulatory Shock Absorption Curve</h3>
+<p class="small mb-0">
                 Functional curve showing how fast and at what intensity regulatory systems
                 internalise, dampen or transmit external shocks to other domains.
               </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Portfolio formats -->
-      <div class="mb-3">
-        <div class="section-label">Portfolio</div>
-        <h3 class="h5 mb-1">Formats: outlook, analysis, impact</h3>
-        <p class="small text-secondary mb-3">
+</div>
+</div>
+</div>
+</div>
+<!-- Portfolio formats -->
+<div class="mb-3">
+<div class="section-label">Portfolio</div>
+<h3 class="h5 mb-1">Formats: outlook, analysis, impact</h3>
+<p class="small text-secondary mb-3">
           The work spans several time horizons and publication formats. It aims to make
           patterns visible rather than provide day-to-day market calls.
         </p>
-
-        <div class="row g-3 mb-2">
-          <div class="col-md-4">
-            <div class="card-soft h-100">
-              <div class="card-body">
-                <div class="chip mb-2">
-                  <i class="bi bi-lightning-charge"></i>
-                  <span>Short term</span>
-                </div>
-                <h4 class="h6 mb-1">Signals &amp; notes</h4>
-                <ul class="small mb-2">
-                  <li>Short notes on regulatory or policy impulses.</li>
-                  <li>Quick framing of new data points.</li>
-                  <li>Signalling structural breaks vs. noise.</li>
-                </ul>
-                <p class="small text-secondary mb-0">
+<div class="row g-3 mb-2">
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-lightning-charge"></i>
+<span>Short term</span>
+</div>
+<h4 class="h6 mb-1">Signals &amp; notes</h4>
+<ul class="small mb-2">
+<li>Short notes on regulatory or policy impulses.</li>
+<li>Quick framing of new data points.</li>
+<li>Signalling structural breaks vs. noise.</li>
+</ul>
+<p class="small text-secondary mb-0">
                   Not for intraday trading, but as contextual signal.
                 </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card-soft h-100">
-              <div class="card-body">
-                <div class="chip mb-2">
-                  <i class="bi bi-hourglass-split"></i>
-                  <span>Medium term</span>
-                </div>
-                <h4 class="h6 mb-1">Thematic reports &amp; dossiers</h4>
-                <ul class="small mb-2">
-                  <li>In-depth analysis of sectors, policy fields, regions.</li>
-                  <li>Linking data, legal texts &amp; institutional dynamics.</li>
-                  <li>Scenarios over 12–36 months.</li>
-                </ul>
-                <p class="small text-secondary mb-0">
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-hourglass-split"></i>
+<span>Medium term</span>
+</div>
+<h4 class="h6 mb-1">Thematic reports &amp; dossiers</h4>
+<ul class="small mb-2">
+<li>In-depth analysis of sectors, policy fields, regions.</li>
+<li>Linking data, legal texts &amp; institutional dynamics.</li>
+<li>Scenarios over 12–36 months.</li>
+</ul>
+<p class="small text-secondary mb-0">
                   Basis for strategic discussions, not for single-stock picks.
                 </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card-soft h-100">
-              <div class="card-body">
-                <div class="chip mb-2">
-                  <i class="bi bi-calendar3"></i>
-                  <span>Long term</span>
-                </div>
-                <h4 class="h6 mb-1">Frameworks &amp; narrative lines</h4>
-                <ul class="small mb-2">
-                  <li>Conceptual models for path dependence.</li>
-                  <li>Long-run analysis of regulatory regimes.</li>
-                  <li>Narrative lines for decade-long horizons.</li>
-                </ul>
-                <p class="small text-secondary mb-0">
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-calendar3"></i>
+<span>Long term</span>
+</div>
+<h4 class="h6 mb-1">Frameworks &amp; narrative lines</h4>
+<ul class="small mb-2">
+<li>Conceptual models for path dependence.</li>
+<li>Long-run analysis of regulatory regimes.</li>
+<li>Narrative lines for decade-long horizons.</li>
+</ul>
+<p class="small text-secondary mb-0">
                   Designed for institutions, foundations and long-term oriented actors.
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p class="small text-secondary mb-0">
+</div>
+</div>
+</div>
+</div>
+<p class="small text-secondary mb-0">
           Note: This overview describes formats and working logic. It is explicitly not
           an offer to conclude advisory contracts with private individuals.
         </p>
-      </div>
-
-      <!-- Chart + theme explanation -->
-      <div class="row g-4 mt-4">
-        <div class="col-lg-8">
-          <div class="card-soft h-100">
-            <div class="card-body">
-              <div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-md-center mb-3">
-                <div class="flex-grow-1">
-                  <label class="form-label small mb-1">Theme</label>
-                  <select id="themeSelectEN" class="form-select form-select-sm">
-                    <option value="eu_telecom_resilience">EU telecom &amp; infrastructure resilience</option>
-                    <option value="energy_price_shocks">Energy price shocks &amp; regulation</option>
-                    <option value="sovereign_debt_structure">Sovereign debt structure</option>
-                    <option value="banking_union_stress">Banking union &amp; stress transmission</option>
-                    <option value="housing_affordability">Housing market &amp; affordability</option>
-                    <option value="labour_market_flex_security">Labour market: flex &amp; security</option>
-                    <option value="digital_platform_regulation">Digital platform regulation</option>
-                    <option value="climate_policy_investment">Climate policy &amp; investment paths</option>
-                    <option value="health_system_resilience">Health system resilience</option>
-                    <option value="supply_chain_fragility">Supply chain fragility</option>
-                    <option value="demographic_transition">Demographic transition</option>
-                    <option value="fiscal_monetary_interaction">Fiscal–monetary interaction</option>
-                    <option value="macroprudential_cycle">Macroprudential cycle</option>
-                    <option value="capital_flow_regime">Capital flow regime</option>
-                    <option value="euro_area_fragmentation">Euro area financial fragmentation</option>
-                    <option value="transatlantic_policy_divergence">Transatlantic policy divergence</option>
-                    <option value="geo_financial_fragmentation">Geo-financial fragmentation</option>
-                    <option value="agri_input_price_stability">Agricultural input price stability</option>
-                    <option value="global_commodity_cost_cycle">Global commodity cost cycle</option>
-                    <option value="education_cost_burden">Education cost burden &amp; accessibility</option>
-                  </select>
-                </div>
-
-                <div class="flex-shrink-0">
-                  <label class="form-label small mb-1">Horizon</label>
-                  <select id="horizonSelect" class="form-select form-select-sm">
-                    <option value="short">Short</option>
-                    <option value="medium">Medium</option>
-                    <option value="long">Long</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                  <div>
-                    <span class="indicator-tag">Normalised indicator level</span>
-                  </div>
-                  <span class="chip">
-                    <i class="bi bi-graph-up"></i>
-                    <span>0 – 1 scale</span>
-                  </span>
-                </div>
-
-                <!-- Bloomberg-style micro terminal window -->
-                <div class="terminal-chart-shell">
-                  <div class="terminal-window-top">
-                    <span class="terminal-window-title" id="windowTitle">
-                      KMRI · EU telecom & infrastructure resilience
+</div>
+<!-- Chart + theme explanation -->
+<div class="row g-4 mt-4">
+<div class="col-lg-8">
+<div class="card-soft h-100" id="chartCard">
+<div class="card-body">
+<div class="d-flex flex-column flex-md-row gap-3 justify-content-between align-items-md-center mb-3">
+<div class="flex-grow-1">
+<label class="form-label small mb-1">Theme</label>
+<select class="form-select form-select-sm" id="themeSelectEN">
+<option value="eu_telecom_resilience">EU telecom &amp; infrastructure resilience</option>
+<option value="energy_price_shocks">Energy price shocks &amp; regulation</option>
+<option value="sovereign_debt_structure">Sovereign debt structure</option>
+<option value="banking_union_stress">Banking union &amp; stress transmission</option>
+<option value="housing_affordability">Housing market &amp; affordability</option>
+<option value="labour_market_flex_security">Labour market: flex &amp; security</option>
+<option value="digital_platform_regulation">Digital platform regulation</option>
+<option value="climate_policy_investment">Climate policy &amp; investment paths</option>
+<option value="health_system_resilience">Health system resilience</option>
+<option value="supply_chain_fragility">Supply chain fragility</option>
+<option value="demographic_transition">Demographic transition</option>
+<option value="fiscal_monetary_interaction">Fiscal–monetary interaction</option>
+<option value="macroprudential_cycle">Macroprudential cycle</option>
+<option value="capital_flow_regime">Capital flow regime</option>
+<option value="euro_area_fragmentation">Euro area financial fragmentation</option>
+<option value="transatlantic_policy_divergence">Transatlantic policy divergence</option>
+<option value="geo_financial_fragmentation">Geo-financial fragmentation</option>
+<option value="agri_input_price_stability">Agricultural input price stability</option>
+<option value="global_commodity_cost_cycle">Global commodity cost cycle</option>
+<option value="education_cost_burden">Education cost burden &amp; accessibility</option>
+</select>
+</div>
+<div class="flex-shrink-0">
+<label class="form-label small mb-1">Horizon</label>
+<select class="form-select form-select-sm" id="horizonSelect">
+<option value="short">Short</option>
+<option value="medium">Medium</option>
+<option value="long">Long</option>
+</select>
+</div>
+</div>
+<div class="mb-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<div>
+<span class="indicator-tag">Normalised indicator level</span>
+</div>
+<span class="chip">
+<i class="bi bi-graph-up"></i>
+<span>0 – 1 scale</span>
+</span>
+</div>
+<!-- Bloomberg-style micro terminal window -->
+<div class="terminal-chart-shell">
+<div class="terminal-window-top">
+<span class="terminal-window-title" id="windowTitle">
+                      KMRI · EU telecom &amp; infrastructure resilience
                     </span>
-                    <span class="terminal-window-meta" id="windowMeta">
+<span class="terminal-window-meta" id="windowMeta">
                       Short · Normalised 0–1
                     </span>
-                  </div>
-                  <div class="terminal-fkeys-row">
-                    <span class="fkey">F1</span>
-                    <span class="fkey">F2</span>
-                    <span class="fkey">F3</span>
-                    <span class="fkey">F4</span>
-                    <span class="fkey">F5</span>
-                    <span class="fkey">F6</span>
-                    <span class="fkey">F7</span>
-                    <span class="fkey">F8</span>
-                  </div>
-                  <div class="terminal-window-toolbar">
-                    <span class="toolbar-label">Range</span>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="1D">1D</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="1W">1W</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="1M">1M</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="3M">3M</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="6M">6M</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="1Y">1Y</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="5Y">5Y</button>
-                    <button class="toolbar-btn toolbar-btn-range" data-range="10Y">10Y</button>
-                  </div>
-                  <div class="terminal-window-actions">
-                    <div class="actions-left">
-                      <button class="action-btn">Track</button>
-                      <button class="action-btn">Annotate</button>
-                      <button class="action-btn">News</button>
-                      <button class="action-btn">Zoom</button>
-                    </div>
-                    <div class="actions-right">
-                      <span class="action-label">Security/Study</span>
-                      <button class="action-icon">
-                        <i class="bi bi-gear-fill"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="terminal-window-body">
-                    <div class="terminal-legend-box">
-                      <div class="terminal-legend-title">Normalised index</div>
-                      <div class="legend-row">
-                        <div class="legend-left">
-                          <span class="legend-color"></span>
-                          <span class="legend-label" id="legendLabel">KMRI Theme</span>
-                        </div>
-                        <span class="legend-value" id="legendLastValue">0.00</span>
-                      </div>
-                    </div>
-                    <div class="terminal-chart-canvas">
-                      <canvas id="chartMain"></canvas>
-                    </div>
-                  </div>
-                  <div class="terminal-status-bar">
-                    <div class="small d-flex align-items-center flex-wrap gap-2">
-                      <span class="status-dot"></span>
-                      <span class="label">Theme</span>
-                      <span class="value" id="statusThemeCode">KMRI</span>
-                      <span class="label ms-2">Horizon</span>
-                      <span class="value" id="statusHorizon">Short</span>
-                    </div>
-                    <div class="small text-end">
-                      <span class="label me-1">Last update</span>
-                      <span class="value" id="statusLastUpdate"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <p class="small text-secondary mb-0">
+</div>
+<div class="terminal-fkeys-row">
+<span class="fkey">F1</span>
+<span class="fkey">F2</span>
+<span class="fkey">F3</span>
+<span class="fkey">F4</span>
+<span class="fkey">F5</span>
+<span class="fkey">F6</span>
+<span class="fkey">F7</span>
+<span class="fkey">F8</span>
+</div>
+<div class="terminal-window-toolbar">
+<span class="toolbar-label">Range</span>
+<button class="toolbar-btn toolbar-btn-range" data-range="1D">1D</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="1W">1W</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="1M">1M</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="3M">3M</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="6M">6M</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="1Y">1Y</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="5Y">5Y</button>
+<button class="toolbar-btn toolbar-btn-range" data-range="10Y">10Y</button>
+<button class="toolbar-btn" id="fullscreenBtn" title="Fullscreen" type="button"><i class="bi bi-arrows-fullscreen"></i></button></div>
+<div class="terminal-window-actions">
+<div class="actions-left">
+<button class="action-btn">Track</button>
+<button class="action-btn">Annotate</button>
+<button class="action-btn">News</button>
+<button class="action-btn">Zoom</button>
+</div>
+<div class="actions-right">
+<span class="action-label">Security/Study</span>
+<button class="action-icon">
+<i class="bi bi-gear-fill"></i>
+</button>
+</div>
+</div>
+<div class="terminal-window-body">
+<div class="terminal-legend-box">
+<div class="terminal-legend-title">Normalised index</div>
+<div class="legend-row">
+<div class="legend-left">
+<span class="legend-color"></span>
+<span class="legend-label" id="legendLabel">KMRI Theme</span>
+</div>
+<span class="legend-value" id="legendLastValue">0.00</span>
+</div>
+</div>
+<div class="terminal-chart-canvas">
+<canvas id="chartMain"></canvas>
+</div>
+</div>
+<div class="terminal-status-bar">
+<div class="small d-flex align-items-center flex-wrap gap-2">
+<span class="status-dot"></span>
+<span class="label">Theme</span>
+<span class="value" id="statusThemeCode">KMRI</span>
+<span class="label ms-2">Horizon</span>
+<span class="value" id="statusHorizon">Short</span>
+</div>
+<div class="small text-end">
+<span class="label me-1">Last update</span>
+<span class="value" id="statusLastUpdate"></span>
+</div>
+</div>
+</div>
+</div>
+<p class="small text-secondary mb-0">
                 The chart shows a stylised, normalised time series for the selected theme.
                 It is not a forecast, but a way of visualising structural stress, resilience
                 or fragmentation levels over different horizons.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="card-soft h-100">
-            <div class="card-body">
-              <div class="mb-2 d-flex justify-content-between align-items-center">
-                <span class="indicator-tag">Current selection</span>
-                <span class="chip">
-                  <i class="bi bi-compass"></i>
-                  <span>Thematic lens</span>
-                </span>
-              </div>
-              <h3 class="h6 mb-1" id="indicatorTitle">
+</div>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="mb-2 d-flex justify-content-between align-items-center">
+<span class="indicator-tag">Current selection</span>
+<span class="chip">
+<i class="bi bi-compass"></i>
+<span>Thematic lens</span>
+</span>
+</div>
+<h3 class="h6 mb-1" id="indicatorTitle">
                 KMRI – EU telecom &amp; infrastructure resilience
               </h3>
-              <p class="small mb-2" id="indicatorSummary"></p>
-              <ul class="small mb-0" id="indicatorBullets"></ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="method" class="section">
-    <div class="container">
-      <div class="section-label">Method &amp; construction</div>
-      <div class="row g-4">
-        <div class="col-lg-7">
-          <div class="card-soft mb-3">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-diagram-3"></i>
-                <span>Indicator construction</span>
-              </div>
-              <ul class="small mb-0">
-                <li>Combines observable data with structural assumptions and scenario logic.</li>
-                <li>Uses normalisation and smoothing to avoid overreaction to single data points.</li>
-                <li>Incorporates legal and institutional constraints explicitly.</li>
-                <li>Designed to support structured discussion, not mechanical decision rules.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card-soft">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-shield-check"></i>
-                <span>What these indicators are not</span>
-              </div>
-              <ul class="small mb-0">
-                <li>Not trading signals or investment recommendations.</li>
-                <li>Not a substitute for due diligence or legal analysis.</li>
-                <li>Not calibrated to any single institution’s balance sheet or mandate.</li>
-                <li>Not designed for automated decision-making.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="card-soft h-100">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-lightbulb"></i>
-                <span>Possible applications</span>
-              </div>
-              <ul class="small mb-0">
-                <li>Foresight work in institutions and think tanks.</li>
-                <li>Scenario construction and narrative stress tests.</li>
-                <li>Connecting legal reforms with macro-financial outcomes.</li>
-                <li>Communicating complex dynamics to non-technical audiences.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="section-label">Contact</div>
-      <div class="row g-4">
-        <div class="col-lg-7">
-          <h2 class="section-title">Contact for publications &amp; cooperation</h2>
-          <p>
+<p class="small mb-2" id="indicatorSummary"></p>
+<ul class="small mb-0" id="indicatorBullets"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="method">
+<div class="container">
+<div class="section-label">Method &amp; construction</div>
+<div class="row g-4">
+<div class="col-lg-7">
+<div class="card-soft mb-3">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-diagram-3"></i>
+<span>Indicator construction</span>
+</div>
+<ul class="small mb-0">
+<li>Combines observable data with structural assumptions and scenario logic.</li>
+<li>Uses normalisation and smoothing to avoid overreaction to single data points.</li>
+<li>Incorporates legal and institutional constraints explicitly.</li>
+<li>Designed to support structured discussion, not mechanical decision rules.</li>
+</ul>
+</div>
+</div>
+<div class="card-soft">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-shield-check"></i>
+<span>What these indicators are not</span>
+</div>
+<ul class="small mb-0">
+<li>Not trading signals or investment recommendations.</li>
+<li>Not a substitute for due diligence or legal analysis.</li>
+<li>Not calibrated to any single institution’s balance sheet or mandate.</li>
+<li>Not designed for automated decision-making.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-lg-5">
+<div class="card-soft h-100">
+<div class="card-body">
+<div class="chip mb-2">
+<i class="bi bi-lightbulb"></i>
+<span>Possible applications</span>
+</div>
+<ul class="small mb-0">
+<li>Foresight work in institutions and think tanks.</li>
+<li>Scenario construction and narrative stress tests.</li>
+<li>Connecting legal reforms with macro-financial outcomes.</li>
+<li>Communicating complex dynamics to non-technical audiences.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="contact">
+<div class="container">
+<div class="section-label">Contact</div>
+<div class="row g-4">
+<div class="col-lg-7">
+<h2 class="section-title">Contact for publications &amp; cooperation</h2>
+<p>
             For enquiries regarding publications, talks, discussion formats, background
             conversations or cooperation in the field of economics &amp; law, please simply
             send an e-mail to:
-            <br>
-            <strong><a href="mailto:email@benjaminkoch.info">email@benjaminkoch.info</a></strong>
-          </p>
-          <p class="small mb-1">
+            <br/>
+<strong><a href="mailto:email@benjaminkoch.info">email@benjaminkoch.info</a></strong>
+</p>
+<p class="small mb-1">
             You may optionally indicate a topic in the subject line, for example:
           </p>
-          <ul class="small">
-            <li>Publication / quote / interview</li>
-            <li>Talk / panel / online format</li>
-            <li>Cooperation request (institution / think tank)</li>
-            <li>Technical / methodological question on indicators</li>
-            <li>Other</li>
-          </ul>
-          <p class="small text-secondary mb-0">
+<ul class="small">
+<li>Publication / quote / interview</li>
+<li>Talk / panel / online format</li>
+<li>Cooperation request (institution / think tank)</li>
+<li>Technical / methodological question on indicators</li>
+<li>Other</li>
+</ul>
+<p class="small text-secondary mb-0">
             Indicating a topic is helpful but not required. No contact forms, cookies or
             tracking tools are used.
           </p>
-        </div>
-
-        <div class="col-lg-5">
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
+<div class="col-lg-5">
+</div>
+</div>
+</div>
+</section>
 </main>
-
 <footer>
-  <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
-    <div>
+<div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+<div>
       © <span id="year"></span> Benjamin Koch. All rights reserved.
     </div>
-    <div>
+<div>
       Personal, non-commercial website · No cookies, no trackers, no analytics.
     </div>
-  </div>
+</div>
 </footer>
-
 <script>
+  // === Charting module (aligned with bk_macro_terminal_fixed_v2) ===
   let currentLang = 'en';
   let currentThemeKey = 'eu_telecom_resilience';
   let currentHorizonKey = 'short';
+  let currentRangeKey = '6M';
   let mainChart = null;
   let rangeButtons = [];
 
+  const $ = (id)=>document.getElementById(id);
+
   // Map horizons to preferred range buttons
-  // short = 3–6M → 6M, medium = 1–5Y → 5Y, long = 5–10Y → 10Y
-  const RANGE_MAPPING = {
-    short: '6M',
-    medium: '5Y',
-    long: '10Y'
-  };
+  const RANGE_MAPPING = { short:'6M', medium:'5Y', long:'10Y' };
 
-  // Map ranges back to horizons when user clicks a range button
+  // Map ranges back to horizons
   const HORIZON_FROM_RANGE = {
-    '1D': 'short',
-    '1W': 'short',
-    '1M': 'short',
-    '3M': 'short',
-    '6M': 'short',
-    '1Y': 'medium',
-    '5Y': 'medium',
-    '10Y': 'long'
-  };
-
-  const BASE_SERIES = {
-    KMRI: {
-      short:  [0.62, 0.58, 0.64, 0.69, 0.67, 0.71, 0.76, 0.73, 0.78, 0.75, 0.79, 0.77],
-      medium: [0.55, 0.52, 0.49, 0.61, 0.68, 0.72, 0.69, 0.74, 0.70, 0.76, 0.73, 0.78],
-      long:   [0.48, 0.45, 0.51, 0.57, 0.54, 0.60, 0.67, 0.63, 0.70, 0.66, 0.72, 0.69, 0.75, 0.71, 0.77, 0.74]
-    },
-    TPVI: {
-      short:  [0.42, 0.71, 0.55, 0.83, 0.49, 0.77, 0.61, 0.69, 0.58, 0.72, 0.63, 0.68],
-      medium: [0.40, 0.55, 0.60, 0.78, 0.52, 0.70, 0.58, 0.63, 0.57, 0.62, 0.59, 0.61],
-      long:   [0.38, 0.44, 0.52, 0.64, 0.56, 0.66, 0.60, 0.62, 0.58, 0.59, 0.57, 0.58, 0.56, 0.57, 0.55, 0.56]
-    },
-    GDFI: {
-      short:  [0.35, 0.39, 0.44, 0.52, 0.58, 0.63, 0.69, 0.71, 0.68, 0.72, 0.70, 0.73],
-      medium: [0.32, 0.36, 0.40, 0.49, 0.55, 0.60, 0.65, 0.68, 0.66, 0.69, 0.68, 0.70],
-      long:   [0.30, 0.33, 0.37, 0.44, 0.50, 0.55, 0.60, 0.63, 0.65, 0.67, 0.68, 0.69, 0.70, 0.71, 0.72, 0.73]
-    }
+    '1D':'short','1W':'short','1M':'short','3M':'short','6M':'short',
+    '1Y':'medium','5Y':'medium','10Y':'long'
   };
 
   const THEMES = {
@@ -1320,29 +1317,212 @@
     }
   };
 
-  // Bloomberg-style vertical crosshair
-  const TERMINAL_CROSSHAIR_PLUGIN = {
-    id: 'terminalCrosshair',
-    afterDatasetsDraw(chart, args, pluginOptions) {
-      const tooltip = chart.tooltip;
-      if (!tooltip || !tooltip._active || !tooltip._active.length) return;
-      const ctx = chart.ctx;
-      const activePoint = tooltip._active[0];
-      const x = activePoint.element.x;
-      const { top, bottom } = chart.chartArea;
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(x, top);
-      ctx.lineTo(x, bottom);
-      ctx.lineWidth = 1;
-      ctx.setLineDash([3, 3]);
-      ctx.strokeStyle = 'rgba(148,163,184,0.7)';
-      ctx.stroke();
-      ctx.restore();
+  // ---- deterministic RNG (seeded) ----
+  function xmur3(str){
+    let h = 1779033703 ^ str.length;
+    for (let i=0;i<str.length;i++){
+      h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
     }
+    return function(){
+      h = Math.imul(h ^ (h >>> 16), 2246822507);
+      h = Math.imul(h ^ (h >>> 13), 3266489909);
+      return (h ^= (h >>> 16)) >>> 0;
+    };
+  }
+  function mulberry32(a){
+    return function(){
+      let t = (a += 0x6D2B79F5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function seededRng(seedStr){
+    const seed = xmur3(seedStr)();
+    return mulberry32(seed);
+  }
+  function randn(rng){
+    // Box–Muller
+    let u = 0, v = 0;
+    while(u === 0) u = rng();
+    while(v === 0) v = rng();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  }
+
+  // ---- profile parameters (stylistic, normalised) ----
+  const INDICATOR_PROFILES = {
+    kmri: { base: 100, drift: 0.012, vol: 0.55, meanRev: 0.020, shockP: 0.012, shockS: 3.4 },
+    rsac: { base: 100, drift: 0.006, vol: 0.95, meanRev: 0.030, shockP: 0.018, shockS: 6.8 },
+    tpvi: { base: 100, drift: 0.004, vol: 0.75, meanRev: 0.025, shockP: 0.015, shockS: 5.2 },
+    gdfi: { base: 100, drift: 0.010, vol: 0.65, meanRev: 0.018, shockP: 0.010, shockS: 4.6 }
   };
 
+  function rangeToDays(rangeKey){
+    switch(rangeKey){
+      case '1D': return 1;
+      case '1W': return 7;
+      case '1M': return 30;
+      case '3M': return 90;
+      case '6M': return 180;
+      case '1Y': return 365;
+      case '5Y': return 365*5;
+      case '10Y': return 365*10;
+      default: return 180;
+    }
+  }
+  function chooseStep(days){
+    if(days <= 30) return 1;
+    if(days <= 365) return 3;
+    if(days <= 365*5) return 10;
+    return 20;
+  }
+
+  function makeSeries(profileKey, rangeKey, seedStr){
+    const p = INDICATOR_PROFILES[profileKey] || INDICATOR_PROFILES.kmri;
+    const days = rangeToDays(rangeKey);
+    const step = chooseStep(days);
+    const points = Math.max(12, Math.floor(days/step));
+    const rng = seededRng(seedStr);
+
+    const now = new Date();
+    const start = new Date(now.getTime() - days*24*3600*1000);
+
+    let y = p.base;
+    let anchor = p.base;
+
+    const out = [];
+    for(let i=0;i<=points;i++){
+      const t = i/points;
+
+      // mean reversion around a slowly drifting anchor
+      anchor = anchor * (1 + (p.drift/365)* (step*0.9));
+      const reversion = (anchor - y) * (p.meanRev * 0.12);
+
+      // day-step volatility scaled with sqrt(step)
+      const noise = randn(rng) * p.vol * Math.sqrt(step/7);
+
+      // occasional shock (policy/energy/geopolitical discontinuity)
+      let shock = 0;
+      if(rng() < p.shockP * (step/7)){
+        shock = (rng() < 0.5 ? -1 : 1) * (p.shockS * (0.35 + 0.75*rng()));
+      }
+
+      y = Math.max(40, Math.min(175, y + reversion + noise + shock));
+
+      const d = new Date(start.getTime() + (t * days)*24*3600*1000);
+      out.push({ x: d, y: Number(y.toFixed(2)) });
+    }
+    return out;
+  }
+
+  function formatRangeLabel(rangeKey){
+    switch(rangeKey){
+      case '1D': return '1D';
+      case '1W': return '1W';
+      case '1M': return '1M';
+      case '3M': return '3M';
+      case '6M': return '6M';
+      case '1Y': return '1Y';
+      case '5Y': return '5Y';
+      case '10Y': return '10Y';
+      default: return rangeKey;
+    }
+  }
+
+  function buildChart(series, theme){
+    const ctx = $('chartMain').getContext('2d');
+
+    const labels = series.map(p=>p.x.toISOString().slice(0,10));
+    const values = series.map(p=>p.y);
+    const last = values[values.length-1];
+    const ref = 100;
+
+    const refSeries = values.map(()=>ref);
+
+    const dsMain = {
+      type: 'line',
+      label: `${theme.code} (${formatRangeLabel(currentRangeKey)})`,
+      data: values,
+      borderColor: '#60a5fa',
+      backgroundColor: 'rgba(30,58,138,0.35)',
+      fill: true,
+      tension: 0.28,
+      pointRadius: 0,
+      borderWidth: 1.6
+    };
+
+    const dsRef = {
+      type: 'line',
+      label: 'Reference (100)',
+      data: refSeries,
+      borderColor: '#f97316',
+      backgroundColor: 'transparent',
+      fill: false,
+      pointRadius: 0,
+      borderWidth: 1.2,
+      borderDash: [6,6]
+    };
+
+    const config = {
+      type: 'line',
+      data: { labels, datasets: [dsMain, dsRef] },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(2,6,23,0.95)',
+            borderColor: 'rgba(148,163,184,0.25)',
+            borderWidth: 1,
+            padding: 10,
+            titleColor: '#e5e7eb',
+            bodyColor: '#e5e7eb',
+            callbacks: {
+              label: (ctx)=> {
+                const y = ctx.parsed.y;
+                if(ctx.datasetIndex === 1) return ` Reference: ${ref.toFixed(1)}`;
+                return ` ${theme.code}: ${Number(y).toFixed(2)} (Δ ${(y-ref>=0?'+':'')}${(y-ref).toFixed(2)})`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'category',
+            grid: { color: 'rgba(148,163,184,0.10)' },
+            ticks: { color: 'rgba(226,232,240,0.85)', maxTicksLimit: 8 }
+          },
+          y: {
+            grid: { color: 'rgba(148,163,184,0.12)' },
+            ticks: {
+              color: 'rgba(226,232,240,0.85)',
+              callback: (v)=> Number(v).toFixed(0)
+            },
+            suggestedMin: 60,
+            suggestedMax: 140
+          }
+        },
+        animation: { duration: 450 }
+      }
+    };
+
+    if(mainChart){
+      mainChart.destroy();
+      mainChart = null;
+    }
+    mainChart = new Chart(ctx, config);
+
+    // update last-price line in status bar if present
+    const statusH = $('statusHorizon');
+    if(statusH){
+      statusH.textContent = `${currentHorizonKey.toUpperCase()} • ${formatRangeLabel(currentRangeKey)} • last ${last.toFixed(2)}`;
+    }
+  }
+
+  
   function getCurrentThemeConfig() {
     return THEMES[currentThemeKey] || THEMES.eu_telecom_resilience;
   }
@@ -1356,7 +1536,7 @@
     const legendLabel = document.getElementById('legendLabel');
 
     if (titleEl && summaryEl && bulletsEl) {
-      const label = theme.label_en || theme.label;
+      const label = theme.label_en || theme.label || '';
       titleEl.textContent = theme.code + ' – ' + label;
       summaryEl.textContent = theme.summary_en || theme.summary || '';
 
@@ -1370,223 +1550,1205 @@
     }
 
     if (windowTitle) {
-      const label = theme.label_en || theme.label;
+      const label = theme.label_en || theme.label || '';
       windowTitle.textContent = theme.code + ' · ' + label;
     }
 
     if (legendLabel) {
-      const label = theme.label_en || theme.label;
-      legendLabel.textContent = theme.code + ' theme';
+      const label = theme.label_en || theme.label || '';
+      legendLabel.textContent = theme.code + ' – ' + label;
+    }
+
+    updateStatusBar();
+
+    // In some layouts the canvas reports a tiny box on first tick; force a deferred resize+render.
+    try{
+      requestAnimationFrame(()=>{ mainChart && mainChart.resize(); });
+      setTimeout(()=>{ mainChart && mainChart.resize(); }, 90);
+    }catch(_){ }
+
+  }
+
+
+
+  function updateStatusBar(){
+    const theme = THEMES[currentThemeKey] || THEMES.eu_telecom_resilience;
+    const codeEl = $('statusThemeCode');
+    const horizonEl = $('statusHorizon');
+    const updEl = $('statusLastUpdate');
+
+    if(codeEl) codeEl.textContent = theme.code;
+    if(horizonEl) horizonEl.textContent = `${currentHorizonKey.toUpperCase()} • ${formatRangeLabel(currentRangeKey)}`;
+    if(updEl){
+      const d = new Date();
+      updEl.textContent = d.toLocaleString(undefined, { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
     }
   }
 
-  function updateStatusBar() {
-    const theme = getCurrentThemeConfig();
-    const codeEl = document.getElementById('statusThemeCode');
-    const horizonEl = document.getElementById('statusHorizon');
-    const updateEl = document.getElementById('statusLastUpdate');
-    const windowMeta = document.getElementById('windowMeta');
+  
+  // ===== BloombergCanvasChart module (from bk_macro_terminal_fixed_v2) =====
+  (function(){
+  // ---------- time / formatting ----------
+  const pad2 = (n)=> (n<10?"0":"")+n;
+  const fmtDateUTC = (d)=>{
+    const mm=pad2(d.getUTCMonth()+1), dd=pad2(d.getUTCDate()), yy=String(d.getUTCFullYear()).slice(-2);
+    return `${mm}/${dd}/${yy}`;
+  };
+  const clamp = (v,a,b)=> Math.max(a, Math.min(b, v));
+  const round3 = (x)=> (Math.round(x*1000)/1000).toFixed(3);
+  const dpr = ()=> Math.max(1, window.devicePixelRatio || 1);
 
-    if (codeEl) codeEl.textContent = theme.code || '';
-    if (horizonEl) {
-      const labelMap = { short: 'Short', medium: 'Medium', long: 'Long' };
-      horizonEl.textContent = labelMap[currentHorizonKey] || currentHorizonKey;
+  // ---------- deterministic generator ----------
+  function hashSeed(str){
+    let h=2166136261>>>0;
+    for(let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
     }
-    if (windowMeta) {
-      const labelMap = { short: 'Short', medium: 'Medium', long: 'Long' };
-      windowMeta.textContent = (labelMap[currentHorizonKey] || currentHorizonKey) + ' · Normalised 0–1';
-    }
-    if (updateEl) {
-      const now = new Date();
-      const pad = n => String(n).padStart(2, '0');
-      updateEl.textContent =
-        now.getFullYear() + '-' +
-        pad(now.getMonth() + 1) + '-' +
-        pad(now.getDate()) + ' ' +
-        pad(now.getHours()) + ':' +
-        pad(now.getMinutes());
-    }
+    return h>>>0;
   }
-
-  function updateLegend(data) {
-    const lastEl = document.getElementById('legendLastValue');
-    if (!lastEl || !Array.isArray(data) || !data.length) return;
-    const last = data[data.length - 1];
-    lastEl.textContent = last.toFixed(2);
+  function seeded(seed){
+    let x = seed|0;
+    return ()=>{ x ^= x<<13; x ^= x>>>17; x ^= x<<5; return (x>>>0)/4294967296; };
   }
+  function makeSeries({seedStr, days=365*10, base=100, drift=0.01, vol=0.8, shockAt=0.72, shock=-2.2, meanRev=0.0012,
+                     shockMode="down", cycleAmp=0, cyclePeriod=180, jumpProb=0, jumpScale=1.0}){
+    const rnd = seeded(hashSeed(seedStr));
+    const end = new Date();
+    const start = new Date(end.getTime() - days*24*60*60*1000);
+    let x = base;
+    const anchor = base;
+    const out = [];
 
-  function updateRangeButtonsForHorizon() {
-    const rangeForHorizon = RANGE_MAPPING[currentHorizonKey];
-    if (!rangeButtons.length || !rangeForHorizon) return;
-    rangeButtons.forEach(btn => {
-      if (btn.dataset.range === rangeForHorizon) {
-        btn.classList.add('toolbar-active');
-      } else {
-        btn.classList.remove('toolbar-active');
+    // deterministic "macro texture": gentle cycle + rare jumps + regime shock
+    for(let i=0;i<=days;i++){
+      const t = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()+i));
+      const eps = (rnd()*2-1)*vol;
+
+      const cyc = cycleAmp ? (cycleAmp * Math.sin((2*Math.PI*i)/Math.max(10, cyclePeriod))) : 0;
+
+      let jump = 0;
+      if(jumpProb && rnd() < jumpProb){
+        const sign = (rnd() < 0.5 ? -1 : 1);
+        jump = sign * jumpScale * (0.5 + rnd());
       }
-    });
+
+      // late-regime "shock" (can be down-only or two-sided)
+      let s = 0;
+      if(i/days > shockAt){
+        const mag = Math.abs(shock) * (rnd()*0.6 + 0.4);
+        if(String(shockMode||"down") === "both"){
+          s = (rnd() < 0.5 ? -mag : mag);
+        }else if(String(shockMode||"down") === "up"){
+          s = +mag;
+        }else{
+          s = -mag; // default down
+        }
+      }
+
+      x = x + drift + eps + cyc + jump + s - meanRev*(x-anchor);
+      out.push({t, v:x});
+    }
+    return out;
   }
 
-  function initRangeButtons() {
-    rangeButtons = Array.from(document.querySelectorAll('.toolbar-btn-range'));
-    rangeButtons.forEach(btn => {
-      btn.addEventListener('click', function () {
-        const range = this.dataset.range;
-        const mappedHorizon = HORIZON_FROM_RANGE[range];
-        if (!mappedHorizon) return;
-
-        currentHorizonKey = mappedHorizon;
-        const horizonSelect = document.getElementById('horizonSelect');
-        if (horizonSelect) horizonSelect.value = mappedHorizon;
-        updateMainChart();
-        updateRangeButtonsForHorizon();
-      });
-    });
-    updateRangeButtonsForHorizon();
+  // ---------- ticks ----------
+  function niceTicks(min, max, target=6){
+    const span = (max-min) || 1;
+    const raw = span/target;
+    const pow = Math.pow(10, Math.floor(Math.log10(raw)));
+    const steps = [1,2,2.5,5,10];
+    let step = steps[0]*pow;
+    for(const s of steps){
+      const cand = s*pow;
+      if(raw<=cand){ step=cand; break; }
+    }
+    const start = Math.floor(min/step)*step;
+    const end   = Math.ceil(max/step)*step;
+    const ticks=[];
+    for(let v=start; v<=end+1e-12; v+=step) ticks.push(v);
+    return ticks;
   }
 
-  function initMainChart() {
-    const canvas = document.getElementById('chartMain');
-    if (!canvas || !window.Chart) {
-      console.error('Chart.js or canvas not available');
-      return;
+  // ---------- chart core ----------
+  class BloombergCanvasChart{
+    constructor(canvas, {title="", unit="", seedStr="SERIES", base=100, drift=0.01, vol=0.8, shockAt=0.72, shock=-2.2, meanRev=0.0012,
+      shockMode="down", cycleAmp=0, cyclePeriod=180, jumpProb=0, jumpScale=1.0,
+      kind="standard", overlays=[], volumeSpec=null,
+      compares=[], compareEnabled=[]}){
+
+      this.canvas = canvas;
+      this.ctx = canvas.getContext("2d", {alpha:false});
+      this.title = title;
+      this.unit = unit;
+
+      // rendering mode: standard | strip | priceVolume
+      this.kind = kind || "standard";
+      this.overlays = Array.isArray(overlays) ? overlays : [];
+      this.volumeSpec = volumeSpec;
+
+      // per-chart toggle for threshold/regime overlays
+      this.overlaysEnabled = true; // {seedStr, base, drift, vol, shock, meanRev}
+
+      this.seedStr = seedStr;
+      this.base=base; this.drift=drift; this.vol=vol; this.shock=shock; this.meanRev=meanRev;
+      this.shockAt=shockAt; this.shockMode=shockMode; this.cycleAmp=cycleAmp; this.cyclePeriod=cyclePeriod; this.jumpProb=jumpProb; this.jumpScale=jumpScale;
+      // comparison overlays (toggleable)
+      this.compares = Array.isArray(compares) ? compares : [];
+      this.compareEnabled = new Set(Array.isArray(compareEnabled) ? compareEnabled : []);
+      if(this.compareEnabled.size===0){
+        for(const c of this.compares){ if(c && c.key) this.compareEnabled.add(c.key); }
+      }
+      this.compareSeries = new Map();
+      this._rebuildCompares();
+
+
+      this.futurePadPx = 90;
+      this.points = makeSeries({seedStr, base, drift, vol, shockAt, shock, meanRev, shockMode, cycleAmp, cyclePeriod, jumpProb, jumpScale});
+
+      // streaming tween state (Bloomberg-feel continuous tail drawing)
+      this.stream = {
+        tickIntervalMs: 280,     // driven externally by setInterval; kept for reference
+        tweenMs: 220,            // tail animation duration (<= tick interval)
+        prevLast: null,
+        nextLast: null,
+        tweenStartTs: performance.now(),
+        isPrimed: false
+      };
+
+      // optional volume track (used by priceVolume panels)
+      if(this.kind === "priceVolume"){
+        const vs = this.volumeSpec || {};
+        const vSeed = vs.seedStr || (seedStr + "|VOL");
+        const vBase = vs.base ?? 1_000_000;
+        const vDrift = vs.drift ?? 80;
+        const vVol = vs.vol ?? 20_000;
+        const vShock = vs.shock ?? 60_000;
+        const vMeanRev = vs.meanRev ?? 0.0008;
+        this.volumePoints = makeSeries({seedStr: vSeed, base: vBase, drift: vDrift, vol: vVol, shock: vShock, meanRev: vMeanRev});
+      } else {
+        this.volumePoints = null;
+      }
+      this.rangeKey = "3M";
+      this.view = {i0:0, i1:this.points.length, y0:0, y1:0, dragging:false, dragX:0, dragI0:0, dragI1:0, hoverX:null, hoverY:null};
+      this.hoverIndex = null;
+      this.hoverValue = null;
+      this.applyRange(this.rangeKey, true);
+
+      this.tooltip = this._ensureTooltip();
+      this.resize();
+      this.bind();
+      this.render();
     }
 
-    const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
-    gradient.addColorStop(0, 'rgba(148,163,184,0.35)');
-    gradient.addColorStop(0.45, 'rgba(56,189,248,0.35)');
-    gradient.addColorStop(1, 'rgba(15,23,42,0)');
+    
+    _rebuildCompares(){
+      this.compareSeries.clear();
+      for(const c of this.compares){
+        const seedStr = c.seedStr || ("CMP|" + c.key);
+        const base = (c.base ?? this.base);
+        let drift = (c.drift ?? this.drift);
+        let vol = (c.vol ?? this.vol);
+        const shock = (c.shock ?? this.shock);
+        const meanRev = (c.meanRev ?? this.meanRev);
+        const pts = makeSeries({seedStr, base, drift, vol, shock, meanRev});
+        this.compareSeries.set(c.key, pts);
+      }
+    }
 
-    Chart.register(TERMINAL_CROSSHAIR_PLUGIN);
+    setCompareEnabled(key, on){
+      if(on) this.compareEnabled.add(key);
+      else this.compareEnabled.delete(key);
+      this.render();
+    }
 
-    const baseOptions = {
-      type: 'line',
-      data: {
-        labels: [],
-        datasets: [{
-          label: 'Indicator level',
-          data: [],
-          fill: true,
-          backgroundColor: gradient,
-          borderColor: 'rgba(255,255,255,0.9)',
-          tension: 0.27,
-          pointRadius: 0,
-          pointHitRadius: 6,
-          borderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: {
-          duration: 650,
-          easing: 'easeOutCubic'
-        },
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: true,
-            intersect: false,
-            mode: 'index',
-            backgroundColor: '#020617',
-            borderColor: 'rgba(56,189,248,0.7)',
-            borderWidth: 1,
-            titleColor: '#f9fafb',
-            bodyColor: '#e5e7eb',
-            displayColors: false,
-            padding: 10,
-            callbacks: {
-              label: function (context) {
-                const v = context.parsed.y;
-                if (typeof v !== 'number') return '';
-                return ' ' + v.toFixed(2) + ' (normalised)';
-              }
-            }
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index'
-        },
-        scales: {
-          x: {
-            grid: {
-              color: 'rgba(31,41,55,0.7)',
-              borderColor: 'rgba(55,65,81,1)'
-            },
-            ticks: {
-              color: 'rgba(148,163,184,0.8)',
-              font: { size: 10 }
-            }
-          },
-          y: {
-            min: 0,
-            max: 1,
-            grid: {
-              color: 'rgba(31,41,55,0.9)',
-              borderColor: 'rgba(55,65,81,1)'
-            },
-            ticks: {
-              color: 'rgba(148,163,184,0.8)',
-              font: { size: 10 },
-              callback: function (value) {
-                return value.toFixed(1);
-              }
-            }
+
+    setOverlaysEnabled(on){
+      this.overlaysEnabled = !!on;
+      this.render();
+    }
+
+    replaceCompares(compares){
+      this.compares = Array.isArray(compares) ? compares : [];
+      this.compareEnabled = new Set();
+      for(const c of this.compares){ if(c.defaultOn) this.compareEnabled.add(c.key); }
+      this._rebuildCompares();
+      this.applyRange(this.rangeKey, true);
+      this.render();
+    }
+_ensureTooltip(){
+      // reuse existing tooltip container if present (parent .overlay .tooltip), else create minimal
+      const wrap = this.canvas.parentElement;
+      let tt = wrap?.querySelector?.(".tooltip");
+      if(tt) return tt;
+
+      const ov = document.createElement("div");
+      ov.style.position="absolute";
+      ov.style.inset="0";
+      ov.style.pointerEvents="none";
+      ov.innerHTML = `<div class="tooltip" style="
+        position:absolute; display:none; min-width:240px;
+        background:rgba(10,11,13,.92); border:1px solid #232838; border-radius:10px;
+        padding:10px; font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        color:#e9e9e9; box-shadow:0 10px 24px rgba(0,0,0,.35);
+      "></div>`;
+      wrap.style.position = wrap.style.position || "relative";
+      wrap.appendChild(ov);
+      return ov.querySelector(".tooltip");
+    }
+    resize(){
+      // robust sizing: fall back to parent box if canvas has not been laid out yet
+      const rect = this.canvas.getBoundingClientRect();
+      const parent = this.canvas.parentElement;
+      const pW = parent ? parent.clientWidth : 0;
+      const pH = parent ? parent.clientHeight : 0;
+
+      // If rect is tiny (e.g., first layout tick), use parent dimensions or sensible defaults
+      const Wraw = (rect && rect.width > 50) ? rect.width : (pW > 50 ? pW : 900);
+      const Hraw = (rect && rect.height > 50) ? rect.height : (pH > 50 ? pH : 230);
+
+      const W = Math.max(120, Math.floor(Wraw));
+      const H = Math.max(120, Math.floor(Hraw));
+      const scale = dpr();
+
+      this.W = W; this.H = H;
+      this.canvas.width  = Math.floor(W * scale);
+      this.canvas.height = Math.floor(H * scale);
+      this.ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      this.render();
+    }
+
+
+    applyRange(key, silent=false){
+      this.rangeKey = key;
+      const pts = this.points;
+      const lastT = pts[pts.length-1].t;
+      let days;
+      let startT;
+      if(key==="1D"){ days=1; startT = new Date(lastT.getTime() - 1*24*60*60*1000); }
+      else if(key==="1W"){ days=7; startT = new Date(lastT.getTime() - 7*24*60*60*1000); }
+      else if(key==="1M"){ days=30; startT = new Date(lastT.getTime() - 30*24*60*60*1000); }
+      else if(key==="3M"){ days=92; startT = new Date(lastT.getTime() - 92*24*60*60*1000); }
+      else if(key==="6M"){ days=182; startT = new Date(lastT.getTime() - 182*24*60*60*1000); }
+      else if(key==="YTD"){ startT = new Date(Date.UTC(lastT.getUTCFullYear(),0,1,0,0,0)); }
+      else if(key==="1Y"){ days=365; startT = new Date(lastT.getTime() - 365*24*60*60*1000); }
+      else if(key==="5Y"){ days=365*5; startT = new Date(lastT.getTime() - (365*5)*24*60*60*1000); }
+      else if(key==="10Y"){ days=365*10; startT = new Date(lastT.getTime() - (365*10)*24*60*60*1000); }
+      else if(key==="MAX" || key==="ALL"){ startT = pts[0]?.t || new Date(lastT.getTime() - (365*10)*24*60*60*1000); }
+      else { days=92; startT = new Date(lastT.getTime() - 92*24*60*60*1000); }
+
+      let i0=0;
+      while(i0<pts.length && pts[i0].t < startT) i0++;
+      this.view.i0 = clamp(i0, 0, Math.max(0, pts.length-2));
+      this.view.i1 = pts.length;
+      this.recomputeY();
+      if(!silent) this.render();
+    }
+
+    recomputeY(){
+      const pts=this.points;
+      const {i0,i1}=this.view;
+
+      let lo=Infinity, hi=-Infinity;
+
+      // primary series
+      for(let i=i0;i<i1;i++){
+        const v=pts[i].v;
+        if(v<lo) lo=v;
+        if(v>hi) hi=v;
+      }
+
+      // include enabled compare overlays so they are never clipped
+      if(this.compares.length){
+        for(const c of this.compares){
+          if(!this.compareEnabled.has(c.key)) continue;
+          const cpts = this.compareSeries.get(c.key);
+          if(!cpts || cpts.length<2) continue;
+          const j0 = Math.min(i0, cpts.length-2);
+          const j1 = Math.min(i1, cpts.length);
+          for(let j=j0;j<j1;j++){
+            const v=cpts[j].v;
+            if(v<lo) lo=v;
+            if(v>hi) hi=v;
           }
         }
       }
+
+      const pad=(hi-lo)*0.10 || (Math.abs(hi)||1)*0.02;
+      this.view.y0 = lo - pad;
+      this.view.y1 = hi + pad;
+    }
+
+    dataRightX(){
+      const padR=52;
+      return (this.W-padR) - this.futurePadPx;
+    }
+    fullRightX(){
+      const padR=52;
+      return (this.W-padR);
+    }
+    mapX(i){
+      const {i0,i1}=this.view;
+      const padL=16;
+      const x0=padL;
+      const x1=this.dataRightX();
+      const t=(i-i0)/Math.max(1,(i1-i0-1));
+      return x0 + t*(x1-x0);
+    }
+    mapY(v){
+      const {y0,y1}=this.view;
+      const padT=12, padB=24;
+      const yTop=padT, yBot=this.H-padB;
+      const t=(v-y0)/(y1-y0||1);
+      return yBot - t*(yBot-yTop);
+    }
+    nearestIndexFromX(x){
+      const {i0,i1}=this.view;
+      const padL=16;
+      const x0=padL, x1=this.dataRightX();
+      const t=(x-x0)/(x1-x0);
+      const i=Math.round(i0 + clamp(t,0,1)*(i1-i0-1));
+      return clamp(i,i0,i1-1);
+    }
+
+    showTooltip(mx,my){
+      const pts=this.points;
+      const i=this.nearestIndexFromX(mx);
+      const p=pts[i];
+      const px=this.mapX(i);
+      const py=this.mapY(p.v);
+
+      this.view.hoverX=px; this.view.hoverY=py;
+
+      this.hoverIndex = i;
+      this.hoverValue = p.v;
+
+      const ref = pts[this.view.i0]?.v ?? pts[0].v;
+      const chg = p.v - ref;
+      const pct = (chg/ref)*100;
+
+      const tt=this.tooltip;
+      tt.style.display="block";
+      tt.innerHTML = `
+        <div style="color:#a7a7a7">${this.title || "Series"}</div>
+        <div style="margin-top:6px;"><span style="color:#7c7c7c">Date</span> ${fmtDateUTC(p.t)} <span style="color:#7c7c7c">UTC</span></div>
+        <div><span style="color:#7c7c7c">Value</span> ${round3(p.v)} ${this.unit||""}</div>
+        <div><span style="color:#7c7c7c">Δ vs ref</span> ${(chg>=0?"+":"") + round3(chg)} (${(pct>=0?"+":"") + (Math.round(pct*100)/100).toFixed(2)}%)</div>
+      `;
+      const tw=260, th=92;
+      const ox = (px < this.W/2) ? px + 12 : px - (tw + 12);
+      const oy = clamp(py - th/2, 8, this.H - th - 8);
+      tt.style.transform = `translate(${ox}px, ${oy}px)`;
+
+      this.render();
+    }
+
+    hideTooltip(){
+      this.tooltip.style.display="none";
+      this.view.hoverX=null; this.view.hoverY=null;
+      this.hoverIndex = null;
+      this.hoverValue = null;
+      this.render();
+    }
+
+    bind(){
+      // hover
+      this.canvas.addEventListener("mousemove",(e)=>{
+        const r=this.canvas.getBoundingClientRect();
+        const x=e.clientX-r.left;
+        const y=e.clientY-r.top;
+
+        if(this.view.dragging){
+          const dx=x-this.view.dragX;
+          const span=this.view.dragI1 - this.view.dragI0;
+          const padL=16;
+          const x0=padL, x1=this.dataRightX();
+          const frac = dx/(x1-x0);
+          const shift = Math.round(-frac*span);
+
+          const pts=this.points;
+          let ni0=this.view.dragI0+shift;
+          let ni1=this.view.dragI1+shift;
+          if(ni0<0){ ni1-=ni0; ni0=0; }
+          if(ni1>pts.length){
+            const over=ni1-pts.length;
+            ni0-=over; ni1=pts.length; ni0=Math.max(0,ni0);
+          }
+          if(ni1-ni0<30) return;
+
+          this.view.i0=ni0; this.view.i1=ni1;
+          this.recomputeY();
+          this.showTooltip(x,y);
+          return;
+        }
+
+        this.showTooltip(x,y);
+      });
+      this.canvas.addEventListener("mouseleave",()=>this.hideTooltip());
+
+      // pan
+      this.canvas.addEventListener("mousedown",(e)=>{
+        const r=this.canvas.getBoundingClientRect();
+        this.view.dragging=true;
+        this.view.dragX = e.clientX-r.left;
+        this.view.dragI0 = this.view.i0;
+        this.view.dragI1 = this.view.i1;
+      });
+      window.addEventListener("mouseup",()=>{ this.view.dragging=false; });
+
+      // zoom
+      this.canvas.addEventListener("wheel",(e)=>{
+        e.preventDefault();
+        const r=this.canvas.getBoundingClientRect();
+        const x=e.clientX-r.left;
+        const iCenter=this.nearestIndexFromX(x);
+        const pts=this.points;
+        const span=this.view.i1 - this.view.i0;
+        const zoom = (e.deltaY>0) ? 1.18 : 0.85;
+        let newSpan=Math.round(span*zoom);
+        newSpan=clamp(newSpan, 60, pts.length);
+
+        const frac=(iCenter - this.view.i0)/span;
+        let ni0=Math.round(iCenter - frac*newSpan);
+        let ni1=ni0+newSpan;
+        if(ni0<0){ ni1-=ni0; ni0=0; }
+        if(ni1>pts.length){
+          const over=ni1-pts.length;
+          ni0-=over; ni1=pts.length; ni0=Math.max(0,ni0);
+        }
+        if(ni1-ni0<30) return;
+
+        this.view.i0=ni0; this.view.i1=ni1;
+        this.recomputeY();
+        this.render();
+      }, {passive:false});
+
+      // reset
+      this.canvas.addEventListener("dblclick",()=> this.applyRange(this.rangeKey));
+    }
+
+    _tailValue(){
+      const s = this.stream;
+      if(!s || !s.isPrimed || s.prevLast==null || s.nextLast==null) return null;
+      const t = (performance.now() - s.tweenStartTs) / (s.tweenMs || 1);
+      const tt = 1 - Math.pow(1 - Math.max(0, Math.min(1, t)), 3); // easeOutCubic
+      return s.prevLast + (s.nextLast - s.prevLast) * tt;
+    }
+    _isTweening(){
+      const s = this.stream;
+      if(!s || !s.isPrimed) return false;
+      return (performance.now() - s.tweenStartTs) < (s.tweenMs || 0);
+    }
+    _primeTail(target){
+      const s = this.stream;
+      if(!s) return;
+      const current = this._tailValue();
+      const fallback = this.points?.length ? this.points[this.points.length-1].v : target;
+      s.prevLast = (current!=null) ? current : fallback;
+      s.nextLast = target;
+      s.tweenStartTs = performance.now();
+      s.isPrimed = true;
+    }
+
+    tickUpdate(){
+      // streaming update: set a new target for the last point; the renderer interpolates the tail continuously
+      const pts=this.points;
+      if(pts.length<10) return;
+      const last=pts[pts.length-1];
+      const prev=pts[pts.length-2];
+
+      const s = seeded(hashSeed(this.seedStr + "|" + String(Date.now()).slice(0,8)))();
+      const jitter = (s*2-1) * (Math.abs(prev.v)*0.0009);
+      const target = prev.v + jitter;
+
+      this._primeTail(target);
+      // keep the stored last value equal to the target so y-scaling includes it
+      last.v = target;
+
+      // volume track update (if present) tied to absolute return (more realistic microstructure)
+      if(this.volumePoints && this.volumePoints.length === pts.length){
+        const vpts = this.volumePoints;
+        const vlast = vpts[vpts.length-1];
+        const vprev = vpts[vpts.length-2];
+        const ret = Math.abs((last.v - prev.v) / (Math.abs(prev.v) || 1));
+        const vs = seeded(hashSeed("VOL|" + this.seedStr + "|" + String(Date.now()).slice(0,8)))();
+        const vj = (vs*2-1) * (Math.abs(vprev.v)*0.0012);
+        // spike volume on bigger moves, with mild mean reversion
+        vlast.v = Math.max(0, vprev.v + vj + (ret * (Math.abs(vprev.v) * 2.5)));
+      }
+
+      // update compare overlays (keep them “alive” too)
+      for(const [k, cpts] of this.compareSeries.entries()){
+        if(cpts.length<10) continue;
+        const clast=cpts[cpts.length-1];
+        const cprev=cpts[cpts.length-2];
+        const cs = seeded(hashSeed((k||"CMP") + "|" + this.seedStr + "|" + String(Date.now()).slice(0,8)))();
+        const cj = (cs*2-1) * (Math.abs(cprev.v)*0.0006);
+        clast.v = cprev.v + cj;
+      }
+
+      this.recomputeY();
+      this.render();
+    }
+
+    render(){
+      const ctx=this.ctx, W=this.W, H=this.H, pts=this.points;
+      // base
+      ctx.fillStyle="#0a0b0d";
+      ctx.fillRect(0,0,W,H);
+      if(!pts || pts.length<2) return;
+
+      const {i0,i1,y0,y1}=this.view;
+      const tailOverride = this._tailValue();
+      const padL=16, padR=52, padT=12, padB=24;
+      const x0=padL, xRight=this.fullRightX();
+      const yTop=padT, yBot=H-padB;
+
+      // vertical grid
+      ctx.lineWidth=1;
+      ctx.strokeStyle="#1c1f26";
+      ctx.beginPath();
+      const vCount=10;
+      for(let k=0;k<=vCount;k++){
+        const x=x0 + (xRight-x0)*(k/vCount);
+        ctx.moveTo(x,yTop); ctx.lineTo(x,yBot);
+      }
+      ctx.stroke();
+
+      // horizontal grid
+      const yticks=niceTicks(y0,y1,7);
+      ctx.strokeStyle="#161820";
+      ctx.beginPath();
+      for(const tv of yticks){
+        const y=this.mapY(tv);
+        ctx.moveTo(x0,y); ctx.lineTo(xRight,y);
+      }
+      ctx.stroke();
+
+      // right labels
+      ctx.fillStyle="#a9a9a9";
+      ctx.font=`12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+      ctx.textAlign="left"; ctx.textBaseline="middle";
+      for(const tv of yticks){
+        const y=this.mapY(tv);
+        const label=(Math.abs(tv)>=1000)?Math.round(tv).toString():tv.toFixed(2);
+        ctx.fillText(label, xRight+8, y);
+      }
+
+      // orange ref line (period open)
+      const ref=pts[i0]?.v ?? pts[0].v;
+      const yRef=this.mapY(ref);
+      ctx.strokeStyle="#ff9f1a";
+      ctx.setLineDash([2,3]);
+      ctx.beginPath(); ctx.moveTo(x0,yRef); ctx.lineTo(xRight,yRef); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // additional overlays (threshold bands, regime markers, etc.)
+      if(this.overlaysEnabled && this.overlays && this.overlays.length){
+        ctx.font=`11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+        ctx.textAlign="left"; ctx.textBaseline="middle";
+        for(const ol of this.overlays){
+          if(!ol) continue;
+          const y = this.mapY(ol.y);
+          ctx.strokeStyle = ol.color || "rgba(255,255,255,.22)";
+          ctx.lineWidth = 1;
+          ctx.setLineDash(ol.dash || [4,4]);
+          ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(xRight,y); ctx.stroke();
+          ctx.setLineDash([]);
+          if(ol.label){
+            const txt = String(ol.label);
+            const tw = ctx.measureText(txt).width;
+            ctx.fillStyle="rgba(10,11,13,.85)";
+            ctx.fillRect(x0+6, y-9, tw+10, 18);
+            ctx.strokeStyle="rgba(255,255,255,.14)";
+            ctx.strokeRect(x0+6, y-9, tw+10, 18);
+            ctx.fillStyle=ol.textColor || "#cfcfcf";
+            ctx.fillText(txt, x0+11, y);
+          }
+        }
+      }
+
+      // render modes
+      if(this.kind === "strip"){
+        // ForumFlow-style strip: centered baseline, signed bars (cyan for positive, red for negative)
+        const mid = (yTop + yBot) / 2;
+        // midline
+        ctx.strokeStyle = "rgba(255,255,255,.16)";
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x0, mid); ctx.lineTo(xRight, mid); ctx.stroke();
+
+        // bars
+        const amp = (yBot - yTop) * 0.40;
+        for(let i=i0;i<i1;i++){
+          const x = this.mapX(i);
+          const v = pts[i].v;
+          const dv = v - ref; // ref acts as baseline anchor
+          const h = clamp(dv / (Math.abs(ref)||1), -1, 1) * amp;
+          ctx.strokeStyle = (h>=0) ? "rgba(56,189,248,.85)" : "rgba(248,113,113,.75)";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(x, mid);
+          ctx.lineTo(x, mid - h);
+          ctx.stroke();
+        }
+
+        // last marker + extension
+        const lastV = (tailOverride!=null)?tailOverride:pts[i1-1].v;
+        const dvLast = lastV - ref;
+        const hLast = clamp(dvLast / (Math.abs(ref)||1), -1, 1) * amp;
+        const yLast = mid - hLast;
+        const lastX = this.mapX(i1-1);
+
+        ctx.strokeStyle="rgba(243,245,247,.85)";
+        ctx.lineWidth=1.0;
+        ctx.beginPath(); ctx.moveTo(lastX,yLast); ctx.lineTo(xRight,yLast); ctx.stroke();
+
+        // last label (shows strip value)
+        const label = round3(lastV);
+        ctx.font=`12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+        const tw = ctx.measureText(label).width;
+        const boxW = tw+16, boxH=18;
+        const bx = xRight+2;
+        const by = clamp(yLast-boxH/2, yTop+2, yBot-boxH-2);
+        ctx.fillStyle="rgba(10,11,13,.95)";
+        ctx.fillRect(bx,by,boxW,boxH);
+        ctx.strokeStyle="rgba(255,255,255,.18)";
+        ctx.strokeRect(bx,by,boxW,boxH);
+        ctx.fillStyle="#f3f5f7";
+        ctx.textAlign="left"; ctx.textBaseline="middle";
+        ctx.fillText(label, bx+8, by+boxH/2);
+
+      } else {
+
+      ctx.beginPath();
+      for(let i=i0;i<i1;i++){
+        const x=this.mapX(i);
+        const y=this.mapY((i===i1-1 && tailOverride!=null)?tailOverride:pts[i].v);
+        if(i===i0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      const lastX=this.mapX(i1-1);
+      ctx.lineTo(lastX,yBot);
+      ctx.lineTo(this.mapX(i0), yBot);
+      ctx.closePath();
+
+      const g=ctx.createLinearGradient(0,yTop,0,yBot);
+      g.addColorStop(0,"#0b2a5a");
+      g.addColorStop(1,"#08224a");
+      ctx.fillStyle=g;
+      ctx.globalAlpha=0.92;
+      ctx.fill();
+      ctx.globalAlpha=1;
+
+      // white line
+      ctx.beginPath();
+      for(let i=i0;i<i1;i++){
+        const x=this.mapX(i);
+        const y=this.mapY((i===i1-1 && tailOverride!=null)?tailOverride:pts[i].v);
+        if(i===i0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle="#f3f5f7";
+      ctx.lineWidth=1.2;
+      ctx.stroke();
+
+      // comparison overlays (toggleable) — mapped as % change vs window ref (so lines are visible & comparable)
+      if(this.compares.length){
+        const palette = ["rgba(56,189,248,.85)","rgba(168,85,247,.75)","rgba(34,211,238,.70)","rgba(250,204,21,.55)","rgba(248,113,113,.65)"];
+        let pi=0;
+
+        const refP = (pts[i0]?.v ?? pts[0].v);
+        for(const c of this.compares){
+          if(!this.compareEnabled.has(c.key)) continue;
+          const cpts = this.compareSeries.get(c.key);
+          if(!cpts || cpts.length<2) continue;
+
+          // align by index (same synthetic calendar); if lengths differ, clamp
+          const j0 = Math.min(i0, cpts.length-2);
+          const j1 = Math.min(i1, cpts.length);
+
+          const refC = (cpts[j0]?.v ?? cpts[0].v);
+          if(!isFinite(refC) || refC===0) continue;
+
+          ctx.beginPath();
+          for(let j=j0;j<j1;j++){
+            const x=this.mapX(j);
+            const pct = (cpts[j].v - refC) / refC;
+            const vMapped = refP * (1 + pct);     // map compare into main price space
+            const y=this.mapY(vMapped);
+            if(j===j0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+          }
+          ctx.strokeStyle = c.color || palette[pi % palette.length];
+          ctx.lineWidth = 1.05;
+          ctx.stroke();
+          pi++;
+        }
+      }
+
+ctx.stroke();
+
+      // extend last price into future space
+      const lastV=(tailOverride!=null)?tailOverride:pts[i1-1].v;
+      const yLast=this.mapY(lastV);
+      ctx.strokeStyle="rgba(243,245,247,.85)";
+      ctx.lineWidth=1.0;
+      ctx.beginPath();
+      ctx.moveTo(lastX,yLast);
+      ctx.lineTo(xRight,yLast);
+      ctx.stroke();
+
+      // last price label box
+      const label=round3(lastV);
+      ctx.font=`12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+      const tw=ctx.measureText(label).width;
+      const boxW=tw+16, boxH=18;
+      const bx=xRight+2;
+      const by=clamp(yLast-boxH/2, yTop+2, yBot-boxH-2);
+      ctx.fillStyle="rgba(10,11,13,.95)";
+      ctx.fillRect(bx,by,boxW,boxH);
+      ctx.strokeStyle="rgba(255,255,255,.18)";
+      ctx.strokeRect(bx,by,boxW,boxH);
+      ctx.fillStyle="#f3f5f7";
+      ctx.textAlign="left"; ctx.textBaseline="middle";
+      ctx.fillText(label, bx+8, by+boxH/2);
+
+      // volume bars (priceVolume panels)
+      if(this.kind === "priceVolume" && this.volumePoints && this.volumePoints.length){
+        const vpts = this.volumePoints;
+        // compute range
+        let vlo=Infinity, vhi=-Infinity;
+        for(let i=i0;i<i1;i++){
+          const v=vpts[i]?.v;
+          if(v==null) continue;
+          if(v<vlo) vlo=v;
+          if(v>vhi) vhi=v;
+        }
+        const vPad = (vhi-vlo)*0.10 || (Math.abs(vhi)||1)*0.05;
+        vlo -= vPad; vhi += vPad;
+
+        const volTop = yBot - Math.round((yBot-yTop)*0.22);
+        const volBot = yBot;
+
+        // separator
+        ctx.strokeStyle="rgba(255,255,255,.12)";
+        ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(x0, volTop); ctx.lineTo(xRight, volTop); ctx.stroke();
+
+        // bars
+        const barW = Math.max(1, (this.mapX(i0+1) - this.mapX(i0)) * 0.65);
+        for(let i=i0;i<i1;i++){
+          const x = this.mapX(i) - barW/2;
+          const vv = vpts[i]?.v ?? 0;
+          const t = (vv - vlo) / (vhi - vlo || 1);
+          const h = clamp(t,0,1) * (volBot - volTop - 6);
+          // neutral gray-blue, but brighten on “up” days
+          const up = (i>0 ? (pts[i].v - pts[i-1].v) : 0) >= 0;
+          ctx.fillStyle = up ? "rgba(56,189,248,.22)" : "rgba(248,113,113,.18)";
+          ctx.fillRect(x, volBot - h, barW, h);
+        }
+
+        // volume label (left)
+        ctx.font=`11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+        ctx.fillStyle="#8a8a8a";
+        ctx.textAlign="left"; ctx.textBaseline="top";
+        ctx.fillText("VOL", x0+2, volTop+3);
+      }
+
+
+      }
+
+      // bottom date labels
+      ctx.fillStyle="#8a8a8a";
+      ctx.textAlign="center"; ctx.textBaseline="top";
+      const tCount=6;
+      for(let k=0;k<=tCount;k++){
+        const i=Math.round(i0 + (i1-i0-1)*(k/tCount));
+        const x=this.mapX(i);
+        ctx.fillText(fmtDateUTC(pts[i].t), x, yBot+6);
+      }
+
+      // crosshair + Bloomberg-style cursor labels
+      if(this.view.hoverX!==null){
+        ctx.strokeStyle="rgba(243,245,247,.28)";
+        ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(this.view.hoverX,yTop); ctx.lineTo(this.view.hoverX,yBot); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x0,this.view.hoverY); ctx.lineTo(xRight,this.view.hoverY); ctx.stroke();
+
+        // top date label (above cursor)
+        const idx = (this.hoverIndex!=null) ? this.hoverIndex : this.nearestIndexFromX(this.view.hoverX);
+        const dp = pts[idx];
+        if(dp){
+          const dateTxt = fmtDateUTC(dp.t) + " UTC";
+          ctx.font=`11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`;
+          const dtw = ctx.measureText(dateTxt).width;
+          const bh = 18, bw = dtw + 16;
+          const bx0 = clamp(this.view.hoverX - bw/2, x0, xRight - bw);
+          const by0 = yTop + 2;
+          ctx.fillStyle="rgba(10,11,13,.95)";
+          ctx.fillRect(bx0, by0, bw, bh);
+          ctx.strokeStyle="rgba(255,255,255,.18)";
+          ctx.strokeRect(bx0, by0, bw, bh);
+          ctx.fillStyle="#f3f5f7";
+          ctx.textAlign="center"; ctx.textBaseline="middle";
+          ctx.fillText(dateTxt, bx0 + bw/2, by0 + bh/2);
+
+          // right value label at cursor (like Bloomberg)
+          const vTxt = round3(dp.v) + (this.unit ? (" " + this.unit) : "");
+          const vtw = ctx.measureText(vTxt).width;
+          const vbw = vtw + 16, vbh = 18;
+          const vbx = xRight + 2;
+          const vby = clamp(this.view.hoverY - vbh/2, yTop+2, yBot - vbh - 2);
+          ctx.fillStyle="rgba(10,11,13,.95)";
+          ctx.fillRect(vbx, vby, vbw, vbh);
+          ctx.strokeStyle="rgba(255,255,255,.18)";
+          ctx.strokeRect(vbx, vby, vbw, vbh);
+          ctx.fillStyle="#f3f5f7";
+          ctx.textAlign="left"; ctx.textBaseline="middle";
+          ctx.fillText(vTxt, vbx + 8, vby + vbh/2);
+        }
+      }
+}
+  }
+
+  // ---------- fullscreen overlay (no layout changes) ----------
+  function ensureFSOverlay(){
+    if(document.getElementById("bkFsOverlay")) return;
+    const style=document.createElement("style");
+    style.textContent = `
+      #bkFsOverlay{position:fixed; inset:0; background:#050607; z-index:9999; display:none;}
+      #bkFsOverlay.on{display:block;}
+      #bkFsInner{position:absolute; inset:10px; border:1px solid #141821; border-radius:14px; overflow:hidden; background:#0a0b0d;
+        box-shadow:0 30px 90px rgba(0,0,0,.6);}
+      #bkFsTop{padding:10px 12px; background:linear-gradient(180deg,#101118,#0b0c0e); border-bottom:1px solid #171a20;
+        display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
+      #bkFsTitle{font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; color:#dcdcdc;}
+      #bkFsExit{font:12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+        color:#cfcfcf; padding:8px 10px; border:1px solid #1c2030; background:rgba(255,255,255,.02); border-radius:8px; cursor:pointer;}
+      #bkFsExit:hover{background:rgba(255,255,255,.04);}
+      
+      #bkFsControls{padding:8px 12px; border-bottom:1px solid #171a20; background:#0b0c0e; display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+      #bkFsRanges{display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+      .bkRangeBtn{font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;
+        color:#cfcfcf; padding:7px 8px; border:1px solid #1c2030; background:rgba(255,255,255,.02); border-radius:8px; cursor:pointer; user-select:none;}
+      .bkRangeBtn:hover{background:rgba(255,255,255,.04);}
+      .bkRangeBtn.active{border-color:#2b3550; box-shadow: inset 0 -2px 0 #ff9f1a;}
+      #bkFsCompares{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+      .bkCmp{display:flex; gap:6px; align-items:center; font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace; color:#cfcfcf;}
+      .bkCmp input{accent-color:#ff9f1a;}
+
+      #bkFsMount{position:relative;}
+      #bkFsMount canvas{width:100% !important; height:calc(100vh - 140px) !important; display:block;}
+    `;
+    document.head.appendChild(style);
+
+    const ov=document.createElement("div");
+    ov.id="bkFsOverlay";
+    ov.innerHTML = `
+      <div id="bkFsInner">
+        <div id="bkFsTop">
+          <div id="bkFsTitle">—</div>
+          <div id="bkFsExit">Exit Fullscreen (Esc)</div>
+        </div>
+        <div id="bkFsControls">
+          <div id="bkFsRanges"></div>
+          <div id="bkFsCompares"></div>
+        </div>
+        <div id="bkFsMount"></div>
+      </div>
+    `;
+    document.body.appendChild(ov);
+
+    const exit=()=>exitFS();
+    ov.addEventListener("mousedown",(e)=>{ if(e.target===ov) exit(); });
+    document.getElementById("bkFsExit").addEventListener("click", exit);
+  }
+
+  let fsState = {on:false, canvas:null, parent:null, next:null, chart:null, mount:null, titleEl:null};
+
+  function enterFS(chart, title){
+    ensureFSOverlay();
+    const ov=document.getElementById("bkFsOverlay");
+    const mount=document.getElementById("bkFsMount");
+    const titleEl=document.getElementById("bkFsTitle");
+
+    const canvas=chart.canvas;
+    fsState = {
+      on:true, canvas, parent: canvas.parentNode, next: canvas.nextSibling, chart,
+      mount, titleEl
     };
 
-    mainChart = new Chart(ctx, baseOptions);
-    updateMainChart();
+    titleEl.textContent = title || chart.title || "Chart";
+    // build fullscreen controls (range + compare toggles)
+    const rangesEl = document.getElementById("bkFsRanges");
+    const comparesEl = document.getElementById("bkFsCompares");
+    if(rangesEl){
+      const keys = ["1D","1W","1M","3M","6M","YTD","1Y","5Y","10Y","MAX"];
+      rangesEl.innerHTML = keys.map(k=>`<div class="bkRangeBtn" data-r="${k}">${k}</div>`).join("");
+      const setActive = ()=>{
+        rangesEl.querySelectorAll(".bkRangeBtn").forEach(b=>{
+          b.classList.toggle("active", b.getAttribute("data-r") === chart.rangeKey);
+        });
+      };
+      rangesEl.querySelectorAll(".bkRangeBtn").forEach(b=>{
+        b.addEventListener("click", ()=>{
+          const r = b.getAttribute("data-r");
+          chart.applyRange(r);
+          setActive();
+        });
+      });
+      setActive();
+    }
+    if(comparesEl){
+      if(chart.compares && chart.compares.length){
+        comparesEl.innerHTML = chart.compares.map((c,idx)=>`
+          <label class="bkCmp" title="${c.label || c.key}">
+            <input type="checkbox" data-k="${c.key}" ${chart.compareEnabled.has(c.key) ? "checked":""}/>
+            <span>${c.label || c.key}</span>
+          </label>
+        `).join("");
+        comparesEl.querySelectorAll("input[type=checkbox]").forEach(cb=>{
+          cb.addEventListener("change", ()=>{
+            chart.setCompareEnabled(cb.getAttribute("data-k"), cb.checked);
+          });
+        });
+      }else{
+        comparesEl.innerHTML = `<span style="color:#7c7c7c; font:11px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace;">Overlays: none</span>`;
+      }
+    }
+
+    mount.innerHTML="";
+    mount.appendChild(canvas);
+    ov.classList.add("on");
+    setTimeout(()=>chart.resize(), 60);
   }
 
-  function updateMainChart() {
-    if (!mainChart) return;
-    const theme = getCurrentThemeConfig();
-    const series = BASE_SERIES[theme.code] || BASE_SERIES.KMRI;
-    const data = series[currentHorizonKey] || series.short;
-    const labels = data.map(function (_, i) { return 't' + (i + 1); });
+  function exitFS(){
+    if(!fsState.on) return;
+    const ov=document.getElementById("bkFsOverlay");
+    const {canvas,parent,next,chart}=fsState;
 
-    mainChart.data.labels = labels;
-    mainChart.data.datasets[0].data = data;
-    mainChart.update();
+    if(next) parent.insertBefore(canvas, next);
+    else parent.appendChild(canvas);
 
-    updateLegend(data);
+    ov.classList.remove("on");
+    fsState = {on:false, canvas:null, parent:null, next:null, chart:null, mount:null, titleEl:null};
+
+    setTimeout(()=>chart.resize(), 60);
+  }
+
+  
+
+  // expose minimal API
+  window.BloombergCanvasChart = BloombergCanvasChart;
+  window.hashSeed = hashSeed;
+  window.__bkMakeSeries = makeSeries;
+  })();
+  // ===== end BloombergCanvasChart module =====
+
+
+  function updateMainChart(){
+    const theme = THEMES[currentThemeKey] || THEMES.eu_telecom_resilience;
+
+    // keep range/horizon coherent
+    if(!currentRangeKey) currentRangeKey = RANGE_MAPPING[currentHorizonKey] || '6M';
+
+    const canvas = $('chartMain');
+    if(!canvas || !window.BloombergCanvasChart){
+      console.error('BloombergCanvasChart or canvas not available');
+      return;
+    }
+
+    const label = (theme.label_en || theme.label || '').trim();
+    const title = `${theme.code} – ${label}`.trim();
+    const seedStr = `${theme.indicatorKey}|${theme.code}|${currentThemeKey}|${currentHorizonKey}|${currentRangeKey}`;
+
+    // horizon-specific dynamics (deterministic but visually realistic: two-sided moves + mild cycles)
+    let drift = (currentHorizonKey === 'short') ? 0.004 : (currentHorizonKey === 'medium') ? 0.0022 : 0.0012;
+    let vol = (currentHorizonKey === 'short') ? 1.15  : (currentHorizonKey === 'medium') ? 0.92  : 0.78;
+
+    // theme-specific skew so every theme renders distinct dynamics (still deterministic)
+    const _hTheme = hashSeed(seedStr + "|theme");
+    const _bias = (((_hTheme % 2001) - 1000) / 1000);              // [-1.0, +1.0]
+    const _volAdj = ((((_hTheme >>> 11) % 401) - 200) / 1000);     // [-0.2, +0.2]
+    drift = drift + (_bias * 0.0016);
+    vol   = vol * (1 + _volAdj);
+    const cycleAmp = (currentHorizonKey === 'short') ? 0.35 : (currentHorizonKey === 'medium') ? 0.25 : 0.18;
+
+    const shockAt = 0.72;
+    const shock = -2.2 * ((_bias >= 0) ? 1 : -1);
+    const meanRev = 0.0024;
+    const shockMode = "both";
+    const cyclePeriod = 180;
+    const jumpProb = (currentHorizonKey === 'short') ? 0.010 : (currentHorizonKey === 'medium') ? 0.007 : 0.004;
+    const jumpScale= (currentHorizonKey === 'short') ? 1.35  : (currentHorizonKey === 'medium') ? 1.10 : 0.85;
+
+    // create chart once; then just swap the underlying series for subsequent updates
+    if(!mainChart || !(mainChart instanceof window.BloombergCanvasChart)){
+      mainChart = new window.BloombergCanvasChart(canvas, {
+        title,
+        unit: '',
+        seedStr,
+        base: 100,
+        drift,
+        vol,
+        shockAt: shockAt,
+        shock: shock,
+        meanRev: meanRev,
+        shockMode: shockMode,
+        cycleAmp: cycleAmp,
+        cyclePeriod: cyclePeriod,
+        jumpProb: jumpProb,
+        jumpScale: jumpScale,
+        kind: "standard",
+        overlays: [],
+        compares: [],
+        compareEnabled: []
+      });
+    } else {
+      // update meta
+      mainChart.title = title;
+      mainChart.seedStr = seedStr;
+      mainChart.base = 100;
+      mainChart.drift = drift;
+      mainChart.vol = vol;
+      mainChart.shockAt = shockAt;
+      mainChart.shock = shock;
+      mainChart.meanRev = meanRev;
+      mainChart.shockMode = shockMode;
+      mainChart.cycleAmp = cycleAmp;
+      mainChart.cyclePeriod = cyclePeriod;
+      mainChart.jumpProb = jumpProb;
+      mainChart.jumpScale = jumpScale;
+
+      // regenerate deterministic points with bk generator
+      if(typeof window.__bkMakeSeries === 'function'){
+        mainChart.points = window.__bkMakeSeries({
+          seedStr,
+          base: mainChart.base,
+          drift: mainChart.drift,
+          vol: mainChart.vol,
+          shockAt: mainChart.shockAt,
+          shock: mainChart.shock,
+          meanRev: mainChart.meanRev,
+          shockMode: mainChart.shockMode,
+          cycleAmp: cycleAmp,
+          cyclePeriod: cyclePeriod,
+          jumpProb: jumpProb,
+          jumpScale: 1.0
+        });
+      }
+      // re-apply range window and redraw
+      mainChart.applyRange(currentRangeKey, true);
+      mainChart.resize();
+      mainChart.render();
+    }
+
+    // apply the selected range window (constructor defaults to MAX otherwise)
+    mainChart.applyRange(currentRangeKey, false);
+
+    // keep the original status behaviour intact
     updateStatusBar();
-    updateRangeButtonsForHorizon();
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  function setActiveRangeButton(rangeKey){
+    rangeButtons.forEach(btn=>{
+      const isActive = btn.dataset.range === rangeKey;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
 
-    const selectEN = document.getElementById('themeSelectEN');
-    if (selectEN) {
-      selectEN.addEventListener('change', function () {
+  function initRangeButtons(){
+    rangeButtons = Array.from(document.querySelectorAll('.toolbar-btn-range[data-range]'));
+    rangeButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const rk = btn.dataset.range;
+        if(!rk) return;
+        currentRangeKey = rk;
+        currentHorizonKey = HORIZON_FROM_RANGE[rk] || currentHorizonKey;
+        const horizonSelect = $('horizonSelect');
+        if(horizonSelect) horizonSelect.value = currentHorizonKey;
+        setActiveRangeButton(rk);
+        updateMainChart();
+      });
+    });
+
+    // initial active state
+    const preferred = RANGE_MAPPING[currentHorizonKey] || '6M';
+    currentRangeKey = preferred;
+    setActiveRangeButton(currentRangeKey);
+  }
+
+  function initControls(){
+    const selectEN = $('themeSelectEN');
+    if(selectEN){
+      selectEN.addEventListener('change', function(){
         currentThemeKey = this.value;
-        selectEN.value = currentThemeKey;
-        updateMainChart();
         updateIndicatorText();
-      });
-    }
-
-    const horizonSelect = document.getElementById('horizonSelect');
-    if (horizonSelect) {
-      horizonSelect.addEventListener('change', function () {
-        currentHorizonKey = this.value;
         updateMainChart();
       });
     }
 
-    initMainChart();
+    const horizonSelect = $('horizonSelect');
+    if(horizonSelect){
+      horizonSelect.addEventListener('change', function(){
+        currentHorizonKey = this.value;
+        const preferred = RANGE_MAPPING[currentHorizonKey] || currentRangeKey;
+        currentRangeKey = preferred;
+        setActiveRangeButton(currentRangeKey);
+        updateMainChart();
+      });
+    }
+  }
+
+  // ---- Fullscreen ----
+  async function toggleFullscreen(){
+    const card = $('chartCard');
+    if(!card) return;
+
+    try{
+      if(document.fullscreenElement){
+        await document.exitFullscreen();
+      }else{
+        await card.requestFullscreen({ navigationUI: 'hide' });
+      }
+    }catch(e){
+      // ignore (browser / policy)
+      console.warn('Fullscreen not available:', e);
+    }
+  }
+
+  function initFullscreen(){
+    const fsBtn = $('fullscreenBtn');
+    if(fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
+
+    const canvasWrap = document.querySelector('#chartCard .terminal-chart-canvas');
+    if(canvasWrap){
+      canvasWrap.addEventListener('dblclick', toggleFullscreen);
+      canvasWrap.style.cursor = 'zoom-in';
+    }
+
+    document.addEventListener('fullscreenchange', ()=>{
+      const canvasWrap2 = document.querySelector('#chartCard .terminal-chart-canvas');
+      if(canvasWrap2){
+        canvasWrap2.style.cursor = document.fullscreenElement ? 'zoom-out' : 'zoom-in';
+      }
+      // Chart.js needs a nudge after fullscreen transitions
+      window.setTimeout(()=>{ try{ mainChart && mainChart.resize(); }catch(_){} }, 50);
+      window.requestAnimationFrame(()=>{ try{ mainChart && mainChart.resize(); }catch(_){} });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    // Chart.js time scale requires a date adapter; fall back to category if missing.
+    // If the adapter isn't present, keep the chart usable by coercing x labels.
+    try{
+      // no-op: existence check happens inside buildChart
+    }catch(_){}
+
+    initControls();
     initRangeButtons();
+    initFullscreen();
     updateIndicatorText();
-    updateStatusBar();
+    updateMainChart();
   });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
