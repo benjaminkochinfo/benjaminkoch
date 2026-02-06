@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="dark"/>
   <title>World Intelligence Factbook</title>
-  <meta name="description" content="World Intelligence Factbook — offline-first country profiles with terminal-grade navigation and silent public series refresh."/>
+  <meta name="description" content="World Intelligence Factbook — redesigned country intelligence library with source-text retrieval and silent current-series refresh."/>
   <style>
     :root{
       --bg:#061018;
@@ -33,8 +33,6 @@
       color:var(--text);
       overflow-x:hidden;
     }
-    a{color:rgba(255,138,0,.92); text-decoration:none}
-    a:hover{text-decoration:underline}
 
     .topbar{
       position:sticky; top:0; z-index:40;
@@ -48,8 +46,9 @@
       padding:12px 14px;
       display:flex; gap:12px;
       align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
     }
-    .brand{display:flex; align-items:center; gap:10px; min-width: 320px;}
+    .brand{display:flex; align-items:center; gap:10px;}
     .logo{
       width:44px; height:44px; border-radius: 16px;
       background: linear-gradient(135deg, rgba(255,138,0,.95), rgba(255,138,0,.15));
@@ -62,85 +61,22 @@
     }
     .brand h1{margin:0; font-size:14px; letter-spacing:.3px; line-height:1.05}
     .brand .sub{margin-top:4px; font-family:var(--mono); font-size:11px; color:var(--muted)}
-
-    .cmd{
-      flex:1;
-      display:flex; gap:10px; align-items:center; justify-content:center;
-      max-width: 820px;
-    }
-    .pill{
-      display:flex; align-items:center; gap:10px;
-      padding:10px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(26,50,75,.85);
-      background: rgba(11,22,34,.78);
-      box-shadow: 0 10px 35px rgba(0,0,0,.25);
-      width: 100%;
-      max-width: 560px;
-    }
-    .pill label{
-      font-family:var(--mono);
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:.25px;
-      white-space:nowrap;
-    }
-    .pill input{
-      border:none; outline:none;
-      background:transparent;
-      color:var(--text);
-      font-family:var(--mono);
-      font-size:12px;
-      width:100%;
-    }
-    .chip{
-      font-family:var(--mono);
-      font-size:11px;
-      color: rgba(255,255,255,.78);
-      border:1px solid rgba(26,50,75,.85);
-      background: rgba(15,33,51,.72);
-      padding:9px 11px;
-      border-radius: 999px;
-      display:flex; align-items:center; gap:8px;
-      cursor:pointer;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .chip:hover{border-color: rgba(255,138,0,.45)}
-    .kbd{
-      font-family:var(--mono);
-      font-size:10px;
-      color: rgba(255,255,255,.75);
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(7,16,24,.55);
-      padding:4px 8px;
-      border-radius: 999px;
-      white-space:nowrap;
-    }
-
-    .rightmeta{
-      display:flex; align-items:center; gap:10px;
+    .meta{
       font-family:var(--mono);
       font-size:11px;
       color: var(--muted);
+      display:flex; gap:10px; align-items:center;
       white-space:nowrap;
-      min-width: 340px;
-      justify-content:flex-end;
     }
 
     .wrap{max-width:1560px; margin:0 auto; padding:14px;}
     .grid{
       display:grid;
-      grid-template-columns: 390px 1fr;
+      grid-template-columns: 520px 1fr;
       gap:14px;
       align-items:start;
     }
-    @media (max-width: 1100px){
-      .grid{grid-template-columns:1fr}
-      .rightmeta{display:none}
-      .brand{min-width:auto}
-      .cmd{justify-content:flex-start}
-    }
+    @media (max-width: 1100px){ .grid{grid-template-columns:1fr} }
 
     .panel{
       border:1px solid rgba(26,50,75,.85);
@@ -154,60 +90,46 @@
       border-bottom:1px solid rgba(26,50,75,.65);
       background: linear-gradient(180deg, rgba(15,33,51,.55), rgba(11,22,34,.35));
       display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
     }
     .panel-h h2{margin:0; font-size:13px; letter-spacing:.2px}
     .hint{color:var(--muted); font-family:var(--mono); font-size:11px; line-height:1.35; margin-top:6px;}
     .panel-b{padding:12px;}
 
-    .seg{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
-    .seg .s{
-      padding:8px 10px;
-      border-radius:999px;
+    label.small{
+      font-family:var(--mono);
+      font-size:10px;
+      color: var(--muted);
+      display:block;
+      margin:0 0 6px 2px;
+    }
+    select, input{
+      width:100%;
+      border:1px solid rgba(26,50,75,.85);
+      background: rgba(7,16,24,.55);
+      color: rgba(255,255,255,.88);
+      border-radius: 14px;
+      padding:10px 12px;
+      outline:none;
+      font-size:12px;
+    }
+    input::placeholder{color: rgba(159,179,201,.75)}
+    .row2{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
+    @media (max-width: 520px){ .row2{grid-template-columns:1fr} }
+
+    .btns{display:flex; gap:8px; flex-wrap:wrap}
+    .btn{
       border:1px solid rgba(26,50,75,.75);
-      background: rgba(15,33,51,.35);
+      background: rgba(7,16,24,.55);
+      color: rgba(255,255,255,.85);
+      padding:9px 10px;
+      border-radius: 999px;
+      cursor:pointer;
       font-family:var(--mono);
       font-size:11px;
-      cursor:pointer;
       user-select:none;
-      color: rgba(255,255,255,.78);
     }
-    .seg .s.active{
-      border-color: rgba(255,138,0,.55);
-      background: rgba(255,138,0,.08);
-      color: rgba(255,138,0,.95);
-    }
-
-    .list{
-      display:flex; flex-direction:column; gap:8px;
-      max-height: calc(100vh - 270px);
-      overflow:auto;
-      padding-right:4px;
-      margin-top:10px;
-    }
-    .row{
-      border:1px solid rgba(26,50,75,.7);
-      background: rgba(15,33,51,.35);
-      border-radius: 14px;
-      padding:10px 10px;
-      cursor:pointer;
-      transition: transform .08s ease, border-color .12s ease;
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
-    }
-    .row:hover{border-color: rgba(255,138,0,.35); transform: translateY(-1px)}
-    .row.active{
-      border-color: rgba(255,138,0,.55);
-      background: rgba(255,138,0,.08);
-    }
-    .row .name{font-size:12px; letter-spacing:.2px; line-height:1.2}
-    .row .meta{font-family:var(--mono); font-size:11px; color:var(--muted); display:flex; gap:10px; align-items:center}
-    .tag{
-      padding:4px 8px;
-      border-radius: 999px;
-      border:1px solid rgba(26,50,75,.7);
-      background: rgba(7,16,24,.55);
-      color: rgba(255,255,255,.75);
-    }
-    .tag.accent{border-color: rgba(255,138,0,.35); color: rgba(255,138,0,.95); background: rgba(255,138,0,.06)}
+    .btn:hover{border-color: rgba(255,138,0,.45)}
 
     .hero{
       padding:16px 16px 12px 16px;
@@ -219,18 +141,6 @@
     .hero-top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap}
     .hero h3{margin:0; font-size:18px; letter-spacing:.3px}
     .subline{font-family:var(--mono); color:var(--muted); font-size:11px; line-height:1.35; margin-top:6px}
-    .actions{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-    .btn{
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(7,16,24,.55);
-      color: rgba(255,255,255,.85);
-      padding:8px 10px;
-      border-radius: 999px;
-      cursor:pointer;
-      font-family:var(--mono);
-      font-size:11px;
-    }
-    .btn:hover{border-color: rgba(255,138,0,.45)}
 
     .kpis{
       display:grid;
@@ -272,7 +182,7 @@
     .content{
       padding:12px;
       display:grid;
-      grid-template-columns: 1.22fr .78fr;
+      grid-template-columns: 1.35fr .65fr;
       gap:12px;
       align-items:start;
     }
@@ -289,14 +199,42 @@
       border-bottom:1px solid rgba(26,50,75,.55);
       background: rgba(7,16,24,.45);
       display:flex; align-items:center; justify-content:space-between; gap:10px;
+      flex-wrap:wrap;
     }
     .card-h b{font-size:12px; letter-spacing:.2px}
     .card-h span{font-family:var(--mono); font-size:10px; color:var(--muted)}
     .card-b{padding:10px 12px}
 
-    .notice{
+    .pillrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px}
+    .pill{
       border:1px solid rgba(26,50,75,.75);
       background: rgba(7,16,24,.55);
+      color: rgba(255,255,255,.85);
+      padding:8px 10px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-family:var(--mono);
+      font-size:11px;
+      user-select:none;
+    }
+    .pill:hover{border-color: rgba(255,138,0,.45)}
+    .pill.active{border-color: rgba(255,138,0,.55); background: rgba(255,138,0,.08); color: rgba(255,138,0,.95)}
+
+    .kv{
+      display:grid;
+      grid-template-columns: 240px 1fr;
+      gap:10px 14px;
+      padding:8px 0;
+      border-bottom:1px dashed rgba(26,50,75,.45);
+    }
+    .kv:last-child{border-bottom:none}
+    @media (max-width: 720px){ .kv{grid-template-columns:1fr} }
+    .kv .k{font-family:var(--mono); font-size:11px; color: rgba(255,255,255,.78); line-height:1.35;}
+    .kv .v{font-size:12px; color: rgba(231,238,247,.95); line-height:1.45; white-space:pre-wrap;}
+
+    .notice{
+      border:1px solid rgba(255,138,0,.35);
+      background: rgba(255,138,0,.08);
       padding:10px 12px;
       border-radius: 16px;
       font-family:var(--mono);
@@ -304,11 +242,21 @@
       line-height:1.45;
       color: rgba(255,255,255,.85);
     }
-    .notice.accent{
-      border-color: rgba(255,138,0,.35);
-      background: rgba(255,138,0,.08);
+    .flagBox{
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(26,50,75,.7);
+      background: rgba(7,16,24,.35);
+      border-radius: 16px;
+      padding:12px;
+      min-height:160px;
     }
-    .small{font-family:var(--mono); font-size:10px; color: var(--muted); line-height:1.4}
+    .flagBox img{
+      max-width:100%;
+      height:auto;
+      border-radius: 12px;
+      border:1px solid rgba(26,50,75,.65);
+    }
+
     .loading{display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11px; color: var(--muted);}
     .spin{
       width:14px; height:14px; border-radius:999px;
@@ -317,73 +265,9 @@
       animation: rot .9s linear infinite;
     }
     @keyframes rot{to{transform: rotate(360deg)}}
-
-    .viewerWrap{
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(7,16,24,.35);
-      border-radius: 16px;
-      overflow:hidden;
-    }
-    .viewerTop{
-      display:flex; gap:8px; align-items:center; justify-content:space-between;
-      padding:10px 12px;
-      border-bottom:1px solid rgba(26,50,75,.55);
-      background: rgba(7,16,24,.45);
-      flex-wrap:wrap;
-    }
-    .viewerTop .mini{
-      font-family:var(--mono);
-      font-size:11px;
-      color: rgba(255,255,255,.82);
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
-    }
-    .mini b{color: rgba(255,138,0,.95)}
-    iframe{
-      width:100%;
-      height: min(78vh, 860px);
-      border:0;
-      background: #000;
-    }
-
-    .cp-backdrop{
-      position:fixed; inset:0; z-index:80;
-      background: rgba(0,0,0,.55);
-      display:none;
-      align-items:flex-start;
-      justify-content:center;
-      padding: 80px 14px 14px;
-    }
-    .cp{
-      width: min(900px, 100%);
-      border:1px solid rgba(26,50,75,.9);
-      border-radius: 18px;
-      background: rgba(11,22,34,.92);
-      box-shadow: 0 30px 90px rgba(0,0,0,.55);
-      overflow:hidden;
-    }
-    .cp-top{
-      padding:12px;
-      border-bottom:1px solid rgba(26,50,75,.65);
-      display:flex; gap:10px; align-items:center;
-    }
-    .cp-top span{font-family:var(--mono); font-size:11px; color: var(--muted)}
-    .cp-top input{
-      border:none; outline:none; background:transparent;
-      color:var(--text); font-family:var(--mono); font-size:12px;
-      width:100%;
-    }
-    .cp-list{max-height: 440px; overflow:auto; padding:10px; display:flex; flex-direction:column; gap:8px}
-    .cp-item{
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(15,33,51,.35);
-      border-radius: 14px;
-      padding:10px 10px;
-      cursor:pointer;
-      display:flex; justify-content:space-between; gap:10px; align-items:center;
-    }
-    .cp-item:hover{border-color: rgba(255,138,0,.35)}
   </style>
 </head>
+
 <body>
   <div class="topbar">
     <div class="topbar-inner">
@@ -391,49 +275,51 @@
         <div class="logo">WIB</div>
         <div>
           <h1>World Intelligence Factbook</h1>
-          <div class="sub">offline reference library • your hosted sources • silent public series refresh</div>
+          <div class="sub">Drop-down navigation • structured fields • generated summaries • silent comparisons</div>
         </div>
       </div>
-
-      <div class="cmd">
-        <div class="pill" title="Search entities. Enter opens best match.">
-          <label>FIND</label>
-          <input id="q" placeholder="type: germany / gm / japan / …   (Ctrl+K palette)"/>
-        </div>
-        <div class="chip" id="cmdBtn" title="Command palette">
-          <span>COMMAND</span>
-          <span class="kbd">Ctrl K</span>
-        </div>
-      </div>
-
-      <div class="rightmeta">
-        <span class="muted">entities:</span> <span id="count">0</span>
+      <div class="meta">
+        <span id="status">loading…</span>
         <span class="muted">|</span>
-        <span id="status">loading wifbindex.html…</span>
+        <span class="muted">entities:</span> <span id="count">0</span>
       </div>
     </div>
   </div>
 
   <div class="wrap">
     <div class="grid">
-      <!-- LEFT -->
+
+      <!-- LEFT: dropdown navigator -->
       <div class="panel">
         <div class="panel-h">
           <div>
             <h2>Navigator</h2>
-            <div class="hint">
-              Sources are loaded locally from this site. Regions are taken from the index selector where present.
-              Scenario lenses reorder recommended section jumps (content remains canonical).
-            </div>
-            <div class="seg" id="lenses"></div>
+            <div class="hint">Choose region and entity. Everything is rendered inside this redesigned layer.</div>
           </div>
-          <button class="btn" id="reload">reload</button>
+          <div class="btns">
+            <button class="btn" id="reload">reload</button>
+            <button class="btn" id="copyLink">copy link</button>
+          </div>
         </div>
         <div class="panel-b">
-          <div class="seg" id="regions"></div>
-          <div class="list" id="list"></div>
-          <div class="small" style="margin-top:10px">
-            Structure expected at root: <span class="muted">geos/</span>, <span class="muted">fields/</span>, <span class="muted">stylesheets/</span>, <span class="muted">javascripts/</span>, <span class="muted">docs/</span>, <span class="muted">appendix/</span>, …
+          <div class="row2">
+            <div>
+              <label class="small">Region</label>
+              <select id="region"><option value="">All</option></select>
+            </div>
+            <div>
+              <label class="small">Search</label>
+              <input id="q" placeholder="Type country name or code…"/>
+            </div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label class="small">Entity</label>
+            <select id="country"><option value="">Select…</option></select>
+          </div>
+
+          <div style="margin-top:10px" class="notice" id="navNote">
+            Select an entity to render its structured profile, travel-relevant fields, flag description, and comparison view.
           </div>
         </div>
       </div>
@@ -444,266 +330,388 @@
           <div class="hero-top">
             <div>
               <h3 id="title">Select an entity</h3>
-              <div class="subline" id="subline">Fast search → open source page → use section jumps (lens-ordered).</div>
+              <div class="subline" id="subline">Facts are extracted from the underlying profile page and rendered into a modern layout.</div>
             </div>
-            <div class="actions">
-              <button class="btn" id="copyLink">copy link</button>
-              <button class="btn" id="openPage">open page</button>
+            <div class="btns">
+              <button class="btn" id="clearCache">clear cache</button>
             </div>
           </div>
           <div class="kpis">
             <div class="kpi"><div class="k">CODE</div><div class="v" id="k_code">—</div></div>
             <div class="kpi"><div class="k">REGION</div><div class="v" id="k_region">—</div></div>
-            <div class="kpi"><div class="k">ISO (extracted)</div><div class="v" id="k_iso">—</div></div>
+            <div class="kpi"><div class="k">PROFILE DEPTH</div><div class="v" id="k_depth">—</div></div>
             <div class="kpi"><div class="k">CURRENT SNAPSHOT</div><div class="v" id="k_now">—</div></div>
           </div>
         </div>
 
         <div class="tabs">
-          <div class="tab active" data-tab="read">READ</div>
-          <div class="tab" data-tab="sections">SECTIONS</div>
-          <div class="tab" data-tab="search">IN-PAGE SEARCH</div>
+          <div class="tab active" data-tab="profile">PROFILE</div>
+          <div class="tab" data-tab="travel">TRAVEL</div>
+          <div class="tab" data-tab="flags">FLAGS</div>
+          <div class="tab" data-tab="compare">COMPARE</div>
         </div>
 
         <div class="content">
           <div class="card">
             <div class="card-h">
-              <b id="mainTitle">Country profile</b>
+              <b id="mainTitle">Profile</b>
               <span id="mainMeta">—</span>
             </div>
             <div class="card-b" id="main">
-              <div class="notice accent">
-                This is the front door. The underlying source pages are rendered below using your local site structure.
-                Select a country; the page loads with all local assets.
-              </div>
+              <div class="notice">Select an entity to render its structured facts.</div>
             </div>
           </div>
 
           <div class="card">
             <div class="card-h">
-              <b>Quick navigation</b>
-              <span>lens-ordered</span>
+              <b id="sideTitle">Summary</b>
+              <span id="sideMeta">—</span>
             </div>
-            <div class="card-b">
-              <div class="notice">
-                <b>Keyboard</b><br/>
-                • <span class="muted">/</span> focus FIND<br/>
-                • <span class="muted">Enter</span> open best match<br/>
-                • <span class="muted">Ctrl+K</span> command palette<br/>
-                • <span class="muted">Esc</span> close palette
-              </div>
-              <div style="margin-top:12px" id="secNav"></div>
-              <div style="margin-top:12px" id="pageSearchBox"></div>
+            <div class="card-b" id="side">
+              <div class="notice">A concise overview will appear here.</div>
             </div>
           </div>
         </div>
 
       </div>
-    </div>
-  </div>
 
-  <!-- Command palette -->
-  <div class="cp-backdrop" id="cpBack">
-    <div class="cp" role="dialog" aria-modal="true" aria-label="Command palette">
-      <div class="cp-top">
-        <span>CMD</span>
-        <input id="cpQ" placeholder="type a country, region, or command: 'lens macro', 'open germany' …"/>
-        <span class="kbd">Esc</span>
-      </div>
-      <div class="cp-list" id="cpList"></div>
     </div>
   </div>
 
 <script>
 (() => {
-  // ====== Configuration ======
-  // Everything is hosted in the same root as this file.
-  // The index selector page is named wifbindex.html (at root).
-  const INDEX_PAGE = "wifbindex.html";
+  // ===== hidden structure (no UI exposure) =====
+  const ARCH = { root: "wifb", index: "wifb/wifbindex.html" };
 
-  // Lens ordering (reorders section jump suggestions only)
-  const LENS_ORDER = {
-    "Core": ["Introduction","Government","Economy","People and Society","Geography","Energy","Communications","Transportation","Military and Security","Transnational Issues"],
-    "GeoRisk": ["Military and Security","Transnational Issues","Government","Energy","Economy","Transportation","Communications","People and Society","Geography","Introduction"],
-    "Macro": ["Economy","Energy","Government","Transportation","Communications","People and Society","Geography","Transnational Issues","Military and Security","Introduction"],
-    "Infrastructure": ["Transportation","Communications","Energy","Government","Economy","People and Society","Geography","Introduction","Transnational Issues","Military and Security"]
-  };
-
-  // Silent public series refresh (no errors shown; blank if unavailable)
-  // ISO codes are extracted from the underlying source page text when possible.
+  // ===== silent public time-series =====
   const WB = {
     base: "https://api.worldbank.org/v2/country",
     indicators: [
       { key: "NY.GDP.MKTP.CD", label: "GDP", fmt: v => fmtNum(v) },
       { key: "FP.CPI.TOTL.ZG", label: "Infl", fmt: v => `${fmtNum(v)}%` },
-      { key: "SP.POP.TOTL",    label: "Pop", fmt: v => fmtNum(v) }
+      { key: "SP.POP.TOTL", label: "Pop", fmt: v => fmtNum(v) }
     ],
     yearMax: 2026
   };
 
-  // ====== State ======
-  const state = {
-    lens: "Core",
-    region: "",
-    tab: "read",
-    entities: [],      // { code, name, href, regionLabel }
-    active: null,      // same
-    activeHtml: "",
-    activeIso: null    // {a2, a3}
-  };
-
-  // ====== DOM ======
+  // ===== DOM =====
   const $ = s => document.querySelector(s);
   const el = {
-    q: $("#q"),
-    count: $("#count"),
     status: $("#status"),
+    count: $("#count"),
 
-    lenses: $("#lenses"),
-    regions: $("#regions"),
-    list: $("#list"),
+    reload: $("#reload"),
+    copyLink: $("#copyLink"),
+    clearCache: $("#clearCache"),
+
+    region: $("#region"),
+    q: $("#q"),
+    country: $("#country"),
 
     title: $("#title"),
     subline: $("#subline"),
+
     k_code: $("#k_code"),
     k_region: $("#k_region"),
-    k_iso: $("#k_iso"),
+    k_depth: $("#k_depth"),
     k_now: $("#k_now"),
 
     mainTitle: $("#mainTitle"),
     mainMeta: $("#mainMeta"),
     main: $("#main"),
-    secNav: $("#secNav"),
-    pageSearchBox: $("#pageSearchBox"),
 
-    reload: $("#reload"),
-    copyLink: $("#copyLink"),
-    openPage: $("#openPage"),
+    sideTitle: $("#sideTitle"),
+    sideMeta: $("#sideMeta"),
+    side: $("#side"),
 
-    tabs: document.querySelectorAll(".tab[data-tab]"),
-
-    cmdBtn: $("#cmdBtn"),
-    cpBack: $("#cpBack"),
-    cpQ: $("#cpQ"),
-    cpList: $("#cpList"),
+    tabs: document.querySelectorAll(".tab[data-tab]")
   };
 
-  // ====== Helpers ======
+  // ===== state =====
+  const state = {
+    entities: [],       // {code, name, regionLabel, href}
+    active: null,
+    activeDoc: null,
+    activeStruct: null,
+    activeIso: null,
+    tab: "profile",
+    activeSection: ""
+  };
+
+  // ===== utils =====
   function escapeHtml(str){
     return String(str)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
   }
-
   function fmtNum(x){
     if (x === null || x === undefined) return "—";
-    const n = Number(String(x).replace(/,/g,""));
-    if (!isFinite(n)) return String(x);
+    const s = String(x);
+    const n = Number(s.replace(/,/g,""));
+    if (!isFinite(n)) return s;
     return n.toLocaleString(undefined);
   }
-
   function deepLink(code){
     const u = new URL(location.href);
     u.searchParams.set("c", code);
     return u.toString();
   }
-
-  function setTab(tab){
-    state.tab = tab;
-    el.tabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-tab") === tab));
-    if (state.active) renderActive();
-  }
-
-  function lensOrderedSectionNames(names){
-    const pref = LENS_ORDER[state.lens] || LENS_ORDER.Core;
-    const set = new Set(names);
-    const top = pref.filter(x => set.has(x));
-    const rest = names.filter(x => !top.includes(x));
-    return [...top, ...rest];
-  }
-
   async function fetchText(url){
     const r = await fetch(url, { credentials: "same-origin" });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     return await r.text();
   }
-
-  // Normalize hrefs to be project-site safe (relative paths, no leading "/")
   function normalizeHref(v){
     if (!v) return "";
     if (v.startsWith("http")) return v;
-    return v.replace(/^\.\//, "").replace(/^\//, "");
+    return v.replace(/^\.\//,"").replace(/^\//,"");
+  }
+  function cleanText(s){
+    return (s || "")
+      .replace(/\u00A0/g, " ")
+      .replace(/[ \t]+\n/g, "\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
   }
 
-  // ====== Index parsing ======
+  // ===== index -> entities =====
   function parseEntitiesFromIndex(html){
     const doc = new DOMParser().parseFromString(html, "text/html");
-
     const selects = Array.from(doc.querySelectorAll("select"));
     const sel = selects.find(s => s.querySelector('option[value*="geos/"]')) || selects[0];
     if (!sel) return [];
 
     const out = [];
-    const children = Array.from(sel.children).filter(n => n.tagName === "OPTGROUP" || n.tagName === "OPTION");
+    const nodes = Array.from(sel.children).filter(n => n.tagName === "OPTGROUP" || n.tagName === "OPTION");
 
-    for (const node of children){
+    for (const node of nodes){
       if (node.tagName === "OPTGROUP"){
-        const label = node.getAttribute("label") || "";
+        const label = (node.getAttribute("label") || "").trim();
         for (const opt of Array.from(node.querySelectorAll("option"))){
-          const v = opt.getAttribute("value") || "";
+          const v = (opt.getAttribute("value") || "").trim();
           if (!v.includes("geos/")) continue;
           const code = (v.match(/geos\/([a-z0-9_-]+)\.html/i)?.[1] || "").toLowerCase();
           if (!code) continue;
           out.push({
             code,
             name: (opt.textContent || "").trim() || code.toUpperCase(),
-            href: normalizeHref(v),
-            regionLabel: label || ""
+            regionLabel: label || "",
+            href: `${ARCH.root}/` + normalizeHref(v)
           });
         }
       } else {
-        const v = node.getAttribute("value") || "";
+        const v = (node.getAttribute("value") || "").trim();
         if (!v.includes("geos/")) continue;
         const code = (v.match(/geos\/([a-z0-9_-]+)\.html/i)?.[1] || "").toLowerCase();
         if (!code) continue;
         out.push({
           code,
           name: (node.textContent || "").trim() || code.toUpperCase(),
-          href: normalizeHref(v),
-          regionLabel: ""
+          regionLabel: "",
+          href: `${ARCH.root}/` + normalizeHref(v)
         });
       }
     }
 
     const seen = new Set();
-    const clean = out.filter(x => {
-      if (seen.has(x.code)) return false;
-      seen.add(x.code);
-      return true;
-    });
-
+    const clean = out.filter(x => { if (seen.has(x.code)) return false; seen.add(x.code); return true; });
     clean.sort((a,b) => (a.name||"").localeCompare(b.name||""));
     return clean;
   }
 
-  // ====== ISO extraction from source page text ======
-  function extractISOFromHtml(countryHtml){
-    const doc = new DOMParser().parseFromString(countryHtml, "text/html");
+  // ===== extraction =====
+  function extractISOFromDoc(doc){
     const text = doc.body?.innerText || "";
-
     const isoLine = text.match(/ISO\s*3166\s*country\s*codes?\s*:\s*([^\n\r]+)/i)?.[1] || null;
     if (!isoLine) return null;
-
-    const a2 = isoLine.match(/Alpha-?2\s*:\s*([A-Z]{2})/i)?.[1]?.toUpperCase() || null;
     const a3 = isoLine.match(/Alpha-?3\s*:\s*([A-Z]{3})/i)?.[1]?.toUpperCase() || null;
+    const a2 = isoLine.match(/Alpha-?2\s*:\s*([A-Z]{2})/i)?.[1]?.toUpperCase() || null;
     if (!a2 && !a3) return null;
     return { a2, a3 };
   }
 
-  // ====== Silent public snapshot ======
+  function dedupeFacts(facts){
+    const seen = new Set();
+    const out = [];
+    for (const f of facts || []){
+      const k = (f.k || "").trim();
+      const v = (f.v || "").trim();
+      if (!k || !v) continue;
+      const key = (k.toLowerCase() + "::" + v.toLowerCase()).slice(0, 900);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ k, v });
+      if (out.length >= 1200) break;
+    }
+    return out;
+  }
+
+  function extractKeyValueTables(root){
+    const facts = [];
+    for (const t of Array.from(root.querySelectorAll("table"))){
+      const rows = Array.from(t.querySelectorAll("tr"));
+      for (const r of rows){
+        const cells = Array.from(r.querySelectorAll("th,td"));
+        if (cells.length < 2) continue;
+        const k = cleanText(cells[0].innerText);
+        const v = cleanText(cells.slice(1).map(c => c.innerText).join(" | "));
+        if (!k || !v) continue;
+        if (k.length > 120) continue;
+        facts.push({ k, v });
+      }
+    }
+    return facts;
+  }
+
+  function extractDefinitionLists(root){
+    const facts = [];
+    for (const dl of Array.from(root.querySelectorAll("dl"))){
+      for (const dt of Array.from(dl.querySelectorAll("dt"))){
+        const dd = dt.nextElementSibling && dt.nextElementSibling.tagName.toLowerCase() === "dd" ? dt.nextElementSibling : null;
+        if (!dd) continue;
+        const k = cleanText(dt.innerText);
+        const v = cleanText(dd.innerText);
+        if (k && v) facts.push({ k, v });
+      }
+    }
+    return facts;
+  }
+
+  function extractLabeledBlocks(root){
+    const facts = [];
+    const text = cleanText(root.innerText || "");
+    const lines = text.split("\n").map(x => x.trim()).filter(Boolean);
+    for (const ln of lines){
+      const m = ln.match(/^([A-Za-z][A-Za-z0-9 \-\/(),.%]{2,80})\s*:\s*(.{2,})$/);
+      if (!m) continue;
+      const k = m[1].trim();
+      const v = m[2].trim();
+      if (!k || !v) continue;
+      facts.push({ k, v });
+    }
+    return facts;
+  }
+
+  function buildSectionsFromDoc(doc){
+    const body = doc.body;
+    const headings = Array.from(body.querySelectorAll("h1,h2,h3"));
+    if (!headings.length){
+      const allFacts = dedupeFacts([
+        ...extractKeyValueTables(body),
+        ...extractDefinitionLists(body),
+        ...extractLabeledBlocks(body)
+      ]);
+      return { sections: new Map([["Overview", { facts: allFacts, text: cleanText(body.innerText||"") }]]), allFacts };
+    }
+
+    const sections = new Map();
+    let allFacts = [];
+    for (let i=0;i<headings.length;i++){
+      const h = headings[i];
+      const name = cleanText(h.innerText || "");
+      if (!name) continue;
+
+      const nodes = [];
+      let cur = h.nextElementSibling;
+      while (cur && !/^(h1|h2|h3)$/i.test(cur.tagName)){
+        nodes.push(cur);
+        cur = cur.nextElementSibling;
+      }
+
+      const chunk = document.createElement("div");
+      for (const n of nodes) chunk.appendChild(n.cloneNode(true));
+
+      const facts = dedupeFacts([
+        ...extractKeyValueTables(chunk),
+        ...extractDefinitionLists(chunk),
+        ...extractLabeledBlocks(chunk)
+      ]);
+
+      const ps = Array.from(chunk.querySelectorAll("p,li"));
+      const text = cleanText(ps.slice(0, 8).map(p => p.innerText).join("\n\n"));
+
+      if (!sections.has(name)) sections.set(name, { facts, text });
+      allFacts = allFacts.concat(facts);
+    }
+
+    allFacts = dedupeFacts(allFacts);
+    if (allFacts.length < 12){
+      const global = dedupeFacts([
+        ...allFacts,
+        ...extractKeyValueTables(body),
+        ...extractDefinitionLists(body),
+        ...extractLabeledBlocks(body)
+      ]);
+      if (!sections.has("Overview")) sections.set("Overview", { facts: global, text: "" });
+      return { sections, allFacts: global };
+    }
+    return { sections, allFacts };
+  }
+
+  function extractFlagFromDoc(doc, pageHref){
+    const imgs = Array.from(doc.querySelectorAll("img"));
+    const scored = imgs.map(img => {
+      const src = img.getAttribute("src") || "";
+      const alt = (img.getAttribute("alt") || "").toLowerCase();
+      const t = (src + " " + alt).toLowerCase();
+      let score = 0;
+      if (t.includes("flag")) score += 5;
+      if (t.includes("smallflag") || t.includes("flag_")) score += 3;
+      if (t.includes("seal") || t.includes("map")) score -= 1;
+      if (src.match(/\.(svg|png|jpg|jpeg|gif)$/i)) score += 1;
+      return { src, alt: img.getAttribute("alt") || "Flag", score };
+    }).sort((a,b)=>b.score-a.score);
+
+    const best = scored.find(x => x.score >= 4);
+    if (!best?.src) return null;
+
+    try{
+      const base = new URL(pageHref, location.href);
+      return { alt: best.alt, src: new URL(best.src, base).toString() };
+    } catch {
+      return null;
+    }
+  }
+
+  function guessSummary(struct){
+    const pref = ["Introduction","Background","Overview","Geography","People and Society","Government","Economy"];
+    let t = "";
+    for (const p of pref){
+      const hit = Array.from(struct.sections.entries()).find(([n]) => n.toLowerCase() === p.toLowerCase());
+      if (hit && hit[1].text){ t = hit[1].text; break; }
+    }
+    if (!t){
+      const any = Array.from(struct.sections.values()).map(s => s.text).find(Boolean);
+      t = any || "";
+    }
+    const picks = pickFacts(struct.allFacts, ["Capital","Population","Area","Government type","Currency","Languages","Religions","GDP"]);
+    const ribbon = picks.length ? ("\n\n" + picks.map(p => `• ${p.k}: ${p.v}`).join("\n")) : "";
+    return cleanText((t ? t.split("\n\n").slice(0,2).join("\n\n") : "") + ribbon);
+  }
+
+  function pickFacts(allFacts, keys){
+    const out = [];
+    const lk = keys.map(k => k.toLowerCase());
+    for (const k of lk){
+      const hit = allFacts.find(f => (f.k||"").toLowerCase().includes(k));
+      if (hit) out.push(hit);
+      if (out.length >= 8) break;
+    }
+    return out;
+  }
+
+  function travelFacts(struct){
+    const tokens = ["travel","visa","passport","entry","health","vaccin","customs","safety","security","crime","airport","ports","transport","road","rail","driving","emergency","medical"];
+    const hits = [];
+    for (const f of struct.allFacts){
+      const t = (f.k + " " + f.v).toLowerCase();
+      if (tokens.some(x => t.includes(x))) hits.push(f);
+      if (hits.length >= 260) break;
+    }
+    return hits;
+  }
+
+  // ===== comparisons (silent) =====
   async function wbLatest(iso3, indicator){
     const url = `${WB.base}/${encodeURIComponent(iso3)}/indicator/${encodeURIComponent(indicator)}?format=json&per_page=20000`;
     const r = await fetch(url);
@@ -711,7 +719,6 @@
     const j = await r.json();
     const data = Array.isArray(j) ? j[1] : null;
     if (!Array.isArray(data)) return null;
-
     const rows = data
       .filter(d => d && d.value !== null && d.date && Number(d.date) <= WB.yearMax)
       .sort((a,b) => Number(b.date) - Number(a.date));
@@ -728,354 +735,304 @@
         if (last) parts.push(`${ind.label} ${last.year}: ${ind.fmt(last.value)}`);
       }
       return parts.length ? parts.join(" • ") : null;
-    } catch {
-      return null;
-    }
+    } catch { return null; }
   }
 
-  // ====== Rendering ======
-  function renderLenses(){
-    const lenses = ["Core","GeoRisk","Macro","Infrastructure"];
-    el.lenses.innerHTML = lenses.map(l => `
-      <div class="s ${l===state.lens?"active":""}" data-lens="${escapeHtml(l)}">LENS: ${escapeHtml(l)}</div>
-    `).join("");
-    el.lenses.querySelectorAll("[data-lens]").forEach(b => {
-      b.addEventListener("click", () => {
-        state.lens = b.getAttribute("data-lens");
-        renderLenses();
-        if (state.active) renderActive();
+  function getIsoCache(){
+    try{ return JSON.parse(localStorage.getItem("wib_iso_cache_v1") || "{}"); } catch { return {}; }
+  }
+  function setIsoCache(map){ localStorage.setItem("wib_iso_cache_v1", JSON.stringify(map || {})); }
+
+  async function buildComparisonForActive(){
+    if (!state.activeIso?.a3) return null;
+    const cache = getIsoCache();
+    cache[state.active.code] = state.activeIso.a3;
+    setIsoCache(cache);
+
+    const entries = Object.entries(cache).slice(0, 120);
+    const result = [];
+
+    for (const ind of WB.indicators){
+      const batch = await Promise.all(entries.map(async ([code, iso3]) => {
+        const last = await wbLatest(iso3, ind.key);
+        if (!last) return null;
+        return { code, year:last.year, value:last.value };
+      }));
+      const rows = batch.filter(Boolean);
+      rows.sort((a,b) => b.value - a.value);
+
+      const activeRow = rows.find(r => r.code === state.active.code) || null;
+      const rank = activeRow ? (rows.indexOf(activeRow)+1) : null;
+
+      result.push({
+        label: ind.label,
+        year: activeRow?.year || rows[0]?.year || null,
+        rank,
+        total: rows.length,
+        top: rows.slice(0,8),
+        bottom: rows.slice(-8).reverse()
       });
-    });
+    }
+    return result;
   }
 
+  // ===== UI rendering =====
   function renderRegions(){
     const labels = Array.from(new Set(state.entities.map(e => e.regionLabel).filter(Boolean))).sort();
-    const all = [{k:"", t:"all"}].concat(labels.map(x => ({k:x, t:x})));
-    el.regions.innerHTML = all.map(x => `
-      <div class="s ${x.k===state.region?"active":""}" data-region="${escapeHtml(x.k)}">${escapeHtml(x.t)}</div>
+    el.region.innerHTML = `<option value="">All</option>` + labels.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join("");
+  }
+
+  function renderCountries(){
+    const q = (el.q.value||"").trim().toLowerCase();
+    const reg = el.region.value || "";
+    const rows = state.entities.filter(e => {
+      if (reg && e.regionLabel !== reg) return false;
+      if (!q) return true;
+      return e.name.toLowerCase().includes(q) || e.code.toLowerCase().includes(q);
+    });
+
+    el.country.innerHTML =
+      `<option value="">Select…</option>` +
+      rows.slice(0, 2500).map(e => `<option value="${escapeHtml(e.code)}">${escapeHtml(e.name)} (${escapeHtml(e.code)})</option>`).join("");
+  }
+
+  function setTab(tab){
+    state.tab = tab;
+    el.tabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-tab")===tab));
+    renderActiveView();
+  }
+
+  function renderKV(facts){
+    const f = (facts || []).slice(0, 420);
+    if (!f.length) return `<div class="notice">No fields detected for this view.</div>`;
+    return f.map(x => `
+      <div class="kv">
+        <div class="k">${escapeHtml(x.k)}</div>
+        <div class="v">${escapeHtml(x.v)}</div>
+      </div>
     `).join("");
-    el.regions.querySelectorAll("[data-region]").forEach(b => {
-      b.addEventListener("click", () => {
-        state.region = b.getAttribute("data-region") || "";
-        renderRegions();
-        renderList();
-      });
+  }
+
+  function renderSectionBrowser(struct){
+    const names = Array.from(struct.sections.keys()).slice(0, 80);
+    const activeName = (state.activeSection && struct.sections.has(state.activeSection))
+      ? state.activeSection
+      : (names.includes("Introduction") ? "Introduction" : (names[0] || "Overview"));
+
+    state.activeSection = activeName;
+
+    const pills = names.map(n => `<div class="pill ${n===activeName ? "active":""}" data-sec="${escapeHtml(n)}">${escapeHtml(n)}</div>`).join("");
+    const sec = struct.sections.get(activeName) || { facts: [], text: "" };
+    const intro = sec.text ? `<div class="notice" style="margin-bottom:10px">${escapeHtml(sec.text)}</div>` : "";
+
+    el.main.innerHTML = `<div class="pillrow">${pills}</div>${intro}${renderKV(sec.facts)}`;
+    el.main.querySelectorAll("[data-sec]").forEach(p => {
+      p.addEventListener("click", () => { state.activeSection = p.getAttribute("data-sec"); renderActiveView(); });
     });
   }
 
-  function renderList(){
-    const q = (el.q.value || "").trim().toLowerCase();
-    const reg = state.region || "";
-    const rows = state.entities
-      .filter(e => {
-        if (reg && e.regionLabel !== reg) return false;
-        if (!q) return true;
-        return (e.name||"").toLowerCase().includes(q) || (e.code||"").toLowerCase().includes(q);
-      })
-      .slice(0, 950);
-
-    el.list.innerHTML = rows.length ? rows.map(e => {
-      const active = state.active?.code === e.code ? "active" : "";
-      return `
-        <div class="row ${active}" data-code="${escapeHtml(e.code)}">
-          <div>
-            <div class="name">${escapeHtml(e.name)}</div>
-            <div class="meta">
-              <span class="tag">${escapeHtml(e.code)}</span>
-              <span class="tag">${escapeHtml(e.regionLabel || "—")}</span>
-            </div>
-          </div>
-          <div class="meta"><span class="tag accent">OPEN</span></div>
-        </div>
-      `;
-    }).join("") : `<div class="notice accent">No matches. Clear region filter or broaden query.</div>`;
-
-    el.list.querySelectorAll(".row").forEach(r => {
-      r.addEventListener("click", () => selectCountry(r.getAttribute("data-code")));
-    });
-  }
-
-  function renderSectionNavFromHtml(countryHtml){
-    const doc = new DOMParser().parseFromString(countryHtml, "text/html");
-
-    const anchors = Array.from(doc.querySelectorAll('a[href^="#"]'))
-      .map(a => ({ href: a.getAttribute("href"), text: (a.textContent || "").trim() }))
-      .filter(x => x.href && x.text && x.text.length <= 40);
-
-    const known = ["Introduction","Geography","People and Society","Government","Economy","Energy","Communications","Transportation","Military and Security","Transnational Issues"];
-    const found = [];
-    for (const k of known){
-      const hit = anchors.find(a => a.text.toLowerCase() === k.toLowerCase());
-      if (hit) found.push({ name: k, href: hit.href });
+  async function renderActiveView(){
+    if (!state.activeStruct){
+      el.mainTitle.textContent = "Profile";
+      el.mainMeta.textContent = "—";
+      el.main.innerHTML = `<div class="notice">Select an entity to render its structured facts.</div>`;
+      el.sideTitle.textContent = "Summary";
+      el.sideMeta.textContent = "—";
+      el.side.innerHTML = `<div class="notice">A concise overview will appear here.</div>`;
+      return;
     }
 
-    const orderedNames = lensOrderedSectionNames(found.map(x => x.name));
-    const ordered = orderedNames.map(n => found.find(x => x.name === n)).filter(Boolean);
+    const struct = state.activeStruct;
 
-    el.secNav.innerHTML = `
-      <div class="notice">
-        <b>Section jumps</b><br/>
-        Ordered by lens: <span class="muted">${escapeHtml(state.lens)}</span>
-      </div>
-      <div class="seg" style="margin-top:10px">
-        ${ordered.map(s => `<div class="s" data-jump="${escapeHtml(s.href)}">${escapeHtml(s.name)}</div>`).join("")}
-      </div>
-      <div class="small" style="margin-top:10px">
-        Jumps scroll inside the embedded page.
-      </div>
-    `;
+    if (state.tab === "profile"){
+      el.mainTitle.textContent = "Profile";
+      el.mainMeta.textContent = "Sections";
+      renderSectionBrowser(struct);
+      el.sideTitle.textContent = "Summary";
+      el.sideMeta.textContent = "Generated";
+      el.side.innerHTML = `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(state._summary || "")}</div>`;
+      return;
+    }
 
-    el.secNav.querySelectorAll("[data-jump]").forEach(b => {
-      b.addEventListener("click", () => {
-        const href = b.getAttribute("data-jump");
-        const frame = document.querySelector("iframe#wifbFrame");
-        if (!frame || !state.active) return;
-        try{
-          const base = state.active.href.split("#")[0];
-          frame.src = base + href;
-        } catch {}
-      });
-    });
-  }
+    if (state.tab === "travel"){
+      el.mainTitle.textContent = "Travel";
+      el.mainMeta.textContent = "Extracted";
+      el.main.innerHTML = renderKV(travelFacts(struct));
+      el.sideTitle.textContent = "Highlights";
+      el.sideMeta.textContent = "Extracted";
+      const picks = pickFacts(struct.allFacts, ["Visa", "Entry", "Health", "Safety", "Airports", "Ports", "Roadways", "Railways"]);
+      el.side.innerHTML = picks.length
+        ? `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(picks.map(p => `• ${p.k}: ${p.v}`).join("\n"))}</div>`
+        : `<div class="notice">No travel highlights detected.</div>`;
+      return;
+    }
 
-  function renderInPageSearch(countryHtml){
-    const doc = new DOMParser().parseFromString(countryHtml, "text/html");
-    const text = doc.body?.innerText || "";
+    if (state.tab === "flags"){
+      el.mainTitle.textContent = "Flag";
+      el.mainMeta.textContent = "Detected";
+      const f = state._flag || null;
+      el.main.innerHTML = f?.src
+        ? `<div class="flagBox"><img src="${escapeHtml(f.src)}" alt="${escapeHtml(f.alt||"Flag")}"/></div>`
+        : `<div class="notice">No flag image detected.</div>`;
 
-    el.pageSearchBox.innerHTML = `
-      <div class="notice">
-        <b>In-page search</b><br/>
-        Searches the page text (fast). Empty means “no matches”.
-      </div>
-      <div style="margin-top:10px">
-        <input id="inQ" style="width:100%; padding:10px 12px; border-radius:14px; border:1px solid rgba(26,50,75,.75); background: rgba(7,16,24,.55); color: var(--text); font-family: var(--mono); font-size:12px; outline:none" placeholder="e.g. 'unemployment', 'railways', 'religion', 'border disputes'"/>
-      </div>
-      <div class="card" style="margin-top:10px">
-        <div class="card-h"><b>Matches</b><span id="inMeta">—</span></div>
-        <div class="card-b" id="inRes"><div class="notice">No query yet.</div></div>
-      </div>
-    `;
+      el.sideTitle.textContent = "Description";
+      el.sideMeta.textContent = "Extracted";
+      const desc = pickFacts(struct.allFacts, ["Flag description","National symbol","National anthem"]);
+      el.side.innerHTML = desc.length
+        ? `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(desc.map(d => `• ${d.k}: ${d.v}`).join("\n"))}</div>`
+        : `<div class="notice">No description detected.</div>`;
+      return;
+    }
 
-    const input = $("#inQ");
-    const meta = $("#inMeta");
-    const out = $("#inRes");
+    if (state.tab === "compare"){
+      el.mainTitle.textContent = "Compare";
+      el.mainMeta.textContent = "Computed";
+      el.main.innerHTML = `<div class="loading"><span class="spin"></span><span>Computing…</span></div>`;
 
-    const lines = text.split("\n").map(x => x.trim()).filter(Boolean);
-
-    input.addEventListener("input", () => {
-      const q = (input.value || "").trim().toLowerCase();
-      if (!q){
-        meta.textContent = "—";
-        out.innerHTML = `<div class="notice">No query yet.</div>`;
+      const cmp = await buildComparisonForActive();
+      if (!cmp){
+        el.main.innerHTML = `<div class="notice">Comparisons are not available for this entity yet.</div>`;
+        el.sideTitle.textContent = "Coverage";
+        el.sideMeta.textContent = "—";
+        el.side.innerHTML = `<div class="notice">This view strengthens as you browse more entities.</div>`;
         return;
       }
-      const hits = [];
-      for (let i=0; i<lines.length; i++){
-        if (lines[i].toLowerCase().includes(q)){
-          hits.push(lines[i]);
-          if (hits.length >= 80) break;
-        }
-      }
-      meta.textContent = `${hits.length} matches (showing up to 80)`;
-      out.innerHTML = hits.length
-        ? hits.map(t => `<div class="notice" style="margin-bottom:8px">${escapeHtml(t)}</div>`).join("")
-        : `<div class="notice accent">No matches for '${escapeHtml(q)}'.</div>`;
-    });
-  }
 
-  function renderActive(){
-    if (!state.active) return;
+      el.main.innerHTML = cmp.map(c => {
+        const rankLine = c.rank ? `Rank: ${c.rank}/${c.total} • Year: ${c.year || "—"}` : `Year: ${c.year || "—"}`;
+        const top = (c.top||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
+        const bot = (c.bottom||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
+        return `
+          <div class="notice" style="margin-bottom:10px"><b>${escapeHtml(c.label)}</b><br/><span class="muted">${escapeHtml(rankLine)}</span></div>
+          <div class="kv"><div class="k">Top</div><div class="v">${escapeHtml(top)}</div></div>
+          <div class="kv"><div class="k">Bottom</div><div class="v">${escapeHtml(bot)}</div></div>
+          <div style="height:12px"></div>
+        `;
+      }).join("");
 
-    el.mainTitle.textContent = "Country profile";
-    el.mainMeta.textContent = `source: ${state.active.href}`;
-
-    if (state.tab === "read"){
-      el.main.innerHTML = `
-        <div class="viewerWrap">
-          <div class="viewerTop">
-            <div class="mini">
-              <span>OPEN:</span>
-              <b>${escapeHtml(state.active.name)}</b>
-              <span class="tag">${escapeHtml(state.active.code)}</span>
-              <span class="tag">${escapeHtml(state.active.regionLabel || "—")}</span>
-            </div>
-            <div class="mini">
-              <span class="kbd">Lens</span>
-              <span>${escapeHtml(state.lens)}</span>
-            </div>
-          </div>
-          <iframe id="wifbFrame" src="${escapeHtml(state.active.href)}"></iframe>
-        </div>
-      `;
-      renderSectionNavFromHtml(state.activeHtml || "");
-      el.pageSearchBox.innerHTML = `<div class="notice">Switch to IN-PAGE SEARCH to interrogate the full text.</div>`;
-      return;
-    }
-
-    if (state.tab === "sections"){
-      el.main.innerHTML = `
-        <div class="notice accent">
-          Sections are navigation. Use the jump pills on the right, or open the embedded page and scroll.
-        </div>
-        <div class="notice" style="margin-top:10px">
-          You can also use <span class="muted">Ctrl+K</span> and type “lens macro” to reorder.
-        </div>
-      `;
-      renderSectionNavFromHtml(state.activeHtml || "");
-      el.pageSearchBox.innerHTML = `<div class="notice">Switch to IN-PAGE SEARCH for full-text retrieval.</div>`;
-      return;
-    }
-
-    if (state.tab === "search"){
-      el.main.innerHTML = `
-        <div class="notice accent">
-          In-page search operates on the rendered page text. It is fast and deterministic.
-        </div>
-      `;
-      renderSectionNavFromHtml(state.activeHtml || "");
-      renderInPageSearch(state.activeHtml || "");
+      el.sideTitle.textContent = "Note";
+      el.sideMeta.textContent = "Adaptive";
+      el.side.innerHTML = `<div class="notice">Comparisons strengthen automatically as the coverage cache builds.</div>`;
       return;
     }
   }
 
+  // ===== selection =====
   async function selectCountry(code){
     const e = state.entities.find(x => x.code === code);
-    if (!e) return;
+    state.active = e || null;
 
-    state.active = e;
-    renderList();
+    if (!state.active){
+      el.title.textContent = "Select an entity";
+      el.subline.textContent = "Facts are extracted and rendered into a modern layout.";
+      el.k_code.textContent = "—";
+      el.k_region.textContent = "—";
+      el.k_depth.textContent = "—";
+      el.k_now.textContent = "—";
+      state.activeDoc = null;
+      state.activeStruct = null;
+      state.activeIso = null;
+      state._flag = null;
+      state._summary = "";
+      renderActiveView();
+      return;
+    }
 
-    el.title.textContent = e.name;
-    el.subline.textContent = `code=${e.code} • region=${e.regionLabel || "—"} • lens=${state.lens}`;
-    el.k_code.textContent = e.code;
-    el.k_region.textContent = e.regionLabel || "—";
-    el.k_iso.textContent = "—";
+    el.title.textContent = state.active.name;
+    el.subline.textContent = `Entity code: ${state.active.code} • Region: ${state.active.regionLabel || "—"}`;
+    el.k_code.textContent = state.active.code;
+    el.k_region.textContent = state.active.regionLabel || "—";
+    el.k_depth.textContent = "…";
     el.k_now.textContent = "—";
 
-    try{
-      const html = await fetchText(e.href);
-      state.activeHtml = html;
+    el.mainTitle.textContent = "Profile";
+    el.mainMeta.textContent = "Loading…";
+    el.main.innerHTML = `<div class="loading"><span class="spin"></span><span>Rendering…</span></div>`;
+    el.sideTitle.textContent = "Summary";
+    el.sideMeta.textContent = "Loading…";
+    el.side.innerHTML = `<div class="loading"><span class="spin"></span><span>Preparing…</span></div>`;
 
-      const iso = extractISOFromHtml(html);
+    try{
+      const html = await fetchText(state.active.href);
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      state.activeDoc = doc;
+
+      const struct = buildSectionsFromDoc(doc);
+      state.activeStruct = struct;
+
+      const iso = extractISOFromDoc(doc);
       state.activeIso = iso;
-      el.k_iso.textContent = iso ? `${iso.a2 || "—"} / ${iso.a3 || "—"}` : "—";
+
+      if (iso?.a3){
+        const cache = getIsoCache();
+        cache[state.active.code] = iso.a3;
+        setIsoCache(cache);
+      }
+
+      state._flag = extractFlagFromDoc(doc, state.active.href);
+      state._summary = guessSummary(struct);
+
+      const depth = { sec: struct.sections.size, facts: struct.allFacts.length };
+      el.k_depth.textContent = `${depth.sec} sections • ${depth.facts.toLocaleString()} fields`;
 
       const snap = await silentSnapshot(iso);
       el.k_now.textContent = snap || "—";
+
+      history.replaceState(null, "", deepLink(state.active.code));
+      renderActiveView();
     } catch {
-      state.activeHtml = "";
+      state.activeDoc = null;
+      state.activeStruct = null;
       state.activeIso = null;
-      el.k_iso.textContent = "—";
+      state._flag = null;
+      state._summary = "";
+
+      el.k_depth.textContent = "—";
       el.k_now.textContent = "—";
+      el.mainMeta.textContent = "—";
+      el.sideMeta.textContent = "—";
+      el.main.innerHTML = `<div class="notice">This entity could not be rendered at the moment.</div>`;
+      el.side.innerHTML = `<div class="notice">No summary available.</div>`;
     }
-
-    renderActive();
-    history.replaceState(null, "", deepLink(e.code));
   }
 
-  // ====== Command palette ======
-  function openCP(){ el.cpBack.style.display = "flex"; el.cpQ.value = ""; renderCP(""); el.cpQ.focus(); }
-  function closeCP(){ el.cpBack.style.display = "none"; }
-
-  function renderCP(q){
-    const needle = (q||"").trim().toLowerCase();
-
-    const commands = [
-      { t: "Lens: Core", a: ()=>{state.lens="Core"; renderLenses(); if(state.active) renderActive(); closeCP();} },
-      { t: "Lens: GeoRisk", a: ()=>{state.lens="GeoRisk"; renderLenses(); if(state.active) renderActive(); closeCP();} },
-      { t: "Lens: Macro", a: ()=>{state.lens="Macro"; renderLenses(); if(state.active) renderActive(); closeCP();} },
-      { t: "Lens: Infrastructure", a: ()=>{state.lens="Infrastructure"; renderLenses(); if(state.active) renderActive(); closeCP();} },
-      { t: "Tab: Read", a: ()=>{setTab("read"); closeCP();} },
-      { t: "Tab: Sections", a: ()=>{setTab("sections"); closeCP();} },
-      { t: "Tab: In-page search", a: ()=>{setTab("search"); closeCP();} },
-      { t: "Reload index", a: ()=>{boot(); closeCP();} },
-    ];
-
-    const countries = state.entities
-      .filter(e => !needle || e.name.toLowerCase().includes(needle) || e.code.toLowerCase().includes(needle) || (e.regionLabel||"").toLowerCase().includes(needle))
-      .slice(0, 28)
-      .map(e => ({ t:`Open: ${e.name} (${e.code})`, a: ()=>{selectCountry(e.code); closeCP();} }));
-
-    let pool = commands.concat(countries);
-
-    if (needle.startsWith("open ")){
-      const k = needle.replace(/^open\s+/,"").trim();
-      const best = state.entities.find(e => e.name.toLowerCase().includes(k)) || state.entities.find(e => e.code.toLowerCase() === k);
-      if (best) pool = [{ t:`Open: ${best.name} (${best.code})`, a: ()=>{selectCountry(best.code); closeCP();} }].concat(commands);
-    }
-    if (needle.startsWith("lens ")){
-      const k = needle.replace(/^lens\s+/,"").trim();
-      const map = { core:"Core", georisk:"GeoRisk", macro:"Macro", infrastructure:"Infrastructure" };
-      const hit = map[k];
-      if (hit) pool = [{ t:`Lens: ${hit}`, a: ()=>{state.lens=hit; renderLenses(); if(state.active) renderActive(); closeCP();} }].concat(commands);
-    }
-
-    el.cpList.innerHTML = pool.length ? pool.map((x,i)=>`
-      <div class="cp-item" data-i="${i}">
-        <div>${escapeHtml(x.t)}</div>
-        <div class="kbd">Enter</div>
-      </div>
-    `).join("") : `<div class="notice accent">No matches.</div>`;
-
-    el.cpList.querySelectorAll(".cp-item").forEach(it => {
-      it.addEventListener("click", () => pool[Number(it.getAttribute("data-i"))]?.a?.());
-    });
-
-    el.cpQ.onkeydown = (ev) => {
-      if (ev.key === "Escape"){ closeCP(); return; }
-      if (ev.key === "Enter"){ pool[0]?.a?.(); return; }
-    };
-  }
-
-  // ====== Boot ======
+  // ===== boot =====
   async function boot(){
-    el.status.textContent = `loading ${INDEX_PAGE}…`;
-    el.list.innerHTML = `<div class="loading"><span class="spin"></span><span>Loading index…</span></div>`;
+    el.status.textContent = "loading…";
+    el.count.textContent = "0";
+
+    // reset dropdown
+    el.country.innerHTML = `<option value="">Select…</option>`;
 
     try{
-      const html = await fetchText(INDEX_PAGE);
-      state.entities = parseEntitiesFromIndex(html);
-
+      const idxHtml = await fetchText(ARCH.index);
+      state.entities = parseEntitiesFromIndex(idxHtml);
       el.count.textContent = String(state.entities.length);
-      el.status.textContent = `source: ${INDEX_PAGE}`;
+      el.status.textContent = "ready";
 
-      renderLenses();
       renderRegions();
-      renderList();
+      renderCountries();
 
-      const code = new URL(location.href).searchParams.get("c");
-      if (code) selectCountry(code.toLowerCase());
+      const deep = new URL(location.href).searchParams.get("c");
+      if (deep){
+        el.country.value = deep.toLowerCase();
+        selectCountry(deep.toLowerCase());
+      } else {
+        selectCountry("");
+      }
     } catch {
-      el.status.textContent = `missing ${INDEX_PAGE}`;
-      el.list.innerHTML = `
-        <div class="notice accent">
-          Could not load <span class="muted">${escapeHtml(INDEX_PAGE)}</span>.<br/><br/>
-          Ensure <span class="muted">wifbindex.html</span> is present in the same directory as this page, and that
-          <span class="muted">geos/</span> is accessible.
-        </div>
-      `;
+      el.status.textContent = "unavailable";
+      el.country.innerHTML = `<option value="">Unavailable</option>`;
     }
   }
 
-  // ====== Wiring ======
-  renderLenses();
-
+  // ===== events =====
   el.reload.addEventListener("click", boot);
 
-  el.q.addEventListener("input", renderList);
-  el.q.addEventListener("keydown", (ev) => {
-    if (ev.key === "Enter"){
-      const q = (el.q.value||"").trim().toLowerCase();
-      if (!q) return;
-      const best =
-        state.entities.find(e => e.code.toLowerCase() === q) ||
-        state.entities.find(e => e.name.toLowerCase().startsWith(q)) ||
-        state.entities.find(e => e.name.toLowerCase().includes(q));
-      if (best) selectCountry(best.code);
-    }
-  });
+  el.region.addEventListener("change", () => { renderCountries(); el.country.value=""; selectCountry(""); });
+  el.q.addEventListener("input", () => { renderCountries(); });
 
-  el.tabs.forEach(t => t.addEventListener("click", () => setTab(t.getAttribute("data-tab"))));
+  el.country.addEventListener("change", () => selectCountry(el.country.value || ""));
 
   el.copyLink.addEventListener("click", async () => {
     if (!state.active) return;
@@ -1087,29 +1044,15 @@
     } catch { alert(link); }
   });
 
-  el.openPage.addEventListener("click", () => {
-    if (!state.active) return;
-    window.open(state.active.href, "_blank");
+  el.clearCache.addEventListener("click", () => {
+    localStorage.removeItem("wib_iso_cache_v1");
+    el.clearCache.textContent = "cleared";
+    setTimeout(()=> el.clearCache.textContent = "clear cache", 900);
   });
 
-  window.addEventListener("keydown", (ev) => {
-    if (ev.key === "/" && !ev.ctrlKey && !ev.metaKey && !ev.altKey){
-      ev.preventDefault();
-      el.q.focus();
-    }
-    if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === "k"){
-      ev.preventDefault();
-      openCP();
-    }
-    if (ev.key === "Escape"){
-      if (el.cpBack.style.display === "flex") closeCP();
-    }
-  });
+  el.tabs.forEach(t => t.addEventListener("click", () => setTab(t.getAttribute("data-tab"))));
 
-  el.cmdBtn.addEventListener("click", openCP);
-  el.cpBack.addEventListener("click", (ev) => { if (ev.target === el.cpBack) closeCP(); });
-  el.cpQ.addEventListener("input", () => renderCP(el.cpQ.value));
-
+  // start
   boot();
 })();
 </script>
