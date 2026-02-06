@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="color-scheme" content="dark"/>
   <title>World Intelligence Factbook</title>
-  <meta name="description" content="World Intelligence Factbook — redesigned country intelligence library with source-text retrieval and silent current-series refresh."/>
+  <meta name="description" content="World Intelligence Factbook — redesigned country intelligence library with maximal sectioning and structured field extraction."/>
   <style>
     :root{
       --bg:#061018;
@@ -257,6 +257,29 @@
       border:1px solid rgba(26,50,75,.65);
     }
 
+    .listbox{
+      max-height: 560px;
+      overflow:auto;
+      border:1px solid rgba(26,50,75,.65);
+      background: rgba(7,16,24,.35);
+      border-radius: 14px;
+      padding:8px;
+    }
+    .chiprow{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{
+      border:1px solid rgba(26,50,75,.7);
+      background: rgba(7,16,24,.55);
+      border-radius:999px;
+      padding:7px 10px;
+      cursor:pointer;
+      font-family:var(--mono);
+      font-size:11px;
+      color: rgba(255,255,255,.85);
+      user-select:none;
+    }
+    .chip:hover{border-color: rgba(255,138,0,.45)}
+    .chip b{color: rgba(255,138,0,.95); font-weight:800}
+
     .loading{display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11px; color: var(--muted);}
     .spin{
       width:14px; height:14px; border-radius:999px;
@@ -275,13 +298,13 @@
         <div class="logo">WIB</div>
         <div>
           <h1>World Intelligence Factbook</h1>
-          <div class="sub">Drop-down navigation • structured fields • generated summaries • silent comparisons</div>
+          <div class="sub">Drop-down navigation • atlas-style sections • maximal extraction</div>
         </div>
       </div>
       <div class="meta">
         <span id="status">loading…</span>
-        <span class="muted">|</span>
-        <span class="muted">entities:</span> <span id="count">0</span>
+        <span style="opacity:.5">|</span>
+        <span style="opacity:.7">entities:</span> <span id="count">0</span>
       </div>
     </div>
   </div>
@@ -289,12 +312,12 @@
   <div class="wrap">
     <div class="grid">
 
-      <!-- LEFT: dropdown navigator -->
+      <!-- LEFT -->
       <div class="panel">
         <div class="panel-h">
           <div>
             <h2>Navigator</h2>
-            <div class="hint">Choose region and entity. Everything is rendered inside this redesigned layer.</div>
+            <div class="hint">Region → Entity. After load: section chips (Economy, Religion, Government, …).</div>
           </div>
           <div class="btns">
             <button class="btn" id="reload">reload</button>
@@ -318,8 +341,13 @@
             <select id="country"><option value="">Select…</option></select>
           </div>
 
-          <div style="margin-top:10px" class="notice" id="navNote">
-            Select an entity to render its structured profile, travel-relevant fields, flag description, and comparison view.
+          <div style="margin-top:10px">
+            <label class="small">Section</label>
+            <select id="section"><option value="">Select…</option></select>
+          </div>
+
+          <div style="margin-top:10px" class="notice">
+            Use the section chips in PROFILE for fast browsing. The dropdown is a direct selector for the same section set.
           </div>
         </div>
       </div>
@@ -330,7 +358,7 @@
           <div class="hero-top">
             <div>
               <h3 id="title">Select an entity</h3>
-              <div class="subline" id="subline">Facts are extracted from the underlying profile page and rendered into a modern layout.</div>
+              <div class="subline" id="subline">Structured fields are extracted and routed into stable topic sections.</div>
             </div>
             <div class="btns">
               <button class="btn" id="clearCache">clear cache</button>
@@ -339,7 +367,7 @@
           <div class="kpis">
             <div class="kpi"><div class="k">CODE</div><div class="v" id="k_code">—</div></div>
             <div class="kpi"><div class="k">REGION</div><div class="v" id="k_region">—</div></div>
-            <div class="kpi"><div class="k">PROFILE DEPTH</div><div class="v" id="k_depth">—</div></div>
+            <div class="kpi"><div class="k">SECTION DEPTH</div><div class="v" id="k_depth">—</div></div>
             <div class="kpi"><div class="k">CURRENT SNAPSHOT</div><div class="v" id="k_now">—</div></div>
           </div>
         </div>
@@ -349,6 +377,7 @@
           <div class="tab" data-tab="travel">TRAVEL</div>
           <div class="tab" data-tab="flags">FLAGS</div>
           <div class="tab" data-tab="compare">COMPARE</div>
+          <div class="tab" data-tab="region">REGION</div>
         </div>
 
         <div class="content">
@@ -358,7 +387,7 @@
               <span id="mainMeta">—</span>
             </div>
             <div class="card-b" id="main">
-              <div class="notice">Select an entity to render its structured facts.</div>
+              <div class="notice">Select an entity to render topic sections and extracted fields.</div>
             </div>
           </div>
 
@@ -374,16 +403,15 @@
         </div>
 
       </div>
-
     </div>
   </div>
 
 <script>
 (() => {
-  // ===== hidden structure (no UI exposure) =====
+  // ===== archive structure (your hosted layout) =====
   const ARCH = { root: "wifb", index: "wifb/wifbindex.html" };
 
-  // ===== silent public time-series =====
+  // ===== silent public time-series (no provenance UI) =====
   const WB = {
     base: "https://api.worldbank.org/v2/country",
     indicators: [
@@ -394,48 +422,44 @@
     yearMax: 2026
   };
 
-  // ===== DOM =====
   const $ = s => document.querySelector(s);
   const el = {
     status: $("#status"),
     count: $("#count"),
-
     reload: $("#reload"),
     copyLink: $("#copyLink"),
     clearCache: $("#clearCache"),
-
     region: $("#region"),
     q: $("#q"),
     country: $("#country"),
-
+    section: $("#section"),
     title: $("#title"),
     subline: $("#subline"),
-
     k_code: $("#k_code"),
     k_region: $("#k_region"),
     k_depth: $("#k_depth"),
     k_now: $("#k_now"),
-
     mainTitle: $("#mainTitle"),
     mainMeta: $("#mainMeta"),
     main: $("#main"),
-
     sideTitle: $("#sideTitle"),
     sideMeta: $("#sideMeta"),
     side: $("#side"),
-
     tabs: document.querySelectorAll(".tab[data-tab]")
   };
 
-  // ===== state =====
   const state = {
-    entities: [],       // {code, name, regionLabel, href}
+    entities: [],
+    byRegion: new Map(),
+    tab: "profile",
     active: null,
     activeDoc: null,
-    activeStruct: null,
+    activeStruct: null, // {sections: Map(name-> {facts,text}), allFacts:[]}
     activeIso: null,
-    tab: "profile",
-    activeSection: ""
+    activeSection: "",
+    summary: "",
+    flag: null,
+    regionHTML: ""
   };
 
   // ===== utils =====
@@ -474,7 +498,7 @@
       .trim();
   }
 
-  // ===== index -> entities =====
+  // ===== index parsing =====
   function parseEntitiesFromIndex(html){
     const doc = new DOMParser().parseFromString(html, "text/html");
     const selects = Array.from(doc.querySelectorAll("select"));
@@ -519,17 +543,21 @@
     return clean;
   }
 
-  // ===== extraction =====
-  function extractISOFromDoc(doc){
-    const text = doc.body?.innerText || "";
-    const isoLine = text.match(/ISO\s*3166\s*country\s*codes?\s*:\s*([^\n\r]+)/i)?.[1] || null;
-    if (!isoLine) return null;
-    const a3 = isoLine.match(/Alpha-?3\s*:\s*([A-Z]{3})/i)?.[1]?.toUpperCase() || null;
-    const a2 = isoLine.match(/Alpha-?2\s*:\s*([A-Z]{2})/i)?.[1]?.toUpperCase() || null;
-    if (!a2 && !a3) return null;
-    return { a2, a3 };
+  function buildRegionIndex(){
+    const m = new Map();
+    for (const e of state.entities){
+      const r = e.regionLabel || "—";
+      if (!m.has(r)) m.set(r, []);
+      m.get(r).push(e);
+    }
+    for (const [k,arr] of m.entries()){
+      arr.sort((a,b)=>a.name.localeCompare(b.name));
+      m.set(k, arr);
+    }
+    state.byRegion = m;
   }
 
+  // ===== extraction primitives =====
   function dedupeFacts(facts){
     const seen = new Set();
     const out = [];
@@ -541,7 +569,7 @@
       if (seen.has(key)) continue;
       seen.add(key);
       out.push({ k, v });
-      if (out.length >= 1200) break;
+      if (out.length >= 6000) break;
     }
     return out;
   }
@@ -556,7 +584,7 @@
         const k = cleanText(cells[0].innerText);
         const v = cleanText(cells.slice(1).map(c => c.innerText).join(" | "));
         if (!k || !v) continue;
-        if (k.length > 120) continue;
+        if (k.length > 200) continue;
         facts.push({ k, v });
       }
     }
@@ -582,7 +610,7 @@
     const text = cleanText(root.innerText || "");
     const lines = text.split("\n").map(x => x.trim()).filter(Boolean);
     for (const ln of lines){
-      const m = ln.match(/^([A-Za-z][A-Za-z0-9 \-\/(),.%]{2,80})\s*:\s*(.{2,})$/);
+      const m = ln.match(/^([A-Za-z][A-Za-z0-9 \-\/(),.%]{2,140})\s*:\s*(.{2,})$/);
       if (!m) continue;
       const k = m[1].trim();
       const v = m[2].trim();
@@ -592,28 +620,148 @@
     return facts;
   }
 
-  function buildSectionsFromDoc(doc){
-    const body = doc.body;
-    const headings = Array.from(body.querySelectorAll("h1,h2,h3"));
-    if (!headings.length){
-      const allFacts = dedupeFacts([
-        ...extractKeyValueTables(body),
-        ...extractDefinitionLists(body),
-        ...extractLabeledBlocks(body)
-      ]);
-      return { sections: new Map([["Overview", { facts: allFacts, text: cleanText(body.innerText||"") }]]), allFacts };
-    }
+  function extractISOFromDoc(doc){
+    const text = doc.body?.innerText || "";
+    const isoLine = text.match(/ISO\s*3166\s*country\s*codes?\s*:\s*([^\n\r]+)/i)?.[1] || null;
+    if (!isoLine) return null;
+    const a3 = isoLine.match(/Alpha-?3\s*:\s*([A-Z]{3})/i)?.[1]?.toUpperCase() || null;
+    const a2 = isoLine.match(/Alpha-?2\s*:\s*([A-Z]{2})/i)?.[1]?.toUpperCase() || null;
+    if (!a2 && !a3) return null;
+    return { a2, a3 };
+  }
+
+  function extractFlagFromDoc(doc, pageHref){
+    const imgs = Array.from(doc.querySelectorAll("img"));
+    const scored = imgs.map(img => {
+      const src = img.getAttribute("src") || "";
+      const alt = (img.getAttribute("alt") || "").toLowerCase();
+      const t = (src + " " + alt).toLowerCase();
+      let score = 0;
+      if (t.includes("flag")) score += 6;
+      if (t.includes("smallflag") || t.includes("flag_")) score += 3;
+      if (t.includes("seal") || t.includes("map")) score -= 2;
+      if (src.match(/\.(svg|png|jpg|jpeg|gif)$/i)) score += 1;
+      return { src, alt: img.getAttribute("alt") || "Flag", score };
+    }).sort((a,b)=>b.score-a.score);
+
+    const best = scored.find(x => x.score >= 4);
+    if (!best?.src) return null;
+
+    try{
+      const base = new URL(pageHref, location.href);
+      return { alt: best.alt, src: new URL(best.src, base).toString() };
+    } catch { return null; }
+  }
+
+  // ===== canonical Atlas-like topic routing =====
+  function buildCanonicalSections(allFacts){
+    const CANON = [
+      "Overview",
+      "Introduction",
+      "Geography",
+      "People and Society",
+      "Religion",
+      "Government",
+      "Economy",
+      "Energy",
+      "Communications",
+      "Transportation",
+      "Military and Security",
+      "Terrorism",
+      "Transnational Issues",
+      "All fields"
+    ];
+
+    const ROUTES = [
+      ["Introduction", ["background","introduction","overview","brief","name","capital","flag description","national anthem","national symbol"]],
+      ["Geography", ["geography","location","area","land","water","coastline","climate","terrain","natural resources","environment","hazards","elevation","land use","irrigated","urbanization","population distribution"]],
+      ["People and Society", ["people","society","population","nationality","ethnic","language","age structure","dependency","sex ratio","education","literacy","health","mortality","life expectancy","fertility","hiv","obesity","sanitation","drinking water","physicians","hospital","migration","refugee","demographics"]],
+      ["Religion", ["religion","religions","religious","faith","church","mosque","temple","catholic","protestant","orthodox","islam","muslim","sunni","shia","hindu","buddhist","jewish","judaism","atheist","none"]],
+      ["Government", ["government","country name","constitution","legal","citizenship","suffrage","executive","legislative","judicial","political","elections","administrative","diplomatic","international organization","national holiday","law enforcement"]],
+      ["Economy", ["economy","gdp","growth","inflation","cpi","unemployment","labor","poverty","budget","revenue","expenditures","debt","tax","banking","credit","investment","industry","agriculture","services","trade","exports","imports","reserves","exchange rate","currency","tourism","market","remittances"]],
+      ["Energy", ["energy","electricity","oil","petroleum","gas","coal","refined","renewable","nuclear","power","consumption","production","pipelines"]],
+      ["Communications", ["communications","telephone","mobile","internet","broadband","telecom","radio","television","tv","satellite","media"]],
+      ["Transportation", ["transportation","airports","heliports","railways","roadways","waterways","merchant marine","ports","terminals","pipelines","civil aviation"]],
+      ["Military and Security", ["military","security","armed forces","expenditures","service age","conscription","paramilitary","defense","weapons","peacekeeping"]],
+      ["Terrorism", ["terrorism","terrorist","terror","extremist"]],
+      ["Transnational Issues", ["transnational","disputes","refugees","trafficking","illicit","drugs","organized crime","international disputes","stateless persons","environmental agreements"]]
+    ];
 
     const sections = new Map();
-    let allFacts = [];
-    for (let i=0;i<headings.length;i++){
-      const h = headings[i];
+    for (const n of CANON) sections.set(n, { facts: [], text: "" });
+
+    // Overview gets top facts separately later
+    for (const f of allFacts){
+      const blob = (f.k + " " + f.v).toLowerCase();
+
+      let matchedAny = false;
+      for (const [topic, keys] of ROUTES){
+        if (keys.some(k => blob.includes(k))){
+          sections.get(topic).facts.push(f);
+          matchedAny = true;
+        }
+      }
+
+      // keep everything accessible
+      sections.get("All fields").facts.push(f);
+
+      // if not matched anywhere, let it still show in People/Society (broad) to avoid “orphan” data
+      if (!matchedAny) sections.get("People and Society").facts.push(f);
+    }
+
+    // de-dup and cap
+    for (const [name, pack] of sections.entries()){
+      pack.facts = dedupeFacts(pack.facts).slice(0, 2400);
+      sections.set(name, pack);
+    }
+
+    return sections;
+  }
+
+  function pickTopFacts(allFacts){
+    const pri = [
+      "Capital","Population","Area","Government type","Independence","Nationality","Ethnic groups",
+      "Languages","Religions","Currency","GDP","GDP -","Unemployment","Inflation","Exports","Imports"
+    ].map(x=>x.toLowerCase());
+
+    const picked = [];
+    const used = new Set();
+
+    for (const key of pri){
+      const hit = allFacts.find(f => (f.k||"").toLowerCase().includes(key));
+      if (hit){
+        const id = (hit.k+"::"+hit.v).toLowerCase();
+        if (!used.has(id)){
+          used.add(id);
+          picked.push(hit);
+        }
+      }
+      if (picked.length >= 24) break;
+    }
+
+    for (const f of allFacts){
+      const id = (f.k+"::"+f.v).toLowerCase();
+      if (used.has(id)) continue;
+      picked.push(f);
+      if (picked.length >= 90) break;
+    }
+    return picked;
+  }
+
+  function extractHeadingsSections(doc){
+    const body = doc.body;
+    const heads = Array.from(body.querySelectorAll("h1,h2,h3,h4,h5,h6"));
+    const sections = new Map();
+    if (!heads.length) return sections;
+
+    for (let i=0;i<heads.length;i++){
+      const h = heads[i];
       const name = cleanText(h.innerText || "");
-      if (!name) continue;
+      if (!name || name.length > 120) continue;
 
       const nodes = [];
       let cur = h.nextElementSibling;
-      while (cur && !/^(h1|h2|h3)$/i.test(cur.tagName)){
+      while (cur && !/^(h1|h2|h3|h4|h5|h6)$/i.test(cur.tagName)){
         nodes.push(cur);
         cur = cur.nextElementSibling;
       }
@@ -628,57 +776,79 @@
       ]);
 
       const ps = Array.from(chunk.querySelectorAll("p,li"));
-      const text = cleanText(ps.slice(0, 8).map(p => p.innerText).join("\n\n"));
+      const text = cleanText(ps.slice(0, 10).map(p => p.innerText).join("\n\n"));
 
-      if (!sections.has(name)) sections.set(name, { facts, text });
-      allFacts = allFacts.concat(facts);
+      const prev = sections.get(name);
+      if (prev){
+        prev.facts = dedupeFacts(prev.facts.concat(facts));
+        prev.text = cleanText([prev.text, text].filter(Boolean).join("\n\n"));
+        sections.set(name, prev);
+      } else {
+        sections.set(name, { facts, text });
+      }
     }
 
-    allFacts = dedupeFacts(allFacts);
-    if (allFacts.length < 12){
-      const global = dedupeFacts([
-        ...allFacts,
-        ...extractKeyValueTables(body),
-        ...extractDefinitionLists(body),
-        ...extractLabeledBlocks(body)
-      ]);
-      if (!sections.has("Overview")) sections.set("Overview", { facts: global, text: "" });
-      return { sections, allFacts: global };
-    }
-    return { sections, allFacts };
+    return sections;
   }
 
-  function extractFlagFromDoc(doc, pageHref){
-    const imgs = Array.from(doc.querySelectorAll("img"));
-    const scored = imgs.map(img => {
-      const src = img.getAttribute("src") || "";
-      const alt = (img.getAttribute("alt") || "").toLowerCase();
-      const t = (src + " " + alt).toLowerCase();
-      let score = 0;
-      if (t.includes("flag")) score += 5;
-      if (t.includes("smallflag") || t.includes("flag_")) score += 3;
-      if (t.includes("seal") || t.includes("map")) score -= 1;
-      if (src.match(/\.(svg|png|jpg|jpeg|gif)$/i)) score += 1;
-      return { src, alt: img.getAttribute("alt") || "Flag", score };
-    }).sort((a,b)=>b.score-a.score);
+  function buildMaxSections(doc){
+    const body = doc.body;
 
-    const best = scored.find(x => x.score >= 4);
-    if (!best?.src) return null;
+    const globalFacts = dedupeFacts([
+      ...extractKeyValueTables(body),
+      ...extractDefinitionLists(body),
+      ...extractLabeledBlocks(body)
+    ]);
 
-    try{
-      const base = new URL(pageHref, location.href);
-      return { alt: best.alt, src: new URL(best.src, base).toString() };
-    } catch {
-      return null;
+    // canonical “Atlas-style” sections from the full fact universe
+    const canon = buildCanonicalSections(globalFacts);
+
+    // merge real headings as extra sections; if a heading matches a canonical name, enrich it
+    const headingSections = extractHeadingsSections(doc);
+    for (const [n, pack] of headingSections.entries()){
+      const name = (n || "").trim();
+      if (!name) continue;
+
+      if (canon.has(name)){
+        const cur = canon.get(name);
+        cur.facts = dedupeFacts(cur.facts.concat(pack.facts || [])).slice(0, 2400);
+        cur.text = cleanText([cur.text, pack.text].filter(Boolean).join("\n\n"));
+        canon.set(name, cur);
+      } else {
+        canon.set(name, {
+          facts: dedupeFacts(pack.facts || []).slice(0, 2400),
+          text: cleanText(pack.text || "")
+        });
+      }
     }
+
+    // overview: top facts + first paragraph
+    const firstText = cleanText((body.querySelector("p")?.innerText) || "");
+    const ov = canon.get("Overview") || { facts: [], text: "" };
+    ov.facts = dedupeFacts(ov.facts.concat(pickTopFacts(globalFacts))).slice(0, 2400);
+    ov.text = ov.text || firstText;
+    canon.set("Overview", ov);
+
+    return { sections: canon, allFacts: globalFacts };
+  }
+
+  function pickFacts(allFacts, keys){
+    const out = [];
+    const lk = keys.map(k => k.toLowerCase());
+    for (const k of lk){
+      const hit = allFacts.find(f => (f.k||"").toLowerCase().includes(k));
+      if (hit) out.push(hit);
+      if (out.length >= 10) break;
+    }
+    return out;
   }
 
   function guessSummary(struct){
-    const pref = ["Introduction","Background","Overview","Geography","People and Society","Government","Economy"];
+    const pref = ["Overview","Introduction","Geography","People and Society","Government","Economy"];
     let t = "";
     for (const p of pref){
-      const hit = Array.from(struct.sections.entries()).find(([n]) => n.toLowerCase() === p.toLowerCase());
-      if (hit && hit[1].text){ t = hit[1].text; break; }
+      const hit = struct.sections.get(p);
+      if (hit && hit.text){ t = hit.text; break; }
     }
     if (!t){
       const any = Array.from(struct.sections.values()).map(s => s.text).find(Boolean);
@@ -689,24 +859,13 @@
     return cleanText((t ? t.split("\n\n").slice(0,2).join("\n\n") : "") + ribbon);
   }
 
-  function pickFacts(allFacts, keys){
-    const out = [];
-    const lk = keys.map(k => k.toLowerCase());
-    for (const k of lk){
-      const hit = allFacts.find(f => (f.k||"").toLowerCase().includes(k));
-      if (hit) out.push(hit);
-      if (out.length >= 8) break;
-    }
-    return out;
-  }
-
   function travelFacts(struct){
     const tokens = ["travel","visa","passport","entry","health","vaccin","customs","safety","security","crime","airport","ports","transport","road","rail","driving","emergency","medical"];
     const hits = [];
     for (const f of struct.allFacts){
       const t = (f.k + " " + f.v).toLowerCase();
       if (tokens.some(x => t.includes(x))) hits.push(f);
-      if (hits.length >= 260) break;
+      if (hits.length >= 900) break;
     }
     return hits;
   }
@@ -749,7 +908,7 @@
     cache[state.active.code] = state.activeIso.a3;
     setIsoCache(cache);
 
-    const entries = Object.entries(cache).slice(0, 120);
+    const entries = Object.entries(cache).slice(0, 160);
     const result = [];
 
     for (const ind of WB.indicators){
@@ -776,7 +935,7 @@
     return result;
   }
 
-  // ===== UI rendering =====
+  // ===== UI helpers =====
   function renderRegions(){
     const labels = Array.from(new Set(state.entities.map(e => e.regionLabel).filter(Boolean))).sort();
     el.region.innerHTML = `<option value="">All</option>` + labels.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join("");
@@ -793,7 +952,38 @@
 
     el.country.innerHTML =
       `<option value="">Select…</option>` +
-      rows.slice(0, 2500).map(e => `<option value="${escapeHtml(e.code)}">${escapeHtml(e.name)} (${escapeHtml(e.code)})</option>`).join("");
+      rows.slice(0, 3500).map(e => `<option value="${escapeHtml(e.code)}">${escapeHtml(e.name)} (${escapeHtml(e.code)})</option>`).join("");
+
+    renderRegionTab();
+  }
+
+  function renderSectionDropdown(){
+    if (!state.activeStruct){
+      el.section.innerHTML = `<option value="">Select…</option>`;
+      return;
+    }
+
+    // preferred Atlas order
+    const preferred = [
+      "Overview",
+      "Introduction","Geography","People and Society","Religion","Government","Economy",
+      "Energy","Communications","Transportation","Military and Security","Terrorism","Transnational Issues",
+      "All fields"
+    ];
+
+    const names = Array.from(state.activeStruct.sections.keys());
+    const canonOrdered = preferred.filter(x => state.activeStruct.sections.has(x));
+    const extra = names.filter(n => !preferred.includes(n)).sort((a,b)=>a.localeCompare(b));
+    const ordered = canonOrdered.concat(extra).slice(0, 120);
+
+    el.section.innerHTML =
+      `<option value="">Select…</option>` +
+      ordered.map(n => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join("");
+
+    if (!state.activeSection || !state.activeStruct.sections.has(state.activeSection)){
+      state.activeSection = canonOrdered[0] || ordered[0] || "Overview";
+    }
+    el.section.value = state.activeSection;
   }
 
   function setTab(tab){
@@ -803,8 +993,8 @@
   }
 
   function renderKV(facts){
-    const f = (facts || []).slice(0, 420);
-    if (!f.length) return `<div class="notice">No fields detected for this view.</div>`;
+    const f = (facts || []).slice(0, 2600);
+    if (!f.length) return `<div class="notice">No fields detected for this section.</div>`;
     return f.map(x => `
       <div class="kv">
         <div class="k">${escapeHtml(x.k)}</div>
@@ -813,29 +1003,42 @@
     `).join("");
   }
 
-  function renderSectionBrowser(struct){
-    const names = Array.from(struct.sections.keys()).slice(0, 80);
-    const activeName = (state.activeSection && struct.sections.has(state.activeSection))
-      ? state.activeSection
-      : (names.includes("Introduction") ? "Introduction" : (names[0] || "Overview"));
+  function renderRegionTab(){
+    const reg = el.region.value || "";
+    const regions = Array.from(state.byRegion.keys()).filter(Boolean).sort((a,b)=>a.localeCompare(b));
+    const chips = regions.filter(r => r !== "—").map(r => {
+      const n = (state.byRegion.get(r)||[]).length;
+      const active = (r === reg);
+      return `<div class="chip" data-reg="${escapeHtml(r)}" style="${active ? "border-color:rgba(255,138,0,.55); background:rgba(255,138,0,.08)" : ""}">
+        <b>${escapeHtml(r)}</b>&nbsp;<span style="opacity:.8">${n}</span>
+      </div>`;
+    }).join("");
 
-    state.activeSection = activeName;
+    const rows = state.entities
+      .filter(e => !reg || e.regionLabel === reg)
+      .slice(0, 4000);
 
-    const pills = names.map(n => `<div class="pill ${n===activeName ? "active":""}" data-sec="${escapeHtml(n)}">${escapeHtml(n)}</div>`).join("");
-    const sec = struct.sections.get(activeName) || { facts: [], text: "" };
-    const intro = sec.text ? `<div class="notice" style="margin-bottom:10px">${escapeHtml(sec.text)}</div>` : "";
+    const list = rows.map(e => `
+      <div class="chip" data-open="${escapeHtml(e.code)}" title="${escapeHtml(e.name)}">
+        ${escapeHtml(e.name)} <span style="opacity:.75">(${escapeHtml(e.code)})</span>
+      </div>
+    `).join("");
 
-    el.main.innerHTML = `<div class="pillrow">${pills}</div>${intro}${renderKV(sec.facts)}`;
-    el.main.querySelectorAll("[data-sec]").forEach(p => {
-      p.addEventListener("click", () => { state.activeSection = p.getAttribute("data-sec"); renderActiveView(); });
-    });
+    state.regionHTML = `
+      <div class="notice" style="margin-bottom:10px">
+        Browse by region. Click a region chip to filter, then click an entity to open.
+      </div>
+      <div class="chiprow" style="margin-bottom:10px">${chips || `<div class="notice">No region groups available.</div>`}</div>
+      <div class="listbox"><div class="chiprow">${list || `<div class="notice">No entities in this filter.</div>`}</div></div>
+    `;
   }
 
+  // ===== view rendering =====
   async function renderActiveView(){
     if (!state.activeStruct){
       el.mainTitle.textContent = "Profile";
       el.mainMeta.textContent = "—";
-      el.main.innerHTML = `<div class="notice">Select an entity to render its structured facts.</div>`;
+      el.main.innerHTML = `<div class="notice">Select an entity to render topic sections and extracted fields.</div>`;
       el.sideTitle.textContent = "Summary";
       el.sideMeta.textContent = "—";
       el.side.innerHTML = `<div class="notice">A concise overview will appear here.</div>`;
@@ -847,32 +1050,67 @@
     if (state.tab === "profile"){
       el.mainTitle.textContent = "Profile";
       el.mainMeta.textContent = "Sections";
-      renderSectionBrowser(struct);
+
+      const preferred = [
+        "Overview",
+        "Introduction","Geography","People and Society","Religion","Government","Economy",
+        "Energy","Communications","Transportation","Military and Security","Terrorism","Transnational Issues",
+        "All fields"
+      ];
+
+      const names = Array.from(struct.sections.keys());
+      const canonOrdered = preferred.filter(x => struct.sections.has(x));
+      const extra = names.filter(n => !preferred.includes(n)).sort((a,b)=>a.localeCompare(b));
+      const ordered = canonOrdered.concat(extra).slice(0, 80);
+
+      if (!state.activeSection || !struct.sections.has(state.activeSection)){
+        state.activeSection = canonOrdered[0] || ordered[0] || "Overview";
+        el.section.value = state.activeSection;
+      }
+
+      const chips = ordered.map(n => `
+        <div class="pill ${n===state.activeSection ? "active":""}" data-sec="${escapeHtml(n)}">${escapeHtml(n)}</div>
+      `).join("");
+
+      const pack = struct.sections.get(state.activeSection) || { facts: [], text: "" };
+      const intro = pack.text ? `<div class="notice" style="margin-bottom:10px">${escapeHtml(pack.text)}</div>` : "";
+
+      el.main.innerHTML = `<div class="pillrow">${chips}</div>${intro}${renderKV(pack.facts)}`;
+
+      el.main.querySelectorAll("[data-sec]").forEach(b => {
+        b.addEventListener("click", () => {
+          state.activeSection = b.getAttribute("data-sec") || "";
+          el.section.value = state.activeSection;
+          renderActiveView();
+        });
+      });
+
       el.sideTitle.textContent = "Summary";
       el.sideMeta.textContent = "Generated";
-      el.side.innerHTML = `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(state._summary || "")}</div>`;
+      el.side.innerHTML = `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(state.summary || "")}</div>`;
       return;
     }
 
     if (state.tab === "travel"){
       el.mainTitle.textContent = "Travel";
       el.mainMeta.textContent = "Extracted";
-      el.main.innerHTML = renderKV(travelFacts(struct));
+      const tf = travelFacts(struct);
+      el.main.innerHTML = tf.length ? renderKV(tf) : `<div class="notice">No travel-relevant fields were detected with high confidence.</div>`;
+
       el.sideTitle.textContent = "Highlights";
       el.sideMeta.textContent = "Extracted";
       const picks = pickFacts(struct.allFacts, ["Visa", "Entry", "Health", "Safety", "Airports", "Ports", "Roadways", "Railways"]);
       el.side.innerHTML = picks.length
         ? `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(picks.map(p => `• ${p.k}: ${p.v}`).join("\n"))}</div>`
-        : `<div class="notice">No travel highlights detected.</div>`;
+        : `<div class="notice">No highlights detected.</div>`;
       return;
     }
 
     if (state.tab === "flags"){
       el.mainTitle.textContent = "Flag";
       el.mainMeta.textContent = "Detected";
-      const f = state._flag || null;
-      el.main.innerHTML = f?.src
-        ? `<div class="flagBox"><img src="${escapeHtml(f.src)}" alt="${escapeHtml(f.alt||"Flag")}"/></div>`
+      el.main.innerHTML = state.flag?.src
+        ? `<div class="flagBox"><img src="${escapeHtml(state.flag.src)}" alt="${escapeHtml(state.flag.alt||"Flag")}"/></div>`
         : `<div class="notice">No flag image detected.</div>`;
 
       el.sideTitle.textContent = "Description";
@@ -894,7 +1132,7 @@
         el.main.innerHTML = `<div class="notice">Comparisons are not available for this entity yet.</div>`;
         el.sideTitle.textContent = "Coverage";
         el.sideMeta.textContent = "—";
-        el.side.innerHTML = `<div class="notice">This view strengthens as you browse more entities.</div>`;
+        el.side.innerHTML = `<div class="notice">Comparisons strengthen as you browse more entities.</div>`;
         return;
       }
 
@@ -903,7 +1141,7 @@
         const top = (c.top||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
         const bot = (c.bottom||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
         return `
-          <div class="notice" style="margin-bottom:10px"><b>${escapeHtml(c.label)}</b><br/><span class="muted">${escapeHtml(rankLine)}</span></div>
+          <div class="notice" style="margin-bottom:10px"><b>${escapeHtml(c.label)}</b><br/><span style="opacity:.8">${escapeHtml(rankLine)}</span></div>
           <div class="kv"><div class="k">Top</div><div class="v">${escapeHtml(top)}</div></div>
           <div class="kv"><div class="k">Bottom</div><div class="v">${escapeHtml(bot)}</div></div>
           <div style="height:12px"></div>
@@ -912,7 +1150,34 @@
 
       el.sideTitle.textContent = "Note";
       el.sideMeta.textContent = "Adaptive";
-      el.side.innerHTML = `<div class="notice">Comparisons strengthen automatically as the coverage cache builds.</div>`;
+      el.side.innerHTML = `<div class="notice">Comparisons strengthen automatically as coverage expands.</div>`;
+      return;
+    }
+
+    if (state.tab === "region"){
+      el.mainTitle.textContent = "Region directory";
+      el.mainMeta.textContent = "Browse";
+      el.main.innerHTML = state.regionHTML || `<div class="notice">No region directory available.</div>`;
+      el.sideTitle.textContent = "Active";
+      el.sideMeta.textContent = "—";
+      el.side.innerHTML = `<div class="notice">Click a region chip to filter, then click an entity to open.</div>`;
+
+      el.main.querySelectorAll("[data-reg]").forEach(x => {
+        x.addEventListener("click", () => {
+          el.region.value = x.getAttribute("data-reg") || "";
+          renderCountries();
+          setTab("region");
+        });
+      });
+      el.main.querySelectorAll("[data-open]").forEach(x => {
+        x.addEventListener("click", () => {
+          const code = x.getAttribute("data-open");
+          if (!code) return;
+          el.country.value = code;
+          selectCountry(code);
+          setTab("profile");
+        });
+      });
       return;
     }
   }
@@ -924,7 +1189,7 @@
 
     if (!state.active){
       el.title.textContent = "Select an entity";
-      el.subline.textContent = "Facts are extracted and rendered into a modern layout.";
+      el.subline.textContent = "Structured fields are extracted and routed into stable topic sections.";
       el.k_code.textContent = "—";
       el.k_region.textContent = "—";
       el.k_depth.textContent = "—";
@@ -932,8 +1197,10 @@
       state.activeDoc = null;
       state.activeStruct = null;
       state.activeIso = null;
-      state._flag = null;
-      state._summary = "";
+      state.summary = "";
+      state.flag = null;
+      state.activeSection = "";
+      renderSectionDropdown();
       renderActiveView();
       return;
     }
@@ -957,7 +1224,7 @@
       const doc = new DOMParser().parseFromString(html, "text/html");
       state.activeDoc = doc;
 
-      const struct = buildSectionsFromDoc(doc);
+      const struct = buildMaxSections(doc);
       state.activeStruct = struct;
 
       const iso = extractISOFromDoc(doc);
@@ -969,11 +1236,19 @@
         setIsoCache(cache);
       }
 
-      state._flag = extractFlagFromDoc(doc, state.active.href);
-      state._summary = guessSummary(struct);
+      state.flag = extractFlagFromDoc(doc, state.active.href);
+      state.summary = guessSummary(struct);
 
-      const depth = { sec: struct.sections.size, facts: struct.allFacts.length };
-      el.k_depth.textContent = `${depth.sec} sections • ${depth.facts.toLocaleString()} fields`;
+      // default section
+      const prefer = ["Overview","Introduction","Geography","People and Society","Religion","Government","Economy","All fields"];
+      state.activeSection = prefer.find(x => struct.sections.has(x)) || Array.from(struct.sections.keys())[0] || "Overview";
+
+      renderSectionDropdown();
+
+      // KPIs
+      const secCount = struct.sections.size;
+      const factCount = struct.allFacts.length;
+      el.k_depth.textContent = `${secCount} sections • ${factCount.toLocaleString()} fields`;
 
       const snap = await silentSnapshot(iso);
       el.k_now.textContent = snap || "—";
@@ -984,8 +1259,8 @@
       state.activeDoc = null;
       state.activeStruct = null;
       state.activeIso = null;
-      state._flag = null;
-      state._summary = "";
+      state.summary = "";
+      state.flag = null;
 
       el.k_depth.textContent = "—";
       el.k_now.textContent = "—";
@@ -993,6 +1268,7 @@
       el.sideMeta.textContent = "—";
       el.main.innerHTML = `<div class="notice">This entity could not be rendered at the moment.</div>`;
       el.side.innerHTML = `<div class="notice">No summary available.</div>`;
+      renderSectionDropdown();
     }
   }
 
@@ -1000,13 +1276,14 @@
   async function boot(){
     el.status.textContent = "loading…";
     el.count.textContent = "0";
-
-    // reset dropdown
     el.country.innerHTML = `<option value="">Select…</option>`;
+    el.section.innerHTML = `<option value="">Select…</option>`;
 
     try{
       const idxHtml = await fetchText(ARCH.index);
       state.entities = parseEntitiesFromIndex(idxHtml);
+      buildRegionIndex();
+
       el.count.textContent = String(state.entities.length);
       el.status.textContent = "ready";
 
@@ -1016,23 +1293,39 @@
       const deep = new URL(location.href).searchParams.get("c");
       if (deep){
         el.country.value = deep.toLowerCase();
-        selectCountry(deep.toLowerCase());
+        await selectCountry(deep.toLowerCase());
       } else {
-        selectCountry("");
+        await selectCountry("");
       }
     } catch {
       el.status.textContent = "unavailable";
       el.country.innerHTML = `<option value="">Unavailable</option>`;
+      el.section.innerHTML = `<option value="">Unavailable</option>`;
     }
   }
 
   // ===== events =====
   el.reload.addEventListener("click", boot);
 
-  el.region.addEventListener("change", () => { renderCountries(); el.country.value=""; selectCountry(""); });
-  el.q.addEventListener("input", () => { renderCountries(); });
+  el.region.addEventListener("change", () => {
+    renderCountries();
+    el.country.value = "";
+    selectCountry("");
+  });
 
-  el.country.addEventListener("change", () => selectCountry(el.country.value || ""));
+  el.q.addEventListener("input", () => renderCountries());
+
+  el.country.addEventListener("change", async () => {
+    await selectCountry(el.country.value || "");
+  });
+
+  el.section.addEventListener("change", () => {
+    const s = el.section.value || "";
+    if (!state.activeStruct || !s) return;
+    if (!state.activeStruct.sections.has(s)) return;
+    state.activeSection = s;
+    setTab("profile");
+  });
 
   el.copyLink.addEventListener("click", async () => {
     if (!state.active) return;
