@@ -450,6 +450,7 @@
   };
 
   const state = {
+    library: { items: [], byGroup: new Map(), html: "" },
     entities: [],
     byRegion: new Map(),
     tab: "profile",
@@ -556,6 +557,152 @@
       m.set(k, arr);
     }
     state.byRegion = m;
+  }
+
+  
+  // ===== library extraction from index (acts as redesigned front-end) =====
+  function parseLibraryFromIndex(indexHtml){
+    // Collect non-geo links (guides, comparisons, notes, rank-order, flags, etc.)
+    const doc = new DOMParser().parseFromString(indexHtml, "text/html");
+    const anchors = Array.from(doc.querySelectorAll("a[href]"));
+    const items = [];
+
+    for (const a of anchors){
+      const hrefRaw = (a.getAttribute("href") || "").trim();
+      if (!hrefRaw) continue;
+      const href = normalizeHref(hrefRaw);
+      // skip geos (country pages handled separately)
+      if (href.includes("geos/")) continue;
+
+      // keep only internal html assets within the archive tree
+      if (!href.match(/\.html?$/i)) continue;
+
+      // avoid self-link duplicates
+      const title = cleanText(a.textContent || "") || href.split("/").pop();
+      if (!title) continue;
+
+      // infer group by path
+      let group = "Reference";
+      if (href.includes("rankorder") || href.includes("rank_order") || href.includes("rank-order")) group = "Rank order";
+      else if (href.includes("docs") || href.includes("guide") || href.includes("reference") || href.includes("notes")) group = "Guides";
+      else if (href.includes("fields") || href.includes("appendix")) group = "Appendices";
+      else if (href.includes("flag") || href.includes("flags")) group = "Flags";
+      else if (href.includes("maps") || href.includes("map")) group = "Maps";
+
+      items.push({
+        title,
+        group,
+        href: `${ARCH.root}/` + href
+      });
+    }
+
+    // de-dup by href
+    const seen = new Set();
+    const dedup = [];
+    for (const it of items){
+      if (seen.has(it.href)) continue;
+      seen.add(it.href);
+      // filter out obvious nav chrome anchors with too-short titles
+      if ((it.title || "").length < 3) continue;
+      dedup.push(it);
+    }
+
+    // group
+    const byGroup = new Map();
+    for (const it of dedup){
+      if (!byGroup.has(it.group)) byGroup.set(it.group, []);
+      byGroup.get(it.group).push(it);
+    }
+    for (const [g, arr] of byGroup.entries()){
+      arr.sort((a,b)=>a.title.localeCompare(b.title));
+      byGroup.set(g, arr);
+    }
+
+    return { items: dedup, byGroup };
+  }
+
+  async function renderLibrary(){
+    // Must have loaded index already; if not, show placeholder
+    const lib = state.library;
+    if (!lib.items?.length){
+      return `<div class="notice">Library is not available yet.</div>`;
+    }
+
+    // Build chips by group and a list for active group
+    const groups = Array.from(lib.byGroup.keys()).sort((a,b)=>a.localeCompare(b));
+    const activeGroup = lib.activeGroup && lib.byGroup.has(lib.activeGroup) ? lib.activeGroup : (groups[0] || "Reference");
+    lib.activeGroup = activeGroup;
+
+    const chips = groups.map(g => `
+      <div class="pill ${g===activeGroup ? "active":""}" data-libgroup="${escapeHtml(g)}">${escapeHtml(g)}</div>
+    `).join("");
+
+    const list = (lib.byGroup.get(activeGroup) || []).slice(0, 400).map(it => `
+      <div class="chip" data-libopen="${escapeHtml(it.href)}" title="${escapeHtml(it.title)}">
+        ${escapeHtml(it.title)}
+      </div>
+    `).join("");
+
+    // If a page is open, render extracted sections (like country pages)
+    let viewer = `<div class="notice">Select a library item to open it.</div>`;
+    if (lib.open){
+      if (lib.loading){
+        viewer = `<div class="loading"><span class="spin"></span><span>Opening…</span></div>`;
+      } else if (lib.openStruct){
+        const names = Array.from(lib.openStruct.sections.keys()).slice(0, 60);
+        const sec = lib.openSection && lib.openStruct.sections.has(lib.openSection) ? lib.openSection : (names[0] || "");
+        lib.openSection = sec;
+
+        const secChips = names.map(n => `
+          <div class="pill ${n===sec ? "active":""}" data-libsec="${escapeHtml(n)}">${escapeHtml(n)}</div>
+        `).join("");
+
+        const pack = lib.openStruct.sections.get(sec) || { facts: [], text: "" };
+        const intro = pack.text ? `<div class="notice" style="margin-bottom:10px">${escapeHtml(pack.text)}</div>` : "";
+        viewer = `<div class="pillrow">${secChips}</div>${intro}${renderKV(pack.facts)}`;
+      } else {
+        viewer = `<div class="notice">This item could not be rendered.</div>`;
+      }
+    }
+
+    return `
+      <div class="notice" style="margin-bottom:10px">
+        Library provides redesigned access to the archive’s reference pages (guides, rank order, flags, maps).
+      </div>
+      <div class="pillrow">${chips}</div>
+      <div class="content" style="padding:0; grid-template-columns: .9fr 1.1fr;">
+        <div class="card" style="margin:0;">
+          <div class="card-h"><b>${escapeHtml(activeGroup)}</b><span>${(lib.byGroup.get(activeGroup)||[]).length} items</span></div>
+          <div class="card-b"><div class="listbox"><div class="chiprow">${list || `<div class="notice">No items.</div>`}</div></div></div>
+        </div>
+        <div class="card" style="margin:0;">
+          <div class="card-h"><b>${escapeHtml(lib.openTitle || "Viewer")}</b><span>${lib.open ? "open" : "—"}</span></div>
+          <div class="card-b" id="libViewer">${viewer}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  async function openLibraryItem(href, title){
+    state.library.open = href;
+    state.library.openTitle = title || "Viewer";
+    state.library.loading = true;
+    state.library.openStruct = null;
+    state.library.openSection = "";
+    renderActiveView();
+
+    try{
+      const html = await fetchText(href);
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const struct = buildMaxSections(doc); // reuse same extractor
+      state.library.openStruct = struct;
+      state.library.loading = false;
+      renderActiveView();
+    } catch {
+      state.library.loading = false;
+      state.library.openStruct = null;
+      renderActiveView();
+    }
   }
 
   // ===== extraction primitives =====
@@ -922,7 +1069,30 @@
     try{ return await wbLatest(iso3, indicator); } catch { return null; }
   }
 
-  async function fetchIndicatorBundle(iso3, indicatorKeys){
+  
+  async function imfLatestSafe(iso2, series){
+    // Optional provider: may fail due to CORS; always silent.
+    // Uses IMF DataMapper endpoint if accessible.
+    // Returns {year, value} or null.
+    try{
+      // Example: https://www.imf.org/external/datamapper/api/v1/NGDPD/USA
+      const url = `https://www.imf.org/external/datamapper/api/v1/${encodeURIComponent(series)}/${encodeURIComponent(iso2)}`;
+      const r = await fetch(url);
+      if (!r.ok) return null;
+      const j = await r.json();
+      // structure: { values: { SERIES: { ISO: { "2026": value, ... } } } }
+      const vals = j?.values?.[series]?.[iso2];
+      if (!vals) return null;
+      const years = Object.keys(vals).map(y=>Number(y)).filter(y=>isFinite(y) && y<=WB.yearMax).sort((a,b)=>b-a);
+      if (!years.length) return null;
+      const y = years[0];
+      const v = vals[String(y)];
+      if (v===null || v===undefined) return null;
+      return { year:y, value:v };
+    } catch { return null; }
+  }
+
+async function fetchIndicatorBundle(iso3, indicatorKeys){
     if (!iso3 || !indicatorKeys?.length) return {};
     const cache = getEnrichCache();
     const entry = cache[iso3] || null;
@@ -1291,6 +1461,42 @@
       return;
     }
 
+    
+    if (state.tab === "library"){
+      el.mainTitle.textContent = "Library";
+      el.mainMeta.textContent = "Archive";
+      el.sideTitle.textContent = "Directory";
+      el.sideMeta.textContent = "—";
+      el.side.innerHTML = `<div class="notice">Use the library to access reference pages and rank-order style listings in the same redesigned layout.</div>`;
+
+      el.main.innerHTML = await renderLibrary();
+
+      // bind group chips and item opens
+      el.main.querySelectorAll("[data-libgroup]").forEach(x => {
+        x.addEventListener("click", () => {
+          state.library.activeGroup = x.getAttribute("data-libgroup") || "Reference";
+          renderActiveView();
+        });
+      });
+      el.main.querySelectorAll("[data-libopen]").forEach(x => {
+        x.addEventListener("click", () => {
+          const href = x.getAttribute("data-libopen");
+          const title = x.textContent?.trim() || "Viewer";
+          if (!href) return;
+          openLibraryItem(href, title);
+        });
+      });
+      // bind section chips within viewer
+      el.main.querySelectorAll("[data-libsec]").forEach(x => {
+        x.addEventListener("click", () => {
+          state.library.openSection = x.getAttribute("data-libsec") || "";
+          renderActiveView();
+        });
+      });
+
+      return;
+    }
+
     if (state.tab === "region"){
       el.mainTitle.textContent = "Region directory";
       el.mainMeta.textContent = "Browse";
@@ -1420,6 +1626,9 @@
 
     try{
       const idxHtml = await fetchText(ARCH.index);
+      // library front-end (guides/rankorder/flags/maps)
+      state.library = parseLibraryFromIndex(idxHtml);
+
       state.entities = parseEntitiesFromIndex(idxHtml);
       buildRegionIndex();
 
