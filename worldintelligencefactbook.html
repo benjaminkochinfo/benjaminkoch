@@ -561,53 +561,71 @@
 
   
   // ===== library extraction from index (acts as redesigned front-end) =====
+  
   function parseLibraryFromIndex(indexHtml){
-    // Collect non-geo links (guides, comparisons, notes, rank-order, flags, etc.)
+    // Collect reference pages from the archive index, but avoid nav chrome / repeated header links.
     const doc = new DOMParser().parseFromString(indexHtml, "text/html");
     const anchors = Array.from(doc.querySelectorAll("a[href]"));
-    const items = [];
 
+    const denyTitle = [
+      "about","history","copyright","contributors","did you know","customer comments"
+    ];
+    const denyHref = [
+      "#","mailto:","javascript:"
+    ];
+
+    // Only keep these subtrees (typical archive structure)
+    const allowPathHints = [
+      "docs/","definitions","notes","guide","rankorder","rank_order","rank-order",
+      "flags","flag","maps","map","gallery","covers","reference","appendix","fields"
+    ];
+
+    const items = [];
     for (const a of anchors){
       const hrefRaw = (a.getAttribute("href") || "").trim();
       if (!hrefRaw) continue;
+      if (denyHref.some(x => hrefRaw.toLowerCase().startsWith(x))) continue;
+
       const href = normalizeHref(hrefRaw);
-      // skip geos (country pages handled separately)
-      if (href.includes("geos/")) continue;
-
-      // keep only internal html assets within the archive tree
       if (!href.match(/\.html?$/i)) continue;
+      if (href.includes("geos/")) continue; // countries are handled separately
 
-      // avoid self-link duplicates
       const title = cleanText(a.textContent || "") || href.split("/").pop();
       if (!title) continue;
 
-      // infer group by path
-      let group = "Reference";
-      if (href.includes("rankorder") || href.includes("rank_order") || href.includes("rank-order")) group = "Rank order";
-      else if (href.includes("docs") || href.includes("guide") || href.includes("reference") || href.includes("notes")) group = "Guides";
-      else if (href.includes("fields") || href.includes("appendix")) group = "Appendices";
-      else if (href.includes("flag") || href.includes("flags")) group = "Flags";
-      else if (href.includes("maps") || href.includes("map")) group = "Maps";
+      const t = title.toLowerCase().trim();
+      if (denyTitle.some(x => t === x || t.startsWith(x+" ") || t.includes(x))) continue;
 
-      items.push({
-        title,
-        group,
-        href: `${ARCH.root}/` + href
-      });
+      const h = href.toLowerCase();
+      if (!allowPathHints.some(x => h.includes(x))) continue;
+
+      // Infer group by path
+      let group = "Reference";
+      if (h.includes("rankorder") || h.includes("rank_order") || h.includes("rank-order")) group = "Rank order";
+      else if (h.includes("guide") || h.includes("docs") || h.includes("definitions") || h.includes("notes")) group = "Guides";
+      else if (h.includes("appendix") || h.includes("fields")) group = "Appendices";
+      else if (h.includes("flag") || h.includes("flags")) group = "Flags";
+      else if (h.includes("maps") || h.includes("map")) group = "Maps";
+      else if (h.includes("gallery") || h.includes("covers")) group = "Gallery";
+
+      items.push({ title, group, href: `${ARCH.root}/` + href });
     }
 
-    // de-dup by href
+    // de-dup and drop repeated/all-caps nav artifacts
     const seen = new Set();
     const dedup = [];
     for (const it of items){
-      if (seen.has(it.href)) continue;
-      seen.add(it.href);
-      // filter out obvious nav chrome anchors with too-short titles
-      if ((it.title || "").length < 3) continue;
-      dedup.push(it);
+      const key = it.href;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      const t = (it.title || "").replace(/\s+/g," ").trim();
+      // filter pathological repeats like "ABOUT History ... ABOUT History ..."
+      if (t.length > 140 && /(.{12,}).*\1/.test(t)) continue;
+
+      dedup.push({ ...it, title: t });
     }
 
-    // group
     const byGroup = new Map();
     for (const it of dedup){
       if (!byGroup.has(it.group)) byGroup.set(it.group, []);
@@ -617,9 +635,9 @@
       arr.sort((a,b)=>a.title.localeCompare(b.title));
       byGroup.set(g, arr);
     }
-
     return { items: dedup, byGroup };
   }
+
 
   async function renderLibrary(){
     // Must have loaded index already; if not, show placeholder
@@ -753,7 +771,72 @@
     return facts;
   }
 
-  function extractLabeledBlocks(root){
+  
+  function extractFactbookCategoryBlocks(root){
+    // Targets the typical factbook DOM: category -> field -> subfield
+    // Very tolerant: if classes differ, it still tries to build key/value from nearby labels.
+    const facts = [];
+
+    // Common patterns observed in geos/*.html
+    const categories = Array.from(root.querySelectorAll(".category, .category_data, .category-container, [class*='category']"));
+    for (const cat of categories){
+      // category name
+      let catName = "";
+      const cn =
+        cat.querySelector(".category_name, .category-title, h2, h3, h4") ||
+        (cat.closest(".category")?.querySelector(".category_name") || null);
+      if (cn) catName = cleanText(cn.innerText || "");
+      if (!catName) catName = "";
+
+      // field blocks
+      const fieldBlocks = Array.from(cat.querySelectorAll(".field, .category_data_subfield, .category_data_field, [class*='field']"));
+      for (const fb of fieldBlocks){
+        // field name
+        let fieldName = "";
+        const fn = fb.querySelector(".field_name, .subcategory, .subfield-name, b, strong");
+        if (fn) fieldName = cleanText(fn.innerText || "");
+        // value - try common containers
+        let value = "";
+        const vEl =
+          fb.querySelector(".field_data, .data, .field-text, .category_data_value, p") ||
+          fb;
+        value = cleanText(vEl.innerText || "");
+
+        // If it looks like "Field: Value" already, capture directly
+        if (value && value.match(/^.{3,80}:\s+.{3,}/)){
+          const m = value.match(/^(.{3,80}):\s+([\s\S]+)$/);
+          if (m){
+            const k = m[1].trim();
+            const v = m[2].trim();
+            if (k && v) facts.push({ k: (catName ? `${catName} — ${k}` : k), v });
+            continue;
+          }
+        }
+
+        // Try splitting by newlines: first line label, rest value
+        if (!fieldName && value){
+          const lines = value.split("\n").map(x=>x.trim()).filter(Boolean);
+          if (lines.length >= 2 && lines[0].length <= 80){
+            fieldName = lines[0];
+            value = cleanText(lines.slice(1).join("\n"));
+          }
+        }
+
+        // Remove field name from value if duplicated
+        if (fieldName && value && value.toLowerCase().startsWith(fieldName.toLowerCase())){
+          value = cleanText(value.slice(fieldName.length));
+        }
+
+        const key = (catName && fieldName) ? `${catName} — ${fieldName}` : (fieldName || catName);
+        if (key && value && value.length >= 2){
+          facts.push({ k: key, v: value });
+        }
+      }
+    }
+    return facts;
+  }
+
+function extractLabeledBlocks(root){
     const facts = [];
     const text = cleanText(root.innerText || "");
     const lines = text.split("\n").map(x => x.trim()).filter(Boolean);
@@ -943,6 +1026,7 @@
     const body = doc.body;
 
     const globalFacts = dedupeFacts([
+      ...extractFactbookCategoryBlocks(body),
       ...extractKeyValueTables(body),
       ...extractDefinitionLists(body),
       ...extractLabeledBlocks(body)
