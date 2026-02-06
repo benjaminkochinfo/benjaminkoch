@@ -1065,6 +1065,90 @@
     try{ localStorage.setItem(enrichCacheKey(), JSON.stringify(v||{})); } catch {}
   }
 
+
+  // ===== indicator-wide ranking cache (1 call per indicator) =====
+  function indCacheKey(){ return "wib_indicator_cache_v1"; }
+  function getIndCache(){ try{ return JSON.parse(localStorage.getItem(indCacheKey()) || "{}"); } catch { return {}; } }
+  function setIndCache(v){ try{ localStorage.setItem(indCacheKey(), JSON.stringify(v||{})); } catch {} }
+
+  async function ensureWBCountryIndex(){
+    // Build a silent name->iso2 map for archive entity names
+    if (state.wbNameToIso2) return;
+    try{
+      const url = `${WB.base}?format=json&per_page=400`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error("idx");
+      const j = await r.json();
+      const data = Array.isArray(j) ? j[1] : null;
+      const map = new Map();
+      if (Array.isArray(data)){
+        for (const c of data){
+          const nm = (c?.name || "").toLowerCase().trim();
+          const iso2 = (c?.id || "").toLowerCase().trim(); // WB uses iso2 as id
+          if (nm && iso2 && iso2.length===2) map.set(nm, iso2);
+          // also store alternative names if present
+          const alt = (c?.iso2Code || "").toLowerCase().trim();
+          if (nm && alt && alt.length===2) map.set(nm, alt);
+        }
+      }
+      // add a few normalization passes for archive naming quirks
+      const norm = (s) => s.toLowerCase()
+        .replace(/\s+/g," ")
+        .replace(/&/g,"and")
+        .replace(/,.*$/,"")
+        .trim();
+      const map2 = new Map(map);
+      for (const [k,v] of map.entries()){
+        map2.set(norm(k), v);
+      }
+      state.wbNameToIso2 = map2;
+    } catch {
+      state.wbNameToIso2 = new Map();
+    }
+  }
+
+  async function getIndicatorLatestByCountry(indicatorId, yearMax){
+    await ensureWBCountryIndex();
+
+    const cache = getIndCache();
+    const key = `${indicatorId}::${yearMax}`;
+    const ttl = daysToMs(ENRICH?.ttlDays || 7);
+
+    if (cache[key] && cache[key].ts && (nowMs() - cache[key].ts) < ttl && Array.isArray(cache[key].rows)){
+      return cache[key].rows;
+    }
+
+    // One call: indicator across all countries, many years
+    const url = `https://api.worldbank.org/v2/indicator/${encodeURIComponent(indicatorId)}?format=json&per_page=20000`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error("ind");
+    const j = await r.json();
+    const data = Array.isArray(j) ? j[1] : null;
+    if (!Array.isArray(data)) throw new Error("ind2");
+
+    // pick latest observation per iso2
+    const best = new Map(); // iso2 -> {iso2,name,year,value}
+    for (const row of data){
+      if (!row) continue;
+      const iso2 = (row?.country?.id || "").toLowerCase().trim(); // WB country id often iso2
+      const name = (row?.country?.value || "").trim();
+      const year = Number(row?.date);
+      const value = row?.value;
+      if (!iso2 || iso2.length!==2) continue;
+      if (!isFinite(year) || year > yearMax) continue;
+      if (value === null || value === undefined) continue;
+
+      const cur = best.get(iso2);
+      if (!cur || year > cur.year){
+        best.set(iso2, { iso2, name, year, value });
+      }
+    }
+
+    const rows = Array.from(best.values());
+    cache[key] = { ts: nowMs(), rows };
+    setIndCache(cache);
+    return rows;
+  }
   async function wbLatestSafe(iso3, indicator){
     try{ return await wbLatest(iso3, indicator); } catch { return null; }
   }
@@ -1431,33 +1515,160 @@ async function fetchIndicatorBundle(iso3, indicatorKeys){
 
     if (state.tab === "compare"){
       el.mainTitle.textContent = "Compare";
-      el.mainMeta.textContent = "Computed";
-      el.main.innerHTML = `<div class="loading"><span class="spin"></span><span>Computing…</span></div>`;
+      el.mainMeta.textContent = "Rankings";
+      el.sideTitle.textContent = "Focus";
+      el.sideMeta.textContent = "—";
 
-      const cmp = await buildComparisonForActive();
-      if (!cmp){
-        el.main.innerHTML = `<div class="notice">Comparisons are not available for this entity yet.</div>`;
-        el.sideTitle.textContent = "Coverage";
-        el.sideMeta.textContent = "—";
-        el.side.innerHTML = `<div class="notice">Comparisons strengthen as you browse more entities.</div>`;
-        return;
+      // Indicator catalog (extendable)
+      const catalog = [
+        { id:"NY.GDP.MKTP.CD", label:"GDP (current US$)", fmt: v => fmtNum(v) },
+        { id:"NY.GDP.PCAP.CD", label:"GDP per capita (current US$)", fmt: v => fmtNum(v) },
+        { id:"FP.CPI.TOTL.ZG", label:"Inflation (annual %)", fmt: v => `${fmtNum(v)}%` },
+        { id:"SL.UEM.TOTL.ZS", label:"Unemployment (%, ILO)", fmt: v => `${fmtNum(v)}%` },
+        { id:"SP.POP.TOTL", label:"Population", fmt: v => fmtNum(v) },
+        { id:"IT.NET.USER.ZS", label:"Internet users (% of population)", fmt: v => `${fmtNum(v)}%` },
+        { id:"EG.ELC.ACCS.ZS", label:"Access to electricity (% of population)", fmt: v => `${fmtNum(v)}%` },
+        { id:"EN.ATM.CO2E.PC", label:"CO₂ emissions (t per capita)", fmt: v => fmtNum(v) }
+      ];
+
+      // selection state
+      state.compare = state.compare || { indicator: catalog[0].id, yearMax: WB.yearMax, mode:"latest" };
+
+      const sel = state.compare.indicator || catalog[0].id;
+      const ind = catalog.find(x => x.id === sel) || catalog[0];
+
+      // UI shell
+      el.main.innerHTML = `
+        <div class="notice" style="margin-bottom:10px">
+          Rankings are computed from one indicator-wide pull and cached locally. If data is missing for a country, it is simply omitted.
+        </div>
+        <div class="row2" style="margin-bottom:10px">
+          <div>
+            <label class="small">Indicator</label>
+            <select id="cmpIndicator">
+              ${catalog.map(x => `<option value="${escapeHtml(x.id)}" ${x.id===ind.id?'selected':''}>${escapeHtml(x.label)}</option>`).join("")}
+            </select>
+          </div>
+          <div>
+            <label class="small">Year ceiling</label>
+            <select id="cmpYearMax">
+              ${[2026,2025,2024,2023,2022,2021,2020].map(y => `<option value="${y}" ${y===state.compare.yearMax?'selected':''}>${y}</option>`).join("")}
+            </select>
+          </div>
+        </div>
+        <div id="cmpBody"><div class="loading"><span class="spin"></span><span>Computing…</span></div></div>
+      `;
+
+      // bind selects
+      const cmpIndicatorEl = document.getElementById("cmpIndicator");
+      const cmpYearMaxEl = document.getElementById("cmpYearMax");
+      if (cmpIndicatorEl){
+        cmpIndicatorEl.addEventListener("change", () => {
+          state.compare.indicator = cmpIndicatorEl.value;
+          renderActiveView();
+        });
+      }
+      if (cmpYearMaxEl){
+        cmpYearMaxEl.addEventListener("change", () => {
+          state.compare.yearMax = Number(cmpYearMaxEl.value) || WB.yearMax;
+          renderActiveView();
+        });
       }
 
-      el.main.innerHTML = cmp.map(c => {
-        const rankLine = c.rank ? `Rank: ${c.rank}/${c.total} • Year: ${c.year || "—"}` : `Year: ${c.year || "—"}`;
-        const top = (c.top||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
-        const bot = (c.bottom||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
-        return `
-          <div class="notice" style="margin-bottom:10px"><b>${escapeHtml(c.label)}</b><br/><span style="opacity:.8">${escapeHtml(rankLine)}</span></div>
-          <div class="kv"><div class="k">Top</div><div class="v">${escapeHtml(top)}</div></div>
-          <div class="kv"><div class="k">Bottom</div><div class="v">${escapeHtml(bot)}</div></div>
-          <div style="height:12px"></div>
-        `;
-      }).join("");
+      const body = document.getElementById("cmpBody");
+      if (!body) return;
 
-      el.sideTitle.textContent = "Note";
-      el.sideMeta.textContent = "Adaptive";
-      el.side.innerHTML = `<div class="notice">Comparisons strengthen automatically as coverage expands.</div>`;
+      // compute rankings
+      try{
+        const rows = await getIndicatorLatestByCountry(ind.id, state.compare.yearMax);
+        // Map archive country names/codes to WB iso2 if available, by name matching (silent)
+        const activeName = state.active?.name || "";
+        const activeCode = state.active?.code || "";
+
+        // convert to list with display name from archive list where possible
+        const byIso2 = new Map(rows.map(r => [r.iso2, r]));
+        const enriched = [];
+        for (const e of state.entities){
+          const iso2 = state.wbNameToIso2?.get((e.name||"").toLowerCase()) || null;
+          const hit = iso2 ? byIso2.get(iso2) : null;
+          if (hit){
+            enriched.push({ name: e.name, code: e.code, iso2, year: hit.year, value: hit.value });
+          }
+        }
+
+        // fallback: include any WB rows not mapped by name as "Other"
+        const mappedIso2 = new Set(enriched.map(x=>x.iso2));
+        const others = rows.filter(r => !mappedIso2.has(r.iso2)).slice(0, 2000).map(r => ({
+          name: r.name, code: "", iso2: r.iso2, year:r.year, value:r.value
+        }));
+
+        const all = enriched.concat(others);
+
+        all.sort((a,b)=> (b.value - a.value));
+
+        const activeRow =
+          all.find(x => x.code && x.code.toLowerCase()===activeCode.toLowerCase()) ||
+          all.find(x => x.name && activeName && x.name.toLowerCase()===activeName.toLowerCase()) ||
+          null;
+
+        const rank = activeRow ? (all.indexOf(activeRow)+1) : null;
+
+        const top = all.slice(0, 25);
+        const bottom = all.slice(-25);
+
+        const fmtV = v => ind.fmt(v);
+
+        const renderTable = (title, arr, highlightIso2=null) => `
+          <div class="notice" style="margin-bottom:10px"><b>${escapeHtml(title)}</b></div>
+          <div class="listbox" style="padding:0">
+            <div style="display:grid; grid-template-columns: 64px 1.3fr .7fr; gap:0; width:100%">
+              <div style="padding:10px 12px; border-bottom:1px solid rgba(26,50,75,.55); font-family:var(--mono); font-size:10px; color:var(--muted)">RANK</div>
+              <div style="padding:10px 12px; border-bottom:1px solid rgba(26,50,75,.55); font-family:var(--mono); font-size:10px; color:var(--muted)">ENTITY</div>
+              <div style="padding:10px 12px; border-bottom:1px solid rgba(26,50,75,.55); font-family:var(--mono); font-size:10px; color:var(--muted); text-align:right">VALUE</div>
+              ${arr.map((x,i)=> {
+                const rnk = title.startsWith("Bottom") ? (all.length - arr.length + i + 1) : (i+1);
+                const isHi = highlightIso2 && x.iso2===highlightIso2;
+                const bg = isHi ? "background: rgba(255,138,0,.08); border-left: 2px solid rgba(255,138,0,.9);" : "";
+                const nm = (x.name || "").trim() + (x.code ? ` (${x.code})` : "");
+                return `
+                  <div style="padding:10px 12px; border-bottom:1px solid rgba(26,50,75,.25); font-family:var(--mono); font-size:11px; ${bg}">${rnk}</div>
+                  <div style="padding:10px 12px; border-bottom:1px solid rgba(26,50,75,.25); font-size:12px; ${bg}">${escapeHtml(nm || x.iso2)}</div>
+                  <div style="padding:10px 12px; border-bottom:1px solid rgba(26,50,75,.25); font-family:var(--mono); font-size:11px; text-align:right; ${bg}">${escapeHtml(fmtV(x.value))}<span style="opacity:.7"> (${escapeHtml(String(x.year))})</span></div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        `;
+
+        body.innerHTML = `
+          <div class="notice" style="margin-bottom:10px">
+            <b>${escapeHtml(ind.label)}</b><br/>
+            <span style="opacity:.8">Coverage: ${all.length.toLocaleString()} entities • Latest year per entity ≤ ${state.compare.yearMax}</span>
+          </div>
+          ${renderTable("Top 25", top, activeRow?.iso2 || null)}
+          <div style="height:12px"></div>
+          ${renderTable("Bottom 25", bottom, activeRow?.iso2 || null)}
+        `;
+
+        // side panel
+        if (activeRow){
+          el.sideMeta.textContent = "Active rank";
+          el.side.innerHTML = `
+            <div class="notice" style="white-space:pre-wrap">
+              Rank: ${rank}/${all.length}
+              \nValue: ${fmtV(activeRow.value)} (${activeRow.year})
+              \nIndicator: ${escapeHtml(ind.label)}
+            </div>
+          `;
+        } else {
+          el.sideMeta.textContent = "—";
+          el.side.innerHTML = `<div class="notice">Select a country to highlight its position in rankings.</div>`;
+        }
+
+      } catch {
+        body.innerHTML = `<div class="notice">Rankings are temporarily unavailable.</div>`;
+        el.side.innerHTML = `<div class="notice">No focus available.</div>`;
+      }
       return;
     }
 
