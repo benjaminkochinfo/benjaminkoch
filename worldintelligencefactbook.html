@@ -1,1352 +1,776 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="color-scheme" content="dark"/>
-  <title>World Intelligence Factbook</title>
-  <meta name="description" content="World Intelligence Factbook — redesigned country intelligence library with maximal sectioning and structured field extraction."/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>WIB — World Intelligence Factbook</title>
   <style>
     :root{
-      --bg:#061018;
-      --panel:#0b1622;
-      --panel2:#0f2133;
-      --border:#1a324b;
-      --text:#e7eef7;
-      --muted:#9fb3c9;
-      --accent:#ff8a00;
-      --accent2:#3ddc97;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius: 18px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --bg:#070A12;
+      --panel:#0B1020;
+      --panel2:#0E1630;
+      --card:#101B3A;
+      --card2:#0D1733;
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.72);
+      --muted2:rgba(234,240,255,.55);
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.16);
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --shadow2: 0 10px 26px rgba(0,0,0,.45);
+      --radius:16px;
+      --radius2:12px;
+      --accent:#F59E0B;
+      --accent2:#7DD3FC;
+      --ok:#22C55E;
+      --warn:#FBBF24;
+      --bad:#EF4444;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: var(--sans);
+      font-family:var(--sans);
       background:
-        radial-gradient(1200px 800px at 18% 0%, rgba(255,138,0,.08), transparent 55%),
-        radial-gradient(900px 600px at 82% 10%, rgba(61,220,151,.06), transparent 60%),
-        linear-gradient(180deg, #061019 0%, #050c13 100%);
+        radial-gradient(1200px 600px at 18% 12%, rgba(245,158,11,.16), transparent 62%),
+        radial-gradient(900px 520px at 75% 18%, rgba(125,211,252,.12), transparent 60%),
+        radial-gradient(1000px 600px at 40% 90%, rgba(34,197,94,.10), transparent 55%),
+        linear-gradient(180deg, #070A12 0%, #050711 100%);
       color:var(--text);
       overflow-x:hidden;
     }
-
+    a{color:inherit}
+    .wrap{max-width:1440px;margin:0 auto;padding:18px 16px 26px}
     .topbar{
-      position:sticky; top:0; z-index:40;
-      backdrop-filter: blur(10px);
-      background: rgba(6,16,24,.72);
-      border-bottom:1px solid rgba(26,50,75,.85);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 14px;border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16,27,58,.84), rgba(11,16,32,.84));
+      border-radius:var(--radius);box-shadow:var(--shadow2);
+      position:sticky;top:12px;z-index:50;backdrop-filter: blur(10px)
     }
-    .topbar-inner{
-      max-width: 1560px;
-      margin:0 auto;
-      padding:12px 14px;
-      display:flex; gap:12px;
-      align-items:center; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .brand{display:flex; align-items:center; gap:10px;}
+    .brand{display:flex;align-items:center;gap:12px;min-width:260px}
     .logo{
-      width:44px; height:44px; border-radius: 16px;
-      background: linear-gradient(135deg, rgba(255,138,0,.95), rgba(255,138,0,.15));
-      border:1px solid rgba(255,138,0,.35);
-      box-shadow: 0 14px 40px rgba(255,138,0,.15);
-      display:grid; place-items:center;
-      font-family:var(--mono); font-weight:900;
-      letter-spacing:.3px;
-      font-size:12px;
+      width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+      background:
+        radial-gradient(70% 70% at 30% 30%, rgba(245,158,11,.35), transparent 55%),
+        radial-gradient(70% 70% at 70% 70%, rgba(125,211,252,.25), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 30px rgba(0,0,0,.45);
+      font-family:var(--mono);font-weight:800;letter-spacing:.08em;color:var(--text)
     }
-    .brand h1{margin:0; font-size:14px; letter-spacing:.3px; line-height:1.05}
-    .brand .sub{margin-top:4px; font-family:var(--mono); font-size:11px; color:var(--muted)}
-    .meta{
-      font-family:var(--mono);
-      font-size:11px;
-      color: var(--muted);
-      display:flex; gap:10px; align-items:center;
-      white-space:nowrap;
-    }
-
-    .wrap{max-width:1560px; margin:0 auto; padding:14px;}
-    .grid{
-      display:grid;
-      grid-template-columns: 520px 1fr;
-      gap:14px;
-      align-items:start;
-    }
-    @media (max-width: 1100px){ .grid{grid-template-columns:1fr} }
-
-    .panel{
-      border:1px solid rgba(26,50,75,.85);
-      background: rgba(11,22,34,.78);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .panel-h{
-      padding:14px 14px 10px 14px;
-      border-bottom:1px solid rgba(26,50,75,.65);
-      background: linear-gradient(180deg, rgba(15,33,51,.55), rgba(11,22,34,.35));
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-      flex-wrap:wrap;
-    }
-    .panel-h h2{margin:0; font-size:13px; letter-spacing:.2px}
-    .hint{color:var(--muted); font-family:var(--mono); font-size:11px; line-height:1.35; margin-top:6px;}
-    .panel-b{padding:12px;}
-
-    label.small{
-      font-family:var(--mono);
-      font-size:10px;
-      color: var(--muted);
-      display:block;
-      margin:0 0 6px 2px;
-    }
-    select, input{
-      width:100%;
-      border:1px solid rgba(26,50,75,.85);
-      background: rgba(7,16,24,.55);
-      color: rgba(255,255,255,.88);
-      border-radius: 14px;
-      padding:10px 12px;
-      outline:none;
-      font-size:12px;
-    }
-    input::placeholder{color: rgba(159,179,201,.75)}
-    .row2{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
-    @media (max-width: 520px){ .row2{grid-template-columns:1fr} }
-
-    .btns{display:flex; gap:8px; flex-wrap:wrap}
-    .btn{
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(7,16,24,.55);
-      color: rgba(255,255,255,.85);
-      padding:9px 10px;
-      border-radius: 999px;
-      cursor:pointer;
-      font-family:var(--mono);
-      font-size:11px;
-      user-select:none;
-    }
-    .btn:hover{border-color: rgba(255,138,0,.45)}
-
-    .hero{
-      padding:16px 16px 12px 16px;
-      border-bottom:1px solid rgba(26,50,75,.65);
-      background: radial-gradient(1000px 500px at 15% 0%, rgba(255,138,0,.09), transparent 50%),
-                  radial-gradient(900px 450px at 85% 10%, rgba(61,220,151,.06), transparent 55%),
-                  linear-gradient(180deg, rgba(15,33,51,.5), rgba(11,22,34,.25));
-    }
-    .hero-top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap}
-    .hero h3{margin:0; font-size:18px; letter-spacing:.3px}
-    .subline{font-family:var(--mono); color:var(--muted); font-size:11px; line-height:1.35; margin-top:6px}
-
-    .kpis{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:10px;
-      margin-top:12px;
-    }
-    @media (max-width: 1100px){ .kpis{grid-template-columns: repeat(2, minmax(0,1fr))} }
-    @media (max-width: 560px){ .kpis{grid-template-columns: 1fr} }
-    .kpi{
-      border:1px solid rgba(26,50,75,.7);
-      background: rgba(7,16,24,.55);
-      border-radius: 16px;
-      padding:10px 10px;
-      min-height:64px;
-    }
-    .kpi .k{font-family:var(--mono); font-size:10px; color:var(--muted)}
-    .kpi .v{margin-top:6px; font-size:12px; line-height:1.25}
-
-    .tabs{
-      display:flex; gap:8px; flex-wrap:wrap;
-      padding:10px 12px;
-      border-bottom:1px solid rgba(26,50,75,.65);
-      background: rgba(11,22,34,.65);
-    }
-    .tab{
-      padding:8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(15,33,51,.35);
-      color: rgba(255,255,255,.8);
-      cursor:pointer;
-      font-family:var(--mono);
-      font-size:11px;
-      user-select:none;
-    }
-    .tab.active{border-color: rgba(255,138,0,.55); background: rgba(255,138,0,.08); color: rgba(255,138,0,.95)}
-
-    .content{
-      padding:12px;
-      display:grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap:12px;
-      align-items:start;
-    }
-    @media (max-width: 1100px){ .content{grid-template-columns:1fr} }
-
-    .card{
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(15,33,51,.30);
-      border-radius: 16px;
-      overflow:hidden;
-    }
-    .card-h{
-      padding:10px 12px;
-      border-bottom:1px solid rgba(26,50,75,.55);
-      background: rgba(7,16,24,.45);
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      flex-wrap:wrap;
-    }
-    .card-h b{font-size:12px; letter-spacing:.2px}
-    .card-h span{font-family:var(--mono); font-size:10px; color:var(--muted)}
-    .card-b{padding:10px 12px}
-
-    .pillrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px}
+    .brand h1{margin:0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;line-height:1.15}
+    .brand .sub{margin-top:3px;font-size:12px;color:var(--muted);letter-spacing:.02em}
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end;flex:1}
     .pill{
-      border:1px solid rgba(26,50,75,.75);
-      background: rgba(7,16,24,.55);
-      color: rgba(255,255,255,.85);
-      padding:8px 10px;
-      border-radius: 999px;
-      cursor:pointer;
-      font-family:var(--mono);
-      font-size:11px;
-      user-select:none;
+      display:flex;align-items:center;gap:8px;border:1px solid var(--line);
+      background: rgba(11,16,32,.62);border-radius:999px;padding:9px 12px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.25)
     }
-    .pill:hover{border-color: rgba(255,138,0,.45)}
-    .pill.active{border-color: rgba(255,138,0,.55); background: rgba(255,138,0,.08); color: rgba(255,138,0,.95)}
-
-    .kv{
-      display:grid;
-      grid-template-columns: 240px 1fr;
-      gap:10px 14px;
-      padding:8px 0;
-      border-bottom:1px dashed rgba(26,50,75,.45);
+    .pill .k{font-size:12px;color:var(--muted2);letter-spacing:.02em}
+    .pill input,.pill select{background:transparent;border:none;outline:none;color:var(--text);font-size:13px;min-width:180px;font-family:var(--sans)}
+    .pill select{min-width:220px}
+    .pill input::placeholder{color: rgba(234,240,255,.45)}
+    .btn{
+      border:1px solid rgba(245,158,11,.34);background: rgba(245,158,11,.12);color:var(--text);
+      border-radius:999px;padding:10px 12px;font-size:13px;cursor:pointer;
+      transition: transform .06s ease, background .15s ease, border-color .15s ease;
+      display:flex;align-items:center;gap:8px;user-select:none;white-space:nowrap
     }
+    .btn:hover{background: rgba(245,158,11,.18);border-color: rgba(245,158,11,.48)}
+    .btn:active{transform: translateY(1px)}
+    .btn.secondary{border-color: rgba(125,211,252,.30);background: rgba(125,211,252,.10)}
+    .btn.secondary:hover{border-color: rgba(125,211,252,.45);background: rgba(125,211,252,.14)}
+    .layout{display:grid;grid-template-columns:360px 1fr;gap:14px;margin-top:14px}
+    @media (max-width:1100px){
+      .layout{grid-template-columns:1fr}
+      .brand{min-width:unset}
+      .controls{justify-content:stretch}
+      .pill{flex:1}
+      .pill input,.pill select{width:100%}
+    }
+    .panel{border:1px solid var(--line);background: rgba(11,16,32,.68);border-radius:var(--radius);box-shadow:var(--shadow2);overflow:hidden}
+    .panel .ph{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;background: linear-gradient(180deg, rgba(255,255,255,.05), transparent)}
+    .panel .ph .title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:rgba(234,240,255,.82)}
+    .panel .ph .meta{font-size:12px;color:var(--muted2);font-family:var(--mono);white-space:nowrap}
+    .panel .pb{padding:12px 14px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:520px){.grid2{grid-template-columns:1fr}}
+    .chiprow{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px solid var(--line);background: rgba(16,27,58,.44);padding:7px 10px;border-radius:999px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;transition: background .15s ease, border-color .15s ease}
+    .chip:hover{background: rgba(16,27,58,.58);border-color: var(--line2)}
+    .chip.active{border-color: rgba(245,158,11,.55);background: rgba(245,158,11,.12);color: rgba(234,240,255,.92)}
+    .rows{max-height:58vh;overflow:auto;padding-right:4px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px;border:1px solid var(--line);border-radius:14px;background: rgba(16,27,58,.32);cursor:pointer;margin-bottom:8px;transition: border-color .15s ease, background .15s ease, transform .06s ease}
+    .row:hover{border-color: var(--line2);background: rgba(16,27,58,.42)}
+    .row:active{transform: translateY(1px)}
+    .row.active{border-color: rgba(245,158,11,.55);background: rgba(245,158,11,.10)}
+    .row .name{font-size:13px;font-weight:650}
+    .row .meta{font-size:11px;color:var(--muted2);font-family:var(--mono);display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+    .tag{border:1px solid var(--line);padding:2px 7px;border-radius:999px;background: rgba(11,16,32,.55)}
+    .tag.accent{border-color: rgba(245,158,11,.35);background: rgba(245,158,11,.10)}
+    .main{padding:0;min-height:70vh}
+    .hero{padding:14px 14px 12px;border-bottom:1px solid var(--line);display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;background: radial-gradient(800px 240px at 15% 0%, rgba(245,158,11,.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.05), transparent)}
+    .media{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;flex:1;min-width:280px}
+    .flag{width:110px;height:74px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background: rgba(255,255,255,.03);overflow:hidden;display:grid;place-items:center;box-shadow: 0 14px 32px rgba(0,0,0,.40)}
+    .flag img{width:100%;height:100%;object-fit:cover}
+    .hero h2{margin:0;font-size:18px;letter-spacing:.02em}
+    .hero .subline{margin-top:4px;color:var(--muted);font-size:13px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .hero .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:flex-end;margin-left:auto}
+    .content{padding:12px 14px 18px}
+    .notice{padding:12px 12px;border:1px dashed rgba(255,255,255,.18);border-radius:14px;color:var(--muted);background: rgba(11,16,32,.35);margin-bottom:12px;font-size:13px;line-height:1.45}
+    .card{border:1px solid var(--line);border-radius:var(--radius);background: rgba(16,27,58,.30);box-shadow:var(--shadow2);overflow:hidden;margin-bottom:12px}
+    .card .ch{padding:10px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;background: linear-gradient(180deg, rgba(255,255,255,.05), transparent)}
+    .card .ch b{font-size:13px}
+    .card .ch span{font-size:12px;color:var(--muted2);font-family:var(--mono)}
+    .card .cb{padding:10px 12px}
+    .kv{display:grid;grid-template-columns:260px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
     .kv:last-child{border-bottom:none}
-    @media (max-width: 720px){ .kv{grid-template-columns:1fr} }
-    .kv .k{font-family:var(--mono); font-size:11px; color: rgba(255,255,255,.78); line-height:1.35;}
-    .kv .v{font-size:12px; color: rgba(231,238,247,.95); line-height:1.45; white-space:pre-wrap;}
-
-    .notice{
-      border:1px solid rgba(255,138,0,.35);
-      background: rgba(255,138,0,.08);
-      padding:10px 12px;
-      border-radius: 16px;
-      font-family:var(--mono);
-      font-size:11px;
-      line-height:1.45;
-      color: rgba(255,255,255,.85);
-    }
-    .flagBox{
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid rgba(26,50,75,.7);
-      background: rgba(7,16,24,.35);
-      border-radius: 16px;
-      padding:12px;
-      min-height:160px;
-    }
-    .flagBox img{
-      max-width:100%;
-      height:auto;
-      border-radius: 12px;
-      border:1px solid rgba(26,50,75,.65);
-    }
-
-    .listbox{
-      max-height: 560px;
-      overflow:auto;
-      border:1px solid rgba(26,50,75,.65);
-      background: rgba(7,16,24,.35);
-      border-radius: 14px;
-      padding:8px;
-    }
-    .chiprow{display:flex; flex-wrap:wrap; gap:8px}
-    .chip{
-      border:1px solid rgba(26,50,75,.7);
-      background: rgba(7,16,24,.55);
-      border-radius:999px;
-      padding:7px 10px;
-      cursor:pointer;
-      font-family:var(--mono);
-      font-size:11px;
-      color: rgba(255,255,255,.85);
-      user-select:none;
-    }
-    .chip:hover{border-color: rgba(255,138,0,.45)}
-    .chip b{color: rgba(255,138,0,.95); font-weight:800}
-
-    .loading{display:inline-flex; gap:8px; align-items:center; font-family:var(--mono); font-size:11px; color: var(--muted);}
-    .spin{
-      width:14px; height:14px; border-radius:999px;
-      border:2px solid rgba(255,255,255,.18);
-      border-top-color: rgba(255,138,0,.9);
-      animation: rot .9s linear infinite;
-    }
-    @keyframes rot{to{transform: rotate(360deg)}}
+    @media (max-width:820px){.kv{grid-template-columns:1fr}}
+    .kv .k{color:rgba(234,240,255,.86);font-size:12px;letter-spacing:.02em;font-weight:650}
+    .kv .v{color:var(--muted);font-size:13px;line-height:1.55;white-space:pre-wrap}
+    .accordion{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;background: rgba(16,27,58,.24)}
+    .acc-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px;cursor:pointer;user-select:none;border-bottom:1px solid var(--line);background: linear-gradient(180deg, rgba(255,255,255,.04), transparent)}
+    .acc-head:hover{background: linear-gradient(180deg, rgba(255,255,255,.06), transparent)}
+    .acc-head .t{font-size:13px;font-weight:750;letter-spacing:.02em}
+    .acc-head .m{font-size:12px;color:var(--muted2);font-family:var(--mono);white-space:nowrap}
+    .acc-body{display:none;padding:10px 12px 14px}
+    .accordion.open .acc-body{display:block}
+    .field{border:1px solid rgba(255,255,255,.10);border-radius:14px;background: rgba(11,16,32,.35);margin-top:10px;overflow:hidden}
+    .field .fh{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none}
+    .field .fh:hover{background: rgba(255,255,255,.03)}
+    .field .fh .fn{font-size:12px;font-weight:750;letter-spacing:.02em}
+    .field .fh .fd{font-size:11px;color:var(--muted2);font-family:var(--mono)}
+    .field .fb{display:none;padding:10px 10px 12px;color:var(--muted);line-height:1.55;font-size:13px}
+    .field.open .fb{display:block}
+    .field .fb p{margin:.35em 0}
+    .field .fb ul{margin:.35em 0 .35em 1.1em}
+    .field .fb table{width:100%;border-collapse:collapse;margin:.4em 0}
+    .field .fb td,.field .fb th{border:1px solid rgba(255,255,255,.10);padding:6px 8px;font-size:12px;color:var(--muted);vertical-align:top}
+    .field .fb .subfield-number{font-family:var(--mono);font-weight:800;color:rgba(234,240,255,.92)}
+    .field .fb .subfield-date{color:var(--muted2);font-family:var(--mono);font-size:11px}
+    .field .fb .subfield-name{color:rgba(234,240,255,.86);font-weight:700}
+    .foot{margin-top:14px;color:rgba(234,240,255,.55);font-size:12px;text-align:center}
+    .kbd{font-family:var(--mono);font-size:11px;padding:1px 6px;border:1px solid rgba(255,255,255,.14);border-bottom-color: rgba(255,255,255,.22);border-radius:8px;background: rgba(0,0,0,.25);color:rgba(234,240,255,.88);display:inline-block;transform: translateY(-1px)}
   </style>
 </head>
-
 <body>
-  <div class="topbar">
-    <div class="topbar-inner">
+  <div class="wrap">
+    <div class="topbar">
       <div class="brand">
-        <div class="logo">WIB</div>
+        <div class="logo" aria-hidden="true">WIB</div>
         <div>
           <h1>World Intelligence Factbook</h1>
-          <div class="sub">Drop-down navigation • atlas-style sections • maximal extraction</div>
+          <div class="sub">Fast retrieval • structured country profiles • offline-first</div>
         </div>
       </div>
-      <div class="meta">
-        <span id="status">loading…</span>
-        <span style="opacity:.5">|</span>
-        <span style="opacity:.7">entities:</span> <span id="count">0</span>
+
+      <div class="controls">
+        <div class="pill" title="Search country list">
+          <span class="k">SEARCH</span>
+          <input id="q" placeholder="Type a country, code, or keyword…" autocomplete="off" />
+        </div>
+
+        <div class="pill" title="Country selector">
+          <span class="k">COUNTRY</span>
+          <select id="countrySelect" aria-label="Select a country">
+            <option value="">Loading…</option>
+          </select>
+        </div>
+
+        <button class="btn secondary" id="lensBtn" title="Scenario lens">
+          <span style="font-family:var(--mono); font-weight:800">LENS</span>
+          <span id="lensLabel" style="opacity:.9">Baseline</span>
+        </button>
+
+        <button class="btn" id="homeBtn" title="Go to start">
+          <span style="font-family:var(--mono); font-weight:800">WIB</span>
+          <span>Home</span>
+        </button>
       </div>
     </div>
-  </div>
 
-  <div class="wrap">
-    <div class="grid">
-
-      <!-- LEFT -->
+    <div class="layout">
       <div class="panel">
-        <div class="panel-h">
-          <div>
-            <h2>Navigator</h2>
-            <div class="hint">Region → Entity. After load: section chips (Economy, Religion, Government, …).</div>
-          </div>
-          <div class="btns">
-            <button class="btn" id="reload">reload</button>
-            <button class="btn" id="copyLink">copy link</button>
-          </div>
+        <div class="ph">
+          <div class="title">Navigator</div>
+          <div class="meta"><span id="countMeta">—</span></div>
         </div>
-        <div class="panel-b">
-          <div class="row2">
-            <div>
-              <label class="small">Region</label>
-              <select id="region"><option value="">All</option></select>
+        <div class="pb">
+          <div class="grid2">
+            <div class="pill" style="border-radius:14px; padding:10px 12px" title="Filter by region (learned as you open countries)">
+              <span class="k">REGION</span>
+              <select id="regionSelect" aria-label="Filter by region">
+                <option value="">All regions</option>
+                <option value="__unknown__">Unclassified (not opened yet)</option>
+              </select>
             </div>
-            <div>
-              <label class="small">Search</label>
-              <input id="q" placeholder="Type country name or code…"/>
+            <div class="pill" style="border-radius:14px; padding:10px 12px" title="Jump to section inside the selected country">
+              <span class="k">SECTION</span>
+              <select id="sectionSelect" aria-label="Select section">
+                <option value="">—</option>
+              </select>
             </div>
           </div>
 
-          <div style="margin-top:10px">
-            <label class="small">Entity</label>
-            <select id="country"><option value="">Select…</option></select>
+          <div style="height:10px"></div>
+
+          <div class="chiprow" id="lensChips" aria-label="Scenario lenses">
+            <div class="chip active" data-lens="baseline">Baseline</div>
+            <div class="chip" data-lens="travel">Travel</div>
+            <div class="chip" data-lens="macro">Macro</div>
+            <div class="chip" data-lens="security">Security</div>
+            <div class="chip" data-lens="infrastructure">Infrastructure</div>
           </div>
 
-          <div style="margin-top:10px">
-            <label class="small">Section</label>
-            <select id="section"><option value="">Select…</option></select>
-          </div>
+          <div style="height:12px"></div>
 
-          <div style="margin-top:10px" class="notice">
-            Use the section chips in PROFILE for fast browsing. The dropdown is a direct selector for the same section set.
+          <div class="rows" id="list"></div>
+          <div class="foot">
+            Tip: press <span class="kbd">/</span> to focus search • <span class="kbd">Esc</span> clears filters
           </div>
         </div>
       </div>
 
-      <!-- RIGHT -->
-      <div class="panel">
-        <div class="hero">
-          <div class="hero-top">
+      <div class="panel main">
+        <div class="hero" id="hero">
+          <div class="media">
+            <div class="flag" id="flagBox"><div style="font-family:var(--mono); color:var(--muted2); font-size:12px">—</div></div>
             <div>
-              <h3 id="title">Select an entity</h3>
-              <div class="subline" id="subline">Structured fields are extracted and routed into stable topic sections.</div>
-            </div>
-            <div class="btns">
-              <button class="btn" id="clearCache">clear cache</button>
+              <h2 id="title">World Intelligence Factbook</h2>
+              <div class="subline">
+                <span id="subtitle">Select a country to load a full profile with structured sections.</span>
+              </div>
+              <div class="subline" style="margin-top:8px">
+                <span class="tag" id="codeTag">—</span>
+                <span class="tag" id="regionTag">—</span>
+                <span class="tag" id="updatedTag">—</span>
+              </div>
             </div>
           </div>
-          <div class="kpis">
-            <div class="kpi"><div class="k">CODE</div><div class="v" id="k_code">—</div></div>
-            <div class="kpi"><div class="k">REGION</div><div class="v" id="k_region">—</div></div>
-            <div class="kpi"><div class="k">SECTION DEPTH</div><div class="v" id="k_depth">—</div></div>
-            <div class="kpi"><div class="k">CURRENT SNAPSHOT</div><div class="v" id="k_now">—</div></div>
+
+          <div class="actions">
+            <button class="btn secondary" id="summaryBtn" disabled title="Open one-page summary">One‑page summary</button>
+            <button class="btn secondary" id="travelBtn" disabled title="Open travel facts">Travel facts</button>
+            <button class="btn secondary" id="mapBtn" disabled title="Open map">Map</button>
           </div>
         </div>
 
-        <div class="tabs">
-          <div class="tab active" data-tab="profile">PROFILE</div>
-          <div class="tab" data-tab="travel">TRAVEL</div>
-          <div class="tab" data-tab="flags">FLAGS</div>
-          <div class="tab" data-tab="compare">COMPARE</div>
-          <div class="tab" data-tab="region">REGION</div>
-        </div>
-
-        <div class="content">
-          <div class="card">
-            <div class="card-h">
-              <b id="mainTitle">Profile</b>
-              <span id="mainMeta">—</span>
-            </div>
-            <div class="card-b" id="main">
-              <div class="notice">Select an entity to render topic sections and extracted fields.</div>
-            </div>
+        <div class="content" id="main">
+          <div class="notice">
+            This interface is built for rapid, high-fidelity retrieval: search → select → navigate by section and field.
+            The country profile is rendered from the locally hosted dataset under <span class="kbd">wifb/</span>.
           </div>
 
           <div class="card">
-            <div class="card-h">
-              <b id="sideTitle">Summary</b>
-              <span id="sideMeta">—</span>
-            </div>
-            <div class="card-b" id="side">
-              <div class="notice">A concise overview will appear here.</div>
+            <div class="ch"><b>Start</b><span>how to use</span></div>
+            <div class="cb">
+              <div class="kv"><div class="k">Country selection</div><div class="v">Use the COUNTRY dropdown (top) or the left list. The list supports instant search.</div></div>
+              <div class="kv"><div class="k">Sections</div><div class="v">After loading a profile, choose a SECTION dropdown or scroll the accordions below.</div></div>
+              <div class="kv"><div class="k">Scenario lens</div><div class="v">The LENS chips pre-open a disciplined subset of sections for the use‑case; it never alters the underlying facts.</div></div>
             </div>
           </div>
-        </div>
 
+          <div id="profile"></div>
+        </div>
       </div>
+    </div>
+
+    <div class="foot" style="margin-top:14px">
+      WIB — World Intelligence Factbook • designed for responsiveness and structured browsing.
     </div>
   </div>
 
 <script>
 (() => {
-  // ===== archive structure (your hosted layout) =====
-  const ARCH = { root: "wifb", index: "wifb/wifbindex.html" };
-
-  // ===== silent public time-series (no provenance UI) =====
-  const WB = {
-    base: "https://api.worldbank.org/v2/country",
-    indicators: [
-      { key: "NY.GDP.MKTP.CD", label: "GDP", fmt: v => fmtNum(v) },
-      { key: "FP.CPI.TOTL.ZG", label: "Infl", fmt: v => `${fmtNum(v)}%` },
-      { key: "SP.POP.TOTL", label: "Pop", fmt: v => fmtNum(v) }
-    ],
-    yearMax: 2026
+  const CONFIG = {
+    base: "./wifb",
+    index: "./wifb/wifbindex.html",
+    geosDir: "./wifb/geos",
+    enrich: { enabled: true, wikipediaSummary: true }
   };
 
-  const $ = s => document.querySelector(s);
-  const el = {
-    status: $("#status"),
-    count: $("#count"),
-    reload: $("#reload"),
-    copyLink: $("#copyLink"),
-    clearCache: $("#clearCache"),
-    region: $("#region"),
-    q: $("#q"),
-    country: $("#country"),
-    section: $("#section"),
-    title: $("#title"),
-    subline: $("#subline"),
-    k_code: $("#k_code"),
-    k_region: $("#k_region"),
-    k_depth: $("#k_depth"),
-    k_now: $("#k_now"),
-    mainTitle: $("#mainTitle"),
-    mainMeta: $("#mainMeta"),
-    main: $("#main"),
-    sideTitle: $("#sideTitle"),
-    sideMeta: $("#sideMeta"),
-    side: $("#side"),
-    tabs: document.querySelectorAll(".tab[data-tab]")
-  };
+  const $ = (sel, el=document) => el.querySelector(sel);
+  const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 
-  const state = {
-    entities: [],
-    byRegion: new Map(),
-    tab: "profile",
-    active: null,
-    activeDoc: null,
-    activeStruct: null, // {sections: Map(name-> {facts,text}), allFacts:[]}
-    activeIso: null,
-    activeSection: "",
-    summary: "",
-    flag: null,
-    regionHTML: ""
-  };
+  const qEl = $("#q");
+  const listEl = $("#list");
+  const countrySelect = $("#countrySelect");
+  const regionSelect = $("#regionSelect");
+  const sectionSelect = $("#sectionSelect");
+  const countMeta = $("#countMeta");
 
-  // ===== utils =====
-  function escapeHtml(str){
-    return String(str)
-      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
-  }
-  function fmtNum(x){
-    if (x === null || x === undefined) return "—";
-    const s = String(x);
-    const n = Number(s.replace(/,/g,""));
-    if (!isFinite(n)) return s;
-    return n.toLocaleString(undefined);
-  }
-  function deepLink(code){
-    const u = new URL(location.href);
-    u.searchParams.set("c", code);
-    return u.toString();
-  }
-  async function fetchText(url){
-    const r = await fetch(url, { credentials: "same-origin" });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return await r.text();
-  }
-  function normalizeHref(v){
-    if (!v) return "";
-    if (v.startsWith("http")) return v;
-    return v.replace(/^\.\//,"").replace(/^\//,"");
-  }
-  function cleanText(s){
-    return (s || "")
-      .replace(/\u00A0/g, " ")
-      .replace(/[ \t]+\n/g, "\n")
-      .replace(/\n{3,}/g, "\n\n")
-      .trim();
+  const titleEl = $("#title");
+  const subtitleEl = $("#subtitle");
+  const flagBox = $("#flagBox");
+  const codeTag = $("#codeTag");
+  const regionTag = $("#regionTag");
+  const updatedTag = $("#updatedTag");
+
+  const summaryBtn = $("#summaryBtn");
+  const travelBtn = $("#travelBtn");
+  const mapBtn = $("#mapBtn");
+
+  const lensBtn = $("#lensBtn");
+  const lensLabel = $("#lensLabel");
+  const lensChips = $("#lensChips");
+  const homeBtn = $("#homeBtn");
+
+  const profileEl = $("#profile");
+
+  let CATALOG = [];
+  let REGION_BY_CODE = {};
+  let ACTIVE = null;
+  let ACTIVE_SECTIONS = [];
+  let ACTIVE_LENS = "baseline";
+
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll("\"","&quot;")
+      .replaceAll("'","&#39;");
   }
 
-  // ===== index parsing =====
-  function parseEntitiesFromIndex(html){
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const selects = Array.from(doc.querySelectorAll("select"));
-    const sel = selects.find(s => s.querySelector('option[value*="geos/"]')) || selects[0];
-    if (!sel) return [];
-
-    const out = [];
-    const nodes = Array.from(sel.children).filter(n => n.tagName === "OPTGROUP" || n.tagName === "OPTION");
-
-    for (const node of nodes){
-      if (node.tagName === "OPTGROUP"){
-        const label = (node.getAttribute("label") || "").trim();
-        for (const opt of Array.from(node.querySelectorAll("option"))){
-          const v = (opt.getAttribute("value") || "").trim();
-          if (!v.includes("geos/")) continue;
-          const code = (v.match(/geos\/([a-z0-9_-]+)\.html/i)?.[1] || "").toLowerCase();
-          if (!code) continue;
-          out.push({
-            code,
-            name: (opt.textContent || "").trim() || code.toUpperCase(),
-            regionLabel: label || "",
-            href: `${ARCH.root}/` + normalizeHref(v)
-          });
-        }
-      } else {
-        const v = (node.getAttribute("value") || "").trim();
-        if (!v.includes("geos/")) continue;
-        const code = (v.match(/geos\/([a-z0-9_-]+)\.html/i)?.[1] || "").toLowerCase();
-        if (!code) continue;
-        out.push({
-          code,
-          name: (node.textContent || "").trim() || code.toUpperCase(),
-          regionLabel: "",
-          href: `${ARCH.root}/` + normalizeHref(v)
-        });
-      }
+  function normalizePath(url){
+    if (!url) return url;
+    const u = String(url);
+    if (/^(https?:|data:|blob:|mailto:|tel:)/i.test(u)) return u;
+    if (u.startsWith("../")) return CONFIG.base + "/" + u.slice(3);
+    if (u.startsWith("./")) return CONFIG.base + "/" + u.slice(2);
+    if (u.startsWith("geos/")) return CONFIG.base + "/" + u;
+    if (u.startsWith("attachments/") || u.startsWith("docs/") || u.startsWith("fields/") || u.startsWith("images/") || u.startsWith("stylesheets/") || u.startsWith("javascripts/") || u.startsWith("appendix/")) {
+      return CONFIG.base + "/" + u;
     }
-
-    const seen = new Set();
-    const clean = out.filter(x => { if (seen.has(x.code)) return false; seen.add(x.code); return true; });
-    clean.sort((a,b) => (a.name||"").localeCompare(b.name||""));
-    return clean;
+    return CONFIG.base + "/" + u.replace(/^\/+/, "");
   }
 
-  function buildRegionIndex(){
-    const m = new Map();
-    for (const e of state.entities){
-      const r = e.regionLabel || "—";
-      if (!m.has(r)) m.set(r, []);
-      m.get(r).push(e);
-    }
-    for (const [k,arr] of m.entries()){
-      arr.sort((a,b)=>a.name.localeCompare(b.name));
-      m.set(k, arr);
-    }
-    state.byRegion = m;
-  }
-
-  // ===== extraction primitives =====
-  function dedupeFacts(facts){
-    const seen = new Set();
-    const out = [];
-    for (const f of facts || []){
-      const k = (f.k || "").trim();
-      const v = (f.v || "").trim();
-      if (!k || !v) continue;
-      const key = (k.toLowerCase() + "::" + v.toLowerCase()).slice(0, 900);
-      if (seen.has(key)) continue;
-      seen.add(key);
-      out.push({ k, v });
-      if (out.length >= 6000) break;
-    }
-    return out;
-  }
-
-  function extractKeyValueTables(root){
-    const facts = [];
-    for (const t of Array.from(root.querySelectorAll("table"))){
-      const rows = Array.from(t.querySelectorAll("tr"));
-      for (const r of rows){
-        const cells = Array.from(r.querySelectorAll("th,td"));
-        if (cells.length < 2) continue;
-        const k = cleanText(cells[0].innerText);
-        const v = cleanText(cells.slice(1).map(c => c.innerText).join(" | "));
-        if (!k || !v) continue;
-        if (k.length > 200) continue;
-        facts.push({ k, v });
-      }
-    }
-    return facts;
-  }
-
-  function extractDefinitionLists(root){
-    const facts = [];
-    for (const dl of Array.from(root.querySelectorAll("dl"))){
-      for (const dt of Array.from(dl.querySelectorAll("dt"))){
-        const dd = dt.nextElementSibling && dt.nextElementSibling.tagName.toLowerCase() === "dd" ? dt.nextElementSibling : null;
-        if (!dd) continue;
-        const k = cleanText(dt.innerText);
-        const v = cleanText(dd.innerText);
-        if (k && v) facts.push({ k, v });
-      }
-    }
-    return facts;
-  }
-
-  function extractLabeledBlocks(root){
-    const facts = [];
-    const text = cleanText(root.innerText || "");
-    const lines = text.split("\n").map(x => x.trim()).filter(Boolean);
-    for (const ln of lines){
-      const m = ln.match(/^([A-Za-z][A-Za-z0-9 \-\/(),.%]{2,140})\s*:\s*(.{2,})$/);
-      if (!m) continue;
-      const k = m[1].trim();
-      const v = m[2].trim();
-      if (!k || !v) continue;
-      facts.push({ k, v });
-    }
-    return facts;
-  }
-
-  function extractISOFromDoc(doc){
-    const text = doc.body?.innerText || "";
-    const isoLine = text.match(/ISO\s*3166\s*country\s*codes?\s*:\s*([^\n\r]+)/i)?.[1] || null;
-    if (!isoLine) return null;
-    const a3 = isoLine.match(/Alpha-?3\s*:\s*([A-Z]{3})/i)?.[1]?.toUpperCase() || null;
-    const a2 = isoLine.match(/Alpha-?2\s*:\s*([A-Z]{2})/i)?.[1]?.toUpperCase() || null;
-    if (!a2 && !a3) return null;
-    return { a2, a3 };
-  }
-
-  function extractFlagFromDoc(doc, pageHref){
-    const imgs = Array.from(doc.querySelectorAll("img"));
-    const scored = imgs.map(img => {
-      const src = img.getAttribute("src") || "";
-      const alt = (img.getAttribute("alt") || "").toLowerCase();
-      const t = (src + " " + alt).toLowerCase();
-      let score = 0;
-      if (t.includes("flag")) score += 6;
-      if (t.includes("smallflag") || t.includes("flag_")) score += 3;
-      if (t.includes("seal") || t.includes("map")) score -= 2;
-      if (src.match(/\.(svg|png|jpg|jpeg|gif)$/i)) score += 1;
-      return { src, alt: img.getAttribute("alt") || "Flag", score };
-    }).sort((a,b)=>b.score-a.score);
-
-    const best = scored.find(x => x.score >= 4);
-    if (!best?.src) return null;
-
+  async function safeText(url){
     try{
-      const base = new URL(pageHref, location.href);
-      return { alt: best.alt, src: new URL(best.src, base).toString() };
-    } catch { return null; }
+      const r = await fetch(url, {cache:"no-store"});
+      if(!r.ok) throw new Error(r.status);
+      return await r.text();
+    }catch(e){ return null; }
   }
-
-  // ===== canonical Atlas-like topic routing =====
-  function buildCanonicalSections(allFacts){
-    const CANON = [
-      "Overview",
-      "Introduction",
-      "Geography",
-      "People and Society",
-      "Religion",
-      "Government",
-      "Economy",
-      "Energy",
-      "Communications",
-      "Transportation",
-      "Military and Security",
-      "Terrorism",
-      "Transnational Issues",
-      "All fields"
-    ];
-
-    const ROUTES = [
-      ["Introduction", ["background","introduction","overview","brief","name","capital","flag description","national anthem","national symbol"]],
-      ["Geography", ["geography","location","area","land","water","coastline","climate","terrain","natural resources","environment","hazards","elevation","land use","irrigated","urbanization","population distribution"]],
-      ["People and Society", ["people","society","population","nationality","ethnic","language","age structure","dependency","sex ratio","education","literacy","health","mortality","life expectancy","fertility","hiv","obesity","sanitation","drinking water","physicians","hospital","migration","refugee","demographics"]],
-      ["Religion", ["religion","religions","religious","faith","church","mosque","temple","catholic","protestant","orthodox","islam","muslim","sunni","shia","hindu","buddhist","jewish","judaism","atheist","none"]],
-      ["Government", ["government","country name","constitution","legal","citizenship","suffrage","executive","legislative","judicial","political","elections","administrative","diplomatic","international organization","national holiday","law enforcement"]],
-      ["Economy", ["economy","gdp","growth","inflation","cpi","unemployment","labor","poverty","budget","revenue","expenditures","debt","tax","banking","credit","investment","industry","agriculture","services","trade","exports","imports","reserves","exchange rate","currency","tourism","market","remittances"]],
-      ["Energy", ["energy","electricity","oil","petroleum","gas","coal","refined","renewable","nuclear","power","consumption","production","pipelines"]],
-      ["Communications", ["communications","telephone","mobile","internet","broadband","telecom","radio","television","tv","satellite","media"]],
-      ["Transportation", ["transportation","airports","heliports","railways","roadways","waterways","merchant marine","ports","terminals","pipelines","civil aviation"]],
-      ["Military and Security", ["military","security","armed forces","expenditures","service age","conscription","paramilitary","defense","weapons","peacekeeping"]],
-      ["Terrorism", ["terrorism","terrorist","terror","extremist"]],
-      ["Transnational Issues", ["transnational","disputes","refugees","trafficking","illicit","drugs","organized crime","international disputes","stateless persons","environmental agreements"]]
-    ];
-
-    const sections = new Map();
-    for (const n of CANON) sections.set(n, { facts: [], text: "" });
-
-    // Overview gets top facts separately later
-    for (const f of allFacts){
-      const blob = (f.k + " " + f.v).toLowerCase();
-
-      let matchedAny = false;
-      for (const [topic, keys] of ROUTES){
-        if (keys.some(k => blob.includes(k))){
-          sections.get(topic).facts.push(f);
-          matchedAny = true;
-        }
-      }
-
-      // keep everything accessible
-      sections.get("All fields").facts.push(f);
-
-      // if not matched anywhere, let it still show in People/Society (broad) to avoid “orphan” data
-      if (!matchedAny) sections.get("People and Society").facts.push(f);
-    }
-
-    // de-dup and cap
-    for (const [name, pack] of sections.entries()){
-      pack.facts = dedupeFacts(pack.facts).slice(0, 2400);
-      sections.set(name, pack);
-    }
-
-    return sections;
-  }
-
-  function pickTopFacts(allFacts){
-    const pri = [
-      "Capital","Population","Area","Government type","Independence","Nationality","Ethnic groups",
-      "Languages","Religions","Currency","GDP","GDP -","Unemployment","Inflation","Exports","Imports"
-    ].map(x=>x.toLowerCase());
-
-    const picked = [];
-    const used = new Set();
-
-    for (const key of pri){
-      const hit = allFacts.find(f => (f.k||"").toLowerCase().includes(key));
-      if (hit){
-        const id = (hit.k+"::"+hit.v).toLowerCase();
-        if (!used.has(id)){
-          used.add(id);
-          picked.push(hit);
-        }
-      }
-      if (picked.length >= 24) break;
-    }
-
-    for (const f of allFacts){
-      const id = (f.k+"::"+f.v).toLowerCase();
-      if (used.has(id)) continue;
-      picked.push(f);
-      if (picked.length >= 90) break;
-    }
-    return picked;
-  }
-
-  function extractHeadingsSections(doc){
-    const body = doc.body;
-    const heads = Array.from(body.querySelectorAll("h1,h2,h3,h4,h5,h6"));
-    const sections = new Map();
-    if (!heads.length) return sections;
-
-    for (let i=0;i<heads.length;i++){
-      const h = heads[i];
-      const name = cleanText(h.innerText || "");
-      if (!name || name.length > 120) continue;
-
-      const nodes = [];
-      let cur = h.nextElementSibling;
-      while (cur && !/^(h1|h2|h3|h4|h5|h6)$/i.test(cur.tagName)){
-        nodes.push(cur);
-        cur = cur.nextElementSibling;
-      }
-
-      const chunk = document.createElement("div");
-      for (const n of nodes) chunk.appendChild(n.cloneNode(true));
-
-      const facts = dedupeFacts([
-        ...extractKeyValueTables(chunk),
-        ...extractDefinitionLists(chunk),
-        ...extractLabeledBlocks(chunk)
-      ]);
-
-      const ps = Array.from(chunk.querySelectorAll("p,li"));
-      const text = cleanText(ps.slice(0, 10).map(p => p.innerText).join("\n\n"));
-
-      const prev = sections.get(name);
-      if (prev){
-        prev.facts = dedupeFacts(prev.facts.concat(facts));
-        prev.text = cleanText([prev.text, text].filter(Boolean).join("\n\n"));
-        sections.set(name, prev);
-      } else {
-        sections.set(name, { facts, text });
-      }
-    }
-
-    return sections;
-  }
-
-  function buildMaxSections(doc){
-    const body = doc.body;
-
-    const globalFacts = dedupeFacts([
-      ...extractKeyValueTables(body),
-      ...extractDefinitionLists(body),
-      ...extractLabeledBlocks(body)
-    ]);
-
-    // canonical “Atlas-style” sections from the full fact universe
-    const canon = buildCanonicalSections(globalFacts);
-
-    // merge real headings as extra sections; if a heading matches a canonical name, enrich it
-    const headingSections = extractHeadingsSections(doc);
-    for (const [n, pack] of headingSections.entries()){
-      const name = (n || "").trim();
-      if (!name) continue;
-
-      if (canon.has(name)){
-        const cur = canon.get(name);
-        cur.facts = dedupeFacts(cur.facts.concat(pack.facts || [])).slice(0, 2400);
-        cur.text = cleanText([cur.text, pack.text].filter(Boolean).join("\n\n"));
-        canon.set(name, cur);
-      } else {
-        canon.set(name, {
-          facts: dedupeFacts(pack.facts || []).slice(0, 2400),
-          text: cleanText(pack.text || "")
-        });
-      }
-    }
-
-    // overview: top facts + first paragraph
-    const firstText = cleanText((body.querySelector("p")?.innerText) || "");
-    const ov = canon.get("Overview") || { facts: [], text: "" };
-    ov.facts = dedupeFacts(ov.facts.concat(pickTopFacts(globalFacts))).slice(0, 2400);
-    ov.text = ov.text || firstText;
-    canon.set("Overview", ov);
-
-    return { sections: canon, allFacts: globalFacts };
-  }
-
-  function pickFacts(allFacts, keys){
-    const out = [];
-    const lk = keys.map(k => k.toLowerCase());
-    for (const k of lk){
-      const hit = allFacts.find(f => (f.k||"").toLowerCase().includes(k));
-      if (hit) out.push(hit);
-      if (out.length >= 10) break;
-    }
-    return out;
-  }
-
-  function guessSummary(struct){
-    const pref = ["Overview","Introduction","Geography","People and Society","Government","Economy"];
-    let t = "";
-    for (const p of pref){
-      const hit = struct.sections.get(p);
-      if (hit && hit.text){ t = hit.text; break; }
-    }
-    if (!t){
-      const any = Array.from(struct.sections.values()).map(s => s.text).find(Boolean);
-      t = any || "";
-    }
-    const picks = pickFacts(struct.allFacts, ["Capital","Population","Area","Government type","Currency","Languages","Religions","GDP"]);
-    const ribbon = picks.length ? ("\n\n" + picks.map(p => `• ${p.k}: ${p.v}`).join("\n")) : "";
-    return cleanText((t ? t.split("\n\n").slice(0,2).join("\n\n") : "") + ribbon);
-  }
-
-  function travelFacts(struct){
-    const tokens = ["travel","visa","passport","entry","health","vaccin","customs","safety","security","crime","airport","ports","transport","road","rail","driving","emergency","medical"];
-    const hits = [];
-    for (const f of struct.allFacts){
-      const t = (f.k + " " + f.v).toLowerCase();
-      if (tokens.some(x => t.includes(x))) hits.push(f);
-      if (hits.length >= 900) break;
-    }
-    return hits;
-  }
-
-  // ===== comparisons (silent) =====
-  async function wbLatest(iso3, indicator){
-    const url = `${WB.base}/${encodeURIComponent(iso3)}/indicator/${encodeURIComponent(indicator)}?format=json&per_page=20000`;
-    const r = await fetch(url);
-    if (!r.ok) return null;
-    const j = await r.json();
-    const data = Array.isArray(j) ? j[1] : null;
-    if (!Array.isArray(data)) return null;
-    const rows = data
-      .filter(d => d && d.value !== null && d.date && Number(d.date) <= WB.yearMax)
-      .sort((a,b) => Number(b.date) - Number(a.date));
-    if (!rows.length) return null;
-    return { year: Number(rows[0].date), value: rows[0].value };
-  }
-
-  async function silentSnapshot(iso){
+  async function safeJson(url){
     try{
-      if (!iso?.a3) return null;
-      const parts = [];
-      for (const ind of WB.indicators){
-        const last = await wbLatest(iso.a3, ind.key);
-        if (last) parts.push(`${ind.label} ${last.year}: ${ind.fmt(last.value)}`);
-      }
-      return parts.length ? parts.join(" • ") : null;
-    } catch { return null; }
+      const r = await fetch(url, {cache:"no-store"});
+      if(!r.ok) throw new Error(r.status);
+      return await r.json();
+    }catch(e){ return null; }
+  }
+  async function openAssetAsBlob(url){
+    try{
+      const r = await fetch(url, {cache:"force-cache"});
+      if(!r.ok) throw new Error(r.status);
+      const blob = await r.blob();
+      const o = URL.createObjectURL(blob);
+      window.open(o, "_blank", "noopener");
+      setTimeout(()=>URL.revokeObjectURL(o), 60_000);
+    }catch(e){}
+  }
+  function textFromNode(node){
+    if(!node) return "";
+    return (node.textContent || "").replace(/\s+/g," ").trim();
+  }
+  function parseRegionAndCountry(doc){
+    const t = $("#geos_title", doc);
+    if(!t) return {region:"", country:""};
+    const country = textFromNode($(".countryName", t));
+    const raw = (t.childNodes?.[0]?.textContent || "").trim();
+    const region = raw.replace(/[:\s]+$/g,"").trim();
+    return {region, country};
+  }
+  function parseLastUpdated(doc){
+    const lm = $(".lastMod", doc);
+    if (lm) return textFromNode(lm).replace(/^Page\s+last\s+updated\s+on\s+/i,"").trim();
+    const meta = doc.querySelector('meta[name="LastModified"]');
+    return meta?.getAttribute("content") || "";
+  }
+  function parseFlag(doc){
+    const img = doc.querySelector(".flagBox img");
+    if(!img) return null;
+    return {src: normalizePath(img.getAttribute("src")), alt: img.getAttribute("alt") || ""};
+  }
+  function parseAttachments(codeUpper){
+    return {
+      travel: normalizePath(`attachments/travel/${codeUpper}-travel-facts.pdf`),
+      summary: normalizePath(`attachments/summaries/${codeUpper}-summary.pdf`),
+      map: normalizePath(`attachments/maps/${codeUpper}-map.jpg`)
+    };
+  }
+  function rewriteLinksInElement(root){
+    $$('a[href]', root).forEach(a => a.setAttribute('href', normalizePath(a.getAttribute('href'))));
+    $$('[src]', root).forEach(x => x.setAttribute('src', normalizePath(x.getAttribute('src'))));
   }
 
-  function getIsoCache(){
-    try{ return JSON.parse(localStorage.getItem("wib_iso_cache_v1") || "{}"); } catch { return {}; }
-  }
-  function setIsoCache(map){ localStorage.setItem("wib_iso_cache_v1", JSON.stringify(map || {})); }
+  function extractSections(doc){
+    const out = [];
+    const anchors = $$("ul.expandcollapse > li[id$='-category-section-anchor']", doc);
+    anchors.forEach(anchorLi => {
+      const q = $(".question", anchorLi);
+      const sectionTitle = q?.getAttribute("sectiontitle") || textFromNode(q).split("::")[0].trim() || "Section";
+      const baseId = anchorLi.id.replace(/-anchor$/,"");
+      const contentLi = doc.getElementById(baseId);
+      if(!contentLi) return;
 
-  async function buildComparisonForActive(){
-    if (!state.activeIso?.a3) return null;
-    const cache = getIsoCache();
-    cache[state.active.code] = state.activeIso.a3;
-    setIsoCache(cache);
+      const fields = [];
+      const cats = $$("div.category[id^='field-anchor-']", contentLi);
+      cats.forEach(cat => {
+        const labelA = cat.querySelector(".btn-tooltip a");
+        const label = textFromNode(labelA) || textFromNode(cat).replace(/:\s*$/,"");
+        const fieldAnchorId = cat.id;
 
-    const entries = Object.entries(cache).slice(0, 160);
-    const result = [];
+        let dataDiv = cat.nextElementSibling;
+        while (dataDiv && !(dataDiv.id && dataDiv.id.startsWith("field-"))) dataDiv = dataDiv.nextElementSibling;
+        if(!dataDiv) return;
 
-    for (const ind of WB.indicators){
-      const batch = await Promise.all(entries.map(async ([code, iso3]) => {
-        const last = await wbLatest(iso3, ind.key);
-        if (!last) return null;
-        return { code, year:last.year, value:last.value };
-      }));
-      const rows = batch.filter(Boolean);
-      rows.sort((a,b) => b.value - a.value);
+        const clone = dataDiv.cloneNode(true);
+        Array.from(clone.querySelectorAll('script')).forEach(s=>s.remove());
+        rewriteLinksInElement(clone);
+        const html = clone.innerHTML.trim();
+        const dt = clone.querySelector('.subfield-date') ? textFromNode(clone.querySelector('.subfield-date')) : "";
 
-      const activeRow = rows.find(r => r.code === state.active.code) || null;
-      const rank = activeRow ? (rows.indexOf(activeRow)+1) : null;
-
-      result.push({
-        label: ind.label,
-        year: activeRow?.year || rows[0]?.year || null,
-        rank,
-        total: rows.length,
-        top: rows.slice(0,8),
-        bottom: rows.slice(-8).reverse()
+        fields.push({label, anchor: fieldAnchorId, date: dt, html});
       });
-    }
-    return result;
-  }
 
-  // ===== UI helpers =====
-  function renderRegions(){
-    const labels = Array.from(new Set(state.entities.map(e => e.regionLabel).filter(Boolean))).sort();
-    el.region.innerHTML = `<option value="">All</option>` + labels.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join("");
-  }
-
-  function renderCountries(){
-    const q = (el.q.value||"").trim().toLowerCase();
-    const reg = el.region.value || "";
-    const rows = state.entities.filter(e => {
-      if (reg && e.regionLabel !== reg) return false;
-      if (!q) return true;
-      return e.name.toLowerCase().includes(q) || e.code.toLowerCase().includes(q);
+      out.push({id: baseId, title: sectionTitle, fields});
     });
-
-    el.country.innerHTML =
-      `<option value="">Select…</option>` +
-      rows.slice(0, 3500).map(e => `<option value="${escapeHtml(e.code)}">${escapeHtml(e.name)} (${escapeHtml(e.code)})</option>`).join("");
-
-    renderRegionTab();
+    return out;
   }
 
-  function renderSectionDropdown(){
-    if (!state.activeStruct){
-      el.section.innerHTML = `<option value="">Select…</option>`;
+  function buildSectionSelect(sections){
+    sectionSelect.innerHTML = `<option value="">All sections</option>` + sections.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.title)}</option>`).join("");
+  }
+
+  function renderProfile(sections, opts={}){
+    const openSectionId = opts.openSectionId || null;
+    if (!sections || !sections.length){
+      profileEl.innerHTML = `<div class="notice">No structured sections detected for this entity.</div>`;
       return;
     }
 
-    // preferred Atlas order
-    const preferred = [
-      "Overview",
-      "Introduction","Geography","People and Society","Religion","Government","Economy",
-      "Energy","Communications","Transportation","Military and Security","Terrorism","Transnational Issues",
-      "All fields"
-    ];
+    const lensPlan = {
+      baseline: [],
+      travel: [/Introduction/i, /Geography/i, /People and Society/i, /Government/i],
+      macro: [/Economy/i, /Energy/i, /Communications/i, /Transportation/i],
+      security: [/Military and Security/i, /Transnational Issues/i, /Government/i],
+      infrastructure: [/Communications/i, /Transportation/i, /Energy/i, /Government/i]
+    };
 
-    const names = Array.from(state.activeStruct.sections.keys());
-    const canonOrdered = preferred.filter(x => state.activeStruct.sections.has(x));
-    const extra = names.filter(n => !preferred.includes(n)).sort((a,b)=>a.localeCompare(b));
-    const ordered = canonOrdered.concat(extra).slice(0, 120);
+    const shouldOpenByLens = (title) => {
+      const patterns = lensPlan[ACTIVE_LENS] || [];
+      if (!patterns.length) return false;
+      return patterns.some(rx => rx.test(title));
+    };
 
-    el.section.innerHTML =
-      `<option value="">Select…</option>` +
-      ordered.map(n => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join("");
+    const chosen = openSectionId ? sections.filter(s => s.id === openSectionId) : sections;
 
-    if (!state.activeSection || !state.activeStruct.sections.has(state.activeSection)){
-      state.activeSection = canonOrdered[0] || ordered[0] || "Overview";
-    }
-    el.section.value = state.activeSection;
-  }
+    profileEl.innerHTML = chosen.map(sec => {
+      const open = openSectionId ? true : shouldOpenByLens(sec.title);
+      const fieldCount = sec.fields?.length || 0;
 
-  function setTab(tab){
-    state.tab = tab;
-    el.tabs.forEach(t => t.classList.toggle("active", t.getAttribute("data-tab")===tab));
-    renderActiveView();
-  }
-
-  function renderKV(facts){
-    const f = (facts || []).slice(0, 2600);
-    if (!f.length) return `<div class="notice">No fields detected for this section.</div>`;
-    return f.map(x => `
-      <div class="kv">
-        <div class="k">${escapeHtml(x.k)}</div>
-        <div class="v">${escapeHtml(x.v)}</div>
-      </div>
-    `).join("");
-  }
-
-  function renderRegionTab(){
-    const reg = el.region.value || "";
-    const regions = Array.from(state.byRegion.keys()).filter(Boolean).sort((a,b)=>a.localeCompare(b));
-    const chips = regions.filter(r => r !== "—").map(r => {
-      const n = (state.byRegion.get(r)||[]).length;
-      const active = (r === reg);
-      return `<div class="chip" data-reg="${escapeHtml(r)}" style="${active ? "border-color:rgba(255,138,0,.55); background:rgba(255,138,0,.08)" : ""}">
-        <b>${escapeHtml(r)}</b>&nbsp;<span style="opacity:.8">${n}</span>
-      </div>`;
-    }).join("");
-
-    const rows = state.entities
-      .filter(e => !reg || e.regionLabel === reg)
-      .slice(0, 4000);
-
-    const list = rows.map(e => `
-      <div class="chip" data-open="${escapeHtml(e.code)}" title="${escapeHtml(e.name)}">
-        ${escapeHtml(e.name)} <span style="opacity:.75">(${escapeHtml(e.code)})</span>
-      </div>
-    `).join("");
-
-    state.regionHTML = `
-      <div class="notice" style="margin-bottom:10px">
-        Browse by region. Click a region chip to filter, then click an entity to open.
-      </div>
-      <div class="chiprow" style="margin-bottom:10px">${chips || `<div class="notice">No region groups available.</div>`}</div>
-      <div class="listbox"><div class="chiprow">${list || `<div class="notice">No entities in this filter.</div>`}</div></div>
-    `;
-  }
-
-  // ===== view rendering =====
-  async function renderActiveView(){
-    if (!state.activeStruct){
-      el.mainTitle.textContent = "Profile";
-      el.mainMeta.textContent = "—";
-      el.main.innerHTML = `<div class="notice">Select an entity to render topic sections and extracted fields.</div>`;
-      el.sideTitle.textContent = "Summary";
-      el.sideMeta.textContent = "—";
-      el.side.innerHTML = `<div class="notice">A concise overview will appear here.</div>`;
-      return;
-    }
-
-    const struct = state.activeStruct;
-
-    if (state.tab === "profile"){
-      el.mainTitle.textContent = "Profile";
-      el.mainMeta.textContent = "Sections";
-
-      const preferred = [
-        "Overview",
-        "Introduction","Geography","People and Society","Religion","Government","Economy",
-        "Energy","Communications","Transportation","Military and Security","Terrorism","Transnational Issues",
-        "All fields"
-      ];
-
-      const names = Array.from(struct.sections.keys());
-      const canonOrdered = preferred.filter(x => struct.sections.has(x));
-      const extra = names.filter(n => !preferred.includes(n)).sort((a,b)=>a.localeCompare(b));
-      const ordered = canonOrdered.concat(extra).slice(0, 80);
-
-      if (!state.activeSection || !struct.sections.has(state.activeSection)){
-        state.activeSection = canonOrdered[0] || ordered[0] || "Overview";
-        el.section.value = state.activeSection;
-      }
-
-      const chips = ordered.map(n => `
-        <div class="pill ${n===state.activeSection ? "active":""}" data-sec="${escapeHtml(n)}">${escapeHtml(n)}</div>
+      const fieldsHtml = (sec.fields || []).map(f => `
+        <div class="field" data-field="${escapeHtml(f.anchor)}">
+          <div class="fh" role="button" tabindex="0" aria-expanded="false">
+            <div class="fn">${escapeHtml(f.label)}</div>
+            <div class="fd">${escapeHtml(f.date || "")}</div>
+          </div>
+          <div class="fb">${f.html}</div>
+        </div>
       `).join("");
 
-      const pack = struct.sections.get(state.activeSection) || { facts: [], text: "" };
-      const intro = pack.text ? `<div class="notice" style="margin-bottom:10px">${escapeHtml(pack.text)}</div>` : "";
+      return `
+        <div class="accordion ${open ? "open" : ""}" data-section="${escapeHtml(sec.id)}">
+          <div class="acc-head" role="button" tabindex="0" aria-expanded="${open ? "true" : "false"}">
+            <div class="t">${escapeHtml(sec.title)}</div>
+            <div class="m">${fieldCount} fields</div>
+          </div>
+          <div class="acc-body">
+            ${fieldsHtml || `<div class="notice">No fields available in this section.</div>`}
+          </div>
+        </div>
+      `;
+    }).join("");
 
-      el.main.innerHTML = `<div class="pillrow">${chips}</div>${intro}${renderKV(pack.facts)}`;
-
-      el.main.querySelectorAll("[data-sec]").forEach(b => {
-        b.addEventListener("click", () => {
-          state.activeSection = b.getAttribute("data-sec") || "";
-          el.section.value = state.activeSection;
-          renderActiveView();
-        });
+    $$(".accordion .acc-head", profileEl).forEach(h => {
+      h.addEventListener("click", () => {
+        const acc = h.closest(".accordion");
+        const open = acc.classList.toggle("open");
+        h.setAttribute("aria-expanded", open ? "true" : "false");
       });
+      h.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); h.click(); }
+      });
+    });
 
-      el.sideTitle.textContent = "Summary";
-      el.sideMeta.textContent = "Generated";
-      el.side.innerHTML = `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(state.summary || "")}</div>`;
-      return;
-    }
+    $$(".field .fh", profileEl).forEach(h => {
+      h.addEventListener("click", () => {
+        const f = h.closest(".field");
+        const open = f.classList.toggle("open");
+        h.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      h.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); h.click(); }
+      });
+    });
+  }
 
-    if (state.tab === "travel"){
-      el.mainTitle.textContent = "Travel";
-      el.mainMeta.textContent = "Extracted";
-      const tf = travelFacts(struct);
-      el.main.innerHTML = tf.length ? renderKV(tf) : `<div class="notice">No travel-relevant fields were detected with high confidence.</div>`;
+  function setHero({code, name, region, updated, flagSrc}){
+    titleEl.textContent = name || "World Intelligence Factbook";
+    subtitleEl.textContent = region || "—";
+    codeTag.textContent = code ? code.toUpperCase() : "—";
+    regionTag.textContent = region || "—";
+    updatedTag.textContent = updated ? `Updated: ${updated}` : "—";
+    flagBox.innerHTML = flagSrc
+      ? `<img src="${escapeHtml(flagSrc)}" alt="${escapeHtml(name||"")}" loading="lazy" />`
+      : `<div style="font-family:var(--mono); color:rgba(234,240,255,.55); font-size:12px">—</div>`;
+  }
 
-      el.sideTitle.textContent = "Highlights";
-      el.sideMeta.textContent = "Extracted";
-      const picks = pickFacts(struct.allFacts, ["Visa", "Entry", "Health", "Safety", "Airports", "Ports", "Roadways", "Railways"]);
-      el.side.innerHTML = picks.length
-        ? `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(picks.map(p => `• ${p.k}: ${p.v}`).join("\n"))}</div>`
-        : `<div class="notice">No highlights detected.</div>`;
-      return;
-    }
+  function buildRegionFilter(){
+    const regions = Array.from(new Set(Object.values(REGION_BY_CODE).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+    const current = regionSelect.value;
+    regionSelect.innerHTML = `
+      <option value="">All regions</option>
+      <option value="__unknown__">Unclassified (not opened yet)</option>
+      ${regions.map(r => `<option value="${escapeHtml(r)}">${escapeHtml(r)}</option>`).join("")}
+    `;
+    if ([...regionSelect.options].some(o => o.value === current)) regionSelect.value = current;
+  }
 
-    if (state.tab === "flags"){
-      el.mainTitle.textContent = "Flag";
-      el.mainMeta.textContent = "Detected";
-      el.main.innerHTML = state.flag?.src
-        ? `<div class="flagBox"><img src="${escapeHtml(state.flag.src)}" alt="${escapeHtml(state.flag.alt||"Flag")}"/></div>`
-        : `<div class="notice">No flag image detected.</div>`;
+  function renderCountryList(){
+    const q = (qEl.value || "").trim().toLowerCase();
+    const reg = regionSelect.value;
 
-      el.sideTitle.textContent = "Description";
-      el.sideMeta.textContent = "Extracted";
-      const desc = pickFacts(struct.allFacts, ["Flag description","National symbol","National anthem"]);
-      el.side.innerHTML = desc.length
-        ? `<div style="white-space:pre-wrap; font-size:12px; line-height:1.6">${escapeHtml(desc.map(d => `• ${d.k}: ${d.v}`).join("\n"))}</div>`
-        : `<div class="notice">No description detected.</div>`;
-      return;
-    }
-
-    if (state.tab === "compare"){
-      el.mainTitle.textContent = "Compare";
-      el.mainMeta.textContent = "Computed";
-      el.main.innerHTML = `<div class="loading"><span class="spin"></span><span>Computing…</span></div>`;
-
-      const cmp = await buildComparisonForActive();
-      if (!cmp){
-        el.main.innerHTML = `<div class="notice">Comparisons are not available for this entity yet.</div>`;
-        el.sideTitle.textContent = "Coverage";
-        el.sideMeta.textContent = "—";
-        el.side.innerHTML = `<div class="notice">Comparisons strengthen as you browse more entities.</div>`;
-        return;
+    const rows = CATALOG.filter(x => {
+      if (reg){
+        const r = REGION_BY_CODE[x.code] || "__unknown__";
+        if (reg === "__unknown__") return !REGION_BY_CODE[x.code];
+        if (r !== reg) return false;
       }
+      if (!q) return true;
+      return (x.name || "").toLowerCase().includes(q) || (x.code || "").toLowerCase().includes(q);
+    });
 
-      el.main.innerHTML = cmp.map(c => {
-        const rankLine = c.rank ? `Rank: ${c.rank}/${c.total} • Year: ${c.year || "—"}` : `Year: ${c.year || "—"}`;
-        const top = (c.top||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
-        const bot = (c.bottom||[]).map(r => `• ${r.code.toUpperCase()} — ${fmtNum(r.value)}`).join("\n") || "—";
-        return `
-          <div class="notice" style="margin-bottom:10px"><b>${escapeHtml(c.label)}</b><br/><span style="opacity:.8">${escapeHtml(rankLine)}</span></div>
-          <div class="kv"><div class="k">Top</div><div class="v">${escapeHtml(top)}</div></div>
-          <div class="kv"><div class="k">Bottom</div><div class="v">${escapeHtml(bot)}</div></div>
-          <div style="height:12px"></div>
-        `;
-      }).join("");
+    countMeta.textContent = `${rows.length} / ${CATALOG.length}`;
 
-      el.sideTitle.textContent = "Note";
-      el.sideMeta.textContent = "Adaptive";
-      el.side.innerHTML = `<div class="notice">Comparisons strengthen automatically as coverage expands.</div>`;
-      return;
-    }
+    listEl.innerHTML = rows.slice(0, 900).map(x => {
+      const active = (ACTIVE?.code === x.code) ? "active" : "";
+      const nm = x.name || x.code.toUpperCase();
+      const r = REGION_BY_CODE[x.code] || "Unclassified";
+      return `
+        <div class="row ${active}" data-code="${escapeHtml(x.code)}">
+          <div>
+            <div class="name">${escapeHtml(nm)}</div>
+            <div class="meta">
+              <span class="tag">${escapeHtml(x.code.toUpperCase())}</span>
+              <span class="tag">${escapeHtml(r)}</span>
+            </div>
+          </div>
+          <div class="meta"><span class="tag accent">OPEN</span></div>
+        </div>
+      `;
+    }).join("");
 
-    if (state.tab === "region"){
-      el.mainTitle.textContent = "Region directory";
-      el.mainMeta.textContent = "Browse";
-      el.main.innerHTML = state.regionHTML || `<div class="notice">No region directory available.</div>`;
-      el.sideTitle.textContent = "Active";
-      el.sideMeta.textContent = "—";
-      el.side.innerHTML = `<div class="notice">Click a region chip to filter, then click an entity to open.</div>`;
+    $$(".row", listEl).forEach(el => {
+      el.addEventListener("click", () => selectCountry(el.getAttribute("data-code"), {scroll:false}));
+    });
 
-      el.main.querySelectorAll("[data-reg]").forEach(x => {
-        x.addEventListener("click", () => {
-          el.region.value = x.getAttribute("data-reg") || "";
-          renderCountries();
-          setTab("region");
-        });
-      });
-      el.main.querySelectorAll("[data-open]").forEach(x => {
-        x.addEventListener("click", () => {
-          const code = x.getAttribute("data-open");
-          if (!code) return;
-          el.country.value = code;
-          selectCountry(code);
-          setTab("profile");
-        });
-      });
-      return;
+    if (rows.length === 0){
+      listEl.innerHTML = `<div class="notice">No matches. Try a broader query or clear the region filter.</div>`;
     }
   }
 
-  // ===== selection =====
-  async function selectCountry(code){
-    const e = state.entities.find(x => x.code === code);
-    state.active = e || null;
+  function fillCountrySelect(){
+    countrySelect.innerHTML = `<option value="">Select…</option>` +
+      CATALOG.map(x => `<option value="${escapeHtml(x.code)}">${escapeHtml(x.name)} (${escapeHtml(x.code.toUpperCase())})</option>`).join("");
+  }
 
-    if (!state.active){
-      el.title.textContent = "Select an entity";
-      el.subline.textContent = "Structured fields are extracted and routed into stable topic sections.";
-      el.k_code.textContent = "—";
-      el.k_region.textContent = "—";
-      el.k_depth.textContent = "—";
-      el.k_now.textContent = "—";
-      state.activeDoc = null;
-      state.activeStruct = null;
-      state.activeIso = null;
-      state.summary = "";
-      state.flag = null;
-      state.activeSection = "";
-      renderSectionDropdown();
-      renderActiveView();
+  function setButtonsForCountry(code){
+    const up = (code || "").toUpperCase();
+    if (!up){
+      summaryBtn.disabled = true; travelBtn.disabled = true; mapBtn.disabled = true;
+      return;
+    }
+    const {summary, travel, map} = parseAttachments(up);
+    summaryBtn.disabled = false;
+    travelBtn.disabled = false;
+    mapBtn.disabled = false;
+    summaryBtn.onclick = () => openAssetAsBlob(summary);
+    travelBtn.onclick = () => openAssetAsBlob(travel);
+    mapBtn.onclick = () => openAssetAsBlob(map);
+  }
+
+  async function silentWikipediaSummary(countryName){
+    try{
+      if(!countryName) return null;
+      const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(countryName)}`;
+      const j = await safeJson(url);
+      const txt = j?.extract;
+      if(!txt) return null;
+      return txt.length > 420 ? txt.slice(0, 420).trim() + "…" : txt.trim();
+    }catch(e){ return null; }
+  }
+
+  async function selectCountry(code, opts={}){
+    if (!code) return;
+    const item = CATALOG.find(x => x.code === code);
+    if (!item) return;
+    ACTIVE = {code: item.code, name: item.name};
+
+    countrySelect.value = item.code;
+    renderCountryList();
+    setHero({code:item.code, name:item.name, region: REGION_BY_CODE[item.code] || "", updated:"", flagSrc:null});
+    setButtonsForCountry(item.code);
+    sectionSelect.innerHTML = `<option value="">Loading…</option>`;
+
+    const url = `${CONFIG.geosDir}/${item.code}.html`;
+    const html = await safeText(url);
+    if (!html){
+      profileEl.innerHTML = `<div class="notice">Profile unavailable (missing file). Check that <span class="kbd">${escapeHtml(url)}</span> exists on your host.</div>`;
       return;
     }
 
-    el.title.textContent = state.active.name;
-    el.subline.textContent = `Entity code: ${state.active.code} • Region: ${state.active.regionLabel || "—"}`;
-    el.k_code.textContent = state.active.code;
-    el.k_region.textContent = state.active.regionLabel || "—";
-    el.k_depth.textContent = "…";
-    el.k_now.textContent = "—";
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const {region, country} = parseRegionAndCountry(doc);
+    const updated = parseLastUpdated(doc);
+    const flag = parseFlag(doc);
 
-    el.mainTitle.textContent = "Profile";
-    el.mainMeta.textContent = "Loading…";
-    el.main.innerHTML = `<div class="loading"><span class="spin"></span><span>Rendering…</span></div>`;
-    el.sideTitle.textContent = "Summary";
-    el.sideMeta.textContent = "Loading…";
-    el.side.innerHTML = `<div class="loading"><span class="spin"></span><span>Preparing…</span></div>`;
+    if (region) REGION_BY_CODE[item.code] = region;
+    buildRegionFilter();
 
-    try{
-      const html = await fetchText(state.active.href);
-      const doc = new DOMParser().parseFromString(html, "text/html");
-      state.activeDoc = doc;
+    const sections = extractSections(doc);
+    ACTIVE_SECTIONS = sections;
 
-      const struct = buildMaxSections(doc);
-      state.activeStruct = struct;
+    buildSectionSelect(sections);
+    sectionSelect.value = "";
 
-      const iso = extractISOFromDoc(doc);
-      state.activeIso = iso;
+    setHero({
+      code: item.code,
+      name: country || item.name,
+      region: region || REGION_BY_CODE[item.code] || "",
+      updated,
+      flagSrc: flag?.src || null
+    });
 
-      if (iso?.a3){
-        const cache = getIsoCache();
-        cache[state.active.code] = iso.a3;
-        setIsoCache(cache);
-      }
+    renderProfile(sections);
 
-      state.flag = extractFlagFromDoc(doc, state.active.href);
-      state.summary = guessSummary(struct);
+    if (CONFIG.enrich.enabled && CONFIG.enrich.wikipediaSummary){
+      silentWikipediaSummary(country || item.name).then(sum => {
+        if (!sum) return;
+        if ($("#wikipediaCard")) return;
+        const card = document.createElement("div");
+        card.className = "card";
+        card.id = "wikipediaCard";
+        card.innerHTML = `<div class="ch"><b>Snapshot</b><span>public summary</span></div><div class="cb"><div class="notice" style="margin:0">${escapeHtml(sum)}</div></div>`;
+        profileEl.prepend(card);
+      });
+    }
 
-      // default section
-      const prefer = ["Overview","Introduction","Geography","People and Society","Religion","Government","Economy","All fields"];
-      state.activeSection = prefer.find(x => struct.sections.has(x)) || Array.from(struct.sections.keys())[0] || "Overview";
+    if (opts.scroll !== false){
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
 
-      renderSectionDropdown();
+    history.replaceState(null, "", "#" + item.code);
+  }
 
-      // KPIs
-      const secCount = struct.sections.size;
-      const factCount = struct.allFacts.length;
-      el.k_depth.textContent = `${secCount} sections • ${factCount.toLocaleString()} fields`;
-
-      const snap = await silentSnapshot(iso);
-      el.k_now.textContent = snap || "—";
-
-      history.replaceState(null, "", deepLink(state.active.code));
-      renderActiveView();
-    } catch {
-      state.activeDoc = null;
-      state.activeStruct = null;
-      state.activeIso = null;
-      state.summary = "";
-      state.flag = null;
-
-      el.k_depth.textContent = "—";
-      el.k_now.textContent = "—";
-      el.mainMeta.textContent = "—";
-      el.sideMeta.textContent = "—";
-      el.main.innerHTML = `<div class="notice">This entity could not be rendered at the moment.</div>`;
-      el.side.innerHTML = `<div class="notice">No summary available.</div>`;
-      renderSectionDropdown();
+  function setLens(lens){
+    ACTIVE_LENS = lens;
+    $$(".chip", lensChips).forEach(c => c.classList.toggle("active", c.getAttribute("data-lens") === lens));
+    lensLabel.textContent = ({baseline:"Baseline",travel:"Travel",macro:"Macro",security:"Security",infrastructure:"Infrastructure"})[lens] || "Baseline";
+    if (ACTIVE_SECTIONS && ACTIVE_SECTIONS.length){
+      renderProfile(ACTIVE_SECTIONS, {openSectionId: sectionSelect.value || null});
     }
   }
 
-  // ===== boot =====
-  async function boot(){
-    el.status.textContent = "loading…";
-    el.count.textContent = "0";
-    el.country.innerHTML = `<option value="">Select…</option>`;
-    el.section.innerHTML = `<option value="">Select…</option>`;
+  async function init(){
+    const html = await safeText(CONFIG.index);
+    if (!html){
+      countrySelect.innerHTML = `<option value="">Missing index</option>`;
+      listEl.innerHTML = `<div class="notice">Could not load <span class="kbd">${escapeHtml(CONFIG.index)}</span>. Ensure the file exists and the path is correct.</div>`;
+      return;
+    }
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const opts = $$("#search-place option", doc);
 
-    try{
-      const idxHtml = await fetchText(ARCH.index);
-      state.entities = parseEntitiesFromIndex(idxHtml);
-      buildRegionIndex();
+    const rows = [];
+    for (const o of opts){
+      const val = (o.getAttribute("value") || "").trim();
+      const name = textFromNode(o);
+      const m = val.match(/geos\\/([a-z0-9]{2})\\.html/i);
+      if (!m) continue;
+      rows.push({code: m[1].toLowerCase(), name, href: val});
+    }
 
-      el.count.textContent = String(state.entities.length);
-      el.status.textContent = "ready";
+    const by = new Map();
+    rows.forEach(r => { if(!by.has(r.code)) by.set(r.code, r); });
+    CATALOG = Array.from(by.values()).filter(r => r.code && r.name).sort((a,b) => (a.name || "").localeCompare(b.name || ""));
 
-      renderRegions();
-      renderCountries();
+    fillCountrySelect();
+    renderCountryList();
+    countMeta.textContent = `${CATALOG.length}`;
 
-      const deep = new URL(location.href).searchParams.get("c");
-      if (deep){
-        el.country.value = deep.toLowerCase();
-        await selectCountry(deep.toLowerCase());
-      } else {
-        await selectCountry("");
+    qEl.addEventListener("input", renderCountryList);
+    regionSelect.addEventListener("change", renderCountryList);
+
+    countrySelect.addEventListener("change", () => {
+      const code = countrySelect.value;
+      if (code) selectCountry(code);
+    });
+
+    sectionSelect.addEventListener("change", () => {
+      if (!ACTIVE_SECTIONS.length) return;
+      renderProfile(ACTIVE_SECTIONS, {openSectionId: sectionSelect.value || null});
+      if (sectionSelect.value){
+        const el = profileEl.querySelector(`[data-section="${CSS.escape(sectionSelect.value)}"]`);
+        if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
       }
-    } catch {
-      el.status.textContent = "unavailable";
-      el.country.innerHTML = `<option value="">Unavailable</option>`;
-      el.section.innerHTML = `<option value="">Unavailable</option>`;
+    });
+
+    $$(".chip", lensChips).forEach(ch => ch.addEventListener("click", () => setLens(ch.getAttribute("data-lens"))));
+
+    lensBtn.addEventListener("click", () => {
+      const order = ["baseline","travel","macro","security","infrastructure"];
+      const i = order.indexOf(ACTIVE_LENS);
+      setLens(order[(i+1) % order.length]);
+    });
+
+    homeBtn.addEventListener("click", () => {
+      history.replaceState(null, "", "#");
+      ACTIVE = null;
+      ACTIVE_SECTIONS = [];
+      countrySelect.value = "";
+      sectionSelect.innerHTML = `<option value="">—</option>`;
+      setButtonsForCountry("");
+      setHero({code:"", name:"World Intelligence Factbook", region:"", updated:"", flagSrc:null});
+      profileEl.innerHTML = "";
+      window.scrollTo({top:0, behavior:"smooth"});
+      renderCountryList();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "/" && document.activeElement !== qEl){
+        e.preventDefault();
+        qEl.focus();
+      }
+      if (e.key === "Escape"){
+        qEl.value = "";
+        regionSelect.value = "";
+        renderCountryList();
+      }
+    });
+
+    const hash = (location.hash || "").replace("#","").trim().toLowerCase();
+    if (hash && CATALOG.some(x => x.code === hash)){
+      selectCountry(hash);
     }
   }
 
-  // ===== events =====
-  el.reload.addEventListener("click", boot);
-
-  el.region.addEventListener("change", () => {
-    renderCountries();
-    el.country.value = "";
-    selectCountry("");
-  });
-
-  el.q.addEventListener("input", () => renderCountries());
-
-  el.country.addEventListener("change", async () => {
-    await selectCountry(el.country.value || "");
-  });
-
-  el.section.addEventListener("change", () => {
-    const s = el.section.value || "";
-    if (!state.activeStruct || !s) return;
-    if (!state.activeStruct.sections.has(s)) return;
-    state.activeSection = s;
-    setTab("profile");
-  });
-
-  el.copyLink.addEventListener("click", async () => {
-    if (!state.active) return;
-    const link = deepLink(state.active.code);
-    try{
-      await navigator.clipboard.writeText(link);
-      el.copyLink.textContent = "copied";
-      setTimeout(()=> el.copyLink.textContent = "copy link", 900);
-    } catch { alert(link); }
-  });
-
-  el.clearCache.addEventListener("click", () => {
-    localStorage.removeItem("wib_iso_cache_v1");
-    el.clearCache.textContent = "cleared";
-    setTimeout(()=> el.clearCache.textContent = "clear cache", 900);
-  });
-
-  el.tabs.forEach(t => t.addEventListener("click", () => setTab(t.getAttribute("data-tab"))));
-
-  // start
-  boot();
+  init();
 })();
 </script>
 </body>
