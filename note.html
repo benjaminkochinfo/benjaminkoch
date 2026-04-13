@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>On This Site — Benjamin Koch</title>
+  <meta name="description" content="Benjamin Koch — a brief note on the nature and use of this site." />
+  <meta name="theme-color" content="#f4f0e8" />
+
+  <style>
+    :root {
+      --bg: #f4f0e8;
+      --text: #151515;
+      --muted: #5b564d;
+      --line: rgba(21,21,21,0.14);
+      --line-strong: rgba(21,21,21,0.28);
+      --max: 1160px;
+      --measure: 720px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg) 0%, #f7f4ee 40%, var(--bg) 100%);
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 180ms ease, color 180ms ease;
+    }
+
+    a:hover {
+      border-color: currentColor;
+    }
+
+    .shell {
+      width: min(calc(100vw - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topline {
+      padding: 20px 0 0;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .topline a {
+      border-bottom: 0;
+      opacity: 0.92;
+    }
+
+    .topline a:hover {
+      opacity: 1;
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      letter-spacing: -0.03em;
+      margin: 0 0 18px;
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      color: #1c1c1c;
+      max-width: 34ch;
+    }
+
+    section {
+      padding: 60px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 6px;
+    }
+
+    .section-body {
+      max-width: var(--measure);
+    }
+
+    .section-body p {
+      font-size: 1.15rem;
+      margin: 0 0 1.1em;
+    }
+
+    .return-line {
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 32px 0 46px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .smallcaps {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 900px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(calc(100vw - 28px), var(--max));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <div class="topline">
+      <div><a href="index.html">Benjamin Koch</a></div>
+      <div>On This Site</div>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">Form · Use · Continuity</div>
+      <h1>On This Site</h1>
+      <p class="lead">
+        A brief note on the nature of this space, its use, and its limits.
+      </p>
+    </header>
+
+    <section>
+      <div class="section-grid">
+        <div class="section-label">Note</div>
+        <div class="section-body">
+          <p>This site is maintained as a personal, non-commercial space, intended for private, informational, and academic purposes.</p>
+          <p>Nothing presented here constitutes legal, financial, investment, or psychological advice, nor is it intended as solicitation.</p>
+          <p>While care is taken in the preparation of its contents, no guarantee is given as to completeness, accuracy, or timeliness.</p>
+          <p>No cookies, trackers, analytics, or third-party advertising scripts are used. The structure remains simple, responsive, and openly indexable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-grid">
+        <div class="section-label">Return</div>
+        <div class="section-body">
+          <p class="return-line">For the central room, one may return <a href="index.html">here</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© Benjamin Koch</div>
+        <div class="smallcaps">Personal site · No cookies · No trackers · Pure HTML</div>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

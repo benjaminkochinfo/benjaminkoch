@@ -1,677 +1,445 @@
- <!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Dr. Benjamin Koch | Economist · Psychologist · International Lawyer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- SEO -->
-  <meta name="description" content="Official website of Dr. Benjamin Koch – economist, psychologist, and international lawyer. Research at the intersection of macroeconomics, psychology, and international law with a focus on EU–US economic coordination and behavioural policy frameworks.">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://benjaminkoch.info/">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Dr. Benjamin Koch | Economist · Psychologist · International Lawyer">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://benjaminkoch.info/">
-  <meta property="og:description" content="Economist · Psychologist · International Lawyer | Macroeconomics, psychology, and international law with a focus on transatlantic coordination and behavioural policy.">
-  <meta property="og:image" content="https://images.squarespace-cdn.com/content/v1/65bf9a98d6bb9439b0aedbbd/d03c714e-9c91-4361-a12a-d6e37172a4b7/IMG_1238.jpeg?format=1000w">
-  <meta property="og:image:alt" content="Portrait of Dr. Benjamin Koch">
-
-  <!-- Twitter Card -->
-  <meta name="twitter-card" content="summary_large_image">
-
-  <!-- Fonts & CSS (no trackers) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Benjamin Koch</title>
+  <meta name="description" content="Benjamin Koch — a personal site arranged around continuity, structure, order, and long-horizon coherence." />
+  <meta name="theme-color" content="#f4f0e8" />
   <style>
     :root {
-      --bg-dark: #020617;
-      --bg-card: #020617;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.16);
-      --accent-2: #a855f7;
-      --text-muted: #9ca3af;
-      --border-soft: rgba(148, 163, 184, 0.35);
-      --radius-xl: 1.5rem;
+      --bg: #f4f0e8;
+      --bg-soft: #efe8dc;
+      --text: #151515;
+      --muted: #5b564d;
+      --line: rgba(21, 21, 21, 0.14);
+      --line-strong: rgba(21, 21, 21, 0.28);
+      --max: 1160px;
+      --measure: 760px;
+      --shadow: 0 18px 60px rgba(0,0,0,0.05);
     }
 
-    * { scroll-behavior: smooth; }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #020617 0, #000 60%, #020617 100%);
-      color: #e5e7eb;
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg) 0%, #f7f4ee 40%, var(--bg) 100%);
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.62;
     }
 
-    a { color: var(--accent); }
-    a:hover { color: #0ea5e9; }
-
-    .navbar {
-      background: linear-gradient(to right, rgba(15,23,42,0.95), rgba(15,23,42,0.88));
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(148,163,184,0.25);
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 180ms ease, opacity 180ms ease, color 180ms ease;
     }
 
-    .navbar-brand {
-      font-weight: 600;
-      letter-spacing: .08em;
+    a:hover { border-color: currentColor; }
+
+    .shell {
+      width: min(calc(100vw - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topline {
+      padding: 20px 0 0;
+      font-size: 12px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      font-size: .85rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
     }
-
-    .nav-link { font-size: .9rem; }
 
     .hero {
-      padding: 5.5rem 0 3.5rem;
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      padding: 48px 0 88px;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      padding: .35rem .8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.5);
-      font-size: .78rem;
-      letter-spacing: .12em;
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 56px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.25), rgba(15,23,42,0.95));
+      color: var(--muted);
+      margin-bottom: 22px;
     }
 
-    .hero-badge span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+    h1 {
+      font-weight: 400;
+      font-size: clamp(3.6rem, 9vw, 7.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin: 0 0 20px;
     }
 
-    .hero h1 {
-      font-weight: 700;
-      font-size: clamp(2.3rem, 3.2vw + 1.3rem, 3.6rem);
-      letter-spacing: -.03em;
+    .hero p.lead {
+      max-width: 31ch;
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      line-height: 1.4;
+      color: #1c1c1c;
+      margin: 0;
     }
 
-    .hero-sub {
-      color: var(--text-muted);
-      max-width: 38rem;
+    .hero-side {
+      justify-self: end;
+      align-self: center;
+      width: min(100%, 320px);
+      padding: 26px 0 0;
+      border-top: 1px solid var(--line-strong);
+      color: var(--muted);
+      font-size: 0.98rem;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      padding: .4rem .8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      font-size: .78rem;
-      background: rgba(15,23,42,0.95);
-      color: #e5e7eb;
+    .hero-side p { margin: 0 0 18px; }
+
+    section {
+      padding: 88px 0;
+      border-top: 1px solid var(--line);
     }
 
-    .pill i {
-      font-size: .9rem;
-      color: var(--accent);
-    }
-
-    .glass-card {
-      border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.16), rgba(15,23,42,0.98));
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 24px 80px rgba(15,23,42,0.85);
-    }
-
-    .section {
-      padding: 3.5rem 0;
+    .section-grid {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 40px;
+      align-items: start;
     }
 
     .section-label {
-      font-size: .75rem;
+      font-size: 12px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: .16em;
-      color: var(--text-muted);
-      margin-bottom: .4rem;
+      color: var(--muted);
+      padding-top: 8px;
     }
 
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 1.3rem;
+    .section-body { max-width: var(--measure); }
+
+    .section-body p {
+      font-size: clamp(1.12rem, 1.35vw, 1.34rem);
+      margin: 0 0 1.1em;
     }
 
-    .card-soft {
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.05), rgba(15,23,42,0.97));
-      border-radius: 1.25rem;
-      border: 1px solid rgba(148,163,184,0.45);
-      height: auto;
+    .domains {
+      display: grid;
+      gap: 22px;
     }
 
-    .card-soft .card-body {
-      padding: 1.5rem 1.6rem;
+    .domain {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 24px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
     }
 
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .25rem .7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.35);
-      font-size: .7rem;
-      color: var(--text-muted);
+    .domain:first-child {
+      border-top: 0;
+      padding-top: 0;
     }
 
-    .chip i {
-      font-size: .85rem;
-      color: var(--accent);
+    .domain-title {
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
-    .pub-list li {
-      margin-bottom: .25rem;
+    .domain-copy {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 36ch;
     }
 
-    .media-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      font-size: .87rem;
-      padding: .35rem .7rem;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(148,163,184,0.4);
+    .works {
+      display: grid;
+      gap: 28px;
     }
 
-    .media-tag i {
-      color: var(--accent-2);
+    .work {
+      padding: 0 0 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .work h3 {
+      margin: 0 0 8px;
+      font-weight: 400;
+      font-size: clamp(1.55rem, 2vw, 2.1rem);
+      letter-spacing: -0.02em;
+    }
+
+    .work .subtitle {
+      display: block;
+      margin-bottom: 10px;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .work p {
+      margin: 0;
+      max-width: 42ch;
+      color: #1a1a1a;
+    }
+
+    .contact-block {
+      padding: 28px 32px;
+      background: rgba(255,255,255,0.28);
+      border: 1px solid rgba(21,21,21,0.1);
+      box-shadow: var(--shadow);
+      max-width: 560px;
+      backdrop-filter: blur(4px);
+    }
+
+    .contact-line {
+      font-size: clamp(1.3rem, 2vw, 1.8rem);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    .rooms-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 26px;
+      padding-top: 6px;
+    }
+
+    .rooms-list a {
+      color: var(--muted);
+      border-bottom: 1px solid rgba(21,21,21,0.18);
+      padding-bottom: 2px;
+    }
+
+    .rooms-list a:hover {
+      color: var(--text);
+      border-bottom-color: rgba(21,21,21,0.5);
+    }
+
+    .rooms-list-vertical {
+      display: grid;
+      gap: 10px;
+      max-width: 280px;
     }
 
     footer {
-      border-top: 1px solid rgba(55,65,81,0.8);
-      font-size: .8rem;
-      color: var(--text-muted);
-      padding: 1.5rem 0 1.8rem;
-      background: rgba(3,7,18,0.95);
+      padding: 32px 0 46px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      border-top: 1px solid var(--line);
     }
 
-    @media (max-width: 991.98px) {
-      .hero { padding-top: 4.5rem; }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .smallcaps {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .section-grid,
+      .domain {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 38px;
+      }
+
+      .hero-side {
+        justify-self: start;
+        width: 100%;
+      }
+
+      section { padding: 68px 0; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(calc(100vw - 28px), var(--max)); }
+      h1 { font-size: clamp(3rem, 16vw, 4.6rem); }
+      .topline { flex-direction: column; gap: 8px; }
+      .contact-block { padding: 24px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-  <div class="container">
-    <!-- Brand / Name -->
-    <a class="navbar-brand" href="#top">
-      Dr. Benjamin Koch
-    </a>
-
-    <!-- Hamburger Button -->
-    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Collapsible Navbar Content -->
-    <div class="collapse navbar-collapse order-lg-2" id="navMain">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#publications">Publications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#media">Media</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/psychology.html">Psychology</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/economics_law.html">Economics &amp; Law</a>
-        </li>
- <li class="nav-item">
-          <a class="nav-link" href="/bk_macro_terminal.html">BK Macro</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://insightcompass.substack.com" target="_blank">Insight Compass</a>
-        </li>
-      </ul>
+  <div class="shell">
+    <div class="topline">
+      <div>Benjamin Koch</div>
+      <div>Structure · Order · Self</div>
     </div>
+
+    <header class="hero" aria-label="Introduction">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Continuity · Structure · Long Horizon</div>
+          <h1>Benjamin<br>Koch</h1>
+          <p class="lead">A personal site arranged around institutional coherence, inner clarity, and generational steadiness.</p>
+        </div>
+        <aside class="hero-side">
+          <p>Not visibility, but placement.</p>
+          <p>Not reaction, but sequence.</p>
+          <p>Not accumulation, but continuity across systems, seasons, and time.</p>
+        </aside>
+      </div>
+    </header>
+
+    <section aria-labelledby="presence-title">
+      <div class="section-grid">
+        <div class="section-label" id="presence-title">Presence</div>
+        <div class="section-body">
+          <p>This space is kept deliberately light, with room for what endures.</p>
+          <p>Nothing gathered here is intended as display. It remains simply the visible edge of a longer continuity — a way of thinking about institutions, legal form, and inner architecture without submitting them to noise, urgency, or performative relevance.</p>
+          <p>A few longstanding concerns return quietly: how order is preserved without hardness, how freedom is retained without drift, and how steadiness continues through changing conditions without losing its character.</p>
+          <p>Nothing here is meant to be exhaustive. It is only a way of keeping certain things in view, and of letting them remain in good order.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="domains-title">
+      <div class="section-grid">
+        <div class="section-label" id="domains-title">Lines of Regard</div>
+        <div class="section-body domains">
+          <div class="domain">
+            <div class="domain-title">Structure</div>
+            <div class="domain-copy">
+              The arrangement of larger systems, and the quiet logic by which they remain coherent over time.
+            </div>
+          </div>
+
+          <div class="domain">
+            <div class="domain-title">Order</div>
+            <div class="domain-copy">
+              The forms through which rules, boundaries, and institutions retain their internal consistency.
+            </div>
+          </div>
+
+          <div class="domain">
+            <div class="domain-title">Self</div>
+            <div class="domain-copy">
+              The inner architecture through which perception, decision, and continuity become aligned.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="research-title">
+      <div class="section-grid">
+        <div class="section-label" id="research-title">Research</div>
+        <div class="section-body">
+          <p>Some questions do not pass. They return, quietly, across years, not as tasks, but as continuities that remain unresolved in the most precise sense.</p>
+          <p>They move through structure, order, and inner arrangement, without needing to be named too explicitly.</p>
+          <p>What matters is not their resolution, but the way they are held — long enough for their form to reveal itself.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="work-title">
+      <div class="section-grid">
+        <div class="section-label" id="work-title">Further Along</div>
+        <div class="section-body works">
+          <article class="work">
+            <h3>INVERSION</h3>
+            <span class="subtitle">Alignment, leverage, and quiet freedom</span>
+            <p>A reframing of apparent dysfunction as structural misalignment, and of freedom as the consequence of restored coherence rather than escape.</p>
+          </article>
+
+          <article class="work">
+            <h3>Synaptics</h3>
+            <span class="subtitle">The architecture of the self</span>
+            <p>A model of inner structure concerned less with biography than with reconstruction, pattern, and the conditions under which the self becomes inhabitable again.</p>
+          </article>
+
+          <article class="work">
+            <h3>The Clarity System</h3>
+            <span class="subtitle">A structural approach to internal alignment</span>
+            <p>A framework concerned less with motivation than with the removal of contradiction, restoring continuity between thought, action, and lived orientation.</p>
+          </article>
+
+          <article class="work">
+            <h3>Happiness by Design</h3>
+            <span class="subtitle">On the architecture of lived experience</span>
+            <p>An inquiry into how environment, perception, rhythm, and form quietly determine what a life is able to feel like from within.</p>
+          </article>
+
+          <article class="work">
+            <h3>The Economics Code</h3>
+            <span class="subtitle">Narrative discipline for a new wealth of nations</span>
+            <p>A long-form economic project treating economics not as technique alone, but as a language of order, allocation, legitimacy, and civilisational design.</p>
+          </article>
+
+          <article class="work">
+            <h3>Between Now and Always</h3>
+            <span class="subtitle">Continuity within human connection</span>
+            <p>A narrative study of relational permanence, where time is felt less as sequence than as a field within which attachment settles, returns, and remains.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="access-title">
+      <div class="section-grid">
+        <div class="section-label" id="access-title">Correspondence</div>
+        <div class="section-body">
+          <div class="contact-block">
+            <p class="contact-line">For matters of relevance, correspondence may be directed <a href="mailto:email@benjaminkoch.info">here</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="rooms-title">
+      <div class="section-grid">
+        <div class="section-label" id="rooms-title">Further Rooms</div>
+        <div class="section-body">
+          <p>Some adjoining rooms remain open.</p>
+          <div class="rooms-list rooms-list-vertical">
+            <a href="economics_law.html">Economics &amp; Law</a>
+            <a href="psychology.html">Psychology</a>
+            <a href="bk_macro_terminal.html">Macro Terminal</a>
+            <a href="https://www.researchgate.net/profile/Benjamin-Koch-12/research" target="_blank" rel="noopener noreferrer">Research</a>
+            <a href="https://insightcompass.substack.com" target="_blank" rel="noopener noreferrer">Writing</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© Benjamin Koch</div>
+        <div class="smallcaps">Personal site · No cookies · No trackers · Pure HTML · <a href="note.html">Note</a></div>
+      </div>
+    </footer>
   </div>
-</nav>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-          <div class="hero-badge mb-3">
-            <span>Economist · Psychologist · International Lawyer</span>
-            <span class="dot"></span>
-          </div>
-
-          <h1 class="mb-3">
-            <span>Research at the intersection of<br>economics, law, and psychology.</span>
-          </h1>
-
-          <p class="hero-sub mb-3">
-            Dr. Benjamin Koch holds degrees from the University of Bath (B.Sc.), the London School of Economics (M.Sc.),
-            and Harvard Kennedy School of Government (Ph.D.). His work focuses on transatlantic economic coordination,
-            behavioural policy frameworks, and institutional resilience.
-          </p>
-
-          <p class="mb-4 small">
-            This site is a personal, non-commercial hub for research, long-form writing, and
-            interdisciplinary projects connecting macroeconomics, psychology, and international law.
-          </p>
-
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <div class="pill">
-              <i class="bi bi-graph-up-arrow"></i>
-              <span>Macroeconomics &amp; systemic resilience</span>
-            </div>
-            <div class="pill">
-              <i class="bi bi-bank"></i>
-              <span>International law &amp; institutions</span>
-            </div>
-            <div class="pill">
-              <i class="bi bi-mindfulness"></i>
-              <span>Behavioural science &amp; clarity</span>
-            </div>
-          </div>
-
-          <div class="d-flex flex-wrap gap-2">
-            <a href="#publications" class="btn btn-light">
-              <span>Explore publications</span>
-            </a>
-            <a href="https://insightcompass.substack.com" target="_blank" rel="noopener" class="btn btn-outline-light">
-              <i class="bi bi-newspaper me-1"></i>
-              Insight Compass
-            </a>
-          </div>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="glass-card p-3 p-lg-4 mt-3 mt-lg-0">
-            <div class="row g-3 align-items-center">
-              <div class="col-5 col-sm-4">
-                <img src="https://images.squarespace-cdn.com/content/v1/65bf9a98d6bb9439b0aedbbd/d03c714e-9c91-4361-a12a-d6e37172a4b7/IMG_1238.jpeg?format=1000w"
-                     alt="Dr. Benjamin Koch" class="img-fluid rounded-3 shadow">
-              </div>
-              <div class="col-7 col-sm-8">
-                <h2 class="h5 mb-1">Dr. Benjamin Koch</h2>
-                <p class="small mb-1">
-                  Ph.D. · Harvard Kennedy School<br>
-                  M.Sc. · London School of Economics<br>
-                  B.Sc. · University of Bath
-                </p>
-                <p class="small text-secondary mb-2">
-                  Principal Adviser &amp; independent researcher working on EU–US macro-financial relations,
-                  behavioural policy, and institutional design.
-                </p>
-                <div class="d-flex flex-wrap gap-2">
-                  <span class="chip">
-                    <i class="bi bi-globe2"></i>
-                    <span>Online</span>
-                  </span>
-                  <span class="chip">
-                    <i class="bi bi-lightbulb"></i>
-                    <span>Research · Writing · Foresight</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="section-label">Profile</div>
-
-      <div class="row g-4">
-        <div class="col-lg-7">
-          <h2 class="section-title">About Dr. Koch</h2>
-
-          <p>
-            Benjamin Koch works across macroeconomics, psychology, and international law.
-            His research and writing examine how legal architectures, institutional design,
-            and human behaviour interact to shape resilience, growth, and stability
-            in complex systems.
-          </p>
-
-          <p>
-            Current work ranges from transatlantic macro-financial coordination and telecom-sector
-            architectures to psychological resilience frameworks and structured approaches to
-            mental clarity in the digital age.
-          </p>
-
-          <p class="small text-secondary mb-0">
-            Views expressed in publications and media appear in a strictly personal capacity and
-            do not represent any institution.
-          </p>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <div class="card-soft">
-                <div class="card-body">
-                  <div class="chip mb-2">
-                    <i class="bi bi-mortarboard"></i>
-                    <span>Academic background</span>
-                  </div>
-                  <ul class="small mb-0">
-                    <li>Ph.D. – Harvard Kennedy School of Government</li>
-                    <li>M.Sc. – London School of Economics</li>
-                    <li>B.Sc. – University of Bath</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card-soft">
-                <div class="card-body">
-                  <div class="chip mb-2">
-                    <i class="bi bi-diagram-3"></i>
-                    <span>Areas of focus</span>
-                  </div>
-                  <ul class="small mb-0">
-                    <li>EU–US macro-financial architecture</li>
-                    <li>Behavioural policy &amp; mental resilience</li>
-                    <li>International law &amp; governance</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="card-soft">
-                <div class="card-body">
-                  <div class="chip mb-2">
-                    <i class="bi bi-journal-text"></i>
-                    <span>Key projects</span>
-                  </div>
-                  <ul class="small mb-0">
-                    <li>The Economics Code – A narrative economics textbook.</li>
-                    <li>The Clarity System &amp; Pathway to Mental Clarity (PMC).</li>
-                    <li>Working papers on EU–US convergence, telecom yield structures, sanctions, climate, and behavioural macroeconomics.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PUBLICATIONS -->
-  <section id="publications" class="section">
-    <div class="container">
-      <div class="section-label">Publications</div>
-      <h2 class="section-title">Selected publications &amp; current projects</h2>
-
-      <div class="row g-4 mb-3">
-        <div class="col-lg-7">
-          <div class="card-soft">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-file-earmark-text"></i>
-                <span>Latest working papers</span>
-              </div>
-
-              <ul class="small pub-list mb-3">
-                <li>Continuity Over Rupture: Europe’s Strategic Misreading of a Cyclical World · 2026</li>
-                <li>Presence Without Performance: Control and Delay in Knowledge Work · 2026</li>
-                <li>The Koch Indicator Framework: Resilience, Policy Transmission, Geo-Fin Fragmentation · 2026</li>
-                <li>A Unified Theory of Coherence, Freedom, and Constraint in the Psychology of the 21st Century · 2025</li>
-                <li>Debt-for-Nature Swaps, Sovereign Bond Markets, and Climate-Resilient Development · 2025</li>
-                <li>AI-Driven Global Value Chain (GVC) Bifurcation and Development Divergence · 2025</li>
-                <li>Post-Growth International Macroeconomics: A Model of Degrowth, Redistribution, and Global Stability · 2025</li>
-                <li>The Generational Horizon: Why Central Banks Govern Beyond the Limits of Fiscal Time · 2025</li>
-                <li>Seafloor Mapping, Blue Carbon, and the Infrastructure of Environmental Governance · 2025</li>
-                <li>The Innovation Gap as Advantage: Europe’s Delay as Catalyst for Autonomy · 2025</li>
-                <li>Geopolitical Patience: How the Cost of Waiting Builds Future Prosperity · 2025</li>
-                <li>Framework for EU–US Economic Convergence – A Transatlantic Growth Blueprint · 2025</li>
-                <li>The Telecom Yield Machine: Tariff Design and Dividend Logic · 2025</li>
-                <li>Ghost Towers and Credit Graves: The Doom Loop of Post-Office Capitalism · 2025</li>
-                <li>Asset Class Divergence in 2025: Institutional Resilience vs. Narrative Decay · 2025</li>
-                <li>Semiotics of Stability – Behavioural Alignment in US-EU Macroeconomic Policy · 2025</li>
-                <li>Trust by Design, Stability by Default · 2025</li>
-                <li>Protocol 2026 · 2025</li>
-                <li>The Clarity System · 2025</li>
-                <li>Operational Convergence in Enterprise Service Architectures · 2025</li>
-                <li>Crude Epistemologies in Transition · 2025</li>
-                <li>Pleasure in the Pain of Performance · 2025</li>
-                <li>Strategic Realignments in Sovereign Debt and Trade · 2025</li>
-                <li>Digital Sovereignty and Cross-border Data Flows · 2025</li>
-                <li>Adult ADHD and ASD Revisited · 2025</li>
-                <li>Psychological Frontiers in the Digital Age · 2025</li>
-                <li>Sanctions, Trade Wars, and Economic Fragmentation · 2025</li>
-                <li>Germany’s Economic Challenges · 2025</li>
-                <li>Housing, Food Prices, and Social Fragmentation · 2025</li>
-                <li>Greenland in the Commodities Market · 2025</li>
-                <li>Supply Chains and Social Stability · 2025</li>
-                <li>New Era in U.S. Foreign Policy · 2024</li>
-                <li>Peace in Ukraine · 2024</li>
-                <li>Mindfulness and Cognitive Flexibility · 2024</li>
-                <li>Daycare and Economic Shifts · 2024</li>
-              </ul>
-
-              <a href="https://www.researchgate.net/profile/Benjamin-Koch-12/research" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-link-45deg me-1"></i>
-                ResearchGate profile
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="card-soft mb-3">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-book-half"></i>
-                <span>Books</span>
-              </div>
-              <ul class="small mb-0">
-                <li>Synaptics - The New Science of The Self</li>
-                <li>INVERSION - What You Want Begins When You Stop Chasing It</li>
-                <li>The Economics Code – A Narrative Discipline for a New Wealth of Nations</li>
-                <li>Turning Point – Conservative Foreign Policy and the Path to Global Stability</li>
-                <li>The Clarity System – A Cognitive Framework for Mental Sovereignty</li>
-                <li>Pathway to Mental Clarity (PMC) – ICBT for Clarity &amp; Ethical Living</li>
-                <li>Happiness by Design – A Structured Guide to Fulfilment and Commitment</li>
-                <li>Serendipitous Equilibria – Discovery, Monetary Policy &amp; the Ordinary</li>
-                <li>Mind Over Matter – Chess &amp; StarCraft II as Cognitive Frameworks</li>
-                <li>From Pillow to Pillow – A Love Story Across Time</li>
-                <li>Between Now and Always – A Poetic Sequel of Presence and Devotion</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card-soft">
-            <div class="card-body">
-              <div class="chip mb-2">
-                <i class="bi bi-magic"></i>
-                <span>Dissertation</span>
-              </div>
-              <p class="small mb-2">
-                Socioeconomic Behaviour, Legal Architecture, and Neurobiological Resilience:
-                An Interdisciplinary Examination of Growth, Governance, and Human Adaptation.
-              </p>
-              <p class="small text-secondary mb-3">
-                Originally submitted as a single Ph.D. dissertation at Harvard Kennedy School,
-                later divided into two volumes for publication.
-              </p>
-
-              <a href="https://benjaminkoch.info/Koch_Benjamin_Dissertation_PhD_2019.pdf" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-file-earmark-pdf me-1"></i>
-                Download dissertation (PDF)
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MEDIA -->
-  <section id="media" class="section">
-    <div class="container">
-      <div class="section-label">Media &amp; Features</div>
-      <h2 class="section-title">Interviews, features &amp; long-form writing</h2>
-
-      <div class="row g-4">
-        <div class="col-md-6">
-          <div class="card-soft">
-            <div class="card-body">
-              <span class="media-tag mb-2">
-                <i class="bi bi-medium"></i>
-                <span>Medium</span>
-              </span>
-              <p class="small mb-2">
-                Selected features, press articles, book spotlights, and essays on economics, psychology,
-                and governance.
-              </p>
-              <a href="https://medium.com/@benjamin.koch" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-link-45deg me-1"></i>
-                Available here
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="card-soft">
-            <div class="card-body">
-              <span class="media-tag mb-2">
-                <i class="bi bi-newspaper"></i>
-                <span>Insight Compass</span>
-              </span>
-              <p class="small mb-2">
-                Insight Compass is a Substack publication exploring macro-trends, behavioural
-                economics, and institutional narratives with a focus on EU–US dynamics.
-              </p>
-              <a href="https://insightcompass.substack.com" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-link-45deg me-1"></i>
-                Open Insight Compass
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="section-label">Contact</div>
-
-      <div class="row g-4">
-        <div class="col-lg-7">
-          <h2 class="section-title">Get in touch</h2>
-
-          <p>
-            For invitations to speak, media enquiries, research-related collaboration
-            or questions about published work, you can simply write an e-mail to:
-            <br>
-            <strong><a href="mailto:email@benjaminkoch.info">email(at)benjaminkoch.info</a></strong>
-          </p>
-
-          <p class="small mb-1">
-            If you like, you may (optionally) include a short topic in the subject line, for example:
-          </p>
-
-          <ul class="small">
-            <li>Publication / quote / interview</li>
-            <li>Talk / panel / online event</li>
-            <li>Research collaboration</li>
-            <li>Question about a specific paper or project</li>
-          </ul>
-
-          <p class="small text-secondary mb-0">
-            Indicating a topic is helpful but completely optional.
-          </p>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="card-soft">
-            <div class="card-body">
-              <h3 class="h6 mb-2">Legal &amp; privacy note</h3>
-
-              <p class="small mb-2">
-                This website is a personal, non-commercial platform made available for private,
-                informational, and academic purposes. It does not offer individual legal,
-                tax, investment, or psychological treatment services.
-              </p>
-
-              <p class="small mb-2">
-                No guarantees are given regarding completeness, accuracy, or timeliness of the content.
-                Nothing on this site constitutes investment advice, legal advice, or a solicitation.
-              </p>
-
-              <p class="small text-secondary mb-0">
-                No cookies, trackers, analytics, or third-party advertising scripts are used.
-                The layout is responsive and indexable by search engines.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
-    <div>
-      &copy; <span id="year"></span> Dr. Benjamin Koch. All rights reserved.
-    </div>
-    <div>
-      Personal, non-commercial website · No cookies, no trackers, no analytics. · built entirely in pure HTML
-    </div>
-  </div>
-</footer>
-
-<!-- Bootstrap Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  });
-</script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
