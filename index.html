@@ -178,9 +178,30 @@
 
     .hero-inner {
       display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 56px;
-      align-items: end;
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 230px) minmax(260px, 320px);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-main {
+      min-width: 0;
+    }
+
+    .hero-portrait-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-portrait {
+      width: min(100%, 220px);
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 28%;
+      border-radius: 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.08);
+      display: block;
+      background: rgba(255,255,255,0.35);
     }
 
     .eyebrow {
@@ -372,10 +393,15 @@
     }
 
     @media (max-width: 900px) {
-      .hero-inner,
       .section-grid,
       .domain {
         grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr) minmax(110px, 160px);
+        gap: 20px;
+        align-items: end;
       }
 
       .hero {
@@ -383,9 +409,20 @@
         padding-top: 38px;
       }
 
+      .hero-main {
+        min-width: 0;
+      }
+
+      .hero-portrait {
+        width: min(100%, 150px);
+        border-radius: 14px;
+      }
+
       .hero-side {
+        grid-column: 1 / -1;
         justify-self: start;
         width: 100%;
+        margin-top: 6px;
       }
 
       section { padding: 68px 0; }
@@ -413,10 +450,19 @@
 
     <header class="hero" aria-label="Introduction">
       <div class="hero-inner">
-        <div>
+        <div class="hero-main">
           <div class="eyebrow">Continuity · Structure · Long Horizon</div>
           <h1>Benjamin<br>Koch</h1>
           <p class="lead">A personal site arranged around institutional coherence, inner clarity, and generational steadiness.</p>
+        </div>
+        <div class="hero-portrait-wrap">
+          <img
+            class="hero-portrait"
+            src="https://images.squarespace-cdn.com/content/v1/65bf9a98d6bb9439b0aedbbd/d03c714e-9c91-4361-a12a-d6e37172a4b7/IMG_1238.jpeg?format=1000w"
+            alt="Portrait of Dr. Benjamin Koch"
+            loading="eager"
+            decoding="async"
+          />
         </div>
         <aside class="hero-side">
           <p>Not visibility, but placement.</p>
