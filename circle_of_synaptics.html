@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Circle of Synaptics • The Freedom Framework</title>
+    <meta name="description" content="The Circle of Synaptics is a precise, living framework for sovereign awareness, mental clarity, and freedom. Discover The Clarity System, Happiness by Design, Inversion, Synaptics, and The Pathway to Mental Clarity (PMC) — applicable to every domain of life: relationships, career, parenting, learning, creativity, decision-making, and the self.">
+    <meta property="og:title" content="The Circle of Synaptics • The Freedom Framework">
+    <meta property="og:description" content="A profound, precise technology for clearing static, restoring synaptic flow, and reclaiming authorship of your life. Five pillars for overthinkers, achievers, the curious, professionals, and those seeking real answers.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        
+        :root {
+            --accent: #c9a227;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .section-header {
+            font-size: 2.75rem;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .elegant-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #c9a22722, transparent);
+        }
+
+        .synaptic-bg {
+            background-image: 
+                radial-gradient(circle at 25% 30%, rgba(201, 162, 39, 0.035) 0%, transparent 50%),
+                radial-gradient(circle at 75% 70%, rgba(201, 162, 39, 0.025) 0%, transparent 60%);
+            background-size: 120px 120px;
+        }
+
+        .nav-active {
+            color: #c9a227;
+            position: relative;
+        }
+        
+        .nav-active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #c9a227;
+        }
+
+        .pillar-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .application-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .application-card:hover {
+            transform: translateY(-4px);
+            border-color: #c9a22744;
+        }
+
+        .profound-text {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: #d1d5db;
+        }
+
+        .gold-accent {
+            color: #c9a227;
+        }
+
+        .section {
+            scroll-margin-top: 80px;
+        }
+
+        .modal {
+            animation: modalPop 0.3s ease forwards;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .nav-scrolled {
+            background-color: rgba(9, 9, 11, 0.96);
+            backdrop-filter: blur(16px);
+        }
+
+        .synapse-line {
+            position: relative;
+        }
+        
+        .synapse-line::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(to right, #c9a227, transparent);
+            transition: width 0.6s ease;
+        }
+        
+        .group:hover .synapse-line::after {
+            width: 100%;
+        }
+
+        .metric {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .elegant-shadow {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3),
+                        0 4px 6px -4px rgb(0 0 0 / 0.3);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 overflow-x-hidden">
+    <!-- NAV -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl transition-all">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 rounded-full border border-amber-400/60 flex items-center justify-center relative">
+                        <div class="w-5 h-5 rounded-full border border-amber-400/80 flex items-center justify-center">
+                            <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
+                        </div>
+                        <!-- Subtle node connections -->
+                        <div class="absolute w-px h-3 bg-amber-400/30 top-1/2 -left-1"></div>
+                        <div class="absolute w-px h-3 bg-amber-400/30 top-1/2 -right-1"></div>
+                        <div class="absolute h-px w-3 bg-amber-400/30 left-1/2 -top-1"></div>
+                        <div class="absolute h-px w-3 bg-amber-400/30 left-1/2 -bottom-1"></div>
+                    </div>
+                    <div>
+                        <span class="font-semibold tracking-tighter text-2xl">The Circle of Synaptics</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="#what-is" class="hover:text-amber-400 transition-colors">What is the Circle</a>
+                    <a href="#framework" class="hover:text-amber-400 transition-colors">The Framework</a>
+                    <a href="#origin" class="hover:text-amber-400 transition-colors">The Origin</a>
+                    <a href="#applications" class="hover:text-amber-400 transition-colors">Applications</a>
+                    <a href="#voices" class="hover:text-amber-400 transition-colors">Voices</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-4">
+                    <button onclick="showBeginModal()"
+                            class="px-6 py-2.5 text-sm font-semibold rounded-full border border-white/20 hover:bg-white/5 transition-all active:scale-[0.985]">
+                        Begin the Work
+                    </button>
+                    <button onclick="document.getElementById('enter').scrollIntoView({ behavior: 'smooth' })" 
+                            class="px-6 py-2.5 text-sm font-semibold bg-amber-400 hover:bg-amber-300 transition-all text-zinc-950 rounded-full active:scale-[0.985]">
+                        Enter the Circle
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-zinc-950">
+            <div class="px-8 py-8 flex flex-col gap-y-5 text-base font-medium">
+                <a href="#what-is" class="py-1 mobile-nav-link">What is the Circle</a>
+                <a href="#framework" class="py-1 mobile-nav-link">The Framework</a>
+                <a href="#origin" class="py-1 mobile-nav-link">The Origin</a>
+                <a href="#applications" class="py-1 mobile-nav-link">Applications</a>
+                <a href="#voices" class="py-1 mobile-nav-link">Voices</a>
+                
+                <div class="pt-4 border-t border-white/10 flex flex-col gap-y-3">
+                    <button onclick="showBeginModal(); document.getElementById('mobile-menu').classList.add('hidden');" 
+                            class="w-full py-3 text-center border border-white/20 rounded-2xl text-sm font-semibold">
+                        Begin the Work
+                    </button>
+                    <button onclick="document.getElementById('enter').scrollIntoView({ behavior: 'smooth' }); document.getElementById('mobile-menu').classList.add('hidden');" 
+                            class="w-full py-3 text-center bg-amber-400 text-zinc-950 rounded-2xl text-sm font-semibold">
+                        Enter the Circle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative min-h-[100dvh] flex items-center justify-center pt-20 synaptic-bg border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 mb-8">
+                <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+                <span class="text-xs tracking-[2px] font-medium text-amber-400/90">A LIVING FRAMEWORK FOR SOVEREIGN BEINGS</span>
+            </div>
+            
+            <h1 class="heading-serif text-7xl md:text-8xl lg:text-[92px] leading-[0.92] tracking-tighter mb-6">
+                THE CIRCLE<br>OF SYNAPTICS
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-2xl md:text-3xl text-zinc-300 tracking-tight mb-4">
+                The Freedom Framework
+            </p>
+            
+            <p class="max-w-xl mx-auto text-lg text-zinc-400 mb-10">
+                Stop living a life written by others.<br>
+                Restore the original circuitry of your being.<br>
+                <span class="text-amber-400/90">Create from clarity.</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="document.getElementById('framework').scrollIntoView({ behavior: 'smooth' })" 
+                        class="group px-10 py-4 rounded-2xl bg-white text-zinc-950 font-semibold flex items-center justify-center gap-x-3 text-lg active:scale-[0.985] transition-all hover:bg-amber-50">
+                    Explore the Framework
+                    <i class="fa-solid fa-arrow-right group-active:translate-x-0.5 transition"></i>
+                </button>
+                
+                <button onclick="showBeginModal()" 
+                        class="px-10 py-4 rounded-2xl border border-white/30 hover:bg-white/5 font-semibold flex items-center justify-center gap-x-3 text-lg active:scale-[0.985] transition-all">
+                    Begin Your First Practice
+                </button>
+            </div>
+            
+            <div class="mt-16 flex justify-center">
+                <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs tracking-widest text-zinc-500">
+                    <div>FOR OVERTHINKERS</div>
+                    <div class="w-px h-3 bg-white/20 hidden sm:block"></div>
+                    <div>FOR ACHIEVERS</div>
+                    <div class="w-px h-3 bg-white/20 hidden sm:block"></div>
+                    <div>FOR THE CURIOUS</div>
+                    <div class="w-px h-3 bg-white/20 hidden sm:block"></div>
+                    <div>FOR THE ORDINARY</div>
+                    <div class="w-px h-3 bg-white/20 hidden sm:block"></div>
+                    <div>FOR THE INDIVIDUAL</div>
+                    <div class="w-px h-3 bg-white/20 hidden sm:block"></div>
+                    <div>FOR PROFESSIONALS</div>
+                    <div class="w-px h-3 bg-white/20 hidden sm:block"></div>
+                    <div>FOR THOSE SEEKING ANSWERS</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Subtle scroll indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-y-1 text-[10px] tracking-[1.5px] text-zinc-500">
+            <div>SCROLL TO BEGIN</div>
+            <i class="fa-solid fa-chevron-down text-xs animate-bounce"></i>
+        </div>
+    </header>
+
+    <!-- WHAT IS THE CIRCLE -->
+    <section id="what-is" class="section max-w-5xl mx-auto px-8 pt-24 pb-20">
+        <div class="max-w-3xl">
+            <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-3">THE INVITATION</div>
+            <h2 class="heading-serif section-header tracking-tighter">You were never meant<br>to live someone else’s life.</h2>
+        </div>
+        
+        <div class="mt-10 grid md:grid-cols-12 gap-x-12 gap-y-10">
+            <div class="md:col-span-7 profound-text">
+                <p class="mb-6">The Circle of Synaptics is a precise, living framework for the restoration of sovereign awareness. It is not a belief system. It is not a religion. It is a technology of clarity — applicable to the boardroom and the bedroom, the lecture hall and the family table, the inner life of the overthinker and the outer responsibilities of the leader.</p>
+                
+                <p>It exists for one reason: to give you back authorship of your existence. To dissolve the accumulated static that makes you react instead of create. To make you dangerous to your own limitations and magnetic to your highest possibilities.</p>
+            </div>
+            
+            <div class="md:col-span-5">
+                <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8 elegant-shadow">
+                    <div class="text-sm uppercase tracking-widest text-amber-400/80 mb-4">Core Recognition</div>
+                    
+                    <div class="space-y-5 text-sm">
+                        <div class="flex gap-4">
+                            <div class="text-amber-400 mt-0.5"><i class="fa-solid fa-check w-4"></i></div>
+                            <div>You are a being of infinite synaptic potential.</div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-amber-400 mt-0.5"><i class="fa-solid fa-check w-4"></i></div>
+                            <div>Your awareness is not confined to the imprints of this lifetime.</div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-amber-400 mt-0.5"><i class="fa-solid fa-check w-4"></i></div>
+                            <div>Your capacity to create, connect, and contribute is unlimited — though often obscured.</div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-amber-400 mt-0.5"><i class="fa-solid fa-check w-4"></i></div>
+                            <div>Freedom is not given. It is remembered through precision.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-white/10 text-sm text-zinc-400 max-w-3xl">
+            Being part of this Circle means everything changes — not because the world changes, but because <span class="text-zinc-200">you</span> do. Quietly. Irreversibly. From the inside out.
+        </div>
+    </section>
+
+    <!-- THE FRAMEWORK / FOUR PILLARS -->
+    <section id="framework" class="section bg-zinc-900 py-20 border-y border-white/10">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="max-w-2xl mb-12">
+                <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-3">THE TECHNOLOGY</div>
+                <h2 class="heading-serif text-6xl tracking-tighter">The Pillars of Synaptics</h2>
+                <p class="mt-4 text-xl text-zinc-400">Five interlocking disciplines. One living framework. Applicable to every domain of human experience.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <!-- Pillar 1: Clarity System -->
+                <div class="pillar-card bg-zinc-950 border border-white/10 rounded-3xl p-8 flex flex-col group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 mb-6">
+                        <i class="fa-solid fa-search text-3xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-3xl tracking-tight mb-3">The Clarity System</h3>
+                    <p class="text-zinc-400 flex-1">The foundational technology of precision. Structured processes of observation, duplication, and acknowledgment that strip away confusion, reactivity, and inherited static until only clean, certain knowing remains.</p>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10 text-xs uppercase tracking-widest text-amber-400/70">Applicable to</div>
+                    <div class="mt-2 text-sm text-zinc-300">Every decision • Communication • Study • Creative work • Leadership</div>
+                    
+                    <button onclick="showPillarModal(0)" class="mt-6 text-sm flex items-center gap-x-2 text-amber-400 hover:text-amber-300 group-hover:gap-x-3 transition-all">
+                        Explore this pillar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Pillar 2: Happiness by Design -->
+                <div class="pillar-card bg-zinc-950 border border-white/10 rounded-3xl p-8 flex flex-col group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 mb-6">
+                        <i class="fa-solid fa-drafting-compass text-3xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-3xl tracking-tight mb-3">Happiness by Design</h3>
+                    <p class="text-zinc-400 flex-1">Happiness is not a fleeting emotion to be chased. It is an architecture to be deliberately constructed — in your relationships, your work, your daily rituals, and your inner tone. This pillar gives you the blueprints.</p>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10 text-xs uppercase tracking-widest text-amber-400/70">Applicable to</div>
+                    <div class="mt-2 text-sm text-zinc-300">Emotional tone • Partnership • Career trajectory • Daily life design • Legacy</div>
+                    
+                    <button onclick="showPillarModal(1)" class="mt-6 text-sm flex items-center gap-x-2 text-amber-400 hover:text-amber-300 group-hover:gap-x-3 transition-all">
+                        Explore this pillar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Pillar 3: Inversion -->
+                <div class="pillar-card bg-zinc-950 border border-white/10 rounded-3xl p-8 flex flex-col group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 mb-6">
+                        <i class="fa-solid fa-sync text-3xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-3xl tracking-tight mb-3">Inversion</h3>
+                    <p class="text-zinc-400 flex-1">The most powerful thinking technology available. By systematically inverting assumptions, problems, and desires, you reveal hidden truths and elegant solutions that forward-only thinking cannot access. The antidote to blind spots.</p>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10 text-xs uppercase tracking-widest text-amber-400/70">Applicable to</div>
+                    <div class="mt-2 text-sm text-zinc-300">Strategy • Problem-solving • Risk mitigation • Creative breakthroughs • Parenting</div>
+                    
+                    <button onclick="showPillarModal(2)" class="mt-6 text-sm flex items-center gap-x-2 text-amber-400 hover:text-amber-300 group-hover:gap-x-3 transition-all">
+                        Explore this pillar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Pillar 4: Synaptics -->
+                <div class="pillar-card bg-zinc-950 border border-white/10 rounded-3xl p-8 flex flex-col group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 mb-6">
+                        <i class="fa-solid fa-brain text-3xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-3xl tracking-tight mb-3">Synaptics</h3>
+                    <p class="text-zinc-400 flex-1">The living integrative core. Daily protocols that harness neuroplasticity not merely for performance or healing, but for the systematic liberation of awareness from automaticity itself. This is the practice that makes every other pillar operational in real time — the synaptic technology of presence, sovereignty, and effortless creation.</p>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10 text-xs uppercase tracking-widest text-amber-400/70">Applicable to</div>
+                    <div class="mt-2 text-sm text-zinc-300">Daily freedom • Neuroplastic rewiring • Presence &amp; flow • Long-term sovereignty • Integration of all life domains</div>
+                    
+                    <button onclick="showPillarModal(3)" class="mt-6 text-sm flex items-center gap-x-2 text-amber-400 hover:text-amber-300 group-hover:gap-x-3 transition-all">
+                        Explore this pillar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Pillar 5: The Pathway to Mental Clarity (PMC) -->
+                <div class="pillar-card bg-zinc-950 border border-white/10 rounded-3xl p-8 flex flex-col group">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 mb-6">
+                        <i class="fa-solid fa-route text-3xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-3xl tracking-tight mb-3">The Pathway to Mental Clarity (PMC)</h3>
+                    <p class="text-zinc-400 flex-1">A structured, daily pathway for clearing mental static and restoring clean, precise thinking. PMC provides the practical steps to reduce overthinking, increase mental bandwidth, and build unshakeable clarity as a default state — the accessible on-ramp to the deeper work of Synaptics.</p>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10 text-xs uppercase tracking-widest text-amber-400/70">Applicable to</div>
+                    <div class="mt-2 text-sm text-zinc-300">Daily mental hygiene • Decision clarity • Anxiety reduction • Focus &amp; presence • Entry point to deeper work</div>
+                    
+                    <button onclick="showPillarModal(4)" class="mt-6 text-sm flex items-center gap-x-2 text-amber-400 hover:text-amber-300 group-hover:gap-x-3 transition-all">
+                        Explore this pillar <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ORIGIN / ADAPTED STORY -->
+    <section id="origin" class="section max-w-5xl mx-auto px-8 py-24">
+        <div class="max-w-3xl mx-auto text-center mb-14">
+            <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-3">THE COVENANT</div>
+            <h2 class="heading-serif text-6xl tracking-tighter">The Great Project</h2>
+            <p class="mt-4 text-xl text-zinc-400">A deeper remembrance. Not mythology — operating truth.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="profound-text space-y-7 text-[15.5px] leading-relaxed">
+                <p>In the primordial phase of this world’s becoming, intelligences of luminous potential chose — or were guided into — participation in a civilizational project of extraordinary ambition. They came not as conquerors or exiles, but as participants in the seeding of a planet with the capacity for self-aware creation. The intent was vast: to establish conditions in which consciousness could one day fully recognize itself and continue the work of building societies worthy of their origin — societies in which beings could eventually remember who they were and why they had come.</p>
+                
+                <p>The descent into form required a necessary forgetting. In the compression of pure awareness into the density of matter, time, and the intensity of interaction, the original synaptic pathways of direct knowing became entangled with the residue of experience. The shocks, the overwhelm, the conclusions drawn in moments when survival seemed paramount — all of it left charge. What had been effortless creation became, over time, automatic reaction. The game grew thick with accumulated static. Many forgot they were playing. They began to believe the roles, the limitations, and the inherited narratives were simply “the way things are.”</p>
+                
+                <p>Civilizations rose and fell. Some moved in alignment with the original intent. Many drifted into deviation — built on the very static they had come to clear. Across millennia the charge compounded: layer upon layer of unexamined conclusions, false identities, collective agreements about scarcity, power, worth, and reality itself. These became the invisible architecture through which most beings experienced life. The project continued, but often without the full, awake participation of those who had originally volunteered to steward it.</p>
+                
+                <p>What you experience as “your life” is not separate from this. The static you carry — the recurring patterns, the quiet self-sabotage, the places where clarity dissolves into reactivity or numbness — is not merely personal. It is the living residue of that ancient entanglement. And yet, because the original circuitry is still there, beneath the static, it can be restored. Not through belief. Not through effort alone. Through precise work that dissolves what was never you and returns you to the sovereign awareness that chose to participate in the first place.</p>
+                
+                <p class="pt-4 border-t border-white/10">The Circle of Synaptics is the living technology of return. It offers the precise means to dissolve the accumulated charge, restore the original synaptic flow, and re-enter the civilizational project as a fully awake, creative participant. You do not need to believe any story. You only need to do the work until you know — in your own direct experience — that what was always true beneath the static has never left you. That knowing changes everything. That is why it works.</p>
+            </div>
+            
+            <div class="mt-10 flex justify-center">
+                <div class="inline-flex items-center gap-x-2 px-5 py-2 rounded-full bg-white/5 text-xs tracking-widest border border-white/10">
+                    <span>THIS IS NOT BELIEF. THIS IS REMEMBRANCE THROUGH PRECISION.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLICATIONS -->
+    <section id="applications" class="section bg-zinc-900 py-20 border-y border-white/10">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-y-4">
+                <div>
+                    <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-2">LIVING TECHNOLOGY</div>
+                    <h2 class="heading-serif text-6xl tracking-tighter">Applicable to Everything</h2>
+                </div>
+                <p class="max-w-md text-zinc-400">The framework does not belong to any single domain. It belongs to life itself — because you bring your full being into every sphere you touch.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <!-- Expanded Application Cards - Deep Psychological Framing -->
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">The Self &amp; Inner Freedom</div>
+                            <p class="mt-3 text-sm text-zinc-400">Quiet the recursive loops of overthinking and identity-level self-doubt. Reclaim agency from narratives you didn’t author. Design an inner architecture of peace and power so stable that external circumstances lose their ability to destabilize you.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-heart"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Relationships &amp; Love</div>
+                            <p class="mt-3 text-sm text-zinc-400">Communicate with surgical precision instead of reactive charge. Clear old relational imprints that poison intimacy. Create partnerships rooted in mutual sovereignty rather than unconscious contracts of dependence, control, or rescue.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Learning, Study &amp; Education</div>
+                            <p class="mt-3 text-sm text-zinc-400">Dramatically enhance retention, comprehension, and joy in learning by clearing the static that makes study feel like resistance. For students, teachers, researchers, and autodidacts who want to think originally rather than merely memorize and perform.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-briefcase"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Career, Business &amp; Leadership</div>
+                            <p class="mt-3 text-sm text-zinc-400">Make high-stakes decisions from clarity instead of anxiety or inherited ambition. Lead teams and organizations from overflow rather than depletion. Build cultures where people become more themselves — not smaller versions of what the system requires.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-child"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Parenting &amp; Family</div>
+                            <p class="mt-3 text-sm text-zinc-400">Break generational patterns of reactivity and unconscious transmission. Raise children who think for themselves while feeling deeply safe. Create a family culture where clarity, respect, and genuine connection replace inherited survival strategies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-users"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Community &amp; Society</div>
+                            <p class="mt-3 text-sm text-zinc-400">Contribute from genuine overflow rather than obligation, virtue signaling, or hidden resentment. Build trust at scale. Participate in civilization as a conscious co-creator rather than a passive or cynical consumer of its structures.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-handshake"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Trust, Confidence &amp; Communication</div>
+                            <p class="mt-3 text-sm text-zinc-400">The invisible infrastructure of every successful human endeavor. Clear what blocks authentic expression and magnetic presence. Develop unshakeable inner trust that translates into natural outer authority without force or performance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-lightbulb"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Curiosity, Growth &amp; Neuroplasticity</div>
+                            <p class="mt-3 text-sm text-zinc-400">Reawaken the childlike capacity for wonder while retaining adult precision. Leverage the brain’s natural plasticity to install new default settings for presence, learning, and creation that feel both effortless and profoundly alive.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW DEEPLY PSYCHOLOGICAL CARDS -->
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-user-secret"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Identity, Self-Concept &amp; the False Self</div>
+                            <p class="mt-3 text-sm text-zinc-400">Dissolve the constructed identities that were built to survive but now limit your range. Stop performing versions of yourself that no longer serve. Return to the fluid, sovereign awareness beneath every role you have ever played.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-sync-alt"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Unconscious Patterns &amp; Self-Sabotage</div>
+                            <p class="mt-3 text-sm text-zinc-400">See the hidden programs that repeatedly undermine your success, intimacy, and peace. Clear the charge that makes self-sabotage feel inevitable. Replace automatic self-undermining with chosen, aligned action.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-waveform-lines"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Emotional Charge, Reactivity &amp; Regulation</div>
+                            <p class="mt-3 text-sm text-zinc-400">Stop being run by emotional residue from the past. Develop the capacity to experience strong emotion without losing sovereignty. Turn reactivity into responsiveness and charge into clean, usable energy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-comments"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Intimacy, Vulnerability &amp; Authentic Connection</div>
+                            <p class="mt-3 text-sm text-zinc-400">Clear the protective mechanisms that make true closeness feel dangerous. Learn to be seen without performing or withdrawing. Create relationships where depth and safety coexist rather than trade off.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-balance-scale"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Decision Making, Uncertainty &amp; Paralysis</div>
+                            <p class="mt-3 text-sm text-zinc-400">Cut through analysis paralysis and the fear of wrong choices. Develop the internal clarity to decide cleanly even when outcomes remain uncertain. Turn hesitation into precise, timely action.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-palette"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Creativity, Expression &amp; Blocks</div>
+                            <p class="mt-3 text-sm text-zinc-400">Remove the internal censorship and perfectionism that starve creative flow. Reclaim the original synaptic freedom to express what is actually alive in you — without self-judgment or external validation as the driver.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-coins"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Money, Worth &amp; Abundance Psychology</div>
+                            <p class="mt-3 text-sm text-zinc-400">Clear the deep, often unconscious associations between money, safety, worth, and love. Shift from scarcity-driven striving or guilt around receiving into clean, sovereign relationship with resources and value creation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="application-card group bg-zinc-950 border border-white/10 hover:border-amber-400/30 rounded-3xl p-7">
+                    <div class="flex items-start gap-x-4">
+                        <div class="text-3xl text-amber-400/90 mt-0.5"><i class="fa-solid fa-skull"></i></div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Grief, Loss, Mortality &amp; Meaning</div>
+                            <p class="mt-3 text-sm text-zinc-400">Meet mortality and loss without collapse or denial. Integrate grief so it becomes fuel rather than weight. Reclaim the urgency and clarity that comes when life is no longer treated as endless deferral.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOR WHOM -->
+    <section class="section max-w-6xl mx-auto px-8 py-20">
+        <div class="text-center mb-12">
+            <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-3">WHO THIS IS FOR</div>
+            <h2 class="heading-serif text-5xl tracking-tighter">The Circle recognizes its own.</h2>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE OVERTHINKER</div>
+                <p class="text-lg">You who lie awake replaying conversations, second-guessing decisions, and carrying the weight of ten possible futures. The Clarity System quiets the noise so you can finally think — and then act — with precision.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE ACHIEVER</div>
+                <p class="text-lg">You who have tasted success and discovered it was not enough. You sense there is a higher octave of performance available — one that does not require burnout or the slow erosion of your relationships and health.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE GROUNDED PROFESSIONAL</div>
+                <p class="text-lg">You who carry real responsibility — teams, families, institutions — and refuse to lead from reactivity or inherited patterns. You want tools that scale with the complexity of your life.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE SEEKER WHO REFUSES ILLUSION</div>
+                <p class="text-lg">You who have explored many paths and are no longer satisfied with inspiration without technology, or spirituality without precision. You want something that works — quietly, deeply, and permanently.</p>
+            </div>
+
+            <!-- New additions -->
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE CURIOUS</div>
+                <p class="text-lg">You who sense there is more to reality and to yourself than the surface explanations offer. You are not in crisis — you are simply awake enough to want better tools for understanding and living.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE ORDINARY</div>
+                <p class="text-lg">You who live a normal life and quietly wonder if it has to feel this flat, this reactive, or this limited. The framework meets you exactly where you are — no special background required.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE INDIVIDUAL</div>
+                <p class="text-lg">You who value your sovereignty above belonging to any group or ideology. You are not looking for a new identity — you are looking for the tools to become more fully yourself.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THE PROFESSIONAL</div>
+                <p class="text-lg">You who operate in high-stakes environments and need clarity that actually performs under pressure. You want tools that scale with responsibility, not just personal development theory.</p>
+            </div>
+            <div class="bg-zinc-900 border border-white/10 rounded-3xl p-8">
+                <div class="text-amber-400 text-sm tracking-widest mb-3">THOSE SEEKING ANSWERS</div>
+                <p class="text-lg">You who have asked the real questions — about meaning, patterns, why things keep repeating — and are no longer satisfied with surface-level or temporary solutions. You are ready for precision.</p>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center text-sm text-zinc-400 max-w-lg mx-auto">
+            Whether you live in a remote countryside or a city penthouse, whether you are just beginning or already accomplished — if you are ready to stop outsourcing your life, the Circle is already open to you.
+        </div>
+    </section>
+
+    <!-- VOICES -->
+    <section id="voices" class="section bg-zinc-900 py-20 border-y border-white/10">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-2">FROM THE CIRCLE</div>
+                    <h2 class="heading-serif text-5xl tracking-tighter">Voices of Remembrance</h2>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-zinc-950 border border-white/10 rounded-3xl p-9">
+                    <div class="italic profound-text">"The Clarity System did not give me new beliefs. It gave me back the ability to know what is actually true in any moment — in a negotiation, with my children, in my own mind. I stopped living in the echo of other people’s expectations."</div>
+                    <div class="mt-8 text-sm">
+                        <span class="font-medium">— A strategic advisor in her forties</span>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-950 border border-white/10 rounded-3xl p-9">
+                    <div class="italic profound-text">"I had built a successful career and a beautiful family, yet I felt I was performing a version of life rather than living it. Inversion and the Synaptics practices showed me where I was still running old programs. The difference in my presence with my wife and team is indescribable."</div>
+                    <div class="mt-8 text-sm">
+                        <span class="font-medium">— A founder and father of three</span>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-950 border border-white/10 rounded-3xl p-9">
+                    <div class="italic profound-text">"As a student I was drowning in information but starving for understanding. The technology of study from the Clarity System changed how I learn. I went from anxious over-preparer to someone who actually enjoys deep work. My grades improved, but more importantly, my mind became my own again."</div>
+                    <div class="mt-8 text-sm">
+                        <span class="font-medium">— A graduate researcher in her late twenties</span>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-950 border border-white/10 rounded-3xl p-9">
+                    <div class="italic profound-text">"I came to this work exhausted from years of therapy, self-help, and spiritual seeking that never quite landed. The Circle gave me something I could actually use — daily, in real time, with measurable shifts in how I show up for my patients, my marriage, and myself. It is the most practical mysticism I have ever encountered."</div>
+                    <div class="mt-8 text-sm">
+                        <span class="font-medium">— A physician and mother in her fifties</span>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-950 border border-white/10 rounded-3xl p-9">
+                    <div class="italic profound-text">"For years I created successful work but could never fully inhabit it. Synaptics cleared the quiet conviction that I didn’t deserve to be seen at my full capacity. The shift wasn’t motivational — it was structural. I now create from a place that feels like home rather than performance."</div>
+                    <div class="mt-8 text-sm">
+                        <span class="font-medium">— A writer and creative director</span>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-950 border border-white/10 rounded-3xl p-9">
+                    <div class="italic profound-text">"I carried a deep, unnamed exhaustion from trying to be the ‘good’ version of myself in every room. The work showed me the cost of that performance and gave me precise tools to stop. My relationships, my body, and my sense of time all changed. I finally feel like I’m living my own life."</div>
+                    <div class="mt-8 text-sm">
+                        <span class="font-medium">— A teacher and parent in his early forties</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTER THE CIRCLE / CTA -->
+    <section id="enter" class="section max-w-5xl mx-auto px-8 py-24 text-center">
+        <div class="max-w-3xl mx-auto">
+            <div class="uppercase tracking-[3px] text-xs font-semibold text-amber-400 mb-4">THE DECISION</div>
+            
+            <h2 class="heading-serif text-6xl tracking-tighter leading-none mb-6">You already know<br>if this is for you.</h2>
+            
+            <p class="text-2xl text-zinc-300 mb-10">The only question is whether you will continue to live a life that is almost yours — or whether you will do the precise work required to make it fully yours.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="showBeginModal()" 
+                        class="px-14 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 active:bg-amber-500 transition-all text-xl font-semibold text-zinc-950 flex items-center justify-center gap-x-3">
+                    <span>Begin the First Practice Now</span>
+                </button>
+                
+                <button onclick="showPillarModal(0)" 
+                        class="px-10 py-5 rounded-2xl border border-white/30 hover:bg-white/5 text-lg font-medium transition-all">
+                    Start with The Clarity System
+                </button>
+            </div>
+            
+            <div class="mt-8 text-xs tracking-widest text-zinc-500">NO HIERARCHY • NO DOGMA • NO PERFORMANCE OF ENLIGHTENMENT<br>ONLY PRECISION, SOVEREIGNTY, AND RESULTS THAT ENDURE</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-zinc-950 py-16">
+        <div class="max-w-7xl mx-auto px-8 grid md:grid-cols-12 gap-y-12">
+            <div class="md:col-span-5">
+                <div class="flex items-center gap-x-3 mb-4">
+                    <div class="w-8 h-8 rounded-full border border-amber-400/60 flex items-center justify-center">
+                        <div class="w-3.5 h-3.5 rounded-full border border-amber-400/80 flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+                        </div>
+                    </div>
+                    <span class="font-semibold text-2xl tracking-tighter">The Circle of Synaptics</span>
+                </div>
+                <p class="text-sm text-zinc-400 max-w-xs">A living framework for those who refuse to remain asleep in their own potential. Not a church. A Circle.</p>
+            </div>
+            
+            <div class="md:col-span-3 text-sm">
+                <div class="font-medium mb-4 tracking-wider text-xs">THE PILLARS</div>
+                <div class="space-y-1.5 text-zinc-400">
+                    <div>The Clarity System</div>
+                    <div>Happiness by Design</div>
+                    <div>Inversion</div>
+                    <div>Synaptics</div>
+                    <div>The Pathway to Mental Clarity (PMC)</div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-4">
+                <div class="text-sm">
+                    <div class="font-medium tracking-wider text-xs mb-4">THE WORK IS AVAILABLE TO</div>
+                    <div class="text-zinc-400">Anyone with the courage to look directly at what is blocking their freedom and the willingness to do something precise about it.</div>
+                    
+                    <div class="mt-8 pt-8 border-t border-white/10 text-xs text-zinc-500">
+                        This site and framework are offered in the spirit of quiet influence and personal sovereignty.<br>
+                        No gurus. No followers. Only participants.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/10 text-center text-xs text-zinc-500">
+            © The Circle of Synaptics • A framework by Dr. Benjamin Koch • For those ready to remember
+        </div>
+    </footer>
+
+    <!-- PILLAR MODAL -->
+    <div id="pillar-modal" onclick="if (event.target.id === 'pillar-modal') hidePillarModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
+        <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 border border-white/10 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-auto elegant-shadow">
+            <div class="p-9">
+                <div class="flex justify-between items-start">
+                    <div id="modal-icon" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-400/10 text-amber-400 text-4xl"></div>
+                    <button onclick="hidePillarModal()" class="text-3xl leading-none text-zinc-400 hover:text-white">&times;</button>
+                </div>
+                
+                <h3 id="modal-title" class="heading-serif text-4xl tracking-tighter mt-6 mb-2"></h3>
+                <p id="modal-subtitle" class="text-amber-400 text-sm tracking-[1.5px]"></p>
+                
+                <div id="modal-content" class="mt-8 profound-text text-[15px] space-y-6"></div>
+                
+                <div class="mt-10 pt-8 border-t border-white/10 flex flex-wrap gap-3">
+                    <button onclick="hidePillarModal(); showBeginModal()" class="flex-1 sm:flex-none px-8 py-3.5 bg-amber-400 text-zinc-950 font-semibold rounded-2xl text-sm">Begin this pillar</button>
+                    <button onclick="hidePillarModal()" class="flex-1 sm:flex-none px-8 py-3.5 border border-white/20 rounded-2xl text-sm">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN / FIRST PRACTICE MODAL -->
+    <div id="begin-modal" onclick="if (event.target.id === 'begin-modal') hideBeginModal()" class="hidden fixed inset-0 bg-black/80 backdrop-blur z-[110] flex items-center justify-center p-6">
+        <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 border border-white/10 rounded-3xl max-w-lg w-full elegant-shadow overflow-hidden">
+            <div class="px-8 pt-8 pb-6">
+                <div class="flex justify-between">
+                    <div>
+                        <div class="text-amber-400 text-xs tracking-[2px]">FIRST PRACTICE</div>
+                        <h4 class="text-3xl tracking-tight font-semibold">The 7-Minute Clarity Duplication</h4>
+                    </div>
+                    <button onclick="hideBeginModal()" class="text-3xl text-zinc-400 hover:text-white leading-none">&times;</button>
+                </div>
+                
+                <div class="mt-6 text-sm text-zinc-300">
+                    This is the entry point to the entire framework. A simple but profound process used daily by those in the Circle.
+                </div>
+                
+                <div class="mt-8 space-y-6 text-sm">
+                    <div>
+                        <div class="font-medium text-amber-400 mb-2">1. SELECT A SITUATION</div>
+                        <div class="text-zinc-400">Choose one area of your life where you feel static, confusion, or reactivity. It can be small or large.</div>
+                    </div>
+                    <div>
+                        <div class="font-medium text-amber-400 mb-2">2. DUPLICATE EXACTLY</div>
+                        <div class="text-zinc-400">For 3–4 minutes, describe the situation, your feelings, and your thoughts about it with complete precision — as if you were duplicating it for someone who has never experienced it. No interpretation. Only what is actually there.</div>
+                    </div>
+                    <div>
+                        <div class="font-medium text-amber-400 mb-2">3. ACKNOWLEDGE &amp; RELEASE</div>
+                        <div class="text-zinc-400">When complete, simply say (out loud or silently): “I acknowledge this as it is.” Notice what shifts. Often the charge diminishes or new clarity appears immediately.</div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-5 bg-black/40 rounded-2xl text-xs border border-white/10">
+                    <strong class="text-amber-400">Pro tip from the Circle:</strong> Do this every morning for 21 days with whatever feels most alive. The results compound in ways that are difficult to describe until experienced.
+                </div>
+            </div>
+            
+            <div class="bg-black/30 px-8 py-5 flex items-center justify-between text-sm border-t border-white/10">
+                <div class="text-zinc-400">Ready for more?</div>
+                <button onclick="hideBeginModal(); document.getElementById('framework').scrollIntoView({ behavior: 'smooth' })" 
+                        class="font-semibold text-amber-400 hover:text-amber-300 flex items-center gap-x-2">
+                    Explore the full Framework <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#c9a227');
+        }
+        
+        // Navbar scroll effect
+        function initNavbar() {
+            const nav = document.getElementById('nav');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled', 'shadow-xl');
+                } else {
+                    nav.classList.remove('nav-scrolled', 'shadow-xl');
+                }
+            });
+            
+            // Mobile menu
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-times"></i>';
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                }
+            });
+            
+            // Close mobile menu on link click
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                });
+            });
+        }
+        
+        // Pillar data
+        const pillars = [
+            {
+                icon: '<i class="fa-solid fa-search"></i>',
+                title: 'The Clarity System',
+                subtitle: 'THE FOUNDATION OF PRECISION',
+                content: `
+                    <p>The Clarity System is the cornerstone. It teaches you how to look at anything — a problem, a relationship, a decision, your own mind — with such precision that the static dissolves and what remains is clean, usable knowing.</p>
+                    
+                    <p class="pt-4">Its power lies in three simple but rigorous disciplines:</p>
+                    <ul class="list-none mt-3 space-y-2 pl-1">
+                        <li class="flex gap-3"><span class="text-amber-400">•</span> <strong>Observation</strong> without interpretation or judgment</li>
+                        <li class="flex gap-3"><span class="text-amber-400">•</span> <strong>Duplication</strong> — the ability to exactly recreate in your own mind what another person or situation is experiencing</li>
+                        <li class="flex gap-3"><span class="text-amber-400">•</span> <strong>Acknowledgment</strong> — the precise recognition that allows charge to discharge</li>
+                    </ul>
+                    
+                    <p class="pt-6">This is not positive thinking. This is surgical clarity. Once you have it, every other pillar becomes dramatically more powerful.</p>
+                    
+                    <div class="mt-8 p-5 bg-zinc-950 border border-white/10 rounded-2xl text-sm">
+                        <strong class="text-amber-400">Daily use:</strong> Use the 7-Minute Clarity Duplication on any situation that feels “charged.” Most people notice immediate relief and new options appearing within days.
+                    </div>
+                `
+            },
+            {
+                icon: '<i class="fa-solid fa-drafting-compass"></i>',
+                title: 'Happiness by Design',
+                subtitle: 'ARCHITECTURE, NOT ACCIDENT',
+                content: `
+                    <p>Most people treat happiness as something that happens to them. In the Circle, we treat it as something we deliberately design — in our relationships, our work, our physical spaces, our inner tone, and our long-term trajectory.</p>
+                    
+                    <p class="pt-4">This pillar provides practical blueprints for:</p>
+                    <ul class="mt-3 space-y-2 pl-1 text-sm">
+                        <li>• Designing emotional tone as a stable baseline rather than a rollercoaster</li>
+                        <li>• Structuring relationships so both parties become more themselves</li>
+                        <li>• Creating daily and weekly rituals that actually generate well-being</li>
+                        <li>• Aligning career and contribution with your actual values (not inherited ones)</li>
+                    </ul>
+                    
+                    <p class="pt-6">When you design happiness rather than chase it, you become remarkably resilient. External events still occur, but they no longer have the power to derail you.</p>
+                `
+            },
+            {
+                icon: '<i class="fa-solid fa-sync"></i>',
+                title: 'Inversion',
+                subtitle: 'THE MOST POWERFUL THINKING TOOL',
+                content: `
+                    <p>Inversion is the practice of deliberately thinking backwards and through opposites. Instead of asking “How do I succeed?”, you ask “What would guarantee failure?” and then systematically avoid those things.</p>
+                    
+                    <p class="pt-4">This simple shift reveals blind spots, hidden risks, and elegant solutions that conventional thinking misses entirely. It is used daily by the most effective strategists, investors, and creators in the world — and now available as a precise, teachable discipline.</p>
+                    
+                    <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+                        <div class="bg-zinc-950 p-4 rounded-2xl border border-white/10">
+                            <div class="text-amber-400 text-xs mb-1">INSTEAD OF</div>
+                            <div>“How do I have a great marriage?”</div>
+                        </div>
+                        <div class="bg-zinc-950 p-4 rounded-2xl border border-white/10">
+                            <div class="text-amber-400 text-xs mb-1">INVERT TO</div>
+                            <div>“What would destroy trust and intimacy?”</div>
+                        </div>
+                    </div>
+                    
+                    <p class="pt-6 text-sm">The answers to the inverted question are almost always obvious — and therefore actionable. This pillar alone transforms decision-making in every domain.</p>
+                `
+            },
+            {
+                icon: '<i class="fa-solid fa-brain"></i>',
+                title: 'Synaptics',
+                subtitle: 'THE LIVING INTEGRATIVE CORE',
+                content: `
+                    <p>Synaptics is the living integrative core — the daily practice that makes the entire framework operational. It draws on the latest understanding of neuroplasticity while going far beyond performance optimization into the actual liberation of awareness from automaticity itself.</p>
+                    
+                    <p class="pt-4">Through specific protocols practiced daily, you:</p>
+                    <ul class="mt-3 space-y-2 pl-1">
+                        <li>• Rewire automatic reactions into chosen responses</li>
+                        <li>• Install new “default settings” for presence, confidence, and curiosity</li>
+                        <li>• Clear accumulated synaptic static from past experiences</li>
+                        <li>• Strengthen the direct connection between your awareness and your actions</li>
+                        <li>• Move from effortful practice into natural, sovereign flow</li>
+                    </ul>
+                    
+                    <p class="pt-6">This is not meditation for relaxation. This is precision synaptic technology for those who want to operate at the highest level of their own being — consistently, not just in peak moments. It is the practice that turns the other three pillars from concepts into lived reality.</p>
+                    
+                    <div class="mt-7 text-xs uppercase tracking-widest text-amber-400/70">The daily practice that makes freedom sustainable and inevitable.</div>
+                `
+            },
+            {
+                icon: '<i class="fa-solid fa-route"></i>',
+                title: 'The Pathway to Mental Clarity (PMC)',
+                subtitle: 'THE ACCESSIBLE ON-RAMP TO CLARITY',
+                content: `
+                    <p>The Pathway to Mental Clarity (PMC) is a structured, practical daily pathway designed to clear mental static and restore clean, precise thinking as your baseline. It is the most accessible entry point into the framework — especially powerful for overthinkers and anyone seeking immediate relief from mental noise.</p>
+                    
+                    <p class="pt-4">PMC focuses on:</p>
+                    <ul class="mt-3 space-y-2 pl-1">
+                        <li>• Daily mental hygiene protocols that reduce cognitive load</li>
+                        <li>• Structured thinking exercises that cut through decision paralysis</li>
+                        <li>• Simple but powerful practices to increase mental bandwidth and presence</li>
+                        <li>• Building clarity as a default state rather than a rare occurrence</li>
+                    </ul>
+                    
+                    <p class="pt-6">While the other pillars go deep into the architecture of being, PMC gives you the immediate, usable steps to start experiencing mental clarity today. Many begin here and naturally move into the deeper work of Synaptics.</p>
+                    
+                    <div class="mt-7 text-xs uppercase tracking-widest text-amber-400/70">The practical pathway that makes clarity feel achievable from day one.</div>
+                `
+            }
+        ];
+        
+        function showPillarModal(index) {
+            const modal = document.getElementById('pillar-modal');
+            const pillar = pillars[index];
+            
+            document.getElementById('modal-icon').innerHTML = pillar.icon;
+            document.getElementById('modal-title').innerHTML = pillar.title;
+            document.getElementById('modal-subtitle').innerHTML = pillar.subtitle;
+            document.getElementById('modal-content').innerHTML = pillar.content;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function hidePillarModal() {
+            const modal = document.getElementById('pillar-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        
+        function showBeginModal() {
+            const modal = document.getElementById('begin-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function hideBeginModal() {
+            const modal = document.getElementById('begin-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        
+        // Keyboard escape for modals
+        function initKeyboard() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const pillarModal = document.getElementById('pillar-modal');
+                    const beginModal = document.getElementById('begin-modal');
+                    
+                    if (!pillarModal.classList.contains('hidden') && pillarModal.classList.contains('flex')) {
+                        hidePillarModal();
+                    } else if (!beginModal.classList.contains('hidden') && beginModal.classList.contains('flex')) {
+                        hideBeginModal();
+                    }
+                }
+                
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    const beginModal = document.getElementById('begin-modal');
+                    if (beginModal.classList.contains('hidden')) {
+                        showBeginModal();
+                    }
+                }
+            });
+            
+            // Easter egg: press "?" for quick start
+            document.addEventListener('keypress', function(e) {
+                if (e.key === '?') {
+                    const beginModal = document.getElementById('begin-modal');
+                    if (beginModal.classList.contains('hidden')) {
+                        showBeginModal();
+                    }
+                }
+            });
+        }
+        
+        // Smooth scroll for all anchor links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Initialize everything
+        function initializeWebsite() {
+            initializeTailwind();
+            initNavbar();
+            initKeyboard();
+            initSmoothScroll();
+            
+            // Optional: subtle console message for the curious
+            console.log('%c[The Circle of Synaptics] Precision framework initialized. Welcome.', 'color:#3f3f46; font-size:9px');
+            
+            // Make sure modals start hidden properly
+            document.getElementById('pillar-modal').classList.add('hidden');
+            document.getElementById('begin-modal').classList.add('hidden');
+        }
+        
+        // Boot
+        window.onload = initializeWebsite;
+    </script>
+</body>
+</html>
