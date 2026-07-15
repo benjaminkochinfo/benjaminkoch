@@ -2304,7 +2304,7 @@
     }
     if (models && typeof INDICATOR_EXPLAIN !== "undefined") {
       models.innerHTML =
-        `<h3 class="howto-h3">YOUR SELF-DEVELOPED INDICATORS</h3>
+        `<h3 class="howto-h3">SELF-DEVELOPED INDICATORS</h3>
          <p class="hint" style="margin-bottom:10px">Plain-language reads for KMRI, SPI and the full suite. Click any model card on the Models desk for live factors.</p>` +
         Object.keys(INDICATOR_EXPLAIN)
           .map((id) => {
