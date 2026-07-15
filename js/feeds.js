@@ -498,52 +498,122 @@ const Feeds = (() => {
     }
   }
 
-  // ── Open-Meteo weather samples (major cities) ──
+  // ── Open-Meteo worldwide capital temperatures (batched) ──
   async function refreshWeather() {
-    const cities = [
-      { name: "New York", lat: 40.7, lon: -74 },
-      { name: "London", lat: 51.5, lon: -0.12 },
-      { name: "Tokyo", lat: 35.7, lon: 139.7 },
-      { name: "Singapore", lat: 1.35, lon: 103.8 },
-      { name: "Dubai", lat: 25.2, lon: 55.3 },
-      { name: "São Paulo", lat: -23.5, lon: -46.6 },
-      { name: "Mumbai", lat: 19.1, lon: 72.9 },
-      { name: "Kyiv", lat: 50.45, lon: 30.5 },
-      { name: "Taipei", lat: 25.0, lon: 121.5 },
-      { name: "Lagos", lat: 6.5, lon: 3.4 },
-    ];
+    const cities =
+      typeof weatherCitiesFromCountries === "function"
+        ? weatherCitiesFromCountries()
+        : (typeof COUNTRIES !== "undefined" ? COUNTRIES : [])
+            .filter((c) => c.code && c.code !== "GLOBAL")
+            .map((c) => ({ code: c.code, name: c.name, lat: c.lat, lon: c.lon, region: c.region }));
+
+    if (!cities.length) {
+      setHealth("weather", "err", "no cities");
+      return;
+    }
+
     try {
-      // batch via open-meteo multi-point is limited; sequential few is fine
       const results = [];
-      await Promise.all(
-        cities.map(async (c) => {
-          try {
-            const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC`;
-            const j = await fetchJson(url, 10000);
-            const cur = j.current || {};
-            results.push({
-              name: c.name,
-              lat: c.lat,
-              lon: c.lon,
-              temp: cur.temperature_2m,
-              wind: cur.wind_speed_10m,
-              precip: cur.precipitation,
-              code: cur.weather_code,
-              time: cur.time,
-              label: weatherCodeLabel(cur.weather_code),
-              impact: weatherImpact(cur),
+      const chunkSize = 40; // Open-Meteo multi-location batches
+      for (let i = 0; i < cities.length; i += chunkSize) {
+        const chunk = cities.slice(i, i + chunkSize);
+        const lats = chunk.map((c) => c.lat).join(",");
+        const lons = chunk.map((c) => c.lon).join(",");
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC`;
+        try {
+          const j = await fetchJson(url, 25000);
+          // multi-point: array of responses OR single object if one point
+          const list = Array.isArray(j) ? j : j?.latitude != null || j?.current ? [j] : [];
+          // Open-Meteo multi returns { latitude: [...], longitude: [...], current: { temperature_2m: [...], ... } }
+          if (j && Array.isArray(j.latitude) && j.current) {
+            const temps = [].concat(j.current.temperature_2m);
+            const winds = [].concat(j.current.wind_speed_10m);
+            const codes = [].concat(j.current.weather_code);
+            const precips = [].concat(j.current.precipitation);
+            const times = [].concat(j.current.time);
+            chunk.forEach((c, idx) => {
+              const cur = {
+                temperature_2m: temps[idx],
+                wind_speed_10m: winds[idx],
+                weather_code: codes[idx],
+                precipitation: precips[idx],
+                time: times[idx],
+              };
+              results.push({
+                code: c.code,
+                name: c.name,
+                region: c.region || "",
+                lat: c.lat,
+                lon: c.lon,
+                temp: cur.temperature_2m,
+                wind: cur.wind_speed_10m,
+                precip: cur.precipitation,
+                codeWx: cur.weather_code,
+                time: cur.time,
+                label: weatherCodeLabel(cur.weather_code),
+                impact: weatherImpact(cur),
+              });
             });
-          } catch {
-            /* skip city */
+          } else if (list.length) {
+            list.forEach((item, idx) => {
+              const c = chunk[idx] || chunk[0];
+              const cur = item.current || {};
+              results.push({
+                code: c.code,
+                name: c.name,
+                region: c.region || "",
+                lat: c.lat,
+                lon: c.lon,
+                temp: cur.temperature_2m,
+                wind: cur.wind_speed_10m,
+                precip: cur.precipitation,
+                codeWx: cur.weather_code,
+                time: cur.time,
+                label: weatherCodeLabel(cur.weather_code),
+                impact: weatherImpact(cur),
+              });
+            });
+          } else {
+            // fallback: one-by-one for this chunk
+            await Promise.all(
+              chunk.map(async (c) => {
+                try {
+                  const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC`;
+                  const one = await fetchJson(u, 10000);
+                  const cur = one.current || {};
+                  results.push({
+                    code: c.code,
+                    name: c.name,
+                    region: c.region || "",
+                    lat: c.lat,
+                    lon: c.lon,
+                    temp: cur.temperature_2m,
+                    wind: cur.wind_speed_10m,
+                    precip: cur.precipitation,
+                    codeWx: cur.weather_code,
+                    time: cur.time,
+                    label: weatherCodeLabel(cur.weather_code),
+                    impact: weatherImpact(cur),
+                  });
+                } catch {
+                  /* skip */
+                }
+              })
+            );
           }
-        })
-      );
-      if (!results.length) throw new Error("no cities");
+        } catch (chunkErr) {
+          log(`Weather chunk ${i}: ${chunkErr.message}`, "err");
+        }
+      }
+
+      if (!results.length) throw new Error("no weather rows");
+      // sort by name for stable UI
+      results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
       state.weather = results;
       Storage.cacheSet("weather", results);
-      setHealth("weather", "ok", `${results.length} cities Open-Meteo`);
+      setHealth("weather", "ok", `${results.length} countries Open-Meteo`);
       emit("weather", { items: results });
-      log(`Weather ${results.length} nodes`);
+      log(`Weather ${results.length} countries`);
     } catch (e) {
       const c = Storage.cacheGet("weather", 6 * 3600e3);
       if (c?.data) {

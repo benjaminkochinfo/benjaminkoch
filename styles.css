@@ -1739,13 +1739,45 @@ input:focus, select:focus, textarea:focus {
 .transport-row:hover, .wx-row:hover { background: var(--bg-3); }
 .tr-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .tr-name, .ins-name, .wx-name { font-size: 11px; font-weight: 500; }
+.wx-world-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: min(420px, 50vh);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
 .wx-row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 8px;
+  grid-template-columns: 64px 1fr auto;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 7px 6px;
+  border-bottom: 1px solid rgba(42, 49, 64, 0.4);
+  cursor: pointer;
 }
-.wx-vals { grid-column: 1; font-size: 10px; color: var(--text-mute); }
-.wx-row .i-stat { grid-row: 1 / span 2; align-self: center; }
+.wx-row:hover, .wx-row.active {
+  background: rgba(0, 212, 255, 0.08);
+}
+.wx-row.active {
+  border-left: 3px solid var(--cyan);
+  padding-left: 4px;
+}
+.wx-temp {
+  font-size: 16px;
+  font-weight: 700;
+  color: #80d8ff;
+  text-align: right;
+  line-height: 1.1;
+}
+.wx-name { font-size: 12px; font-weight: 500; }
+.wx-code {
+  font-size: 9px;
+  color: var(--text-mute);
+  font-weight: 600;
+}
+.wx-vals { font-size: 10px; color: var(--text-mute); }
+.wx-row .i-stat { align-self: center; }
 .mini-note {
   margin-top: 8px;
   font-family: var(--mono);

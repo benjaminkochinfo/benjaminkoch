@@ -70,7 +70,14 @@
   // ── Focus chrome ──
   function populateSelectors() {
     const cs = $("#countrySelect");
-    cs.innerHTML = COUNTRIES.map((c) => `<option value="${c.code === "GLOBAL" ? "" : c.code}">${c.name}</option>`).join("");
+    const sorted = [...COUNTRIES].sort((a, b) => {
+      if (a.code === "GLOBAL") return -1;
+      if (b.code === "GLOBAL") return 1;
+      return a.name.localeCompare(b.name);
+    });
+    cs.innerHTML = sorted
+      .map((c) => `<option value="${c.code === "GLOBAL" ? "" : c.code}">${c.name}</option>`)
+      .join("");
     const is = $("#instrumentSelect");
     is.innerHTML =
       `<option value="">All instruments</option>` +
@@ -400,20 +407,29 @@
   }
 
   function affordRow(code) {
-    if (typeof AFFORDABILITY === "undefined") return null;
-    const base = AFFORDABILITY.find((a) => a.code === code);
-    if (!base) return null;
+    if (!code || code === "GLOBAL") return null;
+    // Always bind to THIS country only (never fall back to Germany/USA)
+    const base =
+      typeof getAffordProfile === "function"
+        ? getAffordProfile(code)
+        : typeof AFFORDABILITY !== "undefined"
+          ? AFFORDABILITY.find((a) => a.code === code) || null
+          : null;
+    if (!base || base.code !== code) return null;
     const adj = affordLiveAdj();
     const clamp = (n) => Math.max(5, Math.min(98, n));
     const row = { ...base };
     ["groceries", "energy", "gasFuel", "transport", "cars", "utilities"].forEach((k) => {
       if (row[k] != null) row[k] = clamp(row[k] + (adj[k] || 0));
     });
-    // recompute affordScore lightly when live costs rise
     const costPush = (adj.groceries || 0) + (adj.energy || 0) + (adj.gasFuel || 0);
-    row.affordScore = clamp(base.affordScore - Math.round(costPush / 3));
+    row.affordScore = clamp((base.affordScore || 50) - Math.round(costPush / 3));
     row.live = true;
     return row;
+  }
+
+  function selectedCountryCode() {
+    return state.country && state.country !== "GLOBAL" ? state.country : "";
   }
 
   function affordCostColor(cost) {
@@ -433,10 +449,14 @@
   function fillAfford() {
     const el = Layout.bodyEl("afford");
     if (!el) return;
-    const code = state.country || "DEU";
-    const row = affordRow(code) || affordRow("DEU");
+    const code = selectedCountryCode();
+    if (!code) {
+      el.innerHTML = empty("Pick a country", "Select any country above — costs always match that country.");
+      return;
+    }
+    const row = affordRow(code);
     if (!row) {
-      el.innerHTML = empty("Affordability", "Select a country");
+      el.innerHTML = empty("No profile", "Could not build affordability for this country.");
       return;
     }
     const cname = COUNTRIES.find((c) => c.code === row.code)?.name || row.code;
@@ -474,11 +494,13 @@
   function fillAffordRank() {
     const el = Layout.bodyEl("affordRank");
     if (!el) return;
-    const list = (typeof AFFORDABILITY !== "undefined" ? AFFORDABILITY : [])
-      .map((a) => affordRow(a.code) || a)
+    // Rank ALL countries in the worldwide catalog (each uses its own profile)
+    const list = COUNTRIES.filter((c) => c.code && c.code !== "GLOBAL")
+      .map((c) => affordRow(c.code))
+      .filter(Boolean)
       .sort((a, b) => b.affordScore - a.affordScore);
     Layout.metaEl("affordRank") && (Layout.metaEl("affordRank").textContent = `${list.length} PLACES`);
-    el.innerHTML = `<div class="panel-banner">Higher score = everyday life costs feel easier (model + live food/energy nudge)</div>
+    el.innerHTML = `<div class="panel-banner">Higher score = everyday life costs feel easier · every country has its own profile</div>
       <div class="afford-rank-list">${list
         .map((a, i) => {
           const name = COUNTRIES.find((c) => c.code === a.code)?.name || a.code;
@@ -503,8 +525,12 @@
   function fillAffordEdu() {
     const el = Layout.bodyEl("affordEdu");
     if (!el) return;
-    const code = state.country || "DEU";
-    const row = affordRow(code) || affordRow("USA");
+    const code = selectedCountryCode();
+    if (!code) {
+      el.innerHTML = empty("Pick a country", "Education costs follow the country you select.");
+      return;
+    }
+    const row = affordRow(code);
     if (!row) return;
     const items = [
       ["schoolPublic", "Public / state school", "Usually the lower-cost path for families."],
@@ -538,8 +564,12 @@
   function fillAffordHome() {
     const el = Layout.bodyEl("affordHome");
     if (!el) return;
-    const code = state.country || "DEU";
-    const row = affordRow(code) || affordRow("USA");
+    const code = selectedCountryCode();
+    if (!code) {
+      el.innerHTML = empty("Pick a country", "Home costs follow the country you select.");
+      return;
+    }
+    const row = affordRow(code);
     if (!row) return;
     const items = [
       ["housing", "Housing / rent"],
@@ -566,8 +596,12 @@
   function fillAffordMove() {
     const el = Layout.bodyEl("affordMove");
     if (!el) return;
-    const code = state.country || "DEU";
-    const row = affordRow(code) || affordRow("USA");
+    const code = selectedCountryCode();
+    if (!code) {
+      el.innerHTML = empty("Pick a country", "Transport costs follow the country you select.");
+      return;
+    }
+    const row = affordRow(code);
     if (!row) return;
     const items = [
       ["transport", "Public transport", "Buses, trains, metro — often the family saver."],
@@ -1374,12 +1408,28 @@
     const el = Layout.bodyEl("cii");
     if (!el) return;
     let list = CII;
-    if (state.country) list = CII.filter((c) => c.code === state.country);
+    if (state.country) {
+      const hit = CII.filter((c) => c.code === state.country);
+      if (hit.length) list = hit;
+      else {
+        const c = COUNTRIES.find((x) => x.code === state.country);
+        if (c) {
+          list = [
+            {
+              code: c.code,
+              name: c.name,
+              score: c.risk,
+              color: scoreColor(c.risk),
+            },
+          ];
+        }
+      }
+    }
     el.innerHTML = (list.length ? list : CII)
       .map(
         (c) => `<div class="cii-row"><span class="ccode">${c.code}</span>
-      <div class="cii-bar"><i style="width:${c.score}%;background:${c.color}"></i></div>
-      <span class="cval" style="color:${c.color}">${c.score}</span></div>`
+      <div class="cii-bar"><i style="width:${c.score}%;background:${c.color || scoreColor(c.score)}"></i></div>
+      <span class="cval" style="color:${c.color || scoreColor(c.score)}">${c.score}</span></div>`
       )
       .join("");
   }
@@ -1485,25 +1535,73 @@
   function fillWeather() {
     const el = Layout.bodyEl("weather");
     if (!el) return;
-    const wx = Feeds.getState().weather || [];
-    Layout.metaEl("weather") && (Layout.metaEl("weather").textContent = wx.length ? "OPEN-METEO" : "—");
+    let wx = Feeds.getState().weather || [];
+    Layout.metaEl("weather") &&
+      (Layout.metaEl("weather").textContent = wx.length ? `${wx.length} WORLD` : "—");
     if (!wx.length) {
-      el.innerHTML = empty("Weather loading…", "Open-Meteo city samples");
+      el.innerHTML = empty("Weather loading…", "Fetching capital temperatures worldwide (Open-Meteo)");
       return;
     }
-    el.innerHTML = wx
-      .map(
-        (w) => `<div class="wx-row" data-name="${w.name}">
-      <div class="wx-name">${w.name}</div>
-      <div class="wx-vals mono">${w.temp ?? "—"}°C · wind ${w.wind ?? "—"} · ${w.label}</div>
-      <div class="i-stat ${w.impact === "ok" ? "ok" : w.impact === "watch" ? "warn" : "crit"}">${(w.impact || "").toUpperCase()}</div>
-    </div>`
-      )
-      .join("");
+    // Focus country first, then filter by search, else full world list
+    const focusCode = state.country;
+    if (focusCode) {
+      const focused = wx.filter((w) => w.code === focusCode);
+      const rest = wx.filter((w) => w.code !== focusCode);
+      wx = focused.length ? [...focused, ...rest] : wx;
+    }
+    if (state.search) {
+      const q = state.search;
+      const filtered = wx.filter(
+        (w) =>
+          (w.name || "").toLowerCase().includes(q) ||
+          (w.code || "").toLowerCase().includes(q) ||
+          (w.region || "").toLowerCase().includes(q)
+      );
+      if (filtered.length) wx = filtered;
+    }
+    const show = wx.slice(0, 200);
+    const focus = focusCode ? show.find((w) => w.code === focusCode) : null;
+    el.innerHTML =
+      `<div class="panel-banner">Worldwide capital temperatures · live Open-Meteo · click a row to fly the map${
+        focus
+          ? ` · <b>${UI.esc(focus.name)}</b> now <b class="mono">${focus.temp ?? "—"}°C</b>`
+          : " · pick a country to pin its temperature on top"
+      }</div>
+      <div class="wx-world-grid">${show
+        .map((w) => {
+          const active = focusCode && w.code === focusCode ? " active" : "";
+          const t =
+            w.temp != null && Number.isFinite(Number(w.temp)) ? `${Number(w.temp).toFixed(1)}°C` : "—";
+          return `<div class="wx-row${active}" data-code="${UI.esc(w.code || "")}" data-name="${UI.esc(w.name || "")}">
+          <div class="wx-temp mono">${t}</div>
+          <div>
+            <div class="wx-name">${UI.esc(w.name)}${w.code ? ` <span class="mono wx-code">${UI.esc(w.code)}</span>` : ""}</div>
+            <div class="wx-vals mono">${UI.esc(w.region || "")} · wind ${w.wind ?? "—"} · ${UI.esc(w.label || "")}</div>
+          </div>
+          <div class="i-stat ${w.impact === "ok" ? "ok" : w.impact === "watch" ? "warn" : "crit"}">${(
+            w.impact || ""
+          ).toUpperCase()}</div>
+        </div>`;
+        })
+        .join("")}</div>
+      <div class="afford-foot">${show.length} countries shown${
+        (Feeds.getState().weather || []).length > show.length
+          ? ` of ${(Feeds.getState().weather || []).length}`
+          : ""
+      }. Use search or country focus to narrow.</div>`;
     el.querySelectorAll(".wx-row").forEach((n) => {
       n.addEventListener("click", () => {
-        const w = wx.find((x) => x.name === n.dataset.name);
-        if (w) Map3D.flyTo(w.lon, w.lat, 5);
+        const code = n.dataset.code;
+        const w = (Feeds.getState().weather || []).find((x) => x.code === code || x.name === n.dataset.name);
+        if (w) {
+          Map3D.flyTo(w.lon, w.lat, 5);
+          if (code && $("#countrySelect")) {
+            state.country = code;
+            $("#countrySelect").value = code;
+            updateFocusChrome();
+            fillWeather();
+          }
+        }
       });
     });
   }
@@ -2341,6 +2439,23 @@
     $("#countrySelect")?.addEventListener("change", (e) => {
       state.country = e.target.value;
       applyCountryFocus();
+      // Force country-bound panels to re-bind (affordability, CII, weather, news…)
+      fillAfford();
+      fillAffordRank();
+      fillAffordEdu();
+      fillAffordHome();
+      fillAffordMove();
+      fillCountry();
+      fillCII();
+      fillImpact();
+      fillNews();
+      fillNewsFocus();
+      fillWeather();
+      fillAnswers();
+      fillImplications();
+      fillTriad();
+      fillMktBoard();
+      updateFocusChrome();
     });
     $("#instrumentSelect")?.addEventListener("change", (e) => {
       state.instrument = e.target.value;

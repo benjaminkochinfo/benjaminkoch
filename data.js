@@ -112,46 +112,221 @@ const AFFORDABILITY = [
   { code: "MEX", city: "Major cities", affordScore: 59, housing: 55, groceries: 52, utilities: 48, energy: 50, gasFuel: 55, transport: 40, cars: 58, childcare: 52, schoolPublic: 25, schoolPrivate: 70, higherEd: 45, healthcare: 55, note: "Cars and private education lift costs in big cities." },
   { code: "POL", city: "Poland average", affordScore: 58, housing: 58, groceries: 52, utilities: 55, energy: 60, gasFuel: 62, transport: 40, cars: 55, childcare: 48, schoolPublic: 18, schoolPrivate: 55, higherEd: 30, healthcare: 40, note: "Public school helps; energy winters matter." },
   { code: "EST", city: "Tallinn", affordScore: 54, housing: 62, groceries: 60, utilities: 58, energy: 62, gasFuel: 68, transport: 42, cars: 58, childcare: 45, schoolPublic: 15, schoolPrivate: 55, higherEd: 30, healthcare: 35, note: "Digital services strong; winter energy is the watch item." },
+  { code: "SWE", city: "Sweden average", affordScore: 48, housing: 74, groceries: 72, utilities: 62, energy: 58, gasFuel: 70, transport: 45, cars: 62, childcare: 40, schoolPublic: 12, schoolPrivate: 55, higherEd: 22, healthcare: 25, note: "Strong public services; housing in big cities is the main cost." },
+  { code: "NOR", city: "Norway average", affordScore: 44, housing: 78, groceries: 80, utilities: 65, energy: 45, gasFuel: 72, transport: 50, cars: 68, childcare: 42, schoolPublic: 12, schoolPrivate: 58, higherEd: 20, healthcare: 22, note: "High wages and high prices; energy often manageable." },
+  { code: "DNK", city: "Denmark average", affordScore: 46, housing: 76, groceries: 74, utilities: 64, energy: 60, gasFuel: 72, transport: 42, cars: 70, childcare: 38, schoolPublic: 12, schoolPrivate: 55, higherEd: 20, healthcare: 22, note: "Childcare and public school support families; city housing is high." },
+  { code: "FIN", city: "Finland average", affordScore: 49, housing: 70, groceries: 70, utilities: 60, energy: 58, gasFuel: 70, transport: 45, cars: 62, childcare: 40, schoolPublic: 12, schoolPrivate: 52, higherEd: 18, healthcare: 24, note: "Strong public school and care system; winter energy matters." },
+  { code: "NLD", city: "Netherlands average", affordScore: 47, housing: 80, groceries: 70, utilities: 62, energy: 68, gasFuel: 74, transport: 40, cars: 65, childcare: 75, schoolPublic: 15, schoolPrivate: 60, higherEd: 40, healthcare: 28, note: "Housing and childcare are the big family costs; transit is strong." },
+  { code: "CHE", city: "Switzerland average", affordScore: 38, housing: 90, groceries: 88, utilities: 70, energy: 55, gasFuel: 72, transport: 50, cars: 72, childcare: 85, schoolPublic: 18, schoolPrivate: 80, higherEd: 45, healthcare: 55, note: "Very high prices overall; wages are also high." },
+  { code: "CAN", city: "Canada average", affordScore: 46, housing: 82, groceries: 72, utilities: 65, energy: 55, gasFuel: 60, transport: 58, cars: 65, childcare: 78, schoolPublic: 20, schoolPrivate: 80, higherEd: 70, healthcare: 30, note: "Housing in big cities is the main pressure." },
+  { code: "ITA", city: "Italy average", affordScore: 50, housing: 68, groceries: 70, utilities: 60, energy: 65, gasFuel: 74, transport: 45, cars: 62, childcare: 55, schoolPublic: 15, schoolPrivate: 65, higherEd: 30, healthcare: 30, note: "Public services help; fuel and city rent vary by region." },
+  { code: "ESP", city: "Spain average", affordScore: 52, housing: 65, groceries: 62, utilities: 58, energy: 62, gasFuel: 70, transport: 42, cars: 60, childcare: 52, schoolPublic: 15, schoolPrivate: 65, higherEd: 32, healthcare: 28, note: "Coastal and capital cities cost more than smaller towns." },
 ];
 
-/** Focus countries with capitals for map fly-to */
-const COUNTRIES = [
-  { code: "GLOBAL", name: "Global", lat: 20, lon: 10, zoom: 1.4, region: "World", risk: 40 },
-  { code: "USA", name: "United States", lat: 39, lon: -98, zoom: 3.2, region: "N. America", risk: 28 },
-  { code: "CHN", name: "China", lat: 35, lon: 105, zoom: 3.2, region: "Asia", risk: 42 },
-  { code: "RUS", name: "Russia", lat: 60, lon: 100, zoom: 2.6, region: "Eurasia", risk: 58 },
-  { code: "UKR", name: "Ukraine", lat: 49, lon: 32, zoom: 5, region: "Europe", risk: 92 },
-  { code: "TWN", name: "Taiwan", lat: 23.7, lon: 121, zoom: 6, region: "Asia", risk: 55 },
-  { code: "ISR", name: "Israel", lat: 31.5, lon: 34.8, zoom: 6.5, region: "MENA", risk: 72 },
-  { code: "IRN", name: "Iran", lat: 32, lon: 53, zoom: 4.5, region: "MENA", risk: 68 },
-  { code: "SAU", name: "Saudi Arabia", lat: 24, lon: 45, zoom: 4.5, region: "MENA", risk: 38 },
-  { code: "TUR", name: "Türkiye", lat: 39, lon: 35, zoom: 5, region: "Eurasia", risk: 44 },
-  { code: "DEU", name: "Germany", lat: 51, lon: 10, zoom: 5, region: "Europe", risk: 22 },
-  { code: "GBR", name: "United Kingdom", lat: 54, lon: -2, zoom: 5, region: "Europe", risk: 24 },
-  { code: "FRA", name: "France", lat: 46.5, lon: 2.5, zoom: 5, region: "Europe", risk: 26 },
-  { code: "IND", name: "India", lat: 22, lon: 79, zoom: 4, region: "Asia", risk: 36 },
-  { code: "PAK", name: "Pakistan", lat: 30, lon: 70, zoom: 5, region: "Asia", risk: 52 },
-  { code: "JPN", name: "Japan", lat: 36, lon: 138, zoom: 5, region: "Asia", risk: 30 },
-  { code: "KOR", name: "South Korea", lat: 36, lon: 128, zoom: 6, region: "Asia", risk: 40 },
-  { code: "PRK", name: "North Korea", lat: 40, lon: 127, zoom: 6, region: "Asia", risk: 70 },
-  { code: "SDN", name: "Sudan", lat: 15.5, lon: 32, zoom: 5, region: "Africa", risk: 90 },
-  { code: "EGY", name: "Egypt", lat: 26.5, lon: 30, zoom: 5, region: "MENA", risk: 48 },
-  { code: "YEM", name: "Yemen", lat: 15.5, lon: 48, zoom: 5.5, region: "MENA", risk: 84 },
-  { code: "LBN", name: "Lebanon", lat: 33.9, lon: 35.8, zoom: 7, region: "MENA", risk: 76 },
-  { code: "SYR", name: "Syria", lat: 35, lon: 38, zoom: 5.5, region: "MENA", risk: 80 },
-  { code: "BRA", name: "Brazil", lat: -10, lon: -55, zoom: 3.5, region: "LatAm", risk: 34 },
-  { code: "ARG", name: "Argentina", lat: -34, lon: -64, zoom: 4, region: "LatAm", risk: 40 },
-  { code: "AUS", name: "Australia", lat: -25, lon: 134, zoom: 3.5, region: "Oceania", risk: 18 },
-  { code: "ZAF", name: "South Africa", lat: -29, lon: 25, zoom: 4.5, region: "Africa", risk: 42 },
-  { code: "NGA", name: "Nigeria", lat: 9, lon: 8, zoom: 5, region: "Africa", risk: 55 },
-  { code: "CIV", name: "Côte d'Ivoire", lat: 7.5, lon: -5.5, zoom: 6, region: "Africa", risk: 38 },
-  { code: "GHA", name: "Ghana", lat: 7.9, lon: -1.0, zoom: 6, region: "Africa", risk: 32 },
-  { code: "IDN", name: "Indonesia", lat: -2, lon: 118, zoom: 4, region: "Asia", risk: 36 },
-  { code: "PHL", name: "Philippines", lat: 12, lon: 122, zoom: 5, region: "Asia", risk: 40 },
-  { code: "MEX", name: "Mexico", lat: 23, lon: -102, zoom: 4, region: "N. America", risk: 45 },
-  { code: "POL", name: "Poland", lat: 52, lon: 19, zoom: 5.5, region: "Europe", risk: 35 },
-  { code: "EST", name: "Estonia", lat: 58.6, lon: 25, zoom: 6.5, region: "Europe", risk: 42 },
-];
+/**
+ * Region templates — used to build affordability for ANY country
+ * (so Sweden never shows Germany, etc.)
+ */
+const AFFORD_REGION_TEMPLATES = {
+  Europe: {
+    affordScore: 52,
+    housing: 66,
+    groceries: 64,
+    utilities: 58,
+    energy: 60,
+    gasFuel: 68,
+    transport: 42,
+    cars: 58,
+    childcare: 48,
+    schoolPublic: 16,
+    schoolPrivate: 58,
+    higherEd: 32,
+    healthcare: 30,
+  },
+  "N. America": {
+    affordScore: 48,
+    housing: 78,
+    groceries: 70,
+    utilities: 62,
+    energy: 55,
+    gasFuel: 55,
+    transport: 62,
+    cars: 68,
+    childcare: 80,
+    schoolPublic: 28,
+    schoolPrivate: 82,
+    higherEd: 78,
+    healthcare: 70,
+  },
+  LatAm: {
+    affordScore: 58,
+    housing: 52,
+    groceries: 52,
+    utilities: 50,
+    energy: 52,
+    gasFuel: 58,
+    transport: 42,
+    cars: 60,
+    childcare: 50,
+    schoolPublic: 26,
+    schoolPrivate: 68,
+    higherEd: 48,
+    healthcare: 52,
+  },
+  Caribbean: {
+    affordScore: 54,
+    housing: 58,
+    groceries: 62,
+    utilities: 58,
+    energy: 60,
+    gasFuel: 62,
+    transport: 48,
+    cars: 62,
+    childcare: 52,
+    schoolPublic: 28,
+    schoolPrivate: 70,
+    higherEd: 50,
+    healthcare: 52,
+  },
+  Asia: {
+    affordScore: 56,
+    housing: 58,
+    groceries: 50,
+    utilities: 48,
+    energy: 50,
+    gasFuel: 55,
+    transport: 38,
+    cars: 55,
+    childcare: 52,
+    schoolPublic: 26,
+    schoolPrivate: 68,
+    higherEd: 48,
+    healthcare: 48,
+  },
+  MENA: {
+    affordScore: 52,
+    housing: 60,
+    groceries: 58,
+    utilities: 50,
+    energy: 45,
+    gasFuel: 40,
+    transport: 42,
+    cars: 60,
+    childcare: 55,
+    schoolPublic: 25,
+    schoolPrivate: 72,
+    higherEd: 48,
+    healthcare: 48,
+  },
+  Africa: {
+    affordScore: 58,
+    housing: 48,
+    groceries: 52,
+    utilities: 55,
+    energy: 58,
+    gasFuel: 58,
+    transport: 45,
+    cars: 60,
+    childcare: 48,
+    schoolPublic: 28,
+    schoolPrivate: 62,
+    higherEd: 45,
+    healthcare: 55,
+  },
+  Oceania: {
+    affordScore: 48,
+    housing: 78,
+    groceries: 72,
+    utilities: 65,
+    energy: 62,
+    gasFuel: 68,
+    transport: 55,
+    cars: 65,
+    childcare: 72,
+    schoolPublic: 24,
+    schoolPrivate: 80,
+    higherEd: 65,
+    healthcare: 42,
+  },
+  Eurasia: {
+    affordScore: 54,
+    housing: 55,
+    groceries: 52,
+    utilities: 48,
+    energy: 48,
+    gasFuel: 52,
+    transport: 40,
+    cars: 58,
+    childcare: 48,
+    schoolPublic: 22,
+    schoolPrivate: 60,
+    higherEd: 40,
+    healthcare: 48,
+  },
+  World: {
+    affordScore: 50,
+    housing: 60,
+    groceries: 58,
+    utilities: 55,
+    energy: 55,
+    gasFuel: 58,
+    transport: 48,
+    cars: 60,
+    childcare: 55,
+    schoolPublic: 28,
+    schoolPrivate: 65,
+    higherEd: 50,
+    healthcare: 50,
+  },
+};
+
+/**
+ * Always returns a profile for the selected country code (never another country).
+ * Uses curated table when present; otherwise region + risk model for that country.
+ */
+function getAffordProfile(code) {
+  if (!code || code === "GLOBAL") return null;
+  const curated = (typeof AFFORDABILITY !== "undefined" ? AFFORDABILITY : []).find((a) => a.code === code);
+  if (curated) return { ...curated, source: "curated" };
+
+  const c =
+    typeof COUNTRIES !== "undefined" ? COUNTRIES.find((x) => x.code === code) : null;
+  if (!c) return null;
+
+  const tpl = AFFORD_REGION_TEMPLATES[c.region] || AFFORD_REGION_TEMPLATES.World;
+  const risk = typeof c.risk === "number" ? c.risk : 40;
+  // Higher instability → daily goods/services feel harder (illustrative)
+  const stress = (risk - 40) * 0.22;
+  const clamp = (n) => Math.max(8, Math.min(96, Math.round(n)));
+  const bump = (v, factor = 1) => clamp(v + stress * factor);
+
+  return {
+    code: c.code,
+    city: c.name + " (capital area model)",
+    affordScore: clamp((tpl.affordScore || 50) - stress * 0.8),
+    housing: bump(tpl.housing, 0.6),
+    groceries: bump(tpl.groceries, 0.9),
+    utilities: bump(tpl.utilities, 0.7),
+    energy: bump(tpl.energy, 0.8),
+    gasFuel: bump(tpl.gasFuel, 0.7),
+    transport: bump(tpl.transport, 0.5),
+    cars: bump(tpl.cars, 0.6),
+    childcare: bump(tpl.childcare, 0.5),
+    schoolPublic: bump(tpl.schoolPublic, 0.3),
+    schoolPrivate: bump(tpl.schoolPrivate, 0.5),
+    higherEd: bump(tpl.higherEd, 0.4),
+    healthcare: bump(tpl.healthcare, 0.7),
+    note:
+      "Illustrative cost model for " +
+      c.name +
+      " (" +
+      (c.region || "world") +
+      "), scaled with country risk. Not an official price list — use for comparison.",
+    source: "region-model",
+  };
+}
+
+/** COUNTRIES: loaded from js/countries.js (worldwide capitals) */
 
 /** Markets you can follow — money, food, energy, metals, chips, data centers */
 const INSTRUMENTS = [
@@ -570,7 +745,7 @@ const WIDGET_CATALOG = {
   instrument: { id: "instrument", title: "PRICE BRIEF", help: "Details for the price you clicked.", w: 4, h: 2 },
   infra: { id: "infra", title: "INFRASTRUCTURE", help: "Power grids, cables, GPS, roads — including outages.", w: 4, h: 2 },
   transport: { id: "transport", title: "SHIPPING ROUTES", help: "Key canals and sea chokepoints.", w: 4, h: 2 },
-  weather: { id: "weather", title: "WEATHER", help: "City weather samples and storm risk.", w: 4, h: 2 },
+  weather: { id: "weather", title: "WORLD TEMPERATURES", help: "Live capital temperatures worldwide (Open-Meteo). Click a country to fly the map.", w: 6, h: 3 },
   disasters: { id: "disasters", title: "LIVE DISASTERS", help: "Earthquakes and open natural events (live).", w: 4, h: 2 },
   agriculture: { id: "agriculture", title: "FOOD REGIONS", help: "Crop regions that feed the world.", w: 4, h: 2 },
   insurance: { id: "insurance", title: "INSURANCE SIGNALS", help: "Storm and war insurance cost signals.", w: 4, h: 2 },
@@ -809,7 +984,7 @@ const VIEW_META = {
   answers: { title: "ANSWERS", desc: "Simple Q&A plus positive paths." },
   geo: { title: "MAP", desc: "3D world map, layers, live disasters." },
   crisis: { title: "CRISIS", desc: "War, hotspots, alerts, ways to ease tension." },
-  weather: { title: "WEATHER", desc: "Storms, quakes, El Niño, insurance." },
+  weather: { title: "WEATHER", desc: "Worldwide capital temperatures, storms, El Niño, insurance." },
   markets: { title: "MARKETS", desc: "Live prices and charts for money and commodities." },
   commodities: { title: "COMMODITIES", desc: "Oil, food crops, grocery link." },
   metals: { title: "METALS", desc: "Gold, silver, copper, platinum, aluminum." },
@@ -831,7 +1006,7 @@ const DESK_CATALOG = [
   { id: "answers", title: "Answers", icon: "✦", blurb: "Q&A", desc: "Questions and hope paths", preview: "Opens simple answers and positive paths for your country and lens." },
   { id: "geo", title: "Map", icon: "◎", blurb: "Globe", desc: "3D map + disasters", preview: "Opens the world map with disasters and quakes." },
   { id: "crisis", title: "Crisis", icon: "⚠", blurb: "War", desc: "Hotspots and alerts", preview: "Opens war theaters, hotspots, and top alerts." },
-  { id: "weather", title: "Weather", icon: "☁", blurb: "Storms", desc: "El Niño · hazards", preview: "Opens weather, disasters, climate, insurance." },
+  { id: "weather", title: "Weather", icon: "☁", blurb: "Temps world", desc: "Global °C · storms · El Niño", preview: "Opens worldwide capital temperatures, disasters, climate, insurance." },
   { id: "markets", title: "Markets", icon: "◈", blurb: "Prices", desc: "Stocks · FX · charts", preview: "Opens the live market board and focus chart." },
   { id: "commodities", title: "Commodities", icon: "▣", blurb: "Oil & food", desc: "Energy · crops · groceries", preview: "Opens oil, food crops, and the grocery signal." },
   { id: "metals", title: "Metals", icon: "◆", blurb: "Gold & copper", desc: "Precious + industrial metals", preview: "Opens gold, silver, copper, platinum, aluminum boards." },
@@ -857,7 +1032,7 @@ const VIEW_PRESETS = {
   answers: ["triad", "answers", "implications", "impact", "kmri", "grocery"],
   geo: ["map", "layers", "disasters", "quakes", "country", "climate"],
   crisis: ["map", "hotspots", "theaters", "alerts", "kmri", "implications"],
-  weather: ["map", "weather", "disasters", "climate", "quakes", "insurance"],
+  weather: ["weather", "map", "disasters", "climate", "quakes", "insurance"],
   markets: ["mktboard", "mkthero", "currencies", "energy", "metals", "instrument"],
   commodities: ["mktboard", "commodities", "energy", "grocery", "agriculture", "implications"],
   metals: ["mktboard", "metals", "mkthero", "currencies", "newsfocus", "impact"],

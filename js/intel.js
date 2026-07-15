@@ -234,14 +234,16 @@ const Intel = (() => {
       linkView: "answers",
     });
 
-    if (country && typeof AFFORDABILITY !== "undefined") {
-      const aff = AFFORDABILITY.find((a) => a.code === country);
-      if (aff) {
+    if (country && country !== "GLOBAL" && typeof getAffordProfile === "function") {
+      const aff = getAffordProfile(country);
+      if (aff && aff.code === country) {
         answers.push({
           q: `How affordable is daily life in ${countryName(country)}?`,
-          a: `Overall affordability score ${aff.affordScore}/100 (higher = easier costs). Housing ${aff.housing}, groceries ${aff.groceries}, home energy ${aff.energy}, fuel ${aff.gasFuel}, cars ${aff.cars}, public transport ${aff.transport}, public school ${aff.schoolPublic}, private school ${aff.schoolPrivate}, childcare ${aff.childcare}, healthcare ${aff.healthcare}. ${aff.note}`,
-          confidence: 72,
-          tags: ["affordability", "housing", "school", "groceries"],
+          a: `Overall affordability score ${aff.affordScore}/100 (higher = easier costs) for ${countryName(
+            country
+          )}. Housing ${aff.housing}, groceries ${aff.groceries}, home energy ${aff.energy}, fuel ${aff.gasFuel}, cars ${aff.cars}, public transport ${aff.transport}, public school ${aff.schoolPublic}, private school ${aff.schoolPrivate}, childcare ${aff.childcare}, healthcare ${aff.healthcare}. ${aff.note}`,
+          confidence: aff.source === "curated" ? 74 : 62,
+          tags: ["affordability", country, "housing", "school"],
           linkView: "afford",
         });
       }
