@@ -14,10 +14,9 @@
 </head>
 <body>
   <div class="terminal" id="app">
-    <!-- TOP BAR -->
     <header class="topbar" role="banner">
       <div class="topbar-left">
-        <div class="brand" data-tip="World Intelligence Terminal. Scenario × Lens × Country triad. Layout and models save in this browser.">
+        <div class="brand" data-tip="World Intelligence Terminal. Scenario × Lens × Country triad. Layout and models save only for this visit (no cookies).">
           <span class="brand-logo" aria-hidden="true">
             <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="1.25" opacity="0.35"/>
@@ -39,7 +38,7 @@
       </div>
 
       <div class="topbar-center">
-        <div class="search-box" data-tip="Search countries, instruments, news, markers. Shortcut: /">
+        <div class="search-box" data-tip="Search country, ticker, crisis, answer. Shortcut: /">
           <span class="search-ico">⌕</span>
           <input type="search" id="globalSearch" placeholder="Search country, ticker, crisis, answer…" autocomplete="off" aria-label="Global search" />
           <div class="search-suggest" id="searchSuggest" hidden></div>
@@ -52,7 +51,7 @@
           <span id="fhLabel">FEEDS</span>
           <span class="fh-count" id="fhCount">—</span>
         </div>
-        <div class="status-live" data-tip="Auto-refresh active across all live sources.">
+        <div class="status-live" data-tip="Auto-refresh active across live sources.">
           <span class="pulse"></span><span>AUTO</span>
         </div>
         <div class="clock-block" data-tip="UTC reference time">
@@ -65,13 +64,12 @@
       </div>
     </header>
 
-    <!-- CONTEXT / FOCUS BAR — Scenario × Lens × Country triad -->
     <div class="context-bar" id="contextBar">
       <div class="ctx-group" data-tip="Domain filter — what desk you are on.">
         <label class="ctx-label">DOMAIN</label>
         <div class="domain-pills" id="domainPills" role="tablist"></div>
       </div>
-      <div class="ctx-group grow" data-tip="Country focus. Map flies there; briefs and news re-filter.">
+      <div class="ctx-group grow" data-tip="Country focus. Map flies there; briefs, weather, affordability, and news re-filter.">
         <label class="ctx-label" for="countrySelect">COUNTRY</label>
         <select id="countrySelect" aria-label="Focus country">
           <option value="">Global</option>
@@ -107,7 +105,6 @@
       </div>
     </div>
 
-    <!-- MAIN: side nav + workspace -->
     <div class="body-row">
       <nav class="side-nav" id="sideNav" aria-label="Pre-configured desks">
         <div class="nav-section">DESKS</div>
@@ -116,7 +113,6 @@
       </nav>
 
       <div class="main-col">
-        <!-- FLASH row + INDICES row (full width each so nothing is clipped) -->
         <div class="ticker-wrap" data-tip="Flash headlines (top) · live indices (bottom). Hover flash to pause.">
           <div class="flash-row">
             <div class="ticker-label">FLASH</div>
@@ -144,7 +140,7 @@
           </div>
           <div class="layout-banner" id="layoutBanner" hidden>
             <strong>LAYOUT EDIT ON</strong>
-            <span>Drag a <b>panel header</b> onto another panel to reorder · drag the <b>corner</b> to resize · saves as <b>Custom</b> desk</span>
+            <span>Drag a <b>panel header</b> onto another panel to reorder · drag the <b>corner</b> to resize · saves for this visit only</span>
             <button id="btnLayoutDone" class="btn-amber">DONE</button>
             <button id="btnLayoutReset" class="btn-ghost">RESET ALL</button>
           </div>
@@ -153,7 +149,6 @@
       </div>
     </div>
 
-    <!-- BOTTOM MULTIVIEW TAPE (4 columns) -->
     <footer class="bottom-bar" role="contentinfo">
       <div class="stream-head">
         <div class="stream-tabs" id="streamTabs">
@@ -182,14 +177,12 @@
     </footer>
   </div>
 
-  <!-- DRAWER -->
   <aside class="drawer" id="drawer" aria-hidden="true" role="dialog">
     <div class="drawer-head"><span id="drawerTitle">DETAIL</span><button id="drawerClose" aria-label="Close">×</button></div>
     <div class="drawer-body" id="drawerBody"></div>
   </aside>
   <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
 
-  <!-- SETTINGS -->
   <div class="modal" id="settingsModal" hidden role="dialog" aria-modal="true">
     <div class="modal-card wide">
       <div class="modal-head">
@@ -210,7 +203,7 @@
         </div>
         <div class="stab-panel" data-panel="indicators" hidden>
           <h3>Custom &amp; proprietary indicators (KMRI, SPI, and more)</h3>
-          <p class="hint">Weights 0–100. Saved locally. KMRI is your flagship multi-domain composite. SPI measures constructive stability headroom.</p>
+          <p class="hint">Weights 0–100. This visit only (no browser storage). KMRI is your flagship multi-domain composite.</p>
           <div id="indicatorEditor"></div>
           <button class="btn-amber" id="btnAddIndicator" type="button">+ ADD INDICATOR</button>
         </div>
@@ -239,7 +232,6 @@
     </div>
   </div>
 
-  <!-- HOW TO USE -->
   <div class="modal" id="howToModal" hidden role="dialog" aria-modal="true">
     <div class="modal-card wide howto-card">
       <div class="modal-head">
