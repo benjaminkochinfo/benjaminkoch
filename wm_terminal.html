@@ -1,10 +1,17 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="World Intelligence Terminal — live multiview desk: hybrid map, Answer Desk, KMRI models, public news & markets, impact & grocery signals." />
   <meta name="theme-color" content="#07080b" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="WMT" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <title>WMT // WORLD INTELLIGENCE TERMINAL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +19,7 @@
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="view-desktop">
   <div class="terminal" id="app">
     <header class="topbar" role="banner">
       <div class="topbar-left">
@@ -46,6 +53,11 @@
       </div>
 
       <div class="topbar-right">
+        <div class="view-toggle" id="viewToggle" role="group" aria-label="Desktop or mobile layout">
+          <button type="button" class="vt-btn active" data-viewmode="desktop" data-tip="Desktop desk — wide grid, side rail">DESK</button>
+          <button type="button" class="vt-btn" data-viewmode="mobile" data-tip="Mobile cards — easier thumbs, bottom dock">PHONE</button>
+        </div>
+        <button type="button" class="icon-btn install-btn" id="btnInstall" data-tip="Add World Monitor to the home screen" aria-label="Add to home screen" hidden>↓ HOME</button>
         <div class="feed-health" id="feedHealth" data-tip="Feed health. Click for details." role="status">
           <span class="fh-dot ok" id="fhDot"></span>
           <span id="fhLabel">FEEDS</span>
@@ -69,10 +81,24 @@
         <label class="ctx-label">DOMAIN</label>
         <div class="domain-pills" id="domainPills" role="tablist"></div>
       </div>
-      <div class="ctx-group grow" data-tip="Country focus. Map flies there; briefs, weather, affordability, and news re-filter.">
+      <div class="ctx-group grow" data-tip="World region filter — Americas, Europe, APAC, Africa, MENA… scopes country list and panels.">
+        <label class="ctx-label" for="regionSelect">REGION</label>
+        <select id="regionSelect" aria-label="World region">
+          <option value="all">All regions</option>
+        </select>
+      </div>
+      <div class="ctx-group grow" data-tip="Developed or developing / emerging economies (illustrative advanced-economy list).">
+        <label class="ctx-label" for="develSelect">ECONOMY</label>
+        <select id="develSelect" aria-label="Developed or developing">
+          <option value="all">All economies</option>
+          <option value="developed">Developed</option>
+          <option value="developing">Developing</option>
+        </select>
+      </div>
+      <div class="ctx-group grow" data-tip="Country focus. Map flies there; briefs, weather, affordability, and news re-filter. All countries in scope are listed.">
         <label class="ctx-label" for="countrySelect">COUNTRY</label>
         <select id="countrySelect" aria-label="Focus country">
-          <option value="">Global</option>
+          <option value="">Global / region</option>
         </select>
       </div>
       <div class="ctx-group grow" data-tip="Intelligence lens — the decision question the Answer Desk prioritizes.">
@@ -175,6 +201,18 @@
         <span class="fk-right mono" id="footerStatus">BOOTING…</span>
       </div>
     </footer>
+
+    <!-- Mobile overview: unique radial desk dock + quick chips -->
+    <nav class="mobile-dock" id="mobileDock" aria-label="Mobile desks" hidden>
+      <div class="md-rail" id="mobileDeskRail"></div>
+      <div class="md-quick">
+        <button type="button" class="md-q" id="mdCountry" data-tip="Jump to country">◎</button>
+        <button type="button" class="md-q" id="mdAnswers" data-tip="Answers">✦</button>
+        <button type="button" class="md-q" id="mdMap" data-tip="Map">◎</button>
+        <button type="button" class="md-q" id="mdInstall" data-tip="Add to home screen">↓</button>
+        <button type="button" class="md-q" id="mdHelp" data-tip="How to use">?</button>
+      </div>
+    </nav>
   </div>
 
   <aside class="drawer" id="drawer" aria-hidden="true" role="dialog">
@@ -192,7 +230,7 @@
       <div class="modal-body">
         <div class="settings-tabs" id="settingsTabs">
           <button class="stab active" data-stab="intervals">Intervals</button>
-          <button class="stab" data-stab="indicators">My Indicators</button>
+          <button class="stab" data-stab="indicators">Indicators</button>
           <button class="stab" data-stab="news">News Sources</button>
           <button class="stab" data-stab="models">Risk Models</button>
           <button class="stab" data-stab="maint">Maintenance</button>
@@ -203,7 +241,7 @@
         </div>
         <div class="stab-panel" data-panel="indicators" hidden>
           <h3>Custom &amp; proprietary indicators (KMRI, SPI, and more)</h3>
-          <p class="hint">Weights 0–100. This visit only (no browser storage). KMRI is your flagship multi-domain composite.</p>
+          <p class="hint">Weights 0–100. This visit only (no browser storage). KMRI is the flagship multi-domain composite.</p>
           <div id="indicatorEditor"></div>
           <button class="btn-amber" id="btnAddIndicator" type="button">+ ADD INDICATOR</button>
         </div>
@@ -222,7 +260,7 @@
             <button class="btn-ghost danger" id="btnFactoryReset" type="button">RESET THIS VISIT</button>
           </div>
           <p class="hint">
-            <strong>Privacy:</strong> no cookies, no local browser storage, no feed cache on your device. Live public sources only for this visit;
+            <strong>Privacy:</strong> no cookies, no local browser storage, no feed cache on the device. Live public sources only for this visit;
             if a feed fails, the terminal uses in-memory fallbacks for this session, then model seeds — nothing is written to disk.
             Sources include major public news RSS, Yahoo quotes, CoinGecko, FX APIs, USGS, NASA EONET, Open-Meteo, and hybrid map tiles.
           </p>
@@ -242,7 +280,7 @@
         <div class="about-block" id="aboutBlock">
           <h3 class="about-title">What is this terminal?</h3>
           <p>
-            World Monitor is a <strong>live world desk</strong> in your browser. It brings together public news, markets,
+            World Monitor is a <strong>live world desk</strong> in the browser. It brings together public news, markets,
             weather, disasters, maps, and simple risk scores — so you can see the big picture in one place.
           </p>
           <h3 class="about-title">What is it for?</h3>
@@ -253,9 +291,11 @@
           </p>
           <h3 class="about-title">What can you do with it?</h3>
           <ul class="about-list">
-            <li>Pick a <strong>desk</strong> (Command, Markets, Affordability, Impact…)</li>
+            <li>Pick a <strong>desk</strong> (Command, Compare, Inflation, Affordability, Power · Net, Chips…)</li>
             <li>Choose a <strong>country</strong> and a <strong>lens</strong> (a simple question)</li>
-            <li>Read <strong>answers</strong>, <strong>positive paths</strong>, and the <strong>grocery / living-cost</strong> signals</li>
+            <li>Filter by <strong>region</strong> (Americas, Europe, APAC…) and <strong>developed / developing</strong></li>
+            <li>Read <strong>answers</strong>, <strong>costs</strong>, <strong>power mix</strong>, <strong>telecoms</strong>, <strong>outages</strong>, inflation, and weather / travel warnings</li>
+            <li>Toggle <strong>DESK / PHONE</strong> view, or <strong>Add to Home Screen</strong></li>
             <li>Follow <strong>live headlines and prices</strong>, and open the map</li>
           </ul>
           <h3 class="about-title">Why does that help?</h3>
@@ -266,8 +306,10 @@
           </p>
           <p class="about-privacy">
             <strong>Privacy.</strong> This app does <strong>not</strong> set cookies and does <strong>not</strong> save
-            layout, settings, or feed cache on your device. When you close the tab, the session ends.
-            Data is fetched live for this visit only. (Map or news sites you open may use their own cookies — that is outside this terminal.)
+            layout, settings, or feed cache on the device. When you close the tab, the session ends.
+            Data is fetched live for this visit only. “Add to Home Screen” uses a tiny install helper only —
+            it does <strong>not</strong> store feeds or settings for this visit offline.
+            (Map or news sites you open may use their own cookies — that is outside this terminal.)
           </p>
         </div>
         <div class="howto-grid" id="howToBody"></div>
@@ -280,7 +322,7 @@
         <p class="disclaimer-foot">
           <strong>Disclaimer.</strong> For information and education only. Not investment, legal, medical, or professional advice.
           Not affiliated with any news agency, exchange, map provider, or government. Third-party data may be delayed, incomplete, or wrong;
-          models and scores are illustrative. Always check original sources. No cookies · no browser storage on your device.
+          models and scores are illustrative. Always check original sources. No cookies · no browser storage on the device.
           Developed by Dr. Benjamin Koch.
         </p>
       </div>
@@ -297,7 +339,7 @@
         <button class="btn-amber" id="tourNext">NEXT</button>
       </div>
       <p class="disclaimer-foot tour-disclaimer">
-        Information only · not advice · no cookies · nothing saved on your device · check original sources
+        Information only · not advice · no cookies · nothing saved on the device · check original sources
       </p>
     </div>
   </div>

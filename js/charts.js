@@ -33,9 +33,25 @@ const Charts = (() => {
     }
   }
 
+  /** Replace series from live feed closes (accurate chart history). */
+  function replaceSeries(sym, values) {
+    if (!sym || !Array.isArray(values)) return;
+    const clean = values
+      .map((v) => parseFloat(String(v).replace(/[,%]/g, "")))
+      .filter((n) => Number.isFinite(n));
+    if (clean.length < 2) return;
+    history[sym] = clean.slice(-MAX);
+  }
+
   function ensureFromMarket(m) {
     if (!m) return [];
     const seed = parseFloat(String(m.val).replace(/[,%]/g, "")) || 100;
+    // Prefer real live history when we have enough points
+    if (history[m.sym]?.length >= 4) {
+      const h = history[m.sym];
+      h[h.length - 1] = seed;
+      return h;
+    }
     const series = seedSeries(m.sym, seed, m.dir);
     if (series.length) series[series.length - 1] = seed;
     return series;
@@ -165,7 +181,9 @@ const Charts = (() => {
         </div>
       </div>
       <div class="bb-chart-host">${mountain(s, { w: 280, h: opts.chartH || 58, lineW: 1.6 })}</div>
-      <div class="bb-foot"><span>${m.unit || m.cls || ""}</span><span>${m.source || "model"}</span></div>
+      <div class="bb-foot"><span>${m.unit || m.cls || ""}</span><span class="${
+        m.source === "live" || m.source === "cache" ? "live-tag" : ""
+      }">${m.source === "live" ? "LIVE" : m.source === "cache" ? "CACHE" : m.source === "model" ? "MODEL" : "SEED"}</span></div>
     </div>`;
   }
 
@@ -185,12 +203,15 @@ const Charts = (() => {
         </div>
       </div>
       <div class="bb-hero-chart">${mountain(s, { w: 720, h: 150, lineW: 2.1 })}</div>
-      <div class="bb-hero-note">LIVE MOUNTAIN · white line · amber last · auto-updating tape</div>
+      <div class="bb-hero-note">${
+        m.source === "live" || m.source === "cache" ? "LIVE" : (m.source || "SEED").toUpperCase()
+      } MOUNTAIN · white line · amber last · ${m.chg || ""}</div>
     </div>`;
   }
 
   return {
     push,
+    replaceSeries,
     ensureFromMarket,
     mountain,
     multiMountain,

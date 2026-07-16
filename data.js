@@ -1,4 +1,4 @@
-/**
+﻿/**
  * WMT — Static catalogs: domains, countries, instruments, scenarios,
  * risk models (incl. KMRI), layers, markers, view presets
  */
@@ -352,15 +352,24 @@ const INSTRUMENTS = [
   { sym: "US10Y", name: "US 10-year interest rate", cls: "rates", unit: "%", seed: 4.28 },
   { sym: "VIX", name: "Fear gauge (market stress)", cls: "vol", unit: "idx", seed: 18.4 },
   { sym: "SPX", name: "S&P 500 (big US companies)", cls: "equity", unit: "idx", seed: 5512 },
+  { sym: "NDX", name: "Nasdaq Composite", cls: "equity", unit: "idx", seed: 17800 },
+  { sym: "DJI", name: "Dow Jones", cls: "equity", unit: "idx", seed: 39800 },
   { sym: "BTC", name: "Bitcoin", cls: "crypto", unit: "USD", seed: 67240 },
   { sym: "ETH", name: "Ethereum", cls: "crypto", unit: "USD", seed: 3420 },
+  { sym: "GBPUSD", name: "Pound vs US dollar", cls: "fx", unit: "fx", seed: 1.27 },
+  { sym: "USDCNY", name: "US dollar vs yuan", cls: "fx", unit: "fx", seed: 7.24 },
   { sym: "SOXX", name: "Semiconductor index (chips)", cls: "semi", unit: "idx", seed: 245 },
+  { sym: "SMH", name: "VanEck Semiconductor ETF", cls: "semi", unit: "USD", seed: 240 },
   { sym: "NVDA", name: "NVIDIA (AI chips)", cls: "semi", unit: "USD", seed: 120 },
   { sym: "TSM", name: "TSMC (world chip factory)", cls: "semi", unit: "USD", seed: 185 },
   { sym: "ASML", name: "ASML (chip-making machines)", cls: "semi", unit: "USD", seed: 780 },
   { sym: "AMD", name: "AMD (processors)", cls: "semi", unit: "USD", seed: 155 },
+  { sym: "AVGO", name: "Broadcom (chips & networking)", cls: "semi", unit: "USD", seed: 170 },
+  { sym: "INTC", name: "Intel", cls: "semi", unit: "USD", seed: 32 },
   { sym: "EQIX", name: "Equinix (data centers)", cls: "datacenter", unit: "USD", seed: 820 },
   { sym: "DLR", name: "Digital Realty (data centers)", cls: "datacenter", unit: "USD", seed: 155 },
+  { sym: "MSFT", name: "Microsoft (cloud / AI)", cls: "datacenter", unit: "USD", seed: 430 },
+  { sym: "GOOGL", name: "Alphabet (cloud / AI)", cls: "datacenter", unit: "USD", seed: 175 },
   { sym: "SHIP", name: "Shipping cost proxy", cls: "transport", unit: "idx", seed: 1842 },
   { sym: "BDI", name: "Freight stress proxy", cls: "transport", unit: "idx", seed: 1620 },
   { sym: "WARINS", name: "War insurance cost proxy", cls: "insurance", unit: "bps", seed: 42 },
@@ -559,14 +568,23 @@ const EVENTS = [
 const NEWS_SOURCES = [
   { id: "bbc_world", name: "BBC World", url: "https://feeds.bbci.co.uk/news/world/rss.xml", on: true, tag: "BBC" },
   { id: "bbc_biz", name: "BBC Business", url: "https://feeds.bbci.co.uk/news/business/rss.xml", on: true, tag: "BBC-BIZ" },
-  { id: "reuters_world", name: "Reuters World", url: "https://www.reutersagency.com/feed/?best-topics=political-general&post_type=best", on: true, tag: "REU" },
-  { id: "reuters_biz", name: "Reuters Business", url: "https://www.reutersagency.com/feed/?best-topics=business-finance&post_type=best", on: true, tag: "REU-BIZ" },
+  // CNN
+  { id: "cnn_top", name: "CNN Top", url: "http://rss.cnn.com/rss/cnn_topstories.rss", on: true, tag: "CNN" },
+  { id: "cnn_world", name: "CNN World", url: "http://rss.cnn.com/rss/edition_world.rss", on: true, tag: "CNN-W" },
+  { id: "cnn_edition", name: "CNN International", url: "http://rss.cnn.com/rss/edition.rss", on: true, tag: "CNN-I" },
+  // US networks
+  { id: "abc_intl", name: "ABC News International", url: "https://abcnews.go.com/abcnews/internationalheadlines", on: true, tag: "ABC" },
+  { id: "abc_top", name: "ABC News Top", url: "https://abcnews.go.com/abcnews/topstories", on: true, tag: "ABC-TOP" },
+  { id: "cbs_main", name: "CBS News", url: "https://www.cbsnews.com/latest/rss/main", on: true, tag: "CBS" },
+  { id: "cbs_world", name: "CBS World", url: "https://www.cbsnews.com/latest/rss/world", on: true, tag: "CBS-W" },
+  { id: "newsnation", name: "NewsNation", url: "https://www.newsnationnow.com/feed/", on: true, tag: "NN" },
   { id: "cnbc", name: "CNBC Top News", url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", on: true, tag: "CNBC" },
   { id: "cnbc_world", name: "CNBC World", url: "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100727362", on: true, tag: "CNBC-W" },
   { id: "nyt_world", name: "NY Times World", url: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml", on: true, tag: "NYT" },
   { id: "nyt_biz", name: "NY Times Business", url: "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml", on: true, tag: "NYT-BIZ" },
   { id: "wsj_world", name: "WSJ World", url: "https://feeds.a.dj.com/rss/RSSWorldNews.xml", on: true, tag: "WSJ" },
   { id: "wsj_markets", name: "WSJ Markets", url: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", on: true, tag: "WSJ-MKT" },
+  // German public / regional
   { id: "tagesschau", name: "Tagesschau", url: "https://www.tagesschau.de/xml/rss2/", on: true, tag: "TS" },
   { id: "zdfheute", name: "ZDF heute", url: "https://www.zdf.de/rss/zdf/nachrichten", on: true, tag: "ZDF" },
   { id: "hessenschau", name: "Hessenschau", url: "https://www.hessenschau.de/index.rss", on: true, tag: "HR" },
@@ -574,17 +592,14 @@ const NEWS_SOURCES = [
   { id: "bloomberg_mkt", name: "Bloomberg Markets", url: "https://feeds.bloomberg.com/markets/news.rss", on: true, tag: "BBG" },
   { id: "bloomberg_pol", name: "Bloomberg Politics", url: "https://feeds.bloomberg.com/politics/news.rss", on: true, tag: "BBG-P" },
   { id: "bloomberg_tech", name: "Bloomberg Technology", url: "https://feeds.bloomberg.com/technology/news.rss", on: true, tag: "BBG-T" },
-  { id: "bloomberg_wealth", name: "Bloomberg Wealth", url: "https://feeds.bloomberg.com/wealth/news.rss", on: true, tag: "BBG-W" },
   { id: "dw", name: "Deutsche Welle", url: "https://rss.dw.com/rdf/rss-en-all", on: true, tag: "DW" },
   { id: "foxnews", name: "Fox News", url: "https://moxie.foxnews.com/google-publisher/latest.xml", on: true, tag: "FOX" },
   { id: "foxbiz", name: "Fox Business", url: "https://moxie.foxbusiness.com/google-publisher/latest.xml", on: true, tag: "FOXBIZ" },
   { id: "nbc", name: "NBC News", url: "https://feeds.nbcnews.com/nbcnews/public/news", on: true, tag: "NBC" },
-  { id: "abc", name: "ABC News", url: "https://abcnews.go.com/abcnews/internationalheadlines", on: true, tag: "ABC" },
-  { id: "cbs", name: "CBS News", url: "https://www.cbsnews.com/latest/rss/main", on: true, tag: "CBS" },
   { id: "npr", name: "NPR News", url: "https://feeds.npr.org/1001/rss.xml", on: true, tag: "NPR" },
   { id: "defense", name: "Defense News", url: "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml", on: true, tag: "DEF" },
-  { id: "usda", name: "USDA Releases", url: "https://www.usda.gov/rss/latest-releases.xml", on: true, tag: "USDA" },
-  { id: "commodity", name: "Commodity / Ag News", url: "https://www.agriculture.com/rss", on: true, tag: "AGCOM" },
+  { id: "ap_top", name: "AP Top (Google News)", url: "https://news.google.com/rss/search?q=when:1d+source:Associated+Press&hl=en-US&gl=US&ceid=US:en", on: true, tag: "AP" },
+  { id: "reuters_gnews", name: "Reuters (Google News)", url: "https://news.google.com/rss/search?q=when:1d+source:Reuters&hl=en-US&gl=US&ceid=US:en", on: true, tag: "REU" },
   { id: "usgs_news", name: "USGS News", url: "https://www.usgs.gov/news/news-releases/feed", on: true, tag: "USGS" },
   { id: "nasa", name: "NASA Breaking", url: "https://www.nasa.gov/rss/dyn/breaking_news.rss", on: true, tag: "NASA" },
   { id: "reliefweb", name: "ReliefWeb Headlines", url: "https://reliefweb.int/headlines/rss.xml", on: true, tag: "RW" },
@@ -599,7 +614,7 @@ const DEFAULT_INDICATORS = [
     id: "kmri",
     name: "KMRI",
     label: "Kinetic-Macro Risk Index",
-    desc: "Your flagship model: kinetic tension + macro fear + food/energy stress + insurance/war-risk tone. Higher = broader multi-domain risk.",
+    desc: "Flagship model: kinetic tension + macro fear + food/energy stress + insurance/war-risk tone. Higher = broader multi-domain risk.",
     weights: { kinetic: 28, riskTone: 18, energy: 14, food: 12, insurance: 12, newsCrisis: 10, transport: 6 },
     model: true,
     flagship: true,
@@ -697,7 +712,7 @@ const DEFAULT_INDICATORS = [
     id: "spi",
     name: "SPI",
     label: "Stability Path Index",
-    desc: "Your constructive-stability model: lower kinetic + higher risk-on + cooler insurance = more room for positive paths. Higher SPI = more constructive headroom.",
+    desc: "Constructive-stability model: lower kinetic + higher risk-on + cooler insurance = more room for positive paths. Higher SPI = more constructive headroom.",
     weights: { riskOn: 35, safeHaven: 15, kinetic: 25, insurance: 15, transport: 10 },
     model: true,
     constructive: true,
@@ -710,13 +725,22 @@ const DEFAULT_INDICATORS = [
     weights: { velocity: 40, newsCrisis: 30, weather: 15, quakes: 15 },
     model: true,
   },
+  {
+    id: "iis",
+    name: "IIS",
+    label: "Infrastructure Integrity Stress",
+    desc: "Overall power-grid, telecom, and outage stress. Higher = more fragile electricity and networks.",
+    weights: { outageHeat: 40, powerStress: 25, telecomStress: 20, energy: 10, weather: 5 },
+    model: true,
+  },
 ];
 
 const RISK_MODEL_HELP = [
-  { id: "kmri", summary: "Your main score for “how stressed is the world right now?”" },
+  { id: "kmri", summary: "Main score for “how stressed is the world right now?”" },
   { id: "tsi", summary: "War and tension score." },
   { id: "fsi", summary: "Food and crop stress." },
   { id: "wri", summary: "Weather and disaster stress." },
+  { id: "iis", summary: "Power grid, telecom, and outage stress." },
   { id: "eri", summary: "Oil and energy stress." },
   { id: "iri", summary: "Insurance stress (storms and war)." },
   { id: "tri", summary: "Shipping and transport stress." },
@@ -730,15 +754,15 @@ const WIDGET_CATALOG = {
   layers: { id: "layers", title: "MAP LAYERS", help: "Turn map layers on or off (war, weather, chips, metals…).", w: 4, h: 2 },
   alerts: { id: "alerts", title: "TOP ALERTS", help: "The most important warnings right now.", w: 4, h: 2 },
   hotspots: { id: "hotspots", title: "HOTSPOTS", help: "Places where risk is rising or falling.", w: 4, h: 2 },
-  indicators: { id: "indicators", title: "MY RISK MODELS", help: "Your scores (KMRI, SPI…). Click a card for a simple explanation.", w: 4, h: 3, accent: "#f5a623" },
-  kmri: { id: "kmri", title: "KMRI FLAGSHIP", help: "Your main world-stress score, with what drives it.", w: 4, h: 2, accent: "#f5a623" },
+  indicators: { id: "indicators", title: "RISK MODELS", help: "Risk scores (KMRI, SPI…). Click a card for a simple explanation.", w: 4, h: 3, accent: "#f5a623" },
+  kmri: { id: "kmri", title: "KMRI FLAGSHIP", help: "Main world-stress score, with what drives it.", w: 4, h: 2, accent: "#f5a623" },
   markets: { id: "markets", title: "MONEY MARKETS", help: "Currencies, stocks, crypto — with live charts.", w: 6, h: 3 },
   commodities: { id: "commodities", title: "FOOD COMMODITIES", help: "Wheat, cocoa, corn and more — linked to grocery prices.", w: 6, h: 3 },
   energy: { id: "energy", title: "ENERGY", help: "Oil and gas prices with charts.", w: 6, h: 2 },
   metals: { id: "metals", title: "METALS", help: "Gold, silver, copper, platinum, aluminum — with charts.", w: 6, h: 3, accent: "#ffd740" },
   semiconductors: { id: "semiconductors", title: "SEMICONDUCTORS", help: "Chip makers and the chip index — Taiwan, AI, factories.", w: 6, h: 3, accent: "#64ffda" },
   datacenters: { id: "datacenters", title: "DATA CENTERS", help: "Cloud buildings that power AI and the internet — power and copper demand.", w: 6, h: 2, accent: "#18ffff" },
-  news: { id: "news", title: "LIVE NEWS", help: "Headlines from trusted sources. Filters to your country and lens.", w: 6, h: 3, accent: "#00d4ff" },
+  news: { id: "news", title: "LIVE NEWS", help: "Headlines from trusted sources. Filters to the selected country and lens.", w: 6, h: 3, accent: "#00d4ff" },
   theaters: { id: "theaters", title: "WORLD THEATERS", help: "Big regions of military or political tension.", w: 4, h: 2 },
   cii: { id: "cii", title: "COUNTRY STRESS", help: "Simple country stress scores.", w: 4, h: 2 },
   country: { id: "country", title: "COUNTRY BRIEF", help: "Easy snapshot of the country you selected.", w: 4, h: 2 },
@@ -753,19 +777,19 @@ const WIDGET_CATALOG = {
   feeds: { id: "feeds", title: "FEED HEALTH", help: "Are our live sources working? Green = good.", w: 4, h: 2 },
   scenarios: { id: "scenarios", title: "SCENARIOS", help: "Pick a story (food shock, chip crunch…) to focus the desk.", w: 4, h: 2 },
   politics: { id: "politics", title: "WORLD POLITICS", help: "Big political themes in plain language.", w: 4, h: 2 },
-  answers: { id: "answers", title: "ANSWER DESK", help: "Simple Q&A for your country, lens, and scenario.", w: 6, h: 3, accent: "#00c853" },
+  answers: { id: "answers", title: "ANSWER DESK", help: "Simple Q&A for the selected country, lens, and scenario.", w: 6, h: 3, accent: "#00c853" },
   implications: { id: "implications", title: "POSITIVE PATHS", help: "Problem → better path → good outcome. Always constructive.", w: 6, h: 3, accent: "#00c853" },
   triad: { id: "triad", title: "WHAT YOU ARE WATCHING", help: "Country × lens × scenario in one place.", w: 4, h: 2, accent: "#b388ff" },
   pulse: { id: "pulse", title: "WORLD PULSE", help: "Quick numbers: risk scores, news, disasters.", w: 4, h: 2, accent: "#00d4ff" },
-  radar: { id: "radar", title: "MODEL RADAR", help: "Spider chart of your risk models.", w: 4, h: 3, accent: "#f5a623" },
+  radar: { id: "radar", title: "MODEL RADAR", help: "Spider chart of the risk models.", w: 4, h: 3, accent: "#f5a623" },
   lens: { id: "lens", title: "QUESTION LENS", help: "Which question should the terminal answer?", w: 4, h: 2 },
   mktboard: { id: "mktboard", title: "MARKET BOARD", help: "Big live board of prices. Changes with country and lens.", w: 12, h: 3, accent: "#2962ff" },
   mkthero: { id: "mkthero", title: "FOCUS CHART", help: "Large chart for the price you selected.", w: 8, h: 3, accent: "#2962ff" },
   currencies: { id: "currencies", title: "CURRENCIES", help: "Dollar, euro, yen and more.", w: 6, h: 3, accent: "#4a9eff" },
-  grocery: { id: "grocery", title: "YOUR NEXT GROCERY TRIP", help: "Will food and fuel lean cheaper or more expensive? Simple household signal.", w: 6, h: 2, accent: "#00c853" },
+  grocery: { id: "grocery", title: "GROCERY TRIP SIGNAL", help: "Will food and fuel lean cheaper or more expensive? Simple household signal.", w: 6, h: 2, accent: "#00c853" },
   climate: { id: "climate", title: "CLIMATE · EL NIÑO", help: "El Niño and seasons — and how people adapt.", w: 6, h: 2, accent: "#00d4ff" },
   impact: { id: "impact", title: "IMPACT MONITOR", help: "Politics · money · daily life — easy words, still professional.", w: 6, h: 3, accent: "#00c853" },
-  newsfocus: { id: "newsfocus", title: "FOCUSED NEWS", help: "Only headlines that match your country and lens.", w: 6, h: 3, accent: "#00d4ff" },
+  newsfocus: { id: "newsfocus", title: "FOCUSED NEWS", help: "Only headlines that match the selected country and lens.", w: 6, h: 3, accent: "#00d4ff" },
   techbrief: { id: "techbrief", title: "CHIPS & DATA CENTERS", help: "Plain-language brief: chips, cloud buildings, power, copper.", w: 6, h: 2, accent: "#64ffda" },
   afford: {
     id: "afford",
@@ -807,6 +831,418 @@ const WIDGET_CATALOG = {
     h: 2,
     accent: "#ff8a65",
   },
+  compare: {
+    id: "compare",
+    title: "COUNTRY COMPARE",
+    help: "Compare 2–3 countries: risk, affordability, weather, food/energy pressure.",
+    w: 12,
+    h: 3,
+    accent: "#b388ff",
+  },
+  inflation: {
+    id: "inflation",
+    title: "INFLATION · GROWTH",
+    help: "Current inflation, recent history, projected inflation and real growth (illustrative model).",
+    w: 8,
+    h: 3,
+    accent: "#ff6b1a",
+  },
+  affordRisk: {
+    id: "affordRisk",
+    title: "RISK · STABILITY",
+    help: "Country risk and stability scores for living / moving decisions (illustrative).",
+    w: 6,
+    h: 3,
+    accent: "#ff6b1a",
+  },
+  chipchain: {
+    id: "chipchain",
+    title: "CHIP SUPPLY CHAIN",
+    help: "Design → machines → factories → packaging — plain language map of the semiconductor chain.",
+    w: 6,
+    h: 3,
+    accent: "#64ffda",
+  },
+  climatefood: {
+    id: "climatefood",
+    title: "CLIMATE → FOOD",
+    help: "How El Niño / seasons may affect food stress by country (easy language).",
+    w: 6,
+    h: 2,
+    accent: "#00d4ff",
+  },
+  familyAfford: {
+    id: "familyAfford",
+    title: "FAMILY PROFILE",
+    help: "Single / couple / family with kids — reweights housing, school, childcare, car.",
+    w: 6,
+    h: 2,
+    accent: "#00c853",
+  },
+  moveTo: {
+    id: "moveTo",
+    title: "MOVE-TO RANKING",
+    help: "Rank places by priority: cheap rent, public school, low fuel, stability, etc.",
+    w: 6,
+    h: 3,
+    accent: "#69f0ae",
+  },
+  powerai: {
+    id: "powerai",
+    title: "POWER FOR AI",
+    help: "Data centers need power and copper — live links to gas, copper, and cloud stocks.",
+    w: 6,
+    h: 2,
+    accent: "#18ffff",
+  },
+  powerMix: {
+    id: "powerMix",
+    title: "POWER MIX",
+    help: "Electricity sources: nuclear, coal, gas, hydro, wind, solar — share of generation (illustrative).",
+    w: 6,
+    h: 3,
+    accent: "#ffd54f",
+  },
+  telecoms: {
+    id: "telecoms",
+    title: "TELECOMS · MOBILE · LANDLINE",
+    help: "Mobile, landline, and internet infrastructure strength by country or region.",
+    w: 6,
+    h: 2,
+    accent: "#4fc3f7",
+  },
+  outages: {
+    id: "outages",
+    title: "OUTAGES · WARNINGS",
+    help: "Power outages, internet outages, telecom disruptions — down / up / warning status.",
+    w: 6,
+    h: 3,
+    accent: "#ff9800",
+  },
+  critInfra: {
+    id: "critInfra",
+    title: "CRITICAL INFRA SCORE",
+    help: "Overall power + telecom + outage integrity indicator (higher stress = more fragile grids & networks).",
+    w: 4,
+    h: 2,
+    accent: "#ff6b1a",
+  },
+};
+
+/** Power generation mix % by region template (illustrative, not official IEA tables) */
+const POWER_MIX_TEMPLATES = {
+  Europe: { nuclear: 22, coal: 14, gas: 18, hydro: 12, wind: 16, solar: 10, other: 8, note: "EU mix varies widely by country — Nordics more hydro; France more nuclear." },
+  "N. America": { nuclear: 18, coal: 16, gas: 38, hydro: 7, wind: 10, solar: 6, other: 5, note: "Gas-heavy in many US regions; Canada more hydro." },
+  LatAm: { nuclear: 2, coal: 6, gas: 22, hydro: 45, wind: 8, solar: 6, other: 11, note: "Hydro-dominant in several South American systems." },
+  Caribbean: { nuclear: 0, coal: 5, gas: 35, hydro: 5, wind: 8, solar: 12, other: 35, note: "Often oil/diesel and gas islands — import-dependent." },
+  Asia: { nuclear: 8, coal: 42, gas: 18, hydro: 12, wind: 6, solar: 8, other: 6, note: "Coal still large in parts of Asia; rapid solar/wind growth." },
+  Oceania: { nuclear: 0, coal: 28, gas: 22, hydro: 12, wind: 14, solar: 16, other: 8, note: "Australia coal/gas + rising solar; NZ more hydro." },
+  MENA: { nuclear: 2, coal: 4, gas: 55, hydro: 4, wind: 6, solar: 12, other: 17, note: "Gas and oil generation common; solar expanding fast." },
+  Africa: { nuclear: 1, coal: 28, gas: 18, hydro: 22, wind: 4, solar: 6, other: 21, note: "Mix of coal, hydro, gas, and diesel; access gaps remain." },
+  Eurasia: { nuclear: 12, coal: 18, gas: 42, hydro: 14, wind: 2, solar: 2, other: 10, note: "Gas and hydro important across Eurasia grids." },
+  World: { nuclear: 10, coal: 30, gas: 24, hydro: 15, wind: 8, solar: 6, other: 7, note: "Global average-style mix for comparison only." },
+};
+
+/** Country-level power mix overrides (illustrative shares of generation) */
+const POWER_MIX_BY_CODE = {
+  FRA: { nuclear: 65, coal: 1, gas: 6, hydro: 11, wind: 8, solar: 4, other: 5, note: "France — nuclear-heavy grid." },
+  DEU: { nuclear: 0, coal: 26, gas: 15, hydro: 4, wind: 27, solar: 12, other: 16, note: "Germany — strong wind/solar; coal still in mix." },
+  SWE: { nuclear: 30, coal: 0, gas: 1, hydro: 40, wind: 20, solar: 2, other: 7, note: "Sweden — hydro + nuclear + wind." },
+  NOR: { nuclear: 0, coal: 0, gas: 2, hydro: 88, wind: 6, solar: 0, other: 4, note: "Norway — almost all hydro." },
+  USA: { nuclear: 18, coal: 16, gas: 40, hydro: 6, wind: 10, solar: 5, other: 5, note: "US average — gas is the largest slice." },
+  CAN: { nuclear: 14, coal: 6, gas: 10, hydro: 58, wind: 6, solar: 1, other: 5, note: "Canada — hydro-dominant." },
+  CHN: { nuclear: 5, coal: 55, gas: 4, hydro: 16, wind: 9, solar: 7, other: 4, note: "China — coal still large; renewables growing fast." },
+  IND: { nuclear: 3, coal: 70, gas: 3, hydro: 9, wind: 5, solar: 6, other: 4, note: "India — coal-heavy with rising solar." },
+  JPN: { nuclear: 8, coal: 28, gas: 32, hydro: 8, wind: 2, solar: 10, other: 12, note: "Japan — gas/coal with growing solar." },
+  KOR: { nuclear: 28, coal: 30, gas: 28, hydro: 1, wind: 1, solar: 5, other: 7, note: "Korea — nuclear + coal + gas." },
+  GBR: { nuclear: 14, coal: 2, gas: 32, hydro: 2, wind: 28, solar: 6, other: 16, note: "UK — wind and gas lead; coal almost gone." },
+  BRA: { nuclear: 2, coal: 3, gas: 10, hydro: 60, wind: 12, solar: 5, other: 8, note: "Brazil — hydro and rising wind." },
+  AUS: { nuclear: 0, coal: 45, gas: 18, hydro: 6, wind: 12, solar: 14, other: 5, note: "Australia — coal/gas with strong rooftop solar." },
+  ZAF: { nuclear: 5, coal: 80, gas: 2, hydro: 2, wind: 4, solar: 3, other: 4, note: "South Africa — coal-dominant grid stress." },
+  SAU: { nuclear: 0, coal: 0, gas: 55, hydro: 0, wind: 2, solar: 5, other: 38, note: "Saudi — oil/gas generation; solar ramping." },
+  ARE: { nuclear: 20, coal: 0, gas: 55, hydro: 0, wind: 1, solar: 12, other: 12, note: "UAE — nuclear online + gas + solar." },
+  POL: { nuclear: 0, coal: 60, gas: 10, hydro: 2, wind: 12, solar: 8, other: 8, note: "Poland — still coal-heavy; renewables rising." },
+  TUR: { nuclear: 0, coal: 28, gas: 22, hydro: 20, wind: 10, solar: 8, other: 12, note: "Turkey — diversified mix with hydro and coal." },
+  TWN: { nuclear: 6, coal: 40, gas: 38, hydro: 3, wind: 3, solar: 6, other: 4, note: "Taiwan — coal/gas; nuclear phasing issues matter for industry." },
+};
+
+function getPowerMix(code) {
+  if (code && POWER_MIX_BY_CODE[code]) return { code, ...POWER_MIX_BY_CODE[code], source: "country" };
+  const c = typeof COUNTRIES !== "undefined" ? COUNTRIES.find((x) => x.code === code) : null;
+  const reg = c?.region || "World";
+  const tpl = POWER_MIX_TEMPLATES[reg] || POWER_MIX_TEMPLATES.World;
+  return { code: code || "WORLD", ...tpl, source: "region", region: reg };
+}
+
+/** Telecom / internet infrastructure scores 0–100 (higher = stronger) */
+const TELECOM_TEMPLATES = {
+  Europe: { mobile: 88, landline: 55, fiber: 62, internet: 86, mobileNet: 90, note: "Strong mobile and fixed broadband in most of Europe." },
+  "N. America": { mobile: 90, landline: 48, fiber: 55, internet: 88, mobileNet: 92, note: "Excellent mobile; fiber uneven by region." },
+  LatAm: { mobile: 78, landline: 28, fiber: 35, internet: 68, mobileNet: 80, note: "Mobile-first; fixed broadband improving in cities." },
+  Caribbean: { mobile: 72, landline: 22, fiber: 28, internet: 60, mobileNet: 75, note: "Mobile primary; submarine cables critical." },
+  Asia: { mobile: 85, landline: 30, fiber: 58, internet: 78, mobileNet: 88, note: "Very strong mobile in East Asia; mixed elsewhere." },
+  Oceania: { mobile: 86, landline: 40, fiber: 50, internet: 84, mobileNet: 88, note: "Good urban networks; remote islands harder." },
+  MENA: { mobile: 82, landline: 25, fiber: 40, internet: 70, mobileNet: 85, note: "Strong Gulf mobile; conflict zones fragile." },
+  Africa: { mobile: 70, landline: 8, fiber: 18, internet: 48, mobileNet: 72, note: "Mobile leapfrogging; fixed lines rare outside cities." },
+  Eurasia: { mobile: 80, landline: 35, fiber: 40, internet: 72, mobileNet: 82, note: "Solid mobile; quality varies by state." },
+  World: { mobile: 78, landline: 30, fiber: 40, internet: 70, mobileNet: 80, note: "Global average-style telecom profile." },
+};
+
+const TELECOM_BY_CODE = {
+  KOR: { mobile: 96, landline: 45, fiber: 92, internet: 95, mobileNet: 97, note: "World-class fiber and mobile." },
+  JPN: { mobile: 94, landline: 50, fiber: 85, internet: 93, mobileNet: 95, note: "Excellent fixed and mobile." },
+  SGP: { mobile: 95, landline: 40, fiber: 90, internet: 96, mobileNet: 97, note: "Top-tier city-state networks." },
+  SWE: { mobile: 93, landline: 35, fiber: 82, internet: 94, mobileNet: 95, note: "Nordic fiber and mobile strength." },
+  DEU: { mobile: 90, landline: 55, fiber: 55, internet: 88, mobileNet: 91, note: "Strong mobile; fiber catching up." },
+  USA: { mobile: 92, landline: 40, fiber: 52, internet: 90, mobileNet: 93, note: "Strong overall; rural gaps remain." },
+  CHN: { mobile: 92, landline: 25, fiber: 80, internet: 85, mobileNet: 94, note: "Massive 5G and fiber rollout." },
+  IND: { mobile: 85, landline: 8, fiber: 25, internet: 58, mobileNet: 88, note: "Huge mobile base; fixed broadband lagging." },
+  BRA: { mobile: 82, landline: 20, fiber: 40, internet: 72, mobileNet: 84, note: "Urban fiber growth; interior weaker." },
+  NGA: { mobile: 68, landline: 2, fiber: 10, internet: 42, mobileNet: 70, note: "Mobile-first; power limits internet uptime." },
+  ZAF: { mobile: 80, landline: 12, fiber: 30, internet: 65, mobileNet: 82, note: "Good urban mobile; load-shedding hurts uptime." },
+  LBN: { mobile: 55, landline: 15, fiber: 12, internet: 40, mobileNet: 58, note: "Grid and network stress raise outages." },
+  UKR: { mobile: 70, landline: 20, fiber: 35, internet: 60, mobileNet: 72, note: "Resilient but war-damaged in places." },
+  TWN: { mobile: 94, landline: 42, fiber: 80, internet: 92, mobileNet: 95, note: "Advanced networks supporting industry." },
+};
+
+function getTelecomProfile(code) {
+  if (code && TELECOM_BY_CODE[code]) return { code, ...TELECOM_BY_CODE[code], source: "country" };
+  const c = typeof COUNTRIES !== "undefined" ? COUNTRIES.find((x) => x.code === code) : null;
+  const reg = c?.region || "World";
+  const tpl = TELECOM_TEMPLATES[reg] || TELECOM_TEMPLATES.World;
+  return { code: code || "WORLD", ...tpl, source: "region", region: reg };
+}
+
+/**
+ * Active infrastructure events — power / internet / telecom
+ * status: down | degraded | warn | recovering | up
+ */
+const INFRA_EVENTS = [
+  { id: "ie1", type: "power", status: "down", sev: "crit", code: "LBN", title: "Coastal grid failure", note: "Extended blackouts reported on coastal corridor.", lat: 33.9, lon: 35.5 },
+  { id: "ie2", type: "power", status: "warn", sev: "high", code: "ZAF", title: "Load-shedding risk", note: "Scheduled / emergency power cuts possible.", lat: -25.75, lon: 28.19 },
+  { id: "ie3", type: "power", status: "degraded", sev: "elevated", code: "TWN", title: "Grid stress watch", note: "Industrial demand + weather can strain reserve margin.", lat: 25.03, lon: 121.56 },
+  { id: "ie4", type: "internet", status: "degraded", sev: "elevated", code: "TCD", title: "Sahel connectivity stress", note: "Cross-border fiber and mobile backhaul fragile.", lat: 12.13, lon: 15.05 },
+  { id: "ie5", type: "internet", status: "warn", sev: "high", code: "YEM", title: "International bandwidth risk", note: "Cable and gateway fragility raises outage odds.", lat: 15.35, lon: 44.2 },
+  { id: "ie6", type: "telecom", status: "degraded", sev: "elevated", code: "UKR", title: "Mobile / fixed war damage", note: "Local outages and repairs ongoing in conflict zones.", lat: 50.45, lon: 30.52 },
+  { id: "ie7", type: "power", status: "warn", sev: "elevated", code: "IND", title: "Peak demand warning", note: "Heat-driven peak loads can force local cuts.", lat: 28.61, lon: 77.21 },
+  { id: "ie8", type: "internet", status: "recovering", sev: "watch", code: "TON", title: "Subsea cable recovery", note: "Island connectivity sensitive to single cable cuts.", lat: -21.14, lon: -175.2 },
+  { id: "ie9", type: "power", status: "up", sev: "info", code: "FRA", title: "Nuclear fleet stable", note: "No major national outage flag in model.", lat: 48.86, lon: 2.35 },
+  { id: "ie10", type: "telecom", status: "up", sev: "info", code: "KOR", title: "Networks normal", note: "Mobile and fiber operating in normal band.", lat: 37.57, lon: 126.98 },
+  { id: "ie11", type: "internet", status: "warn", sev: "elevated", code: "SDN", title: "Connectivity blackout risk", note: "Conflict can force mobile/internet shutdowns.", lat: 15.5, lon: 32.53 },
+  { id: "ie12", type: "power", status: "degraded", sev: "high", code: "PAK", title: "Grid instability watch", note: "Demand spikes and fuel constraints can cascade.", lat: 33.68, lon: 73.04 },
+  { id: "ie13", type: "telecom", status: "warn", sev: "elevated", code: "MMR", title: "Mobile network restrictions", note: "Policy and conflict can throttle mobile access.", lat: 16.8, lon: 96.15 },
+  { id: "ie14", type: "power", status: "warn", sev: "watch", code: "USA", title: "Storm grid warning season", note: "Severe weather can take local feeders offline.", lat: 38.9, lon: -77.0 },
+  { id: "ie15", type: "internet", status: "degraded", sev: "elevated", code: "CUB", title: "International gateway limits", note: "Limited routes raise impact of any cable fault.", lat: 23.11, lon: -82.37 },
+];
+
+function statusRank(s) {
+  return { down: 5, degraded: 4, warn: 3, recovering: 2, up: 1, ok: 1 }[s] || 0;
+}
+
+function infraStressFromEvents(events) {
+  if (!events?.length) return 25;
+  const scores = events.map((e) => {
+    const base = { crit: 95, high: 78, elevated: 58, watch: 40, info: 15 }[e.sev] || 35;
+    const st = { down: 1.15, degraded: 1.0, warn: 0.9, recovering: 0.65, up: 0.2 }[e.status] || 0.8;
+    return base * st;
+  });
+  return Math.max(5, Math.min(98, Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)));
+}
+
+/** Family profiles for affordability weighting */
+const FAMILY_PROFILES = [
+  {
+    id: "single",
+    name: "Single adult",
+    desc: "One person, smaller home, less childcare weight.",
+    weights: { housing: 1.1, groceries: 0.85, childcare: 0.2, schoolPublic: 0.1, schoolPrivate: 0.1, cars: 0.9, transport: 1.1, energy: 0.9 },
+  },
+  {
+    id: "couple",
+    name: "Couple, no kids",
+    desc: "Two adults sharing costs.",
+    weights: { housing: 1.0, groceries: 1.0, childcare: 0.15, schoolPublic: 0.1, schoolPrivate: 0.1, cars: 1.0, transport: 1.0, energy: 1.0 },
+  },
+  {
+    id: "family",
+    name: "Family with kids",
+    desc: "More weight on school, childcare, car, and larger home.",
+    weights: { housing: 1.15, groceries: 1.25, childcare: 1.6, schoolPublic: 1.2, schoolPrivate: 1.4, cars: 1.2, transport: 0.9, energy: 1.15 },
+  },
+  {
+    id: "student",
+    name: "Student",
+    desc: "Rent + food + transport; little car or childcare.",
+    weights: { housing: 1.2, groceries: 1.0, childcare: 0.05, schoolPublic: 0.2, schoolPrivate: 0.2, higherEd: 1.8, cars: 0.3, transport: 1.4, energy: 0.7 },
+  },
+];
+
+/** Move-to priority presets */
+const MOVE_PRIORITIES = [
+  { id: "cheap_rent", name: "Cheap rent / housing", key: "housing", invert: true },
+  { id: "public_school", name: "Affordable public school", key: "schoolPublic", invert: true },
+  { id: "low_childcare", name: "Lower childcare cost", key: "childcare", invert: true },
+  { id: "low_fuel", name: "Lower fuel cost", key: "gasFuel", invert: true },
+  { id: "cheap_food", name: "Cheaper groceries", key: "groceries", invert: true },
+  { id: "low_energy", name: "Lower home energy bills", key: "energy", invert: true },
+  { id: "good_transit", name: "Affordable public transport", key: "transport", invert: true },
+  { id: "overall", name: "Overall affordability", key: "affordScore", invert: false },
+  { id: "low_risk", name: "Lower country risk", key: "risk", invert: true },
+  { id: "high_stability", name: "Higher stability", key: "stability", invert: false },
+];
+
+/**
+ * Inflation & real growth — illustrative history + current + projected (not official forecasts).
+ * hist = last ~6 yearly CPI-like readings (%); current; projNext (%); growthHist; growthCurrent; growthProj.
+ */
+const INFLATION_PROFILES = {
+  USA: { hist: [1.2, 4.7, 8.0, 4.1, 3.4, 2.9], current: 2.8, proj: [2.6, 2.4, 2.3], growthHist: [2.3, 5.8, 1.9, 2.5, 2.8], growth: 2.4, growthProj: [2.2, 2.1, 2.0], note: "Illustrative CPI-style path; not Fed official." },
+  DEU: { hist: [0.5, 3.1, 6.9, 5.9, 2.3, 2.2], current: 2.2, proj: [2.1, 2.0, 1.9], growthHist: [1.1, 1.8, -0.3, 0.0, 0.2], growth: 0.3, growthProj: [0.8, 1.1, 1.3], note: "Euro-area style model." },
+  SWE: { hist: [0.7, 2.2, 8.4, 5.9, 2.5, 2.0], current: 1.9, proj: [1.8, 1.9, 2.0], growthHist: [2.0, 5.0, 2.6, -0.2, 0.6], growth: 1.0, growthProj: [1.4, 1.7, 1.8], note: "Nordic model estimate." },
+  GBR: { hist: [0.9, 2.6, 9.1, 6.7, 4.0, 2.6], current: 2.5, proj: [2.3, 2.2, 2.1], growthHist: [1.6, 7.6, 4.3, 0.1, 0.9], growth: 1.0, growthProj: [1.2, 1.4, 1.5], note: "UK-style illustrative path." },
+  FRA: { hist: [0.5, 1.6, 5.2, 4.9, 2.5, 2.1], current: 2.0, proj: [1.9, 1.8, 1.8], growthHist: [1.8, 6.8, 2.5, 0.9, 1.1], growth: 1.0, growthProj: [1.2, 1.3, 1.4], note: "Euro-area style model." },
+  CHN: { hist: [2.9, 0.9, 2.0, 0.2, 0.3, 0.5], current: 0.6, proj: [1.0, 1.4, 1.6], growthHist: [6.1, 8.4, 3.0, 5.2, 4.8], growth: 4.6, growthProj: [4.4, 4.2, 4.0], note: "China growth remains higher than most advanced economies in this model." },
+  IND: { hist: [4.8, 5.1, 6.7, 5.4, 5.0, 4.8], current: 4.7, proj: [4.5, 4.3, 4.2], growthHist: [3.9, 9.1, 7.0, 7.6, 6.8], growth: 6.5, growthProj: [6.4, 6.3, 6.2], note: "Higher growth, moderate inflation in model." },
+  JPN: { hist: [0.0, -0.2, 2.5, 3.3, 2.8, 2.5], current: 2.4, proj: [2.2, 2.0, 1.8], growthHist: [-4.5, 2.2, 1.0, 1.9, 0.9], growth: 0.8, growthProj: [0.9, 1.0, 1.0], note: "Japan long low-inflation history, recent pickup." },
+  BRA: { hist: [3.7, 8.3, 9.3, 4.6, 4.5, 4.2], current: 4.0, proj: [3.8, 3.6, 3.5], growthHist: [-3.9, 5.0, 2.9, 2.9, 2.2], growth: 2.0, growthProj: [2.1, 2.2, 2.2], note: "LatAm style path." },
+  ZAF: { hist: [3.3, 4.6, 6.9, 5.9, 4.8, 4.5], current: 4.4, proj: [4.3, 4.2, 4.1], growthHist: [-6.3, 4.9, 1.9, 0.6, 1.1], growth: 1.2, growthProj: [1.4, 1.6, 1.7], note: "Illustrative SA path." },
+  AUS: { hist: [0.9, 2.9, 6.6, 5.4, 3.5, 3.0], current: 2.9, proj: [2.7, 2.5, 2.5], growthHist: [2.2, 5.2, 3.8, 1.5, 1.4], growth: 1.5, growthProj: [1.8, 2.0, 2.1], note: "Australia model." },
+  CAN: { hist: [0.7, 3.4, 6.8, 3.9, 2.8, 2.5], current: 2.4, proj: [2.2, 2.1, 2.0], growthHist: [5.3, 1.3, 1.1, 1.2, 1.5], growth: 1.4, growthProj: [1.6, 1.7, 1.8], note: "Canada model." },
+  NLD: { hist: [1.1, 2.8, 10.0, 4.1, 3.1, 2.6], current: 2.5, proj: [2.3, 2.2, 2.1], growthHist: [2.0, 6.2, 4.3, 0.1, 0.8], growth: 1.0, growthProj: [1.2, 1.4, 1.5], note: "Netherlands / euro-area style." },
+  KOR: { hist: [0.5, 2.5, 5.1, 3.6, 2.3, 2.2], current: 2.1, proj: [2.0, 2.0, 1.9], growthHist: [0.7, 4.3, 2.6, 1.4, 2.2], growth: 2.1, growthProj: [2.1, 2.2, 2.2], note: "Korea model." },
+  MEX: { hist: [3.4, 5.7, 7.9, 5.5, 4.7, 4.2], current: 4.0, proj: [3.8, 3.6, 3.5], growthHist: [-8.6, 5.8, 3.9, 3.2, 1.5], growth: 1.6, growthProj: [1.8, 2.0, 2.1], note: "Mexico model." },
+  TUR: { hist: [12.3, 19.6, 72.3, 53.9, 58.5, 45.0], current: 42.0, proj: [38.0, 32.0, 28.0], growthHist: [1.9, 11.4, 5.5, 4.5, 3.2], growth: 3.0, growthProj: [3.1, 3.2, 3.2], note: "High-inflation path (illustrative)." },
+  DEFAULT: { hist: [2.0, 3.5, 6.0, 4.5, 3.2, 2.8], current: 2.7, proj: [2.5, 2.4, 2.3], growthHist: [1.5, 4.0, 2.0, 2.2, 2.3], growth: 2.2, growthProj: [2.2, 2.3, 2.3], note: "Regional default model when no country-specific series is set." },
+};
+
+/**
+ * Super-regions for filtering (maps onto COUNTRIES[].region tags).
+ * Use in country picker, affordability, weather, rankings.
+ */
+const REGION_GROUPS = [
+  { id: "all", name: "All regions", short: "WORLD", regions: null },
+  { id: "americas", name: "Americas", short: "AMERICAS", regions: ["N. America", "LatAm", "Caribbean"] },
+  { id: "europe", name: "Europe", short: "EUROPE", regions: ["Europe"] },
+  { id: "apac", name: "Asia-Pacific", short: "APAC", regions: ["Asia", "Oceania"] },
+  { id: "mena", name: "Middle East & N. Africa", short: "MENA", regions: ["MENA"] },
+  { id: "africa", name: "Africa", short: "AFRICA", regions: ["Africa"] },
+  { id: "eurasia", name: "Eurasia", short: "EURASIA", regions: ["Eurasia"] },
+];
+
+/**
+ * Advanced / developed economy codes (illustrative IMF-style advanced list).
+ * Everything else in the catalog is treated as developing / emerging for filters.
+ */
+const DEVELOPED_CODES = new Set([
+  "USA", "CAN", "GBR", "IRL", "FRA", "DEU", "NLD", "BEL", "LUX", "CHE", "AUT", "ITA", "ESP", "PRT", "GRC",
+  "NOR", "SWE", "DNK", "FIN", "ISL", "JPN", "KOR", "AUS", "NZL", "SGP", "ISR", "CZE", "SVK", "SVN",
+  "EST", "LVA", "LTU", "POL", "HUN", "CYP", "MLT", "HRV", "TWN", "HKG", "MAC", "AND", "MCO", "LIE", "SMR",
+]);
+
+function isDevelopedCountry(code) {
+  if (!code || code === "GLOBAL") return null;
+  return DEVELOPED_CODES.has(code);
+}
+
+function countryRiskScore(code) {
+  const c = typeof COUNTRIES !== "undefined" ? COUNTRIES.find((x) => x.code === code) : null;
+  if (!c) return 40;
+  return typeof c.risk === "number" ? c.risk : 40;
+}
+
+/** Stability 0–100 (higher = calmer). Inverse of risk with light clamp. */
+function countryStabilityScore(code) {
+  return Math.max(5, Math.min(98, 100 - countryRiskScore(code)));
+}
+
+function travelAdviceForRisk(risk) {
+  if (risk >= 80) {
+    return {
+      level: "critical",
+      label: "Travel — avoid non-essential",
+      tip: "Very high security / crisis stress in model. Check official foreign-ministry advice before any trip.",
+    };
+  }
+  if (risk >= 65) {
+    return {
+      level: "high",
+      label: "Travel — high caution",
+      tip: "Elevated risk. Prefer essential travel only; monitor local news and official advisories.",
+    };
+  }
+  if (risk >= 50) {
+    return {
+      level: "elevated",
+      label: "Travel — heightened caution",
+      tip: "Some instability. Stay aware of local rules, weather, and demonstrations.",
+    };
+  }
+  if (risk >= 35) {
+    return {
+      level: "watch",
+      label: "Travel — normal precautions",
+      tip: "Routine travel awareness. Watch weather and local transport strikes.",
+    };
+  }
+  return {
+    level: "ok",
+    label: "Travel — standard",
+    tip: "Model risk is relatively low. Still follow normal travel common sense and weather alerts.",
+  };
+}
+
+/** WMO-style Open-Meteo weather codes → human warning */
+function weatherWarningFromCode(codeWx, wind, precip) {
+  const c = Number(codeWx);
+  const w = Number(wind) || 0;
+  const p = Number(precip) || 0;
+  if (c >= 95) return { level: "critical", label: "Thunderstorm / severe", tip: "Thunderstorm risk near capital — delay outdoor plans." };
+  if (c >= 80 && c <= 82) return { level: "elevated", label: "Heavy rain showers", tip: "Heavy showers — flooding risk on low roads." };
+  if (c >= 71 && c <= 77) return { level: "elevated", label: "Snow / ice", tip: "Snow or ice — travel delays possible." };
+  if (c >= 65 && c <= 67) return { level: "elevated", label: "Heavy rain / freezing rain", tip: "Heavy or freezing rain — drive carefully." };
+  if (c >= 51 && c <= 57) return { level: "watch", label: "Drizzle / light rain", tip: "Wet conditions — minor travel friction." };
+  if (c >= 45 && c <= 48) return { level: "watch", label: "Fog", tip: "Fog — reduced visibility for drivers and flights." };
+  if (w >= 60) return { level: "high", label: "Very strong wind", tip: "High wind — outdoor and flight risk." };
+  if (w >= 40) return { level: "elevated", label: "Strong wind", tip: "Strong wind — secure loose items; check ferries." };
+  if (p >= 5) return { level: "watch", label: "Wet spell", tip: "Meaningful precipitation in the capital sample." };
+  if (c >= 1 && c <= 3) return { level: "ok", label: "Partly cloudy", tip: "No major weather warning from capital sample." };
+  return { level: "ok", label: "Fair / calm", tip: "No severe weather flag from this capital reading." };
+}
+
+function countriesInScope(regionGroupId, develFilter) {
+  const all = (typeof COUNTRIES !== "undefined" ? COUNTRIES : []).filter((c) => c.code && c.code !== "GLOBAL");
+  const group = (typeof REGION_GROUPS !== "undefined" ? REGION_GROUPS : []).find((g) => g.id === regionGroupId);
+  let list = all;
+  if (group && group.regions) {
+    const set = new Set(group.regions);
+    list = list.filter((c) => set.has(c.region));
+  }
+  if (develFilter === "developed") list = list.filter((c) => isDevelopedCountry(c.code));
+  if (develFilter === "developing") list = list.filter((c) => !isDevelopedCountry(c.code));
+  return list.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** Chip supply chain story nodes */
+const CHIP_CHAIN = [
+  { id: "design", stage: "1 · Design", where: "USA · Europe · Israel", what: "Companies design the chips (brain of phones, cars, AI).", key: ["NVDA", "AMD"], color: "#64ffda" },
+  { id: "tools", stage: "2 · Machines", where: "Netherlands · Japan · USA", what: "Special machines print tiny patterns on silicon.", key: ["ASML"], color: "#4a9eff" },
+  { id: "foundry", stage: "3 · Factories", where: "Taiwan · Korea · USA · Europe", what: "Factories build the chips at huge scale.", key: ["TSM", "SOXX"], color: "#f5a623" },
+  { id: "package", stage: "4 · Package & test", where: "Asia hubs", what: "Chips are packaged, tested, and shipped worldwide.", key: ["SOXX"], color: "#ce93d8" },
+  { id: "cloud", stage: "5 · Data centers", where: "USA · Europe · Asia", what: "Cloud and AI buildings use many chips plus power and copper.", key: ["EQIX", "DLR", "COPPER", "NATGAS"], color: "#18ffff" },
+];
+
+/** El Niño / climate → food stress tags by region (easy language) */
+const CLIMATE_FOOD_BY_REGION = {
+  Africa: { enso: "Can raise drought risk in parts of East/Southern Africa; Sahel rains matter for food.", tip: "Watch local rains and grain imports." },
+  Asia: { enso: "Can shift monsoon rains — important for rice and water.", tip: "Rice and soft commodities may move with rainfall." },
+  MENA: { enso: "Mostly import-dependent; global grain prices matter more than local rain.", tip: "Black Sea and world wheat prices hit bread costs." },
+  Europe: { enso: "Indirect: global grain and energy prices; local heat/drought can hit harvests.", tip: "Heatwaves and river levels can stress crops and transport." },
+  "N. America": { enso: "Can change rain patterns across US/Canada farm belts.", tip: "Corn, soy, wheat weather windows matter." },
+  LatAm: { enso: "Often strong El Niño/La Niña effects on rain in Brazil, Argentina, Andes.", tip: "Soy, coffee, copper regions can feel it." },
+  Caribbean: { enso: "Can influence storm season odds and local food imports.", tip: "Storm season + import prices." },
+  Oceania: { enso: "Australia farm belts are sensitive to El Niño drought risk.", tip: "Wheat and softs can reprice with dryness." },
+  Eurasia: { enso: "Indirect via global food and energy prices.", tip: "Watch global grain corridors." },
+  World: { enso: "El Niño is a Pacific pattern that can ripple through world food prices.", tip: "Compare local harvests with global grain prices." },
 };
 
 /** Country → news keywords for filtering headlines */
@@ -894,17 +1330,17 @@ const LENS_NEWS_KEYS = {
 
 /** Which prices to show for each lens */
 const LENS_MARKET_BASKETS = {
-  overview: ["SPX", "DXY", "BRENT", "GOLD", "COPPER", "SOXX", "WHEAT", "VIX"],
+  overview: ["SPX", "NDX", "DXY", "BRENT", "GOLD", "COPPER", "SOXX", "WHEAT", "VIX"],
   threat: ["VIX", "GOLD", "BRENT", "WARINS", "USDJPY", "SPX", "BTC"],
   stability: ["SPX", "EURUSD", "GOLD", "VIX", "BTC", "DXY"],
-  markets: ["SPX", "DXY", "EURUSD", "US10Y", "VIX", "BTC", "GOLD", "BRENT", "COPPER", "SOXX"],
+  markets: ["SPX", "NDX", "DJI", "DXY", "EURUSD", "GBPUSD", "US10Y", "VIX", "BTC", "GOLD", "BRENT", "COPPER", "SOXX"],
   logistics: ["SHIP", "BDI", "BRENT", "WARINS", "COPPER", "DXY"],
   humanitarian: ["WHEAT", "CORN", "RICE", "FOODX", "SOY", "SHIP"],
-  climate_cat: ["CAT", "WHEAT", "CORN", "NATGAS", "COFFEE", "SUGAR", "BRENT"],
-  tech: ["SOXX", "NVDA", "TSM", "ASML", "AMD", "EQIX", "DLR", "COPPER", "NATGAS", "SPX"],
+  climate_cat: ["CAT", "WHEAT", "CORN", "NATGAS", "COFFEE", "SUGAR", "BRENT", "RICE"],
+  tech: ["SOXX", "SMH", "NVDA", "TSM", "ASML", "AMD", "AVGO", "EQIX", "DLR", "MSFT", "COPPER", "NATGAS"],
   metals: ["GOLD", "SILVER", "COPPER", "PLAT", "ALUM", "DXY", "SPX"],
   afford: ["WHEAT", "FOODX", "BRENT", "NATGAS", "DXY", "EURUSD", "SPX", "GOLD", "COPPER"],
-  decision: ["SPX", "DXY", "VIX", "GOLD", "BRENT", "SOXX", "WHEAT"],
+  decision: ["SPX", "NDX", "DXY", "VIX", "GOLD", "BRENT", "SOXX", "WHEAT"],
 };
 
 /** Extra prices when you pick a country */
@@ -938,7 +1374,7 @@ const CLIMATE_SIGNALS = [
     phase: "watch",
     note: "The Pacific Ocean can run warmer or cooler for months. That changes rain and storms around the world.",
     impact: "Some places get more drought or floods; food crops can get harder or easier to grow.",
-    positive: "When we know early, farmers and stores can plan. That protects food on your table.",
+    positive: "When we know early, farmers and stores can plan. That protects food on the table.",
     regions: ["Pacific", "LatAm", "SE Asia", "Australia", "Africa"],
   },
   {
@@ -984,26 +1420,32 @@ const VIEW_META = {
   answers: { title: "ANSWERS", desc: "Simple Q&A plus positive paths." },
   geo: { title: "MAP", desc: "3D world map, layers, live disasters." },
   crisis: { title: "CRISIS", desc: "War, hotspots, alerts, ways to ease tension." },
-  weather: { title: "WEATHER", desc: "Worldwide capital temperatures, storms, El Niño, insurance." },
+  weather: { title: "WEATHER", desc: "Capital temperatures, weather warnings, travel warnings, storms." },
   markets: { title: "MARKETS", desc: "Live prices and charts for money and commodities." },
   commodities: { title: "COMMODITIES", desc: "Oil, food crops, grocery link." },
   metals: { title: "METALS", desc: "Gold, silver, copper, platinum, aluminum." },
   tech: { title: "CHIPS & DATA", desc: "Semiconductors, data centers, power, copper." },
   food: { title: "FOOD", desc: "Crops, food regions, grocery signal." },
-  risk: { title: "MODELS", desc: "Your KMRI and other scores explained simply." },
+  risk: { title: "MODELS", desc: "KMRI and other scores explained simply." },
   news: { title: "NEWS", desc: "Live headlines filtered to country and lens." },
   transport: { title: "TRAFFIC", desc: "Ships, canals, insurance, outages." },
+  infra: {
+    title: "POWER · TELECOM",
+    desc: "Power mix, mobile/landline, internet & power outages, overall infra stress.",
+  },
   impact: { title: "IMPACT", desc: "Politics · money · daily life — easy words." },
   afford: {
     title: "AFFORDABILITY",
-    desc: "Cost of living: housing, school, childcare, transport, gas, cars, groceries, utilities, energy.",
+    desc: "Cost of living, risk & stability — filter by region and developed / developing economies.",
   },
-  custom: { title: "CUSTOM", desc: "Your own layout." },
+  compare: { title: "COMPARE", desc: "Side-by-side countries: risk, costs, weather, inflation." },
+  inflation: { title: "INFLATION · GROWTH", desc: "History, current, projected inflation and real growth." },
+  custom: { title: "CUSTOM", desc: "Custom layout for this visit." },
 };
 
 const DESK_CATALOG = [
   { id: "command", title: "Command", icon: "⌘", blurb: "Start here", desc: "Pulse · map · answers · grocery", preview: "Opens the main overview: world pulse, map, answers, news, grocery signal." },
-  { id: "answers", title: "Answers", icon: "✦", blurb: "Q&A", desc: "Questions and hope paths", preview: "Opens simple answers and positive paths for your country and lens." },
+  { id: "answers", title: "Answers", icon: "✦", blurb: "Q&A", desc: "Questions and hope paths", preview: "Opens simple answers and positive paths for the selected country and lens." },
   { id: "geo", title: "Map", icon: "◎", blurb: "Globe", desc: "3D map + disasters", preview: "Opens the world map with disasters and quakes." },
   { id: "crisis", title: "Crisis", icon: "⚠", blurb: "War", desc: "Hotspots and alerts", preview: "Opens war theaters, hotspots, and top alerts." },
   { id: "weather", title: "Weather", icon: "☁", blurb: "Temps world", desc: "Global °C · storms · El Niño", preview: "Opens worldwide capital temperatures, disasters, climate, insurance." },
@@ -1016,33 +1458,60 @@ const DESK_CATALOG = [
     title: "Affordability",
     icon: "⌂",
     blurb: "Living costs",
-    desc: "Home · school · food · car · bills",
-    preview: "Opens cost of living: housing, education, childcare, transport, gas, groceries, utilities, energy, and place rankings.",
+    desc: "Home · risk · stability · region",
+    preview: "Cost of living, risk & stability, family profile, region & developed filters.",
+  },
+  {
+    id: "compare",
+    title: "Compare",
+    icon: "⇄",
+    blurb: "2–3 countries",
+    desc: "Side-by-side view",
+    preview: "Compare countries on risk, affordability, weather, inflation.",
+  },
+  {
+    id: "inflation",
+    title: "Inflation",
+    icon: "%",
+    blurb: "CPI · growth",
+    desc: "History · now · forecast",
+    preview: "Inflation history, current reading, projections and growth.",
   },
   { id: "food", title: "Food", icon: "☘", blurb: "Crops", desc: "Food security", preview: "Opens crop regions, food prices, grocery impact." },
   { id: "transport", title: "Traffic", icon: "⬡", blurb: "Ships", desc: "Routes · outages", preview: "Opens shipping chokepoints, insurance, power outages." },
-  { id: "impact", title: "Impact", icon: "◎", blurb: "Daily life", desc: "Politics · prices · shops", preview: "Opens Impact Monitor and your next grocery trip signal." },
+  {
+    id: "infra",
+    title: "Power · Net",
+    icon: "⚡",
+    blurb: "Grid · phone",
+    desc: "Power mix · telecom · outages",
+    preview: "Power sources, mobile/landline, internet & power outages, overall infrastructure score.",
+  },
+  { id: "impact", title: "Impact", icon: "◎", blurb: "Daily life", desc: "Politics · prices · shops", preview: "Opens Impact Monitor and the grocery-trip signal." },
   { id: "news", title: "News", icon: "☰", blurb: "Headlines", desc: "By country & lens", preview: "Opens filtered live news from major public sources." },
-  { id: "risk", title: "Models", icon: "Σ", blurb: "KMRI", desc: "Your scores explained", preview: "Opens KMRI, SPI and all models in plain language." },
-  { id: "custom", title: "Custom", icon: "✶", blurb: "Yours", desc: "Saved layout", preview: "Opens the layout you saved with drag-and-drop." },
+  { id: "risk", title: "Models", icon: "Σ", blurb: "KMRI", desc: "Scores explained", preview: "Opens KMRI, SPI, IIS, and all models in plain language." },
+  { id: "custom", title: "Custom", icon: "✶", blurb: "Custom", desc: "Saved layout", preview: "Opens the layout saved with drag-and-drop for this visit." },
 ];
 
 const VIEW_PRESETS = {
-  command: ["pulse", "kmri", "map", "answers", "newsfocus", "grocery"],
+  command: ["pulse", "kmri", "map", "answers", "grocery", "weather"],
   answers: ["triad", "answers", "implications", "impact", "kmri", "grocery"],
-  geo: ["map", "layers", "disasters", "quakes", "country", "climate"],
+  geo: ["map", "layers", "disasters", "quakes", "country", "weather"],
   crisis: ["map", "hotspots", "theaters", "alerts", "kmri", "implications"],
-  weather: ["weather", "map", "disasters", "climate", "quakes", "insurance"],
-  markets: ["mktboard", "mkthero", "currencies", "energy", "metals", "instrument"],
-  commodities: ["mktboard", "commodities", "energy", "grocery", "agriculture", "implications"],
+  weather: ["weather", "climatefood", "map", "disasters", "climate", "quakes"],
+  markets: ["mktboard", "mkthero", "currencies", "energy", "instrument", "impact"],
+  commodities: ["mktboard", "commodities", "energy", "grocery", "climatefood", "agriculture"],
   metals: ["mktboard", "metals", "mkthero", "currencies", "newsfocus", "impact"],
-  tech: ["mktboard", "semiconductors", "datacenters", "techbrief", "metals", "newsfocus"],
-  afford: ["afford", "affordRank", "affordHome", "affordEdu", "affordMove", "grocery"],
-  food: ["commodities", "agriculture", "grocery", "climate", "transport", "newsfocus"],
-  transport: ["map", "transport", "insurance", "energy", "infra", "implications"],
-  impact: ["impact", "grocery", "afford", "answers", "implications", "newsfocus"],
-  news: ["newsfocus", "news", "alerts", "answers", "hotspots", "kmri"],
-  risk: ["kmri", "indicators", "radar", "implications", "pulse", "scenarios"],
+  tech: ["chipchain", "powerai", "semiconductors", "datacenters", "powerMix", "outages"],
+  afford: ["afford", "affordRisk", "familyAfford", "moveTo", "affordRank", "affordHome"],
+  compare: ["compare", "inflation", "afford", "affordRisk", "weather", "newsfocus"],
+  inflation: ["inflation", "compare", "mktboard", "grocery", "impact", "afford"],
+  food: ["commodities", "agriculture", "grocery", "climatefood", "climate", "newsfocus"],
+  transport: ["map", "transport", "insurance", "energy", "outages", "implications"],
+  infra: ["critInfra", "powerMix", "telecoms", "outages", "infra", "energy"],
+  impact: ["impact", "grocery", "afford", "inflation", "answers", "newsfocus"],
+  news: ["newsfocus", "news", "alerts", "hotspots", "kmri", "weather"],
+  risk: ["kmri", "indicators", "radar", "critInfra", "implications", "pulse"],
   custom: null,
 };
 
@@ -1054,12 +1523,12 @@ const WIDGET_ALIASES = {
   spi_proxy: "indicators",
 };
 
-/** Easy words for your self-developed indicators (still professional) */
+/** Easy words for self-developed indicators (still professional) */
 const INDICATOR_EXPLAIN = {
   kmri: {
-    short: "Your main “how stressed is the world?” score from 0 to 100.",
+    short: "Main “how stressed is the world?” score from 0 to 100.",
     how: "It mixes fighting risk, market fear, energy, food, insurance, loud crisis news, and shipping.",
-    read: "Higher means more stress across many areas. Use it as your daily headline number.",
+    read: "Higher means more stress across many areas. Use it as the daily headline number.",
     color: "Red 75+ · Orange mid · Green under 40",
   },
   gsi: {
@@ -1071,7 +1540,7 @@ const INDICATOR_EXPLAIN = {
   tsi: {
     short: "War and tension score.",
     how: "Theater postures + fighting risk + crisis news.",
-    read: "Use this when you care about wars or military tension.",
+    read: "Use this when focusing on wars or military tension.",
     color: "Higher = tighter tension.",
   },
   wri: {
@@ -1129,7 +1598,7 @@ const INDICATOR_EXPLAIN = {
     color: "Higher = more convergence.",
   },
   spi: {
-    short: "Room for things to get better (your constructive score).",
+    short: "Room for things to get better (constructive score).",
     how: "Rewards calmer markets and lower fighting/insurance/shipping stress.",
     read: "Higher SPI = more hope and room for positive paths. Green is good.",
     color: "Green high (good) · Red low (tight).",
@@ -1139,6 +1608,12 @@ const INDICATOR_EXPLAIN = {
     how: "News speed + crisis tone + disaster/quake heat.",
     read: "High means lots of public signal — still check sources.",
     color: "Higher = denser public feed.",
+  },
+  iis: {
+    short: "How stressed power grids and telecom networks look.",
+    how: "Outage events + power fragility + weak telecom + energy/weather pressure.",
+    read: "High means blackouts, internet cuts, or network warnings are more likely in the model.",
+    color: "Higher = more infrastructure stress.",
   },
 };
 
@@ -1156,7 +1631,7 @@ const HOW_TO_STEPS = [
     text: "FLASH scrolls live headlines. INDICES shows live prices (oil, gold, chips, currencies…). Click a price to focus it.",
   },
   {
-    title: "④ Impact & your grocery trip",
+    title: "④ Impact & grocery trip",
     text: "Open Impact. It explains politics, money, and daily life in easy words. The red grocery banner says if the next shop may feel cheaper or more expensive.",
   },
   {
@@ -1168,7 +1643,7 @@ const HOW_TO_STEPS = [
     text: "Open Affordability for housing, rent, groceries, utilities, energy, gas, cars, public vs private school, childcare, and healthcare. Higher place score = easier everyday living costs.",
   },
   {
-    title: "⑥ Your scores (KMRI · SPI…)",
+    title: "⑥ Risk scores (KMRI · SPI…)",
     text: "Models desk explains each number in plain language. KMRI = world stress. SPI = room for things to improve. Click any card for details.",
   },
   {
@@ -1184,19 +1659,19 @@ const HOW_TO_STEPS = [
 const TOUR_STEPS = [
   { title: "Desks on the left", text: "Each button opens a ready room. Start with Command." },
   { title: "Country and lens on top", text: "They filter news and which prices you see." },
-  { title: "Impact & groceries", text: "Easy words for politics, money, and your next shop." },
+  { title: "Impact & groceries", text: "Easy words for politics, money, and the next shop." },
   { title: "Metals & chips", text: "Metals desk and Chips & Data desk cover gold, copper, semiconductors, and data centers." },
   { title: "You are ready", text: "Live sources update automatically. Press ? if you need help again." },
 ];
 
 const DEFAULT_INTERVALS = {
-  news: 120,
-  markets: 60,
-  quakes: 180,
-  eonet: 300,
-  weather: 600,
+  news: 90,
+  markets: 45,
+  quakes: 120,
+  eonet: 240,
+  weather: 420,
   relief: 300,
-  indicators: 30,
+  indicators: 25,
   ticker: 12,
 };
 

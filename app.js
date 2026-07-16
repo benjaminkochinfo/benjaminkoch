@@ -1,4 +1,4 @@
-/**
+﻿/**
  * WMT Intelligence Terminal — orchestrator
  */
 (() => {
@@ -17,6 +17,13 @@
     hotspots: HOTSPOTS.map((h) => ({ ...h })),
     indicators: [],
     mapReady: false,
+    viewMode: "desktop", // desktop | mobile
+    familyProfile: "family",
+    movePriority: "overall",
+    compareCodes: ["USA", "DEU", "SWE"],
+    deferredInstall: null,
+    regionGroup: "all", // REGION_GROUPS id
+    develFilter: "all", // all | developed | developing
   };
 
   const $ = (s, el = document) => el.querySelector(s);
@@ -68,16 +75,100 @@
   }
 
   // ── Focus chrome ──
-  function populateSelectors() {
+  function scopedCountries() {
+    if (typeof countriesInScope === "function") {
+      return countriesInScope(state.regionGroup || "all", state.develFilter || "all");
+    }
+    return COUNTRIES.filter((c) => c.code && c.code !== "GLOBAL");
+  }
+
+  function riskColor(r) {
+    if (r >= 75) return "#ff3b30";
+    if (r >= 55) return "#ff6b1a";
+    if (r >= 40) return "#f5a623";
+    return "#00c853";
+  }
+  function stabilityColor(s) {
+    if (s >= 65) return "#00c853";
+    if (s >= 50) return "#f5a623";
+    if (s >= 35) return "#ff9800";
+    return "#ff5252";
+  }
+
+  function countryRiskStability(code) {
+    const risk = typeof countryRiskScore === "function" ? countryRiskScore(code) : 40;
+    const stability =
+      typeof countryStabilityScore === "function" ? countryStabilityScore(code) : Math.max(5, 100 - risk);
+    const travel =
+      typeof travelAdviceForRisk === "function"
+        ? travelAdviceForRisk(risk)
+        : { level: "watch", label: "Travel — check advice", tip: "" };
+    const devel =
+      typeof isDevelopedCountry === "function" && isDevelopedCountry(code) ? "Developed" : "Developing";
+    return { risk, stability, travel, devel };
+  }
+
+  function scopeBanner() {
+    const rg = (typeof REGION_GROUPS !== "undefined" ? REGION_GROUPS : []).find((g) => g.id === state.regionGroup);
+    const regionLabel = rg?.name || "All regions";
+    const develLabel =
+      state.develFilter === "developed"
+        ? "Developed economies"
+        : state.develFilter === "developing"
+          ? "Developing / emerging"
+          : "All economies";
+    const n = scopedCountries().length;
+    return `${regionLabel} · ${develLabel} · ${n} countries in list`;
+  }
+
+  function populateRegionSelect() {
+    const rs = $("#regionSelect");
+    if (!rs || typeof REGION_GROUPS === "undefined") return;
+    rs.innerHTML = REGION_GROUPS.map(
+      (g) => `<option value="${g.id}">${g.name}</option>`
+    ).join("");
+    rs.value = state.regionGroup || "all";
+  }
+
+  function populateCountrySelect() {
     const cs = $("#countrySelect");
-    const sorted = [...COUNTRIES].sort((a, b) => {
-      if (a.code === "GLOBAL") return -1;
-      if (b.code === "GLOBAL") return 1;
-      return a.name.localeCompare(b.name);
+    if (!cs) return;
+    const prev = state.country;
+    const list = scopedCountries();
+    // Group by sub-region for easier scanning (all countries listed)
+    const byRegion = {};
+    list.forEach((c) => {
+      const r = c.region || "Other";
+      if (!byRegion[r]) byRegion[r] = [];
+      byRegion[r].push(c);
     });
-    cs.innerHTML = sorted
-      .map((c) => `<option value="${c.code === "GLOBAL" ? "" : c.code}">${c.name}</option>`)
-      .join("");
+    const regionKeys = Object.keys(byRegion).sort((a, b) => a.localeCompare(b));
+    let html = `<option value="">Global / whole region (${list.length})</option>`;
+    regionKeys.forEach((rk) => {
+      html += `<optgroup label="${rk} (${byRegion[rk].length})">`;
+      byRegion[rk]
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .forEach((c) => {
+          html += `<option value="${c.code}">${c.name}</option>`;
+        });
+      html += `</optgroup>`;
+    });
+    cs.innerHTML = html;
+    // Keep selection if still in scope; else clear
+    if (prev && list.some((c) => c.code === prev)) {
+      cs.value = prev;
+      state.country = prev;
+    } else {
+      cs.value = "";
+      if (prev && !list.some((c) => c.code === prev)) state.country = "";
+    }
+  }
+
+  function populateSelectors() {
+    populateRegionSelect();
+    const ds = $("#develSelect");
+    if (ds) ds.value = state.develFilter || "all";
+    populateCountrySelect();
     const is = $("#instrumentSelect");
     is.innerHTML =
       `<option value="">All instruments</option>` +
@@ -218,6 +309,10 @@
     const chip = $("#focusChip");
     const parts = [];
     if (c) parts.push(c.name);
+    const rg = (typeof REGION_GROUPS !== "undefined" ? REGION_GROUPS : []).find((g) => g.id === state.regionGroup);
+    if (rg && rg.id !== "all") parts.push(rg.short || rg.name);
+    if (state.develFilter === "developed") parts.push("Developed");
+    if (state.develFilter === "developing") parts.push("Developing");
     if (lens && lens.id !== "overview") parts.push(lens.name);
     if (inst) parts.push(inst.sym);
     if (scen && scen.id !== "baseline") parts.push(scen.name);
@@ -240,14 +335,20 @@
   }
 
   // ── Map markers ──
+  /** Layer on/off only — map always shows every enabled layer worldwide (no country hide). */
+  function layerOn(id) {
+    return state.layers[id] !== false;
+  }
+
   function buildMarkers() {
     const list = [];
-    MARKERS.filter((m) => state.layers[m.layer] !== false && countryOk(m) && matchSearch(m.title)).forEach((m) => {
+    // Static catalog markers: respect layer toggles only (ignore country focus)
+    MARKERS.filter((m) => layerOn(m.layer)).forEach((m) => {
       list.push({ ...m, color: layerColor(m) });
     });
-    if (state.layers.natural !== false || state.layers.disasters !== false) {
-      (Feeds.getState().quakes || []).slice(0, 30).forEach((q) => {
-        if (!matchSearch(q.place || "")) return;
+    // Live quakes → Natural Hazards layer
+    if (layerOn("natural")) {
+      (Feeds.getState().quakes || []).slice(0, 40).forEach((q) => {
         list.push({
           id: "q_" + q.id,
           layer: "natural",
@@ -264,10 +365,10 @@
         });
       });
     }
-    if (state.layers.disasters !== false || state.layers.weather !== false) {
+    // Live EONET → Disasters layer
+    if (layerOn("disasters")) {
       (Feeds.getState().eonet || []).forEach((ev) => {
         if (!ev.lat && !ev.lon) return;
-        if (!matchSearch(ev.title)) return;
         list.push({
           id: "eo_" + ev.id,
           layer: "disasters",
@@ -385,10 +486,96 @@
     fillAffordEdu();
     fillAffordHome();
     fillAffordMove();
+    fillAffordRisk();
+    fillCompare();
+    fillInflation();
+    fillChipchain();
+    fillClimatefood();
+    fillFamilyAfford();
+    fillMoveTo();
+    fillPowerai();
+    fillPowerMix();
+    fillTelecoms();
+    fillOutages();
+    fillCritInfra();
     renderTicker();
     renderStream();
     updateFocusChrome();
     updateFeedHealth();
+  }
+
+  /** Simple SVG bar series for inflation / growth history */
+  function seriesBars(values, opts = {}) {
+    const w = opts.w || 280;
+    const h = opts.h || 56;
+    const pad = 4;
+    if (!values?.length) return "";
+    const max = Math.max(...values.map(Math.abs), 0.5);
+    const bw = (w - pad * 2) / values.length;
+    const mid = h / 2;
+    const bars = values
+      .map((v, i) => {
+        const n = Number(v) || 0;
+        const bh = (Math.abs(n) / max) * (h - pad * 2) * 0.9;
+        const x = pad + i * bw + bw * 0.15;
+        const y = n >= 0 ? mid - bh : mid;
+        const col = opts.color || (n >= 0 ? "#4a9eff" : "#ff6b1a");
+        const proj = opts.projFrom != null && i >= opts.projFrom;
+        return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw * 0.7).toFixed(1)}" height="${bh.toFixed(
+          1
+        )}" fill="${col}" opacity="${proj ? 0.45 : 0.9}" rx="1"/>`;
+      })
+      .join("");
+    return `<svg class="series-bars" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">${bars}
+      <line x1="${pad}" y1="${mid}" x2="${w - pad}" y2="${mid}" stroke="rgba(120,140,180,0.25)" stroke-width="0.6"/>
+    </svg>`;
+  }
+
+  function inflationProfile(code) {
+    const map = typeof INFLATION_PROFILES !== "undefined" ? INFLATION_PROFILES : {};
+    if (code && map[code]) return map[code];
+    return map.DEFAULT || { hist: [2, 3, 4], current: 2.5, proj: [2.4, 2.3], growthHist: [2, 2], growth: 2, growthProj: [2, 2], note: "Model default." };
+  }
+
+  function familyWeights() {
+    const list = typeof FAMILY_PROFILES !== "undefined" ? FAMILY_PROFILES : [];
+    return list.find((p) => p.id === state.familyProfile) || list[0] || { weights: {} };
+  }
+
+  function affordRowFamily(code) {
+    const row = affordRow(code);
+    if (!row) return null;
+    const fw = familyWeights().weights || {};
+    const out = { ...row };
+    const costKeys = [
+      "housing",
+      "groceries",
+      "utilities",
+      "energy",
+      "gasFuel",
+      "transport",
+      "cars",
+      "childcare",
+      "schoolPublic",
+      "schoolPrivate",
+      "higherEd",
+      "healthcare",
+    ];
+    let weighted = 0;
+    let wsum = 0;
+    costKeys.forEach((k) => {
+      if (out[k] == null) return;
+      const w = fw[k] != null ? fw[k] : 1;
+      out[k] = Math.max(5, Math.min(98, Math.round(out[k] * (0.55 + 0.45 * w))));
+      weighted += out[k] * w;
+      wsum += w;
+    });
+    if (wsum > 0) {
+      const avgCost = weighted / wsum;
+      out.affordScore = Math.max(5, Math.min(98, Math.round(100 - avgCost * 0.85 + (row.affordScore - 50) * 0.15)));
+    }
+    out.familyId = state.familyProfile;
+    return out;
   }
 
   /** Live market nudge on cost categories (0–100 cost) */
@@ -446,12 +633,75 @@
     return "#ff5252";
   }
 
+  function regionCountryListHtml(limit = 40) {
+    const list = scopedCountries().slice(0, limit);
+    if (!list.length) return empty("No countries in filter", "Widen region or economy filter.");
+    return `<div class="region-country-list">${list
+      .map((c) => {
+        const rs = countryRiskStability(c.code);
+        const aff = affordRow(c.code);
+        const active = state.country === c.code ? " active" : "";
+        return `<button type="button" class="rc-row${active}" data-code="${c.code}">
+          <span class="rc-name">${UI.esc(c.name)}</span>
+          <span class="rc-tag mono">${UI.esc(c.region || "")}</span>
+          <span class="rc-m mono" style="color:${riskColor(rs.risk)}" title="Risk">R ${rs.risk}</span>
+          <span class="rc-m mono" style="color:${stabilityColor(rs.stability)}" title="Stability">S ${rs.stability}</span>
+          <span class="rc-m mono" style="color:${affordScoreColor(aff?.affordScore || 50)}" title="Affordability">A ${
+            aff?.affordScore ?? "—"
+          }</span>
+        </button>`;
+      })
+      .join("")}</div>
+      <p class="afford-foot">${list.length} shown of ${scopedCountries().length} in scope · click to focus</p>`;
+  }
+
+  function bindRegionCountryClicks(el) {
+    el.querySelectorAll(".rc-row, .ar-row").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.country = btn.dataset.code;
+        if ($("#countrySelect")) $("#countrySelect").value = state.country;
+        applyCountryFocus();
+      });
+    });
+  }
+
+  function riskStabilityStrip(code) {
+    const rs = countryRiskStability(code);
+    return `<div class="rs-strip">
+      <div class="rs-box" style="border-color:${riskColor(rs.risk)}">
+        <span class="rs-k">RISK</span>
+        <span class="rs-v" style="color:${riskColor(rs.risk)}">${rs.risk}</span>
+        <span class="rs-l">higher = more stress</span>
+      </div>
+      <div class="rs-box" style="border-color:${stabilityColor(rs.stability)}">
+        <span class="rs-k">STABILITY</span>
+        <span class="rs-v" style="color:${stabilityColor(rs.stability)}">${rs.stability}</span>
+        <span class="rs-l">higher = calmer</span>
+      </div>
+      <div class="rs-box travel ${rs.travel.level}">
+        <span class="rs-k">TRAVEL</span>
+        <span class="rs-v-sm">${UI.esc(rs.travel.label)}</span>
+        <span class="rs-l">${UI.esc(rs.travel.tip)}</span>
+      </div>
+      <div class="rs-box">
+        <span class="rs-k">ECONOMY</span>
+        <span class="rs-v-sm">${UI.esc(rs.devel)}</span>
+        <span class="rs-l">illustrative grouping</span>
+      </div>
+    </div>`;
+  }
+
   function fillAfford() {
     const el = Layout.bodyEl("afford");
     if (!el) return;
     const code = selectedCountryCode();
     if (!code) {
-      el.innerHTML = empty("Pick a country", "Select any country above — costs always match that country.");
+      Layout.metaEl("afford") && (Layout.metaEl("afford").textContent = "REGION");
+      el.innerHTML = `<div class="panel-banner">${UI.esc(
+        scopeBanner()
+      )} — pick a country for full cost detail, or browse the list</div>
+        ${regionCountryListHtml(60)}`;
+      bindRegionCountryClicks(el);
       return;
     }
     const row = affordRow(code);
@@ -461,8 +711,10 @@
     }
     const cname = COUNTRIES.find((c) => c.code === row.code)?.name || row.code;
     const cats = typeof AFFORD_CATEGORIES !== "undefined" ? AFFORD_CATEGORIES : [];
+    const rs = countryRiskStability(code);
     Layout.metaEl("afford") && (Layout.metaEl("afford").textContent = `SCORE ${row.affordScore}`);
-    el.innerHTML = `<div class="afford-hero">
+    el.innerHTML = `<div class="panel-banner mono">${UI.esc(scopeBanner())} · ${UI.esc(rs.devel)}</div>
+      <div class="afford-hero">
         <div>
           <div class="af-label">COST OF LIVING · FULL PICTURE</div>
           <div class="af-title">${UI.esc(cname)} · ${UI.esc(row.city || "")}</div>
@@ -475,6 +727,7 @@
           <span class="af-score-l">Affordability<br/>(higher = easier)</span>
         </div>
       </div>
+      ${riskStabilityStrip(code)}
       <div class="afford-legend mono">Cost bars: green = lower cost · red = higher cost for families</div>
       <div class="afford-grid">${cats
         .map((cat) => {
@@ -488,38 +741,102 @@
           </div>`;
         })
         .join("")}</div>
-      <div class="afford-foot">Includes housing, groceries, utilities, energy, gas/fuel, cars, public transport, public vs private school, university, childcare, and healthcare.</div>`;
+      <div class="afford-foot">Includes housing, groceries, utilities, energy, gas/fuel, cars, public transport, public vs private school, university, childcare, and healthcare. Risk &amp; stability are illustrative country models — not official government scores.</div>`;
+  }
+
+  function fillAffordRisk() {
+    const el = Layout.bodyEl("affordRisk");
+    if (!el) return;
+    const code = selectedCountryCode();
+    const list = scopedCountries()
+      .map((c) => {
+        const rs = countryRiskStability(c.code);
+        const aff = affordRow(c.code);
+        return { ...c, ...rs, affordScore: aff?.affordScore ?? 50 };
+      })
+      .sort((a, b) => b.stability - a.stability);
+    Layout.metaEl("affordRisk") &&
+      (Layout.metaEl("affordRisk").textContent = code
+        ? `R ${countryRiskScore(code)}`
+        : `${list.length} NATIONS`);
+
+    if (code) {
+      const rs = countryRiskStability(code);
+      const c = COUNTRIES.find((x) => x.code === code);
+      const peers = list.filter((x) => x.region === c?.region).slice(0, 12);
+      el.innerHTML = `<div class="panel-banner">Risk &amp; stability for <b>${UI.esc(
+        c?.name || code
+      )}</b> · ${UI.esc(scopeBanner())}</div>
+        ${riskStabilityStrip(code)}
+        <div class="rs-peer-h mono">Peers in ${UI.esc(c?.region || "region")} (same filter)</div>
+        <div class="afford-rank-list">${peers
+          .map((a, i) => {
+            const active = a.code === code ? " active" : "";
+            return `<button type="button" class="ar-row${active}" data-code="${a.code}">
+              <span class="ar-rank mono">${i + 1}</span>
+              <span class="ar-name">${UI.esc(a.name)}</span>
+              <span class="ar-score mono" style="color:${riskColor(a.risk)}">R${a.risk}</span>
+              <span class="ar-score mono" style="color:${stabilityColor(a.stability)}">S${a.stability}</span>
+              <span class="ar-bar"><i style="width:${a.stability}%;background:${stabilityColor(a.stability)}"></i></span>
+            </button>`;
+          })
+          .join("")}</div>
+        <p class="afford-foot">${UI.esc(rs.travel.tip)} Illustrative only — check official travel advice.</p>`;
+      bindRegionCountryClicks(el);
+      return;
+    }
+
+    el.innerHTML = `<div class="panel-banner">Risk (R) &amp; stability (S) · ${UI.esc(
+      scopeBanner()
+    )} · sorted by stability</div>
+      <div class="afford-rank-list">${list
+        .slice(0, 80)
+        .map((a, i) => {
+          return `<button type="button" class="ar-row" data-code="${a.code}">
+            <span class="ar-rank mono">${i + 1}</span>
+            <span class="ar-name">${UI.esc(a.name)} <i class="rc-tag">${UI.esc(a.region || "")}</i></span>
+            <span class="ar-score mono" style="color:${riskColor(a.risk)}">R${a.risk}</span>
+            <span class="ar-score mono" style="color:${stabilityColor(a.stability)}">S${a.stability}</span>
+            <span class="ar-score mono" style="color:${affordScoreColor(a.affordScore)}">A${a.affordScore}</span>
+          </button>`;
+        })
+        .join("")}</div>
+      <p class="afford-foot">Higher stability = calmer living environment in the model. Use with affordability when comparing places to live.</p>`;
+    bindRegionCountryClicks(el);
   }
 
   function fillAffordRank() {
     const el = Layout.bodyEl("affordRank");
     if (!el) return;
-    // Rank ALL countries in the worldwide catalog (each uses its own profile)
-    const list = COUNTRIES.filter((c) => c.code && c.code !== "GLOBAL")
-      .map((c) => affordRow(c.code))
+    const list = scopedCountries()
+      .map((c) => {
+        const row = affordRow(c.code);
+        if (!row) return null;
+        const rs = countryRiskStability(c.code);
+        return { ...row, name: c.name, region: c.region, risk: rs.risk, stability: rs.stability, devel: rs.devel };
+      })
       .filter(Boolean)
       .sort((a, b) => b.affordScore - a.affordScore);
     Layout.metaEl("affordRank") && (Layout.metaEl("affordRank").textContent = `${list.length} PLACES`);
-    el.innerHTML = `<div class="panel-banner">Higher score = everyday life costs feel easier · every country has its own profile</div>
+    el.innerHTML = `<div class="panel-banner">Higher affordability score = everyday costs feel easier · ${UI.esc(
+      scopeBanner()
+    )}</div>
       <div class="afford-rank-list">${list
         .map((a, i) => {
-          const name = COUNTRIES.find((c) => c.code === a.code)?.name || a.code;
           const active = state.country === a.code ? " active" : "";
           return `<button type="button" class="ar-row${active}" data-code="${a.code}">
             <span class="ar-rank mono">${i + 1}</span>
-            <span class="ar-name">${UI.esc(name)}</span>
+            <span class="ar-name">${UI.esc(a.name)} <i class="rc-tag">${UI.esc(a.region || "")} · ${UI.esc(
+              (a.devel || "").slice(0, 3)
+            )}</i></span>
             <span class="ar-score mono" style="color:${affordScoreColor(a.affordScore)}">${a.affordScore}</span>
+            <span class="ar-score mono sm" style="color:${riskColor(a.risk)}" title="Risk">R${a.risk}</span>
+            <span class="ar-score mono sm" style="color:${stabilityColor(a.stability)}" title="Stability">S${a.stability}</span>
             <span class="ar-bar"><i style="width:${a.affordScore}%;background:${affordScoreColor(a.affordScore)}"></i></span>
           </button>`;
         })
         .join("")}</div>`;
-    el.querySelectorAll(".ar-row").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        state.country = btn.dataset.code;
-        if ($("#countrySelect")) $("#countrySelect").value = state.country;
-        applyCountryFocus();
-      });
-    });
+    bindRegionCountryClicks(el);
   }
 
   function fillAffordEdu() {
@@ -527,7 +844,11 @@
     if (!el) return;
     const code = selectedCountryCode();
     if (!code) {
-      el.innerHTML = empty("Pick a country", "Education costs follow the country you select.");
+      Layout.metaEl("affordEdu") && (Layout.metaEl("affordEdu").textContent = "REGION");
+      el.innerHTML = `<div class="panel-banner">Education costs by country · ${UI.esc(
+        scopeBanner()
+      )}</div>${regionCountryListHtml(40)}`;
+      bindRegionCountryClicks(el);
       return;
     }
     const row = affordRow(code);
@@ -566,7 +887,11 @@
     if (!el) return;
     const code = selectedCountryCode();
     if (!code) {
-      el.innerHTML = empty("Pick a country", "Home costs follow the country you select.");
+      Layout.metaEl("affordHome") && (Layout.metaEl("affordHome").textContent = "REGION");
+      el.innerHTML = `<div class="panel-banner">Home / utilities · ${UI.esc(
+        scopeBanner()
+      )} — pick a country for bars</div>${regionCountryListHtml(40)}`;
+      bindRegionCountryClicks(el);
       return;
     }
     const row = affordRow(code);
@@ -598,7 +923,11 @@
     if (!el) return;
     const code = selectedCountryCode();
     if (!code) {
-      el.innerHTML = empty("Pick a country", "Transport costs follow the country you select.");
+      Layout.metaEl("affordMove") && (Layout.metaEl("affordMove").textContent = "REGION");
+      el.innerHTML = `<div class="panel-banner">Getting around · ${UI.esc(scopeBanner())}</div>${regionCountryListHtml(
+        40
+      )}`;
+      bindRegionCountryClicks(el);
       return;
     }
     const row = affordRow(code);
@@ -627,35 +956,448 @@
       <p class="afford-foot">Positive path: good public transport lowers the need for a second car and cuts fuel stress.</p>`;
   }
 
+  function fillCompare() {
+    const el = Layout.bodyEl("compare");
+    if (!el) return;
+    const codes = (state.compareCodes || []).filter(Boolean).slice(0, 3);
+    while (codes.length < 2) codes.push(codes[0] === "USA" ? "DEU" : "USA");
+    if (state.country && !codes.includes(state.country)) {
+      codes[0] = state.country;
+      state.compareCodes = codes;
+    }
+    Layout.metaEl("compare") && (Layout.metaEl("compare").textContent = codes.join(" · "));
+    const cols = codes.map((code) => {
+      const c = COUNTRIES.find((x) => x.code === code);
+      const aff = affordRowFamily(code) || affordRow(code);
+      const inf = inflationProfile(code);
+      const kmri = state.indicators.find((i) => i.id === "kmri");
+      const wx = (Feeds.getState().weather || []).find(
+        (w) => w.code === code || (c?.name && (w.name || "").toLowerCase() === c.name.toLowerCase())
+      );
+      const climate =
+        typeof CLIMATE_FOOD_BY_REGION !== "undefined"
+          ? CLIMATE_FOOD_BY_REGION[c?.region || "World"] || CLIMATE_FOOD_BY_REGION.World
+          : null;
+      return { code, c, aff, inf, kmri, wx, climate };
+    });
+    const scopeList = scopedCountries();
+    const allForCompare =
+      scopeList.length >= 2
+        ? scopeList
+        : COUNTRIES.filter((c) => c.code && c.code !== "GLOBAL");
+    el.innerHTML = `<div class="panel-banner">Side-by-side · ${UI.esc(
+      scopeBanner()
+    )} · risk, costs, inflation, weather</div>
+      <div class="compare-pickers">${[0, 1, 2]
+        .map((i) => {
+          const code = codes[i] || "";
+          const selOpts = allForCompare
+            .slice()
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(
+              (c) =>
+                `<option value="${c.code}"${c.code === code ? " selected" : ""}>${c.name}</option>`
+            )
+            .join("");
+          return `<label class="cmp-pick"><span>Country ${i + 1}</span>
+            <select data-cmp-i="${i}">${selOpts}</select></label>`;
+        })
+        .join("")}</div>
+      <div class="compare-table-wrap"><table class="compare-table">
+        <thead><tr><th>Signal</th>${cols
+          .map((col) => `<th>${UI.esc(col.c?.name || col.code)}</th>`)
+          .join("")}</tr></thead>
+        <tbody>
+          <tr><td>Affordability ↑</td>${cols
+            .map((col) => {
+              const s = col.aff?.affordScore ?? "—";
+              const color = typeof s === "number" ? affordScoreColor(s) : "inherit";
+              return `<td style="color:${color}"><b>${s}</b></td>`;
+            })
+            .join("")}</tr>
+          <tr><td>Risk ↓</td>${cols
+            .map((col) => {
+              const r = countryRiskStability(col.code).risk;
+              return `<td style="color:${riskColor(r)}"><b>${r}</b></td>`;
+            })
+            .join("")}</tr>
+          <tr><td>Stability ↑</td>${cols
+            .map((col) => {
+              const s = countryRiskStability(col.code).stability;
+              return `<td style="color:${stabilityColor(s)}"><b>${s}</b></td>`;
+            })
+            .join("")}</tr>
+          <tr><td>Travel advice</td>${cols
+            .map((col) => {
+              const t = countryRiskStability(col.code).travel;
+              return `<td class="cmp-note">${UI.esc(t.label)}</td>`;
+            })
+            .join("")}</tr>
+          <tr><td>Housing cost</td>${cols.map((col) => `<td>${col.aff?.housing ?? "—"}</td>`).join("")}</tr>
+          <tr><td>Groceries</td>${cols.map((col) => `<td>${col.aff?.groceries ?? "—"}</td>`).join("")}</tr>
+          <tr><td>Public school</td>${cols.map((col) => `<td>${col.aff?.schoolPublic ?? "—"}</td>`).join("")}</tr>
+          <tr><td>Childcare</td>${cols.map((col) => `<td>${col.aff?.childcare ?? "—"}</td>`).join("")}</tr>
+          <tr><td>Inflation now</td>${cols
+            .map((col) => `<td><b>${col.inf.current}%</b></td>`)
+            .join("")}</tr>
+          <tr><td>Inflation proj Y+1</td>${cols.map((col) => `<td>${col.inf.proj?.[0] ?? "—"}%</td>`).join("")}</tr>
+          <tr><td>Real growth now</td>${cols
+            .map((col) => `<td style="color:#69f0ae"><b>${col.inf.growth}%</b></td>`)
+            .join("")}</tr>
+          <tr><td>Growth proj Y+1</td>${cols.map((col) => `<td>${col.inf.growthProj?.[0] ?? "—"}%</td>`).join("")}</tr>
+          <tr><td>Weather</td>${cols
+            .map((col) => {
+              if (col.wx?.temp != null) return `<td>${Math.round(col.wx.temp)}°C</td>`;
+              return `<td class="muted">—</td>`;
+            })
+            .join("")}</tr>
+          <tr><td>Climate → food</td>${cols
+            .map((col) => `<td class="cmp-note">${UI.esc((col.climate?.tip || "").slice(0, 72))}</td>`)
+            .join("")}</tr>
+        </tbody>
+      </table></div>
+      <p class="afford-foot">Illustrative models + live weather/markets when available. Focus country above still drives map & news.</p>`;
+    el.querySelectorAll("select[data-cmp-i]").forEach((sel) => {
+      const i = Number(sel.dataset.cmpI);
+      if (codes[i]) sel.value = codes[i];
+      sel.addEventListener("change", () => {
+        state.compareCodes = state.compareCodes || ["USA", "DEU", "SWE"];
+        state.compareCodes[i] = sel.value;
+        fillCompare();
+        fillInflation();
+      });
+    });
+  }
+
+  function fillInflation() {
+    const el = Layout.bodyEl("inflation");
+    if (!el) return;
+    const code = selectedCountryCode() || state.compareCodes?.[0] || "USA";
+    const cname = COUNTRIES.find((c) => c.code === code)?.name || code;
+    const p = inflationProfile(code);
+    const hist = [...(p.hist || [])];
+    const fullInf = [...hist, p.current, ...(p.proj || [])];
+    const fullGr = [...(p.growthHist || []), p.growth, ...(p.growthProj || [])];
+    const projFromInf = hist.length + 1;
+    const projFromGr = (p.growthHist || []).length + 1;
+    Layout.metaEl("inflation") && (Layout.metaEl("inflation").textContent = `${p.current}% · G ${p.growth}%`);
+    el.innerHTML = `<div class="panel-banner">Inflation &amp; real growth for <b>${UI.esc(
+      cname
+    )}</b> — history · current · projected (illustrative model)</div>
+      <div class="infl-hero">
+        <div class="infl-stat">
+          <span class="infl-k">CURRENT CPI-like</span>
+          <span class="infl-v" style="color:#ff6b1a">${p.current}<small>%</small></span>
+          <span class="infl-s">prices rising this year (model)</span>
+        </div>
+        <div class="infl-stat">
+          <span class="infl-k">PROJECTED Y+1</span>
+          <span class="infl-v soft">${p.proj?.[0] ?? "—"}<small>%</small></span>
+          <span class="infl-s">then ${p.proj?.[1] ?? "—"}% · ${p.proj?.[2] ?? "—"}%</span>
+        </div>
+        <div class="infl-stat growth">
+          <span class="infl-k">REAL GROWTH NOW</span>
+          <span class="infl-v" style="color:#69f0ae">${p.growth}<small>%</small></span>
+          <span class="infl-s">economy expanding (model)</span>
+        </div>
+        <div class="infl-stat growth">
+          <span class="infl-k">GROWTH PROJ Y+1</span>
+          <span class="infl-v soft" style="color:#a5d6a7">${p.growthProj?.[0] ?? "—"}<small>%</small></span>
+          <span class="infl-s">then ${p.growthProj?.[1] ?? "—"}% · ${p.growthProj?.[2] ?? "—"}%</span>
+        </div>
+      </div>
+      <div class="infl-charts">
+        <div class="infl-chart-card">
+          <div class="infl-chart-h">Inflation history → forecast <span class="mono muted">solid = past · fade = projected</span></div>
+          ${seriesBars(fullInf, { color: "#ff6b1a", projFrom: projFromInf, w: 360, h: 64 })}
+          <div class="infl-labels mono">${hist
+            .map((_, i) => `Y-${hist.length - i}`)
+            .concat(["NOW", "Y+1", "Y+2", "Y+3"].slice(0, 1 + (p.proj || []).length))
+            .map((l) => `<span>${l}</span>`)
+            .join("")}</div>
+        </div>
+        <div class="infl-chart-card">
+          <div class="infl-chart-h">Real growth history → forecast</div>
+          ${seriesBars(fullGr, { color: "#69f0ae", projFrom: projFromGr, w: 360, h: 64 })}
+          <div class="infl-labels mono">${(p.growthHist || [])
+            .map((_, i) => `Y-${(p.growthHist || []).length - i}`)
+            .concat(["NOW", "Y+1", "Y+2", "Y+3"].slice(0, 1 + (p.growthProj || []).length))
+            .map((l) => `<span>${l}</span>`)
+            .join("")}</div>
+        </div>
+      </div>
+      <p class="afford-foot">${UI.esc(p.note || "")} Not official central-bank forecasts — for learning and comparison only.</p>`;
+  }
+
+  function fillChipchain() {
+    const el = Layout.bodyEl("chipchain");
+    if (!el) return;
+    const chain = typeof CHIP_CHAIN !== "undefined" ? CHIP_CHAIN : [];
+    Layout.metaEl("chipchain") && (Layout.metaEl("chipchain").textContent = "5 STAGES");
+    el.innerHTML = `<div class="panel-banner">How a chip is born — design → machines → factories → package → data centers</div>
+      <div class="chip-chain">${chain
+        .map((n) => {
+          const quotes = (n.key || [])
+            .map((sym) => {
+              const m = marketBySym(sym);
+              if (!m) return `<span class="chip-sym mono">${sym}</span>`;
+              const col = m.dir === "up" ? "#00c853" : m.dir === "down" ? "#ff5252" : "var(--text-mute)";
+              return `<span class="chip-sym mono" style="color:${col}">${sym} ${m.val} <i>${m.chg}</i></span>`;
+            })
+            .join("");
+          return `<div class="chip-node" style="border-color:${n.color}">
+            <div class="cn-stage" style="color:${n.color}">${UI.esc(n.stage)}</div>
+            <div class="cn-where mono">${UI.esc(n.where)}</div>
+            <p>${UI.esc(n.what)}</p>
+            <div class="cn-keys">${quotes}</div>
+          </div>`;
+        })
+        .join("")}</div>
+      <p class="afford-foot">Live prices when Yahoo legs are up · chip stress often shows first in SOXX, TSM, ASML, NVDA.</p>`;
+  }
+
+  function fillClimatefood() {
+    const el = Layout.bodyEl("climatefood");
+    if (!el) return;
+    const c = COUNTRIES.find((x) => x.code === state.country);
+    const region = c?.region || "World";
+    const map = typeof CLIMATE_FOOD_BY_REGION !== "undefined" ? CLIMATE_FOOD_BY_REGION : {};
+    const row = map[region] || map.World || { enso: "—", tip: "—" };
+    const foodSyms = ["WHEAT", "CORN", "SOY", "COCOA", "COFFEE", "SUGAR", "RICE"];
+    Layout.metaEl("climatefood") && (Layout.metaEl("climatefood").textContent = region.toUpperCase());
+    el.innerHTML = `<div class="panel-banner">Climate patterns → food stress · easy language for ${UI.esc(
+      c?.name || "the world"
+    )} (${UI.esc(region)})</div>
+      <div class="cf-grid">
+        <div class="cf-card">
+          <div class="cf-k">EL NIÑO / SEASON LINK</div>
+          <p>${UI.esc(row.enso)}</p>
+        </div>
+        <div class="cf-card tip">
+          <div class="cf-k">WHAT TO WATCH</div>
+          <p>${UI.esc(row.tip)}</p>
+        </div>
+      </div>
+      <div class="cf-live mono">Live food tape</div>
+      <div class="cf-tape">${foodSyms
+        .map((sym) => {
+          const m = marketBySym(sym);
+          if (!m) return "";
+          const col = m.dir === "up" ? "#ff6b1a" : m.dir === "down" ? "#00c853" : "var(--text-mute)";
+          return `<div class="cf-tick"><b>${sym}</b><span style="color:${col}">${m.val}</span><i style="color:${col}">${m.chg}</i></div>`;
+        })
+        .join("")}</div>
+      <p class="afford-foot">Positive path: diverse farms, grain reserves, and calm shipping routes ease food price spikes.</p>`;
+  }
+
+  function fillFamilyAfford() {
+    const el = Layout.bodyEl("familyAfford");
+    if (!el) return;
+    const code = selectedCountryCode();
+    const profiles = typeof FAMILY_PROFILES !== "undefined" ? FAMILY_PROFILES : [];
+    if (!code) {
+      Layout.metaEl("familyAfford") && (Layout.metaEl("familyAfford").textContent = "REGION");
+      el.innerHTML = `<div class="panel-banner">Family profile · ${UI.esc(
+        scopeBanner()
+      )} — pick a country, then single / couple / family / student</div>
+        <div class="fam-pills">${profiles
+          .map(
+            (p) =>
+              `<button type="button" class="fam-pill ${p.id === state.familyProfile ? "active" : ""}" data-fam="${p.id}">${UI.esc(
+                p.name
+              )}</button>`
+          )
+          .join("")}</div>
+        ${regionCountryListHtml(40)}`;
+      el.querySelectorAll(".fam-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.familyProfile = btn.dataset.fam;
+          fillFamilyAfford();
+          fillMoveTo();
+        });
+      });
+      bindRegionCountryClicks(el);
+      return;
+    }
+    const row = affordRowFamily(code);
+    if (!row) return;
+    const cname = COUNTRIES.find((c) => c.code === code)?.name || code;
+    const cats = typeof AFFORD_CATEGORIES !== "undefined" ? AFFORD_CATEGORIES : [];
+    Layout.metaEl("familyAfford") && (Layout.metaEl("familyAfford").textContent = state.familyProfile.toUpperCase());
+    el.innerHTML = `<div class="panel-banner">Family profile for <b>${UI.esc(
+      cname
+    )}</b> — reweights housing, school, childcare, car</div>
+      <div class="fam-pills">${profiles
+        .map(
+          (p) =>
+            `<button type="button" class="fam-pill ${p.id === state.familyProfile ? "active" : ""}" data-fam="${p.id}"
+            data-tip="${UI.esc(p.desc)}">${UI.esc(p.name)}</button>`
+        )
+        .join("")}</div>
+      <div class="afford-hero compact">
+        <div>
+          <div class="af-label">PROFILE SCORE</div>
+          <div class="af-title">${UI.esc(profiles.find((p) => p.id === state.familyProfile)?.name || "")}</div>
+          <p class="af-note">${UI.esc(profiles.find((p) => p.id === state.familyProfile)?.desc || "")}</p>
+        </div>
+        <div class="af-score-box" style="border-color:${affordScoreColor(row.affordScore)}">
+          <span class="af-score-n" style="color:${affordScoreColor(row.affordScore)}">${row.affordScore}</span>
+          <span class="af-score-l">for this<br/>household</span>
+        </div>
+      </div>
+      <div class="afford-grid tight">${cats
+        .slice(0, 8)
+        .map((cat) => {
+          const v = row[cat.id];
+          if (v == null) return "";
+          const col = affordCostColor(v);
+          return `<div class="afford-cat">
+            <div class="ac-top"><span>${cat.icon || ""} ${UI.esc(cat.name)}</span><b style="color:${col}">${v}</b></div>
+            <div class="ac-bar"><i style="width:${v}%;background:${col}"></i></div>
+          </div>`;
+        })
+        .join("")}</div>`;
+    el.querySelectorAll(".fam-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.familyProfile = btn.dataset.fam;
+        fillFamilyAfford();
+        fillMoveTo();
+        fillCompare();
+        fillAfford();
+      });
+    });
+  }
+
+  function fillMoveTo() {
+    const el = Layout.bodyEl("moveTo");
+    if (!el) return;
+    const prios = typeof MOVE_PRIORITIES !== "undefined" ? MOVE_PRIORITIES : [];
+    const prio = prios.find((p) => p.id === state.movePriority) || prios[0];
+    const key = prio?.key || "affordScore";
+    const invert = !!prio?.invert;
+    const list = scopedCountries()
+      .map((c) => {
+        const row = affordRowFamily(c.code) || affordRow(c.code);
+        if (!row) return null;
+        const rs = countryRiskStability(c.code);
+        return {
+          code: c.code,
+          name: c.name,
+          region: c.region,
+          row,
+          metric: key === "risk" ? rs.risk : key === "stability" ? rs.stability : row[key] ?? row.affordScore,
+          risk: rs.risk,
+          stability: rs.stability,
+        };
+      })
+      .filter(Boolean)
+      .sort((a, b) => (invert ? a.metric - b.metric : b.metric - a.metric))
+      .slice(0, 40);
+    Layout.metaEl("moveTo") && (Layout.metaEl("moveTo").textContent = (prio?.name || "rank").toUpperCase().slice(0, 18));
+    el.innerHTML = `<div class="panel-banner">Move-to ranking — ${UI.esc(scopeBanner())}</div>
+      <div class="move-prios">${prios
+        .map(
+          (p) =>
+            `<button type="button" class="move-prio ${p.id === state.movePriority ? "active" : ""}" data-prio="${p.id}">${UI.esc(
+              p.name
+            )}</button>`
+        )
+        .join("")}</div>
+      <div class="afford-rank-list">${list
+        .map((a, i) => {
+          const active = state.country === a.code ? " active" : "";
+          const col =
+            key === "affordScore" || key === "stability"
+              ? key === "stability"
+                ? stabilityColor(a.metric)
+                : affordScoreColor(a.metric)
+              : key === "risk"
+                ? riskColor(a.metric)
+                : affordCostColor(a.metric);
+          return `<button type="button" class="ar-row${active}" data-code="${a.code}">
+            <span class="ar-rank mono">${i + 1}</span>
+            <span class="ar-name">${UI.esc(a.name)} <i class="rc-tag">${UI.esc(a.region || "")}</i></span>
+            <span class="ar-score mono" style="color:${col}">${a.metric}</span>
+            <span class="ar-score mono sm" style="color:${riskColor(a.risk)}">R${a.risk}</span>
+            <span class="ar-score mono sm" style="color:${stabilityColor(a.stability)}">S${a.stability}</span>
+            <span class="ar-bar"><i style="width:${Math.min(100, Math.abs(a.metric))}%;background:${col}"></i></span>
+          </button>`;
+        })
+        .join("")}</div>
+      <p class="afford-foot">${
+        invert
+          ? "Lower number = better for this priority (cheaper / lower risk)."
+          : "Higher score = better for this priority."
+      } Profile: ${UI.esc(state.familyProfile)}.</p>`;
+    el.querySelectorAll(".move-prio").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.movePriority = btn.dataset.prio;
+        fillMoveTo();
+      });
+    });
+    bindRegionCountryClicks(el);
+  }
+
+  function fillPowerai() {
+    const el = Layout.bodyEl("powerai");
+    if (!el) return;
+    const syms = ["NATGAS", "COPPER", "EQIX", "DLR", "MSFT", "GOOGL", "NVDA", "SOXX"];
+    Layout.metaEl("powerai") && (Layout.metaEl("powerai").textContent = "AI POWER");
+    el.innerHTML = `<div class="panel-banner">Data centers need power + copper + chips — live links</div>
+      <div class="power-grid">${syms
+        .map((sym) => {
+          const m = marketBySym(sym);
+          if (!m) return "";
+          const chart =
+            typeof Charts !== "undefined" ? Charts.sparkHtml(m, 40) : "";
+          const col = m.dir === "up" ? "#00c853" : m.dir === "down" ? "#ff5252" : "var(--text-mute)";
+          return `<div class="power-card" data-sym="${sym}">
+            <div class="pc-top"><b>${sym}</b><span style="color:${col}">${m.chg}</span></div>
+            <div class="pc-val">${m.val}</div>
+            <div class="pc-name">${UI.esc(m.name || "")}</div>
+            <div class="pc-chart">${chart}</div>
+          </div>`;
+        })
+        .join("")}</div>
+      <p class="afford-foot">When gas or copper rises, AI power costs and data-center build-outs can feel the squeeze.</p>`;
+    el.querySelectorAll(".power-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        state.instrument = card.dataset.sym;
+        if ($("#instrumentSelect")) $("#instrumentSelect").value = state.instrument;
+        updateFocusChrome();
+        fillInstrument();
+        fillMktHero();
+        fillMktBoard();
+      });
+    });
+  }
+
   function fillLayers() {
     const el = Layout.bodyEl("layers");
     if (!el) return;
-    let layers = LAYERS;
-    if (state.domain !== "all") {
-      layers = LAYERS.filter((l) => !l.domain || l.domain === state.domain || ["geo", "war"].includes(l.domain) && state.domain === "war");
-      // softer: show domain match + always disasters/hotspots for context
-      layers = LAYERS.filter((l) => l.domain === state.domain || l.id === "hotspots" || l.id === "disasters");
-      if (!layers.length) layers = LAYERS;
-    }
-    const onCount = layers.filter((l) => state.layers[l.id]).length;
+    // Always list every layer so map toggles stay complete (selected + non-selected)
+    const layers = LAYERS;
+    const onCount = layers.filter((l) => state.layers[l.id] !== false).length;
     Layout.metaEl("layers") && (Layout.metaEl("layers").textContent = `${onCount}/${layers.length}`);
-    el.innerHTML = `<div class="layer-list">${layers
+    el.innerHTML = `<div class="panel-banner">Map layers · on = visible worldwide · off = hidden · not filtered by country</div>
+      <div class="layer-list">${layers
       .map((l) => {
-        const on = state.layers[l.id];
-        return `<div class="layer-item ${on ? "on" : ""}" data-layer="${l.id}">
+        const on = state.layers[l.id] !== false;
+        return `<div class="layer-item ${on ? "on" : ""}" data-layer="${l.id}" title="${on ? "On — showing on map" : "Off — hidden on map"}">
         <span class="swatch" style="background:${l.color}"></span>
         <span class="lname">${l.name}</span>
-        <span class="toggle"></span></div>`;
+        <span class="toggle" aria-hidden="true"></span></div>`;
       })
       .join("")}</div>`;
     el.querySelectorAll(".layer-item").forEach((node) => {
       node.addEventListener("click", () => {
-        state.layers[node.dataset.layer] = !state.layers[node.dataset.layer];
+        const id = node.dataset.layer;
+        state.layers[id] = !(state.layers[id] !== false);
         Storage.set("layers", state.layers);
         fillLayers();
         pushMarkers();
         fillAlerts();
-        UI.toast(`Layer ${node.dataset.layer}`);
+        UI.toast(`Map layer · ${id} · ${state.layers[id] ? "ON" : "OFF"}`);
       });
     });
   }
@@ -753,6 +1495,7 @@
     fillTriad();
     fillPulse();
     fillRadar();
+    fillImpact();
     updateFocusChrome();
     if (state.stream === "multi" || state.stream === "news" || state.stream === "markets") renderStream();
   }
@@ -767,8 +1510,8 @@
     if (!el) return;
     const list = state.indicators.length ? state.indicators : Indicators.compute({});
     state.indicators = list;
-    Layout.metaEl("indicators") && (Layout.metaEl("indicators").textContent = `${list.length} YOURS`);
-    el.innerHTML = `<div class="ind-intro">Your proprietary models · click any card for full explanation · edit weights in ⚙</div>
+    Layout.metaEl("indicators") && (Layout.metaEl("indicators").textContent = `${list.length} MODELS`);
+    el.innerHTML = `<div class="ind-intro">Self-developed risk models · click any card for full explanation · edit weights in ⚙</div>
       <div class="ind-grid">${list
         .map((ind) => {
           const col = Indicators.colorFor(ind, ind.value);
@@ -820,7 +1563,7 @@
       })
       .join("");
     el.innerHTML = `<div class="kmri-hero">
-      <div class="kmri-label">★ KMRI · YOUR FLAGSHIP</div>
+      <div class="kmri-label">★ KMRI · FLAGSHIP</div>
       <div class="kmri-val" style="color:${col}">${kmri.value}</div>
       <div class="kmri-delta">Δ ${kmri.delta > 0 ? "+" : ""}${kmri.delta}${
       spi != null ? ` · SPI ${spi.value} (stability headroom)` : ""
@@ -844,7 +1587,7 @@
       ex?.how ? `How it is built: ${ex.how}` : "",
       ex?.read ? `How to read: ${ex.read}` : "",
       ex?.color ? `Color scale: ${ex.color}` : "",
-      "Edit weights under Settings → My Indicators. KMRI is protected as flagship.",
+      "Edit weights under Settings → Indicators. KMRI is protected as flagship.",
     ]
       .filter(Boolean)
       .join("\n\n");
@@ -863,13 +1606,13 @@
               ? "high"
               : "info";
     UI.openDrawer({
-      type: "YOUR INDICATOR",
+      type: "INDICATOR",
       title: `${ind.name} — ${ind.label}`,
       sev,
       meta: [
         ["VALUE", String(ind.value)],
         ["Δ", String(ind.delta)],
-        ["OWNER", "Self-developed"],
+        ["TYPE", "Self-developed model"],
         ...Object.entries(ind.weights || {}).map(([k, v]) => [`WEIGHT ${k}`, String(v)]),
         ...Object.entries(f)
           .slice(0, 10)
@@ -877,6 +1620,10 @@
       ],
       body: bodyParts,
     });
+  }
+
+  function liveCount(list) {
+    return (list || []).filter((x) => x.source === "live" || x.source === "cache").length;
   }
 
   function fillMarkets() {
@@ -887,8 +1634,12 @@
     );
     if (state.search) m = m.filter((x) => matchSearch(x.sym + x.name));
     m.forEach((x) => Charts.push(x.sym, x.val));
-    Layout.metaEl("markets") && (Layout.metaEl("markets").textContent = m.some((x) => x.source === "live") ? "LIVE+" : "MODEL");
-    el.innerHTML = marketGrid(m, true);
+    const live = liveCount(m);
+    Layout.metaEl("markets") &&
+      (Layout.metaEl("markets").textContent = live ? `LIVE ${live}/${m.length}` : "SEED");
+    el.innerHTML =
+      `<div class="panel-banner">Macro tape · ${live} live · Yahoo + CoinGecko + FX APIs · model only for insurance/shipping proxies</div>` +
+      marketGrid(m, true);
     bindMktClicks(el, m);
     renderMacroStrip();
   }
@@ -922,18 +1673,19 @@
     const syms = marketBasket();
     const markets = syms.map(marketBySym).filter(Boolean);
     markets.forEach((m) => Charts.push(m.sym, m.val));
+    const live = liveCount(markets);
     const lens = LENSES.find((l) => l.id === state.lens);
     const c = COUNTRIES.find((x) => x.code === state.country);
     Layout.metaEl("mktboard") &&
-      (Layout.metaEl("mktboard").textContent = `${c ? c.code : "GLB"} · ${(lens?.name || "OVERVIEW").toUpperCase()}`);
+      (Layout.metaEl("mktboard").textContent = `${live}/${markets.length} LIVE · ${c ? c.code : "GLB"}`);
     el.innerHTML = `<div class="mkt-board-head">
         <div>
           <div class="mkt-board-title">MARKET BOARD</div>
-          <div class="mkt-board-sub">Auto basket for <b>${UI.esc(c?.name || "Global")}</b> · lens <b>${UI.esc(
+          <div class="mkt-board-sub">Basket for <b>${UI.esc(c?.name || "Global")}</b> · lens <b>${UI.esc(
             lens?.name || "Overview"
-          )}</b> · live mountain charts</div>
+          )}</b> · <b>${live}</b> live quotes · charts from daily closes</div>
         </div>
-        <div class="mkt-board-count mono">${markets.length} ASSETS</div>
+        <div class="mkt-board-count mono">${live}/${markets.length} LIVE</div>
       </div>
       <div class="bb-board">${markets.map((m) => Charts.boardCard(m, { focused: state.instrument === m.sym })).join("")}</div>`;
     el.querySelectorAll(".bb-board-card").forEach((card) => {
@@ -955,8 +1707,9 @@
     const sym = state.instrument || marketBasket()[0] || "BRENT";
     const m = marketBySym(sym);
     if (m) Charts.push(m.sym, m.val);
-    Layout.metaEl("mkthero") && (Layout.metaEl("mkthero").textContent = sym);
-    el.innerHTML = Charts.heroChart(m, `${sym} · FOCUS`);
+    Layout.metaEl("mkthero") &&
+      (Layout.metaEl("mkthero").textContent = m?.source === "live" || m?.source === "cache" ? `${sym} · LIVE` : `${sym}`);
+    el.innerHTML = Charts.heroChart(m, `${sym} · ${m?.source === "live" ? "LIVE" : (m?.source || "FOCUS").toUpperCase()}`);
     el.querySelector(".bb-hero")?.addEventListener("click", () => {
       if (m) {
         UI.openDrawer({
@@ -1008,7 +1761,7 @@
             ? "Tip: try similar foods in season, or buy the size that lasts longer. Stores often change prices weeks after markets move."
             : dir === "down"
               ? "Good news window: if ships and roads stay open, shelves can get a bit easier on the wallet."
-              : "Steady day — no rush to change your shopping plan.";
+              : "Steady day — no rush to change the shopping plan.";
         return { m, shop, tone, constructive };
       })
       .filter(Boolean);
@@ -1016,13 +1769,13 @@
     const downN = rows.filter((r) => r.tone === "down").length;
     const headline =
       upN > downN + 1
-        ? "Your next grocery trip may feel a bit more expensive (food or fuel-linked items)."
+        ? "The next grocery trip may feel a bit more expensive (food or fuel-linked items)."
         : downN > upN + 1
           ? "Good news: several staples are easing — the next shop could feel lighter."
           : "Mixed basket — some items up, some down. Shop smart by category.";
     Layout.metaEl("grocery") && (Layout.metaEl("grocery").textContent = upN > downN ? "FIRMER" : downN > upN ? "EASIER" : "MIXED");
     el.innerHTML = `<div class="grocery-hero ${upN > downN ? "firmer" : downN > upN ? "easier" : "mixed"}">
-        <div class="gh-label">YOUR NEXT GROCERY TRIP</div>
+        <div class="gh-label">GROCERY TRIP SIGNAL</div>
         <div class="gh-head">${UI.esc(headline)}</div>
         <div class="gh-sub">Built from wheat, soft foods, and energy prices. Not a store receipt — a leading household signal everyone can read.</div>
       </div>
@@ -1337,21 +2090,24 @@
   function fillNews() {
     const el = Layout.bodyEl("news");
     if (!el) return;
-    const items = filterNews(Feeds.getState().news || []);
+    const raw = Feeds.getState().news || [];
+    const items = filterNews(raw);
     const c = COUNTRIES.find((x) => x.code === state.country);
     const lens = LENSES.find((l) => l.id === state.lens);
-    Layout.metaEl("news") && (Layout.metaEl("news").textContent = String(items.length));
+    Layout.metaEl("news") && (Layout.metaEl("news").textContent = `${items.length}/${raw.length}`);
     if (!items.length) {
-      el.innerHTML = empty("No headlines for filter", "Clear country/lens or wait for live RSS");
+      el.innerHTML = empty("No headlines for filter", "Clear country/lens or wait for live RSS · press R to refresh");
       return;
     }
     el.innerHTML =
-      `<div class="panel-banner">News · ${UI.esc(c?.name || "Global")} · ${UI.esc(lens?.name || "Overview")}</div>` +
+      `<div class="panel-banner">News · ${UI.esc(c?.name || "Global")} · ${UI.esc(
+        lens?.name || "Overview"
+      )} · ${raw.length} live headlines · newest first</div>` +
       items
         .slice(0, 50)
         .map(
           (n) => `<div class="news-row ${n.sev === "crit" || n.sev === "high" ? "flash" : ""}" data-id="${n.id}">
-      <div class="news-src">${UI.esc(n.source)}${n.cached ? " · CACHE" : ""}</div>
+      <div class="news-src">${UI.esc(n.source)}${n.cached ? " · CACHE" : n.live ? " · LIVE" : ""}</div>
       <div class="news-title">${UI.esc(n.title)}</div>
       <div class="news-meta">${relTime(n.published)} ago</div></div>`
         )
@@ -1498,10 +2254,272 @@
   function fillInfra() {
     const el = Layout.bodyEl("infra");
     if (!el) return;
-    el.innerHTML = INFRA.map(
-      (i) => `<div class="infra-row"><span>${i.icon}</span><span class="i-name">${i.name}</span>
+    const events = typeof INFRA_EVENTS !== "undefined" ? INFRA_EVENTS : [];
+    const down = events.filter((e) => e.status === "down" || e.status === "degraded").length;
+    const warn = events.filter((e) => e.status === "warn").length;
+    const iis = state.indicators.find((i) => i.id === "iis");
+    Layout.metaEl("infra") && (Layout.metaEl("infra").textContent = iis ? `IIS ${iis.value}` : `${down}↓`);
+    el.innerHTML = `<div class="panel-banner">Critical infrastructure snapshot · IIS ${
+      iis?.value ?? "—"
+    } · ${down} down/degraded · ${warn} warnings</div>
+      ${INFRA.map(
+        (i) => `<div class="infra-row"><span>${i.icon}</span><span class="i-name">${i.name}</span>
       <span class="i-stat ${i.level}">${i.stat}</span></div>`
-    ).join("");
+      ).join("")}
+      <p class="afford-foot">See Power Mix · Telecoms · Outages panels for detail. Open the <b>Power · Net</b> desk for the full view.</p>`;
+  }
+
+  function powerMixBars(mix) {
+    const parts = [
+      ["nuclear", "Nuclear", "#b388ff"],
+      ["coal", "Coal", "#8d6e63"],
+      ["gas", "Gas", "#ff8a65"],
+      ["hydro", "Hydro", "#4fc3f7"],
+      ["wind", "Wind", "#69f0ae"],
+      ["solar", "Solar", "#ffd54f"],
+      ["other", "Other / oil", "#90a4ae"],
+    ];
+    return parts
+      .map(([k, label, col]) => {
+        const v = mix[k] ?? 0;
+        return `<div class="pm-row">
+          <span class="pm-lab">${label}</span>
+          <div class="pm-bar"><i style="width:${v}%;background:${col}"></i></div>
+          <b class="mono" style="color:${col}">${v}%</b>
+        </div>`;
+      })
+      .join("");
+  }
+
+  function fillPowerMix() {
+    const el = Layout.bodyEl("powerMix");
+    if (!el) return;
+    const code = selectedCountryCode();
+    if (!code) {
+      const list = scopedCountries().slice(0, 36);
+      Layout.metaEl("powerMix") && (Layout.metaEl("powerMix").textContent = "REGION");
+      el.innerHTML = `<div class="panel-banner">Power mix by country · ${UI.esc(
+        scopeBanner()
+      )} — pick a country for full stack</div>
+        <div class="region-country-list">${list
+          .map((c) => {
+            const m = typeof getPowerMix === "function" ? getPowerMix(c.code) : {};
+            const ren = (m.wind || 0) + (m.solar || 0) + (m.hydro || 0);
+            return `<button type="button" class="rc-row" data-code="${c.code}">
+              <span class="rc-name">${UI.esc(c.name)}</span>
+              <span class="rc-m mono" title="Nuclear">N ${m.nuclear ?? "—"}</span>
+              <span class="rc-m mono" title="Coal">C ${m.coal ?? "—"}</span>
+              <span class="rc-m mono" title="Renewables hydro+wind+solar">R ${ren}</span>
+            </button>`;
+          })
+          .join("")}</div>`;
+      bindRegionCountryClicks(el);
+      return;
+    }
+    const mix = typeof getPowerMix === "function" ? getPowerMix(code) : null;
+    if (!mix) {
+      el.innerHTML = empty("No power mix", "");
+      return;
+    }
+    const cname = COUNTRIES.find((c) => c.code === code)?.name || code;
+    const ren = (mix.wind || 0) + (mix.solar || 0) + (mix.hydro || 0);
+    const fossil = (mix.coal || 0) + (mix.gas || 0);
+    Layout.metaEl("powerMix") && (Layout.metaEl("powerMix").textContent = `${ren}% REN`);
+    el.innerHTML = `<div class="panel-banner">Electricity sources for <b>${UI.esc(
+      cname
+    )}</b> · illustrative generation shares</div>
+      <div class="pm-sum mono">Renewables (hydro+wind+solar) <b>${ren}%</b> · Fossil (coal+gas) <b>${fossil}%</b> · Nuclear <b>${
+      mix.nuclear || 0
+    }%</b></div>
+      <div class="pm-grid">${powerMixBars(mix)}</div>
+      <p class="afford-foot">${UI.esc(mix.note || "")} Not official utility data — for comparison and learning.</p>`;
+  }
+
+  function fillTelecoms() {
+    const el = Layout.bodyEl("telecoms");
+    if (!el) return;
+    const code = selectedCountryCode();
+    if (!code) {
+      Layout.metaEl("telecoms") && (Layout.metaEl("telecoms").textContent = "REGION");
+      const list = scopedCountries().slice(0, 40);
+      el.innerHTML = `<div class="panel-banner">Telecom strength · ${UI.esc(
+        scopeBanner()
+      )} · higher = stronger networks</div>
+        <div class="region-country-list">${list
+          .map((c) => {
+            const t = typeof getTelecomProfile === "function" ? getTelecomProfile(c.code) : {};
+            return `<button type="button" class="rc-row" data-code="${c.code}">
+              <span class="rc-name">${UI.esc(c.name)}</span>
+              <span class="rc-m mono">Mob ${t.mobile ?? "—"}</span>
+              <span class="rc-m mono">Net ${t.internet ?? "—"}</span>
+              <span class="rc-m mono">Fib ${t.fiber ?? "—"}</span>
+            </button>`;
+          })
+          .join("")}</div>`;
+      bindRegionCountryClicks(el);
+      return;
+    }
+    const t = typeof getTelecomProfile === "function" ? getTelecomProfile(code) : null;
+    if (!t) return;
+    const cname = COUNTRIES.find((c) => c.code === code)?.name || code;
+    const rows = [
+      ["mobile", "Mobile phones", "How strong mobile coverage and use look."],
+      ["mobileNet", "Mobile network quality", "5G / 4G quality and capacity (model)."],
+      ["landline", "Landline / fixed voice", "Traditional copper lines — often lower where mobile wins."],
+      ["fiber", "Fiber broadband", "High-speed fixed internet reach."],
+      ["internet", "Internet reliability", "Overall online access quality for homes and shops."],
+    ];
+    Layout.metaEl("telecoms") && (Layout.metaEl("telecoms").textContent = `NET ${t.internet}`);
+    el.innerHTML = `<div class="panel-banner">Telecoms for <b>${UI.esc(
+      cname
+    )}</b> · mobile · landline · internet</div>
+      <div class="tel-grid">${rows
+        .map(([id, label, tip]) => {
+          const v = t[id] ?? 0;
+          const col = v >= 75 ? "#00c853" : v >= 55 ? "#f5a623" : "#ff6b1a";
+          return `<div class="tel-card" data-tip="${UI.esc(tip)}">
+            <div class="ae-top"><strong>${UI.esc(label)}</strong><span style="color:${col}">${v}</span></div>
+            <div class="ac-bar"><i style="width:${v}%;background:${col}"></i></div>
+            <p class="ac-tip">${UI.esc(tip)}</p>
+          </div>`;
+        })
+        .join("")}</div>
+      <p class="afford-foot">${UI.esc(t.note || "")} Higher bars = stronger infrastructure.</p>`;
+  }
+
+  function fillOutages() {
+    const el = Layout.bodyEl("outages");
+    if (!el) return;
+    let events = typeof INFRA_EVENTS !== "undefined" ? [...INFRA_EVENTS] : [];
+    const scope = new Set(scopedCountries().map((c) => c.code));
+    if (state.regionGroup !== "all" || state.develFilter !== "all") {
+      events = events.filter((e) => scope.has(e.code));
+    }
+    const code = selectedCountryCode();
+    if (code) {
+      const mine = events.filter((e) => e.code === code);
+      if (mine.length) events = [...mine, ...events.filter((e) => e.code !== code)];
+    }
+    // News-derived outage hits
+    const news = Feeds.getState().news || [];
+    const outageRe = /blackout|power outage|load.?shedding|grid failure|internet outage|cable cut|network shutdown|telecom outage/i;
+    const newsHits = news
+      .filter((n) => outageRe.test((n.title || "") + " " + (n.summary || "")))
+      .slice(0, 8)
+      .map((n, i) => ({
+        id: "n_" + i,
+        type: /internet|cable|network|telecom/i.test(n.title || "") ? "internet" : "power",
+        status: "warn",
+        sev: n.sev === "crit" ? "crit" : "elevated",
+        code: "",
+        title: n.title,
+        note: `Live news · ${n.source}`,
+        news: true,
+      }));
+
+    events = events
+      .slice()
+      .sort((a, b) => (statusRank(b.status) || 0) - (statusRank(a.status) || 0) || (b.sev === "crit" ? 1 : 0));
+
+    const down = events.filter((e) => e.status === "down").length;
+    const warn = events.filter((e) => e.status === "warn" || e.status === "degraded").length;
+    Layout.metaEl("outages") && (Layout.metaEl("outages").textContent = `${down}↓ ${warn}⚠`);
+
+    const badge = (st) => {
+      const map = {
+        down: ["DOWN", "#ff3b30"],
+        degraded: ["DEGRADED", "#ff6b1a"],
+        warn: ["WARNING", "#f5a623"],
+        recovering: ["RECOVERING", "#4a9eff"],
+        up: ["UP / OK", "#00c853"],
+      };
+      return map[st] || ["WATCH", "#8b93a7"];
+    };
+
+    el.innerHTML = `<div class="panel-banner">Power · internet · telecom outages &amp; warnings · ${UI.esc(
+      scopeBanner()
+    )}</div>
+      <div class="out-tabs mono"><span class="out-pill down">${down} DOWN</span><span class="out-pill warn">${warn} WARN / DEGRADED</span><span class="out-pill up">${
+      events.filter((e) => e.status === "up").length
+    } OK</span></div>
+      <div class="out-list">${events
+        .map((e) => {
+          const [lab, col] = badge(e.status);
+          const cname = e.code ? COUNTRIES.find((c) => c.code === e.code)?.name || e.code : "Global / news";
+          const active = code && e.code === code ? " active" : "";
+          return `<button type="button" class="out-row${active}" data-code="${e.code || ""}" data-lat="${e.lat || ""}" data-lon="${e.lon || ""}">
+            <span class="out-st" style="background:${col}22;color:${col};border-color:${col}">${lab}</span>
+            <span class="out-type mono">${(e.type || "").toUpperCase()}</span>
+            <div class="out-body">
+              <strong>${UI.esc(e.title)}</strong>
+              <span class="out-meta">${UI.esc(cname)} · ${UI.esc(e.sev || "")}</span>
+              <p>${UI.esc(e.note || "")}</p>
+            </div>
+          </button>`;
+        })
+        .join("")}</div>
+      ${
+        newsHits.length
+          ? `<div class="out-news-h mono">FROM LIVE NEWS</div>
+        <div class="out-list">${newsHits
+          .map((e) => {
+            const [lab, col] = badge(e.status);
+            return `<div class="out-row news">
+              <span class="out-st" style="background:${col}22;color:${col};border-color:${col}">${lab}</span>
+              <span class="out-type mono">${e.type.toUpperCase()}</span>
+              <div class="out-body"><strong>${UI.esc(e.title)}</strong><p>${UI.esc(e.note)}</p></div>
+            </div>`;
+          })
+          .join("")}</div>`
+          : ""
+      }
+      <p class="afford-foot">Statuses: <b>DOWN</b> outage · <b>DEGRADED</b> partial · <b>WARNING</b> risk rising · <b>RECOVERING</b> improving · <b>UP</b> normal. Illustrative model + live headlines.</p>`;
+
+    el.querySelectorAll(".out-row[data-code]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.lat && btn.dataset.lon) {
+          Map3D.flyTo(Number(btn.dataset.lon), Number(btn.dataset.lat), 5);
+        }
+        if (btn.dataset.code) {
+          state.country = btn.dataset.code;
+          if ($("#countrySelect")) $("#countrySelect").value = state.country;
+          applyCountryFocus();
+        }
+      });
+    });
+  }
+
+  function fillCritInfra() {
+    const el = Layout.bodyEl("critInfra");
+    if (!el) return;
+    const iis = state.indicators.find((i) => i.id === "iis");
+    const code = selectedCountryCode();
+    const mix = typeof getPowerMix === "function" ? getPowerMix(code || "") : null;
+    const tel = typeof getTelecomProfile === "function" ? getTelecomProfile(code || "") : null;
+    const f = iis?.factors || {};
+    const val = iis?.value ?? 50;
+    const col = Indicators.colorFor?.(iis || { id: "iis" }, val) || riskColor(val);
+    const ren = mix ? (mix.wind || 0) + (mix.solar || 0) + (mix.hydro || 0) : "—";
+    Layout.metaEl("critInfra") && (Layout.metaEl("critInfra").textContent = `IIS ${val}`);
+    el.innerHTML = `<div class="panel-banner">Overall infrastructure stress · <b>IIS</b> (Infrastructure Integrity Stress)</div>
+      <div class="iis-hero">
+        <div class="iis-score" style="border-color:${col}">
+          <span class="iis-k">IIS</span>
+          <span class="iis-v" style="color:${col}">${val}</span>
+          <span class="iis-l">higher = more stress</span>
+        </div>
+        <div class="iis-facts">
+          <div class="iis-f"><span>Power outage heat</span><b>${f.outageHeat != null ? Math.round(f.outageHeat) : "—"}</b></div>
+          <div class="iis-f"><span>Power structure stress</span><b>${f.powerStress != null ? Math.round(f.powerStress) : "—"}</b></div>
+          <div class="iis-f"><span>Telecom stress</span><b>${f.telecomStress != null ? Math.round(f.telecomStress) : "—"}</b></div>
+          <div class="iis-f"><span>Renewables share</span><b>${ren}${typeof ren === "number" ? "%" : ""}</b></div>
+          <div class="iis-f"><span>Internet score</span><b>${tel?.internet ?? "—"}</b></div>
+          <div class="iis-f"><span>Mobile score</span><b>${tel?.mobile ?? "—"}</b></div>
+        </div>
+      </div>
+      <div class="ind-bar big"><i style="width:${val}%;background:${col}"></i></div>
+      <p class="afford-foot">IIS blends outage events, power mix fragility, telecom strength, energy markets, and weather. Open Power · Net desk for full detail.</p>`;
+    el.onclick = () => showIndicator("iis");
   }
 
   function fillTransport() {
@@ -1536,13 +2554,23 @@
     const el = Layout.bodyEl("weather");
     if (!el) return;
     let wx = Feeds.getState().weather || [];
+    const scopeCodes = new Set(scopedCountries().map((c) => c.code));
+    // Scope weather to region / economy filter
+    if (state.regionGroup !== "all" || state.develFilter !== "all") {
+      wx = wx.filter((w) => scopeCodes.has(w.code));
+    }
+    const wxUpdated = Feeds.getState().weatherUpdated;
     Layout.metaEl("weather") &&
-      (Layout.metaEl("weather").textContent = wx.length ? `${wx.length} WORLD` : "—");
+      (Layout.metaEl("weather").textContent = wx.length
+        ? `${wx.length} · ${wxUpdated ? relTime(wxUpdated) : "—"}`
+        : "—");
     if (!wx.length) {
-      el.innerHTML = empty("Weather loading…", "Fetching capital temperatures worldwide (Open-Meteo)");
+      el.innerHTML = empty(
+        "Weather loading…",
+        "Fetching capital temperatures (Open-Meteo) — or widen region / economy filter."
+      );
       return;
     }
-    // Focus country first, then filter by search, else full world list
     const focusCode = state.country;
     if (focusCode) {
       const focused = wx.filter((w) => w.code === focusCode);
@@ -1559,50 +2587,124 @@
       );
       if (filtered.length) wx = filtered;
     }
-    const show = wx.slice(0, 200);
+
+    // Enrich with weather + travel warnings
+    const enriched = wx.map((w) => {
+      const warn =
+        typeof weatherWarningFromCode === "function"
+          ? weatherWarningFromCode(w.codeWx, w.wind, w.precip)
+          : { level: w.impact || "ok", label: w.label || "—", tip: "" };
+      const rs = countryRiskStability(w.code);
+      return { ...w, wxWarn: warn, travel: rs.travel, risk: rs.risk };
+    });
+
+    const severeWx = enriched
+      .filter((w) => ["critical", "high", "elevated"].includes(w.wxWarn?.level))
+      .sort((a, b) => {
+        const rank = { critical: 3, high: 2, elevated: 1 };
+        return (rank[b.wxWarn.level] || 0) - (rank[a.wxWarn.level] || 0);
+      })
+      .slice(0, 12);
+
+    const travelWarn = enriched
+      .filter((w) => ["critical", "high", "elevated"].includes(w.travel?.level))
+      .sort((a, b) => b.risk - a.risk)
+      .slice(0, 12);
+
+    const show = enriched.slice(0, 200);
     const focus = focusCode ? show.find((w) => w.code === focusCode) : null;
+    const eonet = (Feeds.getState().eonet || []).slice(0, 8);
+
     el.innerHTML =
-      `<div class="panel-banner">Worldwide capital temperatures · live Open-Meteo · click a row to fly the map${
+      `<div class="panel-banner">Weather &amp; travel · ${UI.esc(scopeBanner())} · live Open-Meteo${
+        wxUpdated ? ` · updated ${relTime(wxUpdated)} ago` : ""
+      }${
         focus
-          ? ` · <b>${UI.esc(focus.name)}</b> now <b class="mono">${focus.temp ?? "—"}°C</b>`
-          : " · pick a country to pin its temperature on top"
+          ? ` · <b>${UI.esc(focus.name)}</b> <b class="mono">${
+              focus.temp != null ? Number(focus.temp).toFixed(1) + "°C" : "—"
+            }</b> · ${UI.esc(focus.wxWarn?.label || focus.label || "")}`
+          : ""
       }</div>
+      <div class="warn-panels">
+        <div class="warn-col">
+          <div class="warn-h">☁ WEATHER WARNINGS</div>
+          ${
+            severeWx.length
+              ? severeWx
+                  .map(
+                    (w) => `<div class="warn-row ${w.wxWarn.level}" data-code="${UI.esc(w.code || "")}">
+              <b>${UI.esc(w.name)}</b>
+              <span class="warn-badge">${UI.esc(w.wxWarn.label)}</span>
+              <span class="mono">${w.temp != null ? Number(w.temp).toFixed(0) + "°C" : "—"} · wind ${w.wind ?? "—"}</span>
+              <p>${UI.esc(w.wxWarn.tip || "")}</p>
+            </div>`
+                  )
+                  .join("")
+              : `<p class="warn-empty">No elevated weather flags in this scope right now.</p>`
+          }
+        </div>
+        <div class="warn-col travel">
+          <div class="warn-h">✈ TRAVEL WARNINGS</div>
+          ${
+            travelWarn.length
+              ? travelWarn
+                  .map(
+                    (w) => `<div class="warn-row ${w.travel.level}" data-code="${UI.esc(w.code || "")}">
+              <b>${UI.esc(w.name)}</b>
+              <span class="warn-badge">${UI.esc(w.travel.label)}</span>
+              <span class="mono">risk ${w.risk}</span>
+              <p>${UI.esc(w.travel.tip || "")}</p>
+            </div>`
+                  )
+                  .join("")
+              : `<p class="warn-empty">No high travel-risk countries in this scope.</p>`
+          }
+          <p class="afford-foot">Illustrative model from country risk — not official foreign-ministry advice. Always check official government advice.</p>
+        </div>
+      </div>
+      ${
+        eonet.length
+          ? `<div class="wx-eonet mono">Nearby natural events (EONET): ${eonet
+              .map((e) => UI.esc((e.title || "").slice(0, 40)))
+              .join(" · ")}</div>`
+          : ""
+      }
       <div class="wx-world-grid">${show
         .map((w) => {
           const active = focusCode && w.code === focusCode ? " active" : "";
           const t =
             w.temp != null && Number.isFinite(Number(w.temp)) ? `${Number(w.temp).toFixed(1)}°C` : "—";
+          const wl = w.wxWarn?.level || w.impact || "ok";
           return `<div class="wx-row${active}" data-code="${UI.esc(w.code || "")}" data-name="${UI.esc(w.name || "")}">
           <div class="wx-temp mono">${t}</div>
           <div>
             <div class="wx-name">${UI.esc(w.name)}${w.code ? ` <span class="mono wx-code">${UI.esc(w.code)}</span>` : ""}</div>
-            <div class="wx-vals mono">${UI.esc(w.region || "")} · wind ${w.wind ?? "—"} · ${UI.esc(w.label || "")}</div>
+            <div class="wx-vals mono">${UI.esc(w.region || "")} · wind ${w.wind ?? "—"} · ${UI.esc(
+              w.wxWarn?.label || w.label || ""
+            )}</div>
+            <div class="wx-travel mono" style="color:${riskColor(w.risk)}">${UI.esc(w.travel?.label || "")}</div>
           </div>
-          <div class="i-stat ${w.impact === "ok" ? "ok" : w.impact === "watch" ? "warn" : "crit"}">${(
-            w.impact || ""
-          ).toUpperCase()}</div>
+          <div class="i-stat ${wl === "ok" ? "ok" : wl === "watch" ? "warn" : "crit"}">${UI.esc(
+            (wl || "").toUpperCase()
+          )}</div>
         </div>`;
         })
         .join("")}</div>
-      <div class="afford-foot">${show.length} countries shown${
-        (Feeds.getState().weather || []).length > show.length
-          ? ` of ${(Feeds.getState().weather || []).length}`
-          : ""
-      }. Use search or country focus to narrow.</div>`;
-    el.querySelectorAll(".wx-row").forEach((n) => {
-      n.addEventListener("click", () => {
-        const code = n.dataset.code;
-        const w = (Feeds.getState().weather || []).find((x) => x.code === code || x.name === n.dataset.name);
-        if (w) {
-          Map3D.flyTo(w.lon, w.lat, 5);
-          if (code && $("#countrySelect")) {
-            state.country = code;
-            $("#countrySelect").value = code;
-            updateFocusChrome();
-            fillWeather();
-          }
-        }
-      });
+      <div class="afford-foot">${show.length} countries in temperature list · region &amp; economy filters apply · click to focus map</div>`;
+
+    const goCountry = (code) => {
+      if (!code) return;
+      const w = (Feeds.getState().weather || []).find((x) => x.code === code);
+      if (w) Map3D.flyTo(w.lon, w.lat, 5);
+      state.country = code;
+      if ($("#countrySelect")) $("#countrySelect").value = code;
+      updateFocusChrome();
+      fillWeather();
+      fillAfford();
+      fillAffordRisk();
+    };
+    el.querySelectorAll(".wx-row, .warn-row").forEach((n) => {
+      n.addEventListener("click", () => goCountry(n.dataset.code));
     });
   }
 
@@ -2376,6 +3478,7 @@
   function setView(view) {
     Layout.setView(view);
     $$(".nav-item").forEach((n) => n.classList.toggle("active", n.dataset.view === view));
+    if (state.viewMode === "mobile") renderMobileDock();
     updateFocusChrome();
     const desk = (typeof DESK_CATALOG !== "undefined" ? DESK_CATALOG : []).find((d) => d.id === view);
     UI.toast(desk ? `Desk · ${desk.title}` : `Desk · ${view}`);
@@ -2425,8 +3528,119 @@
     if (modal) modal.hidden = true;
   }
 
+  function setViewMode(mode) {
+    state.viewMode = mode === "mobile" ? "mobile" : "desktop";
+    document.body.classList.toggle("view-mobile", state.viewMode === "mobile");
+    document.body.classList.toggle("view-desktop", state.viewMode === "desktop");
+    $$("#viewToggle .vt-btn").forEach((b) =>
+      b.classList.toggle("active", b.dataset.viewmode === state.viewMode)
+    );
+    const dock = $("#mobileDock");
+    if (dock) dock.hidden = state.viewMode !== "mobile";
+    if (state.viewMode === "mobile") renderMobileDock();
+    try {
+      Map3D.resize?.();
+    } catch {
+      /* */
+    }
+    UI.toast(state.viewMode === "mobile" ? "PHONE view · bottom dock" : "DESK view · wide grid");
+  }
+
+  function renderMobileDock() {
+    const rail = $("#mobileDeskRail");
+    if (!rail) return;
+    const desks = typeof DESK_CATALOG !== "undefined" ? DESK_CATALOG : [];
+    const view = Layout.getView?.() || "command";
+    rail.innerHTML = desks
+      .map(
+        (d) =>
+          `<button type="button" class="md-desk ${d.id === view ? "active" : ""}" data-view="${d.id}">
+        <span class="md-ico">${d.icon || "·"}</span>
+        <span class="md-txt">${UI.esc(d.title)}</span>
+      </button>`
+      )
+      .join("");
+    rail.querySelectorAll(".md-desk").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setView(btn.dataset.view);
+        renderMobileDock();
+      });
+    });
+  }
+
+  function registerPWA() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(() => {
+        /* optional on file:// */
+      });
+    }
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      state.deferredInstall = e;
+      const btn = $("#btnInstall");
+      if (btn) btn.hidden = false;
+      const md = $("#mdInstall");
+      if (md) md.classList.add("ready");
+    });
+    window.addEventListener("appinstalled", () => {
+      state.deferredInstall = null;
+      const btn = $("#btnInstall");
+      if (btn) btn.hidden = true;
+      UI.toast("Added to home screen");
+    });
+  }
+
+  async function promptInstall() {
+    if (state.deferredInstall) {
+      state.deferredInstall.prompt();
+      try {
+        await state.deferredInstall.userChoice;
+      } catch {
+        /* */
+      }
+      state.deferredInstall = null;
+      const btn = $("#btnInstall");
+      if (btn) btn.hidden = true;
+      return;
+    }
+    // iOS / already-installed fallbacks
+    const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+    if (isStandalone) {
+      UI.toast("Already on home screen");
+      return;
+    }
+    if (isIos) {
+      UI.toast("iPhone: Share → Add to Home Screen");
+      return;
+    }
+    UI.toast("Use browser menu → Install app / Add to Home Screen");
+  }
+
   function bindChrome() {
     // desks rendered dynamically in populateDeskNav
+
+    $("#viewToggle")?.addEventListener("click", (e) => {
+      const b = e.target.closest(".vt-btn");
+      if (!b) return;
+      setViewMode(b.dataset.viewmode);
+    });
+    $("#btnInstall")?.addEventListener("click", () => promptInstall());
+    $("#mdInstall")?.addEventListener("click", () => promptInstall());
+    $("#mdHelp")?.addEventListener("click", openHowTo);
+    $("#mdAnswers")?.addEventListener("click", () => setView("answers"));
+    $("#mdMap")?.addEventListener("click", () => setView("geo"));
+    $("#mdCountry")?.addEventListener("click", () => {
+      $("#countrySelect")?.focus();
+      $("#countrySelect")?.click?.();
+      UI.toast("Pick a country in the bar above");
+    });
+
+    // Auto mobile when narrow on first load
+    if (window.matchMedia("(max-width: 720px)").matches) {
+      setViewMode("mobile");
+    }
 
     $("#domainPills")?.addEventListener("click", (e) => {
       const p = e.target.closest(".domain-pill");
@@ -2445,6 +3659,17 @@
       fillAffordEdu();
       fillAffordHome();
       fillAffordMove();
+      fillFamilyAfford();
+      fillMoveTo();
+      fillCompare();
+      fillInflation();
+      fillClimatefood();
+      fillAffordRisk();
+      fillPowerMix();
+      fillTelecoms();
+      fillOutages();
+      fillCritInfra();
+      fillInfra();
       fillCountry();
       fillCII();
       fillImpact();
@@ -2456,6 +3681,26 @@
       fillTriad();
       fillMktBoard();
       updateFocusChrome();
+    });
+
+    $("#regionSelect")?.addEventListener("change", (e) => {
+      state.regionGroup = e.target.value || "all";
+      populateCountrySelect();
+      refreshAllPanels();
+      const rg = (typeof REGION_GROUPS !== "undefined" ? REGION_GROUPS : []).find((g) => g.id === state.regionGroup);
+      UI.toast(`Region · ${rg?.name || "All"} · ${scopedCountries().length} countries`);
+    });
+    $("#develSelect")?.addEventListener("change", (e) => {
+      state.develFilter = e.target.value || "all";
+      populateCountrySelect();
+      refreshAllPanels();
+      UI.toast(
+        state.develFilter === "developed"
+          ? `Developed economies · ${scopedCountries().length}`
+          : state.develFilter === "developing"
+            ? `Developing / emerging · ${scopedCountries().length}`
+            : `All economies · ${scopedCountries().length}`
+      );
     });
     $("#instrumentSelect")?.addEventListener("change", (e) => {
       state.instrument = e.target.value;
@@ -2485,10 +3730,15 @@
       state.scenario = "baseline";
       state.lens = "overview";
       state.domain = "all";
+      state.regionGroup = "all";
+      state.develFilter = "all";
       $("#countrySelect").value = "";
       $("#instrumentSelect").value = "";
       $("#scenarioSelect").value = "baseline";
       if ($("#lensSelect")) $("#lensSelect").value = "overview";
+      if ($("#regionSelect")) $("#regionSelect").value = "all";
+      if ($("#develSelect")) $("#develSelect").value = "all";
+      populateCountrySelect();
       $$(".domain-pill").forEach((x) => x.classList.toggle("active", x.dataset.domain === "all"));
       Map3D.flyTo(20, 18, 1.5);
       refreshAllPanels();
@@ -2564,7 +3814,7 @@
     });
     $("#btnRefreshAll")?.addEventListener("click", () => Feeds.refreshAll().then(() => UI.toast("Refreshed")));
     $("#btnFactoryReset")?.addEventListener("click", () => {
-      if (confirm("Reset this visit? Nothing is stored on your device — the page will reload fresh.")) {
+      if (confirm("Reset this visit? Nothing is stored on the device — the page will reload fresh.")) {
         Storage.clearAll();
         location.reload();
       }
@@ -2627,6 +3877,8 @@
     Feeds.on("news", () => {
       fillNews();
       fillNewsFocus();
+      fillOutages();
+      fillCritInfra();
       renderTicker();
       renderStream();
       recomputeIndicators();
@@ -2652,6 +3904,14 @@
       fillAffordEdu();
       fillAffordHome();
       fillAffordMove();
+      fillFamilyAfford();
+      fillMoveTo();
+      fillChipchain();
+      fillPowerai();
+      fillClimatefood();
+      fillCompare();
+      fillInflation();
+      fillAffordRisk();
       renderMacroStrip();
       recomputeIndicators();
       updateFeedHealth();
@@ -2672,6 +3932,9 @@
     });
     Feeds.on("weather", () => {
       fillWeather();
+      fillClimatefood();
+      fillCompare();
+      fillCountry();
       recomputeIndicators();
       updateFeedHealth();
     });
@@ -2698,6 +3961,7 @@
     populateSelectors();
     bindChrome();
     bindFeeds();
+    registerPWA();
 
     Layout.init(() => {
       refreshAllPanels();
@@ -2706,6 +3970,7 @@
     populateDeskNav();
     const view = Layout.getView();
     $$(".nav-item").forEach((n) => n.classList.toggle("active", n.dataset.view === view));
+    if (state.viewMode === "mobile") renderMobileDock();
 
     tickClock();
     setInterval(tickClock, 1000);
@@ -2731,7 +3996,7 @@
       }, 500);
     }
     console.info(
-      "%c WMT %c desks · drag headers · vertical tape · KMRI/SPI explained ",
+      "%c WMT %c desks · compare · inflation · PWA · mobile/desktop ",
       "background:#f5a623;color:#000;font-weight:700",
       "color:#8b93a7"
     );

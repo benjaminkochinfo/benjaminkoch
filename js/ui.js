@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tooltips, tour, drawer, toast
  */
 const UI = (() => {
@@ -84,7 +84,7 @@ const UI = (() => {
       </div>
       ${bodyHtml}
       ${link ? `<p><a href="${esc(link)}" target="_blank" rel="noopener">Open source ↗</a></p>` : ""}
-      <p class="drawer-foot">World Intelligence Terminal · live public sources · no cookies · nothing saved on your device</p>`;
+      <p class="drawer-foot">World Intelligence Terminal · live public sources · no cookies · nothing saved on the device</p>`;
     drawer.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
     if (backdrop) backdrop.hidden = false;

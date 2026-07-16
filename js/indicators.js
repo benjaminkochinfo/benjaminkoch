@@ -160,11 +160,55 @@ const Indicators = (() => {
     const eonet = ctx.eonet || [];
     let weather = Math.min(100, eonet.length * 4 + weatherHits * 5);
     const wx = ctx.weather || [];
-    const hiImpact = wx.filter((w) => w.impact === "high" || w.impact === "elevated").length;
-    weather = clamp(weather + hiImpact * 8, 0, 100);
+    const hiImpact = wx.filter((w) => w.impact === "high" || w.impact === "elevated" || w.impact === "crit").length;
+    weather = clamp(weather + Math.min(40, hiImpact * 2.5), 0, 100);
+    // Focused-country weather stress when capital sample is elevated
+    if (ctx.countryCode) {
+      const cw = wx.find((w) => w.code === ctx.countryCode);
+      if (cw) {
+        if (cw.impact === "high" || cw.impact === "crit") weather = clamp(weather + 18, 0, 100);
+        else if (cw.impact === "elevated") weather = clamp(weather + 10, 0, 100);
+        else if (cw.impact === "watch") weather = clamp(weather + 4, 0, 100);
+      }
+    }
 
     // Kinetic composite
     const kinetic = clamp(avgHot * 0.45 + tScore * 0.35 + alertHeat * 0.2, 0, 100);
+
+    // Infrastructure: power / telecom / outages
+    const outageRe = /blackout|outage|load.?shedding|power cut|grid fail|internet cut|cable cut|shutdown|mobile network|telecom|fiber cut|subsea cable/i;
+    const outageHits = news.filter((n) => outageRe.test((n.title || "") + " " + (n.summary || ""))).length;
+    let events = typeof INFRA_EVENTS !== "undefined" ? [...INFRA_EVENTS] : [];
+    if (ctx.countryCode) {
+      const focused = events.filter((e) => e.code === ctx.countryCode);
+      if (focused.length) events = focused;
+    }
+    let outageHeat =
+      typeof infraStressFromEvents === "function" ? infraStressFromEvents(events) : 35;
+    outageHeat = clamp(outageHeat + Math.min(25, outageHits * 5), 0, 100);
+
+    const mix =
+      typeof getPowerMix === "function" ? getPowerMix(ctx.countryCode || "") : null;
+    // Coal-heavy + low renewables → higher structural power stress; nuclear/hydro/wind/solar lower it
+    let powerStress = 40;
+    if (mix) {
+      const fossil = (mix.coal || 0) + (mix.gas || 0) * 0.5;
+      const clean = (mix.nuclear || 0) + (mix.hydro || 0) + (mix.wind || 0) + (mix.solar || 0);
+      powerStress = clamp(30 + fossil * 0.45 - clean * 0.2, 0, 100);
+    }
+    if (mktDir(markets, "NATGAS") === "up") powerStress = clamp(powerStress + 8, 0, 100);
+    const powerEvents = events.filter((e) => e.type === "power" && e.status !== "up");
+    if (powerEvents.length) powerStress = clamp(powerStress + powerEvents.length * 6, 0, 100);
+
+    const tel =
+      typeof getTelecomProfile === "function" ? getTelecomProfile(ctx.countryCode || "") : null;
+    let telecomStress = 40;
+    if (tel) {
+      const strength = ((tel.mobile || 50) + (tel.internet || 50) + (tel.fiber || 40) + (tel.mobileNet || 50)) / 4;
+      telecomStress = clamp(100 - strength, 0, 100);
+    }
+    const netEvents = events.filter((e) => (e.type === "internet" || e.type === "telecom") && e.status !== "up");
+    if (netEvents.length) telecomStress = clamp(telecomStress + netEvents.length * 7, 0, 100);
 
     // Transport
     let transport = 40;
@@ -209,6 +253,9 @@ const Indicators = (() => {
             kinetic,
             transport,
             insurance,
+            outageHeat,
+            powerStress,
+            telecomStress,
           },
           boost
         );
@@ -232,6 +279,9 @@ const Indicators = (() => {
       kinetic,
       transport,
       insurance,
+      outageHeat,
+      powerStress,
+      telecomStress,
     };
   }
 
@@ -261,6 +311,9 @@ const Indicators = (() => {
     "alerts",
     "quakes",
     "safeHaven",
+    "outageHeat",
+    "powerStress",
+    "telecomStress",
   ]);
 
   function computeOne(def, f) {

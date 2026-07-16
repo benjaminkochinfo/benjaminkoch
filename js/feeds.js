@@ -101,39 +101,53 @@ const Feeds = (() => {
     return "info";
   }
 
+  function parsePubDate(pub, fallbackOffsetMs = 0) {
+    if (!pub) return Date.now() - fallbackOffsetMs;
+    const t = Date.parse(pub);
+    if (Number.isFinite(t) && t > 0) return t;
+    // Some feeds use RFC822 without year quirks — last resort
+    return Date.now() - fallbackOffsetMs;
+  }
+
   function parseRss(xmlText, source) {
     const items = [];
     try {
       const doc = new DOMParser().parseFromString(xmlText, "text/xml");
+      if (doc.querySelector("parsererror")) throw new Error("XML parse error");
       const nodes = [...doc.querySelectorAll("item")];
       const entries = nodes.length ? nodes : [...doc.querySelectorAll("entry")];
-      entries.slice(0, 28).forEach((node, i) => {
+      entries.slice(0, 32).forEach((node, i) => {
         const title = node.querySelector("title")?.textContent?.trim() || "Untitled";
-        const link =
+        let href =
           node.querySelector("link")?.getAttribute("href") ||
           node.querySelector("link")?.textContent?.trim() ||
           "";
-        const pub =
-          node.querySelector("pubDate")?.textContent ||
-          node.querySelector("updated")?.textContent ||
-          node.querySelector("published")?.textContent ||
-          "";
-        const desc = node.querySelector("description")?.textContent || node.querySelector("summary")?.textContent || "";
-        // Atom sometimes has multiple link nodes
-        let href = link;
         if (!href) {
           const alt = node.querySelector('link[rel="alternate"]') || node.querySelector("link");
           href = alt?.getAttribute("href") || "";
         }
+        const pub =
+          node.querySelector("pubDate")?.textContent ||
+          node.querySelector("updated")?.textContent ||
+          node.querySelector("published")?.textContent ||
+          node.querySelector("dc\\:date, date")?.textContent ||
+          "";
+        const desc =
+          node.querySelector("description")?.textContent ||
+          node.querySelector("summary")?.textContent ||
+          node.querySelector("content")?.textContent ||
+          "";
+        const published = parsePubDate(pub, i * 120000);
         items.push({
           id: `${source.id}_${i}_${hash(title)}`,
           title: stripHtml(title),
           link: href,
           source: source.tag || source.name,
           sourceId: source.id,
-          published: pub ? Date.parse(pub) || Date.now() : Date.now(),
+          published,
           summary: stripHtml(desc).slice(0, 280),
           sev: classifyHeadline(title),
+          live: true,
         });
       });
     } catch (e) {
@@ -216,10 +230,14 @@ const Feeds = (() => {
    */
   const YAHOO_MAP = {
     SPX: "^GSPC",
+    NDX: "^IXIC",
+    DJI: "^DJI",
     VIX: "^VIX",
     DXY: "DX-Y.NYB",
     EURUSD: "EURUSD=X",
     USDJPY: "USDJPY=X",
+    GBPUSD: "GBPUSD=X",
+    USDCNY: "CNY=X",
     BTC: "BTC-USD",
     ETH: "ETH-USD",
     BRENT: "BZ=F",
@@ -236,22 +254,29 @@ const Feeds = (() => {
     COCOA: "CC=F",
     COFFEE: "KC=F",
     SUGAR: "SB=F",
+    RICE: "ZR=F",
     US10Y: "^TNX",
     SOXX: "SOXX",
+    SMH: "SMH",
     NVDA: "NVDA",
     TSM: "TSM",
     ASML: "ASML",
     AMD: "AMD",
+    AVGO: "AVGO",
+    INTC: "INTC",
     EQIX: "EQIX",
     DLR: "DLR",
+    MSFT: "MSFT",
+    GOOGL: "GOOGL",
   };
 
   async function fetchYahooQuote(yahooSym) {
+    // Daily history for accurate last + % change + mountain series
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(
       yahooSym
-    )}?interval=1d&range=5d`;
+    )}?interval=1d&range=3mo`;
     try {
-      return await fetchJson(url, 12000);
+      return await fetchJson(url, 14000);
     } catch {
       const text = await fetchViaProxy(url);
       return JSON.parse(text);
@@ -263,17 +288,26 @@ const Feeds = (() => {
       const r = data?.chart?.result?.[0];
       if (!r) return false;
       const meta = r.meta || {};
-      const closes = r.indicators?.quote?.[0]?.close || [];
-      const last = meta.regularMarketPrice ?? closes.filter((x) => x != null).pop();
-      const prev = meta.chartPreviousClose ?? meta.previousClose;
-      if (last == null || !Number.isFinite(Number(last))) return false;
+      const closes = (r.indicators?.quote?.[0]?.close || []).filter((x) => x != null && Number.isFinite(Number(x)));
+      const lastRaw = meta.regularMarketPrice ?? closes[closes.length - 1];
+      if (lastRaw == null || !Number.isFinite(Number(lastRaw))) return false;
+      const last = Number(lastRaw);
+      // Prefer previous close fields; else prior daily close
+      let prev =
+        meta.chartPreviousClose ??
+        meta.previousClose ??
+        meta.regularMarketPreviousClose ??
+        null;
+      if ((prev == null || !Number.isFinite(Number(prev))) && closes.length >= 2) {
+        prev = closes[closes.length - 2];
+      }
       let chg24 = null;
-      if (prev != null && Number(prev) > 0) chg24 = ((Number(last) - Number(prev)) / Number(prev)) * 100;
-      setMkt(markets, ourSym, Number(last), chg24);
-      // store series for charts
-      const series = closes.filter((x) => x != null && Number.isFinite(x)).slice(-48);
-      if (series.length && typeof Charts !== "undefined") {
-        series.forEach((v) => Charts.push(ourSym, v));
+      if (prev != null && Number(prev) > 0) chg24 = ((last - Number(prev)) / Number(prev)) * 100;
+      setMkt(markets, ourSym, last, chg24);
+      // Accurate chart series from live closes (replace, don't double-push)
+      if (closes.length >= 2 && typeof Charts !== "undefined") {
+        if (typeof Charts.replaceSeries === "function") Charts.replaceSeries(ourSym, closes);
+        else closes.slice(-20).forEach((v) => Charts.push(ourSym, v));
       }
       return true;
     } catch {
@@ -281,56 +315,71 @@ const Feeds = (() => {
     }
   }
 
+  // Explicit model / proxy legs (no public free quote) — gentle model walk only
+  const MODEL_ONLY_SYMS = new Set(["SHIP", "BDI", "WARINS", "CAT", "FOODX", "PALM"]);
+
+  async function mapPool(entries, concurrency, worker) {
+    const results = [];
+    let i = 0;
+    async function run() {
+      while (i < entries.length) {
+        const idx = i++;
+        results[idx] = await worker(entries[idx], idx);
+      }
+    }
+    const n = Math.min(concurrency, entries.length || 1);
+    await Promise.all(Array.from({ length: n }, () => run()));
+    return results;
+  }
+
   // ── Markets + commodities ──
   async function refreshMarkets() {
     const markets = INSTRUMENTS.map((i) => {
       const prev = state.markets.find((m) => m.sym === i.sym);
-      return (
-        prev || {
-          sym: i.sym,
-          name: i.name,
-          cls: i.cls,
-          val: String(i.seed),
-          chg: "0.00%",
-          dir: "flat",
-          source: "seed",
-          unit: i.unit,
-        }
-      );
+      return prev
+        ? { ...prev, name: i.name, cls: i.cls, unit: i.unit }
+        : {
+            sym: i.sym,
+            name: i.name,
+            cls: i.cls,
+            val: String(i.seed),
+            chg: "0.00%",
+            dir: "flat",
+            source: "seed",
+            unit: i.unit,
+          };
     });
     let live = 0;
 
-    // Parallel Yahoo legs (real market data)
+    // Bounded parallel Yahoo legs (real market data)
     const yahooEntries = Object.entries(YAHOO_MAP);
     let yahooOk = 0;
-    await Promise.all(
-      yahooEntries.map(async ([sym, ySym]) => {
-        try {
-          const data = await fetchYahooQuote(ySym);
-          if (applyYahoo(markets, sym, data)) {
-            live++;
-            yahooOk++;
-          }
-        } catch {
-          /* per-symbol fail ok */
+    await mapPool(yahooEntries, 8, async ([sym, ySym]) => {
+      try {
+        const data = await fetchYahooQuote(ySym);
+        if (applyYahoo(markets, sym, data)) {
+          live++;
+          yahooOk++;
         }
-      })
-    );
+      } catch {
+        /* per-symbol fail ok */
+      }
+    });
     if (yahooOk) {
-      setHealth("yahoo", "ok", `${yahooOk} legs`);
+      setHealth("yahoo", "ok", `${yahooOk}/${yahooEntries.length} legs`);
       Storage.cacheSet("yahoo_ok", { n: yahooOk, t: Date.now() });
     } else setHealth("yahoo", "warn", "no yahoo legs");
 
-    // Crypto fallback / confirm via CoinGecko
+    // Crypto via CoinGecko (authoritative for BTC/ETH when available)
     try {
       const cg = await fetchJson(
         "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true"
       );
-      if (cg.bitcoin) {
+      if (cg.bitcoin?.usd != null) {
         setMkt(markets, "BTC", cg.bitcoin.usd, cg.bitcoin.usd_24h_change);
         live++;
       }
-      if (cg.ethereum) {
+      if (cg.ethereum?.usd != null) {
         setMkt(markets, "ETH", cg.ethereum.usd, cg.ethereum.usd_24h_change);
         live++;
       }
@@ -344,15 +393,28 @@ const Feeds = (() => {
       } else setHealth("crypto", "err", e.message || "fail");
     }
 
-    // FX backup
+    // FX backup (only fill missing live legs)
+    const needFx = (sym) => {
+      const m = markets.find((x) => x.sym === sym);
+      return m && m.source !== "live" && m.source !== "cache";
+    };
     try {
-      const fx = await fetchJson("https://api.frankfurter.app/latest?from=USD&to=EUR,JPY,GBP");
-      if (fx?.rates?.EUR && markets.find((m) => m.sym === "EURUSD")?.source !== "live") {
+      const fx = await fetchJson("https://api.frankfurter.app/latest?from=USD&to=EUR,JPY,GBP,CNY");
+      // Frankfurter: 1 USD = rates.X units → invert for XXXUSD-style pairs
+      if (fx?.rates?.EUR && needFx("EURUSD")) {
         setMkt(markets, "EURUSD", 1 / fx.rates.EUR, null);
         live++;
       }
-      if (fx?.rates?.JPY && markets.find((m) => m.sym === "USDJPY")?.source !== "live") {
+      if (fx?.rates?.JPY && needFx("USDJPY")) {
         setMkt(markets, "USDJPY", fx.rates.JPY, null);
+        live++;
+      }
+      if (fx?.rates?.GBP && needFx("GBPUSD")) {
+        setMkt(markets, "GBPUSD", 1 / fx.rates.GBP, null);
+        live++;
+      }
+      if (fx?.rates?.CNY && needFx("USDCNY")) {
+        setMkt(markets, "USDCNY", fx.rates.CNY, null);
         live++;
       }
       setHealth("fx", "ok", "Frankfurter");
@@ -360,8 +422,10 @@ const Feeds = (() => {
     } catch (e) {
       try {
         const fx2 = await fetchJson("https://open.er-api.com/v6/latest/USD");
-        if (fx2?.rates?.EUR) setMkt(markets, "EURUSD", 1 / fx2.rates.EUR, null);
-        if (fx2?.rates?.JPY) setMkt(markets, "USDJPY", fx2.rates.JPY, null);
+        if (fx2?.rates?.EUR && needFx("EURUSD")) setMkt(markets, "EURUSD", 1 / fx2.rates.EUR, null);
+        if (fx2?.rates?.JPY && needFx("USDJPY")) setMkt(markets, "USDJPY", fx2.rates.JPY, null);
+        if (fx2?.rates?.GBP && needFx("GBPUSD")) setMkt(markets, "GBPUSD", 1 / fx2.rates.GBP, null);
+        if (fx2?.rates?.CNY && needFx("USDCNY")) setMkt(markets, "USDCNY", fx2.rates.CNY, null);
         live++;
         setHealth("fx", "ok", "ER-API");
       } catch (e2) {
@@ -369,20 +433,46 @@ const Feeds = (() => {
       }
     }
 
-    // Micro-structure only for legs still without live data (proxies like WARINS, FOODX, SHIP…)
+    // Build FOODX as live basket average of softs when possible
+    const foodLeg = ["WHEAT", "CORN", "SOY", "COCOA", "COFFEE", "SUGAR"];
+    const foodLive = foodLeg
+      .map((s) => markets.find((m) => m.sym === s))
+      .filter((m) => m && (m.source === "live" || m.source === "cache"));
+    if (foodLive.length >= 3) {
+      const dirs = foodLive.map((m) => (m.dir === "up" ? 1 : m.dir === "down" ? -1 : 0));
+      const avgDir = dirs.reduce((a, b) => a + b, 0) / dirs.length;
+      const chgs = foodLive.map((m) => parseFloat(String(m.chg)) || 0);
+      const avgChg = chgs.reduce((a, b) => a + b, 0) / chgs.length;
+      const foodM = markets.find((m) => m.sym === "FOODX");
+      if (foodM) {
+        const base = parseFloat(String(foodM.val).replace(/[,%]/g, "")) || 128;
+        const next = base * (1 + avgChg / 100);
+        foodM.val = fmt(next, "FOODX");
+        foodM.chg = `${avgChg >= 0 ? "+" : ""}${avgChg.toFixed(2)}%`;
+        foodM.dir = avgDir > 0.15 ? "up" : avgDir < -0.15 ? "down" : "flat";
+        foodM.source = "live";
+        foodM.name = "Food price basket (live softs avg)";
+        if (typeof Charts !== "undefined") Charts.push("FOODX", next);
+        live++;
+      }
+    }
+
+    // Model walk only for intentional proxies — never fake-jitter failed live legs
     markets.forEach((m) => {
       if (m.source === "live" || m.source === "cache") return;
+      if (!MODEL_ONLY_SYMS.has(m.sym)) {
+        // Keep last known / seed stable so UI never invents false moves
+        if (m.source !== "seed" && m.source !== "model") m.source = "seed";
+        return;
+      }
       const seed = INSTRUMENTS.find((i) => i.sym === m.sym)?.seed;
       let n = parseFloat(String(m.val).replace(/[,%]/g, ""));
       if (!Number.isFinite(n)) n = seed || 100;
-      let amp = 0.0012;
-      if (m.cls === "ag") amp = 0.002;
+      let amp = 0.0015;
       if (m.cls === "insurance") amp = 0.0025;
-      if (m.cls === "energy") amp = 0.0018;
-      if (m.sym === "VIX") amp = 0.006;
       const jitter = n * (Math.random() * amp * 2 - amp);
       const next = Math.max(0.01, n + jitter);
-      const chg = (jitter / n) * 100;
+      const chg = n ? (jitter / n) * 100 : 0;
       m.val = fmt(next, m.sym);
       m.chg = `${chg >= 0 ? "+" : ""}${chg.toFixed(2)}%`;
       m.dir = chg > 0.02 ? "up" : chg < -0.02 ? "down" : "flat";
@@ -391,30 +481,40 @@ const Feeds = (() => {
     });
 
     state.markets = markets;
+    state.marketsUpdated = Date.now();
     Storage.cacheSet("markets", markets);
-    setHealth("markets", live ? "ok" : "warn", live ? `${live} live legs` : "model tape");
+    const liveN = markets.filter((m) => m.source === "live" || m.source === "cache").length;
+    setHealth("markets", liveN ? "ok" : "warn", `${liveN}/${markets.length} live · ${yahooOk} yahoo`);
     emit("markets", { items: markets });
-    log(`Markets · live legs ${live}`);
+    log(`Markets · ${liveN} live / ${markets.length} total · yahoo ${yahooOk}`);
   }
 
   function setMkt(markets, sym, price, chg24, cached = false) {
     const m = markets.find((x) => x.sym === sym);
-    if (!m || price == null) return;
-    m.val = fmt(price, sym);
-    if (chg24 != null && Number.isFinite(chg24)) {
-      m.chg = `${chg24 >= 0 ? "+" : ""}${chg24.toFixed(2)}%`;
-      m.dir = chg24 > 0.05 ? "up" : chg24 < -0.05 ? "down" : "flat";
-    } else {
-      m.chg = cached ? "cache" : "live";
+    if (!m || price == null || !Number.isFinite(Number(price))) return;
+    m.val = fmt(Number(price), sym);
+    if (chg24 != null && Number.isFinite(Number(chg24))) {
+      const c = Number(chg24);
+      m.chg = `${c >= 0 ? "+" : ""}${c.toFixed(2)}%`;
+      m.dir = c > 0.05 ? "up" : c < -0.05 ? "down" : "flat";
+    } else if (!m.chg || m.chg === "0.00%" || m.chg === "live" || m.chg === "cache") {
+      m.chg = "0.00%";
       m.dir = "flat";
     }
     m.source = cached ? "cache" : "live";
+    m.updated = Date.now();
   }
   function fmt(n, sym) {
-    if (sym === "EURUSD") return Number(n).toFixed(4);
-    if (sym === "USDJPY" || sym === "US10Y") return Number(n).toFixed(2);
-    if (n >= 1000) return Math.round(n).toLocaleString("en-US");
-    return Number(n).toFixed(2);
+    const x = Number(n);
+    if (!Number.isFinite(x)) return "—";
+    if (sym === "EURUSD" || sym === "GBPUSD") return x.toFixed(4);
+    if (sym === "USDCNY" || sym === "USDJPY") return x.toFixed(3);
+    if (sym === "US10Y") return x.toFixed(2);
+    if (sym === "BTC" || sym === "ETH") return Math.round(x).toLocaleString("en-US");
+    if (x >= 10000) return Math.round(x).toLocaleString("en-US");
+    if (x >= 1000) return (Math.round(x * 10) / 10).toLocaleString("en-US");
+    if (x < 1) return x.toFixed(4);
+    return x.toFixed(2);
   }
 
   // ── USGS ──
@@ -498,6 +598,32 @@ const Feeds = (() => {
     }
   }
 
+  function rowFromCurrent(c, cur) {
+    const codeWx = cur.weather_code;
+    return {
+      code: c.code,
+      name: c.name,
+      region: c.region || "",
+      lat: c.lat,
+      lon: c.lon,
+      temp: cur.temperature_2m,
+      wind: cur.wind_speed_10m,
+      precip: cur.precipitation,
+      codeWx,
+      time: cur.time,
+      label: weatherCodeLabel(codeWx),
+      impact: weatherImpact(cur),
+      source: "open-meteo",
+      updated: Date.now(),
+    };
+  }
+
+  async function fetchWeatherOne(c) {
+    const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC&wind_speed_unit=kmh`;
+    const one = await fetchJson(u, 12000);
+    return rowFromCurrent(c, one.current || {});
+  }
+
   // ── Open-Meteo worldwide capital temperatures (batched) ──
   async function refreshWeather() {
     const cities =
@@ -514,109 +640,64 @@ const Feeds = (() => {
 
     try {
       const results = [];
-      const chunkSize = 40; // Open-Meteo multi-location batches
+      const chunkSize = 25; // Open-Meteo multi: JSON array of structures
       for (let i = 0; i < cities.length; i += chunkSize) {
         const chunk = cities.slice(i, i + chunkSize);
         const lats = chunk.map((c) => c.lat).join(",");
         const lons = chunk.map((c) => c.lon).join(",");
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC`;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC&wind_speed_unit=kmh`;
+        let addedThis = 0;
         try {
-          const j = await fetchJson(url, 25000);
-          // multi-point: array of responses OR single object if one point
-          const list = Array.isArray(j) ? j : j?.latitude != null || j?.current ? [j] : [];
-          // Open-Meteo multi returns { latitude: [...], longitude: [...], current: { temperature_2m: [...], ... } }
-          if (j && Array.isArray(j.latitude) && j.current) {
-            const temps = [].concat(j.current.temperature_2m);
-            const winds = [].concat(j.current.wind_speed_10m);
-            const codes = [].concat(j.current.weather_code);
-            const precips = [].concat(j.current.precipitation);
-            const times = [].concat(j.current.time);
-            chunk.forEach((c, idx) => {
-              const cur = {
-                temperature_2m: temps[idx],
-                wind_speed_10m: winds[idx],
-                weather_code: codes[idx],
-                precipitation: precips[idx],
-                time: times[idx],
-              };
-              results.push({
-                code: c.code,
-                name: c.name,
-                region: c.region || "",
-                lat: c.lat,
-                lon: c.lon,
-                temp: cur.temperature_2m,
-                wind: cur.wind_speed_10m,
-                precip: cur.precipitation,
-                codeWx: cur.weather_code,
-                time: cur.time,
-                label: weatherCodeLabel(cur.weather_code),
-                impact: weatherImpact(cur),
-              });
-            });
-          } else if (list.length) {
-            list.forEach((item, idx) => {
+          const j = await fetchJson(url, 28000);
+          // Official multi-location format: array of forecast objects
+          if (Array.isArray(j) && j.length) {
+            j.forEach((item, idx) => {
               const c = chunk[idx] || chunk[0];
-              const cur = item.current || {};
-              results.push({
-                code: c.code,
-                name: c.name,
-                region: c.region || "",
-                lat: c.lat,
-                lon: c.lon,
-                temp: cur.temperature_2m,
-                wind: cur.wind_speed_10m,
-                precip: cur.precipitation,
-                codeWx: cur.weather_code,
-                time: cur.time,
-                label: weatherCodeLabel(cur.weather_code),
-                impact: weatherImpact(cur),
-              });
+              if (item?.current && c) {
+                results.push(rowFromCurrent(c, item.current));
+                addedThis++;
+              }
             });
-          } else {
-            // fallback: one-by-one for this chunk
-            await Promise.all(
-              chunk.map(async (c) => {
-                try {
-                  const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC`;
-                  const one = await fetchJson(u, 10000);
-                  const cur = one.current || {};
-                  results.push({
-                    code: c.code,
-                    name: c.name,
-                    region: c.region || "",
-                    lat: c.lat,
-                    lon: c.lon,
-                    temp: cur.temperature_2m,
-                    wind: cur.wind_speed_10m,
-                    precip: cur.precipitation,
-                    codeWx: cur.weather_code,
-                    time: cur.time,
-                    label: weatherCodeLabel(cur.weather_code),
-                    impact: weatherImpact(cur),
-                  });
-                } catch {
-                  /* skip */
-                }
-              })
-            );
+          } else if (j && j.current && !Array.isArray(j.latitude)) {
+            results.push(rowFromCurrent(chunk[0], j.current));
+            addedThis = 1;
           }
         } catch (chunkErr) {
           log(`Weather chunk ${i}: ${chunkErr.message}`, "err");
         }
+        // Fallback singles when multi fails or returns incomplete chunk
+        if (addedThis < Math.ceil(chunk.length * 0.6)) {
+          const have = new Set(results.map((r) => r.code));
+          await mapPool(
+            chunk.filter((c) => !have.has(c.code)),
+            6,
+            async (c) => {
+              try {
+                results.push(await fetchWeatherOne(c));
+              } catch {
+                /* skip city */
+              }
+            }
+          );
+        }
       }
 
-      if (!results.length) throw new Error("no weather rows");
-      // sort by name for stable UI
-      results.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-      state.weather = results;
-      Storage.cacheSet("weather", results);
-      setHealth("weather", "ok", `${results.length} countries Open-Meteo`);
-      emit("weather", { items: results });
-      log(`Weather ${results.length} countries`);
+      // Deduplicate by code (keep last)
+      const byCode = new Map();
+      results.forEach((r) => {
+        if (r.code && r.temp != null && Number.isFinite(Number(r.temp))) byCode.set(r.code, r);
+      });
+      const final = [...byCode.values()].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      if (!final.length) throw new Error("no weather rows");
+      state.weather = final;
+      state.weatherUpdated = Date.now();
+      Storage.cacheSet("weather", final);
+      setHealth("weather", "ok", `${final.length}/${cities.length} Open-Meteo`);
+      emit("weather", { items: final });
+      log(`Weather ${final.length}/${cities.length} capitals`);
     } catch (e) {
       const c = Storage.cacheGet("weather", 6 * 3600e3);
-      if (c?.data) {
+      if (c?.data?.length) {
         state.weather = c.data;
         setHealth("weather", "warn", "cache");
         emit("weather", { items: state.weather });
@@ -631,23 +712,39 @@ const Feeds = (() => {
       2: "Partly cloudy",
       3: "Overcast",
       45: "Fog",
-      51: "Drizzle",
-      61: "Rain",
+      48: "Depositing rime fog",
+      51: "Light drizzle",
+      53: "Drizzle",
+      55: "Dense drizzle",
+      56: "Freezing drizzle",
+      57: "Freezing drizzle",
+      61: "Slight rain",
       63: "Rain",
       65: "Heavy rain",
-      71: "Snow",
+      66: "Freezing rain",
+      67: "Heavy freezing rain",
+      71: "Slight snow",
+      73: "Snow",
+      75: "Heavy snow",
+      77: "Snow grains",
       80: "Rain showers",
+      81: "Rain showers",
+      82: "Violent rain showers",
+      85: "Snow showers",
+      86: "Heavy snow showers",
       95: "Thunderstorm",
-      96: "Thunderstorm hail",
+      96: "Thunderstorm + hail",
+      99: "Thunderstorm + heavy hail",
     };
-    return m[code] || `Code ${code ?? "—"}`;
+    return m[code] || (code != null ? `WMO ${code}` : "—");
   }
   function weatherImpact(cur) {
-    const wind = cur.wind_speed_10m || 0;
-    const precip = cur.precipitation || 0;
-    if (cur.weather_code >= 95 || wind > 70) return "high";
-    if (cur.weather_code >= 65 || wind > 45 || precip > 5) return "elevated";
-    if (precip > 1 || wind > 30) return "watch";
+    const wind = Number(cur.wind_speed_10m) || 0;
+    const precip = Number(cur.precipitation) || 0;
+    const code = Number(cur.weather_code) || 0;
+    if (code >= 95 || wind > 70) return "high";
+    if (code >= 80 || code >= 65 || wind > 45 || precip > 5) return "elevated";
+    if (precip > 0.5 || wind > 30 || code >= 51) return "watch";
     return "ok";
   }
 
