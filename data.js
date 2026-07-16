@@ -588,7 +588,6 @@ const NEWS_SOURCES = [
   { id: "euronews", name: "Euronews", url: "https://www.euronews.com/rss", on: true, tag: "EN" },
   { id: "dw_top", name: "DW Top (English)", url: "https://rss.dw.com/xml/rss-en-top", on: true, tag: "DW" },
   { id: "dw_global", name: "DW Global (English)", url: "https://rss.dw.com/rdf/rss-en-all", on: true, tag: "DW-G" },
-  { id: "thelocal_de", name: "The Local Germany", url: "https://feeds.thelocal.com/rss/de", on: true, tag: "LOCAL" },
   { id: "france24_en", name: "France 24 English", url: "https://www.france24.com/en/rss", on: true, tag: "F24" },
   { id: "wapo_world", name: "Washington Post World", url: "https://feeds.washingtonpost.com/rss/world", on: true, tag: "WaPo" },
   { id: "wapo_national", name: "Washington Post National", url: "https://feeds.washingtonpost.com/rss/national", on: true, tag: "WaPo-N" },
