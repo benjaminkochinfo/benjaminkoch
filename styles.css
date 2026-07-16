@@ -4435,3 +4435,56 @@ body.view-mobile .rc-row .rc-tag { display: none; }
   .out-type { display: none; }
   .iis-hero { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   STANDALONE / HOMESCREEN APP MODE (iOS · Android · desktop PWA)
+   Entry: https://benjaminkoch.info/wm_terminal.html
+   ═══════════════════════════════════════════════════════════ */
+html.standalone-app,
+body.standalone-app {
+  overscroll-behavior: none;
+}
+@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
+  html { height: 100%; }
+  body {
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+  .terminal {
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+}
+/* Installed app + phone layout: keep dock clear of notch / home indicator */
+body.standalone-app.view-mobile {
+  --mobile-dock-h: 124px;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px);
+}
+body.standalone-app.view-mobile .topbar {
+  padding-top: max(0px, env(safe-area-inset-top, 0px));
+  min-height: calc(var(--topbar-h) + env(safe-area-inset-top, 0px));
+  height: auto;
+}
+body.standalone-app.view-mobile .mobile-dock {
+  padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
+}
+body.standalone-app.view-mobile .workspace {
+  padding-bottom: calc(var(--mobile-dock-h) + env(safe-area-inset-bottom, 0px) + 8px);
+}
+body.standalone-app.view-mobile .bottom-bar {
+  margin-bottom: calc(var(--mobile-dock-h));
+}
+/* Prefer touch scrolling inside panels in app mode */
+body.standalone-app .widget-body,
+body.standalone-app .workspace,
+body.standalone-app .md-rail,
+body.standalone-app .context-bar {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+body.standalone-app button,
+body.standalone-app .md-desk,
+body.standalone-app .md-q,
+body.standalone-app .domain-pill {
+  touch-action: manipulation;
+}

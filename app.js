@@ -3667,17 +3667,84 @@
     requestAnimationFrame(scrollActiveDeskIntoView);
   }
 
-  function registerPWA() {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js").catch(() => {
-        /* optional on file:// */
-      });
+  /** Homescreen / PWA / UWP standalone detection */
+  function isStandaloneApp() {
+    try {
+      if (window.matchMedia("(display-mode: standalone)").matches) return true;
+      if (window.matchMedia("(display-mode: fullscreen)").matches) return true;
+      if (window.matchMedia("(display-mode: minimal-ui)").matches) return true;
+    } catch {
+      /* */
     }
+    // iOS Safari "Add to Home Screen"
+    if (typeof navigator.standalone === "boolean" && navigator.standalone) return true;
+    // Windows / some WebView hosts
+    if (document.referrer && /android-app:|ms-appx-web:/i.test(document.referrer)) return true;
+    return false;
+  }
+
+  /** Keep installed app on the production entry URL when possible */
+  const PWA_ENTRY = "https://benjaminkoch.info/wm_terminal.html";
+
+  function applyStandaloneLayout() {
+    const standalone = isStandaloneApp();
+    document.documentElement.classList.toggle("standalone-app", standalone);
+    document.body.classList.toggle("standalone-app", standalone);
+    if (!standalone) return;
+    // App mode: prefer phone layout under tablet width for touch responsiveness
+    const preferPhone = window.matchMedia("(max-width: 1100px)").matches || "ontouchstart" in window;
+    if (preferPhone && state.viewMode !== "mobile") {
+      setViewMode("mobile", { silent: true });
+    }
+    // Safe reflow after launch chrome settles
+    setTimeout(() => {
+      try {
+        Map3D.resize?.();
+      } catch {
+        /* */
+      }
+      if (state.viewMode === "mobile") scrollActiveDeskIntoView?.();
+    }, 120);
+    setTimeout(() => {
+      try {
+        Map3D.resize?.();
+      } catch {
+        /* */
+      }
+    }, 600);
+  }
+
+  function registerPWA() {
+    // Service worker scoped to site root so homescreen always serves the app shell
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("./sw.js", { scope: "./" })
+        .then(() => {
+          /* installed */
+        })
+        .catch(() => {
+          /* optional on file:// */
+        });
+    }
+    applyStandaloneLayout();
+    // Re-apply when display mode changes (some browsers flip after install)
+    try {
+      const dm = window.matchMedia("(display-mode: standalone)");
+      const onDm = () => applyStandaloneLayout();
+      if (dm.addEventListener) dm.addEventListener("change", onDm);
+      else if (dm.addListener) dm.addListener(onDm);
+    } catch {
+      /* */
+    }
+
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
       state.deferredInstall = e;
       const btn = $("#btnInstall");
-      if (btn) btn.hidden = false;
+      if (btn) {
+        btn.hidden = false;
+        btn.title = "Add to home screen → opens " + PWA_ENTRY;
+      }
       const md = $("#mdInstall");
       if (md) md.classList.add("ready");
     });
@@ -3685,7 +3752,8 @@
       state.deferredInstall = null;
       const btn = $("#btnInstall");
       if (btn) btn.hidden = true;
-      UI.toast("Added to home screen");
+      UI.toast("Added · opens wm_terminal.html");
+      applyStandaloneLayout();
     });
   }
 
@@ -3702,19 +3770,21 @@
       if (btn) btn.hidden = true;
       return;
     }
-    // iOS / already-installed fallbacks
     const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
-    if (isStandalone) {
+    if (isStandaloneApp()) {
       UI.toast("Already on home screen");
       return;
     }
     if (isIos) {
+      // iOS uses the *current* page URL for the icon — ensure users add from wm_terminal
+      if (!/wm_terminal\.html/i.test(location.pathname)) {
+        UI.toast("Open wm_terminal.html first, then Share → Add to Home Screen");
+        return;
+      }
       UI.toast("iPhone: Share → Add to Home Screen");
       return;
     }
-    UI.toast("Use browser menu → Install app / Add to Home Screen");
+    UI.toast("Browser menu → Install app / Add to Home Screen");
   }
 
   function bindChrome() {
@@ -4134,6 +4204,8 @@
     populateDeskNav();
     const view = Layout.getView();
     $$(".nav-item").forEach((n) => n.classList.toggle("active", n.dataset.view === view));
+    // Homescreen / standalone: re-apply phone layout after first paint
+    applyStandaloneLayout();
     if (state.viewMode === "mobile") renderMobileDock();
 
     tickClock();
