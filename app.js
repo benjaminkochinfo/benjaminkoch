@@ -3478,7 +3478,10 @@
   function setView(view) {
     Layout.setView(view);
     $$(".nav-item").forEach((n) => n.classList.toggle("active", n.dataset.view === view));
-    if (state.viewMode === "mobile") renderMobileDock();
+    if (state.viewMode === "mobile") {
+      renderMobileDock();
+      closeMobileSheets();
+    }
     updateFocusChrome();
     const desk = (typeof DESK_CATALOG !== "undefined" ? DESK_CATALOG : []).find((d) => d.id === view);
     UI.toast(desk ? `Desk · ${desk.title}` : `Desk · ${view}`);
@@ -3528,8 +3531,10 @@
     if (modal) modal.hidden = true;
   }
 
-  function setViewMode(mode) {
-    state.viewMode = mode === "mobile" ? "mobile" : "desktop";
+  function setViewMode(mode, opts = {}) {
+    const next = mode === "mobile" ? "mobile" : "desktop";
+    const changed = state.viewMode !== next;
+    state.viewMode = next;
     document.body.classList.toggle("view-mobile", state.viewMode === "mobile");
     document.body.classList.toggle("view-desktop", state.viewMode === "desktop");
     $$("#viewToggle .vt-btn").forEach((b) =>
@@ -3537,35 +3542,129 @@
     );
     const dock = $("#mobileDock");
     if (dock) dock.hidden = state.viewMode !== "mobile";
+    if (state.viewMode !== "mobile") closeMobileSheets();
     if (state.viewMode === "mobile") renderMobileDock();
     try {
       Map3D.resize?.();
     } catch {
       /* */
     }
-    UI.toast(state.viewMode === "mobile" ? "PHONE view · bottom dock" : "DESK view · wide grid");
+    if (changed && !opts.silent) {
+      UI.toast(state.viewMode === "mobile" ? "PHONE view · bottom nav" : "DESK view · wide grid");
+    }
+    // reflow after CSS grid settles
+    requestAnimationFrame(() => {
+      try {
+        Map3D.resize?.();
+      } catch {
+        /* */
+      }
+      if (state.viewMode === "mobile") scrollActiveDeskIntoView();
+    });
+  }
+
+  function closeMobileSheets() {
+    const filter = $("#mdFilterSheet");
+    const more = $("#mdMoreSheet");
+    const back = $("#mdBackdrop");
+    if (filter) filter.hidden = true;
+    if (more) more.hidden = true;
+    if (back) back.hidden = true;
+    document.body.classList.remove("md-sheet-open");
+  }
+
+  function openMobileSheet(which) {
+    if (state.viewMode !== "mobile") return;
+    closeMobileSheets();
+    const el = which === "filters" ? $("#mdFilterSheet") : $("#mdMoreSheet");
+    const back = $("#mdBackdrop");
+    if (el) el.hidden = false;
+    if (back) back.hidden = false;
+    document.body.classList.add("md-sheet-open");
+    if (which === "more") renderMobileDock();
+  }
+
+  function scrollActiveDeskIntoView() {
+    const rail = $("#mobileDeskRail");
+    const active = rail?.querySelector(".md-desk.active");
+    if (!rail || !active) return;
+    try {
+      active.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    } catch {
+      active.scrollIntoView(false);
+    }
+  }
+
+  function pickMobileDesk(id) {
+    if (!id) return;
+    closeMobileSheets();
+    setView(id);
+    renderMobileDock();
+    // scroll workspace to top of panels for orientation
+    const ws = $("#workspace") || $(".main-col");
+    if (ws) ws.scrollTop = 0;
+    const grid = $("#widgetGrid");
+    if (grid) grid.scrollTop = 0;
+    requestAnimationFrame(scrollActiveDeskIntoView);
   }
 
   function renderMobileDock() {
     const rail = $("#mobileDeskRail");
-    if (!rail) return;
+    const more = $("#mdMoreGrid");
     const desks = typeof DESK_CATALOG !== "undefined" ? DESK_CATALOG : [];
     const view = Layout.getView?.() || "command";
-    rail.innerHTML = desks
-      .map(
-        (d) =>
-          `<button type="button" class="md-desk ${d.id === view ? "active" : ""}" data-view="${d.id}">
-        <span class="md-ico">${d.icon || "·"}</span>
-        <span class="md-txt">${UI.esc(d.title)}</span>
-      </button>`
-      )
-      .join("");
-    rail.querySelectorAll(".md-desk").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setView(btn.dataset.view);
-        renderMobileDock();
+    // Prefer common desks first in the thumb rail
+    const priority = [
+      "command",
+      "answers",
+      "geo",
+      "markets",
+      "afford",
+      "infra",
+      "weather",
+      "news",
+      "impact",
+      "compare",
+      "inflation",
+      "tech",
+      "risk",
+    ];
+    const ordered = [
+      ...priority.map((id) => desks.find((d) => d.id === id)).filter(Boolean),
+      ...desks.filter((d) => !priority.includes(d.id)),
+    ];
+    if (rail) {
+      rail.innerHTML = ordered
+        .map(
+          (d) =>
+            `<button type="button" class="md-desk ${d.id === view ? "active" : ""}" data-view="${d.id}" role="tab" aria-selected="${
+              d.id === view ? "true" : "false"
+            }">
+          <span class="md-ico" aria-hidden="true">${d.icon || "·"}</span>
+          <span class="md-txt">${UI.esc(d.title)}</span>
+        </button>`
+        )
+        .join("");
+      rail.querySelectorAll(".md-desk").forEach((btn) => {
+        btn.addEventListener("click", () => pickMobileDesk(btn.dataset.view));
       });
-    });
+    }
+    if (more) {
+      more.innerHTML = desks
+        .map(
+          (d) =>
+            `<button type="button" class="md-more-item ${d.id === view ? "active" : ""}" data-view="${d.id}">
+          <span class="md-ico">${d.icon || "·"}</span>
+          <span class="md-more-t">${UI.esc(d.title)}</span>
+          <span class="md-more-b">${UI.esc(d.blurb || d.desc || "")}</span>
+        </button>`
+        )
+        .join("");
+      more.querySelectorAll(".md-more-item").forEach((btn) => {
+        btn.addEventListener("click", () => pickMobileDesk(btn.dataset.view));
+      });
+    }
+    requestAnimationFrame(scrollActiveDeskIntoView);
   }
 
   function registerPWA() {
@@ -3627,20 +3726,84 @@
       setViewMode(b.dataset.viewmode);
     });
     $("#btnInstall")?.addEventListener("click", () => promptInstall());
-    $("#mdInstall")?.addEventListener("click", () => promptInstall());
-    $("#mdHelp")?.addEventListener("click", openHowTo);
-    $("#mdAnswers")?.addEventListener("click", () => setView("answers"));
-    $("#mdMap")?.addEventListener("click", () => setView("geo"));
-    $("#mdCountry")?.addEventListener("click", () => {
-      $("#countrySelect")?.focus();
-      $("#countrySelect")?.click?.();
-      UI.toast("Pick a country in the bar above");
+    $("#mdHelp")?.addEventListener("click", () => {
+      closeMobileSheets();
+      openHowTo();
+    });
+    $("#mdAnswers")?.addEventListener("click", () => pickMobileDesk("answers"));
+    $("#mdMap")?.addEventListener("click", () => pickMobileDesk("geo"));
+    $("#mdFilters")?.addEventListener("click", () => openMobileSheet("filters"));
+    $("#mdMore")?.addEventListener("click", () => openMobileSheet("more"));
+    $("#mdFilterClose")?.addEventListener("click", closeMobileSheets);
+    $("#mdMoreClose")?.addEventListener("click", closeMobileSheets);
+    $("#mdBackdrop")?.addEventListener("click", closeMobileSheets);
+    $("#mdJumpCountry")?.addEventListener("click", () => {
+      closeMobileSheets();
+      const sel = $("#countrySelect");
+      if (sel) {
+        sel.focus();
+        // bring context into view
+        sel.scrollIntoView({ behavior: "smooth", block: "center" });
+        try {
+          sel.showPicker?.();
+        } catch {
+          /* */
+        }
+      }
+      UI.toast("Choose a country");
+    });
+    $("#mdJumpRegion")?.addEventListener("click", () => {
+      closeMobileSheets();
+      const sel = $("#regionSelect");
+      if (sel) {
+        sel.focus();
+        sel.scrollIntoView({ behavior: "smooth", block: "center" });
+        try {
+          sel.showPicker?.();
+        } catch {
+          /* */
+        }
+      }
+    });
+    $("#mdJumpLens")?.addEventListener("click", () => {
+      closeMobileSheets();
+      const sel = $("#lensSelect");
+      if (sel) {
+        sel.focus();
+        sel.scrollIntoView({ behavior: "smooth", block: "center" });
+        try {
+          sel.showPicker?.();
+        } catch {
+          /* */
+        }
+      }
+    });
+    $("#mdClearFocus")?.addEventListener("click", () => {
+      closeMobileSheets();
+      $("#focusClear")?.click();
     });
 
-    // Auto mobile when narrow on first load
-    if (window.matchMedia("(max-width: 720px)").matches) {
-      setViewMode("mobile");
-    }
+    // Auto phone layout on narrow screens; keep in sync on rotate/resize
+    const mq = window.matchMedia("(max-width: 720px)");
+    const syncPhone = () => {
+      if (mq.matches && state.viewMode !== "mobile") setViewMode("mobile", { silent: true });
+    };
+    syncPhone();
+    if (mq.addEventListener) mq.addEventListener("change", syncPhone);
+    else if (mq.addListener) mq.addListener(syncPhone);
+    window.addEventListener(
+      "resize",
+      () => {
+        if (state.viewMode === "mobile") {
+          try {
+            Map3D.resize?.();
+          } catch {
+            /* */
+          }
+        }
+      },
+      { passive: true }
+    );
 
     $("#domainPills")?.addEventListener("click", (e) => {
       const p = e.target.closest(".domain-pill");
@@ -3837,6 +4000,7 @@
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        closeMobileSheets();
         UI.closeDrawer();
         closeSettings();
         closeHowTo();

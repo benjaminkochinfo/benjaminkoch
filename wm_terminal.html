@@ -202,17 +202,50 @@
       </div>
     </footer>
 
-    <!-- Mobile overview: unique radial desk dock + quick chips -->
-    <nav class="mobile-dock" id="mobileDock" aria-label="Mobile desks" hidden>
-      <div class="md-rail" id="mobileDeskRail"></div>
-      <div class="md-quick">
-        <button type="button" class="md-q" id="mdCountry" data-tip="Jump to country">◎</button>
-        <button type="button" class="md-q" id="mdAnswers" data-tip="Answers">✦</button>
-        <button type="button" class="md-q" id="mdMap" data-tip="Map">◎</button>
-        <button type="button" class="md-q" id="mdInstall" data-tip="Add to home screen">↓</button>
-        <button type="button" class="md-q" id="mdHelp" data-tip="How to use">?</button>
+    <!-- Mobile / phone navigation: filters sheet · desk rail · thumb bar -->
+    <nav class="mobile-dock" id="mobileDock" aria-label="Phone navigation" hidden>
+      <div class="md-sheet" id="mdFilterSheet" hidden>
+        <div class="md-sheet-head">
+          <strong>Filters</strong>
+          <button type="button" class="md-sheet-x" id="mdFilterClose" aria-label="Close filters">×</button>
+        </div>
+        <p class="md-sheet-hint">Region · economy · country · lens — same controls as the top bar</p>
+        <div class="md-filter-actions">
+          <button type="button" class="md-fa" id="mdJumpCountry">Open country list</button>
+          <button type="button" class="md-fa" id="mdJumpRegion">Open region</button>
+          <button type="button" class="md-fa" id="mdJumpLens">Open lens</button>
+          <button type="button" class="md-fa ghost" id="mdClearFocus">Clear focus</button>
+        </div>
+      </div>
+      <div class="md-sheet md-sheet-more" id="mdMoreSheet" hidden>
+        <div class="md-sheet-head">
+          <strong>All desks</strong>
+          <button type="button" class="md-sheet-x" id="mdMoreClose" aria-label="Close desks">×</button>
+        </div>
+        <div class="md-more-grid" id="mdMoreGrid"></div>
+      </div>
+      <div class="md-rail-wrap">
+        <div class="md-rail" id="mobileDeskRail" role="tablist" aria-label="Desks"></div>
+      </div>
+      <div class="md-quick" role="toolbar" aria-label="Quick actions">
+        <button type="button" class="md-q" id="mdFilters" aria-label="Filters">
+          <span class="md-q-ico">☰</span><span class="md-q-lab">Filters</span>
+        </button>
+        <button type="button" class="md-q" id="mdAnswers" aria-label="Answers">
+          <span class="md-q-ico">✦</span><span class="md-q-lab">Answers</span>
+        </button>
+        <button type="button" class="md-q primary" id="mdMap" aria-label="Map">
+          <span class="md-q-ico">◎</span><span class="md-q-lab">Map</span>
+        </button>
+        <button type="button" class="md-q" id="mdMore" aria-label="All desks">
+          <span class="md-q-ico">▦</span><span class="md-q-lab">Desks</span>
+        </button>
+        <button type="button" class="md-q" id="mdHelp" aria-label="Help">
+          <span class="md-q-ico">?</span><span class="md-q-lab">Help</span>
+        </button>
       </div>
     </nav>
+    <div class="md-backdrop" id="mdBackdrop" hidden></div>
   </div>
 
   <aside class="drawer" id="drawer" aria-hidden="true" role="dialog">
