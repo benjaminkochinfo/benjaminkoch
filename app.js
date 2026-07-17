@@ -214,38 +214,187 @@
     });
   }
 
-  /** News filtered by country + lens (newest first) */
-  function filterNews(items) {
+  /**
+   * Build strict country-match keys. Short ISO codes (CAN/ARE/POL…) must NOT be
+   * substring-matched — they pollute focus with almost every headline.
+   */
+  function countryNewsKeyset(code) {
+    if (!code || code === "GLOBAL") return [];
+    const c = (typeof COUNTRIES !== "undefined" ? COUNTRIES : []).find((x) => x.code === code);
+    const catalog =
+      typeof COUNTRY_NEWS_KEYS !== "undefined" && COUNTRY_NEWS_KEYS[code]
+        ? COUNTRY_NEWS_KEYS[code]
+        : [];
+    const keys = [];
+    const push = (k, strength) => {
+      const s = String(k || "")
+        .toLowerCase()
+        .trim();
+      if (!s || s.length < 2) return;
+      // Drop bare ISO codes and 2–3 letter tokens that are common English words
+      if (/^[a-z]{2,3}$/.test(s) && !["usa", "uk", "uae", "eu"].includes(s)) return;
+      keys.push({ s, strength: strength || (s.length >= 5 ? 2 : 1) });
+    };
+    catalog.forEach((k) => push(k, 2));
+    if (c?.name) {
+      push(c.name, 3);
+      // First significant word of name (e.g. "United" alone is weak — skip; "Germany" ok)
+      const parts = c.name.split(/[\s,/-]+/).filter((p) => p.length >= 4);
+      parts.forEach((p) => {
+        if (!/^(united|republic|democratic|federal|state|states|kingdom|south|north|east|west)$/i.test(p))
+          push(p, 2);
+      });
+    }
+    // De-dupe by string
+    const seen = new Set();
+    return keys.filter((k) => {
+      if (seen.has(k.s)) return false;
+      seen.add(k.s);
+      return true;
+    });
+  }
+
+  /** True if headline is clearly about this country (strict). */
+  function newsMatchesCountry(item, code) {
+    const keys = countryNewsKeyset(code);
+    if (!keys.length) return false;
+    const blob = `${item.title || ""} ${item.summary || ""} ${item.source || ""}`.toLowerCase();
+    // Phrase / word-boundary match — no bare 2–3 letter ISO substring hits
+    return keys.some(({ s }) => {
+      if (s.length >= 4) {
+        // Prefer whole-word-ish match for shortish tokens; includes for multi-word phrases
+        if (s.includes(" ") || s.includes(".") || s.includes("-")) return blob.includes(s);
+        try {
+          return new RegExp(`(?:^|[^a-z0-9])${s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:[^a-z0-9]|$)`, "i").test(
+            blob
+          );
+        } catch {
+          return blob.includes(s);
+        }
+      }
+      // Very short keys (uk, u.s.) — only as bounded tokens
+      try {
+        return new RegExp(`(?:^|[^a-z0-9])${s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:[^a-z0-9]|$)`, "i").test(
+          blob
+        );
+      } catch {
+        return false;
+      }
+    });
+  }
+
+  /**
+   * News filter (newest first).
+   * opts.country — true: strict country focus (never falls back to global)
+   * opts.lens    — true: apply active lens keywords
+   * opts.search  — true (default): honor top search box
+   */
+  function filterNews(items, opts = {}) {
+    const applyCountry = opts.country === true;
+    const applyLens = opts.lens === true;
+    const applySearch = opts.search !== false;
     let list = [...(items || [])];
+    if (applySearch && state.search) {
+      list = list.filter((n) => matchSearch((n.title || "") + (n.source || "") + (n.summary || "")));
+    }
+    if (applyCountry) {
+      if (!state.country || state.country === "GLOBAL") return [];
+      // STRICT: only country-relevant items — empty is OK (do NOT fall back to world news)
+      list = list.filter((n) => newsMatchesCountry(n, state.country));
+    }
+    if (applyLens && state.lens && state.lens !== "overview" && typeof LENS_NEWS_KEYS !== "undefined") {
+      const lensKeys = LENS_NEWS_KEYS[state.lens] || [];
+      if (lensKeys.length) {
+        const filtered = list.filter((n) => {
+          const t = ((n.title || "") + " " + (n.summary || "")).toLowerCase();
+          return lensKeys.some((k) => k && t.includes(String(k).toLowerCase()));
+        });
+        // Lens only narrows further when it still has hits; country filter already applied
+        if (filtered.length) list = filtered;
+      }
+    }
+    return list.sort((a, b) => (b.published || 0) - (a.published || 0));
+  }
+
+  /**
+   * Global latest headlines from ALL live sources.
+   * Contract: NEVER depends on state.country — selecting a country must not change this list.
+   * Used by: multiview NEWS tab, full NEWS stream, All News desk, FLASH ticker.
+   */
+  function latestNews(limit) {
+    // Read raw feed only — do not call filterNews (country-safe by construction)
+    const raw = Feeds.getState().news || [];
+    let list = raw.slice();
+    // De-dupe by title so multi-source echoes don't crowd the tape
+    const seen = new Set();
+    list = list.filter((n) => {
+      const k = (n.title || "").trim().toLowerCase().slice(0, 96);
+      if (!k || seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+    // Optional top search only — never country / lens
     if (state.search) {
       list = list.filter((n) => matchSearch((n.title || "") + (n.source || "") + (n.summary || "")));
     }
-    const countryKeys =
-      state.country && typeof COUNTRY_NEWS_KEYS !== "undefined" ? COUNTRY_NEWS_KEYS[state.country] || [] : [];
-    const cName = state.country
-      ? (COUNTRIES.find((c) => c.code === state.country)?.name || "").toLowerCase()
-      : "";
-    if (countryKeys.length || cName) {
-      const keys = [...countryKeys, cName].filter(Boolean).map((k) => k.toLowerCase());
-      const filtered = list.filter((n) => {
-        const t = ((n.title || "") + " " + (n.summary || "")).toLowerCase();
-        return keys.some((k) => k && t.includes(k));
-      });
-      if (filtered.length) list = filtered;
+    list.sort((a, b) => (b.published || 0) - (a.published || 0));
+    return limit != null ? list.slice(0, limit) : list;
+  }
+
+  /**
+   * Country-only headlines.
+   * Contract:
+   *  - no country selected → [] (empty FOCUSED)
+   *  - country selected → only headlines matching that country (strict)
+   * Used by: Focus News desk panel only.
+   */
+  function focusedNews(limit) {
+    const code = state.country;
+    if (!code || code === "GLOBAL") return [];
+    // Build from raw feed with strict country matcher only (ignore lens)
+    let list = (Feeds.getState().news || []).filter((n) => newsMatchesCountry(n, code));
+    if (state.search) {
+      list = list.filter((n) => matchSearch((n.title || "") + (n.source || "") + (n.summary || "")));
     }
-    const lensKeys =
-      state.lens && state.lens !== "overview" && typeof LENS_NEWS_KEYS !== "undefined"
-        ? LENS_NEWS_KEYS[state.lens] || []
-        : [];
-    if (lensKeys.length) {
-      const filtered = list.filter((n) => {
-        const t = ((n.title || "") + " " + (n.summary || "")).toLowerCase();
-        return lensKeys.some((k) => t.includes(k));
-      });
-      // keep country hits even if lens empty — only prefer lens filter when it returns results
-      if (filtered.length) list = filtered;
+    const seen = new Set();
+    list = list.filter((n) => {
+      const k = (n.title || "").trim().toLowerCase().slice(0, 96);
+      if (!k || seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+    list.sort((a, b) => (b.published || 0) - (a.published || 0));
+    return limit != null ? list.slice(0, limit) : list;
+  }
+
+  /** Kick Open-Meteo when weather is missing or stale (throttled). */
+  let lastWeatherKick = 0;
+  function ensureWeatherFresh(force = false) {
+    try {
+      const st = Feeds.getState() || {};
+      const liveRows = (st.weather || []).filter((w) => w && w.source === "open-meteo" && w.temp != null);
+      const age = st.weatherUpdated ? Date.now() - st.weatherUpdated : Infinity;
+      const empty = !liveRows.length;
+      if (!force && !empty && age < 150e3) return; // fresh enough (<2.5 min)
+      if (!force && Date.now() - lastWeatherKick < 55e3) return; // throttle kicks
+      lastWeatherKick = Date.now();
+      const p = Feeds.refreshWeather?.();
+      if (p && typeof p.then === "function") p.catch(() => {});
+    } catch {
+      /* */
     }
-    return list.sort((a, b) => (b.published || 0) - (a.published || 0));
+  }
+
+  /** Prefer live Open-Meteo rows; never treat seed estimates as live. */
+  function weatherRowsForUi() {
+    const st = Feeds.getState() || {};
+    const raw = st.weather || [];
+    const live = raw.filter((w) => w && w.source === "open-meteo" && w.temp != null && Number.isFinite(Number(w.temp)));
+    if (live.length) {
+      return { wx: live, live: true, updated: st.weatherUpdated || null };
+    }
+    // Fall back to seed only while loading
+    return { wx: seedWeatherRows(), live: false, updated: null };
   }
 
   /** Symbols for market board from lens + country */
@@ -502,6 +651,12 @@
     renderStream();
     updateFocusChrome();
     updateFeedHealth();
+    // Collapse empty desk windows and pack remaining panels (no dead space)
+    try {
+      Layout.scheduleAutoArrange?.(90);
+    } catch {
+      /* */
+    }
   }
 
   /** Simple SVG bar series for inflation / growth history */
@@ -956,6 +1111,43 @@
       <p class="afford-foot">Positive path: good public transport lowers the need for a second car and cuts fuel stress.</p>`;
   }
 
+  /**
+   * Compare cell with green/red delta vs first country (baseline).
+   * higherIsBetter: affordability, stability, growth
+   * lowerIsBetter (higherIsBetter=false): risk, costs, inflation
+   */
+  function cmpDeltaCell(value, baseline, opts = {}) {
+    const higherIsBetter = opts.higherIsBetter !== false;
+    const suffix = opts.suffix || "";
+    const digits = opts.digits != null ? opts.digits : 0;
+    const colorFn = opts.colorFn;
+    const n = value != null && value !== "" && Number.isFinite(Number(value)) ? Number(value) : null;
+    const b =
+      baseline != null && baseline !== "" && Number.isFinite(Number(baseline)) ? Number(baseline) : null;
+    if (n == null) return `<td class="muted">—</td>`;
+    const display = digits > 0 ? n.toFixed(digits) : String(Math.round(n));
+    const baseColor = colorFn && typeof colorFn === "function" ? colorFn(n) : "inherit";
+    if (opts.isBase || b == null) {
+      return `<td class="cmp-base" style="color:${baseColor}"><span class="cmp-val">${display}${suffix}</span><span class="cmp-delta base">base</span></td>`;
+    }
+    const d = n - b;
+    const flat = Math.abs(d) < (opts.epsilon || 0.05);
+    let deltaCls = "flat";
+    if (!flat) {
+      const better = higherIsBetter ? d > 0 : d < 0;
+      deltaCls = better ? "good" : "bad";
+    }
+    const dShown = flat
+      ? "0"
+      : digits > 0
+        ? (d > 0 ? "+" : "") + d.toFixed(Math.max(1, digits))
+        : (d > 0 ? "+" : "") + String(Math.round(d));
+    return `<td class="${deltaCls === "good" ? "cmp-best" : deltaCls === "bad" ? "cmp-worst" : ""}" style="color:${baseColor}">
+      <span class="cmp-val">${display}${suffix}</span>
+      <span class="cmp-delta ${deltaCls}">${dShown}</span>
+    </td>`;
+  }
+
   function fillCompare() {
     const el = Layout.bodyEl("compare");
     if (!el) return;
@@ -971,6 +1163,7 @@
       const aff = affordRowFamily(code) || affordRow(code);
       const inf = inflationProfile(code);
       const kmri = state.indicators.find((i) => i.id === "kmri");
+      const rs = countryRiskStability(code);
       const wx = (Feeds.getState().weather || []).find(
         (w) => w.code === code || (c?.name && (w.name || "").toLowerCase() === c.name.toLowerCase())
       );
@@ -978,16 +1171,31 @@
         typeof CLIMATE_FOOD_BY_REGION !== "undefined"
           ? CLIMATE_FOOD_BY_REGION[c?.region || "World"] || CLIMATE_FOOD_BY_REGION.World
           : null;
-      return { code, c, aff, inf, kmri, wx, climate };
+      return { code, c, aff, inf, kmri, rs, wx, climate };
     });
+    const base = cols[0];
     const scopeList = scopedCountries();
     const allForCompare =
       scopeList.length >= 2
         ? scopeList
         : COUNTRIES.filter((c) => c.code && c.code !== "GLOBAL");
+
+    const row = (label, pick, opts = {}) => {
+      const vals = cols.map((col) => pick(col));
+      const b = vals[0];
+      return `<tr><td>${label}</td>${cols
+        .map((col, i) =>
+          cmpDeltaCell(vals[i], b, {
+            ...opts,
+            isBase: i === 0,
+          })
+        )
+        .join("")}</tr>`;
+    };
+
     el.innerHTML = `<div class="panel-banner">Side-by-side · ${UI.esc(
       scopeBanner()
-    )} · risk, costs, inflation, weather</div>
+    )} · <b>green / red</b> = better / worse vs first country · risk, costs, inflation, weather</div>
       <div class="compare-pickers">${[0, 1, 2]
         .map((i) => {
           const code = codes[i] || "";
@@ -999,64 +1207,69 @@
                 `<option value="${c.code}"${c.code === code ? " selected" : ""}>${c.name}</option>`
             )
             .join("");
-          return `<label class="cmp-pick"><span>Country ${i + 1}</span>
+          return `<label class="cmp-pick"><span>Country ${i + 1}${i === 0 ? " · base" : ""}</span>
             <select data-cmp-i="${i}">${selOpts}</select></label>`;
         })
         .join("")}</div>
       <div class="compare-table-wrap"><table class="compare-table">
         <thead><tr><th>Signal</th>${cols
-          .map((col) => `<th>${UI.esc(col.c?.name || col.code)}</th>`)
+          .map(
+            (col, i) =>
+              `<th>${UI.esc(col.c?.name || col.code)}${i === 0 ? ' <span class="cmp-delta base">BASE</span>' : ""}</th>`
+          )
           .join("")}</tr></thead>
         <tbody>
-          <tr><td>Affordability ↑</td>${cols
-            .map((col) => {
-              const s = col.aff?.affordScore ?? "—";
-              const color = typeof s === "number" ? affordScoreColor(s) : "inherit";
-              return `<td style="color:${color}"><b>${s}</b></td>`;
-            })
-            .join("")}</tr>
-          <tr><td>Risk ↓</td>${cols
-            .map((col) => {
-              const r = countryRiskStability(col.code).risk;
-              return `<td style="color:${riskColor(r)}"><b>${r}</b></td>`;
-            })
-            .join("")}</tr>
-          <tr><td>Stability ↑</td>${cols
-            .map((col) => {
-              const s = countryRiskStability(col.code).stability;
-              return `<td style="color:${stabilityColor(s)}"><b>${s}</b></td>`;
-            })
-            .join("")}</tr>
+          ${row("Affordability ↑", (col) => col.aff?.affordScore, {
+            higherIsBetter: true,
+            colorFn: affordScoreColor,
+          })}
+          ${row("Risk ↓", (col) => col.rs?.risk, { higherIsBetter: false, colorFn: riskColor })}
+          ${row("Stability ↑", (col) => col.rs?.stability, {
+            higherIsBetter: true,
+            colorFn: stabilityColor,
+          })}
           <tr><td>Travel advice</td>${cols
             .map((col) => {
-              const t = countryRiskStability(col.code).travel;
+              const t = col.rs?.travel || countryRiskStability(col.code).travel;
               return `<td class="cmp-note">${UI.esc(t.label)}</td>`;
             })
             .join("")}</tr>
-          <tr><td>Housing cost</td>${cols.map((col) => `<td>${col.aff?.housing ?? "—"}</td>`).join("")}</tr>
-          <tr><td>Groceries</td>${cols.map((col) => `<td>${col.aff?.groceries ?? "—"}</td>`).join("")}</tr>
-          <tr><td>Public school</td>${cols.map((col) => `<td>${col.aff?.schoolPublic ?? "—"}</td>`).join("")}</tr>
-          <tr><td>Childcare</td>${cols.map((col) => `<td>${col.aff?.childcare ?? "—"}</td>`).join("")}</tr>
-          <tr><td>Inflation now</td>${cols
-            .map((col) => `<td><b>${col.inf.current}%</b></td>`)
-            .join("")}</tr>
-          <tr><td>Inflation proj Y+1</td>${cols.map((col) => `<td>${col.inf.proj?.[0] ?? "—"}%</td>`).join("")}</tr>
-          <tr><td>Real growth now</td>${cols
-            .map((col) => `<td style="color:#69f0ae"><b>${col.inf.growth}%</b></td>`)
-            .join("")}</tr>
-          <tr><td>Growth proj Y+1</td>${cols.map((col) => `<td>${col.inf.growthProj?.[0] ?? "—"}%</td>`).join("")}</tr>
-          <tr><td>Weather</td>${cols
-            .map((col) => {
-              if (col.wx?.temp != null) return `<td>${Math.round(col.wx.temp)}°C</td>`;
-              return `<td class="muted">—</td>`;
-            })
-            .join("")}</tr>
+          ${row("Housing cost ↓", (col) => col.aff?.housing, { higherIsBetter: false })}
+          ${row("Groceries ↓", (col) => col.aff?.groceries, { higherIsBetter: false })}
+          ${row("Public school ↓", (col) => col.aff?.schoolPublic, { higherIsBetter: false })}
+          ${row("Childcare ↓", (col) => col.aff?.childcare, { higherIsBetter: false })}
+          ${row("Inflation now ↓", (col) => col.inf?.current, {
+            higherIsBetter: false,
+            suffix: "%",
+            digits: 1,
+          })}
+          ${row("Inflation proj Y+1 ↓", (col) => col.inf?.proj?.[0], {
+            higherIsBetter: false,
+            suffix: "%",
+            digits: 1,
+          })}
+          ${row("Real growth now ↑", (col) => col.inf?.growth, {
+            higherIsBetter: true,
+            suffix: "%",
+            digits: 1,
+            colorFn: () => "#69f0ae",
+          })}
+          ${row("Growth proj Y+1 ↑", (col) => col.inf?.growthProj?.[0], {
+            higherIsBetter: true,
+            suffix: "%",
+            digits: 1,
+          })}
+          ${row(
+            "Weather °C",
+            (col) => (col.wx?.temp != null ? Math.round(Number(col.wx.temp)) : null),
+            { higherIsBetter: true, suffix: "°", epsilon: 0.5 }
+          )}
           <tr><td>Climate → food</td>${cols
             .map((col) => `<td class="cmp-note">${UI.esc((col.climate?.tip || "").slice(0, 72))}</td>`)
             .join("")}</tr>
         </tbody>
       </table></div>
-      <p class="afford-foot">Illustrative models + live weather/markets when available. Focus country above still drives map & news.</p>`;
+      <p class="afford-foot">Deltas vs <b>${UI.esc(base?.c?.name || base?.code || "first")}</b> · green = better · red = worse · illustrative models + live weather when available.</p>`;
     el.querySelectorAll("select[data-cmp-i]").forEach((sel) => {
       const i = Number(sel.dataset.cmpI);
       if (codes[i]) sel.value = codes[i];
@@ -1443,18 +1656,30 @@
   function fillHotspots() {
     const el = Layout.bodyEl("hotspots");
     if (!el) return;
-    const list = state.hotspots.filter((h) => countryOk(h) && matchSearch(h.name));
-    el.innerHTML = list
-      .map((h) => {
-        const col = scoreColor(h.score);
-        const dir = h.delta > 0 ? "up" : h.delta < 0 ? "down" : "";
-        return `<div class="hot-row" data-id="${h.id}">
+    let list = (state.hotspots || []).filter((h) => matchSearch(h.name));
+    const focused = list.filter((h) => countryOk(h));
+    // If a country focus would wipe the board, still show all hotspots (global risk board)
+    if (focused.length) list = focused;
+    if (!list.length) list = [...(state.hotspots || [])];
+    list = list.slice().sort((a, b) => (b.score || 0) - (a.score || 0));
+    if (!list.length) {
+      el.innerHTML = empty("No hotspots", "Risk nodes load with the crisis desk.");
+      return;
+    }
+    Layout.metaEl("hotspots") && (Layout.metaEl("hotspots").textContent = `${list.length}`);
+    el.innerHTML =
+      `<div class="panel-banner">Escalation heat · click a row to fly the map</div>` +
+      list
+        .map((h) => {
+          const col = scoreColor(h.score);
+          const dir = h.delta > 0 ? "up" : h.delta < 0 ? "down" : "";
+          return `<div class="hot-row" data-id="${h.id}">
         <div class="hot-top"><span class="hot-name">${UI.esc(h.name)}</span>
         <span class="hot-score" style="color:${col}">${h.score}</span></div>
-        <div class="hot-bar"><i style="width:${h.score}%;background:${col}"></i></div>
-        <div class="hot-delta ${dir}">Δ ${h.delta > 0 ? "+" : ""}${h.delta}</div></div>`;
-      })
-      .join("");
+        <div class="hot-bar"><i style="width:${Math.max(0, Math.min(100, h.score || 0))}%;background:${col}"></i></div>
+        <div class="hot-delta ${dir}">Δ ${h.delta > 0 ? "+" : ""}${h.delta ?? 0}</div></div>`;
+        })
+        .join("");
     el.querySelectorAll(".hot-row").forEach((n) => {
       n.addEventListener("click", () => {
         const h = state.hotspots.find((x) => x.id === n.dataset.id);
@@ -1497,7 +1722,14 @@
     fillRadar();
     fillImpact();
     updateFocusChrome();
-    if (state.stream === "multi" || state.stream === "news" || state.stream === "markets") renderStream();
+    if (
+      state.stream === "multi" ||
+      state.stream === "news" ||
+      state.stream === "markets" ||
+      state.stream === "events" ||
+      state.stream === "disasters"
+    )
+      renderStream();
   }
 
   function explainText(id) {
@@ -1638,7 +1870,7 @@
     Layout.metaEl("markets") &&
       (Layout.metaEl("markets").textContent = live ? `LIVE ${live}/${m.length}` : "SEED");
     el.innerHTML =
-      `<div class="panel-banner">Macro tape · ${live} live · Yahoo + CoinGecko + FX APIs · model only for insurance/shipping proxies</div>` +
+      `<div class="panel-banner">Macro tape · ${live} live prices · model only for insurance/shipping proxies</div>` +
       marketGrid(m, true);
     bindMktClicks(el, m);
     renderMacroStrip();
@@ -1950,14 +2182,22 @@
   function fillNewsFocus() {
     const el = Layout.bodyEl("newsfocus");
     if (!el) return;
-    const items = filterNews(Feeds.getState().news || []);
+    // Country-focused headlines only (News desk Focus panel)
     const c = COUNTRIES.find((x) => x.code === state.country);
     const lens = LENSES.find((l) => l.id === state.lens);
+    if (!state.country || state.country === "GLOBAL") {
+      Layout.metaEl("newsfocus") && (Layout.metaEl("newsfocus").textContent = "—");
+      el.innerHTML =
+        `<div class="panel-banner">Focus news · select a country above · NEWS tab / ticker stay worldwide from all sources</div>` +
+        empty("Select a country", "Focus filters live RSS to that country. Multiview NEWS tab stays global.");
+      return;
+    }
+    const items = focusedNews();
     Layout.metaEl("newsfocus") &&
-      (Layout.metaEl("newsfocus").textContent = `${items.length} · ${c ? c.code : "GLB"}`);
-    el.innerHTML = `<div class="panel-banner">Filtered to <b>${UI.esc(c?.name || "Global")}</b> · lens <b>${UI.esc(
+      (Layout.metaEl("newsfocus").textContent = `${items.length} · ${c ? c.code : "—"}`);
+    el.innerHTML = `<div class="panel-banner">Focus news · <b>${UI.esc(c?.name || state.country)}</b> · lens <b>${UI.esc(
       lens?.name || "Overview"
-    )}</b> · newest first</div>
+    )}</b> · newest first · country-scoped</div>
       ${
         items.length
           ? items
@@ -1969,7 +2209,7 @@
           <div class="news-meta">${relTime(n.published)} ago</div></div>`
               )
               .join("")
-          : empty("No matching headlines", "Widen country/lens or wait for live RSS")
+          : empty("No matching headlines for this country", "Try another country or wait for live RSS — ticker still shows world news")
       }`;
     el.querySelectorAll(".news-row").forEach((node) => {
       node.addEventListener("click", () => {
@@ -2091,18 +2331,15 @@
     const el = Layout.bodyEl("news");
     if (!el) return;
     const raw = Feeds.getState().news || [];
-    const items = filterNews(raw);
-    const c = COUNTRIES.find((x) => x.code === state.country);
-    const lens = LENSES.find((l) => l.id === state.lens);
+    // Worldwide live news only — country select does NOT filter this panel
+    const items = latestNews();
     Layout.metaEl("news") && (Layout.metaEl("news").textContent = `${items.length}/${raw.length}`);
     if (!items.length) {
-      el.innerHTML = empty("No headlines for filter", "Clear country/lens or wait for live RSS · press R to refresh");
+      el.innerHTML = empty("No headlines yet", "Waiting for live RSS · press R to refresh");
       return;
     }
     el.innerHTML =
-      `<div class="panel-banner">News · ${UI.esc(c?.name || "Global")} · ${UI.esc(
-        lens?.name || "Overview"
-      )} · ${raw.length} live headlines · newest first</div>` +
+      `<div class="panel-banner">All news · worldwide live · ${items.length} headlines · newest first · country filter only on FOCUS NEWS</div>` +
       items
         .slice(0, 50)
         .map(
@@ -2123,7 +2360,7 @@
             meta: [
               ["SOURCE", n.source],
               ["AGE", relTime(n.published)],
-              ["FILTER", `${c?.code || "GLOBAL"} · ${lens?.name || "Overview"}`],
+              ["SCOPE", "WORLD · ALL NEWS"],
             ],
             body: n.summary || "",
             link: n.link,
@@ -2132,29 +2369,219 @@
     });
   }
 
+  /** Live enrichment for a world theater (news · heat · shipping · risk) */
+  function enrichTheater(t) {
+    const codes = new Set((t.countries || []).map((c) => String(c).toUpperCase()));
+    const nameLc = (t.name || "").toLowerCase();
+    const nameTokens = nameLc
+      .split(/[\s/·,.-]+/)
+      .filter((w) => w.length > 3)
+      .slice(0, 6);
+
+    const hotspots = (state.hotspots || []).filter((h) => {
+      if (!h) return false;
+      if ((h.countries || []).some((c) => codes.has(String(c).toUpperCase()))) return true;
+      const hn = (h.name || h.title || "").toLowerCase();
+      if (!hn) return false;
+      if (hn.includes(nameLc.slice(0, 8)) || nameLc.includes(hn.slice(0, 8))) return true;
+      return nameTokens.some((tok) => hn.includes(tok));
+    });
+    const heat = hotspots.length
+      ? Math.round(Math.max(...hotspots.map((h) => Number(h.score) || 0)))
+      : null;
+    const heatDelta = hotspots.reduce((s, h) => s + (Number(h.delta) || 0), 0);
+
+    const newsAll = Feeds.getState().news || [];
+    const countryKeys = [];
+    codes.forEach((code) => {
+      if (typeof COUNTRY_NEWS_KEYS !== "undefined" && COUNTRY_NEWS_KEYS[code]) {
+        COUNTRY_NEWS_KEYS[code].forEach((k) => countryKeys.push(String(k).toLowerCase()));
+      }
+      const cn = (typeof COUNTRIES !== "undefined" ? COUNTRIES : []).find((c) => c.code === code);
+      if (cn?.name) countryKeys.push(cn.name.toLowerCase());
+      countryKeys.push(code.toLowerCase());
+    });
+    nameTokens.forEach((tok) => countryKeys.push(tok));
+    const newsHits = newsAll
+      .filter((n) => {
+        const blob = ((n.title || "") + " " + (n.summary || "")).toLowerCase();
+        return countryKeys.some((k) => k && k.length > 2 && blob.includes(k));
+      })
+      .sort((a, b) => (b.published || 0) - (a.published || 0));
+
+    const alerts = (typeof ALERTS !== "undefined" ? ALERTS : []).filter(
+      (a) =>
+        (a.countries || []).some((c) => codes.has(String(c).toUpperCase())) ||
+        ((a.title || "") + " " + (a.sub || "")).toLowerCase().includes(nameLc.slice(0, 8))
+    );
+
+    const ships = (typeof TRANSPORT_NODES !== "undefined" ? TRANSPORT_NODES : []).filter((node) => {
+      const blob = ((node.name || "") + " " + (node.note || "")).toLowerCase();
+      if (nameTokens.some((tok) => blob.includes(tok))) return true;
+      if (nameLc.includes("red sea") && /bab|red sea|mandeb|suez/.test(blob)) return true;
+      if (nameLc.includes("gulf") && /hormuz|gulf|energy/.test(blob)) return true;
+      if (nameLc.includes("black sea") && /bosporus|black|grain/.test(blob)) return true;
+      if (nameLc.includes("taiwan") && /taiwan|strait/.test(blob)) return true;
+      if (nameLc.includes("south china") && /malacca|singapore|south china/.test(blob)) return true;
+      return false;
+    });
+
+    const insurance = (typeof INSURANCE_SIGNALS !== "undefined" ? INSURANCE_SIGNALS : []).filter((ins) => {
+      const blob = ((ins.name || "") + " " + (ins.note || "")).toLowerCase();
+      return nameTokens.some((tok) => blob.includes(tok)) || (t.id === "redsea" && /red sea|war-risk/.test(blob)) || (t.id === "blacksea" && /black sea|marine/.test(blob)) || (t.id === "baltic" && /baltic|hybrid|gnss|cyber/.test(blob)) || (t.id === "gulf" && /gulf|energy|platform/.test(blob));
+    });
+
+    let maxRisk = 0;
+    const riskRows = [];
+    codes.forEach((code) => {
+      const rs = countryRiskStability(code);
+      maxRisk = Math.max(maxRisk, rs.risk || 0);
+      const c = (typeof COUNTRIES !== "undefined" ? COUNTRIES : []).find((x) => x.code === code);
+      riskRows.push({ code, name: c?.name || code, risk: rs.risk, travel: rs.travel });
+    });
+
+    // Effective posture: escalate from catalog if live heat / news / alerts demand it
+    const rank = { stable: 0, watch: 1, elevated: 2, critical: 3 };
+    let posture = (t.posture || "watch").toLowerCase();
+    if (heat != null && heat >= 85) posture = rank[posture] < 3 ? "critical" : posture;
+    else if (heat != null && heat >= 70 && rank[posture] < 2) posture = "elevated";
+    else if (heat != null && heat >= 55 && rank[posture] < 1) posture = "watch";
+    if (alerts.some((a) => a.sev === "crit") && rank[posture] < 3) posture = "critical";
+    else if (alerts.some((a) => a.sev === "high") && rank[posture] < 2) posture = "elevated";
+    if (newsHits.some((n) => n.sev === "crit") && rank[posture] < 3) posture = "critical";
+    else if (newsHits.filter((n) => n.sev === "high" || n.sev === "crit").length >= 2 && rank[posture] < 2)
+      posture = "elevated";
+
+    const newestNews = newsHits[0]?.published || null;
+    const updatedLabel = newestNews
+      ? `news ${relTime(newestNews)}`
+      : heat != null
+        ? "heat live"
+        : "catalog";
+
+    return {
+      ...t,
+      livePosture: posture,
+      heat,
+      heatDelta,
+      newsHits: newsHits.slice(0, 6),
+      newsCount: newsHits.length,
+      alerts: alerts.slice(0, 5),
+      ships,
+      insurance: insurance.slice(0, 3),
+      maxRisk,
+      riskRows: riskRows.sort((a, b) => b.risk - a.risk),
+      hotspotNames: hotspots.map((h) => h.name || h.title).filter(Boolean),
+      updatedLabel,
+      newestNews,
+    };
+  }
+
   function fillTheaters() {
     const el = Layout.bodyEl("theaters");
     if (!el) return;
-    let list = THEATERS.filter((t) => matchSearch(t.name));
-    if (state.country) list = list.filter((t) => !t.countries?.length || t.countries.includes(state.country));
-    el.innerHTML = list
-      .map(
-        (t) => `<div class="theater-row" data-id="${t.id}">
-      <span class="tname">${t.name}</span>
-      <span class="tposture ${t.posture}">${t.posture.toUpperCase()}</span>
-      <span class="tmeta">${t.note}</span></div>`
-      )
-      .join("");
+    let list = (typeof THEATERS !== "undefined" ? THEATERS : []).filter((t) =>
+      matchSearch(t.name + " " + (t.note || "") + " " + (t.countries || []).join(" "))
+    );
+    if (state.country) {
+      const narrowed = list.filter((t) => !t.countries?.length || t.countries.includes(state.country));
+      // Keep the full world theaters board if focus has no match
+      if (narrowed.length) list = narrowed;
+    }
+    if (!list.length) {
+      el.innerHTML = empty("No theaters", "World theaters load with the crisis desk.");
+      return;
+    }
+    const enriched = list.map(enrichTheater).sort((a, b) => {
+      const rank = { critical: 4, elevated: 3, watch: 2, stable: 1 };
+      const d = (rank[b.livePosture] || 0) - (rank[a.livePosture] || 0);
+      if (d) return d;
+      return (b.heat || 0) - (a.heat || 0);
+    });
+    const critN = enriched.filter((t) => t.livePosture === "critical").length;
+    const elevN = enriched.filter((t) => t.livePosture === "elevated").length;
+    const newsN = enriched.reduce((s, t) => s + (t.newsCount || 0), 0);
+    Layout.metaEl("theaters") &&
+      (Layout.metaEl("theaters").textContent = `${enriched.length} · ${critN} crit`);
+    el.innerHTML =
+      `<div class="panel-banner">World theaters · live heat + news + shipping · <b>${critN}</b> critical · <b>${elevN}</b> elevated · <b>${newsN}</b> related headlines · click for full brief</div>` +
+      enriched
+        .map((t) => {
+          const signals = [];
+          if (t.heat != null)
+            signals.push(
+              `<span class="hot">HEAT ${t.heat}${t.heatDelta ? (t.heatDelta > 0 ? ` +${t.heatDelta}` : ` ${t.heatDelta}`) : ""}</span>`
+            );
+          if (t.newsCount) signals.push(`<span class="news">${t.newsCount} NEWS</span>`);
+          if (t.ships?.length) signals.push(`<span class="ship">${t.ships.length} LANE</span>`);
+          if (t.maxRisk) signals.push(`<span class="risk">RISK ${t.maxRisk}</span>`);
+          if (t.alerts?.length) signals.push(`<span class="hot">${t.alerts.length} ALERT</span>`);
+          if (t.insurance?.length) signals.push(`<span class="ship">INS ${t.insurance.length}</span>`);
+          const heads = (t.newsHits || [])
+            .slice(0, 2)
+            .map(
+              (n) =>
+                `<div><em>${relTime(n.published)}</em>${UI.esc((n.title || "").slice(0, 90))}</div>`
+            )
+            .join("");
+          const linked = (t.countries || []).join(" · ") || "—";
+          return `<div class="theater-row" data-id="${UI.esc(t.id)}">
+      <span class="tname">${UI.esc(t.name)}</span>
+      <span class="tposture ${UI.esc(t.livePosture || "watch")}">${UI.esc((t.livePosture || "watch").toUpperCase())}</span>
+      <span class="tmeta">${UI.esc(t.note || "")} · countries ${UI.esc(linked)}</span>
+      ${signals.length ? `<div class="theater-signals">${signals.join("")}</div>` : ""}
+      ${heads ? `<div class="theater-headlines">${heads}</div>` : ""}
+      <div class="theater-updated">updated · ${UI.esc(t.updatedLabel || "—")}${
+            t.hotspotNames?.length ? " · " + UI.esc(t.hotspotNames.slice(0, 2).join(" · ")) : ""
+          }</div></div>`;
+        })
+        .join("");
     el.querySelectorAll(".theater-row").forEach((n) => {
       n.addEventListener("click", () => {
-        const t = THEATERS.find((x) => x.id === n.dataset.id);
-        if (!t) return;
+        const base = THEATERS.find((x) => x.id === n.dataset.id);
+        if (!base) return;
+        const t = enrichTheater(base);
+        const bodyParts = [
+          t.note || "",
+          t.hotspotNames?.length ? `\nHotspots: ${t.hotspotNames.join(", ")}` : "",
+          t.heat != null ? `\nLive heat score: ${t.heat}${t.heatDelta ? ` (Δ ${t.heatDelta > 0 ? "+" : ""}${t.heatDelta})` : ""}` : "",
+          t.riskRows?.length
+            ? `\nCountry risk: ${t.riskRows.map((r) => `${r.code} ${r.risk} (${r.travel?.label || "—"})`).join(" · ")}`
+            : "",
+          t.ships?.length
+            ? `\nShipping / nodes: ${t.ships.map((s) => `${s.name} [${s.status}] — ${s.note || ""}`).join(" | ")}`
+            : "",
+          t.insurance?.length
+            ? `\nInsurance: ${t.insurance.map((i) => `${i.name} ${i.level} ${i.change || ""} — ${i.note || ""}`).join(" | ")}`
+            : "",
+          t.alerts?.length
+            ? `\nAlerts:\n${t.alerts.map((a) => `· [${(a.sev || "").toUpperCase()}] ${a.title}`).join("\n")}`
+            : "",
+          t.newsHits?.length
+            ? `\nRelated headlines:\n${t.newsHits.map((h) => `· ${relTime(h.published)} — ${h.title}`).join("\n")}`
+            : "\nNo matching live headlines in current feed window.",
+        ];
         UI.openDrawer({
           type: "THEATER",
           title: t.name,
-          sev: t.posture === "critical" ? "critical" : t.posture === "elevated" ? "high" : "watch",
-          meta: [["POSTURE", t.posture.toUpperCase()]],
-          body: t.note,
+          sev:
+            t.livePosture === "critical"
+              ? "critical"
+              : t.livePosture === "elevated"
+                ? "high"
+                : t.livePosture === "stable"
+                  ? "info"
+                  : "watch",
+          meta: [
+            ["POSTURE", (t.livePosture || "").toUpperCase()],
+            ["CATALOG", (t.posture || "").toUpperCase()],
+            ["HEAT", t.heat != null ? String(t.heat) : "—"],
+            ["NEWS", String(t.newsCount || 0)],
+            ["MAX RISK", t.maxRisk ? String(t.maxRisk) : "—"],
+            ["COUNTRIES", (t.countries || []).join(", ") || "—"],
+            ["UPDATED", t.updatedLabel || "—"],
+          ],
+          body: bodyParts.filter(Boolean).join("\n"),
         });
       });
     });
@@ -2550,24 +2977,58 @@
     });
   }
 
+  function seedWeatherRows() {
+    // Placeholder only while Open-Meteo loads — never labeled as live
+    const cities =
+      typeof weatherCitiesFromCountries === "function"
+        ? weatherCitiesFromCountries()
+        : (typeof COUNTRIES !== "undefined" ? COUNTRIES : [])
+            .filter((c) => c.code && c.code !== "GLOBAL" && c.lat != null)
+            .map((c) => ({ code: c.code, name: c.name, lat: c.lat, lon: c.lon, region: c.region }));
+    return cities.map((c) => {
+      const lat = Math.abs(Number(c.lat) || 0);
+      const est = Math.round(32 - lat * 0.55 + (Math.sin((Date.now() / 8.64e7 + lat) % 6.28) * 3));
+      return {
+        code: c.code,
+        name: c.name,
+        lat: c.lat,
+        lon: c.lon,
+        region: c.region || "",
+        temp: est,
+        wind: null,
+        precip: null,
+        codeWx: 1,
+        label: "est. · loading",
+        impact: "ok",
+        source: "seed",
+        live: false,
+      };
+    });
+  }
+
   function fillWeather() {
     const el = Layout.bodyEl("weather");
     if (!el) return;
-    let wx = Feeds.getState().weather || [];
+    // Always keep Open-Meteo + warnings fresh when this panel paints
+    ensureWeatherFresh(false);
+    let { wx, live, updated: wxUpdated } = weatherRowsForUi();
+    if (!live) ensureWeatherFresh(true);
+    else if (wxUpdated && Date.now() - wxUpdated > 180e3) ensureWeatherFresh(true);
+
     const scopeCodes = new Set(scopedCountries().map((c) => c.code));
-    // Scope weather to region / economy filter
+    // Scope weather to region / economy filter (not country — country only reorders)
     if (state.regionGroup !== "all" || state.develFilter !== "all") {
-      wx = wx.filter((w) => scopeCodes.has(w.code));
+      const scoped = wx.filter((w) => scopeCodes.has(w.code));
+      if (scoped.length) wx = scoped;
     }
-    const wxUpdated = Feeds.getState().weatherUpdated;
     Layout.metaEl("weather") &&
       (Layout.metaEl("weather").textContent = wx.length
-        ? `${wx.length} · ${wxUpdated ? relTime(wxUpdated) : "—"}`
+        ? `${wx.length}${live ? " · live" : " · est"}${wxUpdated ? " · " + relTime(wxUpdated) : ""}`
         : "—");
     if (!wx.length) {
       el.innerHTML = empty(
         "Weather loading…",
-        "Fetching capital temperatures (Open-Meteo) — or widen region / economy filter."
+        "Fetching capital temperatures from Open-Meteo — try All regions if a filter is active."
       );
       return;
     }
@@ -2588,46 +3049,103 @@
       if (filtered.length) wx = filtered;
     }
 
-    // Enrich with weather + travel warnings
+    // Enrich with weather + travel warnings (scoped to region / country)
     const enriched = wx.map((w) => {
       const warn =
         typeof weatherWarningFromCode === "function"
-          ? weatherWarningFromCode(w.codeWx, w.wind, w.precip)
+          ? weatherWarningFromCode(w.codeWx, w.wind, w.precip, w.temp)
           : { level: w.impact || "ok", label: w.label || "—", tip: "" };
       const rs = countryRiskStability(w.code);
       return { ...w, wxWarn: warn, travel: rs.travel, risk: rs.risk };
     });
 
-    const severeWx = enriched
-      .filter((w) => ["critical", "high", "elevated"].includes(w.wxWarn?.level))
-      .sort((a, b) => {
-        const rank = { critical: 3, high: 2, elevated: 1 };
-        return (rank[b.wxWarn.level] || 0) - (rank[a.wxWarn.level] || 0);
-      })
-      .slice(0, 12);
+    const rankWx = { critical: 4, high: 3, elevated: 2, watch: 1, ok: 0 };
+    // When country focused: prioritize that capital; else region scope already applied
+    let severeWx = enriched
+      .filter((w) => ["critical", "high", "elevated", "watch"].includes(w.wxWarn?.level))
+      .sort((a, b) => (rankWx[b.wxWarn.level] || 0) - (rankWx[a.wxWarn.level] || 0));
+    if (focusCode) {
+      const focusWarn = severeWx.filter((w) => w.code === focusCode);
+      const rest = severeWx.filter((w) => w.code !== focusCode);
+      severeWx = [...focusWarn, ...rest];
+    }
+    severeWx = severeWx.slice(0, 16);
 
+    // Link travel rows to theaters + related news for updated context
+    const newsAll = Feeds.getState().news || [];
+    const theatersAll = typeof THEATERS !== "undefined" ? THEATERS : [];
     const travelWarn = enriched
-      .filter((w) => ["critical", "high", "elevated"].includes(w.travel?.level))
+      .filter((w) => ["critical", "high", "elevated", "watch"].includes(w.travel?.level))
       .sort((a, b) => b.risk - a.risk)
-      .slice(0, 12);
+      .slice(0, 16)
+      .map((w) => {
+        const code = (w.code || "").toUpperCase();
+        const th = theatersAll.filter((t) => (t.countries || []).includes(code));
+        const keys = [];
+        if (typeof COUNTRY_NEWS_KEYS !== "undefined" && COUNTRY_NEWS_KEYS[code]) {
+          COUNTRY_NEWS_KEYS[code].forEach((k) => keys.push(String(k).toLowerCase()));
+        }
+        if (w.name) keys.push(String(w.name).toLowerCase());
+        if (code) keys.push(code.toLowerCase());
+        const relatedNews = newsAll
+          .filter((n) => {
+            const blob = ((n.title || "") + " " + (n.summary || "")).toLowerCase();
+            return keys.some((k) => k && k.length > 2 && blob.includes(k));
+          })
+          .sort((a, b) => (b.published || 0) - (a.published || 0))
+          .slice(0, 2);
+        return {
+          ...w,
+          theaters: th,
+          relatedNews,
+          travelExtra: [
+            th.length ? `Theater: ${th.map((t) => t.name).join(", ")}` : "",
+            relatedNews[0] ? `News: ${relatedNews[0].title}` : "",
+          ]
+            .filter(Boolean)
+            .join(" · "),
+        };
+      });
 
     const show = enriched.slice(0, 200);
     const focus = focusCode ? show.find((w) => w.code === focusCode) : null;
-    const eonet = (Feeds.getState().eonet || []).slice(0, 8);
+    // Natural events: prefer ones near scoped region (by title/country match) else global
+    let eonet = [...(Feeds.getState().eonet || [])];
+    if (state.regionGroup !== "all" || focusCode) {
+      const names = new Set(enriched.map((w) => (w.name || "").toLowerCase()).filter(Boolean));
+      const codes = new Set(enriched.map((w) => (w.code || "").toLowerCase()));
+      const regional = eonet.filter((d) => {
+        const t = ((d.title || "") + " " + (d.category || "")).toLowerCase();
+        for (const n of names) if (n.length > 3 && t.includes(n.slice(0, 6))) return true;
+        for (const c of codes) if (c && t.includes(c)) return true;
+        return false;
+      });
+      if (regional.length) eonet = regional;
+    }
+    eonet = eonet.slice(0, 12);
+    const warnCount = severeWx.filter((w) => ["critical", "high", "elevated"].includes(w.wxWarn?.level)).length;
+    const travelHigh = travelWarn.filter((w) => ["critical", "high", "elevated"].includes(w.travel?.level)).length;
+    const eonetUpdated = eonet[0]?.date || null;
 
     el.innerHTML =
-      `<div class="panel-banner">Weather &amp; travel · ${UI.esc(scopeBanner())} · live Open-Meteo${
-        wxUpdated ? ` · updated ${relTime(wxUpdated)} ago` : ""
-      }${
+      `<div class="panel-banner">World temperatures · ${UI.esc(scopeBanner())} · ${
+        live
+          ? `live Open-Meteo · ${wx.filter((w) => w.source === "open-meteo").length} capitals`
+          : "estimates only — Open-Meteo fetch in progress"
+      }${wxUpdated ? ` · updated ${relTime(wxUpdated)}` : " · waiting for live"}${
+        eonetUpdated ? ` · eonet ${relTime(eonetUpdated)}` : ""
+      } · <b>${warnCount}</b> weather flags · <b>${travelHigh}</b> travel elevated${
         focus
           ? ` · <b>${UI.esc(focus.name)}</b> <b class="mono">${
               focus.temp != null ? Number(focus.temp).toFixed(1) + "°C" : "—"
-            }</b> · ${UI.esc(focus.wxWarn?.label || focus.label || "")}`
+            }</b> · ${UI.esc(focus.wxWarn?.label || focus.label || "")} · travel ${UI.esc(
+              focus.travel?.label || "—"
+            )}`
           : ""
       }</div>
       <div class="warn-panels">
         <div class="warn-col">
-          <div class="warn-h">☁ WEATHER WARNINGS</div>
+          <div class="warn-h">☁ WEATHER WARNINGS <em>${severeWx.length}</em></div>
           ${
             severeWx.length
               ? severeWx
@@ -2635,16 +3153,20 @@
                     (w) => `<div class="warn-row ${w.wxWarn.level}" data-code="${UI.esc(w.code || "")}">
               <b>${UI.esc(w.name)}</b>
               <span class="warn-badge">${UI.esc(w.wxWarn.label)}</span>
-              <span class="mono">${w.temp != null ? Number(w.temp).toFixed(0) + "°C" : "—"} · wind ${w.wind ?? "—"}</span>
-              <p>${UI.esc(w.wxWarn.tip || "")}</p>
+              <span class="mono">${w.temp != null ? Number(w.temp).toFixed(0) + "°C" : "—"} · wind ${
+                      w.wind ?? "—"
+                    } km/h · precip ${w.precip ?? "—"}</span>
+              <p>${UI.esc(w.wxWarn.tip || "")}${w.region ? " · " + UI.esc(w.region) : ""}${
+                      live ? " · live" : " · est"
+                    }</p>
             </div>`
                   )
                   .join("")
-              : `<p class="warn-empty">No elevated weather flags in this scope right now.</p>`
+              : `<p class="warn-empty">No weather flags in this region / country scope right now — widen filters or wait for live update.</p>`
           }
         </div>
         <div class="warn-col travel">
-          <div class="warn-h">✈ TRAVEL WARNINGS</div>
+          <div class="warn-h">✈ TRAVEL WARNINGS <em>${travelWarn.length}</em></div>
           ${
             travelWarn.length
               ? travelWarn
@@ -2652,20 +3174,29 @@
                     (w) => `<div class="warn-row ${w.travel.level}" data-code="${UI.esc(w.code || "")}">
               <b>${UI.esc(w.name)}</b>
               <span class="warn-badge">${UI.esc(w.travel.label)}</span>
-              <span class="mono">risk ${w.risk}</span>
-              <p>${UI.esc(w.travel.tip || "")}</p>
+              <span class="mono">risk ${w.risk}${w.region ? " · " + UI.esc(w.region) : ""}${
+                      w.theaters?.length ? " · " + UI.esc(w.theaters.map((t) => t.name).join("/")) : ""
+                    }</span>
+              <p>${UI.esc(w.travel.tip || "")}${
+                      w.travelExtra ? " · " + UI.esc(w.travelExtra.slice(0, 160)) : ""
+                    }</p>
             </div>`
                   )
                   .join("")
-              : `<p class="warn-empty">No high travel-risk countries in this scope.</p>`
+              : `<p class="warn-empty">No elevated travel-risk countries in this scope.</p>`
           }
-          <p class="afford-foot">Illustrative model from country risk — not official foreign-ministry advice. Always check official government advice.</p>
+          <p class="afford-foot">Model from country risk + theaters + related headlines — not official foreign-ministry advice. Always check official government advice.</p>
         </div>
       </div>
       ${
         eonet.length
-          ? `<div class="wx-eonet mono">Nearby natural events (EONET): ${eonet
-              .map((e) => UI.esc((e.title || "").slice(0, 40)))
+          ? `<div class="wx-eonet mono"><b>Natural events</b> (scoped · NASA EONET): ${eonet
+              .map(
+                (e) =>
+                  `${UI.esc((e.category || "").slice(0, 18))}: ${UI.esc((e.title || "").slice(0, 42))}${
+                    e.date ? " (" + relTime(e.date) + ")" : ""
+                  }`
+              )
               .join(" · ")}</div>`
           : ""
       }
@@ -2675,13 +3206,14 @@
           const t =
             w.temp != null && Number.isFinite(Number(w.temp)) ? `${Number(w.temp).toFixed(1)}°C` : "—";
           const wl = w.wxWarn?.level || w.impact || "ok";
+          const srcTag = w.source === "open-meteo" ? "LIVE" : "EST";
           return `<div class="wx-row${active}" data-code="${UI.esc(w.code || "")}" data-name="${UI.esc(w.name || "")}">
           <div class="wx-temp mono">${t}</div>
           <div>
-            <div class="wx-name">${UI.esc(w.name)}${w.code ? ` <span class="mono wx-code">${UI.esc(w.code)}</span>` : ""}</div>
+            <div class="wx-name">${UI.esc(w.name)}${w.code ? ` <span class="mono wx-code">${UI.esc(w.code)}</span>` : ""} <span class="mono" style="opacity:.65">${srcTag}</span></div>
             <div class="wx-vals mono">${UI.esc(w.region || "")} · wind ${w.wind ?? "—"} · ${UI.esc(
               w.wxWarn?.label || w.label || ""
-            )}</div>
+            )} · Open-Meteo</div>
             <div class="wx-travel mono" style="color:${riskColor(w.risk)}">${UI.esc(w.travel?.label || "")}</div>
           </div>
           <div class="i-stat ${wl === "ok" ? "ok" : wl === "watch" ? "warn" : "crit"}">${UI.esc(
@@ -2690,7 +3222,7 @@
         </div>`;
         })
         .join("")}</div>
-      <div class="afford-foot">${show.length} countries in temperature list · region &amp; economy filters apply · click to focus map</div>`;
+      <div class="afford-foot">${show.length} countries · source Open-Meteo (live) or estimate while loading · region filters apply · country select only reorders focus · click to fly map</div>`;
 
     const goCountry = (code) => {
       if (!code) return;
@@ -3111,16 +3643,28 @@
 
   // ── Ticker / stream ──
   function renderTicker() {
-    const news = filterNews(Feeds.getState().news || []).slice(0, 16);
+    // Always global latest live news — country select never scopes the FLASH tape
+    const news = latestNews(20);
     const items = [];
-    news.forEach((n) => items.push({ sev: n.sev || "info", tag: n.source, text: n.title }));
+    news.forEach((n) =>
+      items.push({
+        sev: n.sev || "info",
+        tag: n.source || "NEWS",
+        text: n.title,
+      })
+    );
     const kmri = state.indicators.find((i) => i.id === "kmri");
-    if (kmri) items.push({ sev: kmri.value >= 70 ? "high" : "info", tag: "KMRI", text: `Flagship ${kmri.value} (Δ ${kmri.delta})` });
+    if (kmri)
+      items.push({
+        sev: kmri.value >= 70 ? "high" : "info",
+        tag: "KMRI",
+        text: `Flagship ${kmri.value} (Δ ${kmri.delta})`,
+      });
     if (!items.length)
       items.push({
         sev: "info",
         tag: "SYS",
-        text: "Terminal booting live sources… BBC · Reuters · Bloomberg · CNBC · NYT · WSJ · Tagesschau · NDR",
+        text: "Terminal booting live sources… worldwide headlines coming online",
       });
     // Duplicate for seamless marquee
     const loop = items.length ? [...items, ...items] : items;
@@ -3141,20 +3685,34 @@
     track.style.animation = "";
   }
 
-  function vtNewsRows(items, limit = 40) {
-    return (
-      items
-        .slice(0, limit)
-        .map(
-          (n) =>
-            `<div class="vt-row ${n.sev === "crit" ? "crit" : n.sev === "high" ? "high" : "info"}" data-link="${UI.esc(n.link || "")}">
+  function vtNewsRows(items, limit = 40, emptyMsg) {
+    const list = (items || []).slice(0, limit);
+    if (!list.length) {
+      return `<div class="vt-empty">${UI.esc(emptyMsg || "No headlines yet")}</div>`;
+    }
+    return list
+      .map(
+        (n) =>
+          `<div class="vt-row ${n.sev === "crit" ? "crit" : n.sev === "high" ? "high" : "info"}" data-link="${UI.esc(n.link || "")}">
           <span class="vt-time mono">${relTime(n.published)}</span>
           <span class="vt-src mono">${UI.esc(n.source)}</span>
           <span class="vt-title">${UI.esc(n.title)}</span>
         </div>`
-        )
-        .join("") || `<div class="vt-empty">No headlines for filter</div>`
-    );
+      )
+      .join("");
+  }
+
+  /** Multiview NEWS column — global latest only (focused news lives on News desk). */
+  function mvNewsColumnHtml() {
+    const world = latestNews();
+    return `
+        <div class="mv-col" data-col="news">
+          <div class="mv-head">
+            <span>NEWS</span>
+            <em>${world.length} · WORLD</em>
+          </div>
+          <div class="mv-body">${vtNewsRows(world, 100, "Waiting for live RSS from all sources…")}</div>
+        </div>`;
   }
 
   function vtMarketRows() {
@@ -3213,6 +3771,184 @@
     });
   }
 
+  /** Live event tape: seed board + hotspots + theaters + news alerts + quakes */
+  function buildLiveEvents() {
+    const out = [];
+    const now = Date.now();
+    // Seed board with aging times so it does not look frozen
+    (typeof EVENTS !== "undefined" ? EVENTS : []).forEach((e, i) => {
+      if (!domainOk(e)) return;
+      const mins = 8 + ((now / 60000 + i * 17) % 180) | 0;
+      const time = mins < 60 ? `${mins}m` : `${(mins / 60).toFixed(1)}h`;
+      out.push({
+        id: e.id,
+        layer: e.layer || "watch",
+        sev: e.sev || "med",
+        title: e.title,
+        time,
+        sort: now - mins * 60000,
+      });
+    });
+    (state.hotspots || []).forEach((h) => {
+      if (!h) return;
+      const title = h.name || h.title || h.id;
+      if (!title) return;
+      const score = h.score != null ? Math.round(h.score) : null;
+      out.push({
+        id: "hs-" + (h.id || title),
+        layer: "hotspots",
+        sev: score >= 75 ? "crit" : score >= 55 ? "high" : "med",
+        title: score != null ? `${title} · heat ${score}` : title,
+        time: "live",
+        sort: now - 30000 + (score || 0) * 100,
+      });
+    });
+    // Theaters with live posture / heat (not static catalog only)
+    (typeof THEATERS !== "undefined" ? THEATERS : []).forEach((t) => {
+      const title = t.name || t.title || t.id;
+      if (!title) return;
+      let live;
+      try {
+        live = enrichTheater(t);
+      } catch {
+        live = t;
+      }
+      const post = (live.livePosture || t.posture || "").toLowerCase();
+      const sev =
+        post === "critical" ? "crit" : post === "elevated" ? "high" : post === "watch" ? "med" : "info";
+      const heatBit = live.heat != null ? ` · heat ${live.heat}` : "";
+      const newsBit = live.newsCount ? ` · ${live.newsCount} hdln` : "";
+      out.push({
+        id: "th-" + (t.id || title),
+        layer: "military",
+        sev,
+        title: `${title}${heatBit}${newsBit}${t.note ? ` — ${t.note}` : ""}`,
+        time: live.updatedLabel || post || "watch",
+        sort: now - 45000 + (live.heat || 0) * 200,
+      });
+    });
+    // High + medium news (more volume so EVENTS column stays populated)
+    // Global news into events tape (not country-scoped)
+    latestNews(40)
+      .filter((n) => n.sev === "crit" || n.sev === "high" || n.sev === "med" || !n.sev)
+      .slice(0, 28)
+      .forEach((n) => {
+        const sev =
+          n.sev === "crit" ? "crit" : n.sev === "high" ? "high" : n.sev === "med" ? "med" : "info";
+        out.push({
+          id: "nw-" + (n.id || n.title),
+          layer: "news",
+          sev,
+          title: n.title,
+          time: relTime(n.published),
+          sort: n.published || now - 120000,
+          link: n.link,
+        });
+      });
+    (Feeds.getState().quakes || []).slice(0, 12).forEach((q) => {
+      const mag = q.mag != null ? q.mag : q.magnitude;
+      const place = q.place || q.title || "Quake";
+      out.push({
+        id: "qk-" + (q.id || place),
+        layer: "quakes",
+        sev: mag >= 6 ? "crit" : mag >= 5 ? "high" : "med",
+        title: `M${mag != null ? Number(mag).toFixed(1) : "?"} · ${place}`,
+        time: relTime(q.time || q.date),
+        sort: q.time || q.date || now - 180000,
+      });
+    });
+    // Natural disasters (EONET) into events tape
+    (Feeds.getState().eonet || []).slice(0, 10).forEach((d, i) => {
+      out.push({
+        id: "eo-" + (d.id || i),
+        layer: "natural",
+        sev: "high",
+        title: `${d.category || "EONET"} · ${d.title || "Open event"}`,
+        time: relTime(d.date),
+        sort: d.date || now - 200000 - i * 1000,
+      });
+    });
+    // Live weather flags (severe capital samples)
+    const wx = Feeds.getState().weather || [];
+    if (wx.length) {
+      wx
+        .map((w) => {
+          const warn =
+            typeof weatherWarningFromCode === "function"
+              ? weatherWarningFromCode(w.codeWx, w.wind, w.precip, w.temp)
+              : { level: w.impact || "ok", label: w.label || "—" };
+          return { w, warn };
+        })
+        .filter(({ warn }) => ["critical", "high", "elevated"].includes(warn.level))
+        .sort((a, b) => {
+          const r = { critical: 3, high: 2, elevated: 1 };
+          return (r[b.warn.level] || 0) - (r[a.warn.level] || 0);
+        })
+        .slice(0, 10)
+        .forEach(({ w, warn }) => {
+          out.push({
+            id: "wx-" + (w.code || w.name),
+            layer: "weather",
+            sev: warn.level === "critical" ? "crit" : warn.level === "high" ? "high" : "med",
+            title: `${w.name}: ${warn.label}${w.temp != null ? ` · ${Number(w.temp).toFixed(0)}°C` : ""}`,
+            time: Feeds.getState().weatherUpdated ? relTime(Feeds.getState().weatherUpdated) : "live",
+            sort: (Feeds.getState().weatherUpdated || now) - 5000,
+          });
+        });
+    }
+    // Catalog alerts (aging)
+    (typeof ALERTS !== "undefined" ? ALERTS : []).forEach((a, i) => {
+      if (!domainOk(a) && state.domain !== "all") return;
+      const mins = 12 + ((now / 60000 + i * 23) % 240) | 0;
+      out.push({
+        id: "al-" + (a.id || i),
+        layer: a.layer || "alert",
+        sev: a.sev === "crit" ? "crit" : a.sev === "high" ? "high" : a.sev === "med" ? "med" : "info",
+        title: a.title,
+        time: mins < 60 ? `${mins}m` : `${(mins / 60).toFixed(1)}h`,
+        sort: now - mins * 60000,
+      });
+    });
+    (typeof INFRA_EVENTS !== "undefined" ? INFRA_EVENTS : []).slice(0, 8).forEach((e, i) => {
+      const sevMap = { crit: "crit", high: "high", elevated: "med", watch: "info", info: "info" };
+      out.push({
+        id: "inf-" + (e.id || i),
+        layer: e.type || "infra",
+        sev: sevMap[e.sev] || "med",
+        title: e.title || e.name || "Infrastructure note",
+        time: e.status || "watch",
+        sort: now - (i + 2) * 90000,
+      });
+    });
+    // de-dupe by title, newest first
+    const seen = new Set();
+    return out
+      .sort((a, b) => (b.sort || 0) - (a.sort || 0))
+      .filter((e) => {
+        const k = (e.title || "").slice(0, 80);
+        if (!k || seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      })
+      .slice(0, 80);
+  }
+
+  function vtEventRows(events) {
+    if (!events.length) return `<div class="vt-empty">Waiting for live events…</div>`;
+    return events
+      .map(
+        (e) =>
+          `<div class="vt-row ${e.sev === "crit" ? "crit" : e.sev === "high" ? "high" : e.sev === "info" ? "info" : "med"}"${
+            e.link ? ` data-link="${UI.esc(e.link)}"` : ""
+          }>
+          <span class="vt-time mono">${UI.esc(e.time || "—")}</span>
+          <span class="vt-src mono">${UI.esc(e.layer || "event")}</span>
+          <span class="vt-title">${UI.esc(e.title)}</span>
+        </div>`
+      )
+      .join("");
+  }
+
   function renderStream() {
     const pane = $("#streamPane");
     if (!pane) return;
@@ -3220,30 +3956,17 @@
     // Full multiview: 4 columns side by side
     if (state.stream === "multi" || !state.stream) {
       pane.className = "stream-pane multiview-tape";
-      const news = filterNews(Feeds.getState().news || []);
-      const events = EVENTS.filter((e) => domainOk(e));
+      const events = buildLiveEvents();
       const disasters = [...(Feeds.getState().eonet || [])].sort((a, b) => (b.date || 0) - (a.date || 0));
       pane.innerHTML = `
-        <div class="mv-col" data-col="news">
-          <div class="mv-head"><span>NEWS</span><em>${news.length}</em></div>
-          <div class="mv-body">${vtNewsRows(news, 35)}</div>
-        </div>
+        ${mvNewsColumnHtml()}
         <div class="mv-col" data-col="markets">
           <div class="mv-head"><span>MARKETS</span><em>TAPE</em></div>
           <div class="mv-body">${vtMarketRows()}</div>
         </div>
         <div class="mv-col" data-col="events">
           <div class="mv-head"><span>EVENTS</span><em>${events.length}</em></div>
-          <div class="mv-body">${events
-            .map(
-              (e) =>
-                `<div class="vt-row ${e.sev === "crit" ? "crit" : e.sev === "high" ? "high" : "med"}">
-              <span class="vt-time mono">${UI.esc(e.time)}</span>
-              <span class="vt-src mono">${UI.esc(e.layer)}</span>
-              <span class="vt-title">${UI.esc(e.title)}</span>
-            </div>`
-            )
-            .join("")}</div>
+          <div class="mv-body">${vtEventRows(events)}</div>
         </div>
         <div class="mv-col" data-col="disasters">
           <div class="mv-head"><span>DISASTERS</span><em>${disasters.length}</em></div>
@@ -3260,7 +3983,7 @@
                 </div>`
                   )
                   .join("")
-              : `<div class="vt-empty">No open EONET events</div>`
+              : `<div class="vt-empty">No open disaster alerts</div>`
           }</div>
         </div>`;
       bindStreamClicks(pane);
@@ -3270,23 +3993,16 @@
     pane.className = "stream-pane vertical-tape single-col";
 
     if (state.stream === "news") {
-      const items = filterNews(Feeds.getState().news || []);
-      pane.innerHTML = vtNewsRows(items, 80);
+      // Full-column NEWS: global latest only
+      const world = latestNews();
+      pane.innerHTML = vtNewsRows(world, 120, "Waiting for live RSS from all sources…");
       bindStreamClicks(pane);
     } else if (state.stream === "markets") {
       pane.innerHTML = vtMarketRows();
       bindStreamClicks(pane);
     } else if (state.stream === "events") {
-      pane.innerHTML = EVENTS.filter((e) => domainOk(e))
-        .map(
-          (e) =>
-            `<div class="vt-row ${e.sev === "crit" ? "crit" : e.sev === "high" ? "high" : "med"}">
-          <span class="vt-time mono">${UI.esc(e.time)}</span>
-          <span class="vt-src mono">${UI.esc(e.layer)}</span>
-          <span class="vt-title">${UI.esc(e.title)}</span>
-        </div>`
-        )
-        .join("");
+      pane.innerHTML = vtEventRows(buildLiveEvents());
+      bindStreamClicks(pane);
     } else if (state.stream === "disasters") {
       const items = [...(Feeds.getState().eonet || [])].sort((a, b) => (b.date || 0) - (a.date || 0));
       pane.innerHTML =
@@ -3483,6 +4199,22 @@
       closeMobileSheets();
     }
     updateFocusChrome();
+    // Always land at the top of the desk (no manual scroll-up)
+    try {
+      Layout.scrollWorkspaceTop?.();
+    } catch {
+      const ws = $("#workspace");
+      if (ws) ws.scrollTop = 0;
+    }
+    requestAnimationFrame(() => {
+      Layout.scrollWorkspaceTop?.();
+      Layout.scheduleAutoArrange?.(40);
+    });
+    setTimeout(() => {
+      Layout.scrollWorkspaceTop?.();
+      Layout.scheduleAutoArrange?.(20);
+    }, 120);
+    setTimeout(() => Layout.scrollWorkspaceTop?.(), 320);
     const desk = (typeof DESK_CATALOG !== "undefined" ? DESK_CATALOG : []).find((d) => d.id === view);
     UI.toast(desk ? `Desk · ${desk.title}` : `Desk · ${view}`);
   }
@@ -3531,36 +4263,82 @@
     if (modal) modal.hidden = true;
   }
 
+  function isV2Shell() {
+    return document.body.classList.contains("dash-v2");
+  }
+
+  /**
+   * Compact (phone/tablet portrait) vs wide (desktop/large tablet landscape).
+   * 1024 covers most phones + tablets in portrait; landscape tablets stay desktop rail.
+   */
+  function prefersCompactLayout() {
+    try {
+      // Touch-first: short edge ≤ 1024 OR explicit max-width
+      const narrow = window.matchMedia("(max-width: 1024px)").matches;
+      const coarse = window.matchMedia("(pointer: coarse)").matches;
+      const shortH = window.matchMedia("(max-height: 500px)").matches; // landscape phone
+      if (shortH && window.innerWidth <= 920) return true;
+      // Large tablets in landscape keep desktop when wide enough
+      if (window.innerWidth >= 1100 && !narrow) return false;
+      return narrow || (coarse && window.innerWidth <= 1100);
+    } catch {
+      return window.innerWidth <= 1024;
+    }
+  }
+
   function setViewMode(mode, opts = {}) {
+    // Pure responsive: layout follows viewport (no DESK/PHONE toggle) unless force
+    if (!opts.force) {
+      mode = prefersCompactLayout() ? "mobile" : "desktop";
+    }
     const next = mode === "mobile" ? "mobile" : "desktop";
     const changed = state.viewMode !== next;
     state.viewMode = next;
     document.body.classList.toggle("view-mobile", state.viewMode === "mobile");
     document.body.classList.toggle("view-desktop", state.viewMode === "desktop");
+    // Orientation helpers for CSS
+    try {
+      const land = window.matchMedia("(orientation: landscape)").matches;
+      document.body.classList.toggle("orient-landscape", land);
+      document.body.classList.toggle("orient-portrait", !land);
+      document.body.classList.toggle("is-touch", window.matchMedia("(pointer: coarse)").matches);
+    } catch {
+      /* */
+    }
     $$("#viewToggle .vt-btn").forEach((b) =>
       b.classList.toggle("active", b.dataset.viewmode === state.viewMode)
     );
     const dock = $("#mobileDock");
     if (dock) dock.hidden = state.viewMode !== "mobile";
     if (state.viewMode !== "mobile") closeMobileSheets();
-    if (state.viewMode === "mobile") renderMobileDock();
-    try {
-      Map3D.resize?.();
-    } catch {
-      /* */
-    }
-    if (changed && !opts.silent) {
-      UI.toast(state.viewMode === "mobile" ? "PHONE view · bottom nav" : "DESK view · wide grid");
-    }
-    // reflow after CSS grid settles
-    requestAnimationFrame(() => {
+    // Only rebuild dock when mode actually changes (resize was thrashing the UI)
+    if (changed && state.viewMode === "mobile") renderMobileDock();
+    if (changed) {
       try {
         Map3D.resize?.();
       } catch {
         /* */
       }
-      if (state.viewMode === "mobile") scrollActiveDeskIntoView();
-    });
+    }
+    // reflow after CSS grid settles
+    if (changed || opts.reflow) {
+      requestAnimationFrame(() => {
+        try {
+          Map3D.resize?.();
+        } catch {
+          /* */
+        }
+        if (state.viewMode === "mobile") scrollActiveDeskIntoView();
+        // Stream / map need a second pass after dock CSS applies
+        setTimeout(() => {
+          try {
+            Map3D.resize?.();
+          } catch {
+            /* */
+          }
+        }, 120);
+      });
+    }
   }
 
   function closeMobileSheets() {
@@ -3598,13 +4376,8 @@
   function pickMobileDesk(id) {
     if (!id) return;
     closeMobileSheets();
-    setView(id);
+    setView(id); // setView already scrolls workspace to top
     renderMobileDock();
-    // scroll workspace to top of panels for orientation
-    const ws = $("#workspace") || $(".main-col");
-    if (ws) ws.scrollTop = 0;
-    const grid = $("#widgetGrid");
-    if (grid) grid.scrollTop = 0;
     requestAnimationFrame(scrollActiveDeskIntoView);
   }
 
@@ -3691,11 +4464,8 @@
     document.documentElement.classList.toggle("standalone-app", standalone);
     document.body.classList.toggle("standalone-app", standalone);
     if (!standalone) return;
-    // App mode: prefer phone layout under tablet width for touch responsiveness
-    const preferPhone = window.matchMedia("(max-width: 1100px)").matches || "ontouchstart" in window;
-    if (preferPhone && state.viewMode !== "mobile") {
-      setViewMode("mobile", { silent: true });
-    }
+    // UWP / PWA / homescreen: layout follows viewport width (pure responsive)
+    setViewMode(prefersCompactLayout() ? "mobile" : "desktop", { silent: true, force: true });
     // Safe reflow after launch chrome settles
     setTimeout(() => {
       try {
@@ -3853,27 +4623,84 @@
       $("#focusClear")?.click();
     });
 
-    // Auto phone layout on narrow screens; keep in sync on rotate/resize
-    const mq = window.matchMedia("(max-width: 720px)");
+    // Pure responsive: compact ↔ wide on phone / tablet / desktop / UWP
     const syncPhone = () => {
-      if (mq.matches && state.viewMode !== "mobile") setViewMode("mobile", { silent: true });
+      setViewMode(prefersCompactLayout() ? "mobile" : "desktop", {
+        silent: true,
+        force: true,
+        reflow: true,
+      });
     };
     syncPhone();
-    if (mq.addEventListener) mq.addEventListener("change", syncPhone);
-    else if (mq.addListener) mq.addListener(syncPhone);
+    // Breakpoint + orientation (tablet rotate, foldables)
+    try {
+      const mqW = window.matchMedia("(max-width: 1024px)");
+      const mqO = window.matchMedia("(orientation: landscape)");
+      const mqP = window.matchMedia("(pointer: coarse)");
+      const onMq = () => syncPhone();
+      [mqW, mqO, mqP].forEach((mq) => {
+        if (mq.addEventListener) mq.addEventListener("change", onMq);
+        else if (mq.addListener) mq.addListener(onMq);
+      });
+    } catch {
+      /* */
+    }
+    let layoutResizeT = 0;
     window.addEventListener(
       "resize",
       () => {
-        if (state.viewMode === "mobile") {
+        clearTimeout(layoutResizeT);
+        layoutResizeT = setTimeout(() => {
+          syncPhone();
           try {
             Map3D.resize?.();
           } catch {
             /* */
           }
-        }
+        }, 140);
       },
       { passive: true }
     );
+    window.addEventListener(
+      "orientationchange",
+      () => {
+        setTimeout(syncPhone, 80);
+        setTimeout(() => {
+          try {
+            Map3D.resize?.();
+          } catch {
+            /* */
+          }
+        }, 280);
+      },
+      { passive: true }
+    );
+    // Visual viewport (iOS URL bar show/hide)
+    try {
+      if (window.visualViewport) {
+        let vvT = 0;
+        window.visualViewport.addEventListener(
+          "resize",
+          () => {
+            clearTimeout(vvT);
+            vvT = setTimeout(() => {
+              document.documentElement.style.setProperty(
+                "--vv-h",
+                `${window.visualViewport.height}px`
+              );
+              try {
+                Map3D.resize?.();
+              } catch {
+                /* */
+              }
+            }, 60);
+          },
+          { passive: true }
+        );
+      }
+    } catch {
+      /* */
+    }
 
     $("#domainPills")?.addEventListener("click", (e) => {
       const p = e.target.closest(".domain-pill");
@@ -3906,19 +4733,24 @@
       fillCountry();
       fillCII();
       fillImpact();
-      fillNews();
-      fillNewsFocus();
+      fillNews(); // always global all-sources
+      fillNewsFocus(); // country-only (empty if none)
       fillWeather();
+      ensureWeatherFresh(true);
       fillAnswers();
       fillImplications();
       fillTriad();
       fillMktBoard();
       updateFocusChrome();
+      // Bottom multiview NEWS stays global; Focus News desk panel updates separately
+      renderTicker();
+      renderStream();
     });
 
     $("#regionSelect")?.addEventListener("change", (e) => {
       state.regionGroup = e.target.value || "all";
       populateCountrySelect();
+      ensureWeatherFresh(true);
       refreshAllPanels();
       const rg = (typeof REGION_GROUPS !== "undefined" ? REGION_GROUPS : []).find((g) => g.id === state.regionGroup);
       UI.toast(`Region · ${rg?.name || "All"} · ${scopedCountries().length} countries`);
@@ -4113,6 +4945,8 @@
       fillNewsFocus();
       fillOutages();
       fillCritInfra();
+      fillTheaters();
+      fillWeather();
       renderTicker();
       renderStream();
       recomputeIndicators();
@@ -4149,6 +4983,9 @@
       renderMacroStrip();
       recomputeIndicators();
       updateFeedHealth();
+      // Markets also keep multi-tape (markets + events meta) fresh
+      if (state.stream === "multi" || state.stream === "markets" || state.stream === "events")
+        renderStream();
     });
     Feeds.on("quakes", () => {
       fillQuakes();
@@ -4156,21 +4993,33 @@
       fillAlerts();
       recomputeIndicators();
       updateFeedHealth();
+      renderStream();
     });
     Feeds.on("eonet", () => {
       fillDisasters();
+      fillWeather();
       pushMarkers();
       recomputeIndicators();
       updateFeedHealth();
       renderStream();
     });
     Feeds.on("weather", () => {
+      // Live Open-Meteo → temps + weather warnings + travel-risk panel
       fillWeather();
       fillClimatefood();
       fillCompare();
       fillCountry();
+      fillTheaters();
       recomputeIndicators();
       updateFeedHealth();
+      // Weather flags feed the EVENTS column
+      if (state.stream === "multi" || state.stream === "events" || state.stream === "disasters")
+        renderStream();
+      try {
+        Layout.scheduleAutoArrange?.(80);
+      } catch {
+        /* */
+      }
     });
     Feeds.on("relief", () => {
       updateFeedHealth();
@@ -4179,9 +5028,20 @@
     Feeds.on("refresh", () => {
       refreshAllPanels();
       recomputeIndicators();
+      renderStream();
     });
     Feeds.on("log", () => {
       if (state.stream === "log") renderStream();
+    });
+    // After any feed tick, re-pack desk windows (empty → compact)
+    ["news", "markets", "quakes", "eonet", "weather", "refresh"].forEach((ev) => {
+      Feeds.on(ev, () => {
+        try {
+          Layout.scheduleAutoArrange?.(120);
+        } catch {
+          /* */
+        }
+      });
     });
   }
 
@@ -4216,12 +5076,36 @@
     recomputeIndicators();
 
     setInterval(() => {
-      const h = state.hotspots[Math.floor(Math.random() * state.hotspots.length)];
-      const n = Math.random() > 0.55 ? 1 : -1;
-      h.score = Math.max(20, Math.min(99, h.score + n));
-      h.delta += n;
+      if (state.hotspots?.length) {
+        const h = state.hotspots[Math.floor(Math.random() * state.hotspots.length)];
+        if (h) {
+          const n = Math.random() > 0.55 ? 1 : -1;
+          h.score = Math.max(20, Math.min(99, h.score + n));
+          h.delta += n;
+        }
+      }
       if (Layout.bodyEl("hotspots")) fillHotspots();
+      // Keep theaters + weather / travel warnings fresh as heat / clocks move
+      if (Layout.bodyEl("theaters")) fillTheaters();
+      ensureWeatherFresh(false);
+      if (Layout.bodyEl("weather")) fillWeather();
+      // Keep events tape moving (not stuck on a single seed line)
+      if (
+        state.stream === "multi" ||
+        state.stream === "events" ||
+        state.stream === "disasters" ||
+        !state.stream
+      )
+        renderStream();
     }, 15000);
+
+    // Lightweight stream + ticker tick so relative times stay current
+    setInterval(() => {
+      if (state.stream === "multi" || state.stream === "news" || state.stream === "events" || !state.stream)
+        renderStream();
+      renderTicker();
+      ensureWeatherFresh(false);
+    }, 45000);
 
     $("#footerStatus").textContent = "LIVE · NO COOKIES · NO DISK CACHE · THIS VISIT ONLY";
     // Open help once per browser tab (memory only — never saved on disk)

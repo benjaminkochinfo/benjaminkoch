@@ -599,110 +599,251 @@ const Feeds = (() => {
   }
 
   function rowFromCurrent(c, cur) {
-    const codeWx = cur.weather_code;
+    if (!c || !cur) return null;
+    const temp = Number(cur.temperature_2m);
+    if (!Number.isFinite(temp)) return null;
+    const codeWx = cur.weather_code != null ? Number(cur.weather_code) : null;
+    const wind = cur.wind_speed_10m != null ? Number(cur.wind_speed_10m) : null;
+    const precip = cur.precipitation != null ? Number(cur.precipitation) : null;
+    const curNorm = {
+      temperature_2m: temp,
+      wind_speed_10m: wind,
+      weather_code: codeWx,
+      precipitation: precip,
+    };
     return {
       code: c.code,
       name: c.name,
       region: c.region || "",
       lat: c.lat,
       lon: c.lon,
-      temp: cur.temperature_2m,
-      wind: cur.wind_speed_10m,
-      precip: cur.precipitation,
-      codeWx,
-      time: cur.time,
+      temp,
+      wind: Number.isFinite(wind) ? wind : null,
+      precip: Number.isFinite(precip) ? precip : null,
+      codeWx: Number.isFinite(codeWx) ? codeWx : null,
+      time: cur.time || null,
       label: weatherCodeLabel(codeWx),
-      impact: weatherImpact(cur),
+      impact: weatherImpact(curNorm),
       source: "open-meteo",
+      live: true,
       updated: Date.now(),
     };
   }
 
-  async function fetchWeatherOne(c) {
-    const u = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC&wind_speed_unit=kmh`;
-    const one = await fetchJson(u, 12000);
-    return rowFromCurrent(c, one.current || {});
+  function nearestCity(chunk, lat, lon) {
+    if (!chunk?.length || lat == null || lon == null) return null;
+    let best = null;
+    let bestD = Infinity;
+    for (const c of chunk) {
+      if (c.lat == null || c.lon == null) continue;
+      const d = Math.hypot(Number(c.lat) - Number(lat), Number(c.lon) - Number(lon));
+      if (d < bestD) {
+        bestD = d;
+        best = c;
+      }
+    }
+    // Reject wild mismatches (wrong index mapping)
+    return bestD < 8 ? best : null;
   }
 
-  // ── Open-Meteo worldwide capital temperatures (batched) ──
-  async function refreshWeather() {
-    const cities =
-      typeof weatherCitiesFromCountries === "function"
-        ? weatherCitiesFromCountries()
-        : (typeof COUNTRIES !== "undefined" ? COUNTRIES : [])
-            .filter((c) => c.code && c.code !== "GLOBAL")
-            .map((c) => ({ code: c.code, name: c.name, lat: c.lat, lon: c.lon, region: c.region }));
+  /** Pull current fields for index i whether Open-Meteo returns scalars or parallel arrays. */
+  function currentAt(current, i) {
+    if (!current) return null;
+    const pick = (key) => {
+      const v = current[key];
+      if (Array.isArray(v)) return v[i];
+      // scalar applies only to single-location payloads
+      return i === 0 ? v : Array.isArray(v) ? v[i] : undefined;
+    };
+    const temperature_2m = pick("temperature_2m");
+    if (temperature_2m == null && temperature_2m !== 0) return null;
+    return {
+      temperature_2m,
+      wind_speed_10m: pick("wind_speed_10m"),
+      weather_code: pick("weather_code"),
+      precipitation: pick("precipitation"),
+      time: pick("time"),
+    };
+  }
 
-    if (!cities.length) {
-      setHealth("weather", "err", "no cities");
-      return;
+  /**
+   * Parse Open-Meteo multi/single JSON into rows matched to chunk cities by lat/lon.
+   * Supports: array of forecasts · parallel lat arrays · single forecast object.
+   */
+  function parseOpenMeteoPayload(j, chunk) {
+    const out = [];
+    if (!j || !chunk?.length) return out;
+
+    // Format A: JSON array of location objects (official multi-location)
+    if (Array.isArray(j)) {
+      j.forEach((item, idx) => {
+        if (!item?.current) return;
+        const c =
+          nearestCity(chunk, item.latitude, item.longitude) ||
+          chunk[idx] ||
+          null;
+        const row = rowFromCurrent(c, item.current);
+        if (row) out.push(row);
+      });
+      return out;
     }
 
-    try {
-      const results = [];
-      const chunkSize = 25; // Open-Meteo multi: JSON array of structures
-      for (let i = 0; i < cities.length; i += chunkSize) {
-        const chunk = cities.slice(i, i + chunkSize);
-        const lats = chunk.map((c) => c.lat).join(",");
-        const lons = chunk.map((c) => c.lon).join(",");
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC&wind_speed_unit=kmh`;
-        let addedThis = 0;
-        try {
-          const j = await fetchJson(url, 28000);
-          // Official multi-location format: array of forecast objects
-          if (Array.isArray(j) && j.length) {
-            j.forEach((item, idx) => {
-              const c = chunk[idx] || chunk[0];
-              if (item?.current && c) {
-                results.push(rowFromCurrent(c, item.current));
-                addedThis++;
-              }
-            });
-          } else if (j && j.current && !Array.isArray(j.latitude)) {
-            results.push(rowFromCurrent(chunk[0], j.current));
-            addedThis = 1;
-          }
-        } catch (chunkErr) {
-          log(`Weather chunk ${i}: ${chunkErr.message}`, "err");
-        }
-        // Fallback singles when multi fails or returns incomplete chunk
-        if (addedThis < Math.ceil(chunk.length * 0.6)) {
-          const have = new Set(results.map((r) => r.code));
-          await mapPool(
-            chunk.filter((c) => !have.has(c.code)),
-            6,
-            async (c) => {
-              try {
-                results.push(await fetchWeatherOne(c));
-              } catch {
-                /* skip city */
-              }
-            }
-          );
-        }
+    // Format B: parallel arrays on root latitude / current.*
+    if (Array.isArray(j.latitude) && j.current) {
+      const n = j.latitude.length;
+      for (let i = 0; i < n; i++) {
+        const cur = currentAt(j.current, i);
+        if (!cur) continue;
+        const c =
+          nearestCity(chunk, j.latitude[i], Array.isArray(j.longitude) ? j.longitude[i] : j.longitude) ||
+          chunk[i] ||
+          null;
+        const row = rowFromCurrent(c, cur);
+        if (row) out.push(row);
+      }
+      return out;
+    }
+
+    // Format C: single location object
+    if (j.current && (typeof j.latitude === "number" || j.latitude == null)) {
+      const c =
+        nearestCity(chunk, j.latitude, j.longitude) || chunk[0] || null;
+      const row = rowFromCurrent(c, j.current);
+      if (row) out.push(row);
+    }
+    return out;
+  }
+
+  async function fetchWeatherOne(c) {
+    if (c?.lat == null || c?.lon == null) throw new Error("no coords");
+    const u = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(
+      c.lat
+    )}&longitude=${encodeURIComponent(
+      c.lon
+    )}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC&wind_speed_unit=kmh`;
+    const one = await fetchJson(u, 14000);
+    // single may still be array-of-one
+    if (Array.isArray(one)) {
+      const row = parseOpenMeteoPayload(one, [c])[0];
+      if (row) return row;
+    }
+    const row = rowFromCurrent(c, one?.current || {});
+    if (!row) throw new Error("no temp");
+    return row;
+  }
+
+  let weatherInFlight = null;
+
+  // ── Open-Meteo worldwide capital temperatures (batched + reliable fallback) ──
+  async function refreshWeather() {
+    // Coalesce concurrent kicks (UI + interval + force)
+    if (weatherInFlight) return weatherInFlight;
+
+    weatherInFlight = (async () => {
+      const cities = (
+        typeof weatherCitiesFromCountries === "function"
+          ? weatherCitiesFromCountries()
+          : (typeof COUNTRIES !== "undefined" ? COUNTRIES : [])
+              .filter((c) => c.code && c.code !== "GLOBAL")
+              .map((c) => ({ code: c.code, name: c.name, lat: c.lat, lon: c.lon, region: c.region }))
+      ).filter((c) => c && c.code && c.lat != null && c.lon != null && Number.isFinite(Number(c.lat)));
+
+      if (!cities.length) {
+        setHealth("weather", "err", "no cities");
+        return;
       }
 
-      // Deduplicate by code (keep last)
-      const byCode = new Map();
-      results.forEach((r) => {
-        if (r.code && r.temp != null && Number.isFinite(Number(r.temp))) byCode.set(r.code, r);
-      });
-      const final = [...byCode.values()].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-      if (!final.length) throw new Error("no weather rows");
-      state.weather = final;
-      state.weatherUpdated = Date.now();
-      Storage.cacheSet("weather", final);
-      setHealth("weather", "ok", `${final.length}/${cities.length} Open-Meteo`);
-      emit("weather", { items: final });
-      log(`Weather ${final.length}/${cities.length} capitals`);
-    } catch (e) {
-      const c = Storage.cacheGet("weather", 6 * 3600e3);
-      if (c?.data?.length) {
-        state.weather = c.data;
-        setHealth("weather", "warn", "cache");
-        emit("weather", { items: state.weather });
-      } else setHealth("weather", "err", e.message || "fail");
-    }
+      try {
+        const results = [];
+        // Smaller multi chunks are more reliable; then fill gaps with singles (low concurrency to avoid 429)
+        const chunkSize = 12;
+        for (let i = 0; i < cities.length; i += chunkSize) {
+          const chunk = cities.slice(i, i + chunkSize);
+          const lats = chunk.map((c) => Number(c.lat).toFixed(4)).join(",");
+          const lons = chunk.map((c) => Number(c.lon).toFixed(4)).join(",");
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&current=temperature_2m,wind_speed_10m,weather_code,precipitation&timezone=UTC&wind_speed_unit=kmh`;
+          let added = [];
+          try {
+            const j = await fetchJson(url, 30000);
+            added = parseOpenMeteoPayload(j, chunk);
+            added.forEach((r) => results.push(r));
+          } catch (chunkErr) {
+            log(`Weather multi ${i}: ${chunkErr.message || chunkErr}`, "err");
+          }
+
+          const have = new Set(results.map((r) => r.code));
+          const missing = chunk.filter((c) => !have.has(c.code));
+          // If multi missed most of the chunk, fetch singles carefully
+          if (missing.length) {
+            const needSingles =
+              added.length < Math.ceil(chunk.length * 0.5) ? missing : missing.slice(0, 4);
+            const singles = await mapPool(needSingles, 3, async (c) => {
+              try {
+                return await fetchWeatherOne(c);
+              } catch {
+                return null;
+              }
+            });
+            singles.forEach((r) => {
+              if (r) results.push(r);
+            });
+            // gentle pause between heavy chunks to avoid Open-Meteo 429
+            if (missing.length > 2) await new Promise((r) => setTimeout(r, 120));
+          }
+        }
+
+        // Second pass: any still missing → low-concurrency singles
+        const haveAll = new Set(results.map((r) => r.code));
+        const still = cities.filter((c) => !haveAll.has(c.code));
+        if (still.length) {
+          log(`Weather fill ${still.length} remaining capitals…`);
+          const more = await mapPool(still, 4, async (c) => {
+            try {
+              return await fetchWeatherOne(c);
+            } catch {
+              return null;
+            }
+          });
+          more.forEach((r) => {
+            if (r) results.push(r);
+          });
+        }
+
+        const byCode = new Map();
+        results.forEach((r) => {
+          if (r?.code && r.temp != null && Number.isFinite(Number(r.temp))) byCode.set(r.code, r);
+        });
+        const final = [...byCode.values()].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+        if (!final.length) throw new Error("no weather rows");
+
+        state.weather = final;
+        state.weatherUpdated = Date.now();
+        Storage.cacheSet("weather", final);
+        const pct = Math.round((final.length / cities.length) * 100);
+        setHealth(
+          "weather",
+          final.length >= cities.length * 0.5 ? "ok" : "warn",
+          `${final.length}/${cities.length} Open-Meteo (${pct}%)`
+        );
+        emit("weather", { items: final });
+        log(`Weather live ${final.length}/${cities.length} capitals · Open-Meteo`);
+      } catch (e) {
+        // Keep prior live rows if any; never invent numbers
+        if (state.weather?.length && state.weather.some((w) => w.source === "open-meteo")) {
+          setHealth("weather", "warn", e.message || "stale");
+          emit("weather", { items: state.weather });
+          log(`Weather keep prior live rows: ${e.message || e}`, "err");
+        } else {
+          setHealth("weather", "err", e.message || "fail");
+          emit("weather", { items: state.weather || [] });
+          log(`Weather fail: ${e.message || e}`, "err");
+        }
+      } finally {
+        weatherInFlight = null;
+      }
+    })();
+
+    return weatherInFlight;
   }
 
   function weatherCodeLabel(code) {

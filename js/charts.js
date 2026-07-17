@@ -57,11 +57,25 @@ const Charts = (() => {
     return series;
   }
 
+  function themePalette(opts = {}) {
+    return {
+      stroke: opts.stroke || "#ffffff",
+      fillTop: opts.fillTop || "rgba(33, 100, 243, 0.62)",
+      fillMid: "rgba(20, 60, 140, 0.22)",
+      fillBot: opts.fillBot || "rgba(4, 10, 28, 0.02)",
+      bg: opts.bg || "#050a16",
+      grid: "rgba(80, 110, 180, 0.12)",
+      last: "#ffab00",
+      lastStroke: "#fff",
+    };
+  }
+
   function mountain(series, opts = {}) {
     const w = opts.w || 320;
     const h = opts.h || 72;
     const padX = opts.padX ?? 6;
     const padY = opts.padY ?? 8;
+    const pal = themePalette(opts);
     if (!series?.length) {
       return `<svg class="bb-chart" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><text x="8" y="${
         h / 2
@@ -82,10 +96,9 @@ const Charts = (() => {
       line +
       ` L${pts[pts.length - 1][0].toFixed(2)},${(h - 2).toFixed(2)}` +
       ` L${pts[0][0].toFixed(2)},${(h - 2).toFixed(2)} Z`;
-    const up = series[series.length - 1] >= series[0];
-    const stroke = opts.stroke || "#ffffff";
-    const fillTop = opts.fillTop || (up ? "rgba(33, 100, 243, 0.62)" : "rgba(33, 100, 243, 0.38)");
-    const fillBot = opts.fillBot || "rgba(4, 10, 28, 0.02)";
+    const stroke = pal.stroke;
+    const fillTop = pal.fillTop;
+    const fillBot = pal.fillBot;
     const gid = "g" + Math.random().toString(36).slice(2, 9);
     const last = pts[pts.length - 1];
     // subtle grid
@@ -94,14 +107,14 @@ const Charts = (() => {
       const gy = padY + (innerH * g) / 4;
       grid += `<line x1="${padX}" y1="${gy.toFixed(1)}" x2="${(w - padX).toFixed(
         1
-      )}" y2="${gy.toFixed(1)}" stroke="rgba(80,110,180,0.12)" stroke-width="0.6"/>`;
+      )}" y2="${gy.toFixed(1)}" stroke="${pal.grid}" stroke-width="0.6"/>`;
     }
 
     return `<svg class="bb-chart" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img">
       <defs>
         <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="${fillTop}"/>
-          <stop offset="55%" stop-color="rgba(20,60,140,0.22)"/>
+          <stop offset="55%" stop-color="${pal.fillMid}"/>
           <stop offset="100%" stop-color="${fillBot}"/>
         </linearGradient>
         <filter id="glow${gid}" x="-20%" y="-20%" width="140%" height="140%">
@@ -109,13 +122,13 @@ const Charts = (() => {
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-      <rect width="${w}" height="${h}" fill="#050a16"/>
+      <rect width="${w}" height="${h}" fill="${pal.bg}"/>
       ${grid}
       <path d="${area}" fill="url(#${gid})"/>
       <path d="${line}" fill="none" stroke="${stroke}" stroke-width="${
       opts.lineW || 1.75
     }" stroke-linejoin="round" stroke-linecap="round" filter="url(#glow${gid})"/>
-      <circle cx="${last[0].toFixed(2)}" cy="${last[1].toFixed(2)}" r="2.4" fill="#ffab00" stroke="#fff" stroke-width="0.6"/>
+      <circle cx="${last[0].toFixed(2)}" cy="${last[1].toFixed(2)}" r="2.4" fill="${pal.last}" stroke="${pal.lastStroke}" stroke-width="0.6"/>
     </svg>`;
   }
 

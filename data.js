@@ -1193,10 +1193,11 @@ function travelAdviceForRisk(risk) {
 }
 
 /** WMO-style Open-Meteo weather codes → human warning */
-function weatherWarningFromCode(codeWx, wind, precip) {
+function weatherWarningFromCode(codeWx, wind, precip, tempC) {
   const c = Number(codeWx);
   const w = Number(wind) || 0;
   const p = Number(precip) || 0;
+  const t = tempC != null && Number.isFinite(Number(tempC)) ? Number(tempC) : null;
   if (c >= 95) return { level: "critical", label: "Thunderstorm / severe", tip: "Thunderstorm risk near capital — delay outdoor plans." };
   if (c >= 80 && c <= 82) return { level: "elevated", label: "Heavy rain showers", tip: "Heavy showers — flooding risk on low roads." };
   if (c >= 71 && c <= 77) return { level: "elevated", label: "Snow / ice", tip: "Snow or ice — travel delays possible." };
@@ -1206,9 +1207,198 @@ function weatherWarningFromCode(codeWx, wind, precip) {
   if (w >= 60) return { level: "high", label: "Very strong wind", tip: "High wind — outdoor and flight risk." };
   if (w >= 40) return { level: "elevated", label: "Strong wind", tip: "Strong wind — secure loose items; check ferries." };
   if (p >= 5) return { level: "watch", label: "Wet spell", tip: "Meaningful precipitation in the capital sample." };
+  // Temperature extremes (capital sample)
+  if (t != null && t >= 40) return { level: "high", label: "Extreme heat", tip: "Capital sample ≥40°C — heat stress and power demand risk." };
+  if (t != null && t >= 35) return { level: "elevated", label: "Hot spell", tip: "Very warm capital reading — hydrate; watch vulnerable groups." };
+  if (t != null && t <= -20) return { level: "high", label: "Extreme cold", tip: "Capital sample ≤−20°C — freeze risk for travel and utilities." };
+  if (t != null && t <= -10) return { level: "elevated", label: "Hard freeze", tip: "Bitter cold — travel and pipe freeze risk." };
   if (c >= 1 && c <= 3) return { level: "ok", label: "Partly cloudy", tip: "No major weather warning from capital sample." };
   return { level: "ok", label: "Fair / calm", tip: "No severe weather flag from this capital reading." };
 }
+
+/**
+ * Major sea lanes + tanker corridors (illustrative great-circle style paths).
+ * Used on the 3D map for shipping / tanker situational awareness — not live AIS.
+ */
+const SHIPPING_ROUTES = [
+  {
+    id: "lane-hormuz-asia",
+    name: "Persian Gulf → Asia crude",
+    kind: "tanker",
+    status: "watch",
+    delayH: 6,
+    coords: [
+      [56.5, 26.5],
+      [58, 24],
+      [62, 20],
+      [72, 12],
+      [80, 6],
+      [95, 5],
+      [104, 2],
+      [112, 10],
+      [120, 22],
+      [130, 32],
+    ],
+  },
+  {
+    id: "lane-suez-med",
+    name: "Suez / Med energy lane",
+    kind: "tanker",
+    status: "watch",
+    delayH: 12,
+    coords: [
+      [43.3, 12.5],
+      [38, 18],
+      [34, 24],
+      [32.5, 30],
+      [30, 32],
+      [25, 35],
+      [18, 36],
+      [10, 38],
+      [5, 40],
+      [-5, 36],
+    ],
+  },
+  {
+    id: "lane-redsea",
+    name: "Red Sea / Bab el-Mandeb",
+    kind: "shipping",
+    status: "elevated",
+    delayH: 48,
+    coords: [
+      [43.3, 12.5],
+      [42, 14],
+      [40, 18],
+      [38, 22],
+      [36, 26],
+      [34, 28],
+      [32.5, 30],
+    ],
+  },
+  {
+    id: "lane-cape",
+    name: "Cape of Good Hope diversion",
+    kind: "shipping",
+    status: "elevated",
+    delayH: 96,
+    coords: [
+      [43, 12],
+      [48, 0],
+      [40, -15],
+      [30, -28],
+      [18.4, -34.3],
+      [10, -30],
+      [0, -20],
+      [-10, -5],
+      [-20, 10],
+      [-40, 25],
+      [-60, 30],
+    ],
+  },
+  {
+    id: "lane-malacca",
+    name: "Malacca / Singapore corridor",
+    kind: "shipping",
+    status: "normal",
+    delayH: 4,
+    coords: [
+      [95, 5],
+      [100, 3],
+      [103.8, 1.2],
+      [108, 2],
+      [115, 8],
+      [120, 15],
+    ],
+  },
+  {
+    id: "lane-panama",
+    name: "Panama Canal transit",
+    kind: "shipping",
+    status: "watch",
+    delayH: 18,
+    coords: [
+      [-90, 15],
+      [-85, 12],
+      [-79.7, 9.1],
+      [-75, 10],
+      [-70, 15],
+      [-65, 20],
+    ],
+  },
+  {
+    id: "lane-atlantic-crude",
+    name: "Atlantic crude / products",
+    kind: "tanker",
+    status: "normal",
+    delayH: 8,
+    coords: [
+      [-95, 28],
+      [-80, 25],
+      [-60, 28],
+      [-40, 35],
+      [-20, 40],
+      [-10, 44],
+      [0, 48],
+    ],
+  },
+  {
+    id: "lane-pacific",
+    name: "Trans-Pacific box / energy",
+    kind: "shipping",
+    status: "normal",
+    delayH: 10,
+    coords: [
+      [140, 35],
+      [160, 30],
+      [180, 28],
+      [-160, 30],
+      [-140, 32],
+      [-125, 35],
+      [-120, 34],
+    ],
+  },
+  {
+    id: "lane-blacksea",
+    name: "Black Sea grain / energy",
+    kind: "shipping",
+    status: "elevated",
+    delayH: 36,
+    coords: [
+      [32, 46],
+      [30, 43],
+      [29.1, 41.1],
+      [28, 40],
+      [26, 38],
+      [25, 36],
+    ],
+  },
+  {
+    id: "lane-taiwan",
+    name: "Taiwan Strait shipping",
+    kind: "shipping",
+    status: "elevated",
+    delayH: 14,
+    coords: [
+      [118, 20],
+      [119.5, 24.5],
+      [121, 28],
+      [122, 30],
+      [124, 32],
+    ],
+  },
+];
+
+/** Illustrative delayed tanker / vessel trackers along lanes (not live AIS). */
+const TANKER_TRACKERS = [
+  { id: "tk1", name: "VLCC Gulf → East Asia", route: "lane-hormuz-asia", progress: 0.35, status: "delayed", delayH: 18, cargo: "crude" },
+  { id: "tk2", name: "Aframax Red Sea wait", route: "lane-redsea", progress: 0.55, status: "delayed", delayH: 42, cargo: "products" },
+  { id: "tk3", name: "Suezmax Cape diversion", route: "lane-cape", progress: 0.4, status: "reroute", delayH: 72, cargo: "crude" },
+  { id: "tk4", name: "Panamax canal queue", route: "lane-panama", progress: 0.5, status: "delayed", delayH: 22, cargo: "goods" },
+  { id: "tk5", name: "Malacca transit", route: "lane-malacca", progress: 0.7, status: "on-time", delayH: 2, cargo: "mixed" },
+  { id: "tk6", name: "Black Sea grain ship", route: "lane-blacksea", progress: 0.3, status: "elevated", delayH: 30, cargo: "grain" },
+  { id: "tk7", name: "Atlantic ULCC", route: "lane-atlantic-crude", progress: 0.6, status: "on-time", delayH: 5, cargo: "crude" },
+  { id: "tk8", name: "Taiwan Strait boxship", route: "lane-taiwan", progress: 0.45, status: "watch", delayH: 12, cargo: "containers" },
+];
 
 function countriesInScope(regionGroupId, develFilter) {
   const all = (typeof COUNTRIES !== "undefined" ? COUNTRIES : []).filter((c) => c.code && c.code !== "GLOBAL");
@@ -1247,41 +1437,50 @@ const CLIMATE_FOOD_BY_REGION = {
 };
 
 /** Country → news keywords for filtering headlines */
+/** Country → headline keywords (phrases preferred; avoid bare ISO codes / common English words). */
 const COUNTRY_NEWS_KEYS = {
-  USA: ["united states", "u.s.", "us ", "washington", "america", "biden", "trump", "pentagon", "wall street", "fed "],
-  CHN: ["china", "beijing", "shanghai", "xi jinping", "chinese", "prc"],
+  USA: ["united states", "u.s.", "washington", "white house", "america", "american", "biden", "trump", "pentagon", "wall street", "federal reserve"],
+  CHN: ["china", "beijing", "shanghai", "xi jinping", "chinese", "people's republic"],
   RUS: ["russia", "moscow", "kremlin", "putin", "russian"],
-  UKR: ["ukraine", "kyiv", "kiev", "zelensky", "donbas", "kharkiv", "odesa"],
-  TWN: ["taiwan", "taipei", "strait"],
-  ISR: ["israel", "gaza", "jerusalem", "tel aviv", "idf", "hamas"],
-  IRN: ["iran", "tehran", "iranian"],
-  SAU: ["saudi", "riyadh", "opec"],
-  TUR: ["turkey", "türkiye", "ankara", "erdogan"],
-  DEU: ["germany", "berlin", "german", "bundes"],
-  GBR: ["britain", "uk ", "london", "british"],
+  UKR: ["ukraine", "kyiv", "kiev", "zelensky", "donbas", "kharkiv", "odesa", "ukrainian"],
+  TWN: ["taiwan", "taipei", "taiwan strait", "taiwanee"],
+  ISR: ["israel", "gaza", "jerusalem", "tel aviv", "israeli", "hamas", "west bank"],
+  IRN: ["iran", "tehran", "iranian", "irgc"],
+  SAU: ["saudi", "riyadh", "saudi arabia", "opec"],
+  TUR: ["turkey", "türkiye", "ankara", "erdogan", "turkish"],
+  DEU: ["germany", "berlin", "german", "bundeswehr", "scholz"],
+  GBR: ["britain", "united kingdom", "london", "british", "downing street"],
   FRA: ["france", "paris", "french", "macron"],
-  IND: ["india", "delhi", "modi", "mumbai"],
-  PAK: ["pakistan", "islamabad", "karachi"],
-  JPN: ["japan", "tokyo", "japanese"],
+  IND: ["india", "new delhi", "delhi", "modi", "mumbai", "indian"],
+  PAK: ["pakistan", "islamabad", "karachi", "pakistani"],
+  JPN: ["japan", "tokyo", "japanese", "yen"],
   KOR: ["south korea", "seoul", "korean"],
   PRK: ["north korea", "pyongyang", "kim jong"],
   SDN: ["sudan", "khartoum", "darfur"],
-  EGY: ["egypt", "cairo", "suez"],
-  YEM: ["yemen", "houthi", "sanaa"],
-  LBN: ["lebanon", "beirut", "hezbollah"],
+  EGY: ["egypt", "cairo", "egyptian", "suez canal"],
+  YEM: ["yemen", "houthi", "sanaa", "sana'a"],
+  LBN: ["lebanon", "beirut", "hezbollah", "lebanese"],
   SYR: ["syria", "damascus", "syrian"],
-  BRA: ["brazil", "brasilia", "brazilian"],
-  ARG: ["argentina", "buenos aires"],
-  AUS: ["australia", "sydney", "canberra"],
-  ZAF: ["south africa", "johannesburg", "cape town"],
-  NGA: ["nigeria", "lagos", "abuja"],
+  BRA: ["brazil", "brasilia", "brazilian", "lula"],
+  ARG: ["argentina", "buenos aires", "argentine"],
+  AUS: ["australia", "sydney", "canberra", "australian"],
+  ZAF: ["south africa", "johannesburg", "cape town", "pretoria"],
+  NGA: ["nigeria", "lagos", "abuja", "nigerian"],
   CIV: ["ivory coast", "côte d", "cote d", "abidjan"],
   GHA: ["ghana", "accra"],
-  IDN: ["indonesia", "jakarta"],
-  PHL: ["philippines", "manila"],
-  MEX: ["mexico", "mexico city"],
-  POL: ["poland", "warsaw", "polish"],
-  EST: ["estonia", "tallinn", "baltic"],
+  IDN: ["indonesia", "jakarta", "indonesian"],
+  PHL: ["philippines", "manila", "filipino"],
+  MEX: ["mexico", "mexico city", "mexican"],
+  POL: ["poland", "warsaw", "polish", "duda"],
+  EST: ["estonia", "tallinn", "estonian"],
+  SWE: ["sweden", "stockholm", "swedish"],
+  NOR: ["norway", "oslo", "norwegian"],
+  CAN: ["canada", "ottawa", "toronto", "canadian", "trudeau"],
+  NLD: ["netherlands", "amsterdam", "dutch", "hague"],
+  ITA: ["italy", "rome", "italian", "milan"],
+  ESP: ["spain", "madrid", "spanish", "barcelona"],
+  ARE: ["united arab emirates", "u.a.e", "dubai", "abu dhabi", "emirati"],
+  QAT: ["qatar", "doha", "qatari"],
 };
 
 /** Lens → news keywords (simple words the news filter looks for) */
@@ -1669,8 +1868,8 @@ const DEFAULT_INTERVALS = {
   news: 90,
   markets: 45,
   quakes: 120,
-  eonet: 240,
-  weather: 420,
+  eonet: 180,
+  weather: 150, // Open-Meteo + travel/weather warnings refresh ~2.5 min
   relief: 300,
   indicators: 25,
   ticker: 12,

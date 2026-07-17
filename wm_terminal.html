@@ -52,16 +52,19 @@
       <div class="topbar-center">
         <div class="search-box" data-tip="Search country, ticker, crisis, answer. Shortcut: /">
           <span class="search-ico">⌕</span>
-          <input type="search" id="globalSearch" placeholder="Search country, ticker, crisis, answer…" autocomplete="off" aria-label="Global search" />
-          <div class="search-suggest" id="searchSuggest" hidden></div>
+          <input type="search" id="globalSearch" placeholder="Search country, ticker, crisis, answer…" autocomplete="off" aria-label="Global search" role="combobox" aria-autocomplete="list" aria-controls="searchSuggest" aria-expanded="false" />
+          <div class="search-suggest" id="searchSuggest" role="listbox" hidden></div>
         </div>
       </div>
 
       <div class="topbar-right">
-        <div class="view-toggle" id="viewToggle" role="group" aria-label="Desktop or mobile layout">
-          <button type="button" class="vt-btn active" data-viewmode="desktop" data-tip="Desktop desk — wide grid, side rail">DESK</button>
-          <button type="button" class="vt-btn" data-viewmode="mobile" data-tip="Mobile cards — easier thumbs, bottom dock">PHONE</button>
+        <!-- Layout is automatic (responsive). Hidden toggle kept for app.js compatibility. -->
+        <div class="view-toggle" id="viewToggle" hidden aria-hidden="true">
+          <button type="button" class="vt-btn active" data-viewmode="desktop">DESK</button>
+          <button type="button" class="vt-btn" data-viewmode="mobile">PHONE</button>
         </div>
+        <button type="button" class="icon-btn" id="btnRailToggle" data-tip="Collapse / expand desk rail" aria-label="Collapse desks" aria-pressed="false" title="Collapse desks">‹</button>
+        <button type="button" class="icon-btn" id="btnStreamToggle" data-tip="Collapse / expand bottom stream" aria-label="Collapse stream" aria-pressed="false" title="Collapse stream">▾</button>
         <button type="button" class="icon-btn install-btn" id="btnInstall" data-tip="Add World Monitor to the home screen" aria-label="Add to home screen" hidden>↓ HOME</button>
         <div class="feed-health" id="feedHealth" data-tip="Feed health. Click for details." role="status">
           <span class="fh-dot ok" id="fhDot"></span>
@@ -138,7 +141,10 @@
 
     <div class="body-row">
       <nav class="side-nav" id="sideNav" aria-label="Pre-configured desks">
-        <div class="nav-section">DESKS</div>
+        <div class="nav-section">
+          <span>DESKS</span>
+          <button type="button" class="rail-pin" id="btnRailToggle2" title="Collapse desks" aria-label="Collapse desks">‹</button>
+        </div>
         <div id="deskNav"></div>
         <div class="nav-foot mono" id="navFoot">KMRI —</div>
       </nav>
@@ -180,7 +186,7 @@
       </div>
     </div>
 
-    <footer class="bottom-bar" role="contentinfo">
+    <footer class="bottom-bar" id="bottomBar" role="contentinfo" data-stream-mode="open">
       <div class="stream-head">
         <div class="stream-tabs" id="streamTabs">
           <button class="st active" data-stream="multi">MULTIVIEW</button>
@@ -191,6 +197,11 @@
           <button class="st" data-stream="log">LOG</button>
         </div>
         <span class="stream-hint mono">4-COL · NEWEST ↑ · LIVE SOURCES</span>
+        <div class="stream-tools">
+          <button type="button" class="stool active" id="btnStreamOpen" title="Expand stream">▴ FULL</button>
+          <button type="button" class="stool" id="btnStreamCompact" title="Compact stream">▾ COMPACT</button>
+          <button type="button" class="stool" id="btnStreamHide" title="Hide stream">× HIDE</button>
+        </div>
       </div>
       <div class="stream-pane multiview-tape" id="streamPane"></div>
       <div class="func-keys">
@@ -333,7 +344,8 @@
             <li>Choose a <strong>country</strong> and a <strong>lens</strong> (a simple question)</li>
             <li>Filter by <strong>region</strong> (Americas, Europe, APAC…) and <strong>developed / developing</strong></li>
             <li>Read <strong>answers</strong>, <strong>costs</strong>, <strong>power mix</strong>, <strong>telecoms</strong>, <strong>outages</strong>, inflation, and weather / travel warnings</li>
-            <li>Toggle <strong>DESK / PHONE</strong> view, or <strong>Add to Home Screen</strong></li>
+            <li>Layout adapts automatically on desktop, tablet, and phone · <strong>Add to Home Screen</strong> / UWP</li>
+            <li>Collapse the <strong>desk rail</strong> or <strong>bottom stream</strong> for more workspace</li>
             <li>Follow <strong>live headlines and prices</strong>, and open the map</li>
           </ul>
           <h3 class="about-title">Why does that help?</h3>
@@ -411,5 +423,6 @@
   <script src="js/layout.js"></script>
   <script src="js/ui.js"></script>
   <script src="app.js"></script>
+  <script src="js/classic_polish.js"></script>
 </body>
 </html>

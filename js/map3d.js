@@ -1,5 +1,5 @@
 /**
- * Hybrid 3D globe — MapLibre GL
+ * Hybrid 3D globe — MapLibre GL + Esri basemaps (no MapTiler)
  * Modes: hybrid (sat+labels+roads), satellite, streets, terrain, dark
  * Falls back to SVG equirectangular if MapLibre unavailable
  */
@@ -14,8 +14,11 @@ const Map3D = (() => {
   let containerEl = null;
   let spinning = false;
   let spinTimer = null;
+  let showShipping = true;
+  let tankerTimer = null;
 
   const TILES = {
+    // Esri World Imagery — public tile endpoints (no API key)
     satellite: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     labels: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
     roads: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
@@ -25,10 +28,10 @@ const Map3D = (() => {
   };
 
   const BASEMAPS = [
-    { id: "hybrid", label: "HYBRID", tip: "Satellite + borders + roads" },
-    { id: "satellite", label: "SAT", tip: "Esri World Imagery only" },
+    { id: "hybrid", label: "HYBRID", tip: "Esri satellite + borders + roads" },
+    { id: "satellite", label: "SPACE", tip: "Esri World Imagery — space view" },
     { id: "streets", label: "STREETS", tip: "OpenStreetMap roads" },
-    { id: "terrain", label: "TERRAIN", tip: "Topo / terrain basemap" },
+    { id: "terrain", label: "TERRAIN", tip: "Esri World Topo" },
     { id: "dark", label: "DARK", tip: "Dark canvas for night ops" },
   ];
 
@@ -48,7 +51,20 @@ const Map3D = (() => {
         attribution: "Esri World Imagery",
         maxzoom: 19,
       };
-      layers.push({ id: "satellite", type: "raster", source: "satellite", minzoom: 0, maxzoom: 22 });
+      layers.push({
+        id: "satellite",
+        type: "raster",
+        source: "satellite",
+        minzoom: 0,
+        maxzoom: 22,
+        paint: {
+          "raster-opacity": 1,
+          "raster-contrast": kind === "satellite" ? 0.14 : 0.08,
+          "raster-saturation": kind === "satellite" ? 0.18 : 0.1,
+          "raster-brightness-min": 0,
+          "raster-brightness-max": 0.95,
+        },
+      });
       if (kind === "hybrid") {
         sources.roads = {
           type: "raster",
@@ -70,7 +86,7 @@ const Map3D = (() => {
           source: "roads",
           minzoom: 3,
           maxzoom: 22,
-          paint: { "raster-opacity": 0.55 },
+          paint: { "raster-opacity": 0.45 },
         });
         layers.push({
           id: "labels",
@@ -120,7 +136,49 @@ const Map3D = (() => {
 
   function badgeText() {
     const b = BASEMAPS.find((x) => x.id === basemap);
-    return `${(b?.label || basemap).toUpperCase()} · 3D GLOBE`;
+    const ship = showShipping ? " · LANES" : "";
+    return `${(b?.label || basemap).toUpperCase()} · ESRI${ship}`;
+  }
+
+  function applyGlobeAndAtmosphere() {
+    if (!map) return;
+    try {
+      if (map.setProjection) map.setProjection({ type: "globe" });
+    } catch {
+      /* older MapLibre */
+    }
+    applyFog();
+    try {
+      if (map.setLight) {
+        map.setLight({
+          anchor: "viewport",
+          color: "#fff8f0",
+          intensity: 0.45,
+          position: [1.4, 200, 40],
+        });
+      }
+    } catch {
+      /* */
+    }
+  }
+
+  function afterStyleReady(preserveView) {
+    applyGlobeAndAtmosphere();
+    ready = true;
+    ensureMarkerSource();
+    setMarkers(markersData);
+    ensureShippingLayers();
+    if (preserveView) {
+      try {
+        map.jumpTo(preserveView);
+      } catch {
+        /* */
+      }
+    }
+    if (containerEl) {
+      const badge = containerEl.querySelector("#mapBadge");
+      if (badge) badge.textContent = badgeText();
+    }
   }
 
   function rebuildControls(el) {
@@ -133,7 +191,8 @@ const Map3D = (() => {
     ctrl.innerHTML = `
       <button type="button" data-act="reset" title="Reset view">⌂</button>
       <button type="button" data-act="spin" title="Toggle spin" class="${spinning ? "active" : ""}">⟳</button>
-      <button type="button" data-act="pitch" title="Tilt 3D"> cop</button>
+      <button type="button" data-act="pitch" title="Tilt 3D / flat">3D</button>
+      <button type="button" data-act="shipping" title="Shipping / tanker lanes" class="${showShipping ? "active" : ""}">🚢</button>
       <div class="map-basemap-switch" role="group" aria-label="Basemap mode">
         ${BASEMAPS.map(
           (b) =>
@@ -146,15 +205,221 @@ const Map3D = (() => {
   function applyFog() {
     if (!map) return;
     try {
+      const space = basemap === "hybrid" || basemap === "satellite";
       map.setFog({
-        color: "rgb(8,10,16)",
-        "high-color": "rgb(20,30,50)",
-        "horizon-blend": 0.08,
-        "space-color": "rgb(6,8,12)",
-        "star-intensity": basemap === "dark" ? 0.65 : 0.4,
+        color: space ? "rgb(186, 214, 240)" : "rgb(8,10,16)",
+        "high-color": space ? "rgb(100, 150, 210)" : "rgb(20,30,50)",
+        "horizon-blend": space ? 0.022 : 0.08,
+        "space-color": "rgb(2, 4, 12)",
+        "star-intensity": space ? 0.48 : basemap === "dark" ? 0.75 : 0.35,
       });
     } catch {
       /* ignore */
+    }
+  }
+
+  function routeColor(status, kind) {
+    if (status === "elevated") return "#ff6b1a";
+    if (status === "watch") return "#f5a623";
+    if (kind === "tanker") return "#4fc3f7";
+    return "#69f0ae";
+  }
+
+  function shippingGeoJSON() {
+    const routes = typeof SHIPPING_ROUTES !== "undefined" ? SHIPPING_ROUTES : [];
+    const trackers = typeof TANKER_TRACKERS !== "undefined" ? TANKER_TRACKERS : [];
+    const lineFeatures = routes.map((r) => ({
+      type: "Feature",
+      properties: {
+        id: r.id,
+        name: r.name,
+        kind: r.kind || "shipping",
+        status: r.status || "normal",
+        delayH: r.delayH || 0,
+        color: routeColor(r.status, r.kind),
+      },
+      geometry: {
+        type: "LineString",
+        coordinates: (r.coords || []).map((c) => [c[0], c[1]]),
+      },
+    }));
+    const byId = Object.fromEntries(routes.map((r) => [r.id, r]));
+    const pointFeatures = trackers
+      .map((t) => {
+        const route = byId[t.route];
+        if (!route?.coords?.length) return null;
+        const coords = route.coords;
+        const p = Math.max(0, Math.min(0.999, Number(t.progress) || 0));
+        const idx = p * (coords.length - 1);
+        const i0 = Math.floor(idx);
+        const i1 = Math.min(coords.length - 1, i0 + 1);
+        const f = idx - i0;
+        const lon = coords[i0][0] + (coords[i1][0] - coords[i0][0]) * f;
+        const lat = coords[i0][1] + (coords[i1][1] - coords[i0][1]) * f;
+        const delayed = (t.status || "").includes("delay") || (t.delayH || 0) >= 12;
+        return {
+          type: "Feature",
+          properties: {
+            id: t.id,
+            title: t.name,
+            layer: "shipping",
+            sev: delayed ? "high" : t.status === "elevated" ? "elevated" : "info",
+            color: delayed ? "#ff5252" : t.cargo === "crude" ? "#ffab00" : "#4fc3f7",
+            source: "lane model",
+            desc: `${t.cargo || "cargo"} · ${t.status || "track"} · delay ~${t.delayH || 0}h · illustrative (not live AIS)`,
+            time: delayed ? `+${t.delayH || 0}h` : "on route",
+            delayH: t.delayH || 0,
+            cargo: t.cargo || "",
+          },
+          geometry: { type: "Point", coordinates: [lon, lat] },
+        };
+      })
+      .filter(Boolean);
+    // Chokepoint nodes as secondary markers
+    const nodes = typeof TRANSPORT_NODES !== "undefined" ? TRANSPORT_NODES : [];
+    nodes.forEach((n) => {
+      pointFeatures.push({
+        type: "Feature",
+        properties: {
+          id: n.id,
+          title: n.name,
+          layer: "chokepoint",
+          sev: n.status === "elevated" ? "high" : n.status === "watch" ? "elevated" : "info",
+          color: n.status === "elevated" ? "#ff6b1a" : "#80d8ff",
+          source: "chokepoint",
+          desc: n.note || n.type || "Shipping node",
+          time: n.status || "watch",
+        },
+        geometry: { type: "Point", coordinates: [n.lon, n.lat] },
+      });
+    });
+    return {
+      lines: { type: "FeatureCollection", features: lineFeatures },
+      points: { type: "FeatureCollection", features: pointFeatures },
+    };
+  }
+
+  function ensureShippingLayers() {
+    if (!map || !ready) return;
+    const data = shippingGeoJSON();
+    if (!map.getSource("shipping-lanes")) {
+      map.addSource("shipping-lanes", { type: "geojson", data: data.lines });
+      map.addSource("shipping-vessels", { type: "geojson", data: data.points });
+      // Glow underlay
+      map.addLayer({
+        id: "shipping-lanes-glow",
+        type: "line",
+        source: "shipping-lanes",
+        layout: { "line-join": "round", "line-cap": "round" },
+        paint: {
+          "line-color": ["get", "color"],
+          "line-width": 6,
+          "line-opacity": 0.22,
+          "line-blur": 1.2,
+        },
+      });
+      map.addLayer({
+        id: "shipping-lanes-main",
+        type: "line",
+        source: "shipping-lanes",
+        layout: { "line-join": "round", "line-cap": "round" },
+        paint: {
+          "line-color": ["get", "color"],
+          "line-width": [
+            "match",
+            ["get", "kind"],
+            "tanker",
+            2.6,
+            1.9,
+          ],
+          "line-opacity": 0.9,
+        },
+      });
+      map.addLayer({
+        id: "shipping-vessels-pulse",
+        type: "circle",
+        source: "shipping-vessels",
+        paint: {
+          "circle-radius": 11,
+          "circle-color": ["get", "color"],
+          "circle-opacity": 0.25,
+          "circle-blur": 0.5,
+        },
+      });
+      map.addLayer({
+        id: "shipping-vessels",
+        type: "circle",
+        source: "shipping-vessels",
+        paint: {
+          "circle-radius": [
+            "match",
+            ["get", "layer"],
+            "chokepoint",
+            5.5,
+            4.5,
+          ],
+          "circle-color": ["get", "color"],
+          "circle-stroke-width": 1.4,
+          "circle-stroke-color": "rgba(255,255,255,0.55)",
+          "circle-opacity": 0.95,
+        },
+      });
+      map.on("click", "shipping-vessels", (e) => {
+        const f = e.features?.[0];
+        if (f && onSelect) onSelect(f.properties);
+      });
+      map.on("click", "shipping-lanes-main", (e) => {
+        const f = e.features?.[0];
+        if (!f || !onSelect) return;
+        const p = f.properties || {};
+        onSelect({
+          title: p.name || "Sea lane",
+          layer: "shipping",
+          sev: p.status === "elevated" ? "high" : "elevated",
+          source: "lane model",
+          desc: `${p.kind || "shipping"} · status ${p.status || "—"} · model delay ~${p.delayH || 0}h (illustrative, not live AIS)`,
+          time: "lane",
+          color: p.color,
+        });
+      });
+      ["shipping-vessels", "shipping-lanes-main"].forEach((id) => {
+        map.on("mouseenter", id, () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+        map.on("mouseleave", id, () => {
+          map.getCanvas().style.cursor = "";
+        });
+      });
+    } else {
+      map.getSource("shipping-lanes")?.setData(data.lines);
+      map.getSource("shipping-vessels")?.setData(data.points);
+    }
+    setShippingVisible(showShipping);
+  }
+
+  function setShippingVisible(on) {
+    showShipping = !!on;
+    if (!map) return;
+    const vis = showShipping ? "visible" : "none";
+    ["shipping-lanes-glow", "shipping-lanes-main", "shipping-vessels-pulse", "shipping-vessels"].forEach((id) => {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", vis);
+    });
+    if (containerEl) {
+      const badge = containerEl.querySelector("#mapBadge");
+      if (badge) badge.textContent = badgeText();
+      containerEl.querySelector('[data-act="shipping"]')?.classList.toggle("active", showShipping);
+    }
+  }
+
+  function advanceTankers() {
+    if (typeof TANKER_TRACKERS === "undefined" || !TANKER_TRACKERS.length) return;
+    TANKER_TRACKERS.forEach((t) => {
+      const step = t.status === "delayed" || t.status === "reroute" ? 0.004 : 0.01;
+      t.progress = ((Number(t.progress) || 0) + step) % 1;
+    });
+    if (map && ready && showShipping && map.getSource("shipping-vessels")) {
+      const data = shippingGeoJSON();
+      map.getSource("shipping-vessels").setData(data.points);
     }
   }
 
@@ -171,19 +436,9 @@ const Map3D = (() => {
       const zoom = map.getZoom();
       const pitch = map.getPitch();
       const bearing = map.getBearing();
+      const view = { center, zoom, pitch, bearing };
+      map.once("style.load", () => afterStyleReady(view));
       map.setStyle(buildStyle(basemap));
-      map.once("style.load", () => {
-        try {
-          if (map.setProjection) map.setProjection({ type: "globe" });
-        } catch {
-          /* */
-        }
-        applyFog();
-        ready = true;
-        ensureMarkerSource();
-        setMarkers(markersData);
-        map.jumpTo({ center, zoom, pitch, bearing });
-      });
     }
     if (containerEl) {
       const badge = containerEl.querySelector("#mapBadge");
@@ -202,6 +457,7 @@ const Map3D = (() => {
 
     const saved = Storage.get("map_basemap");
     if (saved && BASEMAPS.find((b) => b.id === saved)) basemap = saved;
+    else basemap = "hybrid";
 
     if (!available()) {
       mode = "svg";
@@ -216,24 +472,29 @@ const Map3D = (() => {
     el.appendChild(mapDiv);
     rebuildControls(el);
 
+    const start = {
+      center: [20, 12],
+      zoom: 1.55,
+      pitch: 48,
+      bearing: -18,
+    };
+
     try {
       map = new maplibregl.Map({
         container: mapDiv,
         style: buildStyle(basemap),
-        center: [20, 18],
-        zoom: 1.5,
-        pitch: 0,
-        bearing: 0,
+        center: start.center,
+        zoom: start.zoom,
+        pitch: start.pitch,
+        bearing: start.bearing,
+        maxPitch: 78,
         attributionControl: true,
+        antialias: true,
+        fadeDuration: 320,
       });
 
       map.on("style.load", () => {
-        try {
-          if (map.setProjection) map.setProjection({ type: "globe" });
-        } catch {
-          /* older build */
-        }
-        applyFog();
+        applyGlobeAndAtmosphere();
       });
 
       map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
@@ -242,14 +503,22 @@ const Map3D = (() => {
       map.on("load", () => {
         ready = true;
         mode = "globe";
+        applyGlobeAndAtmosphere();
         ensureMarkerSource();
         setMarkers(markersData);
+        ensureShippingLayers();
+        if (tankerTimer) clearInterval(tankerTimer);
+        tankerTimer = setInterval(advanceTankers, 8000);
+        if (containerEl) {
+          const badge = containerEl.querySelector("#mapBadge");
+          if (badge) badge.textContent = badgeText();
+        }
       });
 
       const spin = () => {
         if (!spinning || !map) return;
         const c = map.getCenter();
-        map.easeTo({ center: [c.lng + 0.15, c.lat], duration: 1000, easing: (n) => n });
+        map.easeTo({ center: [c.lng + 0.12, c.lat], duration: 1000, easing: (n) => n });
         spinTimer = setTimeout(spin, 1000);
       };
 
@@ -261,7 +530,13 @@ const Map3D = (() => {
           return;
         }
         if (btn.dataset.act === "reset") {
-          map.flyTo({ center: [20, 18], zoom: 1.5, pitch: 0, bearing: 0, essential: true });
+          map.flyTo({
+            center: start.center,
+            zoom: start.zoom,
+            pitch: start.pitch,
+            bearing: start.bearing,
+            essential: true,
+          });
         }
         if (btn.dataset.act === "spin") {
           spinning = !spinning;
@@ -270,8 +545,11 @@ const Map3D = (() => {
           else clearTimeout(spinTimer);
         }
         if (btn.dataset.act === "pitch") {
-          const p = map.getPitch() > 20 ? 0 : 48;
-          map.easeTo({ pitch: p, duration: 600 });
+          const p = map.getPitch() > 30 ? 0 : 55;
+          map.easeTo({ pitch: p, duration: 700 });
+        }
+        if (btn.dataset.act === "shipping") {
+          setShippingVisible(!showShipping);
         }
       });
 
@@ -455,6 +733,7 @@ const Map3D = (() => {
 
   function destroy() {
     clearTimeout(spinTimer);
+    clearInterval(tankerTimer);
     spinning = false;
     if (map) {
       try {
@@ -466,6 +745,7 @@ const Map3D = (() => {
     }
     ready = false;
     mode = "none";
+    containerEl = null;
   }
 
   return {
@@ -476,6 +756,8 @@ const Map3D = (() => {
     getMode,
     getBasemap,
     setBasemap,
+    setShippingVisible,
+    getShippingVisible: () => showShipping,
     destroy,
     available,
     BASEMAPS,

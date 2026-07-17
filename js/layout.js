@@ -62,7 +62,11 @@ const Layout = (() => {
     grid?.querySelectorAll(".widget").forEach((el) => {
       el.classList.toggle("editable", editMode);
     });
-    if (!on) cleanupDrag();
+    if (!on) {
+      cleanupDrag();
+      // Re-pack after leaving edit mode
+      scheduleAutoArrange(80);
+    }
   }
   function isEditMode() {
     return editMode;
@@ -70,10 +74,43 @@ const Layout = (() => {
   function setView(view) {
     currentView = view;
     Storage.set("layout_view", view);
+    // Always open a desk from the top of the workspace
+    scrollWorkspaceTop();
     render();
+    // Re-assert after paint (fills / images can shift scroll)
+    requestAnimationFrame(scrollWorkspaceTop);
+    setTimeout(scrollWorkspaceTop, 50);
+    setTimeout(scrollWorkspaceTop, 200);
   }
   function getView() {
     return currentView;
+  }
+
+  /** Scroll the desk workspace (and parents) to the top. */
+  function scrollWorkspaceTop() {
+    const ids = ["workspace", "widgetGrid"];
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollTop = 0;
+        el.scrollLeft = 0;
+      }
+    });
+    document.querySelectorAll(".workspace, .main-col, .body-row").forEach((el) => {
+      try {
+        el.scrollTop = 0;
+        el.scrollLeft = 0;
+      } catch {
+        /* */
+      }
+    });
+    try {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    } catch {
+      /* */
+    }
   }
 
   function render() {
@@ -82,6 +119,8 @@ const Layout = (() => {
     if (!grid || !tpl) return;
     const order = getOrder(currentView);
     grid.innerHTML = "";
+    grid.classList.add("auto-arrange");
+    scrollWorkspaceTop();
 
     order.forEach((id) => {
       const cat = WIDGET_CATALOG[id];
@@ -91,6 +130,8 @@ const Layout = (() => {
       const { w, h } = widgetSize(id);
       node.dataset.w = String(w);
       node.dataset.h = String(h);
+      node.dataset.baseW = String(w);
+      node.dataset.baseH = String(h);
       node.querySelector(".widget-title").textContent = cat.title;
       node.querySelector(".widget-meta").textContent = "";
       node.classList.toggle("editable", editMode);
@@ -105,6 +146,9 @@ const Layout = (() => {
       node.querySelector(".widget-collapse").addEventListener("click", (e) => {
         e.stopPropagation();
         node.classList.toggle("collapsed");
+        // Manual collapse wins until next content-driven arrange
+        node.dataset.userCollapse = node.classList.contains("collapsed") ? "1" : "0";
+        scheduleAutoArrange(40);
         setTimeout(() => window.Map3D?.resize?.(), 50);
       });
       bindPointerDrag(node);
@@ -113,7 +157,267 @@ const Layout = (() => {
     });
 
     if (typeof onRender === "function") onRender(order);
-    setTimeout(() => window.Map3D?.resize?.(), 80);
+    // Content fills run in onRender — arrange + pin top after they paint
+    queueMicrotask(() => {
+      autoArrange();
+      scrollWorkspaceTop();
+    });
+    setTimeout(() => {
+      autoArrange();
+      scrollWorkspaceTop();
+      window.Map3D?.resize?.();
+    }, 80);
+    setTimeout(() => {
+      autoArrange();
+      scrollWorkspaceTop();
+    }, 280);
+    setTimeout(() => autoArrange(), 600);
+  }
+
+  /** Detect panels with no real content (empty / loading shell only). */
+  function isWidgetEmpty(widget) {
+    if (!widget) return true;
+    if (widget.dataset.userCollapse === "1") return true;
+    const id = widget.dataset.id || "";
+    // Map and structural panels always keep their footprint
+    if (id === "map" || id === "layers" || id === "controls") return false;
+    const body = widget.querySelector(".widget-body");
+    if (!body) return true;
+
+    const text = (body.textContent || "").replace(/\s+/g, " ").trim();
+    if (!text) return true;
+
+    // Explicit empty() shell — sole or banner + empty only
+    const emptyEl = body.querySelector(".w-empty");
+    if (emptyEl) {
+      const kids = [...body.children];
+      const meaningful = kids.filter((c) => {
+        if (c.classList?.contains("w-empty")) return false;
+        const cls = String(c.className || "");
+        if (/panel-banner|afford-foot|warn-empty/.test(cls)) return false;
+        return (c.textContent || "").trim().length > 8;
+      });
+      if (!meaningful.length) return true;
+    }
+
+    // Placeholder-only strings
+    if (
+      /^(—|-|\.|n\/a|none|loading…?|waiting for|no data|empty)/i.test(text) &&
+      text.length < 64
+    )
+      return true;
+
+    // Real content: anything with substance stays filled
+    if (text.length >= 24) return false;
+    if (body.querySelector("canvas, svg, table, img, video")) return false;
+    if (body.children.length >= 2 && text.length >= 12) return false;
+    if (text.length < 10) return true;
+    return false;
+  }
+
+  /** Expand widgets so each grid row uses the full 12 columns (no trailing gap). */
+  function expandRowsToFill(widgets) {
+    if (!widgets.length) return;
+    let row = [];
+    let used = 0;
+    const flush = () => {
+      if (!row.length) return;
+      const gap = 12 - used;
+      if (gap > 0 && gap < 12) {
+        // Prefer growing the last item; if last is already wide, split across row
+        const last = row[row.length - 1];
+        const cur = parseInt(last.dataset.w, 10) || 4;
+        const nextW = Math.min(12, cur + gap);
+        last.dataset.w = String(Math.max(3, nextW));
+      }
+      row = [];
+      used = 0;
+    };
+    widgets.forEach((w) => {
+      let span = parseInt(w.dataset.w, 10) || 4;
+      span = Math.max(3, Math.min(12, span));
+      if (used + span > 12) flush();
+      if (span > 12 - used && used > 0) flush();
+      span = Math.min(span, 12 - used);
+      if (span < 3 && used > 0) {
+        flush();
+        span = parseInt(w.dataset.w, 10) || 4;
+      }
+      w.dataset.w = String(Math.max(3, Math.min(12, span)));
+      row.push(w);
+      used += parseInt(w.dataset.w, 10);
+      if (used >= 12) flush();
+    });
+    flush();
+  }
+
+  /**
+   * Fit each filled window height to its content so the body is not a tall black void.
+   * Uses data-h spans only as a soft ceiling for map / tall boards.
+   */
+  function fitContentHeights(filled) {
+    filled.forEach((w) => {
+      const id = w.dataset.id || "";
+      const body = w.querySelector(".widget-body");
+      const head = w.querySelector(".widget-head");
+      if (!body) return;
+
+      // Clear previous forced sizes so measurement is honest
+      w.style.height = "";
+      w.style.minHeight = "";
+      body.style.minHeight = "";
+      body.style.height = "";
+      body.style.maxHeight = "";
+
+      if (id === "map") {
+        w.dataset.h = String(Math.max(3, parseInt(w.dataset.baseH, 10) || 3));
+        w.style.minHeight = "min(42vh, 320px)";
+        body.style.minHeight = "260px";
+        return;
+      }
+
+      // Measure natural content
+      const prevOverflow = body.style.overflow;
+      body.style.overflow = "visible";
+      const contentH = Math.max(body.scrollHeight, body.offsetHeight, 0);
+      const headH = head ? head.offsetHeight : 28;
+      body.style.overflow = prevOverflow || "";
+
+      const total = headH + contentH + 4;
+      const baseH = parseInt(w.dataset.baseH, 10) || 2;
+
+      // Map content height → grid row span (no oversized empty rows)
+      let h;
+      if (total < 96) h = 1;
+      else if (total < 170) h = 2;
+      else if (total < 260) h = Math.min(3, Math.max(2, baseH));
+      else if (total < 360) h = Math.min(4, Math.max(3, baseH));
+      else h = Math.min(5, Math.max(3, baseH));
+
+      // Don't force taller than content needs (except map handled above)
+      if (baseH > h + 1 && total < baseH * 90) {
+        h = Math.max(h, Math.min(baseH, h + 1));
+      }
+      w.dataset.h = String(h);
+
+      // Lock height to content — kills internal empty black band
+      w.style.minHeight = "0";
+      w.style.height = "auto";
+      body.style.minHeight = "0";
+      body.style.flex = "0 1 auto";
+    });
+  }
+
+  /**
+   * Auto-arrange desk windows:
+   * - empty panels collapse (header chip only — no black body)
+   * - filled panels restore width, fit height to content, fill row gaps
+   * Skipped while layout edit mode is on.
+   */
+  let arrangeTimer = null;
+  function autoArrange(opts = {}) {
+    if (editMode && !opts.force) return;
+    const grid = document.getElementById("widgetGrid");
+    if (!grid) return;
+
+    const widgets = [...grid.querySelectorAll(".widget")];
+    if (!widgets.length) return;
+
+    widgets.forEach((w) => {
+      if (!w.dataset.baseW) {
+        w.dataset.baseW = w.dataset.w || "4";
+        w.dataset.baseH = w.dataset.h || "2";
+      }
+    });
+
+    const filled = [];
+    const empty = [];
+    widgets.forEach((w) => {
+      // User-collapsed stays compact
+      if (w.dataset.userCollapse === "1") {
+        w.classList.add("is-empty", "collapsed");
+        empty.push(w);
+        return;
+      }
+      if (isWidgetEmpty(w)) empty.push(w);
+      else filled.push(w);
+    });
+
+    // Restore filled to preferred width footprint
+    filled.forEach((w) => {
+      w.classList.remove("is-empty", "collapsed");
+      w.classList.add("is-filled");
+      w.dataset.w = w.dataset.baseW || w.dataset.w || "4";
+      w.dataset.h = w.dataset.baseH || w.dataset.h || "2";
+      delete w.dataset.autoEmpty;
+      w.style.display = "";
+    });
+
+    // Empty windows → header-only chips (no black body / no tall grid hole)
+    empty.forEach((w) => {
+      w.classList.add("is-empty");
+      w.classList.remove("is-filled");
+      w.dataset.autoEmpty = "1";
+      w.dataset.w = "3";
+      w.dataset.h = "1";
+      w.style.height = "auto";
+      w.style.minHeight = "0";
+      const body = w.querySelector(".widget-body");
+      if (body) {
+        body.style.minHeight = "0";
+        body.style.height = "0";
+        body.style.maxHeight = "0";
+        body.style.padding = "0";
+        body.style.overflow = "hidden";
+      }
+    });
+
+    // Few filled panels: give them more width so the desk doesn't look sparse
+    if (filled.length === 1) {
+      filled[0].dataset.w = "12";
+    } else if (filled.length === 2) {
+      filled.forEach((w) => {
+        const bw = parseInt(w.dataset.baseW, 10) || 6;
+        w.dataset.w = String(Math.max(6, Math.min(12, bw >= 8 ? 6 : Math.max(bw, 6))));
+      });
+      const a = parseInt(filled[0].dataset.w, 10);
+      filled[1].dataset.w = String(12 - a);
+    } else if (filled.length === 3) {
+      filled.forEach((w) => {
+        const bw = parseInt(w.dataset.baseW, 10) || 4;
+        w.dataset.w = String(bw >= 6 ? 4 : Math.max(4, bw));
+      });
+      expandRowsToFill(filled);
+    }
+
+    expandRowsToFill(filled);
+    // Pack empty chips on their own trailing row(s)
+    expandRowsToFill(empty);
+
+    // Height follows content — removes empty black bands inside panels
+    fitContentHeights(filled);
+
+    // Move empty chips after filled in DOM so dense flow doesn't leave mid-grid holes
+    // (does not change saved custom order — only live DOM for packing)
+    if (empty.length && filled.length) {
+      empty.forEach((w) => grid.appendChild(w));
+    }
+
+    grid.dataset.filled = String(filled.length);
+    grid.dataset.empty = String(empty.length);
+    grid.classList.toggle("has-empty", empty.length > 0);
+    grid.classList.toggle("all-filled", empty.length === 0);
+
+    if (!opts.silent) {
+      setTimeout(() => window.Map3D?.resize?.(), 30);
+    }
+  }
+
+  function scheduleAutoArrange(delay = 60) {
+    clearTimeout(arrangeTimer);
+    arrangeTimer = setTimeout(() => {
+      autoArrange();
+    }, delay);
   }
 
   function cleanupDrag() {
@@ -327,26 +631,36 @@ const Layout = (() => {
     const onUp = () => {
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerup", onUp);
-      sizeMap[widget.dataset.id] = {
-        w: parseInt(widget.dataset.w, 10),
-        h: parseInt(widget.dataset.h, 10),
-      };
+      document.removeEventListener("pointercancel", onUp);
+      const w = parseInt(widget.dataset.w, 10);
+      const h = parseInt(widget.dataset.h, 10);
+      sizeMap[widget.dataset.id] = { w, h };
+      widget.dataset.baseW = String(w);
+      widget.dataset.baseH = String(h);
+      widget.classList.remove("is-empty");
+      widget.classList.add("is-filled");
       saveSizes();
       window.UI?.toast?.("Size saved");
       window.Map3D?.resize?.();
+      scheduleAutoArrange(100);
     };
     handle.addEventListener("pointerdown", (e) => {
-      if (!editMode && e.shiftKey === false) {
-        // allow resize always when edit mode, or always via corner for usability
-      }
+      // Corner resize always available (edit mode optional) for reliable UX
+      if (e.button != null && e.button !== 0) return;
       e.preventDefault();
       e.stopPropagation();
       startX = e.clientX;
       startY = e.clientY;
       startW = parseInt(widget.dataset.w, 10) || 4;
       startH = parseInt(widget.dataset.h, 10) || 2;
+      try {
+        handle.setPointerCapture?.(e.pointerId);
+      } catch {
+        /* */
+      }
       document.addEventListener("pointermove", onMove);
       document.addEventListener("pointerup", onUp);
+      document.addEventListener("pointercancel", onUp);
     });
   }
 
@@ -413,5 +727,8 @@ const Layout = (() => {
     bodyEl,
     metaEl,
     getOrder,
+    autoArrange,
+    scheduleAutoArrange,
+    scrollWorkspaceTop,
   };
 })();
