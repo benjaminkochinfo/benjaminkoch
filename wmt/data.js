@@ -505,7 +505,7 @@ const INSURANCE_SIGNALS = [
 ];
 
 const MARKERS = [
-  { id: "c1", layer: "conflicts", sev: "critical", lat: 48.5, lon: 37.5, title: "Donetsk axis combat", desc: "Sustained artillery/drone. Critical kinetic tempo.", source: "OSINT mock", time: "12m", countries: ["UKR"] },
+  { id: "c1", layer: "conflicts", sev: "critical", lat: 48.5, lon: 37.5, title: "Eastern front combat", desc: "Sustained artillery/drone. Critical kinetic tempo.", source: "OSINT mock", time: "12m", countries: ["UKR"] },
   { id: "c2", layer: "conflicts", sev: "critical", lat: 15.5, lon: 32.5, title: "Khartoum urban warfare", desc: "Multi-faction fighting. IDP surge.", source: "mock", time: "41m", countries: ["SDN"] },
   { id: "c3", layer: "conflicts", sev: "high", lat: 33.4, lon: 36.3, title: "Golan/Syria exchanges", desc: "Air defense elevated.", source: "mock", time: "2h", countries: ["SYR", "ISR"] },
   { id: "c6", layer: "conflicts", sev: "high", lat: 31.5, lon: 34.5, title: "Gaza perimeter ops", desc: "Ongoing kinetic activity.", source: "mock", time: "1h", countries: ["ISR"] },
@@ -751,7 +751,7 @@ const RISK_MODEL_HELP = [
 ];
 
 const WIDGET_CATALOG = {
-  map: { id: "map", title: "WORLD MAP", help: "3D globe. Switch Hybrid / Satellite / Streets. Click dots for details. Fly to a country from the top bar.", w: 8, h: 4, accent: "#00d4ff" },
+  map: { id: "map", title: "WORLD MAP", help: "Situation map with your enabled layers labeled (title, severity, time, notes). Control zones, callouts, shipping lanes. Click markers for details. Fly to a country from the top bar.", w: 8, h: 4, accent: "#00d4ff" },
   layers: { id: "layers", title: "MAP LAYERS", help: "Turn map layers on or off (war, weather, chips, metals…).", w: 4, h: 2 },
   alerts: { id: "alerts", title: "TOP ALERTS", help: "The most important warnings right now.", w: 4, h: 2 },
   hotspots: { id: "hotspots", title: "HOTSPOTS", help: "Places where risk is rising or falling.", w: 4, h: 2 },
@@ -1618,7 +1618,7 @@ const CLIMATE_SIGNALS = [
 const VIEW_META = {
   command: { title: "COMMAND", desc: "Start here: pulse, map, answers, news, grocery signal." },
   answers: { title: "ANSWERS", desc: "Simple Q&A plus positive paths." },
-  geo: { title: "MAP", desc: "3D world map, layers, live disasters." },
+  geo: { title: "MAP", desc: "Situation map, layers, live disasters." },
   crisis: { title: "CRISIS", desc: "War, hotspots, alerts, ways to ease tension." },
   weather: { title: "WEATHER", desc: "Capital temperatures, weather warnings, travel warnings, storms." },
   markets: { title: "MARKETS", desc: "Live prices and charts for money and commodities." },

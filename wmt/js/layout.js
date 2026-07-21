@@ -179,7 +179,7 @@ const Layout = (() => {
     if (!widget) return true;
     if (widget.dataset.userCollapse === "1") return true;
     const id = widget.dataset.id || "";
-    // Map and structural panels always keep their footprint
+    // Map and structural panels always keep their footprint (never collapse)
     if (id === "map" || id === "layers" || id === "controls") return false;
     const body = widget.querySelector(".widget-body");
     if (!body) return true;
@@ -351,6 +351,19 @@ const Layout = (() => {
       w.dataset.h = w.dataset.baseH || w.dataset.h || "2";
       delete w.dataset.autoEmpty;
       w.style.display = "";
+      // Map must never inherit height:0 from a prior empty pass
+      if (w.dataset.id === "map") {
+        w.style.height = "";
+        w.style.minHeight = "";
+        const body = w.querySelector(".widget-body");
+        if (body) {
+          body.style.minHeight = "";
+          body.style.height = "";
+          body.style.maxHeight = "";
+          body.style.display = "";
+          body.style.padding = "0";
+        }
+      }
     });
 
     // Empty windows → header-only chips (no black body / no tall grid hole)

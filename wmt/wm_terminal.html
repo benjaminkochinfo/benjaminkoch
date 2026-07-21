@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5" />
-  <meta name="description" content="World Intelligence Terminal — live multiview desk: hybrid map, Answer Desk, KMRI models, public news & markets, impact & grocery signals." />
+  <meta name="description" content="World Intelligence Terminal — live multiview desk: self-contained broadcast map, Answer Desk, KMRI models, public news & markets, Bloomberg-style charts." />
   <meta name="theme-color" content="#07080b" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#07080b" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -21,7 +21,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="view-desktop">
@@ -311,7 +310,7 @@
           <p class="hint">
             <strong>Privacy:</strong> no cookies, no local browser storage, no feed cache on the device. Live public sources only for this visit;
             if a feed fails, the terminal uses in-memory fallbacks for this session, then model seeds — nothing is written to disk.
-            Sources include major public news RSS, Yahoo quotes, CoinGecko, FX APIs, USGS, NASA EONET, Open-Meteo, and hybrid map tiles.
+            Sources include major public news RSS, Yahoo quotes, CoinGecko, FX APIs, USGS, NASA EONET, and Open-Meteo. The situation map is fully local (no external map tiles).
           </p>
           <p class="hint dev-credit-settings">Developed by Dr. Benjamin Koch</p>
         </div>
@@ -359,7 +358,7 @@
             layout, settings, or feed cache on the device. When you close the tab, the session ends.
             Data is fetched live for this visit only. “Add to Home Screen” uses a tiny install helper only —
             it does <strong>not</strong> store feeds or settings for this visit offline.
-            (Map or news sites you open may use their own cookies — that is outside this terminal.)
+            (News sites you open may use their own cookies — that is outside this terminal. The map itself uses no external tiles.)
           </p>
         </div>
         <div class="howto-grid" id="howToBody"></div>
@@ -371,7 +370,7 @@
         </div>
         <p class="disclaimer-foot">
           <strong>Disclaimer.</strong> For information and education only. Not investment, legal, medical, or professional advice.
-          Not affiliated with any news agency, exchange, map provider, or government. Third-party data may be delayed, incomplete, or wrong;
+          Not affiliated with any news agency, exchange, or government. Third-party data may be delayed, incomplete, or wrong;
           models and scores are illustrative. Always check original sources. No cookies · no browser storage on the device.
           Developed by Dr. Benjamin Koch.
         </p>
@@ -411,8 +410,8 @@
     </section>
   </template>
 
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <script src="js/countries.js"></script>
+  <script src="js/country_borders.js"></script>
   <script src="data.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/feeds.js"></script>

@@ -565,26 +565,59 @@
   function ensureMap() {
     const el = Layout.bodyEl("map");
     if (!el) return;
-    const hasMap = el.querySelector("#mapHost") || el.querySelector("#maplibre-root") || el.querySelector(".map-wrap");
-    if (!hasMap) {
+    // Force a real footprint so absolute SVG map is never 0×0
+    el.style.padding = "0";
+    el.style.minHeight = "340px";
+    el.style.height = "100%";
+    el.style.display = "flex";
+    el.style.flexDirection = "column";
+    el.style.overflow = "hidden";
+
+    const host = el.querySelector("#mapHost");
+    const hasLiveMap = host && host.querySelector("#worldMap");
+    const mode = typeof Map3D !== "undefined" ? Map3D.getMode?.() : "none";
+    const needsInit = !hasLiveMap || mode === "none" || mode === undefined;
+
+    if (needsInit) {
       try {
         Map3D.destroy?.();
       } catch {
         /* */
       }
       el.innerHTML = `<div class="map-host" id="mapHost"></div>`;
-      // map body should fill widget without padding constraint
-      el.style.padding = "0";
-      Map3D.init("mapHost", { onSelect: onMarkerSelect });
-      state.mapReady = true;
+      try {
+        const ok = Map3D.init("mapHost", { onSelect: onMarkerSelect });
+        state.mapReady = !!ok || Map3D.getMode?.() === "broadcast";
+        if (!state.mapReady) {
+          el.innerHTML = `<div class="map-host" id="mapHost"><div class="w-empty"><strong>MAP INIT FAILED</strong><span>Check console · local graphic engine</span></div></div>`;
+        }
+      } catch (err) {
+        console.error("Map3D.init failed", err);
+        el.innerHTML = `<div class="map-host" id="mapHost"><div class="w-empty"><strong>MAP ERROR</strong><span>${String(
+          err?.message || err
+        )}</span></div></div>`;
+        state.mapReady = false;
+      }
     }
-    pushMarkers();
+    try {
+      pushMarkers();
+    } catch (e) {
+      console.warn("pushMarkers", e);
+    }
     if (Layout.metaEl("map")) {
-      const bm = Map3D.getBasemap?.() || "hybrid";
-      Layout.metaEl("map").textContent =
-        Map3D.getMode() === "globe" ? `3D · ${bm.toUpperCase()}` : Map3D.getMode().toUpperCase();
+      const bm = Map3D.getBasemap?.() || "broadcast";
+      const md = Map3D.getMode?.() || "—";
+      const n = typeof Map3D !== "undefined" && Map3D.getMode?.() !== "none" ? "MAP" : String(md).toUpperCase();
+      Layout.metaEl("map").textContent = n;
     }
-    Map3D.resize();
+    // Parent widget must stay filled (layout auto-arrange)
+    el.closest(".widget")?.classList.add("is-filled");
+    el.closest(".widget")?.classList.remove("is-empty");
+    try {
+      Map3D.resize?.();
+    } catch {
+      /* */
+    }
   }
 
   // ── Panels ──
@@ -1921,7 +1954,8 @@
       </div>
       <div class="bb-board">${markets.map((m) => Charts.boardCard(m, { focused: state.instrument === m.sym })).join("")}</div>`;
     el.querySelectorAll(".bb-board-card").forEach((card) => {
-      card.addEventListener("click", () => {
+      card.addEventListener("click", (e) => {
+        if (e.target.closest("[data-pop]")) return;
         state.instrument = card.dataset.sym;
         $("#instrumentSelect").value = state.instrument;
         updateFocusChrome();
@@ -1931,6 +1965,7 @@
         fillMktBoard();
       });
     });
+    Charts.bindPopouts?.(el, marketBySym);
   }
 
   function fillMktHero() {
@@ -1941,22 +1976,10 @@
     if (m) Charts.push(m.sym, m.val);
     Layout.metaEl("mkthero") &&
       (Layout.metaEl("mkthero").textContent = m?.source === "live" || m?.source === "cache" ? `${sym} · LIVE` : `${sym}`);
-    el.innerHTML = Charts.heroChart(m, `${sym} · ${m?.source === "live" ? "LIVE" : (m?.source || "FOCUS").toUpperCase()}`);
-    el.querySelector(".bb-hero")?.addEventListener("click", () => {
-      if (m) {
-        UI.openDrawer({
-          type: "CHART · INSTRUMENT",
-          title: `${m.sym} — ${m.name}`,
-          sev: "info",
-          meta: [
-            ["LAST", m.val],
-            ["CHG", m.chg],
-            ["CLASS", m.cls || "—"],
-            ["SOURCE", m.source || "—"],
-          ],
-          body: "Live mountain chart. Series blends live market legs (when available) with model maintenance so the tape never goes dark.",
-        });
-      }
+    el.innerHTML = Charts.heroChart(m, sym);
+    Charts.bindPopouts?.(el, marketBySym);
+    el.querySelector(".bb-hero")?.addEventListener("dblclick", () => {
+      if (m) Charts.openPopout?.(m);
     });
   }
 
@@ -2250,27 +2273,19 @@
   }
 
   function bindMktClicks(el, m) {
+    Charts.bindPopouts?.(el, (sym) => m.find((x) => x.sym === sym) || marketBySym(sym));
     const cards = el.querySelectorAll(".mkt-cell, .bb-board-card");
     cards.forEach((node) => {
-      node.addEventListener("click", () => {
+      node.addEventListener("click", (e) => {
+        if (e.target.closest("[data-pop]")) return;
         state.instrument = node.dataset.sym;
         $("#instrumentSelect").value = state.instrument;
         updateFocusChrome();
         const item = m.find((x) => x.sym === node.dataset.sym);
-        if (item)
-          UI.openDrawer({
-            type: "INSTRUMENT",
-            title: `${item.sym} — ${item.name || ""}`,
-            sev: "info",
-            meta: [
-              ["LAST", item.val],
-              ["CHG", item.chg],
-              ["CLASS", item.cls || "—"],
-              ["SOURCE", item.source || "—"],
-              ["UNIT", item.unit || "—"],
-            ],
-            body: "Live when market APIs allow; otherwise model-maintained with microstructure so coverage never drops. Chart series updates with the tape.",
-          });
+        if (item && e.detail === 2) {
+          Charts.openPopout?.(item);
+          return;
+        }
         fillInstrument();
         fillMktHero();
         fillMktBoard();
