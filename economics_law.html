@@ -175,6 +175,30 @@
       max-width: 38ch;
     }
 
+    .terminal-frame-live {
+      background: #111317;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(17,19,23,0.28);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.14);
+      margin-top: 8px;
+    }
+
+    .terminal-frame-live iframe {
+      display: block;
+      width: 100%;
+      min-height: 1200px;
+      border: 0;
+      background: #111317;
+    }
+
+    .terminal-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 54ch;
+    }
+
     .entries {
       display: grid;
       gap: 28px;
@@ -279,6 +303,7 @@
       .shell { width: min(calc(100vw - 28px), var(--max)); }
       h1 { font-size: clamp(2.8rem, 15vw, 4.6rem); }
       .topline { flex-direction: column; gap: 8px; }
+      .terminal-frame-live iframe { min-height: 980px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -338,6 +363,25 @@
             <div class="triad-title">Continuity</div>
             <div class="triad-copy">The longer horizon in which economic and legal arrangements either retain their character or begin to dissolve.</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="foresight-title">
+      <div class="section-grid">
+        <div class="section-label" id="foresight-title">Foresight</div>
+        <div class="section-body" style="max-width: 100%;">
+          <div class="terminal-frame-live">
+            <iframe
+              src="economics_law_core.html"
+              title="Economics &amp; Law Foresight"
+              loading="eager"
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+          </div>
+          <p class="terminal-note">
+            The full module may also be opened directly <a href="economics_law_core.html">here</a>.
+          </p>
         </div>
       </div>
     </section>
