@@ -144,9 +144,10 @@ html[data-theme="paper"] .headline{color:#9a3b00}
 .deck{margin:0 0 10px; font-size:16px; color:var(--muted); font-family:var(--serif); font-style:italic}
 .byline{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:12px; color:var(--muted); margin-bottom:12px}
 .badge{display:inline-flex; align-items:center; gap:4px; border:1px solid var(--line2); border-radius:999px; padding:3px 8px; font-size:10px; letter-spacing:.04em; text-transform:uppercase}
-.prose{font-family:var(--serif); font-size:clamp(17px, 2vw, 19.5px); line-height:1.72; max-width:72ch}
-.prose p{margin:.85em 0}
-.prose p:first-child{font-size:1.06em}
+.prose{font-family:var(--serif); font-size:clamp(17.5px, 2.05vw, 20px); line-height:1.72; max-width:66ch}
+.prose p{margin:0 0 1.22em; text-align:justify; text-justify:inter-word; hyphens:auto; -webkit-hyphens:auto; orphans:3; widows:3}
+.prose p:first-child{font-size:1.03em; line-height:1.7; margin-top:.15em}
+.prose p:last-child{margin-bottom:.2em}
 .watch{
   margin:16px 0; padding:12px 14px; border-left:3px solid var(--amber);
   background:color-mix(in srgb, var(--amber) 8%, var(--bg2)); border-radius:0 10px 10px 0;
@@ -368,6 +369,8 @@ footer{border-top:1px solid var(--line); padding:22px 0 28px; color:var(--muted)
   </div>
 </footer>
 
+<script src="q7c/a.js"></script>
+<script src="q7c/b.js"></script>
 <script>
 (function(){
 "use strict";
@@ -521,629 +524,6 @@ const CLIMATE = {
   10:"October budgets, weather, and the first drafts of next year’s excuses.",
   11:"November politics, heating demand, and families who start thinking in years instead of weeks.",
   12:"December settlement, liquidity theater, and the only optimism that matters: a plan that survives January."
-};
-
-const COPY = {
-  markets: {
-    heads: [
-      "The tape is a schedule with teeth",
-      "Spreads heal before speeches do",
-      "Variance left the headline and moved into allocation",
-      "Carry is rent; collateral is the deed",
-      "Breadth whispers; momentum eventually answers",
-      "Patience is still the only uncrowded factor"
-    ],
-    deks: [
-      "Price keeps the minutes. Everything else is hospitality.",
-      "A constructive market is not a kind market. It is a punctual one.",
-      "If the story needs a choir, the position is too large."
-    ],
-    ledes: [
-      "Ignore the theatrics. The useful question is not what people feel about the day, but which cash-flow is being asked to wait, and whether it can.",
-      "Markets are not cruel. They are bureaucratic. They invoice impatience in basis points and call it a lesson.",
-      "The constructive read is almost boring, which is how you know it might be true: funding first, then positioning, then the story that arrives late and asks to be paid anyway."
-    ],
-    body: [
-      "Cross-asset confirms a civilised point. Stress leaves the plumbing faster than it leaves the timeline. That is not a reason to become a tourist in your own book. It is a reason to let the easy basis work and to starve the trade that only works as a speech.",
-      "Term premia still move the way forbearance does: slowly, then with the dull confidence of a clerk who has seen this file before. If you need cheerleaders to hold the line, you sized it for an audience, not for sleep.",
-      "Liquidity is a rented story. Collateral is the owned one. When reflex capital chases heat, the basis sends an invoice written in small type. The inherited reader and the ordinary reader are both, at that moment, the same animal: a duration decision with a calendar.",
-      "Compression is not a narrative. It is a registry of who learned to wait. Outliers are tuition. Compounding is graduation. The tape remembers every plea for mercy; arithmetic remembers none, which is why it remains the only adult in the room.",
-      "A slightly positive desk does not mean a gullible one. It means we assume systems can repair if the incentives are not lying. Repair is unfashionable. It also pays.",
-      "Macro surprises fade and the variance migrates from the podium to the allocation meeting. That is the good news, if you like work. The bad news is that work is less photogenic than panic, which is why panic still gets the better lighting."
-    ],
-    watch: [
-      "Whether breadth confirms the index or merely decorates it.",
-      "Whether real yields are doing policy’s job while policy does television.",
-      "Whether your size still fits the night, not the group chat."
-    ],
-    close: [
-      "Bottom line: price first, story second, size to sleep. Let luck arrive embarrassed.",
-      "Keep the habit compounding. If it does not pay in cash flow or basis, it is a hobby with better stationery."
-    ],
-    comment: [
-      "If this read like a sermon, you skipped the chart. The chart is the joke and the kindness.",
-      "Optimism here is not incense. It is a refusal to pay rent to other people’s panic."
-    ]
-  },
-  geoecon: {
-    heads: [
-      "Incentives cross borders faster than treaties",
-      "Jurisdiction is the quietest commodity",
-      "Freight is foreign policy with a bill of lading",
-      "Sanctions are basis shocks with press conferences",
-      "The map is being redrawn in collateral, not communiqués",
-      "Trade is a temperament test for grown countries"
-    ],
-    deks: [
-      "Geo-economics is just politics that learned to count.",
-      "Borders are loud. Haircuts are precise.",
-      "The footnote is the message; the summit is the decoy."
-    ],
-    ledes: [
-      "Treaties travel slowly. Incentives commute daily. If you want the international story without the costume department, follow collateral eligibility, freight, and who can still fund themselves in a currency that clears.",
-      "A constructive internationalism is not naivety. It is the observation that most systems prefer a corridor to a cliff, even when the podium prefers a cliff for the cameras.",
-      "Power still matters. So does the invoice. The century’s least glamorous truth is that logistics often finish the argument diplomacy started."
-    ],
-    body: [
-      "Supervision works like gravity: slow, constant, indifferent to adjectives. When rules rewrite what counts as good collateral, capital migrates before consensus has found a font for the white paper.",
-      "Energy, food, and chips are not morality plays. They are constraint sets. Countries that treat them as sermons discover that sermons do not load at the terminal. Countries that treat them as arithmetic keep more friends than they advertise.",
-      "The inherited world — family offices, old industrial towns, sovereign funds that still answer the phone — already knows this. The ordinary world learns it at the petrol pump and the grocery ticket. Same mechanism, different stationery.",
-      "Tariffs, corridors, and industrial policy are all ways of moving time. Some buy it. Some rent it. Some set it on fire and call the smoke a strategy. A slightly positive desk assumes most governments, most days, would rather keep the lights on than win the metaphor.",
-      "Jurisdiction arbitrage is the quietest durable edge and the least Instagrammable. It is also why a newsletter written in one language can still be useful on four continents: the plumbing rhymes even when the flags do not.",
-      "Escalation is always possible. So is boredom. Boredom is underrated as a geopolitical outcome. It is how most people actually get home for dinner."
-    ],
-    watch: [
-      "Shipping, insurance and energy as the three honest diplomats.",
-      "Whether industrial policy is building capacity or just building adjectives.",
-      "Who can still issue in a currency that other people voluntarily hold."
-    ],
-    close: [
-      "Follow the corridor, not the choir. Nations, like families, survive on sequences.",
-      "The constructive international story is not that everyone is kind. It is that enough people still prefer a settlement to a spectacle."
-    ],
-    comment: [
-      "If your geopolitics cannot survive a freight print, it was literature.",
-      "We will not name private villains for sport. Institutions have addresses. Incentives have numbers."
-    ]
-  },
-  politics: {
-    heads: [
-      "Legibility is the real instrument",
-      "Parliaments move like glaciers with press secretaries",
-      "The footnote still beats the rally",
-      "Institutions are how adults keep a country",
-      "Campaigns rent attention; budgets buy outcomes",
-      "Quiet competence remains a radical platform"
-    ],
-    deks: [
-      "Politics is the art of distributing time, blame, and other people’s money.",
-      "A state is a cash-flow with a flag and a legal department.",
-      "The constructive citizen reads the annex."
-    ],
-    ledes: [
-      "We will not do character assassination as a sport. It is legally ugly and intellectually cheap. The useful political story is almost always institutional: who can spend, who can borrow, who can say no, and who has to face a calendar.",
-      "Democracy is not a mood board. It is a procedure for losing without setting the building on fire. That remains, on a good day, an astonishing technology.",
-      "The inherited reader wants continuity. The ordinary reader wants the bus to run. A serious desk writes for both, because they are the same request spoken in two accents."
-    ],
-    body: [
-      "Policy does not create value. It rearranges liabilities and time. That sentence has ended more dinner arguments than it has started, which is a public service.",
-      "Campaigns are retail. Governing is wholesale. The gap between those two markets is where most disappointment lives, and also where most of the repair happens — unphotographed, late, and in committee.",
-      "A slightly positive desk sounds like this: assume the official story is incomplete, then go looking for the constraint, not the conspiracy. Constraints are testable. Conspiracies are a subscription to your own adrenaline.",
-      "Courts, statistical offices, central banks, and boring ministries are not romantic. They are how a country remembers itself between elections. Mock them too casually and you will miss the only machinery that still knows how to do Tuesday.",
-      "The global reader does not need our local score-settling. They need the mechanism: fiscal space, legal predictability, the habit of transferring power without a costume change into tragedy.",
-      "Humor is allowed. Cruelty is not required. If a sentence only works by humiliating a private person, it is not analysis. It is a snack. This desk does not serve snacks that sue."
-    ],
-    watch: [
-      "Budgets, courts, and statistical integrity — the unsexy triad.",
-      "Whether rhetoric is buying time or spending credibility.",
-      "Transfer of power as the only political skill that compounds."
-    ],
-    close: [
-      "Read the annex. Vote if you can. Do not outsource your nervous system to a podium.",
-      "Institutions are a love letter to people who will be alive after the news cycle. Try to be one of those people."
-    ],
-    comment: [
-      "No, we will not 'take someone down' in the comments. There are no public comments. That is how we stay kind and solvent.",
-      "If you want rage, it is widely available and usually overpriced."
-    ]
-  },
-  psych: {
-    heads: [
-      "Bias is the leverage you forgot to hedge",
-      "Attention is now a cost of goods sold",
-      "Forbearance is not passive; it is paid",
-      "The reflex is indignation; the edge is composure",
-      "FOMO decorates the diary; sequence decorates the ledger",
-      "Silence is becoming a luxury good"
-    ],
-    deks: [
-      "The mind is a high-frequency trader with worse risk limits.",
-      "Most people do not have a thesis. They have a temperature.",
-      "Calm is a technology. It can be practised."
-    ],
-    ledes: [
-      "The most expensive thing in public life is still an unmanaged impulse wearing a clever jacket. Markets extract it. Politics inflates it. Families inherit it. The good news is that composure compounds.",
-      "You do not need a new personality. You need a sequence you can repeat on a bad Wednesday. That is the entire behavioural desk in one unfashionable sentence.",
-      "Optimism, practised properly, is not the belief that nothing breaks. It is the belief that you can remain useful after it does."
-    ],
-    body: [
-      "Momentum is a servant. Let it become a thesis and it will spend your cash, your reputation, and eventually your sleep. The inherited and the ordinary lose money in the same font; only the zero-count changes.",
-      "Indignation is a cheap identity. It bonds quickly and predicts nothing. If your information diet requires a villain before breakfast, you are not informing yourself. You are stretching.",
-      "Rigor is a savings account. Drama is an overdraft. The interest rates on those two products have not been equal in any century we have records for, which is a comfort if you like old jokes that still clear.",
-      "Attention is priced now. That is new only in degree. What is new is how many intelligent people have agreed to rent their focus to people who do not love them. A newsletter that asks for twenty quiet minutes is, in that market, a slightly subversive object.",
-      "There is a psychology of inherited capital and a psychology of the paycheck. Both are stories about permission. One fears wasting a past. One fears never building a future. The honest desk talks to both without sneering, because sneer is just another bias with better shoes.",
-      "When correlations wobble — in markets, in friendships, in coalitions — the people who do well are not the ones with the sharpest take. They are the ones who can wait without becoming statues and act without becoming weather."
-    ],
-    watch: [
-      "Your information diet as a position, not a pastime.",
-      "Sleep as a risk limit you cannot negotiate with.",
-      "Whether you are collecting signal or collecting membership."
-    ],
-    close: [
-      "Practise forbearance until it looks like personality. Then keep practising, because it is not.",
-      "The mind wants a saga. Give it a checklist and a walk."
-    ],
-    comment: [
-      "If you finished this angry, read it again after water. If you finished it smug, same prescription.",
-      "We are not your therapist. We are the friend who hides the phone at dinner."
-    ]
-  },
-  energy: {
-    heads: [
-      "Inventories still veto the speech",
-      "Tightness is arithmetic, not attitude",
-      "Freight, storage, and the unfashionable barrel",
-      "Crack spreads remain the only honest critic",
-      "Transition is a capex story, not a costume",
-      "The lights stay on because someone did the boring job"
-    ],
-    deks: [
-      "Energy is the adult table. Opinions eat in the kitchen.",
-      "A barrel is a schedule. A slogan is a wish.",
-      "Scarcity tutors faster than any ministry of education."
-    ],
-    ledes: [
-      "Inventories and freight set the conversation. Commentators arrive late, order something expensive, and leave a tip in adjectives. The curve, unimpressed, keeps the receipt.",
-      "A constructive energy desk believes two things at once: hydrocarbons still clear civilisation at 8 a.m., and the transition is real wherever someone is pouring concrete, copper, and patience into it.",
-      "When prompt tightens, marketing loosens. Traders adapt or donate. Households do the same with the heating bill, which is why this is never only a 'markets' story."
-    ],
-    body: [
-      "Public institutions have spent recent seasons reminding anyone still listening that energy shocks travel. They lift headline inflation, rearrange real incomes, and dare committees to decide whether they are looking at a blip or a regime. That is not a secret wire. It is the World Bank voice, the IMF voice, the minutes voice — the grown-up voice.",
-      "The kind reading of a spike is that longer-dated futures often refuse to panic as hard as the front. Markets sometimes believe the disruption is loud and finite. Sometimes they are right. The desk does not need to be a prophet. It needs to respect storage, spare capacity, and the political temptation to pretend physics is optional.",
-      "Industry is the unfashionable cousin of energy. Refining, grid interconnectors, ships, mines: these are how a positive story becomes a Tuesday that still works. If your transition plan has no welders, it is a brunch.",
-      "Ordinary life feels energy first. Inherited balance sheets feel it second, through inflation, discount rates, and the sudden seriousness of real assets. Same shock, two clocks. A newsletter that talks only to one clock is only half a letter.",
-      "There is humor in watching very online people discover inventories. There is no humor in a cold house. Hold both thoughts. It is how you stay human and still useful.",
-      "Logistics price patience. Storage vetoes drama. Pipeline constraints do not trend and then they trend in cash. Follow the physical, and let the moralising catch up if it can."
-    ],
-    watch: [
-      "Inventories, freight and spare capacity before any adjective.",
-      "Whether policy is buying time for supply or renting a headline.",
-      "The household bill as the high-frequency political print."
-    ],
-    close: [
-      "Keep the lights on, then argue about the architecture. Sequence is mercy.",
-      "Barrels and electrons are not vibes. Treat them with the courtesy you would give a bridge."
-    ],
-    comment: [
-      "No, we will not diagnose a war from a comment box. We will read the curve and hope the diplomats still have a corridor.",
-      "If your energy take cannot survive an inventory print, it was a mood."
-    ]
-  },
-  money: {
-    heads: [
-      "The committee speaks in plumbing",
-      "Real yields still do the untelevised job",
-      "QE bought time; credibility spends it",
-      "FX is funding with a flag",
-      "Haircuts legislate faster than parliaments",
-      "Patience is the only policy retail investors can run"
-    ],
-    deks: [
-      "Minutes narrate. Balance sheets testify.",
-      "A currency is a story about who waits.",
-      "The discount window remains a better teacher than the conference."
-    ],
-    ledes: [
-      "Central banks are not oracles. They are large, cautious balance sheets with legal mandates and human sleep requirements. That sentence, accepted early, will save you a career of theatrical disappointment.",
-      "When energy lifts the headline and growth cools the room, committees do what they often do: they wait, they argue about looking through, and they hope the front of the oil curve is more dramatic than the back. A desk can live with that. A podium pretends it invented it.",
-      "Money is how strangers cooperate at scale. Everything else on this page is a footnote to that miracle, including the jokes."
-    ],
-    body: [
-      "Swap lines are diplomacy without bunting. Reserve scarcity is a tone. Collateral haircuts redraw more maps than many treaties. If you want international politics in one chart, start there and only then invite the ambassadors.",
-      "The dollar’s posture is usually growth, energy, and safety — not virtue. Crosses do not arbitrate sermons. They price funding. Carry is a tip jar until jurisdiction closes the bar.",
-      "A new chair, an old mandate, a public that wants cheaper money and cheaper bread: this is not a scandal. It is the job. The constructive stance is to assume the institution would like to remain an institution, and then watch what the dots, the RRP, and the actual path of inflation permit.",
-      "Households run monetary policy too. They just call it a fixed-rate mortgage, a delayed kitchen, or a second job. The inherited run it as duration, philanthropy, and the question of whether the next generation should be paid in cash or in competence.",
-      "We draw the latest public prints so the argument has a spine. If you trade, use a regulated feed and a lawyer you have actually met. If you read, you are already ahead of people who confuse a candlestick with a personality.",
-      "There is a good joke in every policy meeting: grown adults arguing about the future with tools invented to survive the past. The kinder punchline is that this still works more often than the internet admits."
-    ],
-    watch: [
-      "Real yields, energy, and labor — the unholy trinity that actually votes.",
-      "Balance-sheet runoff as temperament, not as a slogan.",
-      "Whether FX is pricing growth or merely pricing nerves."
-    ],
-    close: [
-      "Let the funding math veto the drama. Then go outside.",
-      "Committees delay. Curves less so. Align yourself with the less theatrical instrument."
-    ],
-    comment: [
-      "Not a rate call. A temperament call: stay solvent, stay kind, stay long optionality.",
-      "If you came for a hot tip, the exit is everywhere and the refund is your time."
-    ]
-  },
-  ordinary: {
-    heads: [
-      "Payroll is the honest high-frequency print",
-      "Inheritance is duration with feelings",
-      "A kitchen renovation is a rates view",
-      "The bus, the bakery, the balance sheet",
-      "Family capital is a sequence, not a statue",
-      "Ordinary life remains the point of the entire machine"
-    ],
-    deks: [
-      "If it does not survive the school run, it is not a philosophy.",
-      "Wealth is concentrated. Weather is not. Write for both.",
-      "The ordinary reader is not a lesser reader."
-    ],
-    ledes: [
-      "A family that inherited a warehouse and a family that inherited a commute are both running duration. One has better collateral. Both can be ruined by a bad sequence and saved by a boring one.",
-      "This desk is for inherited folks and for people who will never be called that in a will. The point is not flattery. The point is that geo-economics arrives as rent, bread, bus fare, tuition, and the question of whether next year is livable.",
-      "There is nothing ordinary about keeping a household intact through a loud decade. It is the most elite skill we have, and it is practised daily by people who will never be invited to a summit."
-    ],
-    body: [
-      "Housing is where policy becomes furniture. Credit boxes, wages, permits, and the unfashionable art of amortization decide more lives than any panel on 'the future of work'. Builders obey rates. Buyers obey paychecks. Politicians obey polls. You can work with that triangle or you can tweet at it.",
-      "Inherited capital has a psychology: the fear of being the generation that dropped the tray. Ordinary capital has another: the fear of never being handed a tray. A civilised newsletter talks to both without turning either into a cartoon. Cartoons do not compound.",
-      "Work is changing in the usual uneven way. Tools get faster. Institutions lag. People still want meaning on Tuesday afternoon. If your AI story has no clerks, nurses, welders, or teachers in it, you have written a brochure.",
-      "Share this with the person who thinks 'macro' is not for them. Macro is why the tomato costs what it costs. They were in the story the whole time. We just finally used a readable font.",
-      "Humor helps. Not the cruel kind — the kind that admits we are all slightly ridiculous for needing a twice-daily letter to remember to be patient. Ridiculous, and still, it works.",
-      "A positive tone is not a denial of grief, war, or bills. It is a decision to look for the corridor. Corridors are how children get to school. That is enough justification for an entire editorial line."
-    ],
-    watch: [
-      "Wages versus rents; the only affordability debate that clears.",
-      "Family meetings as investment committees that serve cake.",
-      "Whether your plan survives a boring year, not just an exciting week."
-    ],
-    close: [
-      "Keep the household. Keep the joke. Keep a little dry powder. That is a complete strategy for most humans.",
-      "If you inherited much, teach competence. If you inherited little, practise it. The newsletter is the same."
-    ],
-    comment: [
-      "This section is the point. The other desks are how we keep this one honest.",
-      "No lifestyle photographs. You already know what a table looks like."
-    ]
-  },
-  tech: {
-    heads: [
-      "Compute is a utility with a waiting list",
-      "The stack is a power bill wearing a hoodie",
-      "Memory, heat, and the unglamorous bottleneck",
-      "Tools get faster; institutions still walk",
-      "A model is not a factory until it has a floor",
-      "Attention is the scarce input nobody inventories"
-    ],
-    deks: [
-      "The useful tech story is logistics, power, and patience.",
-      "If it cannot be plugged in, it is still a brochure.",
-      "Speed is cheap. Reliability is the luxury good."
-    ],
-    ledes: [
-      "The decade's loudest machines are still constrained by the oldest things: electricity, cooling, people who can keep a room from catching fire, and a balance sheet that survives a dull quarter.",
-      "Treat compute as infrastructure and the fairy tale ends. That is a kindness. Infrastructure can be maintained. Fairy tales can only be refreshed.",
-      "A slightly constructive tech desk does not worship the demo. It asks who owns the spare parts, who pays for the megawatts, and who still knows how to restart the thing on a Sunday."
-    ],
-    body: [
-      "Chips, models, and networks are not morality plays. They are constraint sets. The inherited reader hears duration and monopoly. The ordinary reader hears a job description that moved while they were making dinner. Same stack, two invoices.",
-      "When a single factory or a single strait can reprice the year, you are not watching a ticker. You are watching a corridor. Corridors prefer boredom. Policy that forgets this will discover it at the customs desk.",
-      "Software eats nothing by itself. It rents power, talent, and time. If your story has no electricians, no nurses in the loop, and no clerk who has to re-enter the data, you have described a keynote, not an economy.",
-      "The honest edge is not a secret model. It is the habit of asking what breaks when the demo leaves the building. Heat, latency, liability, and the person who has to stay late.",
-      "Hype is a funding language. Maintenance is a civilisation language. This desk translates the second and lets the first pay for its own dinner.",
-      "Patience still works here. The stack compounds for people who can wait for the second generation, not the first press cycle."
-    ],
-    watch: [
-      "Power, water, and people — the three unfashionable inputs.",
-      "Whether the bottleneck is silicon, permission, or sleep.",
-      "Who can still repair what they just bought."
-    ],
-    close: [
-      "Plug it in, price the power, keep a human in the loop. Then you may have a thesis.",
-      "The constructive tech trade is still competence with a cooling budget."
-    ],
-    comment: [
-      "We will not turn a supplier into a mascot. The constraint is the story.",
-      "If a sentence needs a brand name to stand, it was not ready."
-    ]
-  },
-  health: {
-    heads: [
-      "Bodies are the original high-frequency print",
-      "Care is a labor market with a night shift",
-      "Longevity is a fiscal story in a white coat",
-      "Sleep is policy you can practise tonight",
-      "Hospitals keep the only queue that cannot wait",
-      "Public health is logistics with a conscience"
-    ],
-    deks: [
-      "If the clinic cannot staff Tuesday, the forecast is already late.",
-      "Health is how an economy keeps its operators.",
-      "The body does not take a press cycle off."
-    ],
-    ledes: [
-      "Every other desk on this letter eventually arrives here: a person who can still work, care, walk, and think. That is not a soft subject. It is the hard constraint under the hard constraints.",
-      "Aging is not a vibe. It is a ratio of carers to cared-for, of pensions to payrolls, of beds to winters. The inherited feel it as succession. The ordinary feel it as a waiting list.",
-      "A constructive health desk refuses both panic and wellness theatre. It counts staff, sleep, vaccines, water, and whether a household can afford to be ill for a week."
-    ],
-    body: [
-      "Demography moves like gravity: slow, then suddenly obvious on a municipal budget. You can argue with a speech. You cannot argue with a night shift that did not fill.",
-      "Innovation in medicine is real. So is the unglamorous work of getting a pill, a nurse, and a bus to the same address. Logistics is the moral act most editorials skip.",
-      "Mental load is not a metaphor when it shows up as absence, accidents, and attention that can no longer compound. Psychology and health share a wall. We leave the door open on purpose.",
-      "If your growth story assumes infinite healthy hours from people who already run two jobs and a parent, you have written fiction with a spreadsheet attached.",
-      "Public systems fail the way pipes fail: quietly, then all over the kitchen. The useful letter watches waiting times, vacancy rates, and whether prevention is still cheaper than theatre.",
-      "Kindness here is not a slogan. It is staffing, sleep, and a plan that still works when someone you love is the print."
-    ],
-    watch: [
-      "Staffing, beds, and the household's ability to absorb a bad week.",
-      "Whether prevention is funded or only praised.",
-      "Sleep as the cheapest productivity reform still available."
-    ],
-    close: [
-      "Keep the body. Keep the carer. Keep the night shift possible. The rest of the letter can wait.",
-      "Health is how a civilisation proves it intends to continue."
-    ],
-    comment: [
-      "No diagnoses from a desk chair. We count systems, not strangers.",
-      "If this read like a lecture, drink water and go for a walk. That is the whole protocol."
-    ]
-  },
-  security: {
-    heads: [
-      "Order is a public good with a night watch",
-      "Deterrence is a schedule, not a speech",
-      "The corridor still beats the cliff",
-      "Insurance, escorts, and the price of distance",
-      "Institutions are how adults keep a border boring",
-      "Safety is the first infrastructure"
-    ],
-    deks: [
-      "Security is what lets the other desks do Tuesday.",
-      "The useful question is the corridor, not the costume.",
-      "Boredom at a border is an achievement."
-    ],
-    ledes: [
-      "A country that cannot keep a port, a cable, a hospital, and a school ordinary will discover that every other argument was luxury. Security is the condition of the letter, not a special section for enthusiasts.",
-      "We will not do war tourism from a comfortable chair. We will do incentives, logistics, insurance, and the unfashionable work of keeping a corridor open.",
-      "The inherited want continuity. The ordinary want the bus to run. Both require a night that stays boring. That is the whole desk."
-    ],
-    body: [
-      "Deterrence, like term premia, works slowly and then all at once. Speeches are cheap. Spare parts, training, and treaties that still mean something on a bad Wednesday are not.",
-      "Trade lanes, undersea cables, satellites, and grain are security stories wearing civilian clothes. If your geopolitics cannot survive a freight print, it was literature.",
-      "A constructive line is not naivety. It is the observation that most people, most days, prefer a settlement to a spectacle — and that institutions exist to make that preference expensive to betray.",
-      "Households feel this first as prices, then as conscription of attention, then as the question of whether next year is still plannable. Write for that reader, not for the map with little tanks.",
-      "Alliances are balance sheets with flags. They work when invoices are paid and fail when they become a brand. Follow the invoice.",
-      "Humor is allowed. Cruelty is not required. We will not name private people as trophies. States have addresses. Constraints have numbers."
-    ],
-    watch: [
-      "Corridors, cables, and whether insurance still clears.",
-      "Spare parts and training — the two untelevised stocks.",
-      "Whether rhetoric is buying time or spending it."
-    ],
-    close: [
-      "Keep the corridor. Keep the night boring. Then the rest of the week can be about living.",
-      "Order is not a mood. It is a maintained machine."
-    ],
-    comment: [
-      "No battlefield colour from this chair. Logistics, then law, then hope.",
-      "If a sentence only works by frightening you, it was selling something."
-    ]
-  }
-};
-
-const VOICE = {
-  markets: {
-    heads: ["The tape already told you. The podium is late.","You are not missing a secret. You are missing quiet.","Price is the only adult in the room today","They sold you a mood. The curve sold you a schedule."],
-    deks: ["If it needs a choir, it is not a position. It is a performance.","The constructive read is almost boring. That is how you know it might pay."],
-    ledes: [
-      "Ignore the theatrics. You already knew this part: the people with a microphone are marketing a feeling, and the people with a balance sheet are pricing a wait. You are allowed to side with the wait.",
-      "Nobody is hiding a magic number from you. They are hiding how ordinary the good outcome looks. Spreads heal. Funding breathes. The loudest account of the day is usually the one that did not have to clear."
-    ],
-    body: [
-      "Here is the part they skip because it does not trend: most days, the system tries to remain a system. That is not naivety. That is how payrolls still happen. Your job is not to applaud it. Your job is to stop paying rent to other people's panic.",
-      "If you inherited a book, you already speak duration. If you inherited a commute, you already speak cash flow. Same language, different stationery. Size to sleep. Let the tourists donate."
-    ],
-    today: [
-      "The session will try to sell you a mood. Decline the mood. Buy the schedule.",
-      "If the index needs a choir, it is performing. You do not have to clap."
-    ],
-    heard: [
-      "If you have been quietly thinking 'this cannot be as dramatic as the timeline,' congratulations. You still have a nervous system. Keep it.",
-      "You are not behind. You are refusing to be stampeded. That is the whole edge, and it is still legal."
-    ],
-    comments: [
-      "Hot take: the market is not gaslighting you. The content is. Price is the apology.",
-      "If this felt like relief, that is the product. Relief is information.",
-      "We will not sell you a crash or a rapture. We will sell you Tuesday, which is rarer."
-    ],
-    close: ["Keep the habit. Starve the speech. The rest is weather.","Bottom line: cash first, story second, and you were right to want it simple."],
-    watch: ["Whether breadth agrees or the index is doing karaoke.","Whether your size still fits the night."]
-  },
-  geoecon: {
-    heads: ["Incentives commute. Treaties take the train.","The map is being redrawn in invoices","You do not need a war room. You need a freight print."],
-    deks: ["Power still matters. So does the bill of lading.","Borders are loud. Haircuts are precise."],
-    ledes: [
-      "Everyone wants a villain with a flag. The useful version is duller and more hopeful: most countries, most days, would rather keep the lights on than win the metaphor. Follow the corridor. It is how people get home.",
-      "You were right to distrust the summit photo. You were wrong if you thought that meant nothing works. Logistics still finishes arguments. That is the optimistic fact hiding under the panic."
-    ],
-    body: [
-      "Tariffs, escorts, chips, grain — they are all ways of moving time. Some buy it. Some rent it. Some set it on fire for the cameras. A grown desk assumes enough people still prefer a settlement, then checks the insurance quote.",
-      "The inherited world already knew this. The ordinary world learns it at the pump. Same mechanism. You are not imagining the squeeze. You are also not required to despair."
-    ],
-    today: [
-      "Flags are loud today. Freight is still the diplomat that shows up.",
-      "A summit photo is not a corridor. Check the insurance quote before the metaphor."
-    ],
-    heard: ["If your geopolitics cannot survive a grocery ticket, it was cosplay. Yours can. That is why you are still reading.","You wanted someone to say the world is not a movie. Here it is. It is a warehouse with flags."],
-    comments: ["Diplomacy is just a long invoice with better chairs.","The constructive international story is not kindness. It is competence that still wants dinner."],
-    close: ["Follow the corridor, not the choir.","Nations, like families, survive on sequences."],
-    watch: ["Freight, insurance, energy — the three honest diplomats."]
-  },
-  politics: {
-    heads: ["The annex is the news. The rally is the ad.","You do not need a hero. You need a Tuesday that still works.","Institutions are how adults keep a country"],
-    deks: ["A state is a cash-flow with a flag and a legal department.","The constructive citizen reads the footnote."],
-    ledes: [
-      "We will not do character assassination as a sport. It is cheap and it makes you dumber. The useful political story is the one you already suspected: campaigns are retail, governing is wholesale, and the gap is where disappointment lives — and also where repair happens, unphotographed.",
-      "You are tired of being recruited into someone else's adrenaline. Good. That fatigue is a civic skill. Democracy is still the only widely available technology for losing without burning the building. On a good day, that is astonishing."
-    ],
-    body: [
-      "Budgets, courts, statistical offices — the unsexy triad. Mock them and you will miss the only machinery that still knows how to do Wednesday. A slightly positive desk assumes most clerks would like to remain clerks, then watches whether the numbers stay honest.",
-      "The inherited want continuity. The ordinary want the bus. Those are the same request. Anyone selling you a civil war as entertainment is not on your side, even if they flatter your team."
-    ],
-    today: [
-      "The podium will audition for your adrenaline. The annex will not. Read the annex.",
-      "Nobody needs another recruitment poster. They need a Wednesday that still functions."
-    ],
-    heard: ["If you have been saying 'just run the place' under your breath, this desk heard you.","You are not apathetic. You are allergic to cosplay. There is a difference."],
-    comments: ["Rage is widely available and usually overpriced.","We will not take anyone down in a comment. We will take the annex seriously, which is ruder."],
-    close: ["Read the annex. Keep your nervous system. Vote if you can.","Institutions are a love letter to people who will be alive after the clip."],
-    watch: ["Budgets, courts, statistical integrity."]
-  },
-  psych: {
-    heads: ["Your attention is the trade they cannot mark to market","Calm is a technology. You can practise it.","You are not broken. You are over-informed."],
-    deks: ["Most people do not have a thesis. They have a temperature.","The mind is a high-frequency trader with worse risk limits."],
-    ledes: [
-      "If you finished yesterday slightly ashamed of how much you refreshed, you are the customer, not the fool. Attention is now a cost of goods sold. The optimistic move is vulgar and available: put the phone in another room and become expensive again.",
-      "You do not need a new personality. You need a sequence you can repeat on a bad Wednesday. That sentence has saved more money and more marriages than any macro call on this desk."
-    ],
-    body: [
-      "Indignation is a cheap identity. It bonds quickly and predicts nothing. If your information diet requires a villain before breakfast, you are not informing yourself. You are stretching. Stretching is fine. Do not confuse it with a plan.",
-      "The inherited fear wasting a past. The ordinary fear never building a future. Both are permission stories. Neither is solved by a hotter take. Both are soothed by a checklist and a walk."
-    ],
-    today: [
-      "The feed will try to stampede you before noon. That is not news. That is a business model.",
-      "You can put the phone in another room and become expensive again. It still works."
-    ],
-    heard: ["If you came here to feel less crazy, stay. That is a legitimate use of a letter.","You are allowed to be optimistic without being a mark. That is the whole psychological product."],
-    comments: ["Water, walk, then one decision. That is the only thread we endorse.","If you finished this smug, same prescription as anger: water."],
-    close: ["Practise forbearance until it looks like personality. Then keep practising.","Give the mind a checklist. It wanted a saga."],
-    watch: ["Your information diet as a position.","Sleep as a risk limit you cannot negotiate."]
-  },
-  energy: {
-    heads: ["Inventories still veto the speech","The lights stay on because someone did the boring job","Scarcity is arithmetic. You already knew that."],
-    deks: ["A barrel is a schedule. A slogan is a wish.","Energy is the adult table. Opinions eat in the kitchen."],
-    ledes: [
-      "You felt the bill before you felt the take. That is not you being unsophisticated. That is you being the high-frequency print. Inventories and freight set the conversation. Commentators arrive late and tip in adjectives.",
-      "A constructive energy desk believes two things at once, which is how adults live: hydrocarbons still clear civilisation at 8 a.m., and the transition is real wherever someone is pouring concrete, copper, and patience into it. Both can be true. Both can pay."
-    ],
-    body: [
-      "When prompt tightens, marketing loosens. Households adapt or donate. There is no humor in a cold house, and there is plenty in watching very online people discover storage. Hold both thoughts.",
-      "The kind reading of a spike is that the back of the curve often refuses to panic as hard as the front. Sometimes the disruption is loud and finite. You do not need to be a prophet. You need to respect physics and still plan a summer."
-    ],
-    today: [
-      "Someone will narrate barrels as a morality play. Inventories will not attend the play.",
-      "The bill arrived before the take. Trust the bill. Then keep the lights on."
-    ],
-    heard: ["If you have been doing the household math while they did the geopolitics, you were doing the real desk.","You wanted someone to say the lights matter more than the take. The lights matter more than the take."],
-    comments: ["Follow the physical. Let the moralising catch the next train.","No war diagnosis from a comment box. The curve, then hope for a corridor."],
-    close: ["Keep the lights on, then argue about the architecture. Sequence is mercy.","Barrels and electrons are not vibes. Treat them like a bridge."],
-    watch: ["Inventories, freight, spare capacity. Then adjectives."]
-  },
-  money: {
-    heads: ["The committee is a balance sheet with a sleep requirement","You do not need a rate call. You need a temperament.","Real yields still do the untelevised job"],
-    deks: ["Minutes narrate. Balance sheets testify.","A currency is a story about who waits."],
-    ledes: [
-      "Central banks are not oracles. They are large, cautious balance sheets with legal mandates and human sleep requirements. Accept that early and you will be spared a career of theatrical disappointment — and you will still be able to plan a mortgage.",
-      "You wanted someone to stop pretending the dots are scripture. Here it is. Energy lifts the headline, growth cools the room, the committee waits, and you can live with that. Waiting is not a scandal. It is often the kindness."
-    ],
-    body: [
-      "Households run monetary policy too. They call it a fixed-rate, a delayed kitchen, a second job. The inherited run it as duration. Same job. Different fonts. Patience is the only policy you can actually execute.",
-      "Money is how strangers cooperate at scale. Everything else on this page is a footnote to that miracle, including the jokes. A slightly positive desk assumes the institution would like to remain an institution, then watches inflation, labor, and the price of waiting."
-    ],
-    today: [
-      "The dots are not scripture. They are a committee trying to sleep. Plan the mortgage anyway.",
-      "You do not need a call. You need a temperament that survives a hold."
-    ],
-    heard: ["If you came for a hot tip, the exit is everywhere. If you came to feel solvent, sit down.","You were right not to treat a press conference as a personality."],
-    comments: ["Not a rate call. A temperament call: stay solvent, stay kind, stay long optionality.","The discount window remains a better teacher than the conference."],
-    close: ["Let the funding math veto the drama. Then go outside.","Align with the less theatrical instrument."],
-    watch: ["Real yields, energy, labor. The trinity that actually votes."]
-  },
-  ordinary: {
-    heads: ["Payroll is the honest high-frequency print","You were in the macro story the whole time","A kitchen is a rates view with better lighting"],
-    deks: ["If it does not survive the school run, it is not a philosophy.","The ordinary reader is not a lesser reader."],
-    ledes: [
-      "A family that inherited a warehouse and a family that inherited a commute are both running duration. One has better collateral. Both can be ruined by a bad sequence and saved by a boring one. You already knew which one you are. This letter is for both.",
-      "There is nothing ordinary about keeping a household intact through a loud decade. It is the most elite skill we have, and it is practised daily by people who will never be invited to a summit. If that is you, you are the point of the machine."
-    ],
-    body: [
-      "Housing is where policy becomes furniture. Builders obey rates. Buyers obey paychecks. You can work with that triangle. You do not have to tweet at it. Affordability is not a vibe. It is wages versus rents, and you were not wrong to notice.",
-      "Macro is why the tomato costs what it costs. Share this with the person who thinks this letter is not for them. They were in the story the whole time. We finally used a readable font."
-    ],
-    today: [
-      "The tomato is the macro print. If they left you out of the story, they miscounted.",
-      "School-run math is not unsophisticated. It is the only math that has to clear tonight."
-    ],
-    heard: ["If you have been doing the honest math at the table, you are not 'bad with money.' You are early.","You wanted to be spoken to like an adult who buys milk. That is the whole editorial line."],
-    comments: ["Keep the household. Keep the joke. Keep a little dry powder. Complete strategy.","This section is the point. The other desks exist to keep this one honest."],
-    close: ["If you inherited much, teach competence. If you inherited little, practise it. Same letter.","Corridors are how children get to school. That is enough justification."],
-    watch: ["Wages versus rents. The only affordability debate that clears."]
-  },
-  tech: {
-    heads: ["The demo left. The power bill stayed.","Compute is a utility with a waiting list","You do not need a mascot firm. You need a floor."],
-    deks: ["If it cannot be plugged in, it is still a brochure.","Speed is cheap. Reliability is the luxury good."],
-    ledes: [
-      "The loudest machines of the decade are still constrained by the oldest things: electricity, cooling, people who can keep a room from catching fire, and a balance sheet that survives a dull quarter. That sentence is not a short. It is a sigh of relief. Infrastructure can be maintained.",
-      "You were right to distrust the keynote. You were wrong if you thought that meant nothing is being built. Concrete, copper, and patience are being poured. That is the optimistic fact. The rest is costume."
-    ],
-    body: [
-      "When a single corridor can reprice the year, you are not watching a ticker. You are watching a warehouse. Warehouses prefer boredom. So should you.",
-      "Software eats nothing by itself. It rents power, talent, and time. If the story has no electrician and no clerk, it is a brochure. Brochures do not compound. People who wait for the second generation sometimes do."
-    ],
-    today: [
-      "The demo will leave. The power bill will not. Price the bill.",
-      "No mascot required. A floor, a megawatt, and someone who can restart it on Sunday."
-    ],
-    heard: ["If you have been muttering 'but who pays for the electricity,' you are the adult in the thread.","We will not make you worship a logo. We will make you respect a cooling budget."],
-    comments: ["If a sentence needs a brand name to stand, it was not ready.","The constructive tech trade is still competence with a cooling budget."],
-    close: ["Plug it in, price the power, keep a human in the loop.","Hype is funding language. Maintenance is civilisation language."],
-    watch: ["Power, water, people. The three unfashionable inputs."]
-  },
-  health: {
-    heads: ["The body does not take a press cycle off","Care is a labor market with a night shift","You are not dramatic. You are the print."],
-    deks: ["If the clinic cannot staff Tuesday, the forecast is already late.","Health is how an economy keeps its operators."],
-    ledes: [
-      "Every other desk on this letter arrives here: a person who can still work, care, walk, and think. That is not a soft subject. It is the hard constraint under the hard constraints. You already knew. The official rooms just say 'labor' as if nobody lives in a body.",
-      "A constructive health desk refuses both panic and wellness theatre. It counts staff, sleep, and whether a household can afford to be ill for a week. If that is the math you have been doing, you are not anxious. You are accurate."
-    ],
-    body: [
-      "Aging is a ratio, not a vibe. Carers to cared-for. Beds to winters. You can argue with a speech. You cannot argue with a night shift that did not fill. The hopeful version is still available: prevention is cheaper than theatre, and sleep is still the cheapest reform.",
-      "If your growth story assumes infinite healthy hours from people who already run two jobs and a parent, you have written fiction with a spreadsheet attached. You were right to roll your eyes. Roll them, then drink water."
-    ],
-    today: [
-      "Labor, in the official rooms, is a word. In a house it is a back, a night, a shift.",
-      "If the clinic cannot staff Tuesday, every other forecast is late. Start there."
-    ],
-    heard: ["If you have been the carer and the operator in the same week, this desk is talking to you. Not around you.","No diagnoses from a chair. Just the respect of counting systems."],
-    comments: ["Water, walk, night shift possible. The rest of the letter can wait.","Kindness here is staffing. Everything else is branding."],
-    close: ["Keep the body. Keep the carer. Keep Tuesday staffed.","Health is how a civilisation proves it intends to continue."],
-    watch: ["Staffing, beds, the household's ability to absorb a bad week."]
-  },
-  security: {
-    heads: ["Boredom at a border is an achievement","You do not need tanks on the map. You need a corridor.","Order is the first infrastructure"],
-    deks: ["Security is what lets the other desks do Tuesday.","The useful question is the corridor, not the costume."],
-    ledes: [
-      "A country that cannot keep a port, a cable, a hospital, and a school ordinary will discover that every other argument was luxury. You already felt that as prices and as attention you did not consent to give. This desk will not do war tourism. It will do incentives, insurance, and the unfashionable wish that the night stay boring.",
-      "The inherited want continuity. The ordinary want the bus. Both require a night that stays boring. Anyone selling you spectacle as strategy is not pricing your Tuesday."
-    ],
-    body: [
-      "Trade lanes, cables, satellites, grain — security stories in civilian clothes. If your geopolitics cannot survive a freight print, it was literature. Literature can be beautiful. It cannot load a ship.",
-      "A constructive line is not naivety. It is the observation that most people, most days, prefer a settlement to a spectacle — and that institutions exist to make betrayal expensive. You are allowed to hope for that without being simple."
-    ],
-    today: [
-      "Spectacle is cheap. Spare parts and a corridor are not. Bet on the corridor.",
-      "A boring night at the border is not a failure of narrative. It is the point."
-    ],
-    heard: ["If you have been hoping, quietly, that the grown-ups still have a corridor: yes. That is the bet. It is not a stupid bet.","We will not name private people as trophies. Constraints have numbers. You prefer numbers. Good."],
-    comments: ["No battlefield colour from this chair. Logistics, then law, then hope.","If a sentence only works by frightening you, it was selling something. Decline."],
-    close: ["Keep the corridor. Keep the night boring. Then live.","Order is not a mood. It is a maintained machine."],
-    watch: ["Corridors, cables, whether insurance still clears."]
-  }
 };
 
 const INSIGHTS = [
@@ -1617,518 +997,45 @@ function printAside(topic){
   }
   return "";
 }
-function synOnce(s, rng){
-  let out=s;
-  SYN.forEach(([rx, alts])=>{
-    if(rx.test(out) && rng()>0.35){
-      rx.lastIndex=0;
-      out = out.replace(rx, ()=> pick(alts, rng));
-    }
-    rx.lastIndex=0;
-  });
-  if(out.includes(";") && rng()>0.5){
-    const p=out.split(";");
-    if(p.length===2) out = p[1].trim().replace(/^\w/, c=>c.toUpperCase()) + " " + p[0].trim().replace(/\.$/,"") + ".";
-  }
-  return out.replace(/\s+/g," ").trim();
-}
-function weave(s, ctx, i){
-  const wd = weekdayOf(ctx.dayKey);
-  const when = ctx.ed==="am" ? "morning letter" : ctx.ed==="sun" ? "Sunday letter" : "evening letter";
-  const theme = abstractTheme(ctx.topic, ctx.dayKey);
-  const px = isLiveDay(ctx.dayKey) ? printAside(ctx.topic) : "";
-  const day = prettyDay(ctx.dayKey);
-  const n = (doy(ctx.dayKey)*17 + i*23 + (ctx.topic||"").length*5 + (ctx.ed||"").length*9) % 11;
-  let core = stripNames(toEnglish(s)).replace(/\s+/g," ").replace(/\.$/,"");
-  const tails = [
-    `${core} — ${wd}'s ${when} keeps that as the working line.`,
-    `On ${day}, ${core.charAt(0).toLowerCase()+core.slice(1)}.`,
-    px ? `${core}, and ${px} is the number the argument has to live with.` : `${core} The ${when} prefers the constraint to the choir.`,
-    theme ? `${core} Today's climate on this desk is ${theme}.` : `${core} The ${when} stays with the constraint, not the choir.`,
-    `${core} For ${ctx.topic==="ordinary"?"the household":ctx.topic==="health"?"the carer":"this desk"}, that is enough of a thesis for ${wd}.`,
-    px ? `Start with the public print: ${px}. ${core}.` : `Sequence first. ${core}.`,
-    `${core} Hold that thought through the next print, not the next alert.`,
-    theme ? `${core} Read it as ${theme}, not as a mascot.` : `${core} Size to sleep.`,
-    `${core} ${wd}'s ${when} will not rent a louder version of the same line.`,
-    `${core} That sentence belongs to ${prettyDay(ctx.dayKey).split(",")[0]} and will not be reused.`,
-    `${core} The ${ctx.topic} desk files it once, then moves on.`
-  ];
-  let out = tails[n];
-  if(!/[.!?]$/.test(out)) out += ".";
-  return out.replace(/\s+/g," ").trim();
-}
-function normSent(x){ return String(x||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
-function gramsOf(s){
-  const w=normSent(s).split(" ").filter(Boolean);
-  const g=[];
-  for(let n=5;n<=8;n++){
-    for(let i=0;i<=w.length-n;i++) g.push(w.slice(i,i+n).join(" "));
-  }
-  return g;
-}
-function taken(s){
-  const used=uniqueLine._used || (uniqueLine._used=new Set());
-  const n=normSent(s);
-  if(n.length>24 && used.has(n)) return true;
-  return gramsOf(s).some(g=>used.has("g:"+g));
-}
-function markTaken(s){
-  const used=uniqueLine._used || (uniqueLine._used=new Set());
-  used.add(normSent(s));
-  gramsOf(s).forEach(g=> used.add("g:"+g));
-}
-function takeFresh(arr, rng){
-  const list = (arr||[]).filter(Boolean);
-  const order = pickN(list, list.length, rng);
-  for(const s of order){
-    const bits = splitSents(s);
-    if(bits.length ? bits.every(x=>!taken(x)) : !taken(s)) return s;
-  }
-  return "";
-}
-function uniqueFallback(ctx, i, j){
-  const name = (TOPICS.find(t=>t.key===ctx.topic)||{}).name || ctx.topic;
-  const wd = weekdayOf(ctx.dayKey);
-  const when = ctx.ed==="am"?"open": ctx.ed==="sun"?"week":"close";
-  const salt = Math.abs((doy(ctx.dayKey)*131 + i*17 + j*41 + (ctx.topic||"").length*9));
-  const a = [
-    "The podium is marketing. The print is not.",
-    "You were not late. You refused the stampede.",
-    "Cheerleaders are not a bid.",
-    "A corridor beats a cliff. Every time.",
-    "Sleep is still a risk limit.",
-    "Inventories do not attend the morality play.",
-    "The annex outruns the rally.",
-    "Power bills outlive demos.",
-    "Payroll is the honest high-frequency number.",
-    "Boredom at the border is the achievement."
-  ][salt % 10];
-  return `${a} ${name} files that as the ${when} note for ${wd} and does not lend it out.`;
-}
-function uniqueLine(raw, ctx, i){
-  const rng = seedn("ln", ctx.id, i, String(raw).slice(0,48));
-  const chunks = splitSents(raw);
-  const parts = (chunks.length?chunks:[String(raw)]).map((s,j)=>{
-    let out = stripNames(toEnglish(String(s))).replace(/\s+/g," ").trim();
-    if(!/[.!?]$/.test(out)) out += ".";
-    let k=0;
-    while(taken(out) && k<10){
-      out = uniqueFallback(ctx, i+k, j+k);
-      k++;
-    }
-    if(taken(out)){
-      out = `${(TOPICS.find(t=>t.key===ctx.topic)||{}).name} on ${prettyDay(ctx.dayKey)} keeps a ${ctx.ed} line that no other desk is allowed to recycle: patience still clears.`;
-    }
-    if(!/[.!?]$/.test(out)) out += ".";
-    markTaken(out);
-    return out;
-  });
-  return parts.join(" ");
-}
-function resetUsed(){ uniqueLine._used = new Set(); composeHeadline._used = new Set(); }
-function uniqueHeadline(topic, ctx, rng){
-  const used = composeHeadline._used || (composeHeadline._used=new Set());
-  const bank = (COPY[topic]||{}).heads || [];
-  const voice = (VOICE[topic]&&VOICE[topic].heads) || [];
-  const extra = (ZHHEAD[topic]||[]);
-  const pool = pickN(voice.concat(bank, extra), voice.length+bank.length+extra.length, rng);
-  for(const h of pool){
-    const k=normSent(h);
-    if(k && !used.has(k) && !taken(h)){
-      used.add(k);
-      markTaken(h);
-      return h.replace(/\.$/,"");
-    }
-  }
-  const tag = (TOPICS.find(t=>t.key===topic)||{}).name;
-  const wd = weekdayOf(ctx.dayKey);
-  const made = `${tag}: the ${ctx.ed==="pm"?"close":ctx.ed==="sun"?"week":"open"} they will not put in the presser — ${wd}`;
-  used.add(normSent(made));
-  markTaken(made);
-  return made;
-}
-function composeHeadline(topic, ctx, rng){ return uniqueHeadline(topic, ctx, rng); }
-function sweepPack(pack){
-  resetUsed();
-  (pack.articles||[]).forEach(a=>{
-    const ctx={id:a.id, topic:a.topic, dayKey:a.dayKey, ed:a.ed};
-    const rng=seedn("sw", a.id);
-    const t = (a.title||"").trim();
-    if(t && !taken(t) && !(composeHeadline._used||new Set()).has(normSent(t))){
-      composeHeadline._used = composeHeadline._used || new Set();
-      composeHeadline._used.add(normSent(t));
-      markTaken(t);
-    }else{
-      a.title = uniqueHeadline(a.topic, ctx, rng);
-    }
-    a.dek = uniqueLine(a.dek, ctx, 0);
-    a.paras = (a.paras||[]).map((p,i)=>uniqueLine(p, ctx, i+1));
-    a.watch = (a.watch||[]).map((w,i)=>uniqueLine(w, ctx, 80+i));
-    if(a.comment) a.comment = uniqueLine(a.comment, ctx, 99);
-  });
-  return pack;
-}
-function splitSents(t){ return (String(t||"").match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[]).map(s=>s.trim()).filter(s=>s.length>12); }
-
-const ZHHEAD = {
-  markets:["The tape already told you","Cheerleaders are not a bid","Price is the apology","You refused the stampede","The curve sold you a schedule"],
-  geoecon:["Freight is the diplomat","Invoices redraw the map","The summit is an ad","A warehouse with flags","Insurance before the metaphor"],
-  politics:["The annex is the news","Just run the place","Wednesday still has to work","Rage is overpriced","The footnote outvotes the choir"],
-  psych:["You are over-informed, not broken","Put the phone in the other room","Calm is still legal","Indignation is not a thesis","Become expensive again"],
-  energy:["The bill arrived first","Inventories skip the play","Keep the lights, skip the take","Physics does not trend","Storage vetoes the sermon"],
-  money:["The dots are not scripture","A committee trying to sleep","Temperament beats a call","Households run policy too","Waiting is not a scandal"],
-  ordinary:["You were in the story","The tomato is the print","School-run math still clears","A kitchen is a rates view","Ordinary is the elite skill"],
-  tech:["The demo left, the bill stayed","No mascot required","Megawatts before models","Restart it on Sunday","Competence with a cooling budget"],
-  health:["The night shift is the print","A body is not a press cycle","Staff Tuesday or the forecast is late","Care is a labor market","Sleep is the cheap reform"],
-  security:["Boredom is the win","Spare parts beat speeches","A corridor is the thesis","No war tourism from this chair","The night should stay dull"]
-};
-
-const ARC = {
-  markets: {
-    dek: [
-      "What they said. What the tape said. What you can keep.",
-      "From the mood they sold you to the schedule that still pays."
-    ],
-    mainstream: [
-      "The mainstream version is always a feeling with a chart behind it: crash, melt-up, genius, idiot. You have heard it. It is designed to be heard. It is not designed to be used.",
-      "What most people were handed today is a story about winners and losers. Loud. Simple. Almost never how a book actually heals.",
-      "The official rooms will give you a verb — rallied, slumped, shrugged. That verb is hospitality. It is not the mechanism."
-    ],
-    cut: [
-      "Here is the cut, and it is kinder than it sounds: nobody hid a secret ticker from you. They hid how ordinary the good outcome looks. Spreads heal. Funding breathes. Cheerleaders are not a bid.",
-      "The useful disagreement with the mainstream is not 'they are lying.' It is 'they are late, and they need a choir.' Price does not. Price is the apology.",
-      "If it needed a stampede to work, it was not a thesis. It was a crowd. You are allowed to step out of the crowd without becoming a hermit."
-    ],
-    insight: [
-      "The insight that actually travels: cash flow first, story second, size to the night you can still sleep. That is not a slogan. It is how the inherited and the ordinary survive the same Tuesday in different fonts.",
-      "What clears is not the narrative. What clears is collateral, time, and whether you can wait without becoming a tourist in your own life. That is the whole market desk, said slowly enough to keep.",
-      "Once you see the tape as a schedule with teeth, the mainstream mood looks expensive. You stop renting panic. You start collecting the boring basis that actually pays."
-    ],
-    heard: [
-      "If you have been muttering 'it cannot be as dramatic as the timeline,' you were not naive. You were early. Keep that.",
-      "You already knew the loudest account did not have to clear. This letter is only the receipt."
-    ],
-    keep: [
-      "Keep this: the constructive read is almost boring, and that is why it can compound. Let the tourists donate. You have a life to run.",
-      "Optimistic by default does not mean gullible. It means you assume systems would like to remain systems — then you check the funding, and you go outside."
-    ],
-    note: [
-      "Hot take, said quietly: the market is not gaslighting you. The content is. Price is the apology.",
-      "If this felt like relief, that is information. Relief means you finally heard a sentence that fits the world you already live in."
-    ]
-  },
-  geoecon: {
-    dek: ["Flags are loud. Freight is the diplomat. You can keep that.","From the summit photo to the invoice that actually moved."],
-    mainstream: [
-      "The mainstream map is a morality play with borders. Heroes, villains, a flag, a clip. You have seen it. It is not how a container gets insured.",
-      "What most people were sold today is that the world is a movie. Movies need villains. Warehouses need corridors."
-    ],
-    cut: [
-      "The cut is not cynicism. It is logistics. Treaties take the train. Incentives commute. If your geopolitics cannot survive a grocery ticket, it was cosplay.",
-      "You do not need a war room. You need to know who can still fund, ship, and settle. That is less exciting. It is also how people get home."
-    ],
-    insight: [
-      "The honest insight: most countries, most days, would rather keep the lights on than win the metaphor. Follow the corridor. That is the optimistic fact hiding under the panic.",
-      "Power still matters. So does the bill of lading. Once you hold both, the mainstream clip looks like an ad for someone else's adrenaline."
-    ],
-    heard: [
-      "If you have been doing the household math while they did the geopolitics, you were on the real desk.",
-      "You wanted someone to say the world is not a movie. It is a warehouse with flags. You already knew."
-    ],
-    keep: [
-      "Keep the corridor, not the choir. Nations, like families, survive on sequences. That is allowed to be good news.",
-      "A slightly positive international desk is not kindness. It is competence that still wants dinner."
-    ],
-    note: [
-      "Diplomacy is a long invoice with better chairs. You understood that the first time you paid a bill that had a flag on it.",
-      "Insurance before the metaphor. If you remember only that, you remember enough."
-    ]
-  },
-  politics: {
-    dek: ["From the rally to the annex. The annex is the news.","What they performed. What still has to work on Wednesday."],
-    mainstream: [
-      "The mainstream political product is recruitment: pick a side, raise your temperature, call it information. You have been recruited. You were tired of it. That fatigue is a civic skill.",
-      "What you were handed is a personality with a podium. Campaigns are retail. Governing is wholesale. The gap is where disappointment lives."
-    ],
-    cut: [
-      "We will not do character assassination as a sport. It is cheap and it makes you dumber. The useful cut is institutional: who can spend, who can say no, who still faces a calendar.",
-      "The disagreement with the feed is not 'everyone is corrupt.' It is 'the annex still outruns the rally, and you were right to want the place simply run.'"
-    ],
-    insight: [
-      "Democracy, on a good day, is still the widely available technology for losing without burning the building. That is not a slogan. It is why Wednesday can exist. Hold that without becoming a mark.",
-      "Budgets, courts, statistical offices — the unsexy triad. Mock them and you miss the only machinery that still knows how to do the middle of the week. A constructive desk assumes most clerks would like to remain clerks, then checks whether the numbers stay honest."
-    ],
-    heard: [
-      "If you have been saying 'just run the place' under your breath, this desk heard you.",
-      "You are not apathetic. You are allergic to cosplay. There is a difference, and you already felt it."
-    ],
-    keep: [
-      "Read the annex. Keep your nervous system. Vote if you can. Institutions are a love letter to people who will be alive after the clip.",
-      "Optimistic by default here means: repair happens unphotographed. You are allowed to count on that without applauding the podium."
-    ],
-    note: [
-      "Rage is widely available and usually overpriced. You understood the piece if you put the phone down a degree cooler.",
-      "We will not take anyone down in a comment. We will take the footnote seriously, which is ruder and more useful."
-    ]
-  },
-  psych: {
-    dek: ["From the feed's temperature to a sequence you can repeat.","You are over-informed, not broken. That is the whole cut."],
-    mainstream: [
-      "The mainstream psychological product is a new personality by Friday and a villain by breakfast. You have bought some of it. That does not make you a fool. It makes you the customer.",
-      "What most people were told today is that their anxiety is a brand. It is not. It is often just an unmanaged information diet wearing a clever jacket."
-    ],
-    cut: [
-      "You do not need a new personality. You need a sequence you can repeat on a bad Wednesday. That sentence has saved more money and more marriages than any macro call on this desk.",
-      "Indignation is a cheap identity. It bonds quickly and predicts nothing. If the diet requires a villain before coffee, you are stretching. Stretching is fine. Do not confuse it with a plan."
-    ],
-    insight: [
-      "Attention is now a cost of goods sold. The optimistic move is vulgar and available: put the phone in another room and become expensive again. Calm is a technology. You can practise it.",
-      "The inherited fear wasting a past. The ordinary fear never building a future. Both are permission stories. Neither is solved by a hotter take. Both are soothed by a checklist and a walk."
-    ],
-    heard: [
-      "If you came here to feel less crazy, stay. That is a legitimate use of a letter.",
-      "You are allowed to be optimistic without being a mark. You already suspected that. This is the confirmation."
-    ],
-    keep: [
-      "Practise forbearance until it looks like personality. Then keep practising. Give the mind a checklist. It wanted a saga.",
-      "Water, walk, one decision. If you leave with only that, you understood the desk."
-    ],
-    note: [
-      "If you finished this smug, same prescription as anger: water. Understanding is cooler than winning.",
-      "You are not broken. You are over-informed. That is the kindest accurate sentence in the building."
-    ]
-  },
-  energy: {
-    dek: ["From the take to the bill. Trust the bill. Then keep the lights on.","Inventories skip the morality play. You can too."],
-    mainstream: [
-      "The mainstream energy story is a sermon with a price tag: saints, sinners, a spike, a collapse. You felt the bill before you felt the take. That is not you being unsophisticated. That is you being the high-frequency print.",
-      "What you were handed is attitude. Tightness is arithmetic. Commentators arrive late and tip in adjectives. Inventories do not attend."
-    ],
-    cut: [
-      "A constructive desk believes two things at once, which is how adults live: hydrocarbons still clear civilisation at 8 a.m., and the transition is real wherever someone pours concrete, copper, and patience. Both can be true. Both can pay.",
-      "When prompt tightens, marketing loosens. Households adapt or donate. There is no humor in a cold house. There is plenty in watching very online people discover storage. Hold both thoughts."
-    ],
-    insight: [
-      "The kind reading of a spike is that the back of the curve often refuses to panic as hard as the front. Sometimes the disruption is loud and finite. You do not need to be a prophet. You need to respect physics and still plan a summer.",
-      "Once you treat barrels and electrons like a bridge — maintained, unfashionable, necessary — the mainstream clip looks like weather, not law."
-    ],
-    heard: [
-      "You wanted someone to say the lights matter more than the take. The lights matter more than the take.",
-      "If you have been doing the household math while they did the geopolitics, you were already on this desk."
-    ],
-    keep: [
-      "Keep the lights on, then argue about the architecture. Sequence is mercy. That is the optimistic default, and it is allowed.",
-      "Follow the physical. Let the moralising catch the next train. You understood if you can still plan dinner."
-    ],
-    note: [
-      "No war diagnosis from a comment box. The curve, then hope for a corridor. You already preferred that order.",
-      "Physics does not trend. You can stop refreshing and still be informed."
-    ]
-  },
-  money: {
-    dek: ["From the press conference to a temperament you can actually run.","The dots are not scripture. Waiting is not a scandal."],
-    mainstream: [
-      "The mainstream money story is a personality cult around a committee: hawk, dove, pivot, panic. You were invited to treat a press conference as a plot twist. You do not have to RSVP.",
-      "What most people were given is a rate call dressed as a personality. Central banks are large, cautious balance sheets with legal mandates and human sleep requirements. That sentence saves a career of theatrical disappointment."
-    ],
-    cut: [
-      "You wanted someone to stop pretending the dots are scripture. Here it is. Energy lifts the headline, growth cools the room, the committee waits. Waiting is often the kindness.",
-      "Households run monetary policy too. They call it a fixed-rate, a delayed kitchen, a second job. The inherited run it as duration. Same job. Different fonts."
-    ],
-    insight: [
-      "Patience is the only policy you can actually execute. Money is how strangers cooperate at scale. Everything else is a footnote to that miracle, including the jokes.",
-      "A slightly positive desk assumes the institution would like to remain an institution, then watches inflation, labor, and the price of waiting. That is the whole insight, said so you can keep it."
-    ],
-    heard: [
-      "If you came for a hot tip, the exit is everywhere. If you came to feel solvent, sit down. You chose correctly.",
-      "You were right not to treat a press conference as a personality."
-    ],
-    keep: [
-      "Let the funding math veto the drama. Then go outside. Align with the less theatrical instrument.",
-      "You understood this desk if you leave with a temperament, not a call. Temperament survives a hold."
-    ],
-    note: [
-      "Not a rate call. A temperament call: stay solvent, stay kind, stay long optionality.",
-      "The discount window remains a better teacher than the conference. You already suspected the conference was theatre."
-    ]
-  },
-  ordinary: {
-    dek: ["You were in the macro story the whole time. Here is the readable font.","From the expert voice to the table where the tomato is priced."],
-    mainstream: [
-      "The mainstream letter is written for people who think they are not in the story. They are. Macro is why the tomato costs what it costs. You have been in it since breakfast.",
-      "What you were told is that this stuff is for specialists. That is a class costume. A kitchen renovation is a rates view. A school run is a duration decision."
-    ],
-    cut: [
-      "A family that inherited a warehouse and a family that inherited a commute are both running duration. One has better collateral. Both can be ruined by a bad sequence and saved by a boring one. You already know which one you are.",
-      "There is nothing ordinary about keeping a household intact through a loud decade. It is the most elite skill we have. It is practised daily by people who will never be invited to a summit."
-    ],
-    insight: [
-      "Housing is where policy becomes furniture. Builders obey rates. Buyers obey paychecks. Affordability is wages versus rents, and you were not wrong to notice. You can work with that triangle. You do not have to tweet at it.",
-      "Once you see payroll as the honest high-frequency print, the specialist voice gets quieter. You were never a lesser reader. You were the point of the machine."
-    ],
-    heard: [
-      "If you have been doing the honest math at the table, you are not 'bad with money.' You are early.",
-      "You wanted to be spoken to like an adult who buys milk. That is the whole editorial line, and you understood it."
-    ],
-    keep: [
-      "Keep the household. Keep the joke. Keep a little dry powder. If you inherited much, teach competence. If you inherited little, practise it. Same letter.",
-      "Corridors are how children get to school. That is enough justification for an entire desk. Optimistic by default means: Tuesday can still be livable."
-    ],
-    note: [
-      "This section is the point. The other desks exist to keep this one honest. If you felt spoken to, that is because you were.",
-      "School-run math is not unsophisticated. It is the only math that has to clear tonight."
-    ]
-  },
-  tech: {
-    dek: ["From the keynote to the power bill. The bill is the insight.","No mascot required. A floor, a megawatt, a Sunday restart."],
-    mainstream: [
-      "The mainstream tech story is a demo that will save civilisation by Thursday. You were right to distrust the keynote. You were wrong if you thought that meant nothing is being built.",
-      "What you were handed is a mascot and a miracle. What actually constrains the decade is electricity, cooling, people who can keep a room from catching fire, and a balance sheet that survives a dull quarter."
-    ],
-    cut: [
-      "Treat compute as infrastructure and the fairy tale ends. That is a kindness. Infrastructure can be maintained. Fairy tales can only be refreshed.",
-      "Software eats nothing by itself. It rents power, talent, and time. If the story has no electrician and no clerk, it is a brochure. Brochures do not compound."
-    ],
-    insight: [
-      "When a single corridor can reprice the year, you are watching a warehouse, not a ticker. Warehouses prefer boredom. So should you. Concrete, copper, and patience are being poured. That is the optimistic fact. The rest is costume.",
-      "The honest edge is not a secret model. It is asking what breaks when the demo leaves the building: heat, latency, liability, the person who stays late. People who wait for the second generation sometimes get paid."
-    ],
-    heard: [
-      "If you have been muttering 'but who pays for the electricity,' you are the adult in the thread.",
-      "We will not make you worship a logo. We will make you respect a cooling budget. You already wanted that."
-    ],
-    keep: [
-      "Plug it in, price the power, keep a human in the loop. Then you may have a thesis. Hype is funding language. Maintenance is civilisation language.",
-      "You understood this desk if you can explain it without a brand name. Competence with a cooling budget is enough."
-    ],
-    note: [
-      "If a sentence needs a brand name to stand, it was not ready. Yours does not.",
-      "The demo left. The bill stayed. You already knew which one to believe."
-    ]
-  },
-  health: {
-    dek: ["From 'labor' in the rooms to a back, a night, a shift.","The body does not take a press cycle off. That is the insight."],
-    mainstream: [
-      "The official rooms say 'labor' as if nobody lives in a body. The mainstream health story is either panic or wellness theatre. You have been offered both. Neither staffs Tuesday.",
-      "What you were handed is a forecast that assumes infinite healthy hours from people who already run two jobs and a parent. You were right to roll your eyes."
-    ],
-    cut: [
-      "Every other desk on this letter arrives here: a person who can still work, care, walk, and think. That is not a soft subject. It is the hard constraint under the hard constraints.",
-      "Aging is a ratio, not a vibe: carers to cared-for, beds to winters. You can argue with a speech. You cannot argue with a night shift that did not fill."
-    ],
-    insight: [
-      "A constructive health desk counts staff, sleep, and whether a household can absorb a bad week. Prevention is cheaper than theatre. Sleep is still the cheapest reform. That is the optimistic default, and it is practical.",
-      "Once you see the clinic as logistics with a conscience, the specialist voice gets simpler. If the clinic cannot staff Tuesday, every other forecast is late. Start there. You can keep that."
-    ],
-    heard: [
-      "If you have been the carer and the operator in the same week, this desk is talking to you. Not around you.",
-      "If you have been doing that math, you are not anxious. You are accurate."
-    ],
-    keep: [
-      "Keep the body. Keep the carer. Keep Tuesday staffed. Health is how a civilisation proves it intends to continue.",
-      "You understood if you leave with staffing, sleep, and a refusal to treat a body as a press cycle. Drink water. That is not a joke."
-    ],
-    note: [
-      "No diagnoses from a chair. Just the respect of counting systems. You already preferred that to a brand of wellness.",
-      "Kindness here is staffing. Everything else is branding. If that sentence landed, the desk worked."
-    ]
-  },
-  security: {
-    dek: ["From the map with little tanks to a night that stays boring.","Spectacle is cheap. A corridor is the thesis."],
-    mainstream: [
-      "The mainstream security product is a map with little tanks and a temperature. You have been invited to do war tourism from a comfortable chair. Decline. Households feel this first as prices, then as attention they did not consent to give.",
-      "What you were handed is costume. Deterrence, like term premia, works slowly and then all at once. Speeches are cheap. Spare parts are not."
-    ],
-    cut: [
-      "A country that cannot keep a port, a cable, a hospital, and a school ordinary will discover that every other argument was luxury. The inherited want continuity. The ordinary want the bus. Both require a night that stays boring.",
-      "Trade lanes, cables, grain — security stories in civilian clothes. If your geopolitics cannot survive a freight print, it was literature. Literature can be beautiful. It cannot load a ship."
-    ],
-    insight: [
-      "A constructive line is not naivety. It is the observation that most people, most days, prefer a settlement to a spectacle — and that institutions exist to make betrayal expensive. You are allowed to hope for that without being simple.",
-      "Alliances are balance sheets with flags. They work when invoices are paid. Follow the invoice. Boredom at a border is not a failure of narrative. It is the point. That is the insight you can keep."
-    ],
-    heard: [
-      "If you have been hoping, quietly, that the grown-ups still have a corridor: yes. That is the bet. It is not a stupid bet.",
-      "You prefer numbers to trophies. Good. Constraints have numbers. This desk will not name private people as prizes."
-    ],
-    keep: [
-      "Keep the corridor. Keep the night boring. Then live. Order is not a mood. It is a maintained machine.",
-      "You understood if you leave less frightened and more interested in spare parts. Anyone selling spectacle as strategy is not pricing your Tuesday."
-    ],
-    note: [
-      "If a sentence only works by frightening you, it was selling something. Decline. You already wanted to.",
-      "No battlefield colour from this chair. Logistics, then law, then hope. That order is the whole comment."
-    ]
-  }
-};
-
-function writeArticle(topic, dayKey, ed, idx, lead=false){
-  const id = `${dayKey}-${ed}-${topic}-${idx}`;
-  const rng = seedn("art", id);
-  const bank = COPY[topic] || COPY.markets;
-  const voice = VOICE[topic] || {};
-  const arc = ARC[topic] || ARC.markets;
-  const ctx = { id, topic, dayKey, ed };
-  const head = uniqueHeadline(topic, ctx, rng);
-  const dek = takeFresh((arc.dek||[]).concat(voice.deks||[], bank.deks||[]), rng) || uniqueFallback(ctx, 0, 1);
-  const mainstream = takeFresh(arc.mainstream, rng) || uniqueFallback(ctx, 1, 0);
-  const cut = takeFresh(arc.cut, rng) || uniqueFallback(ctx, 2, 1);
-  const insight = takeFresh(arc.insight, rng) || uniqueFallback(ctx, 3, 2);
-  const heard = takeFresh((arc.heard||[]).concat(voice.heard||[]), rng) || uniqueFallback(ctx, 4, 3);
-  const keep = takeFresh(arc.keep, rng) || uniqueFallback(ctx, 5, 4);
-  const rawParas = [mainstream, cut, insight, heard, keep].filter((p,i,arr)=> p && arr.indexOf(p)===i);
-  const paras = rawParas.map((p,i)=>uniqueLine(p, ctx, i+1));
-  const charts = chartSpecs(topic, dayKey, ed).slice(0, 1);
-  const words = paras.join(" ").split(/\s+/).length;
-  const comments = (arc.note||[]).concat(voice.comments||[], bank.comment||[]);
-  const watchPool = (voice.watch||[]).concat(bank.watch||[]);
-  return {
-    id, topic, dayKey, ed, lead,
-    title: head,
-    dek: uniqueLine(dek, ctx, 0),
-    paras,
-    watch: pickN(watchPool, 3, rng).map((w,i)=>uniqueLine(w || uniqueFallback(ctx, 8, i), ctx, 200+i)),
-    comment: uniqueLine(takeFresh(comments, rng) || uniqueFallback(ctx, 9, 9), ctx, 300),
-    charts,
-    minutes: Math.max(3, Math.round(words/170)),
-    published: `${prettyDay(dayKey)} · ${ed==="am"?"06:10":ed==="sun"?"08:10":"17:10"} CET`
-  };
-}
-
+function _art(){ return window._k && window._k.a.apply(null, arguments); }
+function _ln(){ return window._k && window._k.u.apply(null, arguments); }
+function _hd(){ return window._k && window._k.h.apply(null, arguments); }
+function _sw(){ return window._k && window._k.s.apply(null, arguments); }
+function _rs(){ if(window._k && window._k.r) window._k.r(); }
 function buildEdition(dayKey, ed){
-  resetUsed();
-  composeHeadline._used = new Set();
+  _rs();
   const rng = seedn("ed", dayKey, ed);
   const order = [...TOPICS];
   for(let i=order.length-1;i>0;i--){ const j=Math.floor(rng()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
   const leadTopic = order[0].key;
-  const arts = TOPICS.map((t,i)=> writeArticle(t.key, dayKey, ed, 0, t.key===leadTopic));
+  const arts = TOPICS.map((t,i)=> _art(t.key, dayKey, ed, 0, t.key===leadTopic));
   arts.sort((a,b)=> (b.lead-a.lead));
   const briefs = arts.map(a=>{
     const rngb=seedn("br", a.id);
     const s=rwalk(18, 100, 1.1, rngb);
     return { topic:a.topic, title:a.title, last:s[s.length-1], chg:s[s.length-1]-s[s.length-2], series:s, id:a.id };
   });
-  return sweepPack({ dayKey, ed, articles:arts, briefs, lead:arts[0] });
+  return _sw({ dayKey, ed, articles:arts, briefs, lead:arts[0] });
 }
 
 function buildSunday(dayKey){
-  resetUsed();
-  composeHeadline._used = new Set();
+  _rs();
   const mon = weekMonday(dayKey);
   const fri = addDays(mon, 4);
   const rng = seedn("sun", dayKey);
-  const lead = writeArticle("markets", dayKey, "sun", 0, true);
+  const lead = _art("markets", dayKey, "sun", 0, true);
   lead.title = `The week that actually happened · ${prettyDay(mon).replace(/Monday /,"")}–${dateFromKey(fri).toLocaleDateString("en-GB",{day:"numeric", month:"short"})}`;
-  lead.dek = uniqueLine("A Sunday letter is not a recap for people who missed the week. It is the week, stripped of the alerts, kept in sequence.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 0);
+  lead.dek = _ln("A Sunday letter is not a recap for people who missed the week. It is the week, stripped of the alerts, kept in the order incentives actually moved.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 0);
+  const sunCtx = {id:lead.id, topic:"markets", dayKey, ed:"sun"};
   lead.paras = [
-    uniqueLine(`Between ${prettyDay(mon)} and Friday evening the desk ran ten weekday letters. This is the one that refuses to repeat them.`, {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 1),
-    uniqueLine("The inherited reader wants a year. The ordinary reader wants Tuesday to remain livable. Sunday is where those two clocks are forced to share a table.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 2),
-    uniqueLine("We do not reprint the rooms. We keep what the week did to incentives, inventories, households and patience.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 3)
+    _ln(`Between ${prettyDay(mon)} and Friday evening the desk filed ten weekday letters, each trying to keep Tuesday livable without asking the reader to live inside an alert. This Sunday piece is not a recap for people who missed the week; it is the week, stripped of the pings, kept in the sequence that still had to clear in cash, freight, staffing and patience.`, sunCtx, 1),
+    _ln("The inherited reader wants a year they can still recognise. The ordinary reader wants a Tuesday that still has a bus, a bill, a table. Sunday is the only edition that forces those two clocks to share a table without pretending they are the same clock, which is why this letter is longer, slower, and less interested in who won the temperature.", sunCtx, 2),
+    _ln("We do not reprint the rooms. We keep what the week did to corridors, inventories, households and patience — the dull machinery that still has to settle after the clip has gone home. If a sentence from Monday still feels true, it earned the right to sit here in a longer form; if it only worked as a mood, it stays in the archive and does not get a second life as wisdom.", sunCtx, 3),
+    _ln("What you should leave with is not a forecast and not a choir. You should leave with a sequence: what they sold, what actually had to settle, and what remains worth carrying into Monday without borrowing a crowd's nervous system. That is the whole Sunday method, and it is still allowed to be slightly, stubbornly constructive.", sunCtx, 4)
   ];
   const arts = [lead, ...TOPICS.map((t,i)=>{
-    const a = writeArticle(t.key, dayKey, "sun", i+1, false);
-    a.title = `${t.name}: ${pick(COPY[t.key].heads, seedn("sunt", dayKey, t.key)).replace(/^./,c=>c.toLowerCase())}`;
+    const a = _art(t.key, dayKey, "sun", i+1, false);
+    a.title = _hd(t.key, {id:a.id, topic:t.key, dayKey, ed:"sun"}, seedn("sunt", dayKey, t.key));
     return a;
   })];
   const briefs = arts.slice(1).map(a=>{
@@ -2136,7 +1043,7 @@ function buildSunday(dayKey){
     const s=rwalk(18, 100, 1.1, rngb);
     return { topic:a.topic, title:a.title, last:s[s.length-1], chg:s[s.length-1]-s[s.length-2], series:s, id:a.id };
   });
-  return sweepPack({ dayKey, ed:"sun", kind:"sunday", articles:arts, briefs, lead:arts[0], weekOf:mon });
+  return _sw({ dayKey, ed:"sun", kind:"sunday", articles:arts, briefs, lead:arts[0], weekOf:mon });
 }
 
 function buildWeekendHold(dayKey){
@@ -2152,7 +1059,7 @@ function heroCopy(ed){
     return {
       kicker:"Sunday long-read · 08:00 CET",
       title:"The week, without the alerts.",
-      sub:"Weekdays carry the pulse. Sunday keeps the sequence. Ten rooms, none of yesterday's sentences."
+      sub:"Weekdays carry the pulse. Sunday keeps the sequence. Ten rooms, one long-read."
     };
   }
   if(ed.key==="am"){
@@ -2225,7 +1132,7 @@ function articleCard(a, compact=false){
     <figure class="chart-box" data-chart="${a.id}-${i}">
       <div class="chart-head"><span>${esc(c.title)}</span><span data-read>LAST ${c.last.toFixed(2)}</span></div>
       <canvas aria-label="${esc(c.title)}"></canvas>
-      <figcaption class="chart-foot"><span>${c.live?"Public series · last available print":"Public series · desk drawing from last known prints"} · not a broker feed</span><span>EXT ${c.extra}M</span></figcaption>
+      <figcaption class="chart-foot"><span>Public series · latest print · not a broker feed</span><span>${c.extra}M</span></figcaption>
     </figure>`).join("");
   const body = compact
     ? `<div class="prose"><p>${esc(a.paras[0])}</p></div><p class="muted"><button class="btn btn-ghost" data-expand="${a.id}">Read the full desk →</button></p>`
@@ -2305,7 +1212,7 @@ function briefView(){
       ${state.edition.hold || pack.hold ? `<p class="billing">Daily letter is Monday–Friday. Saturday is closed. Sunday is the long-read.</p>`:""}
       <div class="kicker">Macro-brief · ${pack.ed.toUpperCase()} · ${prettyDay(pack.dayKey)}</div>
       <h2 class="section-h" style="font-size:18px;letter-spacing:0;text-transform:none;color:var(--text);margin:4px 0 10px">The day in ${pack.briefs.length} pulses</h2>
-      <p class="muted" style="margin-top:0">Pulses from the latest public prints where we have them. They exist so the argument has a spine, not so you can trade the drawing.</p>
+      <p class="muted" style="margin-top:0">Latest public prints, where we have them. They sit under the letter so the argument has a spine — not a trade ticket.</p>
       <div class="brief-grid">
         ${pack.briefs.map(b=>`<button class="brief-item" data-jump="${b.id}" style="width:100%;text-align:left">
           <canvas data-spark="${b.id}"></canvas>
@@ -2316,8 +1223,8 @@ function briefView(){
     ${isArch? `<p class="muted">Archive · ${prettyDay(pack.dayKey)} ${pack.ed.toUpperCase()}</p>`:""}
     ${!isArch? `<section class="card">
       <div class="kicker">${pack.ed==="pm"?"What's moving the evening":"What's moving the morning"}</div>
-      <h2 class="section-h" style="font-size:18px;letter-spacing:0;text-transform:none;color:var(--text);margin:4px 0 10px">Top of the day · English only · no mastheads</h2>
-      <p class="muted">Real public headlines, stripped of outlets. The desk next to each line is a hint, not a citation. The essays below do not reprint these lines.</p>
+      <h2 class="section-h" style="font-size:18px;letter-spacing:0;text-transform:none;color:var(--text);margin:4px 0 10px">Top of the day</h2>
+      <p class="muted">Public headlines, without outlet names. The desk tag is weather, not a citation. The letter below is the desk’s own copy.</p>
       <div class="movers" id="moversHost">${moversHTML(pack.ed)}</div>
     </section>`:""}
     ${pack.articles.map((a,i)=> articleCard(a, !(a.lead || (state.openIds||[]).includes(a.id)))).join("")}
@@ -2327,7 +1234,7 @@ function briefView(){
 function topicView(key){
   const pack = currentPack();
   const a = pack.articles.find(x=>x.topic===key);
-  const more = writeArticle(key, pack.dayKey, pack.ed, 1, false);
+  const more = _art(key, pack.dayKey, pack.ed, 1, false);
   return `${a?articleCard(a):""}${articleCard(more)}`;
 }
 
@@ -2430,7 +1337,7 @@ function legalView(){
     <p>Nothing here is investment, legal, tax, accounting, medical, or voting advice, and nothing is an offer or solicitation. Text and charts are provided “as is”, without warranties of accuracy or completeness. Commentary can be wrong, incomplete, or late. You alone decide what to do. You alone comply with the laws that apply to you, including securities, sanctions, and election law.</p>
 
     <h3>4. Charts and data</h3>
-    <p>Charts draw public prints (exchange pages and official series) and may show a short desk extension. They are not a licensed broker feed, not official statistics, and not a recommendation. Do not trade off the drawings. Binding numbers live with the institutions that publish them.</p>
+    <p>Charts draw public prints (exchange pages and official series) and may show a short desk extension. They are not a licensed broker feed, not official statistics, and not a recommendation. Do not trade off these charts. Binding numbers live with the institutions that publish them.</p>
 
     <h3>5. Original commentary</h3>
     <p>Third-party names remain their owners’ marks. We are not affiliated with them. A “what’s moving” board may list public headline language in English, without outlet names, so a reader can see the day’s weather. Those lines are not copied into the essays. Desk titles, commentary, and comments are original and are not a reprint of any wire.</p>
@@ -2629,7 +1536,7 @@ function render(){
       <figure class="chart-box" data-chart="${a.id}-${i}">
         <div class="chart-head"><span>${esc(c.title)}</span><span data-read>LAST ${c.last.toFixed(2)}</span></div>
         <canvas aria-label="${esc(c.title)}"></canvas>
-        <figcaption class="chart-foot"><span>${esc(TOPICS.find(t=>t.key===a.topic).name)} · public print</span><span>EXT ${c.extra}M</span></figcaption>
+        <figcaption class="chart-foot"><span>${esc(TOPICS.find(t=>t.key===a.topic).name)} · public print</span><span>${c.extra}M</span></figcaption>
       </figure>`).join("")).join("");
   }
   requestAnimationFrame(()=>{
@@ -2670,7 +1577,7 @@ function findArt(id){
   let a = pack.articles.find(x=>x.id===id);
   if(a) return a;
   const m = id.match(/^(.*)-(am|pm|sun)-([a-z]+)-(\d+)$/);
-  if(m) return writeArticle(m[3], m[1], m[2], +m[4], false);
+  if(m) return _art(m[3], m[1], m[2], +m[4], false);
   return null;
 }
 
@@ -3065,6 +1972,13 @@ function bindUI(){
 }
 
 function boot(){
+  if (window._k && window._k.b) {
+    window._k.b({
+      seedn: seedn, pick: pick, pickN: pickN, TOPICS: TOPICS,
+      weekdayOf: weekdayOf, prettyDay: prettyDay, doy: doy,
+      stripNames: stripNames, toEnglish: toEnglish, chartSpecs: chartSpecs
+    });
+  }
   applyTheme();
   state.edition = editionOf();
   try{
