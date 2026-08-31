@@ -277,7 +277,7 @@
       comment: uniqueLine(takeFresh(A.note, rng) || uniqueFallback(ctx, 9, 9), ctx, 300),
       charts: charts,
       minutes: Math.max(3, Math.round(words / 170)),
-      published: prettyDay(dayKey) + " · " + (ed === "am" ? "06:10" : ed === "sun" ? "08:10" : "17:10") + " CET"
+      published: prettyDay(dayKey) + " · " + (ed === "am" ? "08:40" : ed === "sun" ? "10:10" : "17:40") + " CET"
     };
   }
 

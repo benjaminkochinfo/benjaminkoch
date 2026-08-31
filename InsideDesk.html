@@ -460,19 +460,28 @@ function fmtUntil(target, nowP){
   const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
   return `${h}h ${String(m).padStart(2,"0")}m`;
 }
+function cetHM(p){ return p.h*60 + (p.min||0); }
+const AM_LOCK = 8*60+30;
+const PM_LOCK = 17*60+30;
+const SUN_LOCK = 10*60;
 function editionOf(d=new Date()){
   const p = cetParts(d);
   const key = dayKeyFromParts(p);
   const w = weekdayFromKey(key);
+  const t = cetHM(p);
   if(w===0){
+    if(t<SUN_LOCK){
+      const fri = previousFridayKey(key);
+      return { key:"pm", label:"Friday evening", dayKey:fri, parts:p, isLive:true, kind:"weekend", hold:true };
+    }
     return { key:"sun", label:"Sunday long-read", dayKey:key, parts:p, isLive:true, kind:"sunday" };
   }
   if(w===6){
     const fri = previousFridayKey(key);
     return { key:"pm", label:"Friday evening", dayKey:fri, parts:p, isLive:true, kind:"weekend", hold:true };
   }
-  if(p.h>=17 || p.h<6){
-    if(p.h<6){
+  if(t>=PM_LOCK || t<AM_LOCK){
+    if(t<AM_LOCK){
       const yest=addDays(key,-1);
       if(isWeekdayKey(yest)) return { key:"pm", label:"Evening edition", dayKey:yest, parts:p, isLive:true, kind:"daily" };
       if(isSundayKey(yest)) return { key:"sun", label:"Sunday long-read", dayKey:yest, parts:p, isLive:true, kind:"sunday" };
@@ -483,16 +492,16 @@ function editionOf(d=new Date()){
 }
 function nextEdition(d=new Date()){
   const p = cetParts(d);
-  const key = dayKeyFromParts(p);
-  const w = weekdayFromKey(key);
-  const utc = (y,m,day,h)=> Date.UTC(y,m-1,day,h,0,0);
-  if(w===6) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day+1,8), p) };
-  if(w===0 && p.h<8) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day,8), p) };
-  if(w===0) return { label:"Monday morning", in: fmtUntil(utc(p.y,p.m,p.day+1,6), p) };
-  if(p.h<6) return { label:"Morning edition", in: fmtUntil(utc(p.y,p.m,p.day,6), p) };
-  if(p.h<17) return { label:"Evening edition", in: fmtUntil(utc(p.y,p.m,p.day,17), p) };
-  if(w===5) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day+2,8), p) };
-  return { label:"Morning edition", in: fmtUntil(utc(p.y,p.m,p.day+1,6), p) };
+  const w = weekdayFromKey(dayKeyFromParts(p));
+  const t = cetHM(p);
+  const utc = (y,m,day,h,min=0)=> Date.UTC(y,m-1,day,h,min,0);
+  if(w===6) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day+1,10), p) };
+  if(w===0 && t<SUN_LOCK) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day,10), p) };
+  if(w===0) return { label:"Monday morning", in: fmtUntil(utc(p.y,p.m,p.day+1,8,30), p) };
+  if(t<AM_LOCK) return { label:"Morning edition", in: fmtUntil(utc(p.y,p.m,p.day,8,30), p) };
+  if(t<PM_LOCK) return { label:"Evening edition", in: fmtUntil(utc(p.y,p.m,p.day,17,30), p) };
+  if(w===5) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day+2,10), p) };
+  return { label:"Morning edition", in: fmtUntil(utc(p.y,p.m,p.day+1,8,30), p) };
 }
 function prettyDay(dayKey){
   return dateFromKey(dayKey).toLocaleDateString("en-GB",{weekday:"long", day:"numeric", month:"long", year:"numeric"});
@@ -1057,20 +1066,20 @@ function buildWeekendHold(dayKey){
 function heroCopy(ed){
   if(ed.key==="sun"){
     return {
-      kicker:"Sunday long-read · 08:00 CET",
+      kicker:"Sunday long-read · 10:00 CET",
       title:"The week, without the alerts.",
       sub:"Weekdays carry the pulse. Sunday keeps the sequence. Ten rooms, one long-read."
     };
   }
   if(ed.key==="am"){
     return {
-      kicker:"Morning edition · Monday–Friday · 06:00 CET",
+      kicker:"Morning edition · Monday–Friday · 08:30 CET",
       title:"Order the day before the day orders you.",
       sub:"Ten desks. A slightly positive terminal: skeptical of podiums, loyal to inventories, written for the reader who still has a life to run."
     };
   }
   return {
-    kicker:"Evening edition · Monday–Friday · 17:00 CET",
+    kicker:"Evening edition · Monday–Friday · 17:30 CET",
     title:"Admit what the day actually did.",
     sub:"The evening letter is how a serious desk stays honest. Same ten rooms, a different temperature, still no public pile-on."
   };
@@ -1199,14 +1208,14 @@ function briefView(){
   const isArch = state.view==="archive" && state.archiveDay;
   const viewingSun = pack.ed==="sun" || pack.kind==="sunday";
   const edNow = viewingSun ? "sun" : pack.ed;
-  const pmReady = state.edition.key==="pm" || cetParts().h>=17 || state.view==="archive";
+  const pmReady = state.edition.key==="pm" || cetHM(cetParts())>=PM_LOCK || state.view==="archive";
   return `
     <section class="card">
       <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px">
         ${viewingSun
           ? `<button class="btn btn-amber">Sunday long-read</button>`
-          : `<button class="btn ${edNow==="am"?"btn-amber":""}" ${state.view==="archive"?"data-ed":"data-peek"}="am">Morning 06:00</button>
-             <button class="btn ${edNow==="pm"?"btn-amber":""}" ${state.view==="archive"?"data-ed":"data-peek"}="pm">${pmReady?"Evening 17:00":"Evening 17:00 CET"}</button>`}
+          : `<button class="btn ${edNow==="am"?"btn-amber":""}" ${state.view==="archive"?"data-ed":"data-peek"}="am">Morning 08:30</button>
+             <button class="btn ${edNow==="pm"?"btn-amber":""}" ${state.view==="archive"?"data-ed":"data-peek"}="pm">${pmReady?"Evening 17:30":"Evening 17:30 CET"}</button>`}
         <button class="btn" data-dossier="${pack.dayKey}">Week dossier</button>
       </div>
       ${state.edition.hold || pack.hold ? `<p class="billing">Daily letter is Monday–Friday. Saturday is closed. Sunday is the long-read.</p>`:""}
@@ -1251,7 +1260,7 @@ function insightsView(){
       </div>
       <hr class="hr">
       <div class="prose">
-        <p>Morning at 06:00 CET. Evening at 17:00 CET. The letter is written for people who prefer incentives to applause, and who would like the inherited and the ordinary to be able to sit at the same table.</p>
+        <p>Morning at 08:30 CET. Evening at 17:30 CET. The letter is written for people who prefer incentives to applause, and who would like the inherited and the ordinary to be able to sit at the same table.</p>
         <p>We stay slightly, stubbornly constructive. Speeches are marketing. Institutions still matter. There is no public comment board. That last choice is how this house stays usable.</p>
       </div>
     </section>
@@ -1913,8 +1922,8 @@ function bindUI(){
     const peek = e.target.closest("[data-peek]");
     if(peek){
       const want = peek.dataset.peek;
-      if(want==="pm" && state.edition.key!=="pm" && cetParts().h<17){
-        toast("Evening edition locks at 17:00 CET. Morning is the live letter until then.");
+      if(want==="pm" && state.edition.key!=="pm" && cetHM(cetParts())<PM_LOCK){
+        toast("Evening edition locks at 17:30 CET. Morning is the live letter until then.");
         return;
       }
       state.peekEd = want;
