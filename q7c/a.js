@@ -6,19 +6,28 @@
     for (var i = 0; i < a.length; i++) for (var j = 0; j < b.length; j++) out.push(a[i] + " " + b[j]);
     return out;
   }
+  function banks(a, b, c, d) {
+    var out = pair(a, b);
+    if (c && c.length && d && d.length) {
+      out = out.concat(pair(c, d));
+      out = out.concat(pair(a, d));
+      out = out.concat(pair(c, b));
+    }
+    return out;
+  }
   function desk(spec) {
     return {
-      heads: spec.heads,
-      dek: spec.dek,
-      mainstream: pair(spec.msA, spec.msB),
-      cut: pair(spec.cutA, spec.cutB),
-      insight: pair(spec.inA, spec.inB),
-      more: pair(spec.dA, spec.dB),
-      turn: pair(spec.tA, spec.tB),
-      heard: spec.heard,
-      keep: spec.keep,
-      note: spec.note,
-      watch: (spec.watch || []).concat(pair(spec.wA, spec.wB))
+      heads: (spec.heads || []).concat(pair(spec.hA, spec.hB)),
+      dek: (spec.dek || []).concat(pair(spec.dkA, spec.dkB)),
+      mainstream: banks(spec.msA, spec.msB, spec.msC, spec.msD),
+      cut: banks(spec.cutA, spec.cutB, spec.cutC, spec.cutD),
+      insight: banks(spec.inA, spec.inB, spec.inC, spec.inD),
+      more: banks(spec.dA, spec.dB, spec.dC, spec.dD),
+      turn: banks(spec.tA, spec.tB, spec.tC, spec.tD),
+      heard: (spec.heard || []).concat(pair(spec.hdA, spec.hdB)),
+      keep: (spec.keep || []).concat(pair(spec.kA, spec.kB)),
+      note: (spec.note || []).concat(pair(spec.nA, spec.nB)),
+      watch: (spec.watch || []).concat(pair(spec.wA, spec.wB)).concat(pair(spec.wC, spec.wD))
     };
   }
 
@@ -1663,5 +1672,426 @@
     });
   }
   enrich(L);
+
+  function fill(L) {
+    var X = {
+      markets: {
+        heads: ["The auction already voted","Overnight is a character test","Crowding is not conviction","The unloved bid is still a bid","Rolls tell on the speech","Thin hours tell the truth","A gap is not a thesis","Settlement Wednesday is the adult","Dealers do not owe you a plot","The basis is a wage if you wait","Positioning is the weather under the weather","Mean reversion is a habit, not a prayer","The weekend does not clear","Liquidity left through the side door","A squeeze is a crowd with a calendar"],
+        dek: ["From the verb they sold you to the auction that still has to work.","Crowding is loud. Clearing is quiet. Keep the quiet.","Overnight already filed a dissent. You can read it without a choir.","The constructive tape is a schedule you can still sleep inside."],
+        h1: ["The auction","Overnight","Crowding","The basis","Thin hours","The roll","Settlement","Positioning"],
+        h2: ["already voted in small type","is a character test you can pass","is not the same thing as a bid","pays people who can wait","tell on the speech","outlives the metaphor","is the adult in the room","is weather under the weather"],
+        dk1: ["What the rooms called a market","The overnight print","A crowded tape","The unloved hour"],
+        dk2: ["was mostly a feeling looking for a number.","already dissented, politely.","is not a map of tomorrow.","is often the honest one."],
+        m1: ["The rooms issued a verb and waited for you to decorate it.","A squeeze was advertised as a personality.","Overnight left a note the day session tried to ignore.","Someone called crowding a thesis and asked you to pay rent on it.","The auction was treated as a backdrop instead of a vote.","Thin hours were edited out of the story because they were unphotogenic.","A gap arrived wearing a manifesto.","You were invited to confuse a squeeze with a season.","The weekend was sold as a cliff. It is a pause that still has to settle.","Dealers were written out of the play as if inventory were optional.","A headline needed a hero. The book needed a roll.","The unloved name was treated as a moral failure instead of a price.","Correlation was announced as destiny before it had to survive a Tuesday.","You were handed a temperature of the index and told it was breadth.","A miracle was scheduled for the open. The open declined."],
+        m2: ["None of that had to clear. You do.","That is a product. You can leave it on the shelf.","Read the note. It is ruder and cheaper.","Rent is not a position.","Votes still count when they are dull.","Unphotogenic is often the print.","Manifestos do not roll.","Seasons have inventories. Squeezes have calendars.","Pauses still have funding.","Inventory is the plot.","Heroes do not roll. Rolls do.","Price is allowed to be unloved.","Destiny is a word people use when they have not waited.","Breadth is a count, not a feeling.","Declining is what opens do."],
+        c1: ["The useful cut is the roll, not the sermon.","Nobody hid the overnight. They just did not put it on a thumbnail.","If the thesis required a crowd in the first hour, it was a crowd.","Crowding can be right and still be expensive.","Thin hours are not a glitch in the story. They are the story's spine.","A gap is a question. It is not an answer wearing boots.","Settlement still happens on a calendar, not on a feeling.","You may dislike the auction and still believe it.","The unloved bid is allowed to be the adult.","Positioning is not sin. Forgetting it is.","Mean reversion is what patience looks like when it has a job.","Dealers are not villains. They are a balance sheet with a bedtime."],
+        c2: ["Keep that and the verb looks like hospitality.","Thumbnails are not minutes.","Crowds invoice you for the privilege of staying.","Expensive and correct is still expensive.","Spines are allowed to be dull.","Answer it with size you can sleep, or do not answer.","Feelings do not have CUSIPs.","Belief here is just reading.","Adults are unfashionable on purpose.","Memory is the cheap edge.","Jobs beat prayers.","Bedtimes veto a lot of poetry."],
+        i1: ["Once the tape is an auction with a bedtime,","Cash still clears before character does.","The inherited already knew overnight can veto a speech.","Ordinary books heal in rolls, not in takes.","Stop paying rent on a squeeze and the week gets quieter.","A schedule with teeth is kinder than a mood with a megaphone.","Size to the gap you can still explain at dinner.","Quiet hours are a temperament exam with no invigilator."],
+        i2: ["the choir looks like overtime.","That order still pays.","You can know it without becoming grim.","Takes do not stitch a bruise.","Quiet is not a failure of nerve.","Megaphones are rental equipment.","Dinner is still a risk limit.","You can sit it without an audience."],
+        x1: ["One more market fact, then you can leave the verb:","After the squeeze-as-personality leaves the room:","If you keep only a test for the week, keep this:","Here is the dull mechanism that makes the manifesto look expensive:"],
+        x2: ["the auction still votes, even when nobody films it.","rolls and overnight remain the minutes.","a gap you cannot explain at dinner is not a thesis.","crowding can be loud and still be a bill."],
+        t1: ["Sit with the unloved hour for a second:","You can want a market to remain a market:","The kind default is not a squeeze:","This desk returns you to a night that still fits:"],
+        t2: ["it is often where the honest bid lives.","that is the slightly constructive bet.","it is a roll that still clears.","that was the whole method."],
+        hd1: ["If overnight already felt ruder than the speech,","If you declined to rent the squeeze,","If crowding felt like weather rather than destiny,","If the unloved hour made more sense than the open,"],
+        hd2: ["you were reading the minutes.","you kept the only edge that still compounds.","you were early, not cold.","you already had the desk."],
+        heard: ["If you have been waiting for the verb to get quieter, that wait is the work.","You already suspected the auction was the news. This is only the stamp."],
+        k1: ["Keep the roll. Starve the verb.","Let crowding pay you to wait.","Go to dinner. The auction will keep.","Size to overnight, not to the thumbnail."],
+        k2: ["That is the whole constructive tape.","That is still legal.","Tuesday remains usable.","The rest is weather under the weather."],
+        keep: ["You understood if you leave with a roll, a bedtime, and no rented squeeze.","Optimistic by default here means the auction would like to remain an auction — then you check overnight, and you live."],
+        n1: ["The auction is ruder than the speech.","Crowding is a bill.","Overnight files dissents.","A gap is a question."],
+        n2: ["Believe the rudeness.","You do not have to pay it.","Read them.","Answer only with sleepable size."],
+        note: ["Hot take, still quiet: the open is not your parent. The roll is.","We will not sell you a squeeze as a season. We will sell you settlement Wednesday."],
+        w1: ["Watch overnight","Watch the roll","Watch crowding","Watch thin hours","Watch the gap","Watch whether the auction","Watch the unloved bid","Watch whether dinner"],
+        w2: ["as the first dissent.","as the minutes.","as a bill, not a destiny.","as the spine.","you can still explain.","still has to work.","as the adult.","still fits the size."],
+        watch: ["Whether overnight vetoed the speech.","Whether crowding invoiced you.","Whether the roll still cleared.","Whether thin hours agreed with the thumbnail.","Whether the gap survived dinner."]
+      },
+      geoecon: {
+        heads: ["Premia are the map","Customs outvotes the clip","A chokepoint is a price","Harvest is a diplomat","Invoices commute faster than flags","The premium is the adult","Ports keep the minutes","A visa is logistics","Grain does not watch the podium","Pipelines are arguments in steel","Settlement is a border with manners","The surcharge is the communiqué"],
+        dek: ["From the flag to the premium. The premium is the map.","Ports keep minutes. Podiums keep adjectives.","If it cannot survive a surcharge, it was theatre.","Corridors are policy you can still eat inside."],
+        h1: ["Premia","Customs","The chokepoint","Harvest","The surcharge","A visa","The port","Grain"],
+        h2: ["are the map","outvotes the clip","is a price, not a metaphor","is a diplomat","is the communiqué","is logistics with a face","keeps the minutes","does not watch the podium"],
+        dk1: ["What they called a world","The clip at the border","A flag with no invoice","The grocery surcharge"],
+        dk2: ["was a premium looking for a speech.","was not the corridor.","is a costume.","is the honest diplomat."],
+        m1: ["The rooms issued a flag and waited for you to pick a team.","A chokepoint was narrated as destiny before it had been priced as a wait.","Customs was treated as a footnote to a feeling.","Harvest was written out as if calories were optional.","You were handed a clip of a border and told it was a policy.","Premia moved first. The metaphor arrived in a better suit.","A visa queue was sold as a character test instead of a schedule.","Ports were asked to be symbols. They preferred to be ports.","Grain was given a morality before it was given a route.","Someone confused a surcharge with a sermon.","Pipelines were discussed as opinions. They remain steel.","The grocery ticket already knew the map. The podium was catching up."],
+        m2: ["Teams do not load ships.","Waits have invoices. Destiny does not.","Feelings do not clear customs.","Calories still commute.","Policy still needs a dock.","Suits are late on purpose.","Schedules are kinder than tests.","Symbols do not berth.","Routes feed people. Moralities feed clips.","Sermons do not itemise.","Opinions rust. Steel waits.","Catching up is allowed to be the story."],
+        c1: ["The cut is a premium, not a team.","You do not need a war room to read a surcharge.","Power still matters. So does the berth.","If the geopolitics cannot survive customs,","Follow the harvest and the panic looks overdressed.","A visa is a corridor with a clerk.","Most days the lights, the grain, and the invoice still want to move.","The optimistic fact is a dull port."],
+        c2: ["Teams are a product. Premia are a print.","Surcharges are diplomats with worse manners.","Hold both and the clip looks rented.","it was a costume, and you already felt the till.","Overdressed panic is still panic.","Clerks finish more arguments than choruses.","Wanting to move is a policy.","Dull ports feed Tuesdays."],
+        i1: ["Once premia and flags sit in the same ledger,","Nations, like kitchens, survive on sequences of delivery.","Keep the surcharge in view and the morality play loses its catering.","A port with flags is still a port: dredged, or not.","The inherited read this at the pump. The ordinary read it at the till.","Diplomacy is a long invoice that learned to sit down.","Corridors beat cliffs when anyone has to eat.","Same shock, two clocks: the clip and the container."],
+        i2: ["the temperature looks like fundraising with better lighting.","That is allowed to be good news.","Catering was the real budget.","Dredging is unfashionable and therefore decisive.","You were not imagining the squeeze in the bag.","Sitting down is how settlement happens.","Eating is a foreign policy.","You can work with the container without clapping for the clip."],
+        x1: ["One more international fact after the photograph:","Keep this beside the till:","If the clip dies on a surcharge, let it:","The extra honesty that makes a villain look like a product:"],
+        x2: ["who can still berth, insure, and settle is the method.","a corridor is a policy you can still cook with.","surcharges are the communiqué.","most days the grain still wants a route."],
+        t1: ["Sit with the dull port:","You can want a corridor without a costume:","The kind default is not a cliff:","This desk returns you to a grocery ticket:"],
+        t2: ["it is an achievement, not a narrative failure.","people still prefer delivery to destiny.","it is a berth that still works.","that is the map you can keep."],
+        hd1: ["If you read the till before the clip,","If the world never felt like a team sport,","If the surcharge taught you more than the summit,"],
+        hd2: ["you were already doing the international desk.","you were right. It is a warehouse with better lighting.","you had the method in your pocket."],
+        heard: ["If you have been doing kitchen math during the geopolitics, that order is correct.","You wanted someone to say the port is the news. The port is the news."],
+        k1: ["Keep the premium, not the team.","Prefer the berth to the villain.","Want dinner more than a summit."],
+        k2: ["That is the whole international pocket.","You understood if that feels like relief.","That is allowed to be the point."],
+        keep: ["You understood if you leave more interested in a surcharge than in a side.","A slightly positive desk here is competence that still wants a route home."],
+        n1: ["Premia before the metaphor.","Flags are loud on a schedule.","Ports do not need a choir."],
+        n2: ["The diplomat already left a number.","You can remember that at the till.","Berths still finish arguments."],
+        note: ["Insurance before the metaphor still pays. Smile at the surcharge; it is speaking.","If the map cannot survive customs, keep the groceries."],
+        w1: ["Watch premia","Watch customs","Watch harvest","Watch the berth","Watch the visa queue","Watch the surcharge","Watch grain","Watch whether the port"],
+        w2: ["before the team.","as a diplomat.","as foreign policy.","after the clip fades.","as a schedule.","as the communiqué.","for a route, not a morality.","still wants to be dull."],
+        watch: ["Premia, berths, harvests — the three honest diplomats.","Whether the surcharge agrees with the speech.","Whether grain still has a route.","Whether customs outran the clip.","Whether dinner is still a corridor."]
+      },
+      politics: {
+        heads: ["Quorum is the news","Procurement outvotes the rally","The clerk's calendar is the adult","Municipal is the country","A census is a spine","Ordinance before oratory","The annex still has page numbers","Losing on time is a skill","The bus is a statute","FOIA is ruder than a take","Spending power is the plot","Wednesday has a quorum or it does not"],
+        dek: ["From the rally to the quorum. The quorum is the news.","Procurement is ruder than a podium and more useful.","Rage is still overpriced at the municipal level.","The constructive citizen reads the calendar, then the clip."],
+        h1: ["Quorum","Procurement","The municipal","A census","The ordinance","FOIA","The clerk","Spending power"],
+        h2: ["is the news","outvotes the rally","is the country","is a spine","beats oratory","is ruder than a take","would like a calendar","is the plot"],
+        dk1: ["What they called politics","The podium","A temperature with a flag","The annex"],
+        dk2: ["was a calendar looking for a choir.","was retail. Wholesale still has a bus.","was not a program.","still has page numbers."],
+        m1: ["The rooms issued a personality and asked you to confuse it with a government.","A rally was treated as a legislature with better lighting.","You were recruited before you were informed, again.","A clip outran a procurement line because procurement does not trend.","The temperature was sold as a statute.","Campaigns arrived wearing the clothes of a calendar.","Municipal reality was treated as lesser politics. It is most of the country.","A choir assembled before a quorum did.","You were told the annex was boring as if that were an argument against it.","Spending power was discussed as a vibe. It is a signature and a date.","Losing was narrated as death. It is often a calendar event.","The bus was asked to be a metaphor. It preferred to run."],
+        m2: ["Governments still need a Wednesday.","Lighting is not a majority.","Fatigue is still a civic skill.","Trends are not appropriations.","Statutes do not have a temperature.","Calendars do not campaign. They arrive.","Lesser is a costume. The pothole is not.","Choirs do not count.","Boredom is how page numbers work.","Dates still bind.","Death makes a better clip than a recess.","Running is the program."],
+        c1: ["We will not hunt persons for sport. The annex is ruder.","The useful cut is quorum, spending, and who still faces a date.","The feed is not disproved by shouting corruption as a personality.","Democracy, on a good day, is how you lose and still have a bus.","Procurement, courts, statistical offices:","Mock the clerk and you will miss the only Tuesday that still knows how to count.","Repair is unphotographed on purpose.","A slightly positive desk assumes most clerks would like the calendar to remain a calendar."],
+        c2: ["Ruder is more useful than a takedown.","That is the whole political method, said without a choir.","It is disproved by a page number.","Hold that without becoming a mark for either choir.","the unsexy triad still runs the middle of the week.","Counting is not a small civilisational trick.","Purpose is not a scandal.","Then it checks whether the numbers stay boringly honest."],
+        i1: ["Once quorum is the news,","The inherited want continuity. The ordinary want the bus to exist.","Keep your nervous system off the recruitment list.","Institutions are a letter to people who will still need a pavement.","You can count on quiet repair without clapping for a podium.","A calendar with teeth beats a personality with a clip.","If a sentence only works as recruitment, it is not analysis.","Optimistic by default means Wednesday can still have a quorum."],
+        i2: ["the rally looks like an advertisement with better chairs.","Same request, two accents, one pavement.","That is an allergy to cosplay, not apathy.","Pavement is a love letter.","Clapping is optional. Dates are not.","Clips expire. Calendars do not.","You already preferred the footnote. Stay there.","You need a bus more than a miracle with a flag."],
+        x1: ["One more civic fact after the choir sits down:","The extra honesty that makes the rally look rented:","If you take one institution home:","Wednesday is the exam; the clip is makeup:"],
+        x2: ["who can spend, who can refuse, who still has a date.","clerks remaining clerks is not a small trick.","the footnote still outvotes the choir when it is read.","makeup is not a majority."],
+        t1: ["Sit with the bus for a second:","You can want continuity without a costume:","The kind default is not applause:","This desk returns your temperature:"],
+        t2: ["it is a statute that still has to run.","the ordinary and the inherited asked for the same pavement.","repair happening quietly is still repair.","cooler is a policy preference."],
+        hd1: ["If you have been saying just run the place,","If the temperature felt like a job application,","If you wanted the annex more than the anthem,"],
+        hd2: ["this desk filed that as the brief.","you were not wrong to decline.","you already had the method."],
+        heard: ["If you wanted the phone to be cooler and the bus to exist, those are the same preference.","You are not apathetic. You are done being recruited before breakfast."],
+        k1: ["Read the quorum. Keep the pavement.","Prefer the clerk to the choir.","Vote if you can. Ride the bus either way."],
+        k2: ["That is not apathy.","You understood if you leave cooler.","Wednesday still has to work."],
+        keep: ["You understood if you leave more interested in procurement than in a personality.","Repair unphotographed is still how a country remains a country."],
+        n1: ["Rage is still overpriced.","Just run the place.","The annex has page numbers."],
+        n2: ["Put the phone down a degree.","That is the whole civic comment.","Read them."],
+        note: ["We will not take anyone down in a comment. We will take the calendar seriously.","A quorum is ruder than a rally and more useful by Wednesday."],
+        w1: ["Watch the quorum","Watch procurement","Watch Wednesday","Watch the clerk","Watch whether you were","Watch the census","Watch the bus","Watch FOIA"],
+        w2: ["before the rally.","as if it were the news.","for a majority that can count.","for a calendar, not applause.","recruited or informed.","as a spine.","as a statute.","as the rude adult."],
+        watch: ["Quorum, procurement, pavement.","Whether rhetoric bought time or spent it.","Whether Wednesday still has a bus.","Whether the annex still outruns the clip.","Whether you were informed or merely warmed."]
+      },
+      psych: {
+        heads: ["Boredom is a skill","The other room is a policy","A ritual beats a revelation","Rumours in your head are inventory","Habit is the only compounding","You do not owe the feed a pulse","Morning is a risk desk","The saga is optional","One closed loop is a life","Permission is not a personality","Stillness is a technology","You can leave the diet without leaving the century"],
+        dek: ["From the temperature they sold you to a ritual you can repeat.","You are over-informed. That is a position, not a diagnosis.","The other room is still the cheapest reform.","A checklist is ruder than a saga and kinder by afternoon."],
+        h1: ["Boredom","The other room","A ritual","Habit","Morning","Stillness","The closed loop","Permission"],
+        h2: ["is a skill","is a policy","beats a revelation","is the only compounding","is a risk desk","is a technology","is a life","is not a personality"],
+        dk1: ["What they called a self","The villain before coffee","A branded anxiety","The saga"],
+        dk2: ["was a diet looking for a customer.","was inventory, not duty.","was not a diagnosis.","wanted a checklist and would not admit it."],
+        m1: ["The rooms issued a new self and a deadline of Friday.","A villain was required as proof of seriousness.","Your unease was offered a logo.","You bought some of the diet. That makes you a customer with a receipt, not a fool with a fate.","The feed asked for a pulse as a loyalty test.","A saga arrived dressed as insight.","Membership in a mood was on sale at a discount to sleep.","The villain was punctual. The walk was not scheduled.","You were told calm was a personality you had failed to purchase.","Stretching was confused with a plan because stretching photographs better.","Someone sold rumination as depth.","You were invited to treat boredom as a medical emergency."],
+        m2: ["Deadlines like that are retail.","Seriousness does not need a mascot.","Logos are not diagnoses.","Receipts can be declined next time.","Loyalty tests are optional.","Insight would have fit on a list.","Sleep is not a coupon.","Walks do not need to trend.","Calm is practise, not retail.","Photographs are not Wednesday.","Depth can be a walk.","Boredom is often the treatment."],
+        c1: ["You do not need a new self. You need a loop you can close.","Attention is a cost of goods. Price it like one.","The inherited fear a wasted past. The ordinary fear a blank week.","If a villain is required before water,","Calm is a technology you can run when it is ugly.","Optimism without being a customer of your own panic is allowed.","A repeatable morning","Water, walk, one closed loop."],
+        c2: ["Loops beat revelations when the week gets cheap.","That is price, not withdrawal.","Both are permission stories. A hotter take will not settle either.","you are stretching a product until it becomes a name. Stop.","Ugly is the exam. Pretty is the brochure.","You already suspected. This is the receipt.","has saved more than a worldview.","If that is all you keep, you understood."],
+        i1: ["Treat the diet as a position and","Sleep still does not negotiate, which is its virtue.","Relief is a print: a sentence fit, then your shoulders dropped.","Be kind without subscribing to the panic as a service.","The checklist is unromantic on purpose. That is how it compounds.","Become expensive again. The feed cannot mark a room it is not in.","A walk still clears more inventory than a thread.","You are not behind. You are declining a stampede with better lighting."],
+        i2: ["the villain looks like stock that wants to move.","Keep the limit. It is adult.","Keep the sentence. Drop the subscription.","That product is free and does not upsell.","Purpose is not a personality. Keep practising.","Good. Rooms are still legal.","You wanted permission. You have it, in walking shoes.","Lighting is not an obligation."],
+        x1: ["One more useful line, then the other room:","The extra cut after the saga sits down:","If you keep a method:","Calm is still cheaper than a rebrand."],
+        x2: ["a closed loop on a bad Wednesday beats a revelation.","attention costs. Put a price on the door.","water, walk, one loop.","you are over-informed, not broken. Act like a person with a door."],
+        t1: ["Sit with the other room:","You can smile at the saga and still obey the list:","The kind default is not numbness:","This desk returns you to your own morning:"],
+        t2: ["expensive attention is a position you can close.","that is adult, not cold.","it is practised stillness.","that was the whole point of the letter."],
+        hd1: ["If you came to feel less crazy,","If you already wanted the door between you and the diet,","If optimism without being a mark felt like home,"],
+        hd2: ["stay. That is a legitimate use of paper.","this is the nudge that will still work on Thursday.","you already had the desk in the other room."],
+        heard: ["If the phone felt like a landlord, you were not weak. You were over-leased.","You already wanted a checklist. The saga was just louder."],
+        k1: ["Water, walk, one closed loop.","You are over-informed, not broken.","Give the morning a list."],
+        k2: ["Understanding is cooler than winning a thread.","Act like a person with a door.","It wanted a saga. Smile, then close the loop."],
+        keep: ["You understood if you leave with a ritual, not a rebrand.","Boredom, practised on purpose, is still the cheapest compounding."],
+        n1: ["The other room is still legal.","If you finished smug, drink water.","Boredom is a skill."],
+        n2: ["Use it.","Same prescription as anger.","Practise it before you praise it."],
+        note: ["Calm is still legal. That one burns in if you walk it.","Put the phone in the other room. The day will not file a complaint."],
+        w1: ["Watch the diet","Watch sleep","Watch the villain","Watch the door","Watch the loop","Watch boredom","Watch morning","Watch whether a saga"],
+        w2: ["as a position you can close.","as a limit that does not negotiate.","before water.","as policy.","closing once.","for skill, not emergency.","as a risk desk.","was required to feel informed."],
+        watch: ["Whether the other room got used.","Whether one loop closed.","Whether a villain was still required before water.","Whether sleep was treated as a limit.","Whether boredom was practised or panicked."]
+      },
+      energy: {
+        heads: ["Degree-days do not campaign","Spare capacity is the adult","A tanker is a sentence","Outages are minutes","Reserves veto adjectives","The interconnect is the argument","Baseload is a bedtime","Welders are the transition","The meter is the diplomat","A cold morning is data","Maintenance is policy","Electrons still have a route"],
+        dek: ["From the sermon to the meter. Trust the meter.","Spare capacity is ruder than a slogan and kinder in January.","A barrel is still a schedule. A hashtag is still a wish.","Physics does not need your refresh."],
+        h1: ["Degree-days","Spare capacity","The tanker","The meter","Baseload","The interconnect","A weld","Reserves"],
+        h2: ["do not campaign","is the adult","is a sentence","is the diplomat","is a bedtime","is the argument","is the transition","veto adjectives"],
+        dk1: ["What they called energy","The slogan","A spike with a personality","The household meter"],
+        dk2: ["was arithmetic looking for a church.","arrived after freight had voted.","was not a season.","already knew."],
+        m1: ["The rooms issued a morality and a price tag in the same breath.","Attitude was plentiful. Spare capacity was not.","You felt the meter before you felt the take.","Adjectives arrived after the tanker had already turned.","A church of energy was offered to people who still had to boil a kettle.","The slogan traveled. The outage did not issue a press release.","Storage was treated as a personality flaw in the model.","The spike was given a name as if names heated rooms.","Baseload was discussed as an opinion. It remains a bedtime.","Welders were invited to the transition as a metaphor and then not as a payroll.","Interconnects were asked to be vibes. They preferred to be copper.","A cold morning was narrated as a scandal instead of a degree-day."],
+        m2: ["Breath is not a reserve.","That is the whole difference, and it is arithmetic.","Trust the meter. It is the high-frequency print.","Turned tankers are minutes.","Kettles are civilisation.","Press releases do not restore volts.","Models do not freeze. Houses do.","Names do not heat.","Opinions do not keep 8 a.m.","Payroll is the transition.","Copper still has a route.","Degree-days are allowed to be dull."],
+        c1: ["Believe two physical things at once.","When prompt tightens, the brochure loosens.","A cold house is not a take, and it is not a personality.","A spike can be loud and still be finite.","Treat barrels, electrons, and welds as a bridge:","The back of the curve often refuses the panic the front is selling.","You do not need to be a prophet of either church.","Follow the meter, the tanker, and the spare."],
+        c2: ["8 a.m. still has to work. Welders still have to show. Hold both.","Households adapt or donate. You already chose which one you refuse.","There is a grim humor in watching a feed discover storage. Hold both thoughts.","Finite is kindness in a number if you check stocks.","maintained, unfashionable, necessary. Then the clip looks like weather.","Sometimes the front is theatre. Sometimes it is physics. Ask reserves.","Respect physics and still plan a summer table.","Let the moralising catch the next interconnect."],
+        i1: ["Once the meter outranks the take,","Lights first, architecture second, sermons a distant third.","Plan dinner, then the grid, then the argument.","A summer is still allowed. That is practical, not naive.","Maintenance is the cousin of every energy story that actually compounds.","You can stop refreshing and still be the adult in the kitchen.","Inventories and degree-days are the grown-ups.","The household bill remains the fastest political number, and it does not campaign."],
+        i2: ["the sermon looks like hospitality with a steeple.","Sequence is mercy you can cook with.","That order is still civilisation.","You understood if a table is still plannable.","Cousins do not trend. Good.","Kitchens do not need a feed.","Check them. Then go outside while it is still light.","Believe the bill before the architecture."],
+        x1: ["One more physical line after the church sits down:","If you keep a sequence:","Dinner and a weld are both allowed:","After the spike-as-personality:"],
+        x2: ["inventories and spare still skip the play.","lights first.","the back of the curve often stays calmer. Notice.","the meter arrived first."],
+        t1: ["Sit with the tank:","You can want a transition and still want 8 a.m.:","The kind default is not a church:","This desk returns you to a kettle:"],
+        t2: ["arithmetic is not an insult to anyone.","adults hold both without a hymn.","it is a weld on a payroll.","that is civilisation, still."],
+        hd1: ["If you wanted the lights to outrank the take,","If you did kitchen math during the geopolitics of barrels,"],
+        hd2: ["they do, and they did.","you were already on this desk."],
+        heard: ["You wanted someone to say the meter matters more than the take. The meter matters more.","If you have been planning a summer while they planned a church, stay with the summer."],
+        k1: ["Keep the lights, then argue.","Follow the meter.","Plan a summer table."],
+        k2: ["Sequence is mercy.","You understood if dinner is still possible.","That is the optimistic default, with a weld."],
+        keep: ["You understood if you can still plan dinner and a maintenance window.","Optimistic by default: a summer is allowed, and so is copper."],
+        n1: ["Physics does not trend.","The meter arrived first.","No war from a kettle."],
+        n2: ["Remember it in January.","Believe it.","The curve, then a corridor."],
+        note: ["Spare capacity is kindness with a decimal.","We will not diagnose a war from a comment box. Check the tanker, then hope for a route."],
+        w1: ["Watch inventories","Watch spare","Watch the meter","Watch degree-days","Watch the tanker","Watch the front","Watch welds","Watch whether a summer"],
+        w2: ["before adjectives.","as the adult.","as politics.","as data, not scandal.","as a sentence.","for theatre versus physics.","as payroll.","is still plannable."],
+        watch: ["Inventories, spare, degree-days. Then adjectives.","Whether the front is theatre or physics.","Whether the meter still comes first.","Whether a weld is on a payroll.","Whether a summer table still exists."]
+      },
+      money: {
+        heads: ["Term premium is the adult","Reserves have a bedtime","The kitchen is a committee","A hold can be kindness","Deposits vote every night","Duration is a household word","The window teaches more than the stage","Real rates do not campaign","A mortgage outlives a presser","Patience is runnable policy","Dots are not a personality","Funding math vetoes drama"],
+        dek: ["From the cult of hawks to a kitchen that already voted.","The dots are not scripture. The mortgage is a paragraph.","Waiting is often the kindness the committee cannot say.","Temperament beats a call, then you go outside."],
+        h1: ["Term premium","Reserves","Deposits","The kitchen","A hold","The window","Real rates","Duration"],
+        h2: ["is the adult","have a bedtime","vote every night","is a committee","can be kindness","teaches more than the stage","do not campaign","is a household word"],
+        dk1: ["What they called policy","The presser","A hawk-and-dove play","The mortgage"],
+        dk2: ["was a bedtime looking for a cult.","was theatre with better chairs.","was not a balance sheet.","outlives the dots."],
+        m1: ["The rooms issued a cult of hawks and doves and asked you to join before breakfast.","A rate call arrived wearing a personality.","The press conference asked to be a plot twist in a household that needed a bedtime.","The dots were treated as scripture by people who still have a kitchen to run.","You were asked to pick a team before you picked a fixed rate.","A verb was issued. The household issued a delay in a renovation.","The feed wanted a pivot. The sheet wanted the lights out at a decent hour.","Waiting was sold as a scandal instead of a temperament.","Reserves were discussed as a mood. They are a quantity with a clock.","Term premium was treated as trivia. It is how the future invoices the present.","Deposits vote every night whether anyone films them.","A hold was narrated as weakness. It is often how an institution remains one."],
+        m2: ["You do not have to join a cult to have a mortgage.","Personalities expire. Sheets do not.","Bedtimes are policy.","Kitchens already run a committee.","Teams are retail. Duration is wholesale.","Delays are a rates view with better lighting.","Lights-out is a mandate.","Temperament is allowed to be dull.","Clocks still bind.","Invoices are ruder than dots.","Unfilmed votes still count.","Remaining is not a small trick."],
+        c1: ["Stop pretending the dots are holy writ.","Headline heat, cooler growth, a committee that would like to sleep:","Temperament beats a call because calls expire.","Money is strangers cooperating at scale, including the ones you will never meet.","Hot tips have an exit in every corridor.","The conference is theatre. The window is tuition.","Stay solvent, kind, and long optionality you can explain.","The less theatrical instrument is the adult in the room."],
+        c2: ["You can live with a hold without becoming a mascot.","That is a job, not a plot twist.","Expiry is information.","The rest is a footnote, including the jokes about personalities.","Solvent is the right reason to sit down.","Tuition is ruder and sticks.","That is the whole call, and it is not a number on a wheel.","Align with it, then go outside while there is still a pavement."],
+        i1: ["Once the committee is a bedtime and a sheet,","Assume the institution would like to remain one, then watch.","Leave with a temperament, not a mascot.","Believe the kitchen; it already voted in delays and second jobs.","Let funding math veto drama before you rent a take.","You do not need a personality on the podium to have a night.","Plan the mortgage as if waiting were allowed, because it is.","Cooperation at scale still works more often than a thread will admit."],
+        i2: ["the cult looks expensive and a little teenage.","Inflation, labor, and the wait are the watchlist.","Mascots do not survive a hold. Temperament can.","Honest words, same policy.","Then go outside. The math will keep.","Nights you can sleep are the mandate you can run.","Allowed is the kind word for patience.","Keep that without becoming simple, or cynical, or both."],
+        x1: ["One more monetary line, then outside:","After the conference lights dim:","If you keep a temperament:","A hold can be kindness:"],
+        x2: ["the kitchen is often the scripture.","households already voted in duration.","patience is the runnable policy.","plan the mortgage as if that were true."],
+        t1: ["Sit with the bedtime:","You can want an institution to remain one:","The kind default is not a tip:","This desk returns you to solvent:"],
+        t2: ["it is more honest than a cult with better chairs.","that is the slightly positive bet, then you check.","it is a temperament you can carry.","that was the reason to sit down in the first place."],
+        hd1: ["If you would not treat a presser as a personality,","If you came to feel solvent rather than informed-by-choir,","If the kitchen already felt like a committee,"],
+        hd2: ["you were right, and cheaper.","you came to the right letter.","you already had the method."],
+        heard: ["If you have been waiting without calling it a scandal, that wait is policy you can run.","You wanted someone to say a hold can be kindness. A hold can be kindness."],
+        k1: ["Let funding math veto drama.","Leave with a temperament.","Waiting is not a scandal."],
+        k2: ["Then go outside.","Not a mascot.","Remember it when the dots wriggle."],
+        keep: ["You understood if you leave with a bedtime, a mortgage plan, and no cult.","Optimistic by default: institutions would like to remain institutions — then you check, and you live."],
+        n1: ["Not a rate call.","The dots are not scripture.","Households run policy too."],
+        n2: ["A temperament call.","Smile, then plan the mortgage.","You live in that committee."],
+        note: ["The window teaches. The stage performs. Take the tuition.","Deposits vote every night. You can remember that without a feed."],
+        w1: ["Watch real rates","Watch the kitchen","Watch the bedtime","Watch the call","Watch labor","Watch deposits","Watch term premium","Watch whether a hold"],
+        w2: ["with energy, before personality.","as policy.","more than the choir.","pretending to be temperament.","as the vote.","as a nightly committee.","as the adult.","is being sold as weakness."],
+        watch: ["Real rates, kitchens, bedtimes.","Whether a hold is kindness or theatre.","Whether deposits still vote quietly.","Whether the mortgage outlived the presser.","Whether you left with temperament or a mascot."]
+      },
+      ordinary: {
+        heads: ["Payroll Friday is a print","The supermarket is a rates desk","Rent is a duration","The school-run is logistics","A landlord is a curve","Milk is high-frequency","The table still settles","Tuesday is the expert","A commute is a balance sheet","The pharmacy is an institution","Inherited furniture is policy","Ordinary is the point"],
+        dek: ["From the specialist voice to a table that still has to clear tonight.","You were in it at breakfast. The tomato had a price.","A kitchen is a rates view with better light.","Ordinary is not lesser. It is the print that settles."],
+        h1: ["Payroll Friday","The supermarket","Rent","The school-run","Milk","The table","The commute","The pharmacy"],
+        h2: ["is a print","is a rates desk","is duration","is logistics","is high-frequency","still settles","is a balance sheet","is an institution"],
+        dk1: ["What they called the economy","The specialist voice","A class accent","The tomato"],
+        dk2: ["was a kitchen looking for permission.","arrived without a school-run.","was not a credential.","is a print."],
+        m1: ["The specialist letter was written as if you were furniture in someone else's model.","This stuff was reserved for experts as a costume you were not issued.","You were in it at breakfast. The tomato had a number.","A class voice arrived without a school-run, a pharmacy, or a bus.","You were invited to feel unqualified before you felt the rent.","A kitchen renovation is a rates view. Nobody sent a presser.","Ordinary was sold as lesser so the specialist could remain specialist.","The expert spoke. The table still had to clear tonight, with chairs.","Payroll Friday was treated as a rounding error in a grander story.","The commute was discussed as a lifestyle. It is duration in traffic.","A landlord is a curve you already trade, whether you like the word or not.","Milk is high-frequency data with a handle."],
+        m2: ["The font was the problem, not your life.","Take the costume off. You already run a book.","Believe the tomato. It does not need a forecast.","You were never a lesser reader. You were the point.","Unqualified is a class trick. Rent is not.","Pressers are optional. Kitchens are not.","Specialist is a lighting choice.","Chairs are the expert that settles.","Grander stories still cash a paycheck.","Traffic is a print.","Liking the word is optional. Living the curve is not.","Handles are honest."],
+        c1: ["Warehouse or commute: both are duration with different collateral.","Keeping a household through a loud decade is elite work, unphotographed.","Policy becomes furniture in housing, quietly, then all at once.","Affordability is still wages versus rents, not a vibe versus a vibe.","You do not have to tweet at the triangle to be in the letter.","Believe payroll over costume, supermarket over sermon.","Teach competence, or practise it at the table.","Corridors are how children get to school, which is the program."],
+        c2: ["Better collateral helps. A boring sequence saves both.","Unphotographed, daily, with a kettle.","You already work with that, in rooms.","You were not wrong to notice the squeeze in the bag.","You can buy milk and still be the reader.","Same letter. Same dignity. Same till.","That is enough justification for a desk.","That is the whole ordinary method."],
+        i1: ["Once the table is the expert,","Keep household, joke, and a little dry powder.","Tuesday can still be livable without a forecast.","If you felt spoken to, you were; stay.","The bus is the program, not the metaphor.","Dinner is duration. You already run it.","Share this with the person who thinks the letter is not for them.","Ordinary is the point, which is why the other desks exist."],
+        i2: ["the presser looks overdressed for supper.","Complete strategy for most humans who buy milk.","Keep that without becoming a mascot of resilience.","Good. Permission was the missing line.","Continuity is not a crime, and neither is a sandwich.","Smile at that, then set the table.","They were in it the whole time, at breakfast.","Keep that. It burns in without a slogan."],
+        x1: ["One more household line:","After the specialist voice sits down:","If you keep a strategy:","Believe the tomato:"],
+        x2: ["wages versus rents still clears, or it does not.","you were the point, not the footnote.","household, joke, dry powder.","it is a print with a smell."],
+        t1: ["Sit with the table:","You can be elite without a summit:","The kind default is a livable Tuesday:","This desk is for people who buy milk:"],
+        t2: ["it settles tonight, with or without a forecast.","you already were, in traffic.","that is enough, and it is adult.","that is the whole editorial line."],
+        hd1: ["If you have been doing honest math at the table,","If you wanted to be spoken to like an adult who buys milk,","If the specialist voice felt like the wrong font,"],
+        hd2: ["you are early, not bad with money.","that is the line, and it will not change.","you were right; the font was the tell."],
+        heard: ["If you have been running a book without being told you were, you were.","You wanted the letter to include the supermarket. It does, on purpose."],
+        k1: ["Keep the household and the joke.","The tomato is a print.","School-run math still clears."],
+        k2: ["And a little dry powder.","Believe it at the till.","Tonight, with chairs."],
+        keep: ["You understood if you leave feeling spoken to, not spoken over.","Ordinary is the elite skill practised without a lanyard."],
+        n1: ["This section is the point.","You buy milk.","A kitchen is a rates view."],
+        n2: ["The other desks keep it honest.","This letter is for you.","Better lighting, same duration."],
+        note: ["A commute is duration. A paycheck is a print. You already knew.","Share this with the person who thinks they are not the reader."],
+        w1: ["Watch wages versus rents","Watch the table","Watch Tuesday","Watch the tomato","Watch the specialist","Watch payroll Friday","Watch the school-run","Watch milk"],
+        w2: ["as the debate that clears.","as tonight's expert.","for livable.","as a print.","for talking down.","as the honest number.","as logistics.","as high-frequency."],
+        watch: ["Wages versus rents, still.","Whether Tuesday remained livable.","Whether the table settled.","Whether the specialist talked down.","Whether milk still had a handle."]
+      },
+      tech: {
+        heads: ["Uptime is the exam","A substation is a thesis","Permits beat demos","Failover is character","PUE is an input","The invoice stayed","Latency is a place","Clerks still restart Sunday","Cooling is policy","No mascot required for a floor","Megawatts before metaphors","Second shift gets paid"],
+        dek: ["From the demo to the bill. The bill stayed.","Uptime is ruder than a keynote and more useful on Sunday.","A floor can restart. A brochure cannot.","Physics showed up anyway, with a permit."],
+        h1: ["Uptime","The substation","A permit","Failover","PUE","The invoice","Latency","Sunday restart"],
+        h2: ["is the exam","is a thesis","beats a demo","is character","is an input","stayed","is a place","is the test"],
+        dk1: ["What they called a stack","The keynote","A mascot with a miracle","The cooling bill"],
+        dk2: ["was infrastructure looking for a costume.","left. The invoice did not.","was not a floor.","is competence."],
+        m1: ["The rooms scheduled a demo to save civilisation by Thursday afternoon.","A mascot and a miracle were issued before a plug.","You were right about the keynote: it was hospitality.","The feed needed a saviour. The room needed cooling and a permit.","A brand arrived as if it were physics with better slides.","Worship was requested before anyone priced a megawatt.","The miracle traveled. The substation did not.","The stack was told it had no body. Bodies showed up as heat.","Latency was discussed as a vibe. It is a place with a cable.","Failover was treated as a footnote to a story about genius.","Sunday restart was not in the brochure. It is the exam.","Second shift was invited as a metaphor and not as a wage."],
+        m2: ["Thursday afternoons do not civilise. Concrete does.","Plugs are the plot.","Hospitality is allowed to be pretty. It is not a floor.","Permits are ruder than saviours.","Slides do not dump heat.","Megawatts do not worship.","Substations finish arguments.","Heat is an input, not a scandal.","Cables have addresses.","Genius does not fail over. Floors do.","Brochures do not sit the exam.","Wages are the second generation."],
+        c1: ["A corridor that reprices the year is a warehouse, not a ticker with a mascot.","The edge is not a secret model. It is an unglamorous question you can wait on.","What breaks when the demo leaves: heat, latency, liability, the late person.","No mascot is required for a floor that restarts.","Welders and electricians, not brunch, still hold the decade.","Keep a human in the loop who can still explain it on Sunday.","If you cannot say it without a brand, it was not ready.","A cooling budget is competence enough to count as a thesis."],
+        c2: ["Warehouses like boredom. Join them without a costume.","Waiting is the method, not a personality flaw.","That is the adult list, and it still has names.","Restarts are character.","Smile at that, then price the power.","Sunday is the invigilator.","Readiness does not need a logo.","Count it. Keep it."],
+        i1: ["Price power first and","Concrete and copper are being poured. That is the optimistic fact, unfashionable.","Costume is optional; failover is not.","Second shift sometimes gets paid, which is a tech policy.","Hype funds. Maintenance civilises. Keep the second sentence.","You muttered about electricity. Stay with that muttering.","A brochure cannot restart on Sunday. A floor can, if someone trained.","No logo, still a sentence:"],
+        i2: ["the keynote looks like hospitality with better fonts.","Skip the costume; keep the pour.","Optional is the kind word for marketing.","Patience is a stack.","Civilising is the whole job after the raise.","Adults mutter about inputs.","Training is the exam you can keep.","that was the test, and it did not need a brand."],
+        x1: ["One more stack line after the demo:","If you keep a test:","No logo required:","After the miracle leaves the building:"],
+        x2: ["megawatts and a Sunday restart beat a saviour.","the invoice stayed.","competence with cooling is enough.","a brochure does not compound."],
+        t1: ["Sit with the bill:","You can want tools and still want physics:","The kind default is a floor:","This desk returns you to Sunday:"],
+        t2: ["believe it over the demo, every time.","adults hold both without a mascot.","maintained, permitted, unfashionable.","can it restart, with a name on a rota."],
+        hd1: ["If you asked who pays for the electricity,","If you would not worship a logo,","If Sunday restart felt like the real exam,"],
+        hd2: ["you were the adult in the thread.","respect a cooling budget instead.","you already had the desk."],
+        heard: ["If you muttered about permits while they muttered about destiny, you were early.","You wanted a floor, not a mascot. Keep wanting that."],
+        k1: ["Plug it in. Price the power.","Explain it without a brand.","Believe the invoice."],
+        k2: ["Keep a human in the loop.","That is the exam.","The demo already left."],
+        keep: ["You understood if you leave more interested in a substation than in a saviour.","Optimistic by default: something is still being built in copper, if the permit holds."],
+        n1: ["If it needs a brand to stand, it was not ready.","Megawatts before models.","No mascot required."],
+        n2: ["Yours does not.","That sticks on Sunday.","Check the cooling, then the rota."],
+        note: ["Uptime is character. Brochures are not.","Second shift is the generation that sometimes gets paid."],
+        w1: ["Watch power","Watch Sunday","Watch the invoice","Watch the logo","Watch cooling","Watch permits","Watch failover","Watch the rota"],
+        w2: ["before the model.","for a restart.","after the demo.","required to stand.","as an input.","as a thesis.","as character.","for a name."],
+        watch: ["Power, permits, Sunday restart.","Whether a logo was required to stand.","Whether the invoice outlived the demo.","Whether a human could still explain it.","Whether cooling was treated as policy."]
+      },
+      health: {
+        heads: ["The vacancy is the print","Winter is a ratio","A waitlist is policy","Primary care is logistics","Carer hours are the mandate","Beds do not take a press cycle off","Prevention is cheaper than theatre","Staffing is kindness with a rota","A body is not a campaign","Tuesday must fill","Sleep is the cheap reform","The night shift is the expert"],
+        dek: ["From the theatre to the rota. The rota is the print.","A body is not a press cycle. Tuesday still has to fill.","Kindness showed up as staff, or it did not.","Sleep is still the reform that does not need a brand."],
+        h1: ["The vacancy","Winter","The waitlist","Primary care","Carer hours","The night shift","A bed","Prevention"],
+        h2: ["is the print","is a ratio","is policy","is logistics","are the mandate","is the expert","does not campaign","is cheaper than theatre"],
+        dk1: ["What they called health","The wellness brand","A vibe with no shift","The rota"],
+        dk2: ["was labor looking for a body.","staffs nobody.","was not a clinic.","is the news."],
+        m1: ["The rooms discussed labor as if it had no back and no night.","Panic and wellness theatre were both on offer, with better lighting.","Neither staffs Tuesday, which is the exam.","Infinite healthy hours were assumed of people already running two jobs and a parent.","A vibe was issued. A shift was empty.","Optimization was offered before sleep, as if sleep were a lifestyle.","The specialist voice had no carer in it, and no winter.","Your accuracy about the waitlist was called anxiety.","Aging was treated as a vibe. It is a ratio of carers to winters.","Primary care was asked to be a slogan. It preferred to be a corridor.","A press cycle took the day off. The night shift did not.","Prevention was praised. Payroll for prevention was not."],
+        m2: ["Start with a back, a night, a shift.","Lighting does not fill a rota.","Exams that do not fill are late forecasts.","That input is not infinite, and it never was.","Empty is the print.","Sleep is a limit, not a lifestyle brand.","Winters are ratios.","Accuracy is allowed to be grim and still be kind.","Ratios do not campaign.","Corridors still see people.","Nights are the expert.","Praise is not a hire."],
+        c1: ["Every other desk arrives here, in a body that has to work.","Count systems, not strangers, and not villains in scrubs.","No diagnoses from a chair. Rota, sleep, absorbable week.","The clinic is logistics with a conscience, which is not a brand.","Unstaffed Tuesday,","Kindness is staffing, then manners.","Drink water. Not a joke, not a slogan.","A civilisation that intends to continue"],
+        c2: ["a person who can still work, care, walk, think.","That respect is the method, and it is ruder than a campaign.","The costume loosens when you count.","Conscience without a rota is a brochure.","late forecast. Start there, not with a vibe.","Branding is the rest. Mean the first half.","Keep body, carer, Tuesday.","looks like a filled night, or it does not."],
+        i1: ["Start at Tuesday's rota and","Leave with staffing, sleep, and no press-cycle body.","The carer-operator is the expert, in both directions.","Prevention and sleep still work. They are not a brand, and they start tonight.","Count the ratio. Then be kind on purpose, which is staffing.","A bad week should be absorbable. That is policy you can recognise.","You were spoken to, not around; stay if that is rare.","The night shift is the print, and it does not take a day off for a cycle."],
+        i2: ["the theatre looks expensive and understaffed.","Drink water. Then one decision that is not a vibe.","Believe them, in both jobs.","Practise tonight, which is how cheap reforms work.","That is adult, and it hires.","You already wanted that, in your own week.","Rarity is information.","It does not, and that is the whole clinical comment."],
+        x1: ["One more clinical line:","After the theatre:","If you keep a test:","Kindness is staffing:"],
+        x2: ["believe the rota before the forecast.","a body is not a press cycle.","Tuesday unstaffed means the forecast is late.","sleep starts tonight, without a logo."],
+        t1: ["Sit with Tuesday:","You can be accurate without being a brand of anxiety:","The kind default is an absorbable week:","This desk talks to the carer:"],
+        t2: ["it is the exam, with names.","you already were, and you were called anxious for it.","that is policy, not a mood.","not around them, not over them."],
+        hd1: ["If you have been carer and operator in one week,","If the math felt like accuracy,","If the night shift felt like the only honest print,"],
+        hd2: ["this is talking to you, on purpose.","it was, and it still is.","you already had the desk."],
+        heard: ["If you have been counting staff while they counted vibes, you were the adult.","You wanted Tuesday to fill. Wanting that is not a personality. It is a mandate."],
+        k1: ["Keep the body and the carer.","Leave with staffing and sleep.","Kindness showed up as staff, or it did not."],
+        k2: ["Keep Tuesday staffed.","Not a wellness brand.","Remember which, without a speech."],
+        keep: ["You understood if you leave more interested in a rota than in a campaign.","Optimistic by default: a bad week can still be absorbable, if someone is paid to be there."],
+        n1: ["Count systems.","Staff Tuesday or the forecast is late.","Sleep is the cheap reform."],
+        n2: ["No diagnoses from a chair.","That burns in.","Start tonight."],
+        note: ["A waitlist is policy. A vibe is not.","The night shift does not take a press cycle off. Remember that when the lighting improves."],
+        w1: ["Watch the rota","Watch sleep","Watch a bad week","Watch prevention","Watch Tuesday","Watch vacancies","Watch winter","Watch carer hours"],
+        w2: ["before the forecast.","as policy.","for absorbable.","funded or only praised.","for a fill.","as the print.","as a ratio.","as the mandate."],
+        watch: ["Rota, vacancies, winter ratios.","Whether a bad week was absorbable.","Whether prevention was funded.","Whether Tuesday filled.","Whether the carer was spoken to, or around."]
+      },
+      security: {
+        heads: ["A dull night is the win","Spare parts beat maps","Insurance still has to clear","Cables are civilian clothes","Training is untelevised","The grain corridor is a thesis","Spectacle is cheap inventory","A hospital is the argument","Boredom at a border is policy","Logistics, then law, then hope","The bus still needs a night","Fear for sale is not analysis"],
+        dek: ["From the toy map to a corridor that still has a night.","Spare parts are ruder than speeches and more useful.","If it needs fear to stand, it was selling.","Boredom at a border is an achievement."],
+        h1: ["A dull night","Spare parts","The cable","Training","Insurance","The grain corridor","A hospital","Boredom"],
+        h2: ["is the win","beat maps","is civilian clothes","is untelevised","still has to clear","is a thesis","is the argument","at a border is policy"],
+        dk1: ["What they called security","The toy map","A speech with tanks","The night"],
+        dk2: ["was a corridor looking for a dull hour.","was not a briefing.","was not logistics.","should stay boring."],
+        m1: ["The rooms issued a map with little symbols and called it a briefing.","War tourism from a chair was offered as if furniture conferred rank.","Costume was issued as analysis, with better lighting.","The feed wanted escalation. The port wanted a night that stayed dull.","Prices arrived before the theory, and so did stolen attention.","A speech traveled. A spare part did not, and neither did a trained person.","A team was requested before a corridor was checked.","Boredom was called a narrative failure, which is how you know it was the point.","Cables were discussed as metaphors. They remain wet, buried, and expensive.","Grain was given a subplot. It preferred a lane.","A hospital was asked to be a symbol. It preferred a generator.","Fear was priced as a subscription."],
+        m2: ["Decline. The chair is not a briefing room.","Rank is not upholstery.","Lighting is not logistics.","Dull nights feed Tuesdays.","Stolen attention is still a cost.","Untelevised stocks still decide.","Corridors are the thesis. Teams are a product.","Points are allowed to be boring.","Expensive and buried is the print.","Lanes feed people. Subplots feed clips.","Generators are the argument.","Subscriptions are optional. Analysis is not."],
+        c1: ["A port, a cable, a hospital, a school — if those fail,","Not naive: most people, most days, prefer settlement to spectacle.","Alliances are balance sheets with flags, and they work when paid.","Follow the invoice, the spare, the trainer.","Hope for a corridor without becoming simple, or a tourist.","Numbers, not trophies, and no private names from a chair.","If fear is required for the sentence to stand,","Logistics, then law, then hope — that order is the comment."],
+        c2: ["every other argument was luxury, and you already felt that.","Institutions exist to make betrayal expensive, which is dull on purpose.","Unpaid sheets are literature.","Ruder than toys on a map, more useful by morning.","That bet is not stupid, and it still wants dinner.","You prefer numbers. Good. Stay there.","it was selling. Decline the subscription.","Hope without the first two is a greeting card."],
+        i1: ["Want a dull night more than a clip and","Keep the corridor. Then live the week as if that were allowed.","Order is a maintained machine, not a mood you can rent.","Leave less frightened, more interested in parts and training.","Spectacle priced as strategy is not pricing your Tuesday, or your bus.","Prefer untelevised training; it is the only kind that loads.","Hope without being simple is allowed, and so is a generator.","A dull night is policy you can recognise when it holds."],
+        i2: ["the temperature looks like a product with better graphics.","Allowed is the kind word for peace as logistics.","Maintain it, pay it, do not photograph it for sport.","That was the test, and it does not need a flag on a desk.","You already knew, in the part of you that buys tickets.","Smile at that, then prefer it.","Keep both.","Then live the week, which is the point of the night."],
+        x1: ["One more security line, then live:","After the toy map:","If you keep a preference:","Spare parts beat speeches:"],
+        x2: ["a corridor is the thesis. Spectacle is inventory.","literature cannot load a ship, or a generator.","a dull night, still.","training is untelevised, on purpose."],
+        t1: ["Sit with the dull night:","You can want a corridor without a costume:","The kind default is settlement:","This desk returns you to Tuesday:"],
+        t2: ["it is an achievement, not a failure of plot.","people still prefer it when they are not being sold a team.","most days, most people, unpaid by the clip.","someone was not pricing it with little symbols."],
+        hd1: ["If you quietly hoped the grown-ups still had a corridor,","If you prefer numbers to trophies,","If a dull night felt like the win,"],
+        hd2: ["yes. That bet is not stupid.","good. Stay with numbers.","it is, and it was."],
+        heard: ["If you hoped for boredom at a border, that hope is adult.","You wanted parts, not a map for the coffee table. Keep wanting parts."],
+        k1: ["Keep the corridor.","Prefer parts to maps.","Boredom is the win."],
+        k2: ["Keep the night boring. Then live.","That was the test.","Remember it when the lighting improves."],
+        keep: ["You understood if you leave less frightened and more interested in a spare part.","Optimistic by default: most people, most days, still prefer a corridor to a clip."],
+        n1: ["If it needs fear to stand, it was selling.","No tourism from this chair.","Spectacle is cheap inventory."],
+        n2: ["Decline the subscription.","Logistics, law, hope.","A corridor is the thesis."],
+        note: ["A hospital with a generator is an argument. A map with toys is a product.","Cables, grain, lanes: security in civilian clothes. Keep the clothes."],
+        w1: ["Watch the corridor","Watch spare parts","Watch insurance","Watch the night","Watch fear","Watch cables","Watch training","Watch whether a hospital"],
+        w2: ["before the toy map.","and a trainer.","for a clear.","for dull.","required to stand.","as civilian clothes.","as untelevised stock.","still has a generator."],
+        watch: ["Corridors, cables, whether insurance still clears.","Spare parts and training — the untelevised stocks.","Whether the night stayed dull.","Whether spectacle was priced as strategy.","Whether the bus still had a night."]
+      }
+    };
+
+    Object.keys(X).forEach(function (k) {
+      var D = L[k], W = X[k];
+      if (!D || !W) return;
+      function add(field, a, b) {
+        if (!a || !b || !a.length || !b.length) return;
+        D[field] = (D[field] || []).concat(pair(a, b));
+      }
+      D.heads = (D.heads || []).concat(W.heads || []).concat(pair(W.h1, W.h2));
+      D.dek = (D.dek || []).concat(W.dek || []).concat(pair(W.dk1, W.dk2));
+      add("mainstream", W.m1, W.m2);
+      add("cut", W.c1, W.c2);
+      add("insight", W.i1, W.i2);
+      add("more", W.x1, W.x2);
+      add("turn", W.t1, W.t2);
+      add("heard", W.hd1, W.hd2);
+      D.heard = (D.heard || []).concat(W.heard || []);
+      add("keep", W.k1, W.k2);
+      D.keep = (D.keep || []).concat(W.keep || []);
+      add("note", W.n1, W.n2);
+      D.note = (D.note || []).concat(W.note || []);
+      add("watch", W.w1, W.w2);
+      D.watch = (D.watch || []).concat(W.watch || []);
+    });
+  }
+  fill(L);
+  (function scarce(L) {
+    var S = {
+      markets: {
+        t1: ["The tape gets kinder when you stop renting it:", "A book that can wait is already the optimistic bet:", "You can leave the verb on the table:", "Overnight is allowed to be the grown-up:", "The unloved hour is not a punishment:", "Settlement is a kindness with a date:", "Crowding will invoice you whether you notice or not:", "Thin hours are a courtesy the day session forgets:"],
+        t2: ["check the roll, then live.","patience is a bid.","the auction will keep.","read it without a thumbnail.","it is often the honest print.","dates still bind.","noticing is the cheap edge.","remember them."],
+        hd1: ["If the verb felt overdressed,","If you wanted the roll more than the miracle,","If overnight already vetoed the speech in your head,","If crowding felt like rent,","If the gap could not survive dinner,","If you declined the squeeze-as-season,","If thin hours made more sense than the open,","If you wanted a bedtime more than a plot,"],
+        hd2: ["you were reading.","you already had the method.","you were early.","you were right to leave.","you understood the test.","you kept the edge.","you were on the desk.","good."],
+        k1: ["Keep the auction.","Starve the thumbnail.","Let overnight dissent.","Size to dinner.","Collect the unloved hour.","Refuse the rented squeeze.","Prefer the roll.","Leave the verb."],
+        k2: ["Then go outside.","The book will keep.","That is still legal.","That is a risk limit.","It often pays.","Seasons have inventories.","Minutes beat metaphors.","Tuesday remains usable."]
+      },
+      geoecon: {
+        t1: ["The till is kinder than the clip:", "A dull port is an achievement:", "You can want a route without a team:", "Surcharges are allowed to be diplomats:", "Harvest is not a subplot:", "Customs is ruder than a summit:", "A visa queue is a schedule:", "Grain still wants a lane:"],
+        t2: ["keep the ticket.","feed Tuesdays.","delivery still beats destiny.","read the number.","it feeds people.","page numbers still bind.","treat it like one.","give it one."],
+        hd1: ["If the till taught you first,","If you declined the team sport,","If the berth felt like the news,","If the surcharge spoke more clearly than the flag,","If you wanted dinner more than a summit,","If customs already vetoed the costume,","If the grocery bag was the map,","If a dull port felt like a win,"],
+        hd2: ["you were doing the desk.","you were right.","it was.","you were reading.","that preference is adult.","you already knew.","you had the method.","it is."],
+        k1: ["Keep the premium.","Prefer the berth.","Want a route home.","Believe the till.","Let customs vote.","Skip the team.","Keep the surcharge.","Hope for a dull port."],
+        k2: ["Not the choir.","Not the villain.","That is policy.","It is the diplomat.","It outruns clips.","Ships do not join.","It is speaking.","Then cook."]
+      },
+      politics: {
+        t1: ["The pavement is kinder than the anthem:", "A quorum is allowed to be the plot:", "You can want a bus without a miracle:", "Procurement is ruder than a podium:", "The clerk's date still binds:", "Municipal is not lesser:", "Losing on time is a civic skill:", "The annex is allowed to be boring:"],
+        t2: ["keep the pavement.","count, then live.","statutes still run.","read the line.","dates are the adult.","it is most of the country.","recesses are not death.","page numbers work."],
+        hd1: ["If you wanted the bus more than the anthem,","If recruitment felt like a job you did not apply for,","If the annex felt like the news,","If quorum felt ruder and better,","If you declined to hunt persons,","If Wednesday felt like the exam,","If procurement outran the clip in your head,","If cooler felt like a policy,"],
+        hd2: ["you already had the brief.","you were right to decline.","it is.","you were reading.","good. Stay with institutions.","it is.","you were early.","it is."],
+        k1: ["Read the quorum.","Keep the pavement.","Prefer the clerk.","Ride the bus.","Take the annex.","Let Wednesday count.","Skip the choir.","Keep your temperature."],
+        k2: ["Then vote if you can.","That is the country.","Calendars still bind.","It is a statute.","Page numbers help.","Majorities are dull on purpose.","Retail is loud.","Cooler is allowed."]
+      },
+      psych: {
+        t1: ["The other room is kinder than a rebrand:", "A closed loop is allowed to be a life:", "You can want calm without a purchase:", "Boredom is a skill with a door:", "Morning is a risk desk you already own:", "The saga is optional equipment:", "Water is still a policy:", "Permission does not need a personality:"],
+        t2: ["use it.","close it once.","practise it.","practise it before you praise it.","run it.","leave it on the shelf.","start there.","you already have it."],
+        hd1: ["If the phone felt like a landlord,","If you wanted a list more than a saga,","If the other room already felt like policy,","If a villain before water felt like retail,","If boredom felt like medicine,","If you declined a new self by Friday,","If one loop felt like enough,","If stillness felt like a technology,"],
+        hd2: ["you were over-leased, not weak.","you already had the method.","it is.","it was.","it often is.","good.","it is.","it is, and you can run it."],
+        k1: ["Close one loop.","Use the other room.","Walk before the thread.","Price the door.","Keep the list.","Practise boredom.","Start with water.","Leave the saga."],
+        k2: ["That is a life.","It is still legal.","Threads can wait.","Attention is a cost.","Sagas wanted it anyway.","It compounds.","Then one decision.","Retail will keep without you."]
+      },
+      energy: {
+        t1: ["The meter is kinder than the church:", "A weld on a payroll is the transition:", "You can want 8 a.m. and a summer:", "Spare is allowed to be kindness:", "Degree-days are data, not scandal:", "Tankers are sentences:", "Baseload is a bedtime:", "Maintenance is policy you can touch:"],
+        t2: ["believe it.","pay it.","adults hold both.","check the decimal.","treat them that way.","read them.","keep it.","touch it."],
+        hd1: ["If the meter spoke first,","If you wanted a kettle more than a hymn,","If spare felt like the adult,","If a weld felt more real than a slogan,","If January already taught you arithmetic,","If you declined the church and kept the tank,","If a summer table still felt plannable,","If copper felt like the optimistic fact,"],
+        hd2: ["you were reading.","you were on this desk.","it is.","it is.","you were early.","good.","that is the default.","it is, if the permit holds."],
+        k1: ["Believe the meter.","Keep 8 a.m.","Plan the table.","Check spare.","Pay the weld.","Follow the tanker.","Skip the hymn.","Keep the lights."],
+        k2: ["Then argue, if you must.","It is a clock.","Summers are allowed.","Kindness has a decimal.","Payroll is the transition.","It already voted.","Churches can wait.","Then architecture."]
+      },
+      money: {
+        t1: ["The kitchen is kinder than the cult:", "A hold is allowed to be kindness:", "You can want a bedtime and a sheet:", "Term premium is the adult in the invoice:", "Deposits vote whether you film them:", "The window is tuition:", "Duration is a household word:", "Solvent is a reason to sit down:"],
+        t2: ["it already voted.","plan the mortgage that way.","institutions like remaining.","read it.","count them.","take it.","you already speak it.","then live."],
+        hd1: ["If the presser felt like a personality you did not need,","If the kitchen already felt like a committee,","If waiting did not feel like a scandal,","If a hold felt like remaining,","If dots felt unlike scripture,","If you wanted temperament not a mascot,","If the mortgage outlived the wheel,","If solvent felt like the point,"],
+        hd2: ["you were right, and cheaper.","you already had the method.","it is not.","it often is.","they are not.","good.","it does.","it was."],
+        k1: ["Keep the bedtime.","Let math veto drama.","Plan the mortgage.","Leave the cult.","Take the window.","Count deposits.","Prefer a hold to a mascot.","Go outside."],
+        k2: ["Sheets still bind.","Then live.","It outlives dots.","Retail is loud.","Tuition sticks.","They vote nightly.","Remaining is a trick.","The committee will keep."]
+      },
+      ordinary: {
+        t1: ["The table is kinder than the specialist:", "Milk is allowed to be data:", "You can want a livable Tuesday:", "Payroll Friday is a print with a name:", "The school-run is logistics, not lifestyle:", "Rent is duration you already trade:", "A commute is a balance sheet in traffic:", "The tomato does not need a forecast:"],
+        t2: ["it settles tonight.","believe the handle.","that is enough.","cash it.","treat it that way.","living it is the trade.","count it.","smell it."],
+        hd1: ["If the specialist font felt wrong,","If you wanted to be spoken to at the till,","If breakfast already had a number,","If the school-run felt like the real logistics,","If rent felt like a curve,","If you were told you were lesser and did not believe it,","If the table still had to clear,","If a joke and dry powder felt like a strategy,"],
+        hd2: ["it was.","that is the line.","it did.","it is.","you already trade it.","you were right.","it did, with chairs.","it is, for most humans."],
+        k1: ["Keep the table.","Believe the tomato.","Cash payroll.","Run the school-run.","Keep a joke.","Hold a little powder.","Buy the milk.","Skip the costume."],
+        k2: ["It settles tonight.","It is a print.","It is the number.","It is logistics.","It is strategy.","It is adult.","It is high-frequency.","You already run a book."]
+      },
+      tech: {
+        t1: ["The invoice is kinder than the miracle:", "Sunday restart is allowed to be the exam:", "You can want tools and a permit:", "Cooling is policy with a decimal:", "Failover is character:", "A substation is a thesis you can visit:", "Second shift is a generation:", "Uptime does not need a mascot:"],
+        t2: ["it stayed.","sit it.","adults hold both.","count it.","floors have it.","go look.","pay it.","floors do not."],
+        hd1: ["If you asked who pays for the electricity,","If the demo felt like hospitality,","If Sunday felt like the real test,","If a permit felt ruder and better,","If you would not worship a logo,","If heat felt like an input,","If a name on a rota felt like the loop,","If copper felt like the optimistic fact,"],
+        hd2: ["you were the adult.","it was.","it is.","it is.","good.","it is, not a scandal.","it is.","it is, if it pours."],
+        k1: ["Price the power.","Keep the permit.","Sit Sunday.","Believe the invoice.","Skip the mascot.","Pay the second shift.","Explain it without a brand.","Prefer the floor."],
+        k2: ["Then the model.","Theses need them.","Brochures will not.","It stayed.","Saviours are retail.","Generations sometimes get paid.","Readiness sounds like that.","It can restart."]
+      },
+      health: {
+        t1: ["The rota is kinder than the campaign:", "An absorbable week is allowed to be policy:", "You can want accuracy without a brand of fear:", "Night shift is the expert:", "Vacancies are the print:", "Sleep is a cheap reform with a pillow:", "Carer hours are a mandate:", "Tuesday filling is the exam:"],
+        t2: ["read it.","recognise it.","you already were accurate.","believe them.","count them.","start tonight.","pay them.","fill it."],
+        hd1: ["If you have been both carer and operator,","If the waitlist felt like policy,","If a vibe could not fill a shift,","If winter already felt like a ratio,","If you were called anxious for counting,","If the night shift felt like the only honest desk,","If prevention was praised and not hired,","If a bad week needed to be absorbable,"],
+        hd2: ["this is for you.","it is.","it could not.","it is.","you were accurate.","it is.","you noticed the gap.","that is the mandate."],
+        k1: ["Keep the rota.","Staff Tuesday.","Pay the carer.","Start sleep tonight.","Count vacancies.","Skip the theatre.","Believe the night shift.","Want an absorbable week."],
+        k2: ["It is the print.","Or the forecast is late.","It is kindness.","Cheap reforms start.","They are the news.","Lighting is not a hire.","They did not take the day off.","That is policy."]
+      },
+      security: {
+        t1: ["The dull night is kinder than the clip:", "A spare part is allowed to be the thesis:", "You can want a corridor without a team:", "Insurance is a diplomat with worse manners:", "Training is untelevised on purpose:", "A generator is an argument:", "Fear-as-subscription is optional:", "Logistics then law then hope:"],
+        t2: ["keep it boring.","stock it.","people still prefer delivery.","let it clear.","prefer it.","hospitals know.","decline it.","that order still holds."],
+        hd1: ["If you hoped the grown-ups still had a corridor,","If a toy map felt like a product,","If boredom at a border felt like the win,","If you wanted parts not trophies,","If fear was required for the sentence to stand,","If a cable felt more real than a speech,","If the bus still needed a night,","If you declined tourism from a chair,"],
+        hd2: ["yes. That bet is not stupid.","it was.","it is.","good.","it was selling.","it is.","it does.","correct."],
+        k1: ["Keep the corridor.","Stock the spare.","Prefer the dull night.","Let insurance clear.","Train untelevised.","Keep the generator.","Decline the subscription.","Live the week."],
+        k2: ["Then live.","Maps cannot load.","That is the win.","Diplomats itemise.","It is the only kind that loads.","Hospitals are arguments.","Fear is inventory.","That was the point of the night."]
+      }
+    };
+    Object.keys(S).forEach(function (k) {
+      var D = L[k], W = S[k];
+      if (!D || !W) return;
+      D.turn = (D.turn || []).concat(pair(W.t1, W.t2));
+      D.heard = (D.heard || []).concat(pair(W.hd1, W.hd2));
+      D.keep = (D.keep || []).concat(pair(W.k1, W.k2));
+    });
+  })(L);
   w._n = L;
 })(window);
