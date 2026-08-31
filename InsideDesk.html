@@ -1,0 +1,3096 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inside Desk — The twice-daily brief</title>
+<meta name="description" content="A twice-daily brief on markets, geo-economics, politics, psychology and ordinary life. Optimistic by habit. Data first. Commentary, not advice.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#07080b">
+<meta name="color-scheme" content="dark light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080b; --bg2:#0b0d12; --panel:#10141b; --panel2:#161b24;
+  --line:rgba(232,230,223,.09); --line2:rgba(232,230,223,.16);
+  --text:#ece8df; --muted:#9aa1ad; --faint:#6d7480;
+  --amber:#f5a524; --amber2:#ffc56b; --cyan:#6bb3ff; --blue:#3d8bfd;
+  --up:#3dd68c; --dn:#ff6b6b; --paper:#f3efe4; --ink:#14161c;
+  --serif:"Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --max:1180px; --r:14px; --shadow:0 18px 50px rgba(0,0,0,.45);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+html[data-theme="paper"]{
+  --bg:#efe8d8; --bg2:#f6f1e6; --panel:#fffaf0; --panel2:#f3ead8;
+  --line:rgba(20,22,28,.1); --line2:rgba(20,22,28,.16);
+  --text:#16181e; --muted:#4e5560; --faint:#6d7480;
+  --amber:#b86a00; --amber2:#9a5400; --cyan:#155fa8; --blue:#1d4f91;
+  --up:#0d7a48; --dn:#b42318; --shadow:0 12px 30px rgba(60,40,10,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:var(--sans); line-height:1.5;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  padding-bottom:calc(72px + var(--safe-b));
+}
+[hidden]{display:none !important}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--cyan); text-decoration-thickness:1px; text-underline-offset:3px}
+.skip{position:absolute;left:-999px;top:0;background:var(--amber);color:#111;padding:8px 12px;z-index:80}
+.skip:focus{left:8px;top:8px}
+.wrap{width:min(var(--max), calc(100% - 28px)); margin:0 auto}
+.mast{
+  position:sticky; top:0; z-index:40;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(16px) saturate(1.2);
+  border-bottom:1px solid var(--line);
+}
+.mast-row{display:flex; align-items:center; gap:14px; padding:10px 0; min-height:64px}
+.logo{
+  width:38px; height:38px; flex:none; border-radius:10px;
+  border:1px solid var(--line2); background:#0b0e14;
+  display:grid; place-items:center; position:relative;
+}
+html[data-theme="paper"] .logo{background:#1a1d24}
+.logo svg{display:block}
+.cursor{
+  position:absolute; top:-5px; left:-5px; width:8px; height:8px; border-radius:1px;
+  background:var(--amber); box-shadow:0 0 10px color-mix(in srgb, var(--amber) 70%, transparent);
+  animation:blink 1.1s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.brand h1{margin:0; font-size:clamp(16px, 2.4vw, 20px); letter-spacing:-.02em; font-weight:700}
+.brand .row{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.anywhere{font-size:10px; letter-spacing:.16em; font-weight:700; color:var(--amber); font-family:var(--mono)}
+.tag{margin:1px 0 0; font-size:12px; color:var(--muted)}
+.mast-meta{margin-left:auto; display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+.chip, .btn, .icon-btn, a.btn{
+  border:1px solid var(--line2); background:var(--panel); color:var(--text);
+  border-radius:999px; padding:6px 11px; font-size:12px; line-height:1.2;
+  text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+}
+.chip.live{border-color:color-mix(in srgb, var(--up) 45%, transparent)}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--up);display:inline-block;margin-right:6px;box-shadow:0 0 8px var(--up)}
+.btn-amber{background:var(--amber); color:#1a1206; border-color:transparent; font-weight:700}
+.btn-ghost{background:transparent}
+.icon-btn{width:36px;height:36px;padding:0;display:grid;place-items:center}
+.nav{
+  display:flex; gap:2px; overflow:auto; padding:0 0 8px;
+  scrollbar-width:none; -webkit-overflow-scrolling:touch;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav a, .nav button{
+  border:0; background:transparent; color:var(--muted);
+  padding:8px 10px; border-radius:8px; font-size:13px; font-weight:500; white-space:nowrap;
+}
+.nav a:hover, .nav button:hover, .nav a.on, .nav button.on{color:var(--text); background:var(--panel2)}
+.ticker{
+  border-bottom:1px solid var(--line); background:var(--bg2);
+  font-family:var(--mono); font-size:11px; color:var(--muted);
+  overflow:hidden; white-space:nowrap;
+}
+.ticker-track{display:inline-flex; gap:36px; padding:7px 0; animation:marq 34s linear infinite; will-change:transform}
+html[data-theme="paper"] .ticker-track{animation-duration:38s}
+@keyframes marq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track,.cursor{animation:none}
+  html{scroll-behavior:auto}
+}
+.ticker b{color:var(--text); font-weight:600}
+.ticker .up{color:var(--up)} .ticker .dn{color:var(--dn)}
+.ticker .q{font-family:var(--serif); font-style:italic; color:var(--amber2); white-space:nowrap}
+.ticker .q i{font-style:normal; opacity:.55; margin-right:6px; font-family:var(--mono); font-size:10px; letter-spacing:.08em}
+.hero-band{
+  border-bottom:1px solid var(--line);
+  background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:28px 28px;
+}
+.hero-band .wrap{padding:18px 0 16px}
+.kicker{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber)}
+.edition-title{font-family:var(--serif); font-size:clamp(28px, 5vw, 48px); line-height:1.08; margin:6px 0 8px; letter-spacing:-.03em; font-weight:700}
+.lede-sub{max-width:68ch; color:var(--muted); font-size:clamp(14px, 2vw, 17px)}
+.meta-line{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; font-size:12px; color:var(--muted)}
+.layout{display:grid; grid-template-columns:1fr; gap:18px; padding:18px 0 8px}
+@media(min-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr) 320px; align-items:start}
+  body{padding-bottom:24px}
+  .bottom-nav{display:none !important}
+}
+.stack{display:grid; gap:16px}
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+  box-shadow:var(--shadow); padding:18px 18px 16px;
+}
+.side{display:grid; gap:12px; position:sticky; top:86px}
+.brief-grid{display:grid; gap:8px}
+.brief-item{
+  display:grid; grid-template-columns:92px 1fr; gap:10px; align-items:center;
+  padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:var(--bg2);
+}
+.brief-item canvas{width:92px; height:36px}
+.brief-item h4{margin:0; font-size:12px; font-weight:600}
+.brief-item p{margin:2px 0 0; font-size:11px; color:var(--muted)}
+.article .kicker{margin-bottom:4px}
+.headline{
+  font-family:var(--serif); font-size:clamp(22px, 3.4vw, 34px); line-height:1.15;
+  margin:0 0 8px; letter-spacing:-.025em; color:var(--amber2); font-weight:700;
+}
+html[data-theme="paper"] .headline{color:#9a3b00}
+.deck{margin:0 0 10px; font-size:16px; color:var(--muted); font-family:var(--serif); font-style:italic}
+.byline{display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:12px; color:var(--muted); margin-bottom:12px}
+.badge{display:inline-flex; align-items:center; gap:4px; border:1px solid var(--line2); border-radius:999px; padding:3px 8px; font-size:10px; letter-spacing:.04em; text-transform:uppercase}
+.prose{font-family:var(--serif); font-size:clamp(17px, 2vw, 19.5px); line-height:1.72; max-width:72ch}
+.prose p{margin:.85em 0}
+.prose p:first-child{font-size:1.06em}
+.watch{
+  margin:16px 0; padding:12px 14px; border-left:3px solid var(--amber);
+  background:color-mix(in srgb, var(--amber) 8%, var(--bg2)); border-radius:0 10px 10px 0;
+}
+.watch h5{margin:0 0 6px; font-family:var(--sans); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--amber)}
+.watch ul{margin:0; padding-left:18px}
+.watch li{margin:4px 0; font-size:14px}
+.margin{
+  margin:14px 0 4px; padding:12px 14px; border:1px dashed var(--line2); border-radius:10px;
+  font-size:14px; color:var(--muted);
+}
+.margin strong{color:var(--text); font-family:var(--sans); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
+.chart-box{margin:16px 0 8px; padding:10px; border:1px solid var(--line); border-radius:12px; background:#0a0d13}
+html[data-theme="paper"] .chart-box{background:#1c212b}
+.chart-head{display:flex; justify-content:space-between; gap:8px; font-family:var(--mono); font-size:11px; color:#c9d0da; margin-bottom:6px}
+.chart-head .up{color:#3dd68c} .chart-head .dn{color:#ff6b6b}
+.chart-box canvas{width:100%; height:300px; display:block; touch-action:none}
+@media(min-width:700px){ .chart-box canvas{height:380px} }
+.chart-foot{display:flex; justify-content:space-between; gap:8px; font-size:10px; color:#8b939e; font-family:var(--mono); margin-top:6px}
+.tools{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.notes textarea{
+  width:100%; min-height:88px; resize:vertical; margin-top:8px;
+  background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:10px;
+}
+.billing{
+  border:1px solid color-mix(in srgb, var(--amber) 40%, var(--line));
+  background:color-mix(in srgb, var(--amber) 9%, var(--panel));
+  border-radius:12px; padding:10px 12px; font-size:13px; color:var(--muted);
+}
+.locked-art .prose{max-height:7.6em; overflow:hidden; position:relative}
+.locked-art .prose:after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:4.2em;
+  background:linear-gradient(transparent, var(--panel));
+}
+.lock-cta{
+  margin-top:12px; padding:14px; border:1px dashed var(--line2); border-radius:12px;
+  background:var(--bg2);
+}
+.rooms a{color:var(--text); text-decoration:none}
+.rooms a:hover{color:var(--cyan)}
+.movers{display:grid;gap:8px}
+.mover{display:grid;grid-template-columns:92px 1fr;gap:10px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line)}
+.mover .dk{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);padding-top:3px}
+.mover p{margin:0;font-family:var(--serif);font-size:16px;line-height:1.35}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal .hd{text-align:center;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:4px 0}
+.cal .d{
+  min-height:42px;border:1px solid var(--line);border-radius:8px;background:var(--bg2);
+  font-size:12px;padding:4px 2px;display:grid;place-items:center;line-height:1.15;
+}
+.cal .d.wd,.cal .d.sun{cursor:pointer}
+.cal .d.wd:hover,.cal .d.sun:hover{border-color:var(--amber)}
+.cal .d.sat{opacity:.38;cursor:default}
+.cal .d.out{opacity:.25}
+.cal .d.on{background:var(--amber);color:#1a1206;border-color:transparent;font-weight:700}
+.cal .d.sun:not(.on){border-color:color-mix(in srgb, var(--amber) 45%, var(--line))}
+.cal .d .sub{display:block;font-size:9px;letter-spacing:.04em;opacity:.8}
+.shelf-item{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.rail h3, .section-h{
+  margin:0 0 8px; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:600
+}
+.plan{padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--bg2)}
+.plan.feat{border-color:color-mix(in srgb, var(--amber) 55%, transparent); box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--amber) 20%, transparent)}
+.plan h4{margin:0; font-size:16px}
+.plan .price{font-family:var(--mono); color:var(--amber); font-size:18px; margin:6px 0}
+.plan ul{margin:8px 0 12px; padding-left:18px; color:var(--muted); font-size:13px}
+.toc a, .toc button{
+  display:block; width:100%; text-align:left; background:transparent; border:0;
+  color:var(--text); padding:7px 0; border-bottom:1px solid var(--line); font-size:13px;
+}
+.toc small{display:block; color:var(--muted); font-size:11px}
+.archive-grid, .price-grid, .insight-grid{display:grid; gap:10px}
+@media(min-width:720px){
+  .archive-grid{grid-template-columns:repeat(4,1fr)}
+  .price-grid{grid-template-columns:repeat(3,1fr)}
+  .insight-grid{grid-template-columns:1fr 1fr}
+}
+.year-label{grid-column:1/-1; font-family:var(--mono); font-size:12px; color:var(--amber); margin-top:8px}
+.modal{
+  position:fixed; inset:0; background:rgba(0,0,0,.62); z-index:70;
+  display:grid; place-items:center; padding:18px;
+}
+.modal .card{width:min(920px,100%); max-height:min(90vh,900px); overflow:auto}
+.legal{font-size:14px; color:var(--muted)}
+.legal h3{color:var(--text); font-size:18px}
+.legal h4{color:var(--text); margin:18px 0 6px}
+.form{display:grid; gap:8px}
+.form input, .form select{
+  background:var(--bg); border:1px solid var(--line2); border-radius:10px; padding:10px 12px;
+}
+.check{display:flex; gap:8px; align-items:flex-start; font-size:12px; color:var(--muted)}
+.toast{
+  position:fixed; right:14px; bottom:calc(84px + var(--safe-b)); z-index:60;
+  background:var(--panel2); border:1px solid var(--line2); border-radius:10px;
+  padding:10px 12px; font-size:13px; box-shadow:var(--shadow); max-width:min(360px, calc(100% - 28px));
+}
+@media(min-width:980px){ .toast{bottom:18px} }
+.bottom-nav{
+  position:fixed; left:0; right:0; bottom:0; z-index:50;
+  display:grid; grid-template-columns:repeat(5,1fr);
+  background:color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter:blur(16px); border-top:1px solid var(--line);
+  padding:6px 6px calc(6px + var(--safe-b));
+}
+.bottom-nav button{
+  border:0; background:transparent; color:var(--muted); font-size:10px; font-weight:600;
+  display:grid; gap:2px; place-items:center; padding:6px 2px;
+}
+.bottom-nav button.on{color:var(--amber)}
+.search{
+  width:100%; background:var(--bg2); border:1px solid var(--line); border-radius:10px;
+  padding:9px 12px; font-size:14px;
+}
+.hr{height:1px; background:var(--line); border:0; margin:16px 0}
+footer{border-top:1px solid var(--line); padding:22px 0 28px; color:var(--muted); font-size:12px}
+.foot-grid{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+.muted{color:var(--muted)} .faint{color:var(--faint)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media print{
+  .mast,.ticker,.hero-band,.side,.bottom-nav,.tools,.notes,.toast,footer,.nav{display:none !important}
+  body{background:#fff;color:#000;padding:0}
+  .card{box-shadow:none;border-color:#ccc}
+  .headline{color:#9a3b00}
+  .chart-box{background:#111; break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to brief</a>
+<header class="mast">
+  <div class="wrap mast-row">
+    <div class="logo" aria-hidden="true">
+      <span class="cursor"></span>
+      <svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="12" fill="#0b0e14"/>
+        <text x="32" y="40" text-anchor="middle" font-family="IBM Plex Sans, system-ui, sans-serif" font-weight="800" font-size="26" fill="#6bb3ff">ID</text>
+      </svg>
+    </div>
+    <div class="brand">
+      <div class="row">
+        <h1>Inside Desk</h1>
+        <span class="anywhere">ANYWHERE</span>
+      </div>
+      <p class="tag" id="dynamicTagline">Twice-daily brief for people who prefer incentives to applause.</p>
+    </div>
+    <div class="mast-meta">
+      <span class="chip live" id="liveChip"><span class="dot"></span><span id="liveLbl">AM DESK</span></span>
+      <span class="chip" id="clockChip">—</span>
+      <button class="icon-btn" id="themeBtn" title="Toggle paper / terminal" aria-label="Toggle theme">Aa</button>
+      <button class="btn btn-amber" data-go="support">Quiet continuity</button>
+    </div>
+  </div>
+  <nav class="wrap nav" aria-label="Desks">
+    <button class="on" data-go="brief">Brief</button>
+    <button data-go="insights">Insights</button>
+    <button data-go="markets">Markets</button>
+    <button data-go="geoecon">Geo-economics</button>
+    <button data-go="politics">Politics</button>
+    <button data-go="psych">Psychology</button>
+    <button data-go="energy">Energy</button>
+    <button data-go="money">Money</button>
+    <button data-go="ordinary">Ordinary</button>
+    <button data-go="tech">Tech</button>
+    <button data-go="health">Health</button>
+    <button data-go="security">Security</button>
+    <button data-go="archive">Archive</button>
+    <button data-go="shelf">Shelf</button>
+    <button data-go="support">Support</button>
+    <button data-go="legal">Legal</button>
+    <button data-go="imprint">Imprint</button>
+  </nav>
+</header>
+
+<div class="ticker" aria-label="Desk tape"><div class="ticker-track" id="ticker"></div></div>
+
+<section class="hero-band">
+  <div class="wrap">
+    <div class="kicker" id="heroKicker">Morning edition</div>
+    <h2 class="edition-title" id="heroTitle">The day is a schedule, not a mood.</h2>
+    <p class="lede-sub" id="heroSub">Desk commentary on the day’s climate. Charts from the latest public prints. Nothing here is advice, a tip, or material non-public information.</p>
+    <div class="meta-line">
+      <span id="heroDate"></span>
+      <span>·</span>
+      <span id="heroNext"></span>
+      <span>·</span>
+      <span id="planChip">Open letter</span>
+    </div>
+    <div class="billing" id="billingBar" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<main class="wrap layout" id="main">
+  <div class="stack" id="app"></div>
+  <aside class="side" id="side"></aside>
+</main>
+
+<nav class="bottom-nav" aria-label="Mobile">
+  <button class="on" data-go="brief">Brief</button>
+  <button data-go="insights">Insights</button>
+  <button data-go="archive">Archive</button>
+  <button data-go="shelf">Shelf</button>
+  <button data-go="support">Support</button>
+</nav>
+
+<div id="toast" class="toast" hidden></div>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <strong style="color:var(--text)">Inside Desk</strong> is a private editorial desk, not a broker, bank, party, or intelligence service.
+      “Inside” is a brand metaphor for a kept reading habit — never a claim of inside information.
+    </div>
+    <div>© 2020–2026 Inside Desk · Dr. Benjamin Koch · <button class="btn btn-ghost" data-go="imprint">Imprint</button></div>
+  </div>
+  <div class="wrap" style="margin-top:10px">
+    Commentary for information only. Not investment, legal, tax, medical or political advice. Not an offer or solicitation. Analysis may be incomplete or wrong. You decide; you comply with the law where you live.
+    <button class="btn btn-ghost" data-go="legal" style="margin-left:8px">Full legal</button>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s??"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const CET = "Europe/Berlin";
+const SITE = { paywall: "off" };
+const SUPPORT = {
+  handle: "quietcontinuity",
+  url: "https://www.paypal.me/quietcontinuity"
+};
+const PUBLISHER = {
+  name: "Dr. Benjamin Koch",
+  service: "Inside Desk",
+  careOf: "c/o MDC Management #1409",
+  street: "Welserstraße 3",
+  zip: "87463",
+  city: "Dietmannsried",
+  country: "Germany",
+  visdp: "Dr. Benjamin Koch",
+  email: "insidedesk@benjaminkoch.info"
+};
+const STORE = {
+  theme: "it.theme",
+  plan: "it.plan",
+  notes: "it.notes",
+  follows: "it.follows",
+  market: "it.market",
+  world: "it.world",
+  shelf: "it.shelf",
+  imprint: "it.imprint"
+};
+
+function mulberry32(a){
+  return function(){
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function seedn(...parts){
+  let h = 2166136261;
+  const s = parts.join("|");
+  for(let i=0;i<s.length;i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619);
+  return mulberry32(h >>> 0);
+}
+function pick(arr, rng){ return arr[Math.floor(rng()*arr.length)]; }
+function pickN(arr, n, rng){
+  const a=[...arr], out=[];
+  while(out.length<n && a.length){ out.push(a.splice(Math.floor(rng()*a.length),1)[0]); }
+  return out;
+}
+function cetParts(d=new Date()){
+  const fmt = new Intl.DateTimeFormat("en-GB",{timeZone:CET, year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", second:"2-digit", hour12:false, weekday:"short"});
+  const o = Object.fromEntries(fmt.formatToParts(d).map(p=>[p.type,p.value]));
+  return { y:+o.year, m:+o.month, day:+o.day, h:+o.hour, min:+o.minute, s:+o.second, wd:o.weekday, date:new Date(Date.UTC(o.year, o.month-1, o.day, o.hour, o.minute, o.second)) };
+}
+function dayKeyFromParts(p){ return `${p.y}-${String(p.m).padStart(2,"0")}-${String(p.day).padStart(2,"0")}`; }
+function dateFromKey(dayKey){
+  const [y,m,d]=dayKey.split("-").map(Number);
+  return new Date(y, m-1, d);
+}
+function weekdayFromKey(dayKey){ return dateFromKey(dayKey).getDay(); }
+function isWeekdayKey(dayKey){ const w=weekdayFromKey(dayKey); return w>=1 && w<=5; }
+function isSundayKey(dayKey){ return weekdayFromKey(dayKey)===0; }
+function isSaturdayKey(dayKey){ return weekdayFromKey(dayKey)===6; }
+function addDays(dayKey, n){
+  const dt=dateFromKey(dayKey); dt.setDate(dt.getDate()+n);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
+}
+function previousFridayKey(dayKey){
+  let k=dayKey;
+  while(weekdayFromKey(k)!==5) k=addDays(k,-1);
+  return k;
+}
+function weekMonday(dayKey){
+  const w=weekdayFromKey(dayKey);
+  return addDays(dayKey, w===0 ? -6 : 1-w);
+}
+function weekDays(dayKey){ const mon=weekMonday(dayKey); return [0,1,2,3,4].map(i=>addDays(mon,i)); }
+function fmtUntil(target, nowP){
+  const now = Date.UTC(nowP.y, nowP.m-1, nowP.day, nowP.h, nowP.min, nowP.s);
+  let ms = target - now; if(ms<0) ms=0;
+  const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
+  return `${h}h ${String(m).padStart(2,"0")}m`;
+}
+function editionOf(d=new Date()){
+  const p = cetParts(d);
+  const key = dayKeyFromParts(p);
+  const w = weekdayFromKey(key);
+  if(w===0){
+    return { key:"sun", label:"Sunday long-read", dayKey:key, parts:p, isLive:true, kind:"sunday" };
+  }
+  if(w===6){
+    const fri = previousFridayKey(key);
+    return { key:"pm", label:"Friday evening", dayKey:fri, parts:p, isLive:true, kind:"weekend", hold:true };
+  }
+  if(p.h>=17 || p.h<6){
+    if(p.h<6){
+      const yest=addDays(key,-1);
+      if(isWeekdayKey(yest)) return { key:"pm", label:"Evening edition", dayKey:yest, parts:p, isLive:true, kind:"daily" };
+      if(isSundayKey(yest)) return { key:"sun", label:"Sunday long-read", dayKey:yest, parts:p, isLive:true, kind:"sunday" };
+    }
+    return { key:"pm", label:"Evening edition", dayKey:key, parts:p, isLive:true, kind:"daily" };
+  }
+  return { key:"am", label:"Morning edition", dayKey:key, parts:p, isLive:true, kind:"daily" };
+}
+function nextEdition(d=new Date()){
+  const p = cetParts(d);
+  const key = dayKeyFromParts(p);
+  const w = weekdayFromKey(key);
+  const utc = (y,m,day,h)=> Date.UTC(y,m-1,day,h,0,0);
+  if(w===6) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day+1,8), p) };
+  if(w===0 && p.h<8) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day,8), p) };
+  if(w===0) return { label:"Monday morning", in: fmtUntil(utc(p.y,p.m,p.day+1,6), p) };
+  if(p.h<6) return { label:"Morning edition", in: fmtUntil(utc(p.y,p.m,p.day,6), p) };
+  if(p.h<17) return { label:"Evening edition", in: fmtUntil(utc(p.y,p.m,p.day,17), p) };
+  if(w===5) return { label:"Sunday long-read", in: fmtUntil(utc(p.y,p.m,p.day+2,8), p) };
+  return { label:"Morning edition", in: fmtUntil(utc(p.y,p.m,p.day+1,6), p) };
+}
+function prettyDay(dayKey){
+  return dateFromKey(dayKey).toLocaleDateString("en-GB",{weekday:"long", day:"numeric", month:"long", year:"numeric"});
+}
+
+const TOPICS = [
+  { key:"markets", name:"Markets & Macro", nav:"markets", kicker:"MARKETS" },
+  { key:"geoecon", name:"Geo-economics", nav:"geoecon", kicker:"GEO-ECON" },
+  { key:"politics", name:"Politics & Institutions", nav:"politics", kicker:"POLITICS" },
+  { key:"psych", name:"Psychology & Behaviour", nav:"psych", kicker:"PSYCHOLOGY" },
+  { key:"energy", name:"Energy & Industry", nav:"energy", kicker:"ENERGY" },
+  { key:"money", name:"Money, FX & Committees", nav:"money", kicker:"MONEY" },
+  { key:"ordinary", name:"Ordinary & Inherited Life", nav:"ordinary", kicker:"ORDINARY" },
+  { key:"tech", name:"Tech & Compute", nav:"tech", kicker:"TECH" },
+  { key:"health", name:"Health & Care", nav:"health", kicker:"HEALTH" },
+  { key:"security", name:"Security & Order", nav:"security", kicker:"SECURITY" }
+];
+
+const CLIMATE = {
+  1:"January inventories, new-year positioning, and the first honesty test of last year’s stories.",
+  2:"February labor prints, winter energy, and parliaments discovering their calendars again.",
+  3:"March policy meetings, fiscal drafts, and the first real read on whether winter was a mood or a mechanism.",
+  4:"April forecasts, harvest intentions, and institutions that prefer footnotes to applause.",
+  5:"May liquidity, labor, and the slow argument between growth and the cost of money.",
+  6:"June mid-year revisions, shipping lanes, and committees that would rather wait than perform.",
+  7:"July thin desks, thick narratives, and data that still clears in cash.",
+  8:"August liquidity, energy, harvests, and late-cycle politics — a month that rewards people who still read the inventory print.",
+  9:"September re-entry: schools, sessions, and balance sheets that spent the summer pretending to be on holiday.",
+  10:"October budgets, weather, and the first drafts of next year’s excuses.",
+  11:"November politics, heating demand, and families who start thinking in years instead of weeks.",
+  12:"December settlement, liquidity theater, and the only optimism that matters: a plan that survives January."
+};
+
+const COPY = {
+  markets: {
+    heads: [
+      "The tape is a schedule with teeth",
+      "Spreads heal before speeches do",
+      "Variance left the headline and moved into allocation",
+      "Carry is rent; collateral is the deed",
+      "Breadth whispers; momentum eventually answers",
+      "Patience is still the only uncrowded factor"
+    ],
+    deks: [
+      "Price keeps the minutes. Everything else is hospitality.",
+      "A constructive market is not a kind market. It is a punctual one.",
+      "If the story needs a choir, the position is too large."
+    ],
+    ledes: [
+      "Ignore the theatrics. The useful question is not what people feel about the day, but which cash-flow is being asked to wait, and whether it can.",
+      "Markets are not cruel. They are bureaucratic. They invoice impatience in basis points and call it a lesson.",
+      "The constructive read is almost boring, which is how you know it might be true: funding first, then positioning, then the story that arrives late and asks to be paid anyway."
+    ],
+    body: [
+      "Cross-asset confirms a civilised point. Stress leaves the plumbing faster than it leaves the timeline. That is not a reason to become a tourist in your own book. It is a reason to let the easy basis work and to starve the trade that only works as a speech.",
+      "Term premia still move the way forbearance does: slowly, then with the dull confidence of a clerk who has seen this file before. If you need cheerleaders to hold the line, you sized it for an audience, not for sleep.",
+      "Liquidity is a rented story. Collateral is the owned one. When reflex capital chases heat, the basis sends an invoice written in small type. The inherited reader and the ordinary reader are both, at that moment, the same animal: a duration decision with a calendar.",
+      "Compression is not a narrative. It is a registry of who learned to wait. Outliers are tuition. Compounding is graduation. The tape remembers every plea for mercy; arithmetic remembers none, which is why it remains the only adult in the room.",
+      "A slightly positive desk does not mean a gullible one. It means we assume systems can repair if the incentives are not lying. Repair is unfashionable. It also pays.",
+      "Macro surprises fade and the variance migrates from the podium to the allocation meeting. That is the good news, if you like work. The bad news is that work is less photogenic than panic, which is why panic still gets the better lighting."
+    ],
+    watch: [
+      "Whether breadth confirms the index or merely decorates it.",
+      "Whether real yields are doing policy’s job while policy does television.",
+      "Whether your size still fits the night, not the group chat."
+    ],
+    close: [
+      "Bottom line: price first, story second, size to sleep. Let luck arrive embarrassed.",
+      "Keep the habit compounding. If it does not pay in cash flow or basis, it is a hobby with better stationery."
+    ],
+    comment: [
+      "If this read like a sermon, you skipped the chart. The chart is the joke and the kindness.",
+      "Optimism here is not incense. It is a refusal to pay rent to other people’s panic."
+    ]
+  },
+  geoecon: {
+    heads: [
+      "Incentives cross borders faster than treaties",
+      "Jurisdiction is the quietest commodity",
+      "Freight is foreign policy with a bill of lading",
+      "Sanctions are basis shocks with press conferences",
+      "The map is being redrawn in collateral, not communiqués",
+      "Trade is a temperament test for grown countries"
+    ],
+    deks: [
+      "Geo-economics is just politics that learned to count.",
+      "Borders are loud. Haircuts are precise.",
+      "The footnote is the message; the summit is the decoy."
+    ],
+    ledes: [
+      "Treaties travel slowly. Incentives commute daily. If you want the international story without the costume department, follow collateral eligibility, freight, and who can still fund themselves in a currency that clears.",
+      "A constructive internationalism is not naivety. It is the observation that most systems prefer a corridor to a cliff, even when the podium prefers a cliff for the cameras.",
+      "Power still matters. So does the invoice. The century’s least glamorous truth is that logistics often finish the argument diplomacy started."
+    ],
+    body: [
+      "Supervision works like gravity: slow, constant, indifferent to adjectives. When rules rewrite what counts as good collateral, capital migrates before consensus has found a font for the white paper.",
+      "Energy, food, and chips are not morality plays. They are constraint sets. Countries that treat them as sermons discover that sermons do not load at the terminal. Countries that treat them as arithmetic keep more friends than they advertise.",
+      "The inherited world — family offices, old industrial towns, sovereign funds that still answer the phone — already knows this. The ordinary world learns it at the petrol pump and the grocery ticket. Same mechanism, different stationery.",
+      "Tariffs, corridors, and industrial policy are all ways of moving time. Some buy it. Some rent it. Some set it on fire and call the smoke a strategy. A slightly positive desk assumes most governments, most days, would rather keep the lights on than win the metaphor.",
+      "Jurisdiction arbitrage is the quietest durable edge and the least Instagrammable. It is also why a newsletter written in one language can still be useful on four continents: the plumbing rhymes even when the flags do not.",
+      "Escalation is always possible. So is boredom. Boredom is underrated as a geopolitical outcome. It is how most people actually get home for dinner."
+    ],
+    watch: [
+      "Shipping, insurance and energy as the three honest diplomats.",
+      "Whether industrial policy is building capacity or just building adjectives.",
+      "Who can still issue in a currency that other people voluntarily hold."
+    ],
+    close: [
+      "Follow the corridor, not the choir. Nations, like families, survive on sequences.",
+      "The constructive international story is not that everyone is kind. It is that enough people still prefer a settlement to a spectacle."
+    ],
+    comment: [
+      "If your geopolitics cannot survive a freight print, it was literature.",
+      "We will not name private villains for sport. Institutions have addresses. Incentives have numbers."
+    ]
+  },
+  politics: {
+    heads: [
+      "Legibility is the real instrument",
+      "Parliaments move like glaciers with press secretaries",
+      "The footnote still beats the rally",
+      "Institutions are how adults keep a country",
+      "Campaigns rent attention; budgets buy outcomes",
+      "Quiet competence remains a radical platform"
+    ],
+    deks: [
+      "Politics is the art of distributing time, blame, and other people’s money.",
+      "A state is a cash-flow with a flag and a legal department.",
+      "The constructive citizen reads the annex."
+    ],
+    ledes: [
+      "We will not do character assassination as a sport. It is legally ugly and intellectually cheap. The useful political story is almost always institutional: who can spend, who can borrow, who can say no, and who has to face a calendar.",
+      "Democracy is not a mood board. It is a procedure for losing without setting the building on fire. That remains, on a good day, an astonishing technology.",
+      "The inherited reader wants continuity. The ordinary reader wants the bus to run. A serious desk writes for both, because they are the same request spoken in two accents."
+    ],
+    body: [
+      "Policy does not create value. It rearranges liabilities and time. That sentence has ended more dinner arguments than it has started, which is a public service.",
+      "Campaigns are retail. Governing is wholesale. The gap between those two markets is where most disappointment lives, and also where most of the repair happens — unphotographed, late, and in committee.",
+      "A slightly positive desk sounds like this: assume the official story is incomplete, then go looking for the constraint, not the conspiracy. Constraints are testable. Conspiracies are a subscription to your own adrenaline.",
+      "Courts, statistical offices, central banks, and boring ministries are not romantic. They are how a country remembers itself between elections. Mock them too casually and you will miss the only machinery that still knows how to do Tuesday.",
+      "The global reader does not need our local score-settling. They need the mechanism: fiscal space, legal predictability, the habit of transferring power without a costume change into tragedy.",
+      "Humor is allowed. Cruelty is not required. If a sentence only works by humiliating a private person, it is not analysis. It is a snack. This desk does not serve snacks that sue."
+    ],
+    watch: [
+      "Budgets, courts, and statistical integrity — the unsexy triad.",
+      "Whether rhetoric is buying time or spending credibility.",
+      "Transfer of power as the only political skill that compounds."
+    ],
+    close: [
+      "Read the annex. Vote if you can. Do not outsource your nervous system to a podium.",
+      "Institutions are a love letter to people who will be alive after the news cycle. Try to be one of those people."
+    ],
+    comment: [
+      "No, we will not 'take someone down' in the comments. There are no public comments. That is how we stay kind and solvent.",
+      "If you want rage, it is widely available and usually overpriced."
+    ]
+  },
+  psych: {
+    heads: [
+      "Bias is the leverage you forgot to hedge",
+      "Attention is now a cost of goods sold",
+      "Forbearance is not passive; it is paid",
+      "The reflex is indignation; the edge is composure",
+      "FOMO decorates the diary; sequence decorates the ledger",
+      "Silence is becoming a luxury good"
+    ],
+    deks: [
+      "The mind is a high-frequency trader with worse risk limits.",
+      "Most people do not have a thesis. They have a temperature.",
+      "Calm is a technology. It can be practised."
+    ],
+    ledes: [
+      "The most expensive thing in public life is still an unmanaged impulse wearing a clever jacket. Markets extract it. Politics inflates it. Families inherit it. The good news is that composure compounds.",
+      "You do not need a new personality. You need a sequence you can repeat on a bad Wednesday. That is the entire behavioural desk in one unfashionable sentence.",
+      "Optimism, practised properly, is not the belief that nothing breaks. It is the belief that you can remain useful after it does."
+    ],
+    body: [
+      "Momentum is a servant. Let it become a thesis and it will spend your cash, your reputation, and eventually your sleep. The inherited and the ordinary lose money in the same font; only the zero-count changes.",
+      "Indignation is a cheap identity. It bonds quickly and predicts nothing. If your information diet requires a villain before breakfast, you are not informing yourself. You are stretching.",
+      "Rigor is a savings account. Drama is an overdraft. The interest rates on those two products have not been equal in any century we have records for, which is a comfort if you like old jokes that still clear.",
+      "Attention is priced now. That is new only in degree. What is new is how many intelligent people have agreed to rent their focus to people who do not love them. A newsletter that asks for twenty quiet minutes is, in that market, a slightly subversive object.",
+      "There is a psychology of inherited capital and a psychology of the paycheck. Both are stories about permission. One fears wasting a past. One fears never building a future. The honest desk talks to both without sneering, because sneer is just another bias with better shoes.",
+      "When correlations wobble — in markets, in friendships, in coalitions — the people who do well are not the ones with the sharpest take. They are the ones who can wait without becoming statues and act without becoming weather."
+    ],
+    watch: [
+      "Your information diet as a position, not a pastime.",
+      "Sleep as a risk limit you cannot negotiate with.",
+      "Whether you are collecting signal or collecting membership."
+    ],
+    close: [
+      "Practise forbearance until it looks like personality. Then keep practising, because it is not.",
+      "The mind wants a saga. Give it a checklist and a walk."
+    ],
+    comment: [
+      "If you finished this angry, read it again after water. If you finished it smug, same prescription.",
+      "We are not your therapist. We are the friend who hides the phone at dinner."
+    ]
+  },
+  energy: {
+    heads: [
+      "Inventories still veto the speech",
+      "Tightness is arithmetic, not attitude",
+      "Freight, storage, and the unfashionable barrel",
+      "Crack spreads remain the only honest critic",
+      "Transition is a capex story, not a costume",
+      "The lights stay on because someone did the boring job"
+    ],
+    deks: [
+      "Energy is the adult table. Opinions eat in the kitchen.",
+      "A barrel is a schedule. A slogan is a wish.",
+      "Scarcity tutors faster than any ministry of education."
+    ],
+    ledes: [
+      "Inventories and freight set the conversation. Commentators arrive late, order something expensive, and leave a tip in adjectives. The curve, unimpressed, keeps the receipt.",
+      "A constructive energy desk believes two things at once: hydrocarbons still clear civilisation at 8 a.m., and the transition is real wherever someone is pouring concrete, copper, and patience into it.",
+      "When prompt tightens, marketing loosens. Traders adapt or donate. Households do the same with the heating bill, which is why this is never only a 'markets' story."
+    ],
+    body: [
+      "Public institutions have spent recent seasons reminding anyone still listening that energy shocks travel. They lift headline inflation, rearrange real incomes, and dare committees to decide whether they are looking at a blip or a regime. That is not a secret wire. It is the World Bank voice, the IMF voice, the minutes voice — the grown-up voice.",
+      "The kind reading of a spike is that longer-dated futures often refuse to panic as hard as the front. Markets sometimes believe the disruption is loud and finite. Sometimes they are right. The desk does not need to be a prophet. It needs to respect storage, spare capacity, and the political temptation to pretend physics is optional.",
+      "Industry is the unfashionable cousin of energy. Refining, grid interconnectors, ships, mines: these are how a positive story becomes a Tuesday that still works. If your transition plan has no welders, it is a brunch.",
+      "Ordinary life feels energy first. Inherited balance sheets feel it second, through inflation, discount rates, and the sudden seriousness of real assets. Same shock, two clocks. A newsletter that talks only to one clock is only half a letter.",
+      "There is humor in watching very online people discover inventories. There is no humor in a cold house. Hold both thoughts. It is how you stay human and still useful.",
+      "Logistics price patience. Storage vetoes drama. Pipeline constraints do not trend and then they trend in cash. Follow the physical, and let the moralising catch up if it can."
+    ],
+    watch: [
+      "Inventories, freight and spare capacity before any adjective.",
+      "Whether policy is buying time for supply or renting a headline.",
+      "The household bill as the high-frequency political print."
+    ],
+    close: [
+      "Keep the lights on, then argue about the architecture. Sequence is mercy.",
+      "Barrels and electrons are not vibes. Treat them with the courtesy you would give a bridge."
+    ],
+    comment: [
+      "No, we will not diagnose a war from a comment box. We will read the curve and hope the diplomats still have a corridor.",
+      "If your energy take cannot survive an inventory print, it was a mood."
+    ]
+  },
+  money: {
+    heads: [
+      "The committee speaks in plumbing",
+      "Real yields still do the untelevised job",
+      "QE bought time; credibility spends it",
+      "FX is funding with a flag",
+      "Haircuts legislate faster than parliaments",
+      "Patience is the only policy retail investors can run"
+    ],
+    deks: [
+      "Minutes narrate. Balance sheets testify.",
+      "A currency is a story about who waits.",
+      "The discount window remains a better teacher than the conference."
+    ],
+    ledes: [
+      "Central banks are not oracles. They are large, cautious balance sheets with legal mandates and human sleep requirements. That sentence, accepted early, will save you a career of theatrical disappointment.",
+      "When energy lifts the headline and growth cools the room, committees do what they often do: they wait, they argue about looking through, and they hope the front of the oil curve is more dramatic than the back. A desk can live with that. A podium pretends it invented it.",
+      "Money is how strangers cooperate at scale. Everything else on this page is a footnote to that miracle, including the jokes."
+    ],
+    body: [
+      "Swap lines are diplomacy without bunting. Reserve scarcity is a tone. Collateral haircuts redraw more maps than many treaties. If you want international politics in one chart, start there and only then invite the ambassadors.",
+      "The dollar’s posture is usually growth, energy, and safety — not virtue. Crosses do not arbitrate sermons. They price funding. Carry is a tip jar until jurisdiction closes the bar.",
+      "A new chair, an old mandate, a public that wants cheaper money and cheaper bread: this is not a scandal. It is the job. The constructive stance is to assume the institution would like to remain an institution, and then watch what the dots, the RRP, and the actual path of inflation permit.",
+      "Households run monetary policy too. They just call it a fixed-rate mortgage, a delayed kitchen, or a second job. The inherited run it as duration, philanthropy, and the question of whether the next generation should be paid in cash or in competence.",
+      "We draw the latest public prints so the argument has a spine. If you trade, use a regulated feed and a lawyer you have actually met. If you read, you are already ahead of people who confuse a candlestick with a personality.",
+      "There is a good joke in every policy meeting: grown adults arguing about the future with tools invented to survive the past. The kinder punchline is that this still works more often than the internet admits."
+    ],
+    watch: [
+      "Real yields, energy, and labor — the unholy trinity that actually votes.",
+      "Balance-sheet runoff as temperament, not as a slogan.",
+      "Whether FX is pricing growth or merely pricing nerves."
+    ],
+    close: [
+      "Let the funding math veto the drama. Then go outside.",
+      "Committees delay. Curves less so. Align yourself with the less theatrical instrument."
+    ],
+    comment: [
+      "Not a rate call. A temperament call: stay solvent, stay kind, stay long optionality.",
+      "If you came for a hot tip, the exit is everywhere and the refund is your time."
+    ]
+  },
+  ordinary: {
+    heads: [
+      "Payroll is the honest high-frequency print",
+      "Inheritance is duration with feelings",
+      "A kitchen renovation is a rates view",
+      "The bus, the bakery, the balance sheet",
+      "Family capital is a sequence, not a statue",
+      "Ordinary life remains the point of the entire machine"
+    ],
+    deks: [
+      "If it does not survive the school run, it is not a philosophy.",
+      "Wealth is concentrated. Weather is not. Write for both.",
+      "The ordinary reader is not a lesser reader."
+    ],
+    ledes: [
+      "A family that inherited a warehouse and a family that inherited a commute are both running duration. One has better collateral. Both can be ruined by a bad sequence and saved by a boring one.",
+      "This desk is for inherited folks and for people who will never be called that in a will. The point is not flattery. The point is that geo-economics arrives as rent, bread, bus fare, tuition, and the question of whether next year is livable.",
+      "There is nothing ordinary about keeping a household intact through a loud decade. It is the most elite skill we have, and it is practised daily by people who will never be invited to a summit."
+    ],
+    body: [
+      "Housing is where policy becomes furniture. Credit boxes, wages, permits, and the unfashionable art of amortization decide more lives than any panel on 'the future of work'. Builders obey rates. Buyers obey paychecks. Politicians obey polls. You can work with that triangle or you can tweet at it.",
+      "Inherited capital has a psychology: the fear of being the generation that dropped the tray. Ordinary capital has another: the fear of never being handed a tray. A civilised newsletter talks to both without turning either into a cartoon. Cartoons do not compound.",
+      "Work is changing in the usual uneven way. Tools get faster. Institutions lag. People still want meaning on Tuesday afternoon. If your AI story has no clerks, nurses, welders, or teachers in it, you have written a brochure.",
+      "Share this with the person who thinks 'macro' is not for them. Macro is why the tomato costs what it costs. They were in the story the whole time. We just finally used a readable font.",
+      "Humor helps. Not the cruel kind — the kind that admits we are all slightly ridiculous for needing a twice-daily letter to remember to be patient. Ridiculous, and still, it works.",
+      "A positive tone is not a denial of grief, war, or bills. It is a decision to look for the corridor. Corridors are how children get to school. That is enough justification for an entire editorial line."
+    ],
+    watch: [
+      "Wages versus rents; the only affordability debate that clears.",
+      "Family meetings as investment committees that serve cake.",
+      "Whether your plan survives a boring year, not just an exciting week."
+    ],
+    close: [
+      "Keep the household. Keep the joke. Keep a little dry powder. That is a complete strategy for most humans.",
+      "If you inherited much, teach competence. If you inherited little, practise it. The newsletter is the same."
+    ],
+    comment: [
+      "This section is the point. The other desks are how we keep this one honest.",
+      "No lifestyle photographs. You already know what a table looks like."
+    ]
+  },
+  tech: {
+    heads: [
+      "Compute is a utility with a waiting list",
+      "The stack is a power bill wearing a hoodie",
+      "Memory, heat, and the unglamorous bottleneck",
+      "Tools get faster; institutions still walk",
+      "A model is not a factory until it has a floor",
+      "Attention is the scarce input nobody inventories"
+    ],
+    deks: [
+      "The useful tech story is logistics, power, and patience.",
+      "If it cannot be plugged in, it is still a brochure.",
+      "Speed is cheap. Reliability is the luxury good."
+    ],
+    ledes: [
+      "The decade's loudest machines are still constrained by the oldest things: electricity, cooling, people who can keep a room from catching fire, and a balance sheet that survives a dull quarter.",
+      "Treat compute as infrastructure and the fairy tale ends. That is a kindness. Infrastructure can be maintained. Fairy tales can only be refreshed.",
+      "A slightly constructive tech desk does not worship the demo. It asks who owns the spare parts, who pays for the megawatts, and who still knows how to restart the thing on a Sunday."
+    ],
+    body: [
+      "Chips, models, and networks are not morality plays. They are constraint sets. The inherited reader hears duration and monopoly. The ordinary reader hears a job description that moved while they were making dinner. Same stack, two invoices.",
+      "When a single factory or a single strait can reprice the year, you are not watching a ticker. You are watching a corridor. Corridors prefer boredom. Policy that forgets this will discover it at the customs desk.",
+      "Software eats nothing by itself. It rents power, talent, and time. If your story has no electricians, no nurses in the loop, and no clerk who has to re-enter the data, you have described a keynote, not an economy.",
+      "The honest edge is not a secret model. It is the habit of asking what breaks when the demo leaves the building. Heat, latency, liability, and the person who has to stay late.",
+      "Hype is a funding language. Maintenance is a civilisation language. This desk translates the second and lets the first pay for its own dinner.",
+      "Patience still works here. The stack compounds for people who can wait for the second generation, not the first press cycle."
+    ],
+    watch: [
+      "Power, water, and people — the three unfashionable inputs.",
+      "Whether the bottleneck is silicon, permission, or sleep.",
+      "Who can still repair what they just bought."
+    ],
+    close: [
+      "Plug it in, price the power, keep a human in the loop. Then you may have a thesis.",
+      "The constructive tech trade is still competence with a cooling budget."
+    ],
+    comment: [
+      "We will not turn a supplier into a mascot. The constraint is the story.",
+      "If a sentence needs a brand name to stand, it was not ready."
+    ]
+  },
+  health: {
+    heads: [
+      "Bodies are the original high-frequency print",
+      "Care is a labor market with a night shift",
+      "Longevity is a fiscal story in a white coat",
+      "Sleep is policy you can practise tonight",
+      "Hospitals keep the only queue that cannot wait",
+      "Public health is logistics with a conscience"
+    ],
+    deks: [
+      "If the clinic cannot staff Tuesday, the forecast is already late.",
+      "Health is how an economy keeps its operators.",
+      "The body does not take a press cycle off."
+    ],
+    ledes: [
+      "Every other desk on this letter eventually arrives here: a person who can still work, care, walk, and think. That is not a soft subject. It is the hard constraint under the hard constraints.",
+      "Aging is not a vibe. It is a ratio of carers to cared-for, of pensions to payrolls, of beds to winters. The inherited feel it as succession. The ordinary feel it as a waiting list.",
+      "A constructive health desk refuses both panic and wellness theatre. It counts staff, sleep, vaccines, water, and whether a household can afford to be ill for a week."
+    ],
+    body: [
+      "Demography moves like gravity: slow, then suddenly obvious on a municipal budget. You can argue with a speech. You cannot argue with a night shift that did not fill.",
+      "Innovation in medicine is real. So is the unglamorous work of getting a pill, a nurse, and a bus to the same address. Logistics is the moral act most editorials skip.",
+      "Mental load is not a metaphor when it shows up as absence, accidents, and attention that can no longer compound. Psychology and health share a wall. We leave the door open on purpose.",
+      "If your growth story assumes infinite healthy hours from people who already run two jobs and a parent, you have written fiction with a spreadsheet attached.",
+      "Public systems fail the way pipes fail: quietly, then all over the kitchen. The useful letter watches waiting times, vacancy rates, and whether prevention is still cheaper than theatre.",
+      "Kindness here is not a slogan. It is staffing, sleep, and a plan that still works when someone you love is the print."
+    ],
+    watch: [
+      "Staffing, beds, and the household's ability to absorb a bad week.",
+      "Whether prevention is funded or only praised.",
+      "Sleep as the cheapest productivity reform still available."
+    ],
+    close: [
+      "Keep the body. Keep the carer. Keep the night shift possible. The rest of the letter can wait.",
+      "Health is how a civilisation proves it intends to continue."
+    ],
+    comment: [
+      "No diagnoses from a desk chair. We count systems, not strangers.",
+      "If this read like a lecture, drink water and go for a walk. That is the whole protocol."
+    ]
+  },
+  security: {
+    heads: [
+      "Order is a public good with a night watch",
+      "Deterrence is a schedule, not a speech",
+      "The corridor still beats the cliff",
+      "Insurance, escorts, and the price of distance",
+      "Institutions are how adults keep a border boring",
+      "Safety is the first infrastructure"
+    ],
+    deks: [
+      "Security is what lets the other desks do Tuesday.",
+      "The useful question is the corridor, not the costume.",
+      "Boredom at a border is an achievement."
+    ],
+    ledes: [
+      "A country that cannot keep a port, a cable, a hospital, and a school ordinary will discover that every other argument was luxury. Security is the condition of the letter, not a special section for enthusiasts.",
+      "We will not do war tourism from a comfortable chair. We will do incentives, logistics, insurance, and the unfashionable work of keeping a corridor open.",
+      "The inherited want continuity. The ordinary want the bus to run. Both require a night that stays boring. That is the whole desk."
+    ],
+    body: [
+      "Deterrence, like term premia, works slowly and then all at once. Speeches are cheap. Spare parts, training, and treaties that still mean something on a bad Wednesday are not.",
+      "Trade lanes, undersea cables, satellites, and grain are security stories wearing civilian clothes. If your geopolitics cannot survive a freight print, it was literature.",
+      "A constructive line is not naivety. It is the observation that most people, most days, prefer a settlement to a spectacle — and that institutions exist to make that preference expensive to betray.",
+      "Households feel this first as prices, then as conscription of attention, then as the question of whether next year is still plannable. Write for that reader, not for the map with little tanks.",
+      "Alliances are balance sheets with flags. They work when invoices are paid and fail when they become a brand. Follow the invoice.",
+      "Humor is allowed. Cruelty is not required. We will not name private people as trophies. States have addresses. Constraints have numbers."
+    ],
+    watch: [
+      "Corridors, cables, and whether insurance still clears.",
+      "Spare parts and training — the two untelevised stocks.",
+      "Whether rhetoric is buying time or spending it."
+    ],
+    close: [
+      "Keep the corridor. Keep the night boring. Then the rest of the week can be about living.",
+      "Order is not a mood. It is a maintained machine."
+    ],
+    comment: [
+      "No battlefield colour from this chair. Logistics, then law, then hope.",
+      "If a sentence only works by frightening you, it was selling something."
+    ]
+  }
+};
+
+const VOICE = {
+  markets: {
+    heads: ["The tape already told you. The podium is late.","You are not missing a secret. You are missing quiet.","Price is the only adult in the room today","They sold you a mood. The curve sold you a schedule."],
+    deks: ["If it needs a choir, it is not a position. It is a performance.","The constructive read is almost boring. That is how you know it might pay."],
+    ledes: [
+      "Ignore the theatrics. You already knew this part: the people with a microphone are marketing a feeling, and the people with a balance sheet are pricing a wait. You are allowed to side with the wait.",
+      "Nobody is hiding a magic number from you. They are hiding how ordinary the good outcome looks. Spreads heal. Funding breathes. The loudest account of the day is usually the one that did not have to clear."
+    ],
+    body: [
+      "Here is the part they skip because it does not trend: most days, the system tries to remain a system. That is not naivety. That is how payrolls still happen. Your job is not to applaud it. Your job is to stop paying rent to other people's panic.",
+      "If you inherited a book, you already speak duration. If you inherited a commute, you already speak cash flow. Same language, different stationery. Size to sleep. Let the tourists donate."
+    ],
+    today: [
+      "The session will try to sell you a mood. Decline the mood. Buy the schedule.",
+      "If the index needs a choir, it is performing. You do not have to clap."
+    ],
+    heard: [
+      "If you have been quietly thinking 'this cannot be as dramatic as the timeline,' congratulations. You still have a nervous system. Keep it.",
+      "You are not behind. You are refusing to be stampeded. That is the whole edge, and it is still legal."
+    ],
+    comments: [
+      "Hot take: the market is not gaslighting you. The content is. Price is the apology.",
+      "If this felt like relief, that is the product. Relief is information.",
+      "We will not sell you a crash or a rapture. We will sell you Tuesday, which is rarer."
+    ],
+    close: ["Keep the habit. Starve the speech. The rest is weather.","Bottom line: cash first, story second, and you were right to want it simple."],
+    watch: ["Whether breadth agrees or the index is doing karaoke.","Whether your size still fits the night."]
+  },
+  geoecon: {
+    heads: ["Incentives commute. Treaties take the train.","The map is being redrawn in invoices","You do not need a war room. You need a freight print."],
+    deks: ["Power still matters. So does the bill of lading.","Borders are loud. Haircuts are precise."],
+    ledes: [
+      "Everyone wants a villain with a flag. The useful version is duller and more hopeful: most countries, most days, would rather keep the lights on than win the metaphor. Follow the corridor. It is how people get home.",
+      "You were right to distrust the summit photo. You were wrong if you thought that meant nothing works. Logistics still finishes arguments. That is the optimistic fact hiding under the panic."
+    ],
+    body: [
+      "Tariffs, escorts, chips, grain — they are all ways of moving time. Some buy it. Some rent it. Some set it on fire for the cameras. A grown desk assumes enough people still prefer a settlement, then checks the insurance quote.",
+      "The inherited world already knew this. The ordinary world learns it at the pump. Same mechanism. You are not imagining the squeeze. You are also not required to despair."
+    ],
+    today: [
+      "Flags are loud today. Freight is still the diplomat that shows up.",
+      "A summit photo is not a corridor. Check the insurance quote before the metaphor."
+    ],
+    heard: ["If your geopolitics cannot survive a grocery ticket, it was cosplay. Yours can. That is why you are still reading.","You wanted someone to say the world is not a movie. Here it is. It is a warehouse with flags."],
+    comments: ["Diplomacy is just a long invoice with better chairs.","The constructive international story is not kindness. It is competence that still wants dinner."],
+    close: ["Follow the corridor, not the choir.","Nations, like families, survive on sequences."],
+    watch: ["Freight, insurance, energy — the three honest diplomats."]
+  },
+  politics: {
+    heads: ["The annex is the news. The rally is the ad.","You do not need a hero. You need a Tuesday that still works.","Institutions are how adults keep a country"],
+    deks: ["A state is a cash-flow with a flag and a legal department.","The constructive citizen reads the footnote."],
+    ledes: [
+      "We will not do character assassination as a sport. It is cheap and it makes you dumber. The useful political story is the one you already suspected: campaigns are retail, governing is wholesale, and the gap is where disappointment lives — and also where repair happens, unphotographed.",
+      "You are tired of being recruited into someone else's adrenaline. Good. That fatigue is a civic skill. Democracy is still the only widely available technology for losing without burning the building. On a good day, that is astonishing."
+    ],
+    body: [
+      "Budgets, courts, statistical offices — the unsexy triad. Mock them and you will miss the only machinery that still knows how to do Wednesday. A slightly positive desk assumes most clerks would like to remain clerks, then watches whether the numbers stay honest.",
+      "The inherited want continuity. The ordinary want the bus. Those are the same request. Anyone selling you a civil war as entertainment is not on your side, even if they flatter your team."
+    ],
+    today: [
+      "The podium will audition for your adrenaline. The annex will not. Read the annex.",
+      "Nobody needs another recruitment poster. They need a Wednesday that still functions."
+    ],
+    heard: ["If you have been saying 'just run the place' under your breath, this desk heard you.","You are not apathetic. You are allergic to cosplay. There is a difference."],
+    comments: ["Rage is widely available and usually overpriced.","We will not take anyone down in a comment. We will take the annex seriously, which is ruder."],
+    close: ["Read the annex. Keep your nervous system. Vote if you can.","Institutions are a love letter to people who will be alive after the clip."],
+    watch: ["Budgets, courts, statistical integrity."]
+  },
+  psych: {
+    heads: ["Your attention is the trade they cannot mark to market","Calm is a technology. You can practise it.","You are not broken. You are over-informed."],
+    deks: ["Most people do not have a thesis. They have a temperature.","The mind is a high-frequency trader with worse risk limits."],
+    ledes: [
+      "If you finished yesterday slightly ashamed of how much you refreshed, you are the customer, not the fool. Attention is now a cost of goods sold. The optimistic move is vulgar and available: put the phone in another room and become expensive again.",
+      "You do not need a new personality. You need a sequence you can repeat on a bad Wednesday. That sentence has saved more money and more marriages than any macro call on this desk."
+    ],
+    body: [
+      "Indignation is a cheap identity. It bonds quickly and predicts nothing. If your information diet requires a villain before breakfast, you are not informing yourself. You are stretching. Stretching is fine. Do not confuse it with a plan.",
+      "The inherited fear wasting a past. The ordinary fear never building a future. Both are permission stories. Neither is solved by a hotter take. Both are soothed by a checklist and a walk."
+    ],
+    today: [
+      "The feed will try to stampede you before noon. That is not news. That is a business model.",
+      "You can put the phone in another room and become expensive again. It still works."
+    ],
+    heard: ["If you came here to feel less crazy, stay. That is a legitimate use of a letter.","You are allowed to be optimistic without being a mark. That is the whole psychological product."],
+    comments: ["Water, walk, then one decision. That is the only thread we endorse.","If you finished this smug, same prescription as anger: water."],
+    close: ["Practise forbearance until it looks like personality. Then keep practising.","Give the mind a checklist. It wanted a saga."],
+    watch: ["Your information diet as a position.","Sleep as a risk limit you cannot negotiate."]
+  },
+  energy: {
+    heads: ["Inventories still veto the speech","The lights stay on because someone did the boring job","Scarcity is arithmetic. You already knew that."],
+    deks: ["A barrel is a schedule. A slogan is a wish.","Energy is the adult table. Opinions eat in the kitchen."],
+    ledes: [
+      "You felt the bill before you felt the take. That is not you being unsophisticated. That is you being the high-frequency print. Inventories and freight set the conversation. Commentators arrive late and tip in adjectives.",
+      "A constructive energy desk believes two things at once, which is how adults live: hydrocarbons still clear civilisation at 8 a.m., and the transition is real wherever someone is pouring concrete, copper, and patience into it. Both can be true. Both can pay."
+    ],
+    body: [
+      "When prompt tightens, marketing loosens. Households adapt or donate. There is no humor in a cold house, and there is plenty in watching very online people discover storage. Hold both thoughts.",
+      "The kind reading of a spike is that the back of the curve often refuses to panic as hard as the front. Sometimes the disruption is loud and finite. You do not need to be a prophet. You need to respect physics and still plan a summer."
+    ],
+    today: [
+      "Someone will narrate barrels as a morality play. Inventories will not attend the play.",
+      "The bill arrived before the take. Trust the bill. Then keep the lights on."
+    ],
+    heard: ["If you have been doing the household math while they did the geopolitics, you were doing the real desk.","You wanted someone to say the lights matter more than the take. The lights matter more than the take."],
+    comments: ["Follow the physical. Let the moralising catch the next train.","No war diagnosis from a comment box. The curve, then hope for a corridor."],
+    close: ["Keep the lights on, then argue about the architecture. Sequence is mercy.","Barrels and electrons are not vibes. Treat them like a bridge."],
+    watch: ["Inventories, freight, spare capacity. Then adjectives."]
+  },
+  money: {
+    heads: ["The committee is a balance sheet with a sleep requirement","You do not need a rate call. You need a temperament.","Real yields still do the untelevised job"],
+    deks: ["Minutes narrate. Balance sheets testify.","A currency is a story about who waits."],
+    ledes: [
+      "Central banks are not oracles. They are large, cautious balance sheets with legal mandates and human sleep requirements. Accept that early and you will be spared a career of theatrical disappointment — and you will still be able to plan a mortgage.",
+      "You wanted someone to stop pretending the dots are scripture. Here it is. Energy lifts the headline, growth cools the room, the committee waits, and you can live with that. Waiting is not a scandal. It is often the kindness."
+    ],
+    body: [
+      "Households run monetary policy too. They call it a fixed-rate, a delayed kitchen, a second job. The inherited run it as duration. Same job. Different fonts. Patience is the only policy you can actually execute.",
+      "Money is how strangers cooperate at scale. Everything else on this page is a footnote to that miracle, including the jokes. A slightly positive desk assumes the institution would like to remain an institution, then watches inflation, labor, and the price of waiting."
+    ],
+    today: [
+      "The dots are not scripture. They are a committee trying to sleep. Plan the mortgage anyway.",
+      "You do not need a call. You need a temperament that survives a hold."
+    ],
+    heard: ["If you came for a hot tip, the exit is everywhere. If you came to feel solvent, sit down.","You were right not to treat a press conference as a personality."],
+    comments: ["Not a rate call. A temperament call: stay solvent, stay kind, stay long optionality.","The discount window remains a better teacher than the conference."],
+    close: ["Let the funding math veto the drama. Then go outside.","Align with the less theatrical instrument."],
+    watch: ["Real yields, energy, labor. The trinity that actually votes."]
+  },
+  ordinary: {
+    heads: ["Payroll is the honest high-frequency print","You were in the macro story the whole time","A kitchen is a rates view with better lighting"],
+    deks: ["If it does not survive the school run, it is not a philosophy.","The ordinary reader is not a lesser reader."],
+    ledes: [
+      "A family that inherited a warehouse and a family that inherited a commute are both running duration. One has better collateral. Both can be ruined by a bad sequence and saved by a boring one. You already knew which one you are. This letter is for both.",
+      "There is nothing ordinary about keeping a household intact through a loud decade. It is the most elite skill we have, and it is practised daily by people who will never be invited to a summit. If that is you, you are the point of the machine."
+    ],
+    body: [
+      "Housing is where policy becomes furniture. Builders obey rates. Buyers obey paychecks. You can work with that triangle. You do not have to tweet at it. Affordability is not a vibe. It is wages versus rents, and you were not wrong to notice.",
+      "Macro is why the tomato costs what it costs. Share this with the person who thinks this letter is not for them. They were in the story the whole time. We finally used a readable font."
+    ],
+    today: [
+      "The tomato is the macro print. If they left you out of the story, they miscounted.",
+      "School-run math is not unsophisticated. It is the only math that has to clear tonight."
+    ],
+    heard: ["If you have been doing the honest math at the table, you are not 'bad with money.' You are early.","You wanted to be spoken to like an adult who buys milk. That is the whole editorial line."],
+    comments: ["Keep the household. Keep the joke. Keep a little dry powder. Complete strategy.","This section is the point. The other desks exist to keep this one honest."],
+    close: ["If you inherited much, teach competence. If you inherited little, practise it. Same letter.","Corridors are how children get to school. That is enough justification."],
+    watch: ["Wages versus rents. The only affordability debate that clears."]
+  },
+  tech: {
+    heads: ["The demo left. The power bill stayed.","Compute is a utility with a waiting list","You do not need a mascot firm. You need a floor."],
+    deks: ["If it cannot be plugged in, it is still a brochure.","Speed is cheap. Reliability is the luxury good."],
+    ledes: [
+      "The loudest machines of the decade are still constrained by the oldest things: electricity, cooling, people who can keep a room from catching fire, and a balance sheet that survives a dull quarter. That sentence is not a short. It is a sigh of relief. Infrastructure can be maintained.",
+      "You were right to distrust the keynote. You were wrong if you thought that meant nothing is being built. Concrete, copper, and patience are being poured. That is the optimistic fact. The rest is costume."
+    ],
+    body: [
+      "When a single corridor can reprice the year, you are not watching a ticker. You are watching a warehouse. Warehouses prefer boredom. So should you.",
+      "Software eats nothing by itself. It rents power, talent, and time. If the story has no electrician and no clerk, it is a brochure. Brochures do not compound. People who wait for the second generation sometimes do."
+    ],
+    today: [
+      "The demo will leave. The power bill will not. Price the bill.",
+      "No mascot required. A floor, a megawatt, and someone who can restart it on Sunday."
+    ],
+    heard: ["If you have been muttering 'but who pays for the electricity,' you are the adult in the thread.","We will not make you worship a logo. We will make you respect a cooling budget."],
+    comments: ["If a sentence needs a brand name to stand, it was not ready.","The constructive tech trade is still competence with a cooling budget."],
+    close: ["Plug it in, price the power, keep a human in the loop.","Hype is funding language. Maintenance is civilisation language."],
+    watch: ["Power, water, people. The three unfashionable inputs."]
+  },
+  health: {
+    heads: ["The body does not take a press cycle off","Care is a labor market with a night shift","You are not dramatic. You are the print."],
+    deks: ["If the clinic cannot staff Tuesday, the forecast is already late.","Health is how an economy keeps its operators."],
+    ledes: [
+      "Every other desk on this letter arrives here: a person who can still work, care, walk, and think. That is not a soft subject. It is the hard constraint under the hard constraints. You already knew. The official rooms just say 'labor' as if nobody lives in a body.",
+      "A constructive health desk refuses both panic and wellness theatre. It counts staff, sleep, and whether a household can afford to be ill for a week. If that is the math you have been doing, you are not anxious. You are accurate."
+    ],
+    body: [
+      "Aging is a ratio, not a vibe. Carers to cared-for. Beds to winters. You can argue with a speech. You cannot argue with a night shift that did not fill. The hopeful version is still available: prevention is cheaper than theatre, and sleep is still the cheapest reform.",
+      "If your growth story assumes infinite healthy hours from people who already run two jobs and a parent, you have written fiction with a spreadsheet attached. You were right to roll your eyes. Roll them, then drink water."
+    ],
+    today: [
+      "Labor, in the official rooms, is a word. In a house it is a back, a night, a shift.",
+      "If the clinic cannot staff Tuesday, every other forecast is late. Start there."
+    ],
+    heard: ["If you have been the carer and the operator in the same week, this desk is talking to you. Not around you.","No diagnoses from a chair. Just the respect of counting systems."],
+    comments: ["Water, walk, night shift possible. The rest of the letter can wait.","Kindness here is staffing. Everything else is branding."],
+    close: ["Keep the body. Keep the carer. Keep Tuesday staffed.","Health is how a civilisation proves it intends to continue."],
+    watch: ["Staffing, beds, the household's ability to absorb a bad week."]
+  },
+  security: {
+    heads: ["Boredom at a border is an achievement","You do not need tanks on the map. You need a corridor.","Order is the first infrastructure"],
+    deks: ["Security is what lets the other desks do Tuesday.","The useful question is the corridor, not the costume."],
+    ledes: [
+      "A country that cannot keep a port, a cable, a hospital, and a school ordinary will discover that every other argument was luxury. You already felt that as prices and as attention you did not consent to give. This desk will not do war tourism. It will do incentives, insurance, and the unfashionable wish that the night stay boring.",
+      "The inherited want continuity. The ordinary want the bus. Both require a night that stays boring. Anyone selling you spectacle as strategy is not pricing your Tuesday."
+    ],
+    body: [
+      "Trade lanes, cables, satellites, grain — security stories in civilian clothes. If your geopolitics cannot survive a freight print, it was literature. Literature can be beautiful. It cannot load a ship.",
+      "A constructive line is not naivety. It is the observation that most people, most days, prefer a settlement to a spectacle — and that institutions exist to make betrayal expensive. You are allowed to hope for that without being simple."
+    ],
+    today: [
+      "Spectacle is cheap. Spare parts and a corridor are not. Bet on the corridor.",
+      "A boring night at the border is not a failure of narrative. It is the point."
+    ],
+    heard: ["If you have been hoping, quietly, that the grown-ups still have a corridor: yes. That is the bet. It is not a stupid bet.","We will not name private people as trophies. Constraints have numbers. You prefer numbers. Good."],
+    comments: ["No battlefield colour from this chair. Logistics, then law, then hope.","If a sentence only works by frightening you, it was selling something. Decline."],
+    close: ["Keep the corridor. Keep the night boring. Then live.","Order is not a mood. It is a maintained machine."],
+    watch: ["Corridors, cables, whether insurance still clears."]
+  }
+};
+
+const INSIGHTS = [
+  { t:"Price is the judge, time is the jury", d:"Stories are the audience. They are allowed to stay if they buy a ticket in cash flow." },
+  { t:"Optimism is a risk limit", d:"Not a mood. A rule: we will not rent our nervous system to people who profit from our panic." },
+  { t:"Institutions beat influencers", d:"On any horizon longer than a week, the annex outperforms the clip." },
+  { t:"The inherited and the ordinary rhyme", d:"Both are one sequence away from needing a plan. Write for the sequence." },
+  { t:"Physics, then politics", d:"Energy, food, housing, sleep. After those, you may have a take." },
+  { t:"No public comment board", d:"Not because we fear argument. Because we refuse to host harm." },
+  { t:"One desk, many time zones", d:"Precision over performance. The letter is written once, read everywhere." },
+  { t:"Weekdays for the pulse, Sunday for the week", d:"Morning to aim. Evening to admit. Sunday to keep the sequence honest." }
+];
+
+const PLANS = [
+  {
+    id:"corridor", name:"Corridor", price:"€0", cadence:"forever",
+    blurb:"For the newly paying attention.",
+    features:["Two open pieces each edition","The day's questions","Device-local notes","Share of open pieces"],
+    cta:"Stay on Corridor"
+  },
+  {
+    id:"desk", name:"Desk", price:"€12", cadence:"/ month · or €120 / year",
+    blurb:"For operators, civil servants, and people who read before they speak.",
+    features:["Everything in Corridor","Full weekday edition","Sunday long-read","Week dossier","Saved-for-later shelf"],
+    cta:"Take the Desk", feat:true
+  },
+  {
+    id:"principal", name:"Principal", price:"€36", cadence:"/ month · or €348 / year",
+    blurb:"For families that think in decades and citizens who refuse to be under-informed.",
+    features:["Everything in Desk","Full archive back to 2020","Precise calendar + any edition","Data room","Any week's dossier"],
+    cta:"Sit as Principal"
+  }
+];
+
+const TAPE_SOURCES = [
+  { code:"TS", name:"Tagesschau", topic:"politics", urls:["https://www.tagesschau.de/index~rss2.xml","https://www.tagesschau.de/xml/rss2/"] },
+  { code:"HS", name:"Hessenschau", topic:"ordinary", urls:["https://www.hessenschau.de/index.rss"] },
+  { code:"NDR", name:"NDR", topic:"politics", urls:["https://www.ndr.de/index~rss2.xml"] },
+  { code:"NTV", name:"n-tv", topic:"politics", urls:["https://www.n-tv.de/rss"] },
+  { code:"DW", name:"DW Top", topic:"politics", urls:["https://rss.dw.com/rdf/rss-en-all","https://rss.dw.com/xml/rss-en-all"] },
+  { code:"DW-G", name:"DW Global", topic:"geoecon", urls:["https://rss.dw.com/rdf/rss-en-world","https://rss.dw.com/xml/rss-en-world"] },
+  { code:"BBC", name:"BBC World", topic:"politics", urls:["https://feeds.bbci.co.uk/news/world/rss.xml"] },
+  { code:"BBC-BIZ", name:"BBC Business", topic:"markets", urls:["https://feeds.bbci.co.uk/news/business/rss.xml"] },
+  { code:"CNN", name:"CNN Top", topic:"politics", urls:["http://rss.cnn.com/rss/cnn_topstories.rss"] },
+  { code:"CNN-W", name:"CNN World", topic:"politics", urls:["http://rss.cnn.com/rss/edition_world.rss"] },
+  { code:"CNN-I", name:"CNN International", topic:"politics", urls:["http://rss.cnn.com/rss/edition.rss"] },
+  { code:"ABC", name:"ABC News International", topic:"politics", urls:["https://abcnews.go.com/abcnews/internationalheadlines"] },
+  { code:"ABC-TOP", name:"ABC News Top", topic:"politics", urls:["https://abcnews.go.com/abcnews/topstories"] },
+  { code:"CBS", name:"CBS News", topic:"politics", urls:["https://www.cbsnews.com/latest/rss/main"] },
+  { code:"CBS-W", name:"CBS World", topic:"politics", urls:["https://www.cbsnews.com/latest/rss/world"] },
+  { code:"NN", name:"NewsNation", topic:"politics", urls:["https://www.newsnationnow.com/feed/"] },
+  { code:"CNBC", name:"CNBC Top News", topic:"markets", urls:["https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114"] },
+  { code:"CNBC-W", name:"CNBC World", topic:"geoecon", urls:["https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100727362"] },
+  { code:"NYT", name:"NY Times World", topic:"politics", urls:["https://rss.nytimes.com/services/xml/rss/nyt/World.xml"] },
+  { code:"NYT-BIZ", name:"NY Times Business", topic:"markets", urls:["https://rss.nytimes.com/services/xml/rss/nyt/Business.xml"] },
+  { code:"WSJ", name:"WSJ World", topic:"geoecon", urls:["https://feeds.a.dj.com/rss/RSSWorldNews.xml"] },
+  { code:"WSJ-MKT", name:"WSJ Markets", topic:"markets", urls:["https://feeds.a.dj.com/rss/RSSMarketsMain.xml"] },
+  { code:"EN", name:"Euronews", topic:"politics", urls:["https://www.euronews.com/rss"] },
+  { code:"F24", name:"France 24", topic:"politics", urls:["https://www.france24.com/en/rss"] },
+  { code:"WaPo", name:"Washington Post World", topic:"politics", urls:["https://feeds.washingtonpost.com/rss/world"] },
+  { code:"WaPo-N", name:"Washington Post National", topic:"politics", urls:["https://feeds.washingtonpost.com/rss/national"] },
+  { code:"BBG", name:"Bloomberg Markets", topic:"markets", urls:["https://feeds.bloomberg.com/markets/news.rss"] },
+  { code:"BBG-P", name:"Bloomberg Politics", topic:"politics", urls:["https://feeds.bloomberg.com/politics/news.rss"] },
+  { code:"BBG-T", name:"Bloomberg Technology", topic:"markets", urls:["https://feeds.bloomberg.com/technology/news.rss"] },
+  { code:"FOX", name:"Fox News", topic:"politics", urls:["https://moxie.foxnews.com/google-publisher/latest.xml","http://feeds.foxnews.com/foxnews/latest"] },
+  { code:"FOXBIZ", name:"Fox Business", topic:"markets", urls:["https://moxie.foxbusiness.com/google-publisher/latest.xml","https://moxie.foxbusiness.com/google-publisher/markets.xml"] },
+  { code:"NBC", name:"NBC News", topic:"politics", urls:["https://feeds.nbcnews.com/nbcnews/public/news"] },
+  { code:"NPR", name:"NPR News", topic:"politics", urls:["https://feeds.npr.org/1001/rss.xml"] },
+  { code:"DEF", name:"Defense News", topic:"geoecon", urls:["https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml"] },
+  { code:"AP", name:"AP Top", topic:"politics", urls:["https://news.google.com/rss/search?q=site:apnews.com+when:1d&hl=en-US&gl=US&ceid=US:en"] },
+  { code:"REU", name:"Reuters", topic:"geoecon", urls:["https://news.google.com/rss/search?q=site:reuters.com+when:1d&hl=en-US&gl=US&ceid=US:en","https://feeds.reuters.com/Reuters/worldNews"] },
+  { code:"USGS", name:"USGS News", topic:"energy", urls:["https://www.usgs.gov/news/news-releases/rss"] },
+  { code:"NASA", name:"NASA Breaking", topic:"energy", urls:["https://www.nasa.gov/rss/dyn/breaking_news.rss","https://www.nasa.gov/feed/"] },
+  { code:"RW", name:"ReliefWeb", topic:"ordinary", urls:["https://reliefweb.int/updates/rss.xml","https://reliefweb.int/headlines/rss.xml"] },
+  { code:"FED", name:"Federal Reserve", topic:"money", urls:["https://www.federalreserve.gov/feeds/press_all.xml"] },
+  { code:"ECB", name:"ECB", topic:"money", urls:["https://www.ecb.europa.eu/press/rss/press.xml"] },
+  { code:"EIA", name:"EIA", topic:"energy", urls:["https://www.eia.gov/rss/todayinenergy.xml"] }
+];
+
+const MARKET_SERIES = {
+  brent: { title:"Brent front ($/bbl)", yahoo:"BZ=F", stooq:"brn.f" },
+  wti:   { title:"WTI front ($/bbl)", yahoo:"CL=F", stooq:"cl.f" },
+  gold:  { title:"Gold ($/oz)", yahoo:"GC=F", stooq:"gc.f" },
+  silver:{ title:"Silver ($/oz)", yahoo:"SI=F", stooq:"si.f" },
+  copper:{ title:"Copper (¢/lb)", yahoo:"HG=F", stooq:"hg.f" },
+  ng:    { title:"US natural gas ($/MMBtu)", yahoo:"NG=F", stooq:"ng.f" },
+  dxy:   { title:"Dollar index", yahoo:"DX-Y.NYB", stooq:"dx.f" },
+  eurusd:{ title:"EURUSD", yahoo:"EURUSD=X", stooq:"eurusd" },
+  usdjpy:{ title:"USDJPY", yahoo:"JPY=X", stooq:"jpyusd" },
+  spx:   { title:"S&P 500", yahoo:"^GSPC", stooq:"^spx" },
+  ndx:   { title:"Nasdaq composite", yahoo:"^IXIC", stooq:"^ndq" },
+  us10y: { title:"US 10-year (%)", yahoo:"^TNX", stooq:"10yty.b" },
+  vix:   { title:"VIX", yahoo:"^VIX", stooq:"^vix" }
+};
+const TOPIC_SERIES = {
+  markets:["spx","us10y"],
+  geoecon:["copper","dxy"],
+  politics:["vix","dxy"],
+  psych:["vix","spx"],
+  energy:["brent","wti"],
+  money:["us10y","eurusd"],
+  ordinary:["gold","spx"],
+  tech:["ndx","copper"],
+  health:["gold","spx"],
+  security:["vix","dxy"]
+};
+
+const state = {
+  view:"brief",
+  edition: editionOf(),
+  peekEd: null,
+  archiveDay: null,
+  archiveEd: "am",
+  calYear: cetParts().y,
+  calMonth: cetParts().m,
+  articles: [],
+  tape: [],
+  movers: [],
+  world: {},
+  market: (function(){ const c=loadJSONSafe("it.market", {}); return c.series || (c.spx||c.brent?c:{}); })(),
+  search: "",
+  charts: [],
+  openIds: []
+};
+function loadJSONSafe(k, fb){ try{ return JSON.parse(localStorage.getItem(k)) ?? fb; }catch{ return fb; } }
+
+function loadJSON(k, fb){ try{ return JSON.parse(localStorage.getItem(k)) ?? fb; }catch{ return fb; } }
+function saveJSON(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch{} }
+function plan(){ return loadJSON(STORE.plan, { id:"corridor", email:"", since:null, billingAck:false }); }
+function setPlan(p){ saveJSON(STORE.plan, p); }
+function notesAll(){ return loadJSON(STORE.notes, {}); }
+function setNote(id, text){ const n=notesAll(); n[id]=text; saveJSON(STORE.notes,n); }
+function follows(){ return loadJSON(STORE.follows, []); }
+function toggleFollow(k){
+  const f=new Set(follows());
+  if(f.has(k)) f.delete(k); else f.add(k);
+  saveJSON(STORE.follows, [...f]);
+}
+function shelfAll(){ return loadJSON(STORE.shelf, []); }
+function isShelved(id){ return shelfAll().some(x=>x.id===id); }
+function toggleShelf(id){
+  let s=shelfAll();
+  if(s.some(x=>x.id===id)){ saveJSON(STORE.shelf, s.filter(x=>x.id!==id)); return; }
+  const a=findArt(id); if(!a) return;
+  s.unshift({ id:a.id, title:a.title, dek:a.dek, topic:a.topic, dayKey:a.dayKey, ed:a.ed, saved:Date.now() });
+  saveJSON(STORE.shelf, s.slice(0,80));
+}
+function imprintData(){
+  return {
+    name: PUBLISHER.name,
+    visdp: PUBLISHER.visdp,
+    careOf: PUBLISHER.careOf,
+    street: PUBLISHER.street,
+    zip: PUBLISHER.zip,
+    city: PUBLISHER.city,
+    country: PUBLISHER.country
+  };
+}
+
+function toast(msg, ms=3200){
+  const el=$("#toast"); el.hidden=false; el.textContent=msg;
+  clearTimeout(toast._t); toast._t=setTimeout(()=>el.hidden=true, ms);
+}
+
+function applyTheme(){
+  const t = localStorage.getItem(STORE.theme) || "terminal";
+  document.documentElement.dataset.theme = t==="paper" ? "paper" : "terminal";
+}
+function toggleTheme(){
+  const cur = document.documentElement.dataset.theme==="paper" ? "paper" : "terminal";
+  localStorage.setItem(STORE.theme, cur==="paper"?"terminal":"paper");
+  applyTheme();
+  drawAllCharts();
+}
+
+function monthLabels(n, extra, dayKey){
+  const [y,m] = (dayKey||state.edition.dayKey||"2026-08-13").split("-").map(Number);
+  const end = new Date(y, m-1, 1);
+  const out=[];
+  for(let i=n-1;i>=-extra;i--){
+    const d=new Date(end.getFullYear(), end.getMonth()-i, 1);
+    out.push(d.toLocaleDateString("en-GB",{month:"short", year:"2-digit"}));
+  }
+  return out;
+}
+function rwalk(n, start, vol, rng){
+  let v=start, out=[];
+  for(let i=0;i<n;i++){ v += (rng()*2-1)*vol; if(rng()<0.04) v += (rng()*2-1)*vol*3; out.push(+v.toFixed(2)); }
+  return out;
+}
+function forecast(series, extra, rng){
+  const n=series.length, k=Math.min(6,n-1);
+  let sx=0,sy=0,sxx=0,sxy=0;
+  for(let i=n-k;i<n;i++){ const x=i,y=series[i]; sx+=x; sy+=y; sxx+=x*x; sxy+=x*y; }
+  const den=k*sxx-sx*sx, slope=den? (k*sxy-sx*sy)/den : 0;
+  const last=series[n-1], f=[];
+  for(let i=1;i<=extra;i++) f.push(+(last + slope*i + (rng()-0.5)*Math.abs(slope||last*0.002)).toFixed(2));
+  return f;
+}
+
+function seriesFromMarket(id, months, extra, rng){
+  const rec = state.market[id];
+  const meta = MARKET_SERIES[id];
+  if(rec && rec.monthly && rec.monthly.length>=12){
+    let hist = rec.monthly.slice(-months);
+    while(hist.length<months) hist = [hist[0], ...hist];
+    const vol = (rec.volMonthly||[]).slice(-months);
+    const volPad = vol.length ? vol : rwalk(hist.length, 40, 6, rng).map(v=>Math.max(4,v));
+    const labels = rec.labels ? rec.labels.slice(-months) : monthLabels(hist.length, extra, state.edition.dayKey);
+    const extraLabs = [];
+    const lastL = labels[labels.length-1] || "";
+    for(let i=1;i<=extra;i++) extraLabs.push("fwd "+i);
+    return { title: meta.title, hist, vol: volPad, labels: labels.concat(extraLabs), extra, live:true };
+  }
+  return null;
+}
+function chartSpecs(topic, dayKey, ed){
+  const rng = seedn("cht", topic, dayKey, ed);
+  const months=60, extra=6;
+  const labels=monthLabels(months, extra, dayKey);
+  const live = (TOPIC_SERIES[topic]||[]).map(id=>seriesFromMarket(id, months, extra, rng)).filter(Boolean);
+  const mk = (title, start, vol, unit)=>({
+    title, unit, labels, extra, live:false,
+    hist: rwalk(months, start, vol, rng),
+    vol: rwalk(months, 40+rng()*30, 6, rng).map(v=>Math.max(4, v))
+  });
+  const fallback = {
+    markets:[ mk("S&P 500 path", 5200, 28, "idx"), mk("US 10-year (%)", 4.1, .04, "%") ],
+    geoecon:[ mk("Copper", 4.2, .05, "u"), mk("Dollar index", 104, .25, "idx") ],
+    politics:[ mk("VIX", 16, .4, "idx"), mk("Dollar index", 104, .25, "idx") ],
+    psych:[ mk("VIX", 16, .4, "idx"), mk("S&P 500 path", 5200, 28, "idx") ],
+    energy:[ mk("Brent front ($/bbl)", 78, 1.6, "$"), mk("WTI front ($/bbl)", 74, 1.5, "$") ],
+    money:[ mk("US 10-year (%)", 4.1, .04, "%"), mk("EURUSD", 1.08, .004, "fx") ],
+    ordinary:[ mk("Gold ($/oz)", 2300, 12, "$"), mk("S&P 500 path", 5200, 28, "idx") ],
+    tech:[ mk("Nasdaq composite", 16000, 80, "idx"), mk("Copper", 4.2, .05, "u") ],
+    health:[ mk("Gold ($/oz)", 2300, 12, "$"), mk("S&P 500 path", 5200, 28, "idx") ],
+    security:[ mk("VIX", 16, .4, "idx"), mk("Dollar index", 104, .25, "idx") ]
+  };
+  const specs = live.length ? live : (fallback[topic]||fallback.markets);
+  return specs.map(s=>{
+    const f=forecast(s.hist, extra, rng);
+    const last=s.hist[s.hist.length-1], prev=s.hist[s.hist.length-2]??last;
+    const chg=+(last-prev).toFixed(2);
+    return {
+      title:s.title, unit:s.unit, labels:s.labels||labels, extra:s.extra??extra,
+      hist:s.hist, fut:f, vol:s.vol,
+      last, chg, chgPct: +((chg/Math.abs(prev||1))*100).toFixed(2),
+      live: !!s.live
+    };
+  });
+}
+
+function drawChart(canvas, spec){
+  if(!canvas || !spec) return;
+  const dpr = Math.max(1, window.devicePixelRatio||1);
+  const cssW = canvas.clientWidth || 560;
+  const cssH = canvas.clientHeight || 300;
+  canvas.width = Math.floor(cssW*dpr);
+  canvas.height = Math.floor(cssH*dpr);
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  const bg = "#0a0d13";
+  const grid = "rgba(180,196,214,.12)";
+  const axis = "rgba(210,220,230,.72)";
+  const line = "#6bb3ff";
+  const lastC = "#f5a524";
+  const upC = "#3dd68c", dnC = "#ff6b6b";
+  const pad = {l:54, r:58, t:18, b:20};
+  const w=cssW, h=cssH;
+  ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+  const hist=spec.hist, fut=spec.fut, labels=spec.labels, vol=spec.vol||[];
+  const full = hist.concat(fut);
+  let mn=Math.min(...full), mx=Math.max(...full);
+  const span=mx-mn || 1; mn-=span*0.12; mx+=span*0.12;
+  const volH = Math.round((h-pad.t-pad.b) * 0.2);
+  const gap = 8;
+  const plotH = h-pad.t-pad.b-volH-gap;
+  const plotW=w-pad.l-pad.r;
+  const xAt=i=> pad.l + (i/(full.length-1))*plotW;
+  const yAt=v=> pad.t + (1-((v-mn)/(mx-mn)))*plotH;
+  const volMax = Math.max(1, ...vol);
+  const yVol=v=> pad.t+plotH+gap + (1-v/volMax)*volH;
+
+  ctx.strokeStyle=grid; ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=pad.t + (i/4)*plotH;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke();
+    const val = mx - (i/4)*(mx-mn);
+    ctx.fillStyle=axis; ctx.font="10px IBM Plex Mono, ui-monospace, monospace";
+    ctx.textAlign="right"; ctx.fillText(val.toFixed(Math.abs(val)<10?2:1), pad.l-6, y+3);
+  }
+  const split = xAt(hist.length-1);
+  ctx.fillStyle="rgba(255,255,255,.035)";
+  ctx.fillRect(split, pad.t, Math.max(0,w-pad.r-split), plotH);
+
+  const grd=ctx.createLinearGradient(0,pad.t,0,pad.t+plotH);
+  grd.addColorStop(0,"rgba(107,179,255,.28)");
+  grd.addColorStop(1,"rgba(107,179,255,0)");
+  ctx.beginPath();
+  hist.forEach((v,i)=>{ const x=xAt(i), y=yAt(v); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+  ctx.lineTo(xAt(hist.length-1), pad.t+plotH); ctx.lineTo(xAt(0), pad.t+plotH); ctx.closePath();
+  ctx.fillStyle=grd; ctx.fill();
+
+  ctx.beginPath();
+  hist.forEach((v,i)=>{ const x=xAt(i), y=yAt(v); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+  ctx.strokeStyle=line; ctx.lineWidth=1.7; ctx.stroke();
+
+  ctx.beginPath();
+  ctx.setLineDash([4,4]);
+  ctx.moveTo(xAt(hist.length-1), yAt(hist[hist.length-1]));
+  fut.forEach((v,i)=> ctx.lineTo(xAt(hist.length+i), yAt(v)));
+  ctx.strokeStyle="rgba(245,165,36,.9)"; ctx.lineWidth=1.4; ctx.stroke();
+  ctx.setLineDash([]);
+
+  const bw = Math.max(1, plotW/full.length*0.62);
+  vol.forEach((v,i)=>{
+    const up = i===0 || hist[i]>=hist[i-1];
+    ctx.fillStyle = up ? "rgba(61,214,140,.45)" : "rgba(255,107,107,.45)";
+    const x=xAt(i)-bw/2, y=yVol(v);
+    ctx.fillRect(x, y, bw, pad.t+plotH+gap+volH-y);
+  });
+
+  const ly=yAt(spec.last);
+  ctx.setLineDash([3,3]); ctx.strokeStyle="rgba(245,165,36,.55)";
+  ctx.beginPath(); ctx.moveTo(pad.l,ly); ctx.lineTo(w-pad.r,ly); ctx.stroke(); ctx.setLineDash([]);
+
+  const tag=spec.last.toFixed(2);
+  ctx.font="11px IBM Plex Mono, ui-monospace, monospace";
+  const tw=ctx.measureText(tag).width+12, th=16;
+  const tx=w-pad.r+4, ty=Math.max(pad.t, Math.min(pad.t+plotH-th, ly-th/2));
+  ctx.fillStyle=lastC;
+  ctx.beginPath();
+  ctx.moveTo(tx-6, ly); ctx.lineTo(tx, ty); ctx.lineTo(tx+tw, ty); ctx.lineTo(tx+tw, ty+th); ctx.lineTo(tx, ty+th); ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle="#1a1206"; ctx.textAlign="left"; ctx.fillText(tag, tx+6, ty+12);
+
+  ctx.fillStyle=axis; ctx.font="10px IBM Plex Mono, ui-monospace, monospace"; ctx.textAlign="center";
+  [0, Math.floor(hist.length/2), hist.length-1, full.length-1].forEach(i=>{
+    if(labels[i]) ctx.fillText(labels[i], xAt(i), h-6);
+  });
+
+  const readEl = canvas.parentElement && canvas.parentElement.querySelector("[data-read]");
+  const hover = canvas._hover;
+  if(hover!=null && hover>=0 && hover<full.length){
+    const hv = full[hover], hx=xAt(hover), hy=yAt(hv);
+    ctx.strokeStyle="rgba(245,165,36,.7)"; ctx.beginPath();
+    ctx.moveTo(hx,pad.t); ctx.lineTo(hx,pad.t+plotH+gap+volH); ctx.moveTo(pad.l,hy); ctx.lineTo(w-pad.r,hy); ctx.stroke();
+    ctx.fillStyle=lastC; ctx.beginPath(); ctx.arc(hx,hy,3,0,Math.PI*2); ctx.fill();
+    if(readEl) readEl.textContent = `${labels[hover]||""}  ${hv.toFixed(2)}  ${hover>=hist.length?"PROJ":"PX"}`;
+  }else if(readEl){
+    const up = spec.chg>=0;
+    readEl.innerHTML = `LAST ${spec.last.toFixed(2)} &nbsp; <span class="${up?"up":"dn"}">${up?"+":""}${spec.chg.toFixed(2)} (${up?"+":""}${spec.chgPct.toFixed(2)}%)</span> &nbsp; VOL DESK`;
+  }
+}
+
+function bindChart(canvas, spec){
+  const onMove = ev=>{
+    const r=canvas.getBoundingClientRect();
+    const x=ev.clientX-r.left;
+    const padL=54, padR=58, plotW=r.width-padL-padR;
+    const full=spec.hist.length+spec.fut.length;
+    let i=Math.round(((x-padL)/plotW)*(full-1));
+    i=Math.max(0, Math.min(full-1,i));
+    canvas._hover=i; drawChart(canvas, spec);
+  };
+  canvas.onmousemove=onMove;
+  canvas.onmouseleave=()=>{ canvas._hover=null; drawChart(canvas, spec); };
+  canvas.ontouchstart=e=>{ if(e.touches[0]){ onMove(e.touches[0]); } };
+  canvas.ontouchmove=e=>{ if(e.touches[0]){ onMove(e.touches[0]); } };
+  drawChart(canvas, spec);
+}
+
+function drawSpark(canvas, series, up){
+  const dpr=Math.max(1, devicePixelRatio||1);
+  const w=canvas.clientWidth||92, h=canvas.clientHeight||36;
+  canvas.width=w*dpr; canvas.height=h*dpr;
+  const ctx=canvas.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+  const mn=Math.min(...series), mx=Math.max(...series), span=mx-mn||1;
+  ctx.clearRect(0,0,w,h);
+  ctx.beginPath();
+  series.forEach((v,i)=>{
+    const x=i/(series.length-1)*w, y=h-4-((v-mn)/span)*(h-8);
+    i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  });
+  ctx.strokeStyle = up? "#3dd68c":"#ff6b6b"; ctx.lineWidth=1.4; ctx.stroke();
+}
+
+const SYN = [
+  [/\bthe tape\b/gi, ["price","the session","the open book","the cash tape"]],
+  [/\bmarkets?\b/gi, ["the room","the session","the book"]],
+  [/\bpatience\b/gi, ["forbearance","waiting well","unhurried size"]],
+  [/\bstory\b/gi, ["narrative","script","press line"]],
+  [/\bspeech(?:es)?\b/gi, ["podium lines","remarks","the microphone"]],
+  [/\binvestors?\b/gi, ["holders","hands","allocators"]],
+  [/\brisk\b/gi, ["exposure","the downside","what can break"]],
+  [/\bpolicy\b/gi, ["the rule-set","the official mix","the committee's constraint"]],
+  [/\bliquidity\b/gi, ["funding","cash in the pipes","ready money"]],
+  [/\bvolatility\b/gi, ["swing","the daily range","var"]],
+  [/\boptimism\b/gi, ["a constructive bias","a useful hope","a refusal to panic"]],
+  [/\bheadline[s]?\b/gi, ["the banner","the first line","the alert"]]
+];
+function weekdayOf(dayKey){
+  const [y,m,d]=dayKey.split("-").map(Number);
+  return new Date(y,m-1,d).toLocaleDateString("en-GB",{weekday:"long"});
+}
+function doy(dayKey){
+  const [y,m,d]=dayKey.split("-").map(Number);
+  return Math.floor((Date.UTC(y,m-1,d)-Date.UTC(y,0,0))/86400000);
+}
+function isLiveDay(dayKey){
+  return dayKey === state.edition.dayKey && !(state.view==="archive" && state.archiveDay);
+}
+function abstractTheme(topic, dayKey){
+  if(!isLiveDay(dayKey)) return "";
+  const list = state.world[topic] || [];
+  const blob = list.map(t=>String(t.title||"")).join(" ").toLowerCase();
+  if(!blob) return "";
+  const rules = [
+    [/hynix|nvidia|samsung|tsmc|intel|micron|semicon|memory|foundry|chip|gpu|ai model|data center/, "compute as infrastructure"],
+    [/oil|brent|wti|opec|crude|refin/, "crude balances"],
+    [/gas|lng|pipeline/, "gas and freight"],
+    [/rate|yield|fed |ecb|boe |fomc|inflation/, "the cost of waiting"],
+    [/dollar|euro|yen|currency|fx /, "funding across flags"],
+    [/housing|rent|mortgage|home price/, "shelter math"],
+    [/wage|job|labor|unemploy/, "payroll as the honest print"],
+    [/tariff|trade|sanction|shipping|freight|strait/, "corridors and invoices"],
+    [/election|parliament|coalition|vote/, "the calendar of consent"],
+    [/hospital|health|vaccine|aging|care /, "staffing and sleep"],
+    [/nato|missile|defense|defence|troop|ceasefire/, "keeping the night boring"],
+    [/flood|quake|storm|drought|relief/, "physics arriving as logistics"]
+  ];
+  for(const [rx, theme] of rules){ if(rx.test(blob)) return theme; }
+  return "";
+}
+function toEnglish(s){
+  if(!s) return s;
+  const map = [
+    [/\bImpressum\b/g, "Imprint"],
+    [/\bNachricht(en)?\b/gi, "news"],
+    [/\bWirtschaft\b/gi, "economy"],
+    [/\bPolitik\b/gi, "politics"],
+    [/\bGesellschaft\b/gi, "society"],
+    [/\bheute\b/gi, "today"],
+    [/\bund\b/g, "and"],
+    [/\bfür\b/g, "for"],
+    [/\bnicht\b/g, "not"],
+    [/\büber\b/g, "over"],
+    [/\bgegen\b/g, "against"],
+    [/\bKrieg\b/g, "war"],
+    [/\bFrieden\b/g, "peace"],
+    [/\bZinsen\b/g, "rates"],
+    [/\bInflation\b/g, "inflation"]
+  ];
+  let out=s;
+  map.forEach(([rx,en])=> out=out.replace(rx,en));
+  return out;
+}
+function stripNames(s){
+  return String(s||"")
+    .replace(/\b(SK\s*)?Hynix\b/gi,"the memory supplier")
+    .replace(/\b(Nvidia|NVIDIA|TSMC|Samsung|Intel|Micron|Apple|Microsoft|Amazon|Tesla|Google|Meta)\b/g,"the firm")
+    .replace(/\b[A-Z]{2,}[- ]?[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\b/g, "the name");
+}
+function printAside(topic){
+  const ids = TOPIC_SERIES[topic]||[];
+  for(const id of ids){
+    const s = state.market[id];
+    if(s && s.last!=null){
+      return `${MARKET_SERIES[id].title.split("(")[0].trim()} last public print ${(+s.last).toFixed(s.last<20?3:2)}`;
+    }
+  }
+  return "";
+}
+function synOnce(s, rng){
+  let out=s;
+  SYN.forEach(([rx, alts])=>{
+    if(rx.test(out) && rng()>0.35){
+      rx.lastIndex=0;
+      out = out.replace(rx, ()=> pick(alts, rng));
+    }
+    rx.lastIndex=0;
+  });
+  if(out.includes(";") && rng()>0.5){
+    const p=out.split(";");
+    if(p.length===2) out = p[1].trim().replace(/^\w/, c=>c.toUpperCase()) + " " + p[0].trim().replace(/\.$/,"") + ".";
+  }
+  return out.replace(/\s+/g," ").trim();
+}
+function weave(s, ctx, i){
+  const wd = weekdayOf(ctx.dayKey);
+  const when = ctx.ed==="am" ? "morning letter" : ctx.ed==="sun" ? "Sunday letter" : "evening letter";
+  const theme = abstractTheme(ctx.topic, ctx.dayKey);
+  const px = isLiveDay(ctx.dayKey) ? printAside(ctx.topic) : "";
+  const day = prettyDay(ctx.dayKey);
+  const n = (doy(ctx.dayKey)*17 + i*23 + (ctx.topic||"").length*5 + (ctx.ed||"").length*9) % 11;
+  let core = stripNames(toEnglish(s)).replace(/\s+/g," ").replace(/\.$/,"");
+  const tails = [
+    `${core} — ${wd}'s ${when} keeps that as the working line.`,
+    `On ${day}, ${core.charAt(0).toLowerCase()+core.slice(1)}.`,
+    px ? `${core}, and ${px} is the number the argument has to live with.` : `${core} The ${when} prefers the constraint to the choir.`,
+    theme ? `${core} Today's climate on this desk is ${theme}.` : `${core} The ${when} stays with the constraint, not the choir.`,
+    `${core} For ${ctx.topic==="ordinary"?"the household":ctx.topic==="health"?"the carer":"this desk"}, that is enough of a thesis for ${wd}.`,
+    px ? `Start with the public print: ${px}. ${core}.` : `Sequence first. ${core}.`,
+    `${core} Hold that thought through the next print, not the next alert.`,
+    theme ? `${core} Read it as ${theme}, not as a mascot.` : `${core} Size to sleep.`,
+    `${core} ${wd}'s ${when} will not rent a louder version of the same line.`,
+    `${core} That sentence belongs to ${prettyDay(ctx.dayKey).split(",")[0]} and will not be reused.`,
+    `${core} The ${ctx.topic} desk files it once, then moves on.`
+  ];
+  let out = tails[n];
+  if(!/[.!?]$/.test(out)) out += ".";
+  return out.replace(/\s+/g," ").trim();
+}
+function normSent(x){ return String(x||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim(); }
+function gramsOf(s){
+  const w=normSent(s).split(" ").filter(Boolean);
+  const g=[];
+  for(let n=5;n<=8;n++){
+    for(let i=0;i<=w.length-n;i++) g.push(w.slice(i,i+n).join(" "));
+  }
+  return g;
+}
+function taken(s){
+  const used=uniqueLine._used || (uniqueLine._used=new Set());
+  const n=normSent(s);
+  if(n.length>24 && used.has(n)) return true;
+  return gramsOf(s).some(g=>used.has("g:"+g));
+}
+function markTaken(s){
+  const used=uniqueLine._used || (uniqueLine._used=new Set());
+  used.add(normSent(s));
+  gramsOf(s).forEach(g=> used.add("g:"+g));
+}
+function takeFresh(arr, rng){
+  const list = (arr||[]).filter(Boolean);
+  const order = pickN(list, list.length, rng);
+  for(const s of order){
+    const bits = splitSents(s);
+    if(bits.length ? bits.every(x=>!taken(x)) : !taken(s)) return s;
+  }
+  return "";
+}
+function uniqueFallback(ctx, i, j){
+  const name = (TOPICS.find(t=>t.key===ctx.topic)||{}).name || ctx.topic;
+  const wd = weekdayOf(ctx.dayKey);
+  const when = ctx.ed==="am"?"open": ctx.ed==="sun"?"week":"close";
+  const salt = Math.abs((doy(ctx.dayKey)*131 + i*17 + j*41 + (ctx.topic||"").length*9));
+  const a = [
+    "The podium is marketing. The print is not.",
+    "You were not late. You refused the stampede.",
+    "Cheerleaders are not a bid.",
+    "A corridor beats a cliff. Every time.",
+    "Sleep is still a risk limit.",
+    "Inventories do not attend the morality play.",
+    "The annex outruns the rally.",
+    "Power bills outlive demos.",
+    "Payroll is the honest high-frequency number.",
+    "Boredom at the border is the achievement."
+  ][salt % 10];
+  return `${a} ${name} files that as the ${when} note for ${wd} and does not lend it out.`;
+}
+function uniqueLine(raw, ctx, i){
+  const rng = seedn("ln", ctx.id, i, String(raw).slice(0,48));
+  const chunks = splitSents(raw);
+  const parts = (chunks.length?chunks:[String(raw)]).map((s,j)=>{
+    let out = stripNames(toEnglish(String(s))).replace(/\s+/g," ").trim();
+    if(!/[.!?]$/.test(out)) out += ".";
+    let k=0;
+    while(taken(out) && k<10){
+      out = uniqueFallback(ctx, i+k, j+k);
+      k++;
+    }
+    if(taken(out)){
+      out = `${(TOPICS.find(t=>t.key===ctx.topic)||{}).name} on ${prettyDay(ctx.dayKey)} keeps a ${ctx.ed} line that no other desk is allowed to recycle: patience still clears.`;
+    }
+    if(!/[.!?]$/.test(out)) out += ".";
+    markTaken(out);
+    return out;
+  });
+  return parts.join(" ");
+}
+function resetUsed(){ uniqueLine._used = new Set(); composeHeadline._used = new Set(); }
+function uniqueHeadline(topic, ctx, rng){
+  const used = composeHeadline._used || (composeHeadline._used=new Set());
+  const bank = (COPY[topic]||{}).heads || [];
+  const voice = (VOICE[topic]&&VOICE[topic].heads) || [];
+  const extra = (ZHHEAD[topic]||[]);
+  const pool = pickN(voice.concat(bank, extra), voice.length+bank.length+extra.length, rng);
+  for(const h of pool){
+    const k=normSent(h);
+    if(k && !used.has(k) && !taken(h)){
+      used.add(k);
+      markTaken(h);
+      return h.replace(/\.$/,"");
+    }
+  }
+  const tag = (TOPICS.find(t=>t.key===topic)||{}).name;
+  const wd = weekdayOf(ctx.dayKey);
+  const made = `${tag}: the ${ctx.ed==="pm"?"close":ctx.ed==="sun"?"week":"open"} they will not put in the presser — ${wd}`;
+  used.add(normSent(made));
+  markTaken(made);
+  return made;
+}
+function composeHeadline(topic, ctx, rng){ return uniqueHeadline(topic, ctx, rng); }
+function sweepPack(pack){
+  resetUsed();
+  (pack.articles||[]).forEach(a=>{
+    const ctx={id:a.id, topic:a.topic, dayKey:a.dayKey, ed:a.ed};
+    const rng=seedn("sw", a.id);
+    const t = (a.title||"").trim();
+    if(t && !taken(t) && !(composeHeadline._used||new Set()).has(normSent(t))){
+      composeHeadline._used = composeHeadline._used || new Set();
+      composeHeadline._used.add(normSent(t));
+      markTaken(t);
+    }else{
+      a.title = uniqueHeadline(a.topic, ctx, rng);
+    }
+    a.dek = uniqueLine(a.dek, ctx, 0);
+    a.paras = (a.paras||[]).map((p,i)=>uniqueLine(p, ctx, i+1));
+    a.watch = (a.watch||[]).map((w,i)=>uniqueLine(w, ctx, 80+i));
+    if(a.comment) a.comment = uniqueLine(a.comment, ctx, 99);
+  });
+  return pack;
+}
+function splitSents(t){ return (String(t||"").match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[]).map(s=>s.trim()).filter(s=>s.length>12); }
+
+const ZHHEAD = {
+  markets:["The tape already told you","Cheerleaders are not a bid","Price is the apology","You refused the stampede","The curve sold you a schedule"],
+  geoecon:["Freight is the diplomat","Invoices redraw the map","The summit is an ad","A warehouse with flags","Insurance before the metaphor"],
+  politics:["The annex is the news","Just run the place","Wednesday still has to work","Rage is overpriced","The footnote outvotes the choir"],
+  psych:["You are over-informed, not broken","Put the phone in the other room","Calm is still legal","Indignation is not a thesis","Become expensive again"],
+  energy:["The bill arrived first","Inventories skip the play","Keep the lights, skip the take","Physics does not trend","Storage vetoes the sermon"],
+  money:["The dots are not scripture","A committee trying to sleep","Temperament beats a call","Households run policy too","Waiting is not a scandal"],
+  ordinary:["You were in the story","The tomato is the print","School-run math still clears","A kitchen is a rates view","Ordinary is the elite skill"],
+  tech:["The demo left, the bill stayed","No mascot required","Megawatts before models","Restart it on Sunday","Competence with a cooling budget"],
+  health:["The night shift is the print","A body is not a press cycle","Staff Tuesday or the forecast is late","Care is a labor market","Sleep is the cheap reform"],
+  security:["Boredom is the win","Spare parts beat speeches","A corridor is the thesis","No war tourism from this chair","The night should stay dull"]
+};
+
+const ARC = {
+  markets: {
+    dek: [
+      "What they said. What the tape said. What you can keep.",
+      "From the mood they sold you to the schedule that still pays."
+    ],
+    mainstream: [
+      "The mainstream version is always a feeling with a chart behind it: crash, melt-up, genius, idiot. You have heard it. It is designed to be heard. It is not designed to be used.",
+      "What most people were handed today is a story about winners and losers. Loud. Simple. Almost never how a book actually heals.",
+      "The official rooms will give you a verb — rallied, slumped, shrugged. That verb is hospitality. It is not the mechanism."
+    ],
+    cut: [
+      "Here is the cut, and it is kinder than it sounds: nobody hid a secret ticker from you. They hid how ordinary the good outcome looks. Spreads heal. Funding breathes. Cheerleaders are not a bid.",
+      "The useful disagreement with the mainstream is not 'they are lying.' It is 'they are late, and they need a choir.' Price does not. Price is the apology.",
+      "If it needed a stampede to work, it was not a thesis. It was a crowd. You are allowed to step out of the crowd without becoming a hermit."
+    ],
+    insight: [
+      "The insight that actually travels: cash flow first, story second, size to the night you can still sleep. That is not a slogan. It is how the inherited and the ordinary survive the same Tuesday in different fonts.",
+      "What clears is not the narrative. What clears is collateral, time, and whether you can wait without becoming a tourist in your own life. That is the whole market desk, said slowly enough to keep.",
+      "Once you see the tape as a schedule with teeth, the mainstream mood looks expensive. You stop renting panic. You start collecting the boring basis that actually pays."
+    ],
+    heard: [
+      "If you have been muttering 'it cannot be as dramatic as the timeline,' you were not naive. You were early. Keep that.",
+      "You already knew the loudest account did not have to clear. This letter is only the receipt."
+    ],
+    keep: [
+      "Keep this: the constructive read is almost boring, and that is why it can compound. Let the tourists donate. You have a life to run.",
+      "Optimistic by default does not mean gullible. It means you assume systems would like to remain systems — then you check the funding, and you go outside."
+    ],
+    note: [
+      "Hot take, said quietly: the market is not gaslighting you. The content is. Price is the apology.",
+      "If this felt like relief, that is information. Relief means you finally heard a sentence that fits the world you already live in."
+    ]
+  },
+  geoecon: {
+    dek: ["Flags are loud. Freight is the diplomat. You can keep that.","From the summit photo to the invoice that actually moved."],
+    mainstream: [
+      "The mainstream map is a morality play with borders. Heroes, villains, a flag, a clip. You have seen it. It is not how a container gets insured.",
+      "What most people were sold today is that the world is a movie. Movies need villains. Warehouses need corridors."
+    ],
+    cut: [
+      "The cut is not cynicism. It is logistics. Treaties take the train. Incentives commute. If your geopolitics cannot survive a grocery ticket, it was cosplay.",
+      "You do not need a war room. You need to know who can still fund, ship, and settle. That is less exciting. It is also how people get home."
+    ],
+    insight: [
+      "The honest insight: most countries, most days, would rather keep the lights on than win the metaphor. Follow the corridor. That is the optimistic fact hiding under the panic.",
+      "Power still matters. So does the bill of lading. Once you hold both, the mainstream clip looks like an ad for someone else's adrenaline."
+    ],
+    heard: [
+      "If you have been doing the household math while they did the geopolitics, you were on the real desk.",
+      "You wanted someone to say the world is not a movie. It is a warehouse with flags. You already knew."
+    ],
+    keep: [
+      "Keep the corridor, not the choir. Nations, like families, survive on sequences. That is allowed to be good news.",
+      "A slightly positive international desk is not kindness. It is competence that still wants dinner."
+    ],
+    note: [
+      "Diplomacy is a long invoice with better chairs. You understood that the first time you paid a bill that had a flag on it.",
+      "Insurance before the metaphor. If you remember only that, you remember enough."
+    ]
+  },
+  politics: {
+    dek: ["From the rally to the annex. The annex is the news.","What they performed. What still has to work on Wednesday."],
+    mainstream: [
+      "The mainstream political product is recruitment: pick a side, raise your temperature, call it information. You have been recruited. You were tired of it. That fatigue is a civic skill.",
+      "What you were handed is a personality with a podium. Campaigns are retail. Governing is wholesale. The gap is where disappointment lives."
+    ],
+    cut: [
+      "We will not do character assassination as a sport. It is cheap and it makes you dumber. The useful cut is institutional: who can spend, who can say no, who still faces a calendar.",
+      "The disagreement with the feed is not 'everyone is corrupt.' It is 'the annex still outruns the rally, and you were right to want the place simply run.'"
+    ],
+    insight: [
+      "Democracy, on a good day, is still the widely available technology for losing without burning the building. That is not a slogan. It is why Wednesday can exist. Hold that without becoming a mark.",
+      "Budgets, courts, statistical offices — the unsexy triad. Mock them and you miss the only machinery that still knows how to do the middle of the week. A constructive desk assumes most clerks would like to remain clerks, then checks whether the numbers stay honest."
+    ],
+    heard: [
+      "If you have been saying 'just run the place' under your breath, this desk heard you.",
+      "You are not apathetic. You are allergic to cosplay. There is a difference, and you already felt it."
+    ],
+    keep: [
+      "Read the annex. Keep your nervous system. Vote if you can. Institutions are a love letter to people who will be alive after the clip.",
+      "Optimistic by default here means: repair happens unphotographed. You are allowed to count on that without applauding the podium."
+    ],
+    note: [
+      "Rage is widely available and usually overpriced. You understood the piece if you put the phone down a degree cooler.",
+      "We will not take anyone down in a comment. We will take the footnote seriously, which is ruder and more useful."
+    ]
+  },
+  psych: {
+    dek: ["From the feed's temperature to a sequence you can repeat.","You are over-informed, not broken. That is the whole cut."],
+    mainstream: [
+      "The mainstream psychological product is a new personality by Friday and a villain by breakfast. You have bought some of it. That does not make you a fool. It makes you the customer.",
+      "What most people were told today is that their anxiety is a brand. It is not. It is often just an unmanaged information diet wearing a clever jacket."
+    ],
+    cut: [
+      "You do not need a new personality. You need a sequence you can repeat on a bad Wednesday. That sentence has saved more money and more marriages than any macro call on this desk.",
+      "Indignation is a cheap identity. It bonds quickly and predicts nothing. If the diet requires a villain before coffee, you are stretching. Stretching is fine. Do not confuse it with a plan."
+    ],
+    insight: [
+      "Attention is now a cost of goods sold. The optimistic move is vulgar and available: put the phone in another room and become expensive again. Calm is a technology. You can practise it.",
+      "The inherited fear wasting a past. The ordinary fear never building a future. Both are permission stories. Neither is solved by a hotter take. Both are soothed by a checklist and a walk."
+    ],
+    heard: [
+      "If you came here to feel less crazy, stay. That is a legitimate use of a letter.",
+      "You are allowed to be optimistic without being a mark. You already suspected that. This is the confirmation."
+    ],
+    keep: [
+      "Practise forbearance until it looks like personality. Then keep practising. Give the mind a checklist. It wanted a saga.",
+      "Water, walk, one decision. If you leave with only that, you understood the desk."
+    ],
+    note: [
+      "If you finished this smug, same prescription as anger: water. Understanding is cooler than winning.",
+      "You are not broken. You are over-informed. That is the kindest accurate sentence in the building."
+    ]
+  },
+  energy: {
+    dek: ["From the take to the bill. Trust the bill. Then keep the lights on.","Inventories skip the morality play. You can too."],
+    mainstream: [
+      "The mainstream energy story is a sermon with a price tag: saints, sinners, a spike, a collapse. You felt the bill before you felt the take. That is not you being unsophisticated. That is you being the high-frequency print.",
+      "What you were handed is attitude. Tightness is arithmetic. Commentators arrive late and tip in adjectives. Inventories do not attend."
+    ],
+    cut: [
+      "A constructive desk believes two things at once, which is how adults live: hydrocarbons still clear civilisation at 8 a.m., and the transition is real wherever someone pours concrete, copper, and patience. Both can be true. Both can pay.",
+      "When prompt tightens, marketing loosens. Households adapt or donate. There is no humor in a cold house. There is plenty in watching very online people discover storage. Hold both thoughts."
+    ],
+    insight: [
+      "The kind reading of a spike is that the back of the curve often refuses to panic as hard as the front. Sometimes the disruption is loud and finite. You do not need to be a prophet. You need to respect physics and still plan a summer.",
+      "Once you treat barrels and electrons like a bridge — maintained, unfashionable, necessary — the mainstream clip looks like weather, not law."
+    ],
+    heard: [
+      "You wanted someone to say the lights matter more than the take. The lights matter more than the take.",
+      "If you have been doing the household math while they did the geopolitics, you were already on this desk."
+    ],
+    keep: [
+      "Keep the lights on, then argue about the architecture. Sequence is mercy. That is the optimistic default, and it is allowed.",
+      "Follow the physical. Let the moralising catch the next train. You understood if you can still plan dinner."
+    ],
+    note: [
+      "No war diagnosis from a comment box. The curve, then hope for a corridor. You already preferred that order.",
+      "Physics does not trend. You can stop refreshing and still be informed."
+    ]
+  },
+  money: {
+    dek: ["From the press conference to a temperament you can actually run.","The dots are not scripture. Waiting is not a scandal."],
+    mainstream: [
+      "The mainstream money story is a personality cult around a committee: hawk, dove, pivot, panic. You were invited to treat a press conference as a plot twist. You do not have to RSVP.",
+      "What most people were given is a rate call dressed as a personality. Central banks are large, cautious balance sheets with legal mandates and human sleep requirements. That sentence saves a career of theatrical disappointment."
+    ],
+    cut: [
+      "You wanted someone to stop pretending the dots are scripture. Here it is. Energy lifts the headline, growth cools the room, the committee waits. Waiting is often the kindness.",
+      "Households run monetary policy too. They call it a fixed-rate, a delayed kitchen, a second job. The inherited run it as duration. Same job. Different fonts."
+    ],
+    insight: [
+      "Patience is the only policy you can actually execute. Money is how strangers cooperate at scale. Everything else is a footnote to that miracle, including the jokes.",
+      "A slightly positive desk assumes the institution would like to remain an institution, then watches inflation, labor, and the price of waiting. That is the whole insight, said so you can keep it."
+    ],
+    heard: [
+      "If you came for a hot tip, the exit is everywhere. If you came to feel solvent, sit down. You chose correctly.",
+      "You were right not to treat a press conference as a personality."
+    ],
+    keep: [
+      "Let the funding math veto the drama. Then go outside. Align with the less theatrical instrument.",
+      "You understood this desk if you leave with a temperament, not a call. Temperament survives a hold."
+    ],
+    note: [
+      "Not a rate call. A temperament call: stay solvent, stay kind, stay long optionality.",
+      "The discount window remains a better teacher than the conference. You already suspected the conference was theatre."
+    ]
+  },
+  ordinary: {
+    dek: ["You were in the macro story the whole time. Here is the readable font.","From the expert voice to the table where the tomato is priced."],
+    mainstream: [
+      "The mainstream letter is written for people who think they are not in the story. They are. Macro is why the tomato costs what it costs. You have been in it since breakfast.",
+      "What you were told is that this stuff is for specialists. That is a class costume. A kitchen renovation is a rates view. A school run is a duration decision."
+    ],
+    cut: [
+      "A family that inherited a warehouse and a family that inherited a commute are both running duration. One has better collateral. Both can be ruined by a bad sequence and saved by a boring one. You already know which one you are.",
+      "There is nothing ordinary about keeping a household intact through a loud decade. It is the most elite skill we have. It is practised daily by people who will never be invited to a summit."
+    ],
+    insight: [
+      "Housing is where policy becomes furniture. Builders obey rates. Buyers obey paychecks. Affordability is wages versus rents, and you were not wrong to notice. You can work with that triangle. You do not have to tweet at it.",
+      "Once you see payroll as the honest high-frequency print, the specialist voice gets quieter. You were never a lesser reader. You were the point of the machine."
+    ],
+    heard: [
+      "If you have been doing the honest math at the table, you are not 'bad with money.' You are early.",
+      "You wanted to be spoken to like an adult who buys milk. That is the whole editorial line, and you understood it."
+    ],
+    keep: [
+      "Keep the household. Keep the joke. Keep a little dry powder. If you inherited much, teach competence. If you inherited little, practise it. Same letter.",
+      "Corridors are how children get to school. That is enough justification for an entire desk. Optimistic by default means: Tuesday can still be livable."
+    ],
+    note: [
+      "This section is the point. The other desks exist to keep this one honest. If you felt spoken to, that is because you were.",
+      "School-run math is not unsophisticated. It is the only math that has to clear tonight."
+    ]
+  },
+  tech: {
+    dek: ["From the keynote to the power bill. The bill is the insight.","No mascot required. A floor, a megawatt, a Sunday restart."],
+    mainstream: [
+      "The mainstream tech story is a demo that will save civilisation by Thursday. You were right to distrust the keynote. You were wrong if you thought that meant nothing is being built.",
+      "What you were handed is a mascot and a miracle. What actually constrains the decade is electricity, cooling, people who can keep a room from catching fire, and a balance sheet that survives a dull quarter."
+    ],
+    cut: [
+      "Treat compute as infrastructure and the fairy tale ends. That is a kindness. Infrastructure can be maintained. Fairy tales can only be refreshed.",
+      "Software eats nothing by itself. It rents power, talent, and time. If the story has no electrician and no clerk, it is a brochure. Brochures do not compound."
+    ],
+    insight: [
+      "When a single corridor can reprice the year, you are watching a warehouse, not a ticker. Warehouses prefer boredom. So should you. Concrete, copper, and patience are being poured. That is the optimistic fact. The rest is costume.",
+      "The honest edge is not a secret model. It is asking what breaks when the demo leaves the building: heat, latency, liability, the person who stays late. People who wait for the second generation sometimes get paid."
+    ],
+    heard: [
+      "If you have been muttering 'but who pays for the electricity,' you are the adult in the thread.",
+      "We will not make you worship a logo. We will make you respect a cooling budget. You already wanted that."
+    ],
+    keep: [
+      "Plug it in, price the power, keep a human in the loop. Then you may have a thesis. Hype is funding language. Maintenance is civilisation language.",
+      "You understood this desk if you can explain it without a brand name. Competence with a cooling budget is enough."
+    ],
+    note: [
+      "If a sentence needs a brand name to stand, it was not ready. Yours does not.",
+      "The demo left. The bill stayed. You already knew which one to believe."
+    ]
+  },
+  health: {
+    dek: ["From 'labor' in the rooms to a back, a night, a shift.","The body does not take a press cycle off. That is the insight."],
+    mainstream: [
+      "The official rooms say 'labor' as if nobody lives in a body. The mainstream health story is either panic or wellness theatre. You have been offered both. Neither staffs Tuesday.",
+      "What you were handed is a forecast that assumes infinite healthy hours from people who already run two jobs and a parent. You were right to roll your eyes."
+    ],
+    cut: [
+      "Every other desk on this letter arrives here: a person who can still work, care, walk, and think. That is not a soft subject. It is the hard constraint under the hard constraints.",
+      "Aging is a ratio, not a vibe: carers to cared-for, beds to winters. You can argue with a speech. You cannot argue with a night shift that did not fill."
+    ],
+    insight: [
+      "A constructive health desk counts staff, sleep, and whether a household can absorb a bad week. Prevention is cheaper than theatre. Sleep is still the cheapest reform. That is the optimistic default, and it is practical.",
+      "Once you see the clinic as logistics with a conscience, the specialist voice gets simpler. If the clinic cannot staff Tuesday, every other forecast is late. Start there. You can keep that."
+    ],
+    heard: [
+      "If you have been the carer and the operator in the same week, this desk is talking to you. Not around you.",
+      "If you have been doing that math, you are not anxious. You are accurate."
+    ],
+    keep: [
+      "Keep the body. Keep the carer. Keep Tuesday staffed. Health is how a civilisation proves it intends to continue.",
+      "You understood if you leave with staffing, sleep, and a refusal to treat a body as a press cycle. Drink water. That is not a joke."
+    ],
+    note: [
+      "No diagnoses from a chair. Just the respect of counting systems. You already preferred that to a brand of wellness.",
+      "Kindness here is staffing. Everything else is branding. If that sentence landed, the desk worked."
+    ]
+  },
+  security: {
+    dek: ["From the map with little tanks to a night that stays boring.","Spectacle is cheap. A corridor is the thesis."],
+    mainstream: [
+      "The mainstream security product is a map with little tanks and a temperature. You have been invited to do war tourism from a comfortable chair. Decline. Households feel this first as prices, then as attention they did not consent to give.",
+      "What you were handed is costume. Deterrence, like term premia, works slowly and then all at once. Speeches are cheap. Spare parts are not."
+    ],
+    cut: [
+      "A country that cannot keep a port, a cable, a hospital, and a school ordinary will discover that every other argument was luxury. The inherited want continuity. The ordinary want the bus. Both require a night that stays boring.",
+      "Trade lanes, cables, grain — security stories in civilian clothes. If your geopolitics cannot survive a freight print, it was literature. Literature can be beautiful. It cannot load a ship."
+    ],
+    insight: [
+      "A constructive line is not naivety. It is the observation that most people, most days, prefer a settlement to a spectacle — and that institutions exist to make betrayal expensive. You are allowed to hope for that without being simple.",
+      "Alliances are balance sheets with flags. They work when invoices are paid. Follow the invoice. Boredom at a border is not a failure of narrative. It is the point. That is the insight you can keep."
+    ],
+    heard: [
+      "If you have been hoping, quietly, that the grown-ups still have a corridor: yes. That is the bet. It is not a stupid bet.",
+      "You prefer numbers to trophies. Good. Constraints have numbers. This desk will not name private people as prizes."
+    ],
+    keep: [
+      "Keep the corridor. Keep the night boring. Then live. Order is not a mood. It is a maintained machine.",
+      "You understood if you leave less frightened and more interested in spare parts. Anyone selling spectacle as strategy is not pricing your Tuesday."
+    ],
+    note: [
+      "If a sentence only works by frightening you, it was selling something. Decline. You already wanted to.",
+      "No battlefield colour from this chair. Logistics, then law, then hope. That order is the whole comment."
+    ]
+  }
+};
+
+function writeArticle(topic, dayKey, ed, idx, lead=false){
+  const id = `${dayKey}-${ed}-${topic}-${idx}`;
+  const rng = seedn("art", id);
+  const bank = COPY[topic] || COPY.markets;
+  const voice = VOICE[topic] || {};
+  const arc = ARC[topic] || ARC.markets;
+  const ctx = { id, topic, dayKey, ed };
+  const head = uniqueHeadline(topic, ctx, rng);
+  const dek = takeFresh((arc.dek||[]).concat(voice.deks||[], bank.deks||[]), rng) || uniqueFallback(ctx, 0, 1);
+  const mainstream = takeFresh(arc.mainstream, rng) || uniqueFallback(ctx, 1, 0);
+  const cut = takeFresh(arc.cut, rng) || uniqueFallback(ctx, 2, 1);
+  const insight = takeFresh(arc.insight, rng) || uniqueFallback(ctx, 3, 2);
+  const heard = takeFresh((arc.heard||[]).concat(voice.heard||[]), rng) || uniqueFallback(ctx, 4, 3);
+  const keep = takeFresh(arc.keep, rng) || uniqueFallback(ctx, 5, 4);
+  const rawParas = [mainstream, cut, insight, heard, keep].filter((p,i,arr)=> p && arr.indexOf(p)===i);
+  const paras = rawParas.map((p,i)=>uniqueLine(p, ctx, i+1));
+  const charts = chartSpecs(topic, dayKey, ed).slice(0, 1);
+  const words = paras.join(" ").split(/\s+/).length;
+  const comments = (arc.note||[]).concat(voice.comments||[], bank.comment||[]);
+  const watchPool = (voice.watch||[]).concat(bank.watch||[]);
+  return {
+    id, topic, dayKey, ed, lead,
+    title: head,
+    dek: uniqueLine(dek, ctx, 0),
+    paras,
+    watch: pickN(watchPool, 3, rng).map((w,i)=>uniqueLine(w || uniqueFallback(ctx, 8, i), ctx, 200+i)),
+    comment: uniqueLine(takeFresh(comments, rng) || uniqueFallback(ctx, 9, 9), ctx, 300),
+    charts,
+    minutes: Math.max(3, Math.round(words/170)),
+    published: `${prettyDay(dayKey)} · ${ed==="am"?"06:10":ed==="sun"?"08:10":"17:10"} CET`
+  };
+}
+
+function buildEdition(dayKey, ed){
+  resetUsed();
+  composeHeadline._used = new Set();
+  const rng = seedn("ed", dayKey, ed);
+  const order = [...TOPICS];
+  for(let i=order.length-1;i>0;i--){ const j=Math.floor(rng()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+  const leadTopic = order[0].key;
+  const arts = TOPICS.map((t,i)=> writeArticle(t.key, dayKey, ed, 0, t.key===leadTopic));
+  arts.sort((a,b)=> (b.lead-a.lead));
+  const briefs = arts.map(a=>{
+    const rngb=seedn("br", a.id);
+    const s=rwalk(18, 100, 1.1, rngb);
+    return { topic:a.topic, title:a.title, last:s[s.length-1], chg:s[s.length-1]-s[s.length-2], series:s, id:a.id };
+  });
+  return sweepPack({ dayKey, ed, articles:arts, briefs, lead:arts[0] });
+}
+
+function buildSunday(dayKey){
+  resetUsed();
+  composeHeadline._used = new Set();
+  const mon = weekMonday(dayKey);
+  const fri = addDays(mon, 4);
+  const rng = seedn("sun", dayKey);
+  const lead = writeArticle("markets", dayKey, "sun", 0, true);
+  lead.title = `The week that actually happened · ${prettyDay(mon).replace(/Monday /,"")}–${dateFromKey(fri).toLocaleDateString("en-GB",{day:"numeric", month:"short"})}`;
+  lead.dek = uniqueLine("A Sunday letter is not a recap for people who missed the week. It is the week, stripped of the alerts, kept in sequence.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 0);
+  lead.paras = [
+    uniqueLine(`Between ${prettyDay(mon)} and Friday evening the desk ran ten weekday letters. This is the one that refuses to repeat them.`, {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 1),
+    uniqueLine("The inherited reader wants a year. The ordinary reader wants Tuesday to remain livable. Sunday is where those two clocks are forced to share a table.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 2),
+    uniqueLine("We do not reprint the rooms. We keep what the week did to incentives, inventories, households and patience.", {id:lead.id, topic:"markets", dayKey, ed:"sun"}, 3)
+  ];
+  const arts = [lead, ...TOPICS.map((t,i)=>{
+    const a = writeArticle(t.key, dayKey, "sun", i+1, false);
+    a.title = `${t.name}: ${pick(COPY[t.key].heads, seedn("sunt", dayKey, t.key)).replace(/^./,c=>c.toLowerCase())}`;
+    return a;
+  })];
+  const briefs = arts.slice(1).map(a=>{
+    const rngb=seedn("sbr", a.id);
+    const s=rwalk(18, 100, 1.1, rngb);
+    return { topic:a.topic, title:a.title, last:s[s.length-1], chg:s[s.length-1]-s[s.length-2], series:s, id:a.id };
+  });
+  return sweepPack({ dayKey, ed:"sun", kind:"sunday", articles:arts, briefs, lead:arts[0], weekOf:mon });
+}
+
+function buildWeekendHold(dayKey){
+  const fri = previousFridayKey(dayKey);
+  const pack = buildEdition(fri, "pm");
+  pack.hold = true;
+  pack.holdNote = "The daily letter is Monday to Friday. Saturday is closed. Sunday is the long-read.";
+  return pack;
+}
+
+function heroCopy(ed){
+  if(ed.key==="sun"){
+    return {
+      kicker:"Sunday long-read · 08:00 CET",
+      title:"The week, without the alerts.",
+      sub:"Weekdays carry the pulse. Sunday keeps the sequence. Ten rooms, none of yesterday's sentences."
+    };
+  }
+  if(ed.key==="am"){
+    return {
+      kicker:"Morning edition · Monday–Friday · 06:00 CET",
+      title:"Order the day before the day orders you.",
+      sub:"Ten desks. A slightly positive terminal: skeptical of podiums, loyal to inventories, written for the reader who still has a life to run."
+    };
+  }
+  return {
+    kicker:"Evening edition · Monday–Friday · 17:00 CET",
+    title:"Admit what the day actually did.",
+    sub:"The evening letter is how a serious desk stays honest. Same ten rooms, a different temperature, still no public pile-on."
+  };
+}
+
+function navTo(view, extra){
+  state.view = view;
+  if(extra && extra.dayKey){ state.archiveDay=extra.dayKey; state.archiveEd=extra.ed||"am"; }
+  if(view!=="archive" && !["am","pm"].includes(view)) state.search="";
+  $$(".nav button").forEach(b=> b.classList.toggle("on", b.dataset.go===view || (view==="article"&&b.dataset.go==="brief")));
+  $$(".bottom-nav button").forEach(b=> b.classList.toggle("on", b.dataset.go===view || (view==="brief"&&b.dataset.go==="brief")));
+  const known = new Set(["brief","insights","archive","donate","subscribe","legal","notes","shelf","imprint","article",...TOPICS.map(t=>t.nav)]);
+  if(!known.has(view)) state.view="brief";
+  render();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function liveEdKey(){
+  if(state.peekEd==="am" || state.peekEd==="pm" || state.peekEd==="sun") return state.peekEd;
+  return state.edition.key;
+}
+function access(){
+  const id = (plan().id)||"corridor";
+  return { id, member: id==="desk"||id==="principal", principal: id==="principal" };
+}
+function freeTopicFor(dayKey){
+  return TOPICS[doy(dayKey) % TOPICS.length].key;
+}
+function canRead(){ return true; }
+let _packKey="", _pack=null;
+function packKey(){
+  if(state.view==="archive" && state.archiveDay) return "a|"+state.archiveDay+"|"+state.archiveEd;
+  return "l|"+state.edition.dayKey+"|"+liveEdKey();
+}
+function currentPack(){
+  const k=packKey();
+  if(_pack && _packKey===k) return _pack;
+  let pack;
+  if(state.view==="archive" && state.archiveDay){
+    if(isSaturdayKey(state.archiveDay)) pack=buildWeekendHold(state.archiveDay);
+    else if(isSundayKey(state.archiveDay) || state.archiveEd==="sun") pack=buildSunday(state.archiveDay);
+    else if(!isWeekdayKey(state.archiveDay)) pack=buildWeekendHold(state.archiveDay);
+    else pack=buildEdition(state.archiveDay, state.archiveEd==="pm"?"pm":"am");
+  }else{
+    const live = liveEdKey();
+    if(live==="sun" || state.edition.kind==="sunday") pack=buildSunday(state.edition.dayKey);
+    else if(state.edition.kind==="weekend") pack=buildEdition(state.edition.dayKey, live==="am"?"am":"pm");
+    else pack=buildEdition(state.edition.dayKey, live==="pm"?"pm":"am");
+  }
+  _packKey=k; _pack=pack;
+  return pack;
+}
+
+function articleCard(a, compact=false){
+  const topic = TOPICS.find(t=>t.key===a.topic);
+  const followOn = follows().includes(a.topic);
+  const note = notesAll()[a.id]||"";
+  const charts = a.charts.map((c,i)=>`
+    <figure class="chart-box" data-chart="${a.id}-${i}">
+      <div class="chart-head"><span>${esc(c.title)}</span><span data-read>LAST ${c.last.toFixed(2)}</span></div>
+      <canvas aria-label="${esc(c.title)}"></canvas>
+      <figcaption class="chart-foot"><span>${c.live?"Public series · last available print":"Public series · desk drawing from last known prints"} · not a broker feed</span><span>EXT ${c.extra}M</span></figcaption>
+    </figure>`).join("");
+  const body = compact
+    ? `<div class="prose"><p>${esc(a.paras[0])}</p></div><p class="muted"><button class="btn btn-ghost" data-expand="${a.id}">Read the full desk →</button></p>`
+    : `<div class="prose">${a.paras.map((p,i)=>`<p>${esc(p)}</p>${i===0?charts:""}`).join("")}</div>
+       <div class="watch"><h5>What to watch</h5><ul>${a.watch.map(w=>`<li>${esc(w)}</li>`).join("")}</ul></div>
+       <div class="margin"><strong>Desk comment</strong><div>${esc(a.comment)}</div></div>
+       <div class="tools">
+         <button class="btn" data-share="${a.id}">Share</button>
+         <button class="btn" data-copy="${a.id}">Copy link</button>
+         <button class="btn" data-print="${a.id}">Print dossier</button>
+         <button class="btn ${followOn?"btn-amber":""}" data-follow="${a.topic}">${followOn?"Following":"Follow desk"}</button>
+         <button class="btn ${isShelved(a.id)?"btn-amber":""}" data-shelf="${a.id}">${isShelved(a.id)?"On the shelf":"Save for later"}</button>
+         <a class="btn" href="mailto:?subject=${encodeURIComponent("Letter on: "+a.title)}&body=${encodeURIComponent("A private letter, not a public comment.\n\n"+a.title+"\n"+location.href.split("#")[0]+"#"+a.id)}">Letter (your mail)</a>
+       </div>
+       <div class="notes">
+         <label class="muted" for="n-${a.id}">Your notes — private to your browser, never uploaded</label>
+         <textarea id="n-${a.id}" data-note="${a.id}" placeholder="A private margin. Invisible to the world, including us.">${esc(note)}</textarea>
+       </div>`;
+  return `<article class="card article" id="${a.id}" data-article="${a.id}">
+    <div class="kicker">${topic.kicker}${a.lead?" · LEAD":""} · ${a.ed.toUpperCase()}</div>
+    <h3 class="headline">${esc(a.title)}</h3>
+    <p class="deck">${esc(a.dek)}</p>
+    <div class="byline">
+      <span class="badge">${esc(topic.name)}</span>
+      <span>${esc(a.published)}</span>
+      <span>·</span>
+      <span>${a.minutes} min read</span>
+      <span>·</span>
+      <span>Dr. Benjamin Koch / The Desk</span>
+    </div>
+    ${body}
+  </article>`;
+}
+
+function sideHTML(pack){
+  const nxt = nextEdition();
+  return `
+    <div class="card rail">
+      <h3>This edition</h3>
+      <div class="toc">
+        ${pack.articles.map(a=>`<button data-jump="${a.id}"><b>${esc(a.title)}</b><small>${TOPICS.find(t=>t.key===a.topic).name} · ${a.minutes} min</small></button>`).join("")}
+      </div>
+    </div>
+    <div class="card rail">
+      <h3>Quiet continuity</h3>
+      <p class="muted" style="margin-top:0">The letter is free. If it earns its keep, a gift keeps the desk going. No unlock. No list. No debt.</p>
+      <a class="btn btn-amber" style="width:100%;justify-content:center" href="${SUPPORT.url}" target="_blank" rel="noopener noreferrer">Support via PayPal</a>
+      <p class="faint" style="font-size:12px">Next edition: ${nxt.label} in ${nxt.in}.</p>
+    </div>
+    <div class="card rail">
+      <h3>House rules</h3>
+      <ul class="muted" style="padding-left:18px;margin:0;font-size:12px">
+        <li>No public comment board</li>
+        <li>No tips, no solicitation</li>
+        <li>No trackers</li>
+        <li>Notes stay in your browser</li>
+      </ul>
+    </div>`;
+}
+
+function briefView(){
+  const pack = currentPack();
+  state.articles = pack.articles;
+  const isArch = state.view==="archive" && state.archiveDay;
+  const viewingSun = pack.ed==="sun" || pack.kind==="sunday";
+  const edNow = viewingSun ? "sun" : pack.ed;
+  const pmReady = state.edition.key==="pm" || cetParts().h>=17 || state.view==="archive";
+  return `
+    <section class="card">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px">
+        ${viewingSun
+          ? `<button class="btn btn-amber">Sunday long-read</button>`
+          : `<button class="btn ${edNow==="am"?"btn-amber":""}" ${state.view==="archive"?"data-ed":"data-peek"}="am">Morning 06:00</button>
+             <button class="btn ${edNow==="pm"?"btn-amber":""}" ${state.view==="archive"?"data-ed":"data-peek"}="pm">${pmReady?"Evening 17:00":"Evening 17:00 CET"}</button>`}
+        <button class="btn" data-dossier="${pack.dayKey}">Week dossier</button>
+      </div>
+      ${state.edition.hold || pack.hold ? `<p class="billing">Daily letter is Monday–Friday. Saturday is closed. Sunday is the long-read.</p>`:""}
+      <div class="kicker">Macro-brief · ${pack.ed.toUpperCase()} · ${prettyDay(pack.dayKey)}</div>
+      <h2 class="section-h" style="font-size:18px;letter-spacing:0;text-transform:none;color:var(--text);margin:4px 0 10px">The day in ${pack.briefs.length} pulses</h2>
+      <p class="muted" style="margin-top:0">Pulses from the latest public prints where we have them. They exist so the argument has a spine, not so you can trade the drawing.</p>
+      <div class="brief-grid">
+        ${pack.briefs.map(b=>`<button class="brief-item" data-jump="${b.id}" style="width:100%;text-align:left">
+          <canvas data-spark="${b.id}"></canvas>
+          <div><h4>${esc(TOPICS.find(t=>t.key===b.topic).name)}</h4><p>${esc(b.title)} · ${b.chg>=0?"+":""}${b.chg.toFixed(2)}</p></div>
+        </button>`).join("")}
+      </div>
+    </section>
+    ${isArch? `<p class="muted">Archive · ${prettyDay(pack.dayKey)} ${pack.ed.toUpperCase()}</p>`:""}
+    ${!isArch? `<section class="card">
+      <div class="kicker">${pack.ed==="pm"?"What's moving the evening":"What's moving the morning"}</div>
+      <h2 class="section-h" style="font-size:18px;letter-spacing:0;text-transform:none;color:var(--text);margin:4px 0 10px">Top of the day · English only · no mastheads</h2>
+      <p class="muted">Real public headlines, stripped of outlets. The desk next to each line is a hint, not a citation. The essays below do not reprint these lines.</p>
+      <div class="movers" id="moversHost">${moversHTML(pack.ed)}</div>
+    </section>`:""}
+    ${pack.articles.map((a,i)=> articleCard(a, !(a.lead || (state.openIds||[]).includes(a.id)))).join("")}
+  `;
+}
+
+function topicView(key){
+  const pack = currentPack();
+  const a = pack.articles.find(x=>x.topic===key);
+  const more = writeArticle(key, pack.dayKey, pack.ed, 1, false);
+  return `${a?articleCard(a):""}${articleCard(more)}`;
+}
+
+function insightsView(){
+  const rng = seedn("ins", state.edition.dayKey, state.edition.key);
+  const items = pickN(INSIGHTS, 8, rng);
+  return `
+    <section class="card">
+      <div class="kicker">Standing theses</div>
+      <h2 class="headline" style="font-size:32px">What this desk actually believes</h2>
+      <p class="deck">Not a manifesto. A set of working rules. They move slowly, on purpose.</p>
+      <div class="insight-grid">
+        ${items.map(it=>`<div class="plan"><h4>${esc(it.t)}</h4><p class="muted">${esc(it.d)}</p></div>`).join("")}
+      </div>
+      <hr class="hr">
+      <div class="prose">
+        <p>Morning at 06:00 CET. Evening at 17:00 CET. The letter is written for people who prefer incentives to applause, and who would like the inherited and the ordinary to be able to sit at the same table.</p>
+        <p>We stay slightly, stubbornly constructive. Speeches are marketing. Institutions still matter. There is no public comment board. That last choice is how this house stays usable.</p>
+      </div>
+    </section>
+    <section class="card">
+      <div class="kicker">Data room</div>
+      <h2 class="headline" style="font-size:28px">The day’s series, without the adjectives</h2>
+      <p class="deck">Public prints, drawn on the desk. Hover for a crosshair. Not a broker. Not a trade.</p>
+      <div id="dataRoom"></div>
+    </section>`;
+}
+
+function archiveView(){
+  const now = cetParts();
+  if(!state.calYear) state.calYear = now.y;
+  if(!state.calMonth) state.calMonth = now.m;
+  const y=state.calYear, m=state.calMonth;
+  const first=new Date(y,m-1,1);
+  const startPad=first.getDay();
+  const dim=new Date(y,m,0).getDate();
+  const monthName=first.toLocaleDateString("en-GB",{month:"long", year:"numeric"});
+  const cells=[];
+  for(let i=0;i<startPad;i++) cells.push(`<div class="d out"></div>`);
+  for(let d=1;d<=dim;d++){
+    const key=`${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const w=weekdayFromKey(key);
+    const on=state.archiveDay===key;
+    const kind=w===0?"sun": w===6?"sat":"wd";
+    const label=w===0?"Sun": w===6?"—": "";
+    const future = (y>now.y) || (y===now.y && (m>now.m || (m===now.m && d>now.day)));
+    if(future) cells.push(`<div class="d out">${d}</div>`);
+    else cells.push(`<button class="d ${kind}${on?" on":""}" data-cal="${key}" ${w===6?"disabled":""}>${d}${label?`<span class="sub">${label}</span>`:""}</button>`);
+  }
+  let html = `<section class="card"><div class="kicker">Archive · 2020 – ${now.y}</div>
+    <h2 class="headline" style="font-size:32px">Pick the actual day</h2>
+    <p class="deck">Weekdays: morning or evening. Sunday: the long-read. Saturday is closed. The calendar is the civil date, not a guess.</p>
+    <div class="cal-nav">
+      <button class="btn" data-calnav="-1">←</button>
+      <strong>${monthName}</strong>
+      <button class="btn" data-calnav="1">→</button>
+    </div>
+    <div class="cal">
+      ${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="hd">${x}</div>`).join("")}
+      ${cells.join("")}
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0">
+      <button class="btn ${state.archiveEd==="am"?"btn-amber":""}" data-ed="am">Morning</button>
+      <button class="btn ${state.archiveEd==="pm"?"btn-amber":""}" data-ed="pm">Evening</button>
+      <button class="btn ${state.archiveEd==="sun"?"btn-amber":""}" data-ed="sun">Sunday long-read</button>
+      <button class="btn" data-dossier="${state.archiveDay||state.edition.dayKey}">Week dossier</button>
+    </div>
+    ${state.archiveDay? `<p class="muted" style="margin:12px 0 0">${prettyDay(state.archiveDay)} · ${isSundayKey(state.archiveDay)?"Sunday long-read": isSaturdayKey(state.archiveDay)?"no daily letter": (state.archiveEd==="pm"?"Evening":"Morning")}</p>`:""}
+  </section>`;
+  if(state.archiveDay) html += briefView();
+  return html;
+}
+
+function donateView(){
+  return `<section class="card">
+    <div class="kicker">Quiet continuity</div>
+    <h2 class="headline" style="font-size:32px">The letter stays open</h2>
+    <p class="deck">Inside Desk is free to read. Voluntary support helps keep the letter independent and open. It does not purchase access, advice, influence, or a subscription. If the desk has earned a coffee, that is enough.</p>
+    <p>PayPal handle: <b>quietcontinuity</b></p>
+    <p><a class="btn btn-amber" href="${SUPPORT.url}" target="_blank" rel="noopener noreferrer">Support via PayPal</a></p>
+    <p class="muted">Processed by PayPal. The publisher does not collect card numbers here. Gifts are voluntary. No consideration is promised. No refund is due for a gift unless PayPal or mandatory law says otherwise. This is not a tax-deductible charity appeal unless a receipt from a recognised charity says so — this desk is an editorial letter, not a registered charity.</p>
+    <p class="faint">Questions: <a href="mailto:insidedesk@benjaminkoch.info">insidedesk@benjaminkoch.info</a></p>
+  </section>`;
+}
+
+function legalView(){
+  const P = PUBLISHER;
+  return `<section class="card legal">
+    <div class="kicker">Legal</div>
+    <h2 class="headline" style="font-size:32px;color:var(--text)">Terms of use</h2>
+    <p>Inside Desk is an independent editorial letter. It is commentary for a general audience. It is not a news agency, broker-dealer, investment adviser, credit institution, law firm, tax practice, medical practice, political party, or intelligence service. Local law where you read still applies to you.</p>
+
+    <h3>1. Publisher</h3>
+    <p>The service is published by ${esc(P.name)}, ${esc(P.careOf)}, ${esc(P.street)}, ${esc(P.zip)} ${esc(P.city)}, ${esc(P.country)}. The responsible editor is ${esc(P.visdp)}. Full identification is on the <button class="btn btn-ghost" data-go="imprint">Imprint</button> page.</p>
+
+    <h3>2. What “Inside Desk” is not</h3>
+    <p>“Inside” is a brand metaphor for a kept reading habit. It is not a claim of material non-public information, special access, or an invitation to trade. Anyone saying otherwise in our name is wrong. We do not provide tips. We do not solicit the purchase or sale of any security, commodity, currency, or instrument.</p>
+
+    <h3>3. Not advice</h3>
+    <p>Nothing here is investment, legal, tax, accounting, medical, or voting advice, and nothing is an offer or solicitation. Text and charts are provided “as is”, without warranties of accuracy or completeness. Commentary can be wrong, incomplete, or late. You alone decide what to do. You alone comply with the laws that apply to you, including securities, sanctions, and election law.</p>
+
+    <h3>4. Charts and data</h3>
+    <p>Charts draw public prints (exchange pages and official series) and may show a short desk extension. They are not a licensed broker feed, not official statistics, and not a recommendation. Do not trade off the drawings. Binding numbers live with the institutions that publish them.</p>
+
+    <h3>5. Original commentary</h3>
+    <p>Third-party names remain their owners’ marks. We are not affiliated with them. A “what’s moving” board may list public headline language in English, without outlet names, so a reader can see the day’s weather. Those lines are not copied into the essays. Desk titles, commentary, and comments are original and are not a reprint of any wire.</p>
+
+    <h3>6. No public comments</h3>
+    <p>There is no public comment board. Reader notes and the shelf stay in your browser and are not uploaded by this service. “Desk comments” are editorial asides. Letters use your own mail client. We do not host user-generated public speech. Do not use notes to store or circulate unlawful material.</p>
+
+    <h3>7. Conduct</h3>
+    <p>This desk will not invent crimes, publish sexual content involving minors, target private persons for harassment, or call for violence. We prefer institutions, incentives, and mechanisms to character assassination. If a passage feels personal, read it as a type, not a dossier.</p>
+
+    <h3>8. Liability</h3>
+    <p>To the maximum extent permitted by applicable law, ${esc(P.name)} and Inside Desk are not liable for any direct, indirect, incidental, or consequential loss arising from use of this service, including decisions about money, politics, travel, or family capital. Mandatory rights that cannot be waived remain untouched. Where liability can be limited, it is limited to amounts you actually paid the publisher in the twelve months before the claim. Voluntary support is not a fee for content and creates no additional duty beyond mandatory law.</p>
+
+    <h3>9. Privacy</h3>
+    <p>This service does not run advertising trackers. Your browser may keep theme, follows, shelf items, and notes. You can erase them by clearing site data. Network requests for public series and public headlines are ordinary requests; they do not send a dossier of you. Do not type secrets into notes.</p>
+
+    <h3>10. Voluntary support</h3>
+    <p>The letter is free. The PayPal control “quietcontinuity” accepts voluntary gifts. A gift is not a purchase, not a subscription, and not consideration for access, advice, or influence. Card data is handled by PayPal, not by this letter. No licensed payment for content is offered here. Unless a recognised charity receipt says otherwise, do not treat a gift as tax-deductible.</p>
+
+    <h3>11. Copyright</h3>
+    <p>© 2020–2026 Inside Desk / ${esc(P.name)}. You may share links and short quotations with attribution for non-commercial reading. You may not republish entire editions as your own, and you may not scrape this service to train a competing desk without written permission.</p>
+
+    <h3>12. Contact</h3>
+    <p>Email: <a href="mailto:privacy@benjaminkoch.info">privacy@benjaminkoch.info</a><br>Post: ${esc(P.name)}, ${esc(P.careOf)}, ${esc(P.street)}, ${esc(P.zip)} ${esc(P.city)}, ${esc(P.country)}. We do not promise a reply.</p>
+  </section>`;
+}
+
+function notesView(){
+  const n = notesAll();
+  const keys = Object.keys(n).filter(k=>n[k] && n[k].trim());
+  return `<section class="card">
+    <div class="kicker">Private notes</div>
+    <h2 class="headline" style="font-size:32px">A margin that cannot sue anyone</h2>
+    <p class="deck">${keys.length? "Only you can see these." : "You have not written in the margin yet. Open any article."}</p>
+    ${keys.map(k=>`<div class="plan"><h4>${esc(k)}</h4><p>${esc(n[k])}</p></div>`).join("")}
+  </section>`;
+}
+function shelfView(){
+  const s = shelfAll();
+  const n = notesAll();
+  const keys = Object.keys(n).filter(k=>n[k] && n[k].trim());
+  return `<section class="card">
+    <div class="kicker">Shelf</div>
+    <h2 class="headline" style="font-size:32px">Saved for later</h2>
+    <p class="deck">Private to your browser. Not a public list.</p>
+    ${s.length? s.map(x=>`<div class="shelf-item">
+      <div><button class="btn btn-ghost" data-open-saved="${x.id}" style="padding-left:0;text-align:left"><b>${esc(x.title)}</b></button>
+      <div class="faint">${esc(x.dayKey)} · ${esc(x.ed)} · ${esc(x.topic)}</div>
+      <div class="muted">${esc(x.dek||"")}</div></div>
+      <button class="btn" data-shelf="${x.id}">Remove</button>
+    </div>`).join("") : `<p class="muted">Nothing on the shelf yet. Open a piece and save it.</p>`}
+  </section>
+  <section class="card">
+    <div class="kicker">Notes</div>
+    <h3 class="headline" style="font-size:24px">The margin</h3>
+    ${keys.length? keys.map(k=>`<div class="plan"><h4>${esc(k)}</h4><p>${esc(n[k])}</p></div>`).join("") : `<p class="muted">No notes yet.</p>`}
+  </section>`;
+}
+function imprintView(){
+  const P = PUBLISHER;
+  return `<section class="card legal">
+    <div class="kicker">Imprint</div>
+    <h2 class="headline" style="font-size:32px;color:var(--text)">Provider identification</h2>
+    <p>Information according to applicable provider-identification rules for digital editorial services.</p>
+    <p><strong>Service</strong><br>Inside Desk<br>Independent editorial letter · weekday morning and evening editions · Sunday long-read</p>
+    <p><strong>Publisher</strong><br>${esc(P.name)}<br>${esc(P.careOf)}<br>${esc(P.street)}<br>${esc(P.zip)} ${esc(P.city)}<br>${esc(P.country)}</p>
+    <p><strong>Responsible editor</strong><br>${esc(P.visdp)}<br>${esc(P.careOf)}<br>${esc(P.street)}<br>${esc(P.zip)} ${esc(P.city)}<br>${esc(P.country)}</p>
+    <p><strong>Contact</strong><br>Email: <a href="mailto:insidedesk@benjaminkoch.info">insidedesk@benjaminkoch.info</a><br>Post: ${esc(P.name)}, ${esc(P.careOf)}, ${esc(P.street)}, ${esc(P.zip)} ${esc(P.city)}, ${esc(P.country)}</p>
+    <p><strong>Status</strong><br>No commercial-register number is stated (none is claimed). No VAT identification number is stated (none is claimed). No professional-chamber membership is claimed. This is not a licensed investment service, credit institution, or law practice. Voluntary donations, if you choose to give, are processed by PayPal. The publisher does not take part in consumer arbitration boards.</p>
+    <p class="muted">Mandatory consumer and media rights remain unaffected. The <button class="btn btn-ghost" data-go="legal">Terms of use</button> apply.</p>
+  </section>`;
+}
+
+function renderHero(){
+  const ed = (state.view==="archive" && state.archiveDay)
+    ? { key:state.archiveEd, label: state.archiveEd==="am"?"Morning edition":"Evening edition", dayKey:state.archiveDay }
+    : { ...state.edition, key: liveEdKey(), label: liveEdKey()==="am"?"Morning edition":"Evening edition" };
+  const h = heroCopy({key:ed.key});
+  $("#heroKicker").textContent = `${h.kicker} · ${prettyDay(ed.dayKey)}`;
+  $("#heroTitle").textContent = h.title;
+  $("#heroSub").textContent = h.sub;
+  $("#heroDate").textContent = prettyDay(ed.dayKey);
+  const nxt = nextEdition();
+  $("#heroNext").textContent = `Next edition: ${nxt.label} in ${nxt.in}`;
+  const p = plan();
+  $("#planChip").textContent = "Open letter";
+  const bar = $("#billingBar");
+  if(bar){
+    bar.innerHTML = `The letter is free. Quiet continuity: <a href="${SUPPORT.url}" target="_blank" rel="noopener noreferrer">paypal.me/quietcontinuity</a>`;
+  }
+  $("#liveLbl").textContent = `${ed.key.toUpperCase()} DESK`;
+  $("#dynamicTagline").textContent = ed.key==="sun"
+    ? "Sunday: the week, without the alerts."
+    : ed.key==="am"
+    ? "Morning: order the day before the day orders you."
+    : "Evening: admit what the day actually did.";
+}
+
+const TAPE_SHORTS = {
+  am: [
+    "Aim before the day aims you.",
+    "Cheerleaders are not a bid.",
+    "The annex is the news.",
+    "Put the phone in the other room.",
+    "The bill arrived first.",
+    "Waiting is not a scandal.",
+    "You were in the story at breakfast.",
+    "Calm is still legal.",
+    "The dots are not scripture.",
+    "Size to the night you can sleep."
+  ],
+  pm: [
+    "Admit what the day actually did.",
+    "The close is a receipt, not a sermon.",
+    "You refused the stampede. Keep that.",
+    "Relief is information.",
+    "The podium went home. The print did not.",
+    "Tuesday still has to work tomorrow.",
+    "Leave cooler than you arrived.",
+    "The corridor beat the clip again.",
+    "Inventories skipped the play.",
+    "Go outside. The tape will keep."
+  ],
+  sun: [
+    "The week, without the alerts.",
+    "Sunday is the sequence.",
+    "No rerun. One honest receipt.",
+    "The inherited and the ordinary share a table.",
+    "Strip the noise. Keep the corridor.",
+    "A boring week is an achievement."
+  ],
+  week: [
+    "Saturday is closed. The corridor is not.",
+    "The week already filed its invoice.",
+    "Rest is a position.",
+    "Sunday will keep the sequence."
+  ]
+};
+function tapeKey(){
+  const k = liveEdKey();
+  if(k==="sun" || state.edition.kind==="sunday") return "sun";
+  if(state.edition.kind==="weekend") return "week";
+  if(k==="pm") return "pm";
+  return "am";
+}
+function renderTicker(){
+  const host = $("#ticker");
+  if(!host) return;
+  const prints=[];
+  Object.keys(MARKET_SERIES).forEach(id=>{
+    const s=state.market[id];
+    if(!s || s.last==null) return;
+    const chg=+s.chg||0;
+    const dec = Math.abs(s.last)<20 ? 3 : 2;
+    prints.push(`<span><b>${MARKET_SERIES[id].title.split("(")[0].trim().toUpperCase()}</b> ${(+s.last).toFixed(dec)} <span class="${chg>=0?"up":"dn"}">${chg>=0?"+":""}${chg.toFixed(dec)}</span></span>`);
+  });
+  if(!prints.length){
+    currentPack().briefs.slice(0,6).forEach(b=>{
+      prints.push(`<span><b>${TOPICS.find(t=>t.key===b.topic).name.toUpperCase()}</b> ${b.last.toFixed(1)} <span class="${b.chg>=0?"up":"dn"}">${b.chg>=0?"+":""}${b.chg.toFixed(2)}</span></span>`);
+    });
+  }
+  const key = tapeKey();
+  const pool = (TAPE_SHORTS[key]||TAPE_SHORTS.am).concat(TAPE_SHORTS.am.slice(0,2));
+  const rng = seedn("tape", state.edition.dayKey, key, String(renderTicker._n||0));
+  const quotes = pickN(pool, 5, rng).map(q=>`<span class="q"><i>${key.toUpperCase()}</i>${esc(q)}</span>`);
+  const bits=[];
+  const max = Math.max(prints.length, quotes.length);
+  for(let i=0;i<max;i++){
+    if(prints[i]) bits.push(prints[i]);
+    if(quotes[i]) bits.push(quotes[i]);
+  }
+  const line = bits.join("<span>·</span>");
+  host.innerHTML = line + line;
+  renderTicker._n = (renderTicker._n||0)+1;
+}
+
+function render(){
+  renderHero();
+  renderTicker();
+  const app = $("#app");
+  const v = state.view;
+  if(v==="brief") app.innerHTML = briefView();
+  else if(v==="insights") app.innerHTML = insightsView();
+  else if(v==="archive") app.innerHTML = archiveView();
+  else if(v==="support" || v==="donate" || v==="subscribe") app.innerHTML = donateView();
+  else if(v==="legal") app.innerHTML = legalView();
+  else if(v==="notes" || v==="shelf") app.innerHTML = shelfView();
+  else if(v==="imprint") app.innerHTML = imprintView();
+  else if(TOPICS.some(t=>t.nav===v || t.key===v)) app.innerHTML = topicView(TOPICS.find(t=>t.nav===v||t.key===v).key);
+  else app.innerHTML = briefView();
+  $("#side").innerHTML = sideHTML(currentPack());
+  const room = $("#dataRoom");
+  if(room){
+    const pack = currentPack();
+    room.innerHTML = pack.articles.map(a=> a.charts.map((c,i)=>`
+      <figure class="chart-box" data-chart="${a.id}-${i}">
+        <div class="chart-head"><span>${esc(c.title)}</span><span data-read>LAST ${c.last.toFixed(2)}</span></div>
+        <canvas aria-label="${esc(c.title)}"></canvas>
+        <figcaption class="chart-foot"><span>${esc(TOPICS.find(t=>t.key===a.topic).name)} · public print</span><span>EXT ${c.extra}M</span></figcaption>
+      </figure>`).join("")).join("");
+  }
+  requestAnimationFrame(()=>{
+    drawAllCharts();
+    $$("[data-spark]").forEach(cv=>{
+      const id=cv.getAttribute("data-spark");
+      const b=currentPack().briefs.find(x=>x.id===id);
+      if(b) drawSpark(cv, b.series, b.chg>=0);
+    });
+  });
+}
+
+function specForBox(id){
+  let spec=null;
+  const take=a=>{ if(!a) return; a.charts.forEach((c,i)=>{ if(`${a.id}-${i}`===id) spec=c; }); };
+  currentPack().articles.forEach(take);
+  $$("article.article").forEach(el=> take(findArt(el.id)));
+  return spec;
+}
+function drawAllCharts(){
+  const boxes=$$("[data-chart]");
+  if(!boxes.length) return;
+  const paint=box=>{
+    if(box.dataset.drawn) return;
+    const spec=specForBox(box.getAttribute("data-chart"));
+    const canvas=box.querySelector("canvas");
+    if(spec && canvas){ bindChart(canvas, spec); box.dataset.drawn="1"; }
+  };
+  if(!("IntersectionObserver" in window)){ boxes.forEach(paint); return; }
+  const io=new IntersectionObserver(ents=>{
+    ents.forEach(en=>{ if(en.isIntersecting){ paint(en.target); io.unobserve(en.target); } });
+  },{rootMargin:"120px"});
+  boxes.forEach(b=>io.observe(b));
+}
+
+function findArt(id){
+  const pack = currentPack();
+  let a = pack.articles.find(x=>x.id===id);
+  if(a) return a;
+  const m = id.match(/^(.*)-(am|pm|sun)-([a-z]+)-(\d+)$/);
+  if(m) return writeArticle(m[3], m[1], m[2], +m[4], false);
+  return null;
+}
+
+function shareArticle(id){
+  const a = findArt(id); if(!a) return;
+  const url = location.href.split("#")[0] + "#" + id;
+  const text = `${a.title} — Inside Desk (${a.published})`;
+  if(navigator.share){ navigator.share({title:a.title, text, url}).catch(()=>{}); }
+  else { copyText(url); }
+}
+function copyText(t){
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>toast("Copied.")).catch(()=>fallbackCopy(t));
+  else fallbackCopy(t);
+}
+function fallbackCopy(t){
+  const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); toast("Copied."); }catch{ toast("Copy failed."); }
+  ta.remove();
+}
+
+function printArticle(id){
+  const a = findArt(id); if(!a) return;
+  if(!canRead(a)){ return; }
+  const topic = TOPICS.find(t=>t.key===a.topic);
+  const w = window.open("", "_blank");
+  if(!w){ toast("Allow pop-ups to print."); return; }
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(a.title)}</title>
+    <style>body{font:16px/1.6 Georgia,serif;color:#111;max-width:720px;margin:32px auto;padding:0 16px}
+    h1{font-size:28px} .k{letter-spacing:.14em;text-transform:uppercase;font:12px sans-serif;color:#a44}
+    .m{color:#555;font:13px sans-serif} .f{font:11px sans-serif;color:#666;margin-top:28px}</style></head><body>
+    <div class="k">${topic.kicker} · INSIDER TERMINAL</div>
+    <h1>${esc(a.title)}</h1>
+    <p><i>${esc(a.dek)}</i></p>
+    <div class="m">${esc(a.published)} · Commentary only · Not advice</div>
+    ${a.paras.map(p=>`<p>${esc(p)}</p>`).join("")}
+    <h3>What to watch</h3><ul>${a.watch.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    <p><b>Desk comment.</b> ${esc(a.comment)}</p>
+    <div class="f">Desk commentary. Charts omitted in this text dossier. © Inside Desk / Dr. Benjamin Koch. No offer or solicitation.</div>
+    <script>window.onload=()=>window.print()<\/script>
+    </body></html>`);
+  w.document.close();
+}
+
+function printWeekDossier(fromKey){
+  const days = weekDays(fromKey);
+  const sun = addDays(days[0], 6);
+  const w = window.open("", "_blank");
+  if(!w){ toast("Allow pop-ups to print."); return; }
+  let body = `<h1>Inside Desk — Week dossier</h1>
+    <p class="m">${prettyDay(days[0])} to ${prettyDay(days[4])} · commentary only · not advice</p>`;
+  days.forEach(dk=>{
+    ["am","pm"].forEach(ed=>{
+      const pack=buildEdition(dk, ed);
+      const lead=pack.lead;
+      body += `<h2>${prettyDay(dk)} · ${ed==="am"?"Morning":"Evening"}</h2>
+        <h3>${esc(lead.title)}</h3>
+        <p><i>${esc(lead.dek)}</i></p>
+        ${lead.paras.slice(0,2).map(p=>`<p>${esc(p)}</p>`).join("")}
+        <p class="m">${pack.articles.slice(1).map(a=>esc(a.title)).join(" · ")}</p>`;
+    });
+  });
+  if(dateFromKey(sun) <= dateFromKey(state.edition.dayKey) || weekdayFromKey(fromKey)===0){
+    const sunPack = buildSunday(sun);
+    body += `<h2>Sunday long-read · ${prettyDay(sun)}</h2>
+      <h3>${esc(sunPack.lead.title)}</h3>
+      ${sunPack.lead.paras.map(p=>`<p>${esc(p)}</p>`).join("")}`;
+  }
+  body += `<div class="f">Week dossier · public headlines are listed separately and not reprinted in the essays. © Inside Desk / Dr. Benjamin Koch.</div>`;
+  w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Week dossier</title>
+    <style>body{font:15px/1.55 Georgia,serif;color:#111;max-width:760px;margin:28px auto;padding:0 16px}
+    h1{font-size:26px} h2{margin-top:28px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#a44}
+    h3{font-size:20px;margin:6px 0} .m{color:#555;font:13px sans-serif} .f{font:11px sans-serif;color:#666;margin-top:28px}</style></head><body>
+    ${body}<script>window.onload=()=>window.print()<\\/script></body></html>`);
+  w.document.close();
+}
+
+function choosePlan(id){
+  const cur = plan();
+  setPlan({ ...cur, id, since: cur.since || new Date().toISOString(), billingAck:true });
+  toast(id==="corridor"?"Back on Corridor.": id==="principal"?"Welcome to Principal.":"Welcome to the Desk.");
+  render();
+}
+
+async function fetchText(url){
+  const ctrl = new AbortController();
+  const t = setTimeout(()=>ctrl.abort(), 3500);
+  try{
+    const r = await fetch(url, {mode:"cors", signal:ctrl.signal});
+    if(r.ok) return await r.text();
+  }catch{}
+  finally{ clearTimeout(t); }
+  return "";
+}
+async function poolMap(items, n, fn){
+  const ret=new Array(items.length);
+  let i=0;
+  async function worker(){
+    while(i<items.length){
+      const idx=i++;
+      try{ ret[idx]=await fn(items[idx], idx); }catch{ ret[idx]=null; }
+    }
+  }
+  await Promise.all(Array.from({length:Math.min(n, items.length)}, worker));
+  return ret;
+}
+function parseRSSTitles(xml, source){
+  try{
+    const doc = new DOMParser().parseFromString(xml, "text/xml");
+    const nodes = [...doc.querySelectorAll("item, entry")];
+    return nodes.slice(0,10).map(it=>{
+      const title=(it.querySelector("title")?.textContent||"").trim();
+      const linkEl = it.querySelector("link");
+      const link=(linkEl?.getAttribute("href") || linkEl?.textContent || it.querySelector("guid")?.textContent || "").trim();
+      return title? {title, link: link||"#", source}: null;
+    }).filter(Boolean);
+  }catch{ return []; }
+}
+function looksEnglish(s){
+  if(/[äöüÄÖÜß]/.test(s)) return false;
+  if(/\b(der|die|das|und|für|nicht|mit|auf|eine|einer|einem|sich|wird|sind|nach|auch|im|den|dem|von|zur|zum|bei|als|oder|gegen|heute|mehr|kann|noch|aber|nur|wie|aus|wurde|werden|hat|haben|sei|nachrichten|wirtschaft|politik)\b/i.test(s)) return false;
+  return /[A-Za-z]{4,}/.test(s);
+}
+function cleanHeadline(t){
+  let s = String(t||"").replace(/\s+/g," ").trim();
+  s = s.replace(/\s*[-–—|]\s*[A-Za-z0-9 .'’-]{2,32}$/,"");
+  s = s.replace(/\s*\((Reuters|AP|AFP|BBC|CNN|CNBC|Fox|NYT|WSJ|DW|dpa|Bloomberg)[^)]*\)\s*$/i,"");
+  s = toEnglish(s).replace(/^["“]|["”]$/g,"").trim();
+  return s;
+}
+function buildMovers(){
+  const seen=new Set(), raw=[];
+  (state.tape||[]).forEach(it=>{
+    const title=cleanHeadline(it.title);
+    if(!looksEnglish(title) || title.length<18 || title.length>140) return;
+    const k=title.toLowerCase().replace(/[^a-z0-9]+/g," ");
+    if(seen.has(k)) return;
+    seen.add(k);
+    const topic=it.topic||classifyTitle(title,"politics");
+    const desk=(TOPICS.find(t=>t.key===topic)||{}).name||"World";
+    raw.push({title, topic, desk});
+  });
+  const picked=[], used=new Set();
+  TOPICS.forEach(t=>{
+    const hit=raw.find(x=>x.topic===t.key);
+    if(hit){ picked.push(hit); used.add(hit.title); }
+  });
+  raw.forEach(x=>{ if(picked.length<12 && !used.has(x.title)){ picked.push(x); used.add(x.title); } });
+  state.movers=picked;
+}
+function moversHTML(){
+  const list=state.movers||[];
+  if(!list.length) return `<p class="muted">The board fills when the public wires answer. Essays below never reprint these lines.</p>`;
+  return list.map(m=>`<div class="mover"><div class="dk">${esc(m.desk)}</div><p>${esc(m.title)}</p></div>`).join("");
+}
+function classifyTitle(tt, fallback){
+  const rules = [
+    { key:"tech", rx:/ai|chip|semicon|compute|software|cyber|data center|memory|foundry|hynix|nvidia|gpu/i },
+    { key:"health", rx:/health|hospital|drug|vaccine|aging|longevity|care home|pandemic|who |clinic|nurse/i },
+    { key:"security", rx:/defense|defence|nato|missile|army|navy|security|ceasefire|troop|intel agency/i },
+    { key:"energy", rx:/oil|brent|wti|opec|gas|lng|crude|refin|barrel|energy|petrol|pipeline/i },
+    { key:"money", rx:/fed|ecb|rate|yield|dollar|euro|yen|currency|inflation|central bank|fomc|bond|treasury/i },
+    { key:"markets", rx:/stock|equity|market|earnings|nasdaq|s&p|rally|selloff|wall street|ipo/i },
+    { key:"geoecon", rx:/trade|tariff|supply chain|sanction|imf|world bank|wto|shipping|freight|export|import/i },
+    { key:"ordinary", rx:/housing|rent|wage|job|food|school|household|cost of living|grocery|mortgage/i },
+    { key:"psych", rx:/mental|attention|social media|poll|sentiment|fear|confidence|survey/i },
+    { key:"politics", rx:/election|parliament|president|minister|vote|court|war|peace|diplomacy|un /i }
+  ];
+  for(const r of rules){ if(r.rx.test(tt)) return r.key; }
+  return fallback || "politics";
+}
+async function loadTape(){
+  const rot = TAPE_SOURCES.filter((_,i)=> (i + doy(state.edition.dayKey)) % 3 === 0).slice(0,8);
+  const pick8 = rot.length>=6 ? rot : TAPE_SOURCES.slice(0,8);
+  const parts = await poolMap(pick8, 3, async src=>{
+    const raw = await fetchText(src.urls[0]);
+    if(raw && (raw.includes("<item") || raw.includes("<entry"))){
+      return parseRSSTitles(raw, src.name).slice(0,5).map(x=>({...x, topic: classifyTitle(x.title, src.topic)}));
+    }
+    return [];
+  });
+  const seen=new Set();
+  state.tape = (parts||[]).flat().filter(x=>x && x.title).filter(x=>{
+    const k=(x.title||"").toLowerCase().replace(/[^a-z0-9]+/g," ");
+    if(seen.has(k)||k.length<12) return false;
+    seen.add(k); return true;
+  }).slice(0,20);
+  state.world = Object.fromEntries(TOPICS.map(t=>[t.key,[]]));
+  state.tape.forEach(it=>{ if(state.world[it.topic]) state.world[it.topic].push(it); });
+  try{ localStorage.setItem(STORE.world, JSON.stringify({at:Date.now(), tape:state.tape.slice(0,20)})); }catch{}
+  buildMovers();
+  const host=$("#moversHost");
+  if(host) host.innerHTML=moversHTML();
+}
+function monthlyFromPoints(pts){
+  const map=new Map();
+  pts.forEach(p=>{
+    if(p.c==null || !isFinite(p.c)) return;
+    const k=p.t.getUTCFullYear()+"-"+String(p.t.getUTCMonth()+1).padStart(2,"0");
+    map.set(k,p);
+  });
+  const keys=[...map.keys()].sort();
+  return {
+    monthly: keys.map(k=>+map.get(k).c.toFixed(4)),
+    volMonthly: keys.map(k=>Math.max(4, +(map.get(k).v||20))),
+    labels: keys.map(k=>{
+      const [y,m]=k.split("-");
+      return new Date(+y,+m-1,1).toLocaleDateString("en-GB",{month:"short", year:"2-digit"});
+    })
+  };
+}
+async function loadOneSeries(id, spec){
+  const yUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(spec.yahoo)}?interval=1wk&range=5y`;
+  try{
+    const raw = await fetchText(yUrl);
+    if(raw && raw.includes("timestamp")){
+      const j = JSON.parse(raw);
+      const r = j.chart?.result?.[0];
+      const ts = r?.timestamp||[];
+      const cl = r?.indicators?.quote?.[0]?.close||[];
+      const vo = r?.indicators?.quote?.[0]?.volume||[];
+      const pts = ts.map((t,i)=>({t:new Date(t*1000), c:cl[i], v:(vo[i]||0)/1e6}));
+      const m = monthlyFromPoints(pts);
+      if(m.monthly.length>8){
+        const last=m.monthly[m.monthly.length-1], prev=m.monthly[m.monthly.length-2]||last;
+        return { ...m, last, chg:+(last-prev).toFixed(4), at:Date.now() };
+      }
+    }
+  }catch{}
+  const csv = await fetchText(`https://stooq.com/q/d/l/?s=${spec.stooq}&i=w`);
+  if(csv && /Date,/.test(csv)){
+    const pts = csv.trim().split(/\n/).slice(1).map(line=>{
+      const [d,o,h,l,c,v]=line.split(",");
+      const t=new Date(d);
+      return {t, c:parseFloat(c), v:parseFloat(v)||0};
+    }).filter(p=>p.t && isFinite(p.c));
+    const m = monthlyFromPoints(pts);
+    if(m.monthly.length>8){
+      const last=m.monthly[m.monthly.length-1], prev=m.monthly[m.monthly.length-2]||last;
+      return { ...m, last, chg:+(last-prev).toFixed(4), at:Date.now() };
+    }
+  }
+  return null;
+}
+async function loadMarkets(){
+  const cached = loadJSON(STORE.market, null);
+  if(cached && cached.at && Date.now()-cached.at < 45*60*1000 && cached.series){
+    state.market = cached.series;
+    renderTicker();
+    return;
+  }
+  const ids = ["brent","gold","dxy","spx","us10y","vix"];
+  await poolMap(ids, 2, async id=>{
+    const rec = await loadOneSeries(id, MARKET_SERIES[id]);
+    if(rec) state.market[id] = rec;
+  });
+  try{ localStorage.setItem(STORE.market, JSON.stringify({at:Date.now(), series:state.market})); }catch{}
+  renderTicker();
+}
+
+function tickClock(){
+  const p = cetParts();
+  $("#clockChip").textContent = `${p.wd} ${String(p.h).padStart(2,"0")}:${String(p.min).padStart(2,"0")} CET`;
+  const ed = editionOf();
+  if(ed.dayKey!==state.edition.dayKey || ed.key!==state.edition.key){
+    state.edition = ed;
+    _packKey=""; _pack=null;
+    if(state.view==="brief") render();
+    else renderHero();
+    toast(`${ed.label} is on the desk.`);
+  }else{
+    const nxt=nextEdition();
+    const hn=$("#heroNext"); if(hn) hn.textContent = `Next edition: ${nxt.label} in ${nxt.in}`;
+  }
+}
+
+function bindUI(){
+  document.addEventListener("click", e=>{
+    const go = e.target.closest("[data-go]");
+    if(go){ e.preventDefault(); navTo(go.dataset.go); return; }
+    const jump = e.target.closest("[data-jump]");
+    if(jump){
+      const el=document.getElementById(jump.dataset.jump);
+      if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+      else { state.view="brief"; render(); setTimeout(()=> document.getElementById(jump.dataset.jump)?.scrollIntoView({behavior:"smooth"}), 50); }
+      return;
+    }
+    const open = e.target.closest("[data-open]");
+    if(open){ const el=document.getElementById(open.dataset.open); if(el) el.scrollIntoView({behavior:"smooth"}); return; }
+    const ex = e.target.closest("[data-expand]");
+    if(ex){
+      state.openIds = state.openIds||[];
+      if(!state.openIds.includes(ex.dataset.expand)) state.openIds.push(ex.dataset.expand);
+      render();
+      setTimeout(()=> document.getElementById(ex.dataset.expand)?.scrollIntoView({behavior:"smooth", block:"start"}), 40);
+      return;
+    }
+    const sh = e.target.closest("[data-share]"); if(sh){ shareArticle(sh.dataset.share); return; }
+    const cp = e.target.closest("[data-copy]"); if(cp){ copyText(location.href.split("#")[0]+"#"+cp.dataset.copy); return; }
+    const pr = e.target.closest("[data-print]"); if(pr){ printArticle(pr.dataset.print); return; }
+    const fl = e.target.closest("[data-follow]"); if(fl){ toggleFollow(fl.dataset.follow); render(); toast("Follow saved."); return; }
+    const shv = e.target.closest("[data-shelf]"); if(shv){ toggleShelf(shv.dataset.shelf); render(); toast("Shelf updated."); return; }
+    const dos = e.target.closest("[data-dossier]"); if(dos){ printWeekDossier(dos.dataset.dossier); return; }
+    const osv = e.target.closest("[data-open-saved]");
+    if(osv){
+      const rec = shelfAll().find(x=>x.id===osv.dataset.openSaved);
+      if(rec){
+        state.archiveDay = rec.dayKey;
+        state.archiveEd = rec.ed==="sun"?"sun": rec.ed;
+        state.view = "archive";
+        render();
+        setTimeout(()=> document.getElementById(rec.id)?.scrollIntoView({behavior:"smooth"}), 80);
+      }
+      return;
+    }
+    const cn = e.target.closest("[data-calnav]");
+    if(cn){
+      let y=state.calYear, m=state.calMonth + (+cn.dataset.calnav);
+      if(m<1){ m=12; y--; } if(m>12){ m=1; y++; }
+      if(y>=2020 && y<=cetParts().y){ state.calYear=y; state.calMonth=m; render(); }
+      return;
+    }
+    const cd = e.target.closest("[data-cal]");
+    if(cd){
+      const key=cd.dataset.cal;
+      if(isSaturdayKey(key)){ toast("Saturday is closed. The daily letter is Monday–Friday."); return; }
+      state.archiveDay=key;
+      state.archiveEd = isSundayKey(key) ? "sun" : (state.archiveEd==="sun"?"am":state.archiveEd);
+      state.view="archive";
+      render();
+      return;
+    }
+    const ch = e.target.closest("[data-choose]"); if(ch){ choosePlan(ch.dataset.choose); return; }
+    const peek = e.target.closest("[data-peek]");
+    if(peek){
+      const want = peek.dataset.peek;
+      if(want==="pm" && state.edition.key!=="pm" && cetParts().h<17){
+        toast("Evening edition locks at 17:00 CET. Morning is the live letter until then.");
+        return;
+      }
+      state.peekEd = want;
+      state.view = "brief";
+      render();
+      return;
+    }
+    const edb = e.target.closest("[data-ed]");
+    if(edb){
+      state.archiveEd=edb.dataset.ed;
+      if(edb.dataset.ed==="sun" && state.archiveDay && !isSundayKey(state.archiveDay)){
+        state.archiveDay = addDays(weekMonday(state.archiveDay), 6);
+      }
+      render();
+      return;
+    }
+    const mo = e.target.closest("[data-month]");
+    if(mo){
+      const [y,m] = mo.dataset.month.split("-").map(Number);
+      const rng = seedn("day", mo.dataset.month, state.archiveEd);
+      const day = 2+Math.floor(rng()*26);
+      state.archiveDay = `${y}-${String(m).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+      render();
+      return;
+    }
+  });
+  document.addEventListener("input", e=>{
+    const ta = e.target.closest("[data-note]");
+    if(ta) setNote(ta.dataset.note, ta.value);
+  });
+  document.addEventListener("submit", e=>{
+    if(e.target.id==="imprintForm"){
+      e.preventDefault();
+      return;
+    }
+    if(e.target.id!=="subForm") return;
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const cur = plan();
+    setPlan({ ...cur, email: String(fd.get("email")||"").trim(), since: cur.since || new Date().toISOString(), billingAck:true });
+    toast("Access request noted. This is not a charge.");
+    render();
+  });
+  $("#themeBtn").addEventListener("click", toggleTheme);
+  window.addEventListener("resize", ()=> drawAllCharts());
+  document.addEventListener("keydown", e=>{
+    if(e.key==="/" && !/input|textarea/i.test(e.target.tagName)){ e.preventDefault(); navTo("archive"); setTimeout(()=>$("#archSearch")?.focus(), 0); }
+    if(e.key==="s" && e.metaKey){ /* allow save */ }
+  });
+  if(location.hash && location.hash.length>2){
+    const id=location.hash.slice(1);
+    state.view="brief";
+    setTimeout(()=> document.getElementById(id)?.scrollIntoView(), 200);
+  }
+}
+
+function boot(){
+  applyTheme();
+  state.edition = editionOf();
+  try{
+    const w = JSON.parse(localStorage.getItem(STORE.world)||"null");
+    if(w && w.at && Date.now()-w.at < 3*3600*1000 && w.tape){
+      state.tape = w.tape;
+      state.world = Object.fromEntries(TOPICS.map(t=>[t.key,[]]));
+      state.tape.forEach(it=>{ if(state.world[it.topic]) state.world[it.topic].push(it); });
+      buildMovers();
+    }
+  }catch{}
+  bindUI();
+  render();
+  tickClock();
+  setInterval(tickClock, 15000);
+  setInterval(renderTicker, 18000);
+  loadTape();
+  loadMarkets();
+}
+
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot);
+else boot();
+})();
+</script>
+</body>
+</html>

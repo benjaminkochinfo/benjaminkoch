@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="robots" content="index,follow" />
+  <title>The Clarity Institute · Dr. Benjamin Koch</title>
+  <meta name="description" content="The Clarity Institute — an applied philosophy of the being. Inner counsel, the Chart of Ascent, strategic analysis, writing, scholarly work, and knowledge transfer. Private. Precise." />
+  <meta name="author" content="Dr. Benjamin Koch" />
+  <link rel="canonical" href="https://benjaminkoch.info/practice-clarity-institute.html" />
+  <meta name="theme-color" content="#081427" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Clarity Institute · Dr. Benjamin Koch" />
+  <meta property="og:description" content="An applied philosophy for the being. The Chart. The procedures. The work in the world." />
+  <meta property="og:url" content="https://benjaminkoch.info/practice-clarity-institute.html" />
+  <meta property="og:site_name" content="The Clarity Institute" />
+
+  <style>
+    :root {
+      --navy: #081427;
+      --navy-2: #0c1c38;
+      --navy-3: #13284c;
+      --navy-4: #1a3560;
+      --gold: #c9a227;
+      --gold-2: #e4cc86;
+      --gold-3: #f3e6b8;
+      --gold-dim: #8a701c;
+      --cream: #f4ead7;
+      --paper: #f8f2e6;
+      --ink: #0c1424;
+      --ink-soft: #2a3346;
+      --muted: #6e6654;
+      --line: rgba(201, 162, 39, 0.28);
+      --line-soft: rgba(201, 162, 39, 0.14);
+      --ok: #7d9a6a;
+      --warm: #b45309;
+      --serif: "Palatino Linotype", Palatino, "Iowan Old Style", "Times New Roman", Times, serif;
+      --display: "Times New Roman", Times, "Palatino Linotype", Palatino, serif;
+      --sans: "Segoe UI", system-ui, sans-serif;
+      --max: 1180px;
+      --shadow: 0 24px 70px rgba(8, 20, 39, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      color: var(--cream);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.65;
+      background: var(--navy);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--gold-2); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--gold-3); }
+    button, input, select, textarea { font: inherit; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* Dust */
+    .dust {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        radial-gradient(1.2px 1.2px at 12% 22%, rgba(228, 204, 134, 0.35), transparent),
+        radial-gradient(1px 1px at 78% 18%, rgba(201, 162, 39, 0.28), transparent),
+        radial-gradient(1.4px 1.4px at 64% 72%, rgba(243, 230, 184, 0.22), transparent),
+        radial-gradient(1px 1px at 30% 80%, rgba(201, 162, 39, 0.2), transparent),
+        radial-gradient(1px 1px at 90% 54%, rgba(228, 204, 134, 0.18), transparent);
+      animation: drift 48s linear infinite;
+      opacity: 0.55;
+    }
+    @keyframes drift {
+      from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+      to { background-position: 0 -120px, 40px 80px, -30px -90px, 20px 140px, -50px 60px; }
+    }
+
+    /* Top */
+    .mast {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(8, 20, 39, 0.96), rgba(8, 20, 39, 0.88));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .mast::before {
+      content: "";
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-2), var(--gold), transparent);
+    }
+    .mast-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand:hover { color: inherit; }
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 18px rgba(201, 162, 39, 0.35);
+      animation: breathe 5.5s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { box-shadow: 0 0 12px rgba(201, 162, 39, 0.25); }
+      50% { box-shadow: 0 0 26px rgba(228, 204, 134, 0.55); }
+    }
+    .brand-text strong {
+      display: block;
+      font-family: var(--display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-2);
+    }
+    .brand-text span {
+      display: block;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 234, 215, 0.55);
+      margin-top: 2px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .nav a {
+      font-family: var(--sans);
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(244, 234, 215, 0.7);
+      padding: 8px 11px;
+    }
+    .nav a:hover { color: var(--gold-2); }
+    .nav a.cta {
+      color: var(--navy);
+      background: linear-gradient(180deg, var(--gold-2), var(--gold));
+      border-radius: 0;
+      padding: 9px 16px;
+      font-weight: 600;
+    }
+    .nav a.cta:hover { color: var(--navy); filter: brightness(1.08); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8, 20, 39, 0.55) 0%, rgba(8, 20, 39, 0.72) 55%, rgba(8, 20, 39, 0.96) 100%),
+        url("clarity-system-assets/hall.jpg") center/cover no-repeat;
+      z-index: -1;
+      transform: scale(1.04);
+      animation: ken 28s ease-in-out infinite alternate;
+    }
+    @keyframes ken {
+      from { transform: scale(1.02); }
+      to { transform: scale(1.08); }
+    }
+    .hero-inner {
+      text-align: center;
+      padding: 120px 24px 80px;
+      max-width: 880px;
+    }
+    .hero-emblem {
+      width: 118px;
+      height: 118px;
+      margin: 0 auto 28px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 0 8px rgba(201, 162, 39, 0.08), 0 0 40px rgba(201, 162, 39, 0.35);
+      animation: breathe 5.5s ease-in-out infinite;
+    }
+    .kicker {
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 18px;
+    }
+    h1 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+      letter-spacing: 0.16em;
+      line-height: 1.18;
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      color: var(--gold-3);
+      text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+    }
+    .lead {
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      font-style: italic;
+      color: rgba(244, 234, 215, 0.88);
+      max-width: 36em;
+      margin: 0 auto 16px;
+      line-height: 1.45;
+    }
+    .sublead {
+      font-family: var(--sans);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(228, 204, 134, 0.7);
+      margin: 0 auto 32px;
+      max-width: 38em;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 22px;
+      font-family: var(--display);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold-2);
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      color: var(--gold-3);
+      box-shadow: 0 10px 30px rgba(201, 162, 39, 0.18);
+    }
+    .btn.primary {
+      background: linear-gradient(180deg, var(--gold-2), var(--gold));
+      color: var(--navy);
+      border-color: var(--gold);
+    }
+    .btn.primary:hover { color: var(--navy); filter: brightness(1.06); }
+    .trust {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 22px;
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 234, 215, 0.5);
+    }
+    .trust span { display: inline-flex; align-items: center; gap: 8px; }
+    .trust i {
+      font-style: normal;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: inline-block;
+    }
+
+    /* Axiom ticker */
+    .axiom-bar {
+      background: var(--navy-2);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 24px;
+      text-align: center;
+    }
+    .axiom-bar .label {
+      font-family: var(--display);
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .axiom-bar p {
+      margin: 0;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--gold-3);
+      min-height: 1.6em;
+      transition: opacity .6s ease;
+    }
+
+    /* Sections */
+    section { padding: 72px 0; position: relative; z-index: 2; }
+    .paper {
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .paper a { color: var(--navy-4); }
+    .paper a:hover { color: var(--gold-dim); }
+    .navy-soft { background: var(--navy-2); }
+    .section-label {
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 0 0 10px;
+    }
+    .paper .section-label { color: var(--gold-dim); }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(1.55rem, 2vw + 1rem, 2.15rem);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+      line-height: 1.25;
+      color: var(--gold-3);
+    }
+    .paper .section-title { color: var(--navy); }
+    .section-intro {
+      max-width: 46rem;
+      margin: 0 0 32px;
+      font-size: 1.15rem;
+      color: rgba(244, 234, 215, 0.78);
+    }
+    .paper .section-intro { color: var(--ink-soft); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .nav a:not(.cta) { display: none; }
+    }
+
+    .card {
+      background: rgba(19, 40, 76, 0.55);
+      border: 1px solid var(--line-soft);
+      padding: 24px;
+    }
+    .paper .card {
+      background: #fffdf8;
+      border: 1px solid rgba(8, 20, 39, 0.1);
+      box-shadow: 0 10px 30px rgba(8, 20, 39, 0.05);
+    }
+    .card h3 {
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      color: var(--gold-2);
+      font-weight: 500;
+    }
+    .paper .card h3 { color: var(--navy); }
+    .card p { margin: 0; color: rgba(244, 234, 215, 0.78); font-size: 1.02rem; }
+    .paper .card p { color: var(--ink-soft); }
+
+    /* Profile */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px) { .hero-split { grid-template-columns: 1fr; } }
+    .profile {
+      background: linear-gradient(180deg, rgba(19, 40, 76, 0.85), rgba(8, 20, 39, 0.92));
+      border: 1px solid var(--line);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .profile-top {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .avatar {
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--gold);
+    }
+    .profile-top h2 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 4px;
+      font-weight: 500;
+      color: var(--gold-3);
+    }
+    .profile-top p { margin: 0; font-family: var(--sans); font-size: 12.5px; color: rgba(244, 234, 215, 0.6); }
+    .mini-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+    .mini-list li {
+      display: flex; gap: 10px;
+      font-size: 15px;
+      color: rgba(244, 234, 215, 0.78);
+    }
+    .mini-list li::before {
+      content: "";
+      width: 6px; height: 6px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex: 0 0 auto;
+    }
+    .profile-note {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--line-soft);
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: rgba(244, 234, 215, 0.5);
+    }
+
+    /* Chart */
+    .chart {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(19, 40, 76, 0.4), rgba(8, 20, 39, 0.6));
+    }
+    .chart-row {
+      display: grid;
+      grid-template-columns: 88px 1fr 140px;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line-soft);
+      text-decoration: none;
+      color: inherit;
+      transition: background .2s ease, padding-left .2s ease;
+    }
+    .chart-row:last-child { border-bottom: 0; }
+    .chart-row:hover {
+      background: rgba(201, 162, 39, 0.08);
+      padding-left: 24px;
+    }
+    .chart-row .lvl {
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+    }
+    .chart-row h3 {
+      font-family: var(--display);
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 3px;
+      font-weight: 500;
+      color: var(--gold-3);
+    }
+    .chart-row p {
+      margin: 0;
+      font-size: 15px;
+      color: rgba(244, 234, 215, 0.65);
+    }
+    .chart-row .hint {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(228, 204, 134, 0.7);
+      text-align: right;
+    }
+    @media (max-width: 700px) {
+      .chart-row { grid-template-columns: 1fr; }
+      .chart-row .hint { text-align: left; }
+    }
+
+    /* Services */
+    .service {
+      padding: 22px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255, 253, 248, 0.94);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .service:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      box-shadow: var(--shadow);
+    }
+    .service .meta { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    .service .tag {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border: 1px solid rgba(201, 162, 39, 0.35);
+      padding: 4px 9px;
+      white-space: nowrap;
+    }
+    .service h3 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0;
+      font-weight: 500;
+      color: var(--navy);
+    }
+    .service p { margin: 0; color: var(--ink-soft); font-size: 16px; flex: 1; }
+    .service ul { margin: 4px 0 0; padding-left: 1.1rem; color: var(--muted); font-size: 15px; }
+    .service li { margin: 5px 0; }
+    .service .foot {
+      display: flex; justify-content: space-between; align-items: center; gap: 10px;
+      margin-top: 6px; padding-top: 12px; border-top: 1px solid rgba(8, 20, 39, 0.1);
+    }
+    .price-hint { font-family: var(--sans); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .service a.more { font-family: var(--display); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--gold-dim); }
+    .service.wide { grid-column: 1 / -1; }
+
+    .topic-map {
+      margin-top: 16px;
+      padding: 24px;
+      border: 1px solid rgba(201, 162, 39, 0.28);
+      background:
+        linear-gradient(180deg, rgba(201, 162, 39, 0.07), rgba(255, 253, 248, 0.96));
+    }
+    .topic-map > h3 {
+      font-family: var(--display);
+      font-size: 1.05rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+    .topic-map > p { margin: 0 0 16px; color: var(--ink-soft); font-size: 16px; max-width: 52rem; }
+    .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 900px) { .topic-grid { grid-template-columns: 1fr; } }
+    .topic-col {
+      padding: 14px;
+      border: 1px solid rgba(8, 20, 39, 0.1);
+      background: rgba(255, 253, 248, 0.9);
+    }
+    .topic-col h4 {
+      margin: 0 0 8px;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      font-weight: 600;
+    }
+    .topic-col ul { margin: 0; padding-left: 1.05rem; color: var(--ink-soft); font-size: 15px; }
+    .topic-col li { margin: 5px 0; }
+
+    /* Steps */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+    .step {
+      padding: 18px;
+      border: 1px solid var(--line-soft);
+      background: rgba(19, 40, 76, 0.45);
+    }
+    .paper .step { background: #fffdf8; border-color: rgba(8, 20, 39, 0.1); }
+    .step .n {
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .paper .step .n { color: var(--gold-dim); }
+    .step h3 { margin: 0 0 6px; font-family: var(--display); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+    .step p { margin: 0; font-size: 15px; color: rgba(244, 234, 215, 0.65); }
+    .paper .step p { color: var(--muted); }
+
+    /* Fees */
+    .fee {
+      padding: 22px;
+      border: 1px solid rgba(8, 20, 39, 0.1);
+      background: #fffdf8;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 100%;
+    }
+    .fee.featured {
+      border-color: var(--gold);
+      background: linear-gradient(180deg, rgba(201, 162, 39, 0.12), #fffdf8);
+      box-shadow: 0 16px 40px rgba(201, 162, 39, 0.12);
+    }
+    .fee .label {
+      font-family: var(--display);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+    .fee h3 { font-family: var(--display); margin: 0; font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; color: var(--navy); }
+    .fee .amount { font-size: 1.45rem; font-weight: 600; font-family: var(--display); color: var(--navy); }
+    .fee .amount small { font-size: 0.62em; font-weight: 500; color: var(--muted); }
+    .fee p, .fee ul { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
+    .fee ul { padding-left: 1.1rem; }
+    .fee li { margin: 5px 0; }
+
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; }
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-grid p { color: var(--ink-soft); margin: 0 0 12px; }
+    .cred-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .cred-list li {
+      padding: 12px 14px;
+      border: 1px solid rgba(8, 20, 39, 0.1);
+      background: #fffdf8;
+      font-size: 15px;
+      color: var(--ink-soft);
+    }
+    .cred-list strong { display: block; color: var(--navy); margin-bottom: 2px; font-family: var(--display); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .boundary { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .boundary { grid-template-columns: 1fr; } }
+    .boundary .yes, .boundary .no { padding: 20px; border: 1px solid var(--line-soft); }
+    .boundary .yes { background: rgba(125, 154, 106, 0.08); }
+    .boundary .no { background: rgba(180, 83, 9, 0.08); }
+    .boundary h3 { margin: 0 0 10px; font-family: var(--display); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; color: var(--gold-2); }
+    .boundary ul { margin: 0; padding-left: 1.1rem; color: rgba(244, 234, 215, 0.75); font-size: 16px; }
+    .boundary li { margin: 6px 0; }
+    .crisis {
+      margin-top: 14px;
+      padding: 16px 18px;
+      border: 1px dashed rgba(180, 83, 9, 0.45);
+      background: rgba(180, 83, 9, 0.08);
+      font-size: 15px;
+      color: rgba(244, 234, 215, 0.78);
+    }
+    .crisis strong { color: #f0c27a; }
+
+    .contact-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
+    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+    label {
+      display: block;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 6px;
+    }
+    .field { margin-bottom: 12px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid rgba(8, 20, 39, 0.16);
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 16px;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .form-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    .fineprint { margin-top: 12px; font-family: var(--sans); font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .aside-box h3 {
+      margin: 0 0 8px;
+      font-family: var(--display);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--navy);
+    }
+    .aside-box p, .aside-box li { font-size: 15.5px; color: var(--ink-soft); }
+    .aside-box ul { margin: 8px 0 0; padding-left: 1.1rem; }
+    .email-display {
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(8, 20, 39, 0.12);
+      background: var(--cream);
+      display: inline-block;
+      margin: 8px 0 12px;
+    }
+    .email-display a { text-decoration: none; color: var(--navy); }
+
+    details {
+      border: 1px solid var(--line-soft);
+      background: rgba(19, 40, 76, 0.45);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+    details summary {
+      cursor: pointer;
+      font-family: var(--display);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      list-style: none;
+      color: var(--gold-2);
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after { content: "+"; float: right; color: var(--gold); font-weight: 500; }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 10px 0 0; color: rgba(244, 234, 215, 0.75); font-size: 16px; }
+
+    footer {
+      margin-top: 0;
+      padding: 36px 0 48px;
+      border-top: 1px solid var(--line);
+      background: #050d1c;
+      color: rgba(244, 234, 215, 0.55);
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+    footer a { color: var(--gold-2); text-decoration: none; }
+    footer a:hover { color: var(--gold-3); }
+    .legal-block {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line-soft);
+      font-family: var(--sans);
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+    .hr { height: 1px; background: var(--line-soft); margin: 18px 0; }
+    .center-note { text-align: center; color: var(--muted); font-size: 15px; max-width: 42rem; margin: 16px auto 0; }
+
+    .split-visual {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 0;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .split-visual img { width: 100%; height: 100%; object-fit: cover; min-height: 280px; }
+    .split-copy { padding: 32px 28px; }
+    @media (max-width: 800px) { .split-visual { grid-template-columns: 1fr; } }
+
+    .quote-xl {
+      font-style: italic;
+      font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+      line-height: 1.4;
+      color: var(--gold-3);
+      margin: 0 0 12px;
+    }
+    .quote-xl cite {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .paper-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.55), transparent);
+      margin: 0 0 28px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="dust" aria-hidden="true"></div>
+
+  <header class="mast">
+    <div class="mast-inner">
+      <a class="brand" href="#top" aria-label="The Clarity Institute">
+        <img src="clarity-system-assets/emblem.jpg" alt="" width="42" height="42" />
+        <div class="brand-text">
+          <strong>The Clarity Institute</strong>
+          <span>Applied philosophy · Dr. Benjamin Koch</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#chart">The Chart</a>
+        <a href="#services">Procedures</a>
+        <a href="#formats">Exchange</a>
+        <a href="#about">Custodian</a>
+        <a href="#faq">Questions</a>
+        <a class="cta" href="#contact">Begin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <img class="hero-emblem" src="clarity-system-assets/emblem.jpg" alt="The Clarity Institute emblem — a gold sunburst on navy" width="118" height="118" />
+        <p class="kicker">An applied philosophy of the being</p>
+        <h1>The Clarity<br>Institute</h1>
+        <p class="lead">You did not arrive here by accident. Something in you already knows there is a quieter, more exact way to live.</p>
+        <p class="sublead">Inner counsel · The Chart of Ascent · Strategy · Writing · Knowledge transfer</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#contact">Begin the first procedure</a>
+          <a class="btn" href="#chart">See the Chart</a>
+        </div>
+        <div class="trust">
+          <span><i></i> PhD · Economics · Psychology · International law</span>
+          <span><i></i> Private · Online · English</span>
+          <span><i></i> No cookies · No trackers</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="axiom-bar" aria-live="polite">
+      <div class="label">Axiom</div>
+      <p id="axiom">The being is not the noise that surrounds it.</p>
+    </div>
+
+    <!-- Recognition -->
+    <section id="for">
+      <div class="wrap">
+        <p class="section-label">The recognition</p>
+        <h2 class="section-title">Until you look, the life lives you</h2>
+        <div class="hero-split">
+          <div>
+            <p class="section-intro">
+              The Clarity Institute is not a belief. It is a <strong style="color:var(--gold-2);font-weight:500">technology of seeing</strong> —
+              a standard sequence by which confusion is taken apart, charge is allowed to finish, and the being
+              returns to authorship of its own days. It is offered here as independent professional work:
+              inner counsel, analysis, writing, and knowledge transfer. Calm. Private. Exact.
+            </p>
+            <div class="grid-3">
+              <article class="card">
+                <h3>The individual</h3>
+                <p>Decisions, roles, overload, meaning — the quiet work of becoming one thing again.</p>
+              </article>
+              <article class="card">
+                <h3>The professional</h3>
+                <p>High-stakes choice, communication under pressure, leadership load, long-horizon integrity.</p>
+              </article>
+              <article class="card">
+                <h3>The institution</h3>
+                <p>Independent critique, briefings, modules — scoped, attributed only when wanted, never sold as blessing.</p>
+              </article>
+            </div>
+          </div>
+          <aside class="profile" aria-label="Profile">
+            <div class="profile-top">
+              <img
+                class="avatar"
+                src="https://images.squarespace-cdn.com/content/65bf9a98d6bb9439b0aedbbd/7c680386-5682-4bfa-9d7e-00a910733815/IMG_1235.jpeg?format=1000w"
+                alt="Portrait of Dr. Benjamin Koch"
+                width="84"
+                height="84"
+              />
+              <div>
+                <h2>Dr. Benjamin Koch</h2>
+                <p>Custodian of the Institute</p>
+                <p style="margin-top:4px">PhD · Economics · Psychology · International Law</p>
+              </div>
+            </div>
+            <ul class="mini-list">
+              <li>1:1 procedures (attunements) for clarity, roles, and meaning</li>
+              <li>Strategic analysis &amp; research briefings</li>
+              <li>Author / publicist work with intellectual spine</li>
+              <li>Honorary scholarly commentary &amp; knowledge modules</li>
+            </ul>
+            <p class="profile-note">
+              Not psychotherapy. Not medical care. Not regulated legal, tax, or investment advice.
+              Independent applied philosophy, confirmed in writing.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart -->
+    <section id="chart" class="navy-soft">
+      <div class="wrap">
+        <p class="section-label">The Chart of Ascent</p>
+        <h2 class="section-title">There is always a next exact step</h2>
+        <p class="section-intro">
+          Confusion is unfinished seeing. The Chart is a map — not a ladder you are judged by.
+          You enter at the point that is alive. One honest hour is enough to begin.
+          Continuity is available; it is never required.
+        </p>
+
+        <div class="chart">
+          <a class="chart-row" href="#inner-counsel">
+            <div class="lvl">I</div>
+            <div>
+              <h3>First seeing</h3>
+              <p>One defined decision or stuck point. Trade-offs made visible. The noise named.</p>
+            </div>
+            <div class="hint">Clarity Attunement · 60 min</div>
+          </a>
+          <a class="chart-row" href="#inner-counsel">
+            <div class="lvl">II</div>
+            <div>
+              <h3>Deep strands</h3>
+              <p>Work, home, and self as one field. Patterns across roles and time.</p>
+            </div>
+            <div class="hint">Deep Attunement · 90 min</div>
+          </a>
+          <a class="chart-row" href="#inner-counsel">
+            <div class="lvl">III</div>
+            <div>
+              <h3>The other</h3>
+              <p>Partnership, repair, shared load. Two beings, one room, exact speech.</p>
+            </div>
+            <div class="hint">Relationship · 90 min</div>
+          </a>
+          <a class="chart-row" href="#counsel-lines">
+            <div class="lvl">IV</div>
+            <div>
+              <h3>Vocation</h3>
+              <p>Calling under uncertainty. Integrity, ambition, and peace held in one hand.</p>
+            </div>
+            <div class="hint">Decision &amp; vocation</div>
+          </a>
+          <a class="chart-row" href="#counsel-lines">
+            <div class="lvl">V</div>
+            <div>
+              <h3>Climate</h3>
+              <p>Overload, attention residue, restlessness. The weather of the mind made workable.</p>
+            </div>
+            <div class="hint">Focus &amp; mental climate</div>
+          </a>
+          <a class="chart-row" href="#counsel-lines">
+            <div class="lvl">VI</div>
+            <div>
+              <h3>Presence</h3>
+              <p>Meaning without dogma. Continuity of the self. Days that do not fragment you.</p>
+            </div>
+            <div class="hint">Meaning &amp; presence</div>
+          </a>
+          <a class="chart-row" href="#counsel-lines">
+            <div class="lvl">VII</div>
+            <div>
+              <h3>The world</h3>
+              <p>Leadership load, family scripts, the responsible one. Life as it is actually lived.</p>
+            </div>
+            <div class="hint">Professional · Family</div>
+          </a>
+          <a class="chart-row" href="#world-work">
+            <div class="lvl">VIII</div>
+            <div>
+              <h3>The work in the world</h3>
+              <p>When seeing is clean, the page, the brief, and the institution can be made exact.</p>
+            </div>
+            <div class="hint">Writing · Critique · Strategy</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Axioms + stair -->
+    <section>
+      <div class="wrap">
+        <div class="split-visual">
+          <img src="clarity-system-assets/stair.jpg" alt="A pale stone stair rising toward a gold circular light in a navy hall" />
+          <div class="split-copy">
+            <p class="section-label">Standard axioms</p>
+            <p class="quote-xl">
+              What is fully perceived loses its charge. Alignment is the natural state of an unobstructed mind.
+              <cite>The Clarity Institute · Book of Seeing</cite>
+            </p>
+            <p style="color:rgba(244,234,215,0.75);margin:0 0 12px">
+              I. The being is not the noise that surrounds it.<br />
+              II. Confusion is unfinished seeing.<br />
+              III. What is fully perceived loses its charge.<br />
+              IV. Alignment is the natural state of an unobstructed mind.<br />
+              V. The next step is always simpler than the story about it.<br />
+              VI. Until you look, the life lives you.
+            </p>
+            <p style="margin:0;font-family:var(--sans);font-size:13px;color:rgba(228,204,134,0.55);letter-spacing:0.08em;text-transform:uppercase">
+              Original axioms of this Institute.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="paper">
+      <div class="wrap">
+        <p class="section-label">The procedures</p>
+        <h2 class="section-title">Everything in one clear map</h2>
+        <p class="section-intro">
+          Modular offerings you can book as a single session, a short process, or a written commission.
+          Every engagement is confirmed in writing before work begins. You remain responsible for your own decisions.
+        </p>
+
+        <div class="grid-2">
+          <article class="service wide" id="inner-counsel">
+            <div class="meta">
+              <h3>Inner counsel · Attunements</h3>
+              <span class="tag">1:1 · Online · The being</span>
+            </div>
+            <p>
+              A still, structured online space for the quiet work of becoming clearer —
+              with yourself, your relationships, your vocation, and the life you are actually living.
+              Sessions are called <strong>attunements</strong>: conversations that restore alignment between
+              perception, feeling, decision, and direction. Grounded in psychology and behavioural science;
+              open to the spiritual without dogma. Explicitly <strong>not</strong> psychotherapy.
+            </p>
+            <div class="foot" style="border-top:none;padding-top:0;margin-top:4px">
+              <span class="price-hint">From €145 · private invoice · see exchange</span>
+              <a class="more" href="#counsel-lines">Service lines →</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="topic-map" id="counsel-lines">
+          <h3>Inner counsel — service lines</h3>
+          <p>
+            Choose the line that fits. You may also simply describe your situation — we will place it together.
+            All lines use the same calm online frame (browser-based video). Not therapy, not emergency care.
+          </p>
+          <div class="topic-grid">
+            <div class="topic-col">
+              <h4>Clarity Attunement</h4>
+              <ul>
+                <li>One defined decision or stuck point</li>
+                <li>Trade-offs made visible</li>
+                <li>Practical next steps</li>
+                <li>60 minutes · individual</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Deep Attunement</h4>
+              <ul>
+                <li>Intertwined strands (work, home, self)</li>
+                <li>Patterns across roles and time</li>
+                <li>Optional short written summary</li>
+                <li>90 minutes · individual</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Relationship Attunement</h4>
+              <ul>
+                <li>Partnership patterns and repair</li>
+                <li>Shared decisions and load-bearing</li>
+                <li>Boundaries, guilt, expectations</li>
+                <li>90 minutes · individual or couple</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Decision &amp; vocation</h4>
+              <ul>
+                <li>Career and calling under uncertainty</li>
+                <li>Integrity, ambition, and peace</li>
+                <li>Long-horizon choices with weight</li>
+                <li>60 or 90 minutes</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Focus &amp; mental climate</h4>
+              <ul>
+                <li>Overload and “always on”</li>
+                <li>Attention residue from digital switching</li>
+                <li>Self-trust, restlessness, creative blocks</li>
+                <li>60 or 90 minutes</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Meaning &amp; presence</h4>
+              <ul>
+                <li>Existential questions without dogma</li>
+                <li>Stillness, continuity of the self</li>
+                <li>Days that do not fragment you</li>
+                <li>60 or 90 minutes</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Professional load</h4>
+              <ul>
+                <li>Leadership pressure and hard talks</li>
+                <li>High-stakes communication</li>
+                <li>Role conflicts at work</li>
+                <li>60 or 90 minutes</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Family &amp; roles</h4>
+              <ul>
+                <li>Caretaking and generational scripts</li>
+                <li>Parenting roles and expectations</li>
+                <li>Being “the responsible one”</li>
+                <li>60 or 90 minutes</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Written reflection (add-on)</h4>
+              <ul>
+                <li>Short post-session memo (1–2 pages)</li>
+                <li>Key insights and next anchors</li>
+                <li>Optional after any attunement</li>
+                <li>Delivered by email</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-map" id="topics" style="margin-top:14px">
+          <h3>What attunements can hold</h3>
+          <p>
+            You do not need the “right” vocabulary. Bring what is alive. These clusters are orientation only —
+            ordinary life, professional pressure, and quieter questions of meaning sit in the same room.
+          </p>
+          <div class="topic-grid">
+            <div class="topic-col">
+              <h4>Decisions &amp; direction</h4>
+              <ul>
+                <li>Career, vocation, and calling under uncertainty</li>
+                <li>Moving, staying, or changing course</li>
+                <li>Analysis paralysis and trade-off clarity</li>
+                <li>Integrity under pressure; ambition vs. peace</li>
+                <li>Values alignment and long-horizon choices</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Relationships &amp; roles</h4>
+              <ul>
+                <li>Partnership, intimacy, and recurring patterns</li>
+                <li>Boundaries, guilt, and expectations</li>
+                <li>Family systems and caretaking dynamics</li>
+                <li>Parenting roles and generational scripts</li>
+                <li>Difficult conversations that keep being postponed</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Pressure &amp; mental climate</h4>
+              <ul>
+                <li>Overload, restlessness, and never being “off”</li>
+                <li>Attention residue from constant digital switching</li>
+                <li>Self-criticism, self-trust, and inner weather</li>
+                <li>Creative blocks and work that will not open</li>
+                <li>Leadership load and high-stakes communication</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Identity &amp; place in life</h4>
+              <ul>
+                <li>Life chapters ending or refusing to begin</li>
+                <li>Identity after success, loss, or reinvention</li>
+                <li>International / cross-cultural living</li>
+                <li>Loneliness and the quiet epidemic of ordinary isolation</li>
+                <li>Rebuilding rhythm after disruption</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>Meaning &amp; the quieter self</h4>
+              <ul>
+                <li>Existential questions without a fixed doctrine</li>
+                <li>Spiritual hunger, stillness, and continuity of the self</li>
+                <li>What a life is able to feel like from within</li>
+                <li>Removing contradiction between thought and action</li>
+                <li>Designing days that do not fragment you</li>
+              </ul>
+            </div>
+            <div class="topic-col">
+              <h4>For couples (optional)</h4>
+              <ul>
+                <li>Shared decisions and divergent timelines</li>
+                <li>Roles that quietly calcify</li>
+                <li>Repair after misunderstanding or distance</li>
+                <li>Ambition, home, and mutual load-bearing</li>
+                <li>Finding a common language again</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" id="world-work" style="margin-top:14px">
+          <article class="service wide" id="honorary">
+            <div class="meta">
+              <h3>Honorary scholarly work</h3>
+              <span class="tag">Independent critique · Preprints · Reviews</span>
+            </div>
+            <p>
+              External scholarly service for authors, labs, journals-adjacent workflows, and institutions:
+              independent critique that improves clarity without endorsement, collaboration, or validation.
+              Especially suited to <strong>preprints</strong>, working papers, manuscripts, conceptual frameworks, and public narratives.
+            </p>
+            <div class="topic-grid" style="margin-top:12px">
+              <div class="topic-col">
+                <h4>Scholarly review (preprint)</h4>
+                <ul>
+                  <li>Structured review of a preprint or working paper</li>
+                  <li>Argument, constructs, boundary conditions</li>
+                  <li>Prioritised revision notes</li>
+                  <li>Private or shareable PDF</li>
+                </ul>
+              </div>
+              <div class="topic-col">
+                <h4>Publishable commentary</h4>
+                <ul>
+                  <li>Discussant-style public critique</li>
+                  <li>Disclosures &amp; non-endorsement framing</li>
+                  <li>Attribution optional</li>
+                  <li>Text integrity preserved if published</li>
+                </ul>
+              </div>
+              <div class="topic-col">
+                <h4>Private memo</h4>
+                <ul>
+                  <li>Internal, actionable feedback</li>
+                  <li>Revision priorities ranked</li>
+                  <li>Not for public attribution by default</li>
+                  <li>Fast, low-friction path</li>
+                </ul>
+              </div>
+              <div class="topic-col">
+                <h4>Boundary / construct audit</h4>
+                <ul>
+                  <li>Definitions, exclusions, operationalisation risks</li>
+                  <li>Construct hygiene for frameworks</li>
+                  <li>Useful before submission or grant write-up</li>
+                  <li>Short, precise deliverable</li>
+                </ul>
+              </div>
+              <div class="topic-col">
+                <h4>Annotated manuscript</h4>
+                <ul>
+                  <li>Line-level or section-level comments</li>
+                  <li>Clarity and structure first</li>
+                  <li>Ideal for mid-draft polish</li>
+                  <li>Returned as marked file or memo</li>
+                </ul>
+              </div>
+              <div class="topic-col">
+                <h4>Discussant / panel prep</h4>
+                <ul>
+                  <li>Talk or panel preparation notes</li>
+                  <li>Pointed Q&amp;A lines</li>
+                  <li>Scope locked in writing</li>
+                  <li>One-time honorarium</li>
+                </ul>
+              </div>
+            </div>
+            <div class="foot">
+              <span class="price-hint">From €280 · invoice / honorarium · critique ≠ endorsement</span>
+              <a class="more" href="#formats">See honorary fees →</a>
+            </div>
+          </article>
+
+          <article class="service" id="strategy">
+            <div class="meta">
+              <h3>Strategic analysis</h3>
+              <span class="tag">Research-style</span>
+            </div>
+            <p>
+              Directional analysis of systems, incentives, and institutional order — written to be readable,
+              quotable, and useful. No mandates. No trading instructions. No legal opinions.
+            </p>
+            <ul>
+              <li>Scenario mapping &amp; risk framing</li>
+              <li>Institutional / behavioural narratives</li>
+              <li>Policy-adjacent synthesis for professional audiences</li>
+              <li>Assumptions registers &amp; executive summaries</li>
+            </ul>
+            <div class="foot">
+              <span class="price-hint">From €390 · scoped</span>
+              <a class="more" href="#contact">Request analysis →</a>
+            </div>
+          </article>
+
+          <article class="service" id="writing">
+            <div class="meta">
+              <h3>Author &amp; publicist work</h3>
+              <span class="tag">Digital content</span>
+            </div>
+            <p>
+              Long-form and short-form writing with intellectual spine: essays, frameworks, editorial pieces,
+              and public-facing narrative work that holds up under scrutiny.
+            </p>
+            <ul>
+              <li>Essays, columns, and structured long-form</li>
+              <li>Concept notes &amp; framework documents</li>
+              <li>Public-facing positioning for ideas and projects</li>
+              <li>Editorial polish for complex material</li>
+            </ul>
+            <div class="foot">
+              <span class="price-hint">From €450 · by project</span>
+              <a class="more" href="#contact">Commission writing →</a>
+            </div>
+          </article>
+
+          <article class="service" id="education">
+            <div class="meta">
+              <h3>Knowledge transfer</h3>
+              <span class="tag">Education only</span>
+            </div>
+            <p>
+              Conceptual literacy and practical frameworks: cognitive resilience, decision structures,
+              clarity systems, and behavioural science for self-study or organisational learning.
+            </p>
+            <ul>
+              <li>Modules, reading lists, lecture notes</li>
+              <li>Structured briefings (online)</li>
+              <li>Framework packs for teams</li>
+              <li>No diagnosis, no treatment, no therapy</li>
+            </ul>
+            <div class="foot">
+              <span class="price-hint">From €320 · modules</span>
+              <a class="more" href="#contact">Ask for a module →</a>
+            </div>
+          </article>
+
+          <article class="service" id="pro">
+            <div class="meta">
+              <h3>Pro dossiers</h3>
+              <span class="tag">Deep dive</span>
+            </div>
+            <p>
+              Methodologically explicit packages for advanced readers and institutional clients:
+              definitions, indicator logic, model narratives, and repeatable analytical templates.
+            </p>
+            <ul>
+              <li>Dossier (typically 15–35 pages)</li>
+              <li>Indicators list &amp; model narrative</li>
+              <li>Optional slide-ready text summary</li>
+              <li>Conflict-aware, personal-capacity framing</li>
+            </ul>
+            <div class="foot">
+              <span class="price-hint">From €1,200 · written scope</span>
+              <a class="more" href="#contact">Request Pro package →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How -->
+    <section id="how">
+      <div class="wrap">
+        <p class="section-label">Standard procedure</p>
+        <h2 class="section-title">Four calm steps. Nothing stored on this page.</h2>
+        <p class="section-intro">
+          Contact stays deliberately simple: you write an email (optionally generated below).
+          Nothing is submitted to a server from this page. You stay in control of what you send.
+        </p>
+        <div class="steps">
+          <div class="step">
+            <div class="n">01 · Write</div>
+            <h3>Name the work</h3>
+            <p>Tell me what you need — an attunement, a brief, critique, or writing project.</p>
+          </div>
+          <div class="step">
+            <div class="n">02 · Scope</div>
+            <h3>See the edge</h3>
+            <p>I reply with fit, boundaries, timeline, and a clear fee or honorarium proposal.</p>
+          </div>
+          <div class="step">
+            <div class="n">03 · Work</div>
+            <h3>Do the procedure</h3>
+            <p>We meet online (inner counsel) or I deliver written work as agreed — memo, brief, or module.</p>
+          </div>
+          <div class="step">
+            <div class="n">04 · Invoice</div>
+            <h3>Close the exchange</h3>
+            <p>Transparent documentation. Payment after or as agreed. No retainers unless we define one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fees -->
+    <section id="formats" class="paper">
+      <div class="wrap">
+        <p class="section-label">The exchange</p>
+        <h2 class="section-title">Clear orientation prices. Confirmed in writing.</h2>
+        <p class="section-intro">
+          Prices in EUR, set for independent professional work with doctoral-level formation —
+          approachable for private clients, credible for institutions. Final fees depend on scope and urgency
+          and are confirmed only in writing. Inner counsel is private, online, and not billed to insurance.
+          This is payment for work — not a donation, not a tithe, not a membership.
+        </p>
+
+        <p class="section-label" style="margin-top:8px">Inner counsel</p>
+        <div class="grid-3">
+          <article class="fee">
+            <div class="label">Entry · Chart I</div>
+            <h3>Clarity Attunement</h3>
+            <div class="amount">€145 <small>/ 60 min</small></div>
+            <p>One focused conversation on a defined topic, with room for practical next steps.</p>
+            <ul>
+              <li>Online video (browser-based)</li>
+              <li>Individual</li>
+              <li>Decision, role, or single pattern</li>
+            </ul>
+          </article>
+          <article class="fee featured">
+            <div class="label">Most chosen · Chart II</div>
+            <h3>Deep Attunement</h3>
+            <div class="amount">€215 <small>/ 90 min</small></div>
+            <p>Extended time for intertwined strands — work, family, roles, meaning, pressure — and the bigger picture.</p>
+            <ul>
+              <li>Optional written reflection (+€45)</li>
+              <li>Multi-layer situations</li>
+              <li>Can open a short process</li>
+            </ul>
+          </article>
+          <article class="fee">
+            <div class="label">Couples / dual · Chart III</div>
+            <h3>Relationship Attunement</h3>
+            <div class="amount">€245 <small>/ 90 min</small></div>
+            <p>Shared space for partnership patterns, repair, and decisions that affect both lives.</p>
+            <ul>
+              <li>Individual or couple frame</li>
+              <li>Boundaries, load, communication</li>
+              <li>Optional written reflection (+€45)</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="grid-2" style="margin-top:14px">
+          <article class="fee">
+            <div class="label">Continuity</div>
+            <h3>Structured process</h3>
+            <div class="amount">€595 <small>/ 3 × 90 min</small></div>
+            <p>For relationship patterns, longer questions, or building steadier habits across several attunements.</p>
+            <ul>
+              <li>Shared focus defined upfront</li>
+              <li>Optional short email check-ins</li>
+              <li>Private invoice · no insurance logic</li>
+            </ul>
+          </article>
+          <article class="fee">
+            <div class="label">Add-on · optional</div>
+            <h3>Written reflection</h3>
+            <div class="amount">€45 <small>/ memo</small></div>
+            <p>1–2 page post-session note: key insights, decisions in view, and anchors for the next days.</p>
+            <ul>
+              <li>After any attunement</li>
+              <li>Delivered by email</li>
+              <li>Optional, never required</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="section-label" style="margin-top:28px">Honorary · scholarly · written</p>
+        <div class="grid-3">
+          <article class="fee">
+            <div class="label">Honorary</div>
+            <h3>Private memo</h3>
+            <div class="amount">From €280</div>
+            <p>Actionable internal critique (preprint, draft, or framework). Not public by default.</p>
+            <ul>
+              <li>Typically 2–5 pages</li>
+              <li>One revision round if needed</li>
+              <li>Invoice / honorarium</li>
+            </ul>
+          </article>
+          <article class="fee featured">
+            <div class="label">Honorary · flagship</div>
+            <h3>Scholarly review (preprint)</h3>
+            <div class="amount">From €350</div>
+            <p>Structured scholarly review of a preprint or working paper — clarity, constructs, boundaries, revision priorities.</p>
+            <ul>
+              <li>Typically 4–8 pages</li>
+              <li>Shareable or private PDF</li>
+              <li>Critique ≠ endorsement</li>
+            </ul>
+          </article>
+          <article class="fee">
+            <div class="label">Honorary</div>
+            <h3>Publishable commentary</h3>
+            <div class="amount">From €480</div>
+            <p>Discussant-style external commentary with non-endorsement disclosures. Attribution optional.</p>
+            <ul>
+              <li>Publication-ready framing</li>
+              <li>Text integrity if published</li>
+              <li>Scope locked in writing</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="grid-3" style="margin-top:14px">
+          <article class="fee">
+            <div class="label">Honorary</div>
+            <h3>Boundary / construct audit</h3>
+            <div class="amount">From €320</div>
+            <p>Definitions, exclusions, operationalisation risks — construct hygiene before submission or wider use.</p>
+          </article>
+          <article class="fee">
+            <div class="label">Research</div>
+            <h3>Strategic briefing</h3>
+            <div class="amount">From €390</div>
+            <p>Scenario / institutional narrative brief with summary and assumptions register. Non-advisory research style.</p>
+          </article>
+          <article class="fee">
+            <div class="label">Research</div>
+            <h3>Monthly brief (retainer)</h3>
+            <div class="amount">From €550 <small>/ month</small></div>
+            <p>Recurring written brief for professional audiences. Cadence and topics agreed upfront. B2B-friendly.</p>
+          </article>
+        </div>
+
+        <div class="grid-2" style="margin-top:14px">
+          <article class="fee">
+            <div class="label">Education</div>
+            <h3>Knowledge module</h3>
+            <div class="amount">From €320</div>
+            <p>Education-only pack: reading list, framework notes, exercises. No treatment, no diagnosis.</p>
+          </article>
+          <article class="fee">
+            <div class="label">Writing · Pro</div>
+            <h3>Author projects &amp; Pro dossiers</h3>
+            <div class="amount">From €450 / €1,200</div>
+            <p>
+              Writing and editorial from €450 by project. Pro dossiers typically from €1,200 depending on length and method depth.
+              Rights and timeline confirmed before start.
+            </p>
+          </article>
+        </div>
+
+        <p class="center-note">
+          Prefer a free-form note? Just email — a few sentences are enough.
+          Prefer structure? Use the request composer below. Payment after written scope.
+        </p>
+      </div>
+    </section>
+
+    <!-- Payment -->
+    <section id="payment">
+      <div class="wrap">
+        <p class="section-label">Payment</p>
+        <h2 class="section-title">Pay for services — not a donation</h2>
+        <p class="section-intro">
+          Fees and honoraria are payment for professional work. Please do not use a “donate” flow.
+          After scope is agreed, you receive a short invoice (or clear payment instruction) and may settle by PayPal or bank transfer.
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>How payment works</h3>
+            <ol style="margin:0;padding-left:1.2rem;color:rgba(244,234,215,0.75);font-size:16px">
+              <li style="margin:8px 0">You request a service by email (composer below).</li>
+              <li style="margin:8px 0">I confirm fit, deliverable, fee, and timeline in writing.</li>
+              <li style="margin:8px 0">Work is scheduled or delivered as agreed.</li>
+              <li style="margin:8px 0">You receive an invoice / payment note.</li>
+              <li style="margin:8px 0">You pay via PayPal (services) or SEPA transfer.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>PayPal (services)</h3>
+            <p style="margin:0 0 12px">
+              After we agree a fee, you can settle the invoice amount via PayPal.
+              Use the payment link for <strong>goods and services</strong> — not “donate”.
+            </p>
+            <div class="hero-actions" style="margin-bottom:14px;justify-content:flex-start">
+              <a class="btn primary" href="https://paypal.me/quietcontinuity" target="_blank" rel="noopener">Pay via PayPal</a>
+              <a class="btn" href="mailto:practice@benjaminkoch.info?subject=Invoice%20request%20%E2%80%94%20Clarity%20Institute">Request invoice</a>
+            </div>
+            <ul style="margin:0;padding-left:1.1rem;color:rgba(244,234,215,0.55);font-size:15px">
+              <li>Link: paypal.me/quietcontinuity</li>
+              <li>Please put the agreed service in the payment note (e.g. “Deep Attunement 12 Mar”).</li>
+              <li>Prefer bank transfer? Ask in the confirmation email — SEPA details are sent privately.</li>
+              <li>No automatic charge from this page. No subscriptions unless we define a retainer in writing.</li>
+            </ul>
+            <div class="hr"></div>
+            <p style="margin:0;font-family:var(--sans);font-size:12.5px;color:rgba(244,234,215,0.45)">
+              PayPal is operated by PayPal (Europe) S.à r.l. et Cie, S.C.A. Payment data is processed under PayPal’s terms.
+              This site does not embed PayPal tracking pixels or cookies.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="paper">
+      <div class="wrap">
+        <p class="section-label">The custodian</p>
+        <h2 class="section-title">Structure, order, and the self — applied carefully</h2>
+        <div class="about-grid">
+          <div>
+            <div class="paper-rule"></div>
+            <p>
+              My public work on <a href="https://benjaminkoch.info/">benjaminkoch.info</a> sits at the intersection of
+              psychology, economics, and legal-institutional form. This Institute is the applied counterpart:
+              conversations and deliverables that turn that thinking into something you can use.
+            </p>
+            <p>
+              The Clarity Institute is written in the cadence of twentieth-century applied philosophy —
+              the being, the chart, standard procedure, the quiet certainty that confusion can be taken apart.
+              It is original work.
+            </p>
+            <p style="margin-bottom:0">
+              Further reading:
+              <a href="https://insightcompass.substack.com" target="_blank" rel="noopener">Insight Compass</a> ·
+              <a href="https://www.researchgate.net/profile/Benjamin-Koch-12/research" target="_blank" rel="noopener">ResearchGate</a> ·
+              <a href="psychology.html">Psychology room</a> ·
+              <a href="circle_of_synaptics.html">Circle of Synaptics</a>.
+            </p>
+          </div>
+          <div>
+            <ul class="cred-list">
+              <li>
+                <strong>PhD · Economics · Psychology (USA) · International Law</strong>
+                Spectrum of formation spanning behavioural and structural psychology, economics and public policy,
+                and international legal form — held as one integrated field of attention.
+              </li>
+              <li>
+                <strong>Doctoral research (USA)</strong>
+                Long-horizon structural and behavioural work in the Harvard Kennedy School environment.
+              </li>
+              <li>
+                <strong>MSc, International Economics &amp; Public Policy</strong>
+                London School of Economics and Political Science (LSE).
+              </li>
+              <li>
+                <strong>BSc, Psychology · Independent posture</strong>
+                University of Bath foundation; work offered strictly in personal capacity, without institutional representation.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div style="margin-top:22px">
+          <img src="clarity-system-assets/books.jpg" alt="Navy leather volumes, a gold pen and seal in lamplight" style="width:100%;max-height:360px;object-fit:cover;border:1px solid rgba(201,162,39,0.25)" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Boundaries -->
+    <section id="boundaries">
+      <div class="wrap">
+        <p class="section-label">Boundaries</p>
+        <h2 class="section-title">What this is — and what it carefully is not</h2>
+        <p class="section-intro">
+          Clear limits protect both sides. They also make the work better: you know what you are buying,
+          and I know what I am able to give. The Institute does not replace your will.
+        </p>
+        <div class="boundary">
+          <div class="yes">
+            <h3>Suitable for</h3>
+            <ul>
+              <li>People who can reflect and take responsibility for their own decisions</li>
+              <li>Clarity, roles, relationships, pressure, meaning, and structured decision support</li>
+              <li>Research-style briefs, education modules, and editorial critique</li>
+              <li>Writing and digital content that need intellectual honesty</li>
+              <li>One-off or short-process freelance engagements with invoice documentation</li>
+            </ul>
+          </div>
+          <div class="no">
+            <h3>Not offered</h3>
+            <ul>
+              <li>Psychotherapy, diagnosis, medical or psychiatric treatment</li>
+              <li>Crisis intervention or emergency support</li>
+              <li>Individualised legal, tax, or investment advice</li>
+              <li>Endorsement, certification, or institutional representation</li>
+              <li>Guarantees of outcomes, publication, or personal results</li>
+            </ul>
+          </div>
+        </div>
+        <div class="crisis">
+          <strong>If you are in acute crisis:</strong>
+          If you are at risk of harming yourself or others, or experiencing severe symptoms
+          (for example severe depression, psychosis, or suicidal thoughts), please contact local emergency services,
+          a crisis hotline, or a licensed mental health professional in your country.
+          This practice cannot provide emergency care and does not replace local in-person support.
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="paper">
+      <div class="wrap">
+        <p class="section-label">The first step</p>
+        <h2 class="section-title">Start with a simple, professional email</h2>
+        <p class="section-intro">
+          No contact form that stores data. No newsletter trap. No tracking pixels.
+          The composer below only opens your email app with a pre-filled draft.
+        </p>
+        <div class="contact-grid">
+          <div class="card">
+            <form id="reqForm" onsubmit="return false;">
+              <div class="field">
+                <label for="svc">What do you need?</label>
+                <select id="svc" name="svc">
+                  <option value="Clarity Attunement (60 min)">Clarity Attunement (60 min)</option>
+                  <option value="Deep Attunement (90 min)">Deep Attunement (90 min)</option>
+                  <option value="Relationship Attunement (90 min)">Relationship Attunement (90 min)</option>
+                  <option value="Decision &amp; vocation attunement">Decision &amp; vocation attunement</option>
+                  <option value="Focus &amp; mental climate attunement">Focus &amp; mental climate attunement</option>
+                  <option value="Meaning &amp; presence attunement">Meaning &amp; presence attunement</option>
+                  <option value="Professional load attunement">Professional load attunement</option>
+                  <option value="Structured process (3 × 90 min)">Structured process (3 × 90 min)</option>
+                  <option value="Scholarly review of preprint / working paper">Scholarly review of preprint / working paper</option>
+                  <option value="Publishable scholarly commentary">Publishable scholarly commentary</option>
+                  <option value="Private scholarly memo">Private scholarly memo</option>
+                  <option value="Boundary / construct audit">Boundary / construct audit</option>
+                  <option value="Annotated manuscript">Annotated manuscript</option>
+                  <option value="Strategic analysis / briefing">Strategic analysis / briefing</option>
+                  <option value="Author / publicist / digital content">Author / publicist / digital content</option>
+                  <option value="Knowledge transfer / education module">Knowledge transfer / education module</option>
+                  <option value="Pro dossier">Pro dossier</option>
+                  <option value="Not sure yet — exploratory conversation">Not sure yet — exploratory conversation</option>
+                </select>
+              </div>
+              <div class="grid-2" style="gap:12px">
+                <div class="field">
+                  <label for="name">Your name</label>
+                  <input id="name" name="name" type="text" autocomplete="name" placeholder="e.g., Anna M." />
+                </div>
+                <div class="field">
+                  <label for="org">Organisation (optional)</label>
+                  <input id="org" name="org" type="text" placeholder="Private / company / university / outlet" />
+                </div>
+              </div>
+              <div class="grid-2" style="gap:12px">
+                <div class="field">
+                  <label for="format">Preferred format</label>
+                  <select id="format" name="format">
+                    <option value="Online conversation (Whereby or similar)">Online conversation (Whereby or similar)</option>
+                    <option value="Online + written reflection memo">Online + written reflection memo</option>
+                    <option value="Scholarly review PDF (preprint)">Scholarly review PDF (preprint)</option>
+                    <option value="Publishable commentary">Publishable commentary</option>
+                    <option value="Private memo (PDF)">Private memo (PDF)</option>
+                    <option value="Annotated manuscript">Annotated manuscript</option>
+                    <option value="Education module / reading list">Education module / reading list</option>
+                    <option value="Briefing pack (summary + assumptions)">Briefing pack (summary + assumptions)</option>
+                    <option value="Writing / editorial project">Writing / editorial project</option>
+                    <option value="Open — please advise">Open — please advise</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="timeline">Timeline</label>
+                  <input id="timeline" name="timeline" type="text" placeholder="e.g., within 2 weeks / flexible" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="topic">Topic in one line</label>
+                <input id="topic" name="topic" type="text" placeholder="e.g., career decision under family pressure" />
+              </div>
+              <div class="field">
+                <label for="details">A little more context</label>
+                <textarea id="details" name="details" placeholder="What is going on, what you hope to understand or produce, constraints, links (if any). A short paragraph is enough."></textarea>
+              </div>
+              <div class="field">
+                <label for="budget">Budget / honorarium note (optional)</label>
+                <input id="budget" name="budget" type="text" placeholder="e.g., open to invoice · approx. range if known" />
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn primary" id="composeBtn">Compose email</button>
+                <button type="button" class="btn" id="resetBtn">Reset</button>
+                <a class="btn" href="mailto:practice@benjaminkoch.info">Or email directly</a>
+              </div>
+              <p class="fineprint">
+                By sending a request you acknowledge: (i) inner counsel / attunements are not psychotherapy or medical care;
+                (ii) analysis, critique, and writing are research/education/editorial deliverables and do not constitute
+                legal, tax, investment, or medical advice; (iii) independent commentary is not endorsement;
+                (iv) any fee or honorarium is agreed in writing and documented by invoice where appropriate;
+                (v) you remain responsible for your own decisions and actions.
+              </p>
+            </form>
+          </div>
+          <aside class="card aside-box">
+            <h3>Direct address</h3>
+            <p style="margin:0">Prefer to write freely? Use:</p>
+            <div class="email-display">
+              <a href="mailto:practice@benjaminkoch.info">practice@benjaminkoch.info</a>
+            </div>
+            <p style="margin:0 0 12px">
+              Optional subject lines: <em>Attunement — first seeing</em>, <em>Preprint scholarly review</em>,
+              <em>Briefing request</em>, <em>Writing project</em>.
+            </p>
+            <div class="hr"></div>
+            <h3>Operational stance</h3>
+            <ul>
+              <li><strong>Data minimalism:</strong> this page does not submit or store form data.</li>
+              <li><strong>No trackers:</strong> no cookies, analytics, or advertising scripts.</li>
+              <li><strong>Personal capacity:</strong> no institutional agency or representation.</li>
+              <li><strong>Right to decline:</strong> especially where regulated advice is requested or scope is unsafe.</li>
+              <li><strong>Payment:</strong> invoice / PayPal services after written scope — <a href="#payment">see payment</a>.</li>
+              <li><strong>Language:</strong> English preferred on this page; German possible on request.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <p class="section-label">Questions</p>
+        <h2 class="section-title">Plain answers, low legal risk</h2>
+
+        <details>
+          <summary>Is inner counsel the same as therapy?</summary>
+          <p>
+            No. This practice offers inner counsel (attunements) and advisory work for clarity, decisions, roles, meaning,
+            and everyday psychological themes. It is not psychotherapy, not medical treatment, and not a substitute for licensed clinical care.
+          </p>
+        </details>
+        <details>
+          <summary>What does “attunement” mean here?</summary>
+          <p>
+            An attunement is a structured 1:1 conversation aimed at restoring alignment — between what you perceive,
+            what you feel, what you decide, and how you live. The word is used deliberately instead of industry labels:
+            it is personal, precise, and open to quieter or spiritual questions without becoming religious instruction.
+          </p>
+        </details>
+        <details>
+          <summary>Can ordinary people book — or is this only for institutions?</summary>
+          <p>
+            Both. Inner counsel is designed to be understandable and usable for everyday people as well as professionals.
+            Briefings, honorary critique, and Pro dossiers are more often requested by authors, media, and organisations —
+            but individuals commission written work too.
+          </p>
+        </details>
+        <details>
+          <summary>Do you give investment, legal, or tax advice?</summary>
+          <p>
+            No. Analysis stays at the level of general research, scenarios, frameworks, and public-policy style reasoning.
+            Nothing here creates an attorney–client relationship or authorised financial advice.
+          </p>
+        </details>
+        <details>
+          <summary>How does payment work?</summary>
+          <p>
+            After scope is agreed in writing, you receive an invoice or payment note. You can pay via
+            <a href="https://paypal.me/quietcontinuity" target="_blank" rel="noopener">PayPal (services)</a>
+            or bank transfer. No “donate” button, no automatic charge from this page, no subscription unless a retainer is agreed.
+            See the <a href="#payment">payment section</a>.
+          </p>
+        </details>
+        <details>
+          <summary>Can you review a preprint?</summary>
+          <p>
+            Yes. Scholarly review of preprints and working papers is a core honorary line: structured critique of argument,
+            constructs, and boundary conditions, delivered as a private or shareable PDF. It is independent external critique —
+            not peer-review certification, not endorsement, not co-authorship.
+          </p>
+        </details>
+        <details>
+          <summary>Will my request stay confidential?</summary>
+          <p>
+            Correspondence is handled as ordinary professional email. Do not send highly sensitive medical, legal, or security material
+            unsolicited. For inner counsel, discretion is standard; for public commentary, attribution and publication terms are agreed first.
+            No confidentiality is implied for honorary public critique unless agreed in writing beforehand.
+          </p>
+        </details>
+        <details>
+          <summary>Is this connected to an employer or institution?</summary>
+          <p>
+            No. All modules on this page are offered in a strictly personal, independent capacity.
+          </p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div style="color:var(--gold-2);font-family:var(--display);letter-spacing:0.16em;text-transform:uppercase;margin-bottom:6px">The Clarity Institute</div>
+          <div>Dr. Benjamin Koch · Author · Publicist · Independent advisor · Inner counsel · Knowledge transfer</div>
+          <div style="margin-top:6px">
+            <a href="https://benjaminkoch.info/">Main site</a> ·
+            <a href="practice.html">Practice</a> ·
+            <a href="psychology.html">Psychology</a> ·
+            <a href="mailto:practice@benjaminkoch.info">practice@benjaminkoch.info</a>
+          </div>
+          <div style="margin-top:8px">
+            <a href="practice-legal.html">Legal notice (Impressum)</a> ·
+            <a href="practice-privacy.html">Privacy</a> ·
+            <a href="#payment">Payment</a>
+          </div>
+        </div>
+        <div style="text-align:right">
+          © <span id="year"></span> Dr. Benjamin Koch · benjaminkoch.info<br />
+          Personal capacity · No cookies · No trackers · No analytics
+        </div>
+      </div>
+
+      <div class="legal-block" id="legal">
+        <strong style="color:var(--gold-2)">Legal &amp; privacy note (compact).</strong>
+        This page describes an independent freelance practice — The Clarity Institute — for informational and commercial enquiry purposes.
+        Nothing on this page constitutes psychotherapy, medical advice, legal advice, tax advice, investment advice,
+        diagnosis, or treatment. No guarantee is given regarding completeness, accuracy, timeliness, or outcomes.
+        Prices are orientation figures; engagements are scoped individually and confirmed in writing.
+        Deliverables remain inner counsel, research, education, editorial, honorary critique, or writing as agreed —
+        critique is not endorsement. Views are strictly personal and do not represent any institution.
+        Privacy posture: no cookies, trackers, analytics, or third-party advertising scripts on this page
+        (system fonts only).
+        The request tool only opens your local email client via <span style="font-family:var(--sans)">mailto:</span>.
+        Full provider identification: <a href="practice-legal.html">Legal notice</a>.
+        Privacy details: <a href="practice-privacy.html">Privacy</a>.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      var axioms = [
+        "The being is not the noise that surrounds it.",
+        "Confusion is unfinished seeing.",
+        "What is fully perceived loses its charge.",
+        "Alignment is the natural state of an unobstructed mind.",
+        "The next step is always simpler than the story about it.",
+        "Until you look, the life lives you."
+      ];
+      var axiomEl = document.getElementById("axiom");
+      var i = 0;
+      if (axiomEl) {
+        setInterval(function () {
+          i = (i + 1) % axioms.length;
+          axiomEl.style.opacity = "0";
+          setTimeout(function () {
+            axiomEl.textContent = axioms[i];
+            axiomEl.style.opacity = "1";
+          }, 500);
+        }, 5600);
+      }
+
+      var form = document.getElementById("reqForm");
+      var composeBtn = document.getElementById("composeBtn");
+      var resetBtn = document.getElementById("resetBtn");
+
+      function val(id) {
+        var el = document.getElementById(id);
+        return el ? String(el.value || "").trim() : "";
+      }
+
+      function compose() {
+        var svc = val("svc") || "General enquiry";
+        var name = val("name") || "[Your name]";
+        var org = val("org");
+        var format = val("format");
+        var timeline = val("timeline") || "flexible";
+        var topic = val("topic") || "(not specified)";
+        var details = val("details") || "(please add a short paragraph of context)";
+        var budget = val("budget");
+
+        var subject = "Clarity Institute request — " + svc + " — " + topic;
+        var lines = [
+          "Dear Dr. Koch,",
+          "",
+          "I would like to request: " + svc + ".",
+          "",
+          "Name: " + name,
+          org ? "Organisation: " + org : "Organisation: (private / not specified)",
+          "Preferred format: " + format,
+          "Timeline: " + timeline,
+          "Topic: " + topic,
+          budget ? "Budget / honorarium note: " + budget : null,
+          "",
+          "Context:",
+          details,
+          "",
+          "I understand that inner counsel / attunements are not psychotherapy or medical care; that analysis, critique, and writing are research/education/editorial deliverables (not legal, tax, investment, or medical advice); and that independent commentary is not endorsement.",
+          "",
+          "Kind regards,",
+          name
+        ].filter(function (line) { return line !== null; }).join("\n");
+
+        var to = "practice@benjaminkoch.info";
+        var href =
+          "mailto:" + encodeURIComponent(to) +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(lines);
+
+        window.location.href = href;
+      }
+
+      if (composeBtn) composeBtn.addEventListener("click", compose);
+      if (resetBtn) resetBtn.addEventListener("click", function () {
+        if (form) form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
