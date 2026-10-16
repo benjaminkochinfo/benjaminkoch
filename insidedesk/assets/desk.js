@@ -14,18 +14,29 @@
   // Berlin clock + next edition (CET/CEST from the browser's tz database)
   var TZ="Europe/Berlin";
   function parts(d){var o={};new Intl.DateTimeFormat("en-GB",{timeZone:TZ,weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false,timeZoneName:"short"}).formatToParts(d).forEach(function(p){o[p.type]=p.value});return o}
+  // Slots: Mon–Fri 08:30 and 17:30, Sun 10:00 (Berlin wall time). Saturday closed.
+  // A slot is skipped once an edition covering it is published (build writes data-latest-slot).
+  var latestEl=$("[data-latest-slot]"), latest=latestEl?latestEl.getAttribute("data-latest-slot"):"";
+  var DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  function ymd(d){var o={};new Intl.DateTimeFormat("en-CA",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d).forEach(function(p){o[p.type]=p.value});return [+o.year,+o.month,+o.day]}
+  function pad(n){return (n<10?"0":"")+n}
   function nextEdition(d){
-    var o=parts(d), wd=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(o.weekday), t=(+o.hour)*60+(+o.minute);
-    if(wd===6) return "Sunday long-read, tomorrow 10:00";
-    if(wd===0) return t<600?"Sunday long-read, 10:00":"Monday morning, 08:30";
-    if(t<510) return "Morning edition, 08:30";
-    if(t<1050) return "Evening edition, 17:30";
-    return wd===5?"Sunday long-read, Sunday 10:00":"Morning edition, tomorrow 08:30";
+    var o=parts(d), t=ymd(d), nowKey=t[0]+"-"+pad(t[1])+"-"+pad(t[2])+" "+o.hour+":"+o.minute;
+    for(var i=0;i<9;i++){
+      var c=new Date(Date.UTC(t[0],t[1]-1,t[2]+i,12)), wd=c.getUTCDay(), key=c.getUTCFullYear()+"-"+pad(c.getUTCMonth()+1)+"-"+pad(c.getUTCDate());
+      var slots=wd===6?[]:wd===0?[["10:00","Sunday long-read"]]:[["08:30","Morning edition"],["17:30","Evening edition"]];
+      for(var k=0;k<slots.length;k++){var sk=key+" "+slots[k][0];
+        if(sk<=nowKey||(latest&&sk<=latest))continue;
+        var when=i===0?"today":i===1?"tomorrow":DAYS[wd];
+        var tz=new Intl.DateTimeFormat("en-GB",{timeZone:TZ,timeZoneName:"short"}).formatToParts(c).filter(function(p){return p.type==="timeZoneName"})[0];
+        return slots[k][1]+", "+when+" "+slots[k][0]+" "+(tz?tz.value:"")}
+    }
+    return "";
   }
   function tick(){
     var d=new Date(), o=parts(d), tz=o.timeZoneName||"";
     $$("[data-clock]").forEach(function(el){el.textContent=o.weekday+" "+o.hour+":"+o.minute+" "+tz});
-    $$("[data-next]").forEach(function(el){el.textContent="Next: "+nextEdition(d)+" "+tz+" · Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time"});
+    $$("[data-next]").forEach(function(el){el.textContent="Next: "+nextEdition(d)+" · Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time"});
   }
   tick(); setInterval(tick,30000);
   // copy + native share

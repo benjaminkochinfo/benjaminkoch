@@ -482,6 +482,8 @@ def card(page, a, big=False, rendered=None):
   <p class="meta"><span>{e(a.desk_name)}</span> · <span>{a.minutes} min</span> · <a href="{rel(page, a.path)}">Read the piece →</a></p>
 </article>'''
 
+LATEST_SLOT = ""
+
 def edition_block(page, ed, rendered, h1=True):
     lead, rest = ed["arts"][0], ed["arts"][1:]
     tag = "h1" if h1 else "h2"
@@ -489,7 +491,7 @@ def edition_block(page, ed, rendered, h1=True):
   <div class="kicker">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))} · {ed['pub']:%H:%M} {tzlabel(ed['pub'])} · Issue no. {ed['issue']}</div>
   <{tag} id="ed-h" class="edition-title">{e(ed['title'])}</{tag}>
   <p class="lede-sub">{e(ed['standfirst'])}</p>
-  <p class="meta-line"><span data-next>Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time</span></p>
+  <p class="meta-line"><span data-next data-latest-slot="{LATEST_SLOT}">Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time</span></p>
 </section>
 <div class="layout">
   <div class="stack">
@@ -757,6 +759,8 @@ def main():
     args = ap.parse_args()
     specs = chart_specs()
     eds = load_editions(specs)
+    global LATEST_SLOT
+    LATEST_SLOT = max(f"{x['d'].isoformat()} {x['slot_time']}" for x in eds)  # Berlin wall time of the newest covered slot
     used = {c for ed in eds for a in ed["arts"] for c in a.charts}
     print(f"Inside Desk build · {len(eds)} edition(s) · {sum(len(x['arts']) for x in eds)} article(s) · {len(used)} chart(s)")
     rendered = {}
