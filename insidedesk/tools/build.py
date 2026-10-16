@@ -519,7 +519,7 @@ def home_page(eds, rendered):
             + masthead(page, "home") + f'''<main id="main" class="wrap">
 {edition_block(page, ed, rendered)}
 <section class="theses" aria-labelledby="th-h"><h2 id="th-h" class="section-h">What this desk actually believes</h2><div class="thesis-grid">{theses}</div><p><a href="insidedesk/method.html">All standing theses and the method →</a></p></section>
-<section class="archive-teaser"><h2 class="section-h">Archive</h2><p>The archive starts with issue no. 1 on {e(pretty_day(eds[-1]['d']))}. Nothing earlier is shown, because nothing earlier was written this way. <a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
+<section class="archive-teaser"><h2 class="section-h">Archive</h2><p class="archive-links"><a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
 </main>
 ''' + footer(page))
 
