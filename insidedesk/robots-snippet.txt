@@ -1,0 +1,2 @@
+# Not a live robots.txt. If the owner approves a root robots.txt, add this line:
+Sitemap: https://benjaminkoch.info/insidedesk/sitemap.xml

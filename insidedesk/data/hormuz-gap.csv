@@ -1,0 +1,8 @@
+# Inside Desk chart data: hormuz-gap
+# Source: Kpler data as cited by BBC Verify (16 Oct 2026); IEA Governing Board (15 Oct); G7 deadline per S&P Global
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Hormuz flows, pre-war baseline (Kpler)",17.0,no,"BBC Verify, 16 Oct"
+Hormuz flows on 13 October (Kpler),12.6,no,"BBC Verify, 16 Oct"
+Shortfall versus pre-war,4.4,yes,17.0 − 12.6
+Remaining IEA release (~100m bbl) spread over four months,0.82,yes,100m ÷ 122 days

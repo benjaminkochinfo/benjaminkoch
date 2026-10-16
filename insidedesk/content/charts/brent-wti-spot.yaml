@@ -1,0 +1,24 @@
+id: brent-wti-spot
+kind: line
+kicker: "Energy · Spot prices"
+title: "The barrel and the corridor"
+subtitle: "Daily spot price, US$ per barrel · lower panel: Brent minus WTI"
+unit: ""
+label_decimals: 2
+start: "2025-07-01"
+series:
+  - key: brent
+    label: "Brent spot"
+    source: {type: fred, id: DCOILBRENTEU}
+  - key: wti
+    label: "WTI spot"
+    source: {type: fred, id: DCOILWTICO}
+derive:
+  - key: spread
+    expr: "brent - wti"
+panel: {key: spread, label: "Brent minus WTI, US$ per barrel"}
+annotations:
+  - {date: "2026-02-27", text: "War begins (end-Feb)", anchor: end}
+licence: fred-eia
+source_line: "U.S. EIA spot prices (Europe Brent FOB; WTI Cushing) via FRED, St. Louis Fed · public domain"
+alt: "Line chart of daily Brent and WTI spot prices since July 2025. Both trade between roughly $55 and $74 until the end of February 2026, then jump; Brent spot peaks at $138.21 on 7 April and is $126.55 on 14 October, while WTI is $101.91. The lower panel shows the Brent–WTI gap widening from about $4 before the war to $24.64."
