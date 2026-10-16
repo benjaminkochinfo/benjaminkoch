@@ -538,7 +538,6 @@ def archive_page(eds):
     items = "".join(f'''<li class="arch-ed"><a class="arch-head" href="{rel(page, ed['path'])}"><span class="k">{e(ed['slot_name'])} · Issue no. {ed['issue']}</span><b>{e(pretty_day(ed['d']))}</b><span>{e(ed['title'])}</span></a>
       <ul>{''.join(f'<li><a href="{rel(page, a.path)}">{e(a.title)}</a> <small>{e(a.desk_name)}</small></li>' for a in ed['arts'])}</ul></li>''' for ed in eds)
     inner = f'''<div class="kicker">Archive</div><h1 class="headline">Every edition, from issue no. 1</h1>
-<p class="deck">The archive begins on {e(pretty_day(eds[-1]['d']))}. Earlier versions of this site generated text automatically; none of it is kept or presented as an archive.</p>
 <ol class="arch">{items}</ol>'''
     return simple_page(page, "Archive", "Every Inside Desk edition, from issue no. 1.", inner, "archive")
 
