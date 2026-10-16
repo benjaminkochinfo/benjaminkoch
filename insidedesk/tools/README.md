@@ -13,7 +13,21 @@ insidedesk/tools/serve.sh 8765         # preview at http://127.0.0.1:8765/Inside
 Requirements: Python 3.11+, `pip install pyyaml markdown`, Google Chrome/Chromium for PNG and OG images.
 
 ## Writing an edition
-1. `python3 insidedesk/tools/new_edition.py 2026-10-19 am` creates `insidedesk/content/editions/2026-10-19-am/`.
+**House rule: every edition covers all ten desks.** Markets & Macro · Geo-economics · Politics & Institutions ·
+Psychology & Behaviour · Energy & Industry · Money, FX & Committees · Ordinary & Inherited Life · Tech & Compute ·
+Health & Care · Security & Order. Shape: **one lead + nine desk notes** (a note may use the `podium-vs-print` or
+`annex` format instead of `note`).
+* Lead: 600–900 words, the day's main argument, a chart if one carries it.
+* Notes: 3–6 short paragraphs each. A quiet desk still gets a brief note: brief is fine, empty is not.
+* Rotating depth: the lead desk rotates (the scaffold picks one by date and slot; override with a third argument),
+  so each desk leads roughly once every five weekdays. Give one or two notes extra depth per edition, preferably
+  desks that ran brief last time.
+* Every note: real news or data from the last day or two, checked at the source, cited; `watch` and `comment` filled.
+* `build.py` stops with an error if an edition is missing a desk.
+* A note added after the edition went out gets its own real `published:` time in its front matter. Never backdate.
+
+1. `python3 insidedesk/tools/new_edition.py 2026-10-19 am [lead-desk]` creates `insidedesk/content/editions/2026-10-19-am/`
+   with `edition.yaml`, a lead and nine note templates, one per desk.
 2. Edit `edition.yaml` (title, standfirst, article order: first = lead) and one Markdown file per piece.
    Front matter: `title, dek, desk, format (lead | note | podium-vs-print | sunday | annex), charts, sources, watch, comment`.
    `podium-vs-print` pieces also take `podium: {who, when, quote, url}` and `print: {who, when, figure, line, url}`.

@@ -1,36 +1,47 @@
 #!/usr/bin/env python3
-"""Scaffold an edition:  python3 insidedesk/tools/new_edition.py 2026-10-19 am
-Creates insidedesk/content/editions/<date>-<slot>/edition.yaml and a lead article template."""
+"""Scaffold an edition:  python3 insidedesk/tools/new_edition.py 2026-10-19 am [lead-desk]
+Creates insidedesk/content/editions/<date>-<slot>/ with edition.yaml, one lead and nine desk notes,
+so every edition covers all ten desks. The lead desk rotates by date and slot unless you name one."""
 import os, sys, datetime as dt
 from zoneinfo import ZoneInfo
+
+DESKS = ["markets", "geoecon", "politics", "psych", "energy", "money", "ordinary", "tech", "health", "security"]
 date, slot = sys.argv[1], sys.argv[2]
 assert slot in ("am", "pm", "sun")
-hhmm = {"am": (8, 30), "pm": (17, 30), "sun": (10, 0)}[slot]
 d = dt.date.fromisoformat(date)
+hhmm = {"am": (8, 30), "pm": (17, 30), "sun": (10, 0)}[slot]
 pub = dt.datetime(d.year, d.month, d.day, *hhmm, tzinfo=ZoneInfo("Europe/Berlin"))
+lead = sys.argv[3] if len(sys.argv) > 3 else DESKS[(d.toordinal() * 2 + (slot == "pm")) % len(DESKS)]
+assert lead in DESKS, f"lead desk must be one of {DESKS}"
+order = [lead] + [x for x in DESKS if x != lead]
+
 root = os.path.join(os.path.dirname(__file__), "..", "content", "editions", f"{date}-{slot}")
 os.makedirs(root, exist_ok=False)
-eds = os.path.join(os.path.dirname(__file__), "..", "content", "editions")
+slugs = [f"{x}-{'lead' if i == 0 else 'note'}" for i, x in enumerate(order)]
 open(os.path.join(root, "edition.yaml"), "w").write(f'''date: "{date}"
 slot: {slot}
-published: "{pub.isoformat()}"
+published: "{pub.isoformat()}"   # set to the actual Berlin time when it goes live
 title: "EDITION HEADLINE"
 standfirst: "One or two sentences: what the day did."
-articles:
-  - lead-slug
-''')
-open(os.path.join(root, "lead-slug.md"), "w").write('''---
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. All ten desks are required.
+''' + "".join(f"  - {s}\n" for s in slugs))
+for i, (desk, slug) in enumerate(zip(order, slugs)):
+    fmt = "lead" if i == 0 else "note"
+    size = ("Lead: 600-900 words, the day's argument, a chart if one carries it."
+            if i == 0 else "Desk note: 3-6 short paragraphs. Brief is fine; empty is not.")
+    open(os.path.join(root, slug + ".md"), "w").write(f'''---
 title: "Headline"
 dek: "One-sentence dek in the desk voice."
-desk: markets   # markets geoecon politics psych energy money ordinary tech health security
-format: lead    # lead | note | podium-vs-print | sunday | annex
+desk: {desk}
+format: {fmt}    # lead | note | podium-vs-print | sunday | annex
 charts: []      # ids from insidedesk/content/charts/*.yaml, only where a chart carries the argument
 sources:
-  - {n: 1, title: "", publisher: "", url: "", date: ""}
+  - {{n: 1, title: "", publisher: "", url: "", date: ""}}
 watch:
   - ""
 comment: ""
 ---
-Body in Markdown. Cite with [1]. Place a chart on its own line: [[chart:chart-id]]
+{size} Real news or data from the last day or two, checked at the source. Cite with [1].
+Place a chart on its own line: [[chart:chart-id]]
 ''')
-print("created", os.path.relpath(root))
+print("created", os.path.relpath(root), "· lead desk:", lead)

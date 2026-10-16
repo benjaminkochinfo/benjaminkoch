@@ -207,7 +207,8 @@ def load_editions(specs):
             a.slug = slug; a.edition = ed; a.order = i
             a.path = f"insidedesk/{d:%Y/%m/%d}/{slug}.html"
             a.url = BASE + a.path
-            a.pub = ed["pub"]
+            # a note added to an edition after it went out carries its own, real publish time
+            a.pub = dt.datetime.fromisoformat(str(fm["published"])).astimezone(TZ) if fm.get("published") else ed["pub"]
             a.body_md = body
             a.charts = fm.get("charts") or []
             words = len(re.sub(r"\[\[.*?\]\]|\[\d+\]", "", body).split())
@@ -218,6 +219,9 @@ def load_editions(specs):
             a.ledger = None
             arts.append(a)
         ed["arts"] = arts
+        missing = [k for k in DESKS if k not in {x.desk for x in arts}]
+        if missing:  # house rule: every edition covers all ten desks (one lead + notes)
+            sys.exit(f"edition {name} is missing desk(s): {', '.join(missing)}")
         eds.append(ed)
     eds.sort(key=lambda x: x["pub"], reverse=True)
     return eds
@@ -772,7 +776,7 @@ def feed_xml(eds, rendered, se=None):
     <description>{e(a.dek)}</description>
     <content:encoded><![CDATA[{content.replace("]]>", "]]&gt;")}]]></content:encoded>
   </item>''')
-    now = format_datetime(max([eds[0]["pub"]] + ([se["pub"]] if se else [])))
+    now = format_datetime(max([eds[0]["pub"]] + [a.pub for a in eds[0]["arts"]] + ([se["pub"]] if se else [])))
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
