@@ -11,6 +11,7 @@ UA = {"User-Agent": "InsideDesk-build/1.0 (+https://benjaminkoch.info/InsideDesk
 LICENCES = {
     "fred-eia": "EIA spot prices via FRED, Federal Reserve Bank of St. Louis. U.S. government data, public domain.",
     "fred-h15": "Board of Governors of the Federal Reserve System (H.15) via FRED. Public domain.",
+    "fred-bea": "U.S. Bureau of Economic Analysis via FRED, Federal Reserve Bank of St. Louis. U.S. government data, public domain.",
     "eurostat": "Eurostat. Reuse authorised under CC BY 4.0 (Commission Decision 2011/833/EU).",
     "ecb": "European Central Bank Data Portal. Reuse permitted with source acknowledgement.",
     "worldbank": "World Bank Open Data. CC BY 4.0.",

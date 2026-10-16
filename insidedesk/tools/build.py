@@ -215,11 +215,38 @@ def load_editions(specs):
             a.desk_name, a.kicker = DESKS[a.desk]
             a.format_name = FORMATS.get(a.format, "Desk note")
             a.og = f"insidedesk/og/{d:%Y-%m-%d}-{slug}.png"
+            a.ledger = None
             arts.append(a)
         ed["arts"] = arts
         eds.append(ed)
     eds.sort(key=lambda x: x["pub"], reverse=True)
     return eds
+
+def load_ledger():
+    """Look-back series. Pieces are filed under their EVENT date; machine metadata uses the real publish time."""
+    root = os.path.join(CONTENT, "ledger")
+    if not os.path.exists(os.path.join(root, "series.yaml")):
+        return None
+    se = load_yaml(os.path.join(root, "series.yaml"))
+    se["pub"] = dt.datetime.fromisoformat(se["published"]).astimezone(TZ)
+    arts = []
+    for i, key in enumerate(se["pieces"]):
+        fm, body = front_matter(os.path.join(root, key + ".md"))
+        a = Article(); a.__dict__.update(fm)
+        a.ledger = se; a.edition = None; a.order = i; a.format = "ledger"; a.format_name = se["title"]
+        a.event_d = dt.date.fromisoformat(str(fm["event_date"]))
+        a.path = f"insidedesk/{a.event_d:%Y/%m/%d}/{a.slug}.html"
+        a.url = BASE + a.path
+        a.pub = se["pub"]
+        a.body_md = body
+        a.charts = fm.get("charts") or []
+        words = len(re.sub(r"\[\[.*?\]\]|\[\d+\]", "", body).split())
+        a.minutes = max(2, round(words / 220))
+        a.desk_name, a.kicker = DESKS[a.desk]
+        a.og = f"insidedesk/og/ledger-{a.event_d:%Y-%m}-{a.slug}.png"
+        arts.append(a)
+    se["arts"] = arts
+    return se
 
 # ----------------------------------------------------------------- page chrome
 def head(page, title, desc, canonical, og_image, og_type="website", jsonld=None, extra=""):
@@ -420,7 +447,7 @@ def pvp_html(a):
 </section>'''
 
 def article_page(a, eds, rendered):
-    page = a.path; ed = a.edition
+    page = a.path; ed = a.edition; se = a.ledger
     t = f"{a.title} — Inside Desk"
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a.title, "description": a.dek,
           "datePublished": a.pub.isoformat(), "dateModified": a.pub.isoformat(), "inLanguage": "en-GB",
@@ -429,28 +456,47 @@ def article_page(a, eds, rendered):
           "publisher": {"@type": "NewsMediaOrganization", "name": "Inside Desk", "url": BASE + HOME,
                         "logo": {"@type": "ImageObject", "url": BASE + "insidedesk/assets/icon-512.png"}},
           "citation": [s["url"] for s in a.sources]}
+    if se:
+        ld["temporalCoverage"] = a.event_d.isoformat()
+        ld["isPartOf"] = {"@type": "CreativeWorkSeries", "name": se["title"], "url": BASE + se["path"]}
     srcs = "".join(f'<li id="src-{s["n"]}"><a href="{e(s["url"])}" rel="noopener">{e(s["title"])}</a> — {e(s["publisher"])}, {e(s["date"])}.</li>' for s in a.sources)
     watch = "".join(f"<li>{inline_refs(w)}</li>" for w in a.watch)
-    others = [x for x in ed["arts"] if x is not a]
-    more = "".join(f'<li><a href="{rel(page, x.path)}"><span class="k">{e(x.kicker)} · {e(x.format_name)}</span><b>{e(x.title)}</b></a></li>' for x in others)
+    if se:
+        others = [x for x in se["arts"] if x is not a]
+        more = "".join(f'<li><a href="{rel(page, x.path)}"><span class="k">{e(x.event_label)}</span><b>{e(x.title)}</b></a></li>' for x in others)
+        more_h = f'More from {e(se["title"])}'
+        crumbs = f'<a href="{rel(page, se["path"])}">{e(se["title"])}</a>'
+        stamp = f'<p class="event-line"><span class="event-k">Event</span> <time datetime="{a.event_d.isoformat()}">{e(a.event_label)}</time></p>'
+        when = ""
+        kick = f'{e(a.kicker)} · {e(se["title"].upper())}'
+    else:
+        others = [x for x in ed["arts"] if x is not a]
+        more = "".join(f'<li><a href="{rel(page, x.path)}"><span class="k">{e(x.kicker)} · {e(x.format_name)}</span><b>{e(x.title)}</b></a></li>' for x in others)
+        more_h = "Also in this edition"
+        crumbs = f'<a href="{rel(page, ed["path"])}">{e(ed["slot_name"])} · {e(pretty_day(ed["d"]))}</a>'
+        stamp = ""
+        when = f'<time datetime="{a.pub.isoformat()}">{e(pretty_day(a.pub))}, {a.pub:%H:%M} {tzlabel(a.pub)}</time><span aria-hidden="true">·</span>'
+        kick = f'{e(a.kicker)} · {e(a.format_name.upper())}'
+    watch_h = e(getattr(a, "watch_title", None) or "What to watch")
     hasd = " · ".join(filter(None, [f"{len(a.charts)} chart" + ("s" if len(a.charts) != 1 else "") if a.charts else "", f"{len(a.sources)} sources"]))
     return (head(page, t, a.dek, a.url, a.og, "article", ld,
                  extra=f'<meta property="article:published_time" content="{a.pub.isoformat()}"><meta property="article:section" content="{e(a.desk_name)}">')
             + masthead(page) +
 f'''<main id="main" class="wrap article-wrap">
 <article class="article" data-article data-id="{e(a.path)}" data-title="{e(a.title)}" data-url="{e(rel(page, a.path))}" data-dek="{e(a.dek)}">
-  <p class="crumbs"><a href="{rel(page, ed['path'])}">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))}</a></p>
-  <div class="kicker">{e(a.kicker)} · {e(a.format_name.upper())}</div>
+  <p class="crumbs">{crumbs}</p>
+  <div class="kicker">{kick}</div>
+  {stamp}
   <h1 class="headline">{e(a.title)}</h1>
   <p class="deck">{e(a.dek)}</p>
   <p class="byline"><span class="badge">{e(a.desk_name)}</span>
     <span>{AUTHOR} / The Desk</span><span aria-hidden="true">·</span>
-    <time datetime="{a.pub.isoformat()}">{e(pretty_day(a.pub))}, {a.pub:%H:%M} {tzlabel(a.pub)}</time><span aria-hidden="true">·</span>
+    {when}
     <span>{a.minutes} min read</span>{f'<span aria-hidden="true">·</span><span>{hasd}</span>' if hasd else ''}</p>
   {share_row(a.url, a.title)}
   {pvp_html(a) if a.format == "podium-vs-print" else ""}
   <div class="prose">{body_html(page, a, rendered)}</div>
-  <section class="watch" aria-labelledby="w-h"><h2 id="w-h">What to watch</h2><ul>{watch}</ul></section>
+  <section class="watch" aria-labelledby="w-h"><h2 id="w-h">{watch_h}</h2><ul>{watch}</ul></section>
   <section class="margin" aria-label="Desk comment"><strong>Desk comment</strong><p>{e(a.comment)}</p></section>
   <section class="sources" aria-labelledby="s-h"><h2 id="s-h">Sources</h2><ol>{srcs}</ol>
     <p class="faint">Every figure in this piece traces to a source above or to the desk’s own arithmetic on those sources, marked as such. Quotations are short and attributed. Spot an error? <a href="mailto:insidedesk@benjaminkoch.info?subject={e('Correction: ' + a.title)}">Write to the desk</a>; corrections are logged on the <a href="{rel(page, 'insidedesk/method.html')}#corrections">method page</a>.</p></section>
@@ -458,7 +504,7 @@ f'''<main id="main" class="wrap article-wrap">
   {support_ask(page)}
   <div class="tools">{share_row(a.url, a.title, "Pass it on")}<button class="btn btn-s" type="button" data-save>Save for later</button><button class="btn btn-s" type="button" data-print>Print</button></div>
 </article>
-<aside class="more" aria-labelledby="more-h"><h2 id="more-h" class="section-h">Also in this edition</h2><ul class="more-list">{more}</ul></aside>
+<aside class="more" aria-labelledby="more-h"><h2 id="more-h" class="section-h">{more_h}</h2><ul class="more-list">{more}</ul></aside>
 </main>
 ''' + footer(page))
 
@@ -488,7 +534,7 @@ def edition_block(page, ed, rendered, h1=True):
     lead, rest = ed["arts"][0], ed["arts"][1:]
     tag = "h1" if h1 else "h2"
     return f'''<section class="edition-hero" aria-labelledby="ed-h">
-  <div class="kicker">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))} · {ed['pub']:%H:%M} {tzlabel(ed['pub'])} · Issue no. {ed['issue']}</div>
+  <div class="kicker">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))} · {ed['pub']:%H:%M} {tzlabel(ed['pub'])}</div>
   <{tag} id="ed-h" class="edition-title">{e(ed['title'])}</{tag}>
   <p class="lede-sub">{e(ed['standfirst'])}</p>
   <p class="meta-line"><span data-next data-latest-slot="{LATEST_SLOT}">Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time</span></p>
@@ -506,7 +552,14 @@ def edition_block(page, ed, rendered, h1=True):
   </aside>
 </div>'''
 
-def home_page(eds, rendered):
+def ledger_module(page, se):
+    if not se: return ""
+    items = "".join(f'<li><a href="{rel(page, a.path)}"><span class="k">{e(a.event_label)}</span><b>{e(a.title)}</b></a></li>' for a in se["arts"])
+    return f'''<section class="ledger-mod" aria-labelledby="lg-h"><h2 id="lg-h" class="section-h">{e(se["title"])}</h2>
+<p class="ledger-dek">{e(se["dek"])}</p><ol class="ledger-strip">{items}</ol>
+<p><a href="{rel(page, se["path"])}">The whole series →</a></p></section>'''
+
+def home_page(eds, rendered, se=None):
     page = HOME; ed = eds[0]
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "NewsMediaOrganization", "@id": BASE + HOME + "#org", "name": "Inside Desk", "url": BASE + HOME,
@@ -518,6 +571,7 @@ def home_page(eds, rendered):
     return (head(page, "Inside Desk — The twice-daily brief", DESCRIPTION, BASE + HOME, ed["arts"][0].og, "website", ld)
             + masthead(page, "home") + f'''<main id="main" class="wrap">
 {edition_block(page, ed, rendered)}
+{ledger_module(page, se)}
 <section class="theses" aria-labelledby="th-h"><h2 id="th-h" class="section-h">What this desk actually believes</h2><div class="thesis-grid">{theses}</div><p><a href="insidedesk/method.html">All standing theses and the method →</a></p></section>
 <section class="archive-teaser"><h2 class="section-h">Archive</h2><p class="archive-links"><a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
 </main>
@@ -533,13 +587,44 @@ def simple_page(page, title, desc, inner, current=""):
     return (head(page, title + " — Inside Desk", desc, BASE + page, "insidedesk/og/default.png") + masthead(page, current)
             + f'<main id="main" class="wrap narrow">{inner}</main>' + footer(page))
 
-def archive_page(eds):
+def archive_page(eds, se=None):
     page = "insidedesk/archive.html"
-    items = "".join(f'''<li class="arch-ed"><a class="arch-head" href="{rel(page, ed['path'])}"><span class="k">{e(ed['slot_name'])} · Issue no. {ed['issue']}</span><b>{e(pretty_day(ed['d']))}</b><span>{e(ed['title'])}</span></a>
-      <ul>{''.join(f'<li><a href="{rel(page, a.path)}">{e(a.title)}</a> <small>{e(a.desk_name)}</small></li>' for a in ed['arts'])}</ul></li>''' for ed in eds)
-    inner = f'''<div class="kicker">Archive</div><h1 class="headline">Every edition, from issue no. 1</h1>
-<ol class="arch">{items}</ol>'''
-    return simple_page(page, "Archive", "Every Inside Desk edition, from issue no. 1.", inner, "archive")
+    entries = []
+    for ed in eds:
+        arts = "".join(f'<li><a href="{rel(page, a.path)}">{e(a.title)}</a> <small>{e(a.desk_name)}</small></li>' for a in ed["arts"])
+        entries.append((ed["d"], 1, f'''<li class="tl-item tl-ed"><a class="arch-head" href="{rel(page, ed['path'])}"><span class="k">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))}</span><b>{e(ed['title'])}</b></a><ul>{arts}</ul></li>'''))
+    if se:
+        for a in se["arts"]:
+            entries.append((a.event_d, 0, f'''<li class="tl-item tl-ledger"><a class="arch-head" href="{rel(page, a.path)}"><span class="k">{e(a.event_label)} · {e(se['title'])}</span><b>{e(a.title)}</b><span>{e(a.dek)}</span></a></li>'''))
+    entries.sort(key=lambda x: (x[0], x[1]))
+    out, month = [], None
+    for d, _, html_ in entries:
+        m = d.strftime("%B %Y")
+        if m != month:
+            if month: out.append("</ol></section>")
+            out.append(f'<section class="tl-month"><h2 class="tl-m">{e(m)}</h2><ol class="tl">'); month = m
+        out.append(html_)
+    if month: out.append("</ol></section>")
+    series = f'<p class="deck">Editions, and <a href="{rel(page, se["path"])}">{e(se["title"])}</a>, in the order things happened.</p>' if se else ""
+    inner = f'''<div class="kicker">Archive</div><h1 class="headline">2026, in order</h1>
+{series}
+<div class="timeline">{"".join(out)}</div>'''
+    return simple_page(page, "Archive", "Every Inside Desk edition and The 2026 Ledger, as a timeline.", inner, "archive")
+
+def ledger_page(se, rendered):
+    page = se["path"]
+    items = "".join(f'''<li class="tl-item tl-ledger"><a class="arch-head" href="{rel(page, a.path)}"><span class="k">{e(a.event_label)} · {e(a.desk_name)}</span><b>{e(a.title)}</b><span>{e(a.dek)}</span></a></li>''' for a in se["arts"])
+    ld = {"@context": "https://schema.org", "@type": "CreativeWorkSeries", "name": se["title"], "url": BASE + page,
+          "description": se["dek"], "datePublished": se["pub"].isoformat(), "inLanguage": "en-GB",
+          "publisher": {"@type": "NewsMediaOrganization", "name": "Inside Desk", "url": BASE + HOME},
+          "hasPart": [{"@type": "NewsArticle", "headline": a.title, "url": a.url, "temporalCoverage": a.event_d.isoformat()} for a in se["arts"]]}
+    inner = f'''<div class="kicker">Series</div><h1 class="headline">{e(se["title"])}</h1>
+<p class="deck">{e(se["dek"])}</p>
+<p class="series-line">{e(se["line"])}</p>
+<ol class="tl">{items}</ol>
+<p class="faint">Commentary for information only. Not investment, legal, tax or political advice. Every figure is sourced under its piece; quotations are short and attributed.</p>'''
+    return (head(page, se["title"] + " — Inside Desk", se["dek"], BASE + page, "insidedesk/og/ledger-2026.png", "website", ld)
+            + masthead(page, "archive") + f'<main id="main" class="wrap narrow">{inner}</main>' + footer(page))
 
 def method_page():
     page = "insidedesk/method.html"
@@ -575,7 +660,7 @@ def support_page():
   <p>PayPal handle: <b>{SUPPORT_HANDLE}</b></p>
 </div>
 <!-- OWNER PLACEHOLDER: monthly support is not set up yet. Replace this box once a recurring option
-     (e.g. PayPal subscription button, GitHub Sponsors, Ko-fi, Stripe Payment Link or SEPA standing order) exists. -->
+     (e.g. PayPal subscription button, Ko-fi, Stripe Payment Link or SEPA standing order) exists. -->
 <div class="support-box placeholder" role="note">
   <p class="support-l">Monthly support</p>
   <p><strong>Placeholder — not yet available.</strong> A monthly option will appear here once the publisher has set one up. Until then, a one-off gift whenever an edition earns it does the same job.</p>
@@ -636,7 +721,7 @@ def legal_page():
     <p>To the maximum extent permitted by applicable law, {P['name']} and Inside Desk are not liable for any direct, indirect, incidental, or consequential loss arising from use of this service, including decisions about money, politics, travel, or family capital. Mandatory rights that cannot be waived remain untouched. Where liability can be limited, it is limited to amounts you actually paid the publisher in the twelve months before the claim. Voluntary support is not a fee for content and creates no additional duty beyond mandatory law.</p>
 
     <h2>9. Privacy</h2>
-    <p>This service does not run advertising trackers, analytics, or cookies. The pages are static files; fonts are served from this site, and charts are built at publication time, so reading a page makes no requests to data providers or other third parties. Your browser may keep two things in local storage: your theme choice (only once you switch it) and your shelf. You can erase them by clearing site data. The share buttons and the PayPal support links are ordinary links: nothing is sent to those services unless you click one, and then their own terms and privacy notices apply. The pages are hosted on GitHub Pages; the site-wide privacy notice of benjaminkoch.info applies.</p>
+    <p>This service does not run advertising trackers, analytics, or cookies. The pages are static files; fonts are served from this site, and charts are built at publication time, so reading a page makes no requests to data providers or other third parties. Your browser may keep two things in local storage: your theme choice (only once you switch it) and your shelf. You can erase them by clearing site data. The share buttons and the PayPal support links are ordinary links: nothing is sent to those services unless you click one, and then their own terms and privacy notices apply. The site-wide privacy notice of benjaminkoch.info applies.</p>
 
     <h2>10. Voluntary support</h2>
     <p>The letter is free. The PayPal control “quietcontinuity” accepts voluntary gifts. A gift is not a purchase, not a subscription, and not consideration for access, advice, or influence. Card data is handled by PayPal, not by this letter. No licensed payment for content is offered here. Unless a recognised charity receipt says otherwise, do not treat a gift as tax-deductible.</p>
@@ -667,10 +752,12 @@ def imprint_page():
     return simple_page("insidedesk/imprint.html", "Imprint", "Provider identification for Inside Desk.", inner)
 
 # ----------------------------------------------------------------- feed, sitemap, OG
-def feed_xml(eds, rendered):
+def feed_xml(eds, rendered, se=None):
     items = []
-    for ed in eds:
-        for a in ed["arts"]:
+    groups = [ed["arts"] for ed in eds] + ([se["arts"]] if se else [])
+    groups.sort(key=lambda g: g[0].pub, reverse=True)
+    for arts in groups:
+        for a in arts:
             body = re.sub(r'<figure class="plate".*?</figure>', lambda m: "", body_html(a.path, a, rendered), flags=re.S)
             imgs = "".join(f'<p><img src="{BASE}insidedesk/charts/{c}.png" alt="{e(rendered[c][0]["alt"])}" width="960"></p>' for c in a.charts)
             srcs = "".join(f'<li><a href="{e(s["url"])}">{e(s["title"])}</a> — {e(s["publisher"])}</li>' for s in a.sources)
@@ -685,7 +772,7 @@ def feed_xml(eds, rendered):
     <description>{e(a.dek)}</description>
     <content:encoded><![CDATA[{content.replace("]]>", "]]&gt;")}]]></content:encoded>
   </item>''')
-    now = format_datetime(eds[0]["pub"])
+    now = format_datetime(max([eds[0]["pub"]] + ([se["pub"]] if se else [])))
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
@@ -701,8 +788,12 @@ def feed_xml(eds, rendered):
 </rss>
 '''
 
-def sitemap_xml(eds):
-    urls = [("insidedesk/archive.html", eds[0]["pub"]), ("insidedesk/method.html", eds[0]["pub"]), ("insidedesk/support.html", eds[0]["pub"])]
+def sitemap_xml(eds, se=None):
+    latest = max([eds[0]["pub"]] + ([se["pub"]] if se else []))
+    urls = [("insidedesk/archive.html", latest), ("insidedesk/method.html", eds[0]["pub"]), ("insidedesk/support.html", eds[0]["pub"])]
+    if se:
+        urls.append((se["path"], se["pub"]))
+        urls += [(a.path, a.pub) for a in se["arts"]]
     for ed in eds:
         urls.append((ed["path"], ed["pub"]))
         urls += [(a.path, a.pub) for a in ed["arts"]]
@@ -755,17 +846,19 @@ def favicons(no_png):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true"); ap.add_argument("--no-png", action="store_true")
+    ap.add_argument("--fetch", default="", help="comma list: fetch only these chart ids (others read local CSV)")
     args = ap.parse_args()
     specs = chart_specs()
     eds = load_editions(specs)
     global LATEST_SLOT
     LATEST_SLOT = max(f"{x['d'].isoformat()} {x['slot_time']}" for x in eds)  # Berlin wall time of the newest covered slot
-    used = {c for ed in eds for a in ed["arts"] for c in a.charts}
+    se = load_ledger()
+    used = {c for ed in eds for a in ed["arts"] for c in a.charts} | ({c for a in se["arts"] for c in a.charts} if se else set())
     print(f"Inside Desk build · {len(eds)} edition(s) · {sum(len(x['arts']) for x in eds)} article(s) · {len(used)} chart(s)")
     rendered = {}
     for cid in sorted(used):
         spec = specs[cid]
-        if not args.offline and spec["kind"] != "hbar":
+        if not args.offline and spec["kind"] != "hbar" and (not args.fetch or cid in args.fetch.split(",")):
             print("  fetch", cid); fetch_chart_data(spec)
         svg, table = render_chart(spec)
         rendered[cid] = (spec, svg, table)
@@ -779,16 +872,26 @@ def main():
                 svg = rendered[a.charts[0]][1] if a.charts else None
                 chrome_shot(og_card(a.title, f"{a.kicker} · {a.format_name}", a.dek, svg), os.path.join(ROOT, a.og), 1200, 630)
             print("  page", a.path)
-    write(HOME, home_page(eds, rendered))
-    write("insidedesk/archive.html", archive_page(eds))
+    if se:
+        for a in se["arts"]:
+            write(a.path, article_page(a, eds, rendered))
+            if not args.no_png:
+                svg = rendered[a.charts[0]][1] if a.charts else None
+                chrome_shot(og_card(a.title, f"{se['title']} · {a.event_label}", a.dek, svg), os.path.join(ROOT, a.og), 1200, 630)
+            print("  ledger", a.path)
+        write(se["path"], ledger_page(se, rendered))
+        if not args.no_png:
+            chrome_shot(og_card(se["title"], "Inside Desk · Series", se["dek"], rendered.get("ledger-brent-2026", (None, None))[1]), os.path.join(DESK, "og", "ledger-2026.png"), 1200, 630)
+    write(HOME, home_page(eds, rendered, se))
+    write("insidedesk/archive.html", archive_page(eds, se))
     write("insidedesk/method.html", method_page())
     write("insidedesk/support.html", support_page())
     write("insidedesk/thanks.html", thanks_page())
     write("insidedesk/shelf.html", shelf_page())
     write("insidedesk/legal.html", legal_page())
     write("insidedesk/imprint.html", imprint_page())
-    write("insidedesk/feed.xml", feed_xml(eds, rendered))
-    write("insidedesk/sitemap.xml", sitemap_xml(eds))
+    write("insidedesk/feed.xml", feed_xml(eds, rendered, se))
+    write("insidedesk/sitemap.xml", sitemap_xml(eds, se))
     write("insidedesk/robots-snippet.txt", f"# Not a live robots.txt. If the owner approves a root robots.txt, add this line:\nSitemap: {BASE}insidedesk/sitemap.xml\n")
     favicons(args.no_png)
     if not args.no_png:

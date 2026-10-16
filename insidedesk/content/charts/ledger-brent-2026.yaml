@@ -1,0 +1,20 @@
+id: ledger-brent-2026
+kind: line
+kicker: "The 2026 Ledger · Energy"
+title: "A year in one barrel"
+subtitle: "Brent, daily EIA spot price, US$ per barrel"
+unit: ""
+label_decimals: 2
+start: "2025-12-01"
+series:
+  - key: brent
+    label: "Brent spot"
+    source: {type: fred, id: DCOILBRENTEU}
+annotations:
+  - {date: "2026-02-28", text: "Strikes on Iran", anchor: end}
+  - {date: "2026-04-07", text: "Ceasefire"}
+  - {date: "2026-06-17", text: "MOU"}
+  - {date: "2026-09-11", text: "Pipeline hit", anchor: end}
+licence: fred-eia
+source_line: "U.S. EIA spot price (Europe Brent FOB) via FRED, St. Louis Fed · public domain"
+alt: "Line chart of the daily Brent spot price from December 2025. It trades between about $60 and $73 until the end of February 2026, then jumps after the strikes on Iran to $126.69 at the end of March and a peak of $138.21 on 7 April, the day of the ceasefire. It falls to $68.53 in early July after the June memorandum, climbs again to above $120 in mid-September after the Saudi pipeline is hit, and is $126.55 on 14 October."

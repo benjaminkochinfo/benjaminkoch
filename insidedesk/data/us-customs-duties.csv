@@ -1,0 +1,15 @@
+# Inside Desk chart data: us-customs-duties
+"# Source: U.S. Bureau of Economic Analysis, B235RC1Q027SBEA, via FRED, St. Louis Fed · public domain"
+"# Licence: U.S. Bureau of Economic Analysis via FRED, Federal Reserve Bank of St. Louis. U.S. government data, public domain."
+# Retrieved: 2026-10-16T15:10+02:00
+date,customs
+2024-01-01,80.48
+2024-04-01,79.679
+2024-07-01,85.084
+2024-10-01,89.104
+2025-01-01,103.66
+2025-04-01,270.592
+2025-07-01,333.75
+2025-10-01,366.651
+2026-01-01,326.223
+2026-04-01,306.398

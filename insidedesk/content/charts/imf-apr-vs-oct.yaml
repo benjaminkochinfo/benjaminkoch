@@ -1,0 +1,14 @@
+id: imf-apr-vs-oct
+kind: hbar
+kicker: "The 2026 Ledger · Markets"
+title: "Same growth, dearer"
+subtitle: "IMF World Economic Outlook forecasts for 2026, world, %"
+unit: "%"
+rows:
+  - {label: "Growth 2026 — April forecast", value: 3.1, note: "WEO Apr 2026"}
+  - {label: "Growth 2026 — October forecast", value: 3.1, note: "WEO Oct 2026"}
+  - {label: "Headline inflation 2026 — April forecast", value: 4.4, note: "WEO Apr 2026"}
+  - {label: "Headline inflation 2026 — October forecast", value: 4.7, note: "WEO Oct 2026"}
+licence: reported
+source_line: "International Monetary Fund, World Economic Outlook April 2026 and October 2026 (IMF Blog, 13 Oct 2026)"
+alt: "Bar chart comparing the IMF's April and October 2026 forecasts for 2026: world growth 3.1% in both, headline inflation 4.4% in April and 4.7% in October."

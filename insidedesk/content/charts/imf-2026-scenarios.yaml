@@ -1,0 +1,14 @@
+id: imf-2026-scenarios
+kind: hbar
+kicker: "The 2026 Ledger · Markets"
+title: "Read the range, not the middle"
+subtitle: "IMF April 2026 WEO: world GDP growth in 2026 under each case, %"
+unit: "%"
+rows:
+  - {label: "Pre-war assumptions (IMF counterfactual)", value: 3.4, note: "IMF blog, 14 Apr"}
+  - {label: "Reference forecast (short war, fades by mid-2026)", value: 3.1, note: "WEO, 14 Apr"}
+  - {label: "Adverse scenario (inflation 5.4%)", value: 2.5, note: "IMF blog, 14 Apr"}
+  - {label: "Severe scenario (inflation above 6%)", value: 2.0, note: "IMF blog, 14 Apr"}
+licence: reported
+source_line: "International Monetary Fund, World Economic Outlook April 2026 and IMF Blog, 14 Apr 2026"
+alt: "Bar chart of the IMF's April 2026 cases for world growth in 2026: 3.4% on pre-war assumptions, 3.1% in the reference forecast, 2.5% in the adverse scenario and 2.0% in the severe scenario."

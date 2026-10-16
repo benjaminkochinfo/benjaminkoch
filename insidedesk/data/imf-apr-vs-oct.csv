@@ -1,0 +1,8 @@
+# Inside Desk chart data: imf-apr-vs-oct
+"# Source: International Monetary Fund, World Economic Outlook April 2026 and October 2026 (IMF Blog, 13 Oct 2026)"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Growth 2026 — April forecast,3.1,no,WEO Apr 2026
+Growth 2026 — October forecast,3.1,no,WEO Oct 2026
+Headline inflation 2026 — April forecast,4.4,no,WEO Apr 2026
+Headline inflation 2026 — October forecast,4.7,no,WEO Oct 2026

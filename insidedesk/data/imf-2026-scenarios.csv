@@ -1,0 +1,8 @@
+# Inside Desk chart data: imf-2026-scenarios
+"# Source: International Monetary Fund, World Economic Outlook April 2026 and IMF Blog, 14 Apr 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Pre-war assumptions (IMF counterfactual),3.4,no,"IMF blog, 14 Apr"
+"Reference forecast (short war, fades by mid-2026)",3.1,no,"WEO, 14 Apr"
+Adverse scenario (inflation 5.4%),2.5,no,"IMF blog, 14 Apr"
+Severe scenario (inflation above 6%),2.0,no,"IMF blog, 14 Apr"

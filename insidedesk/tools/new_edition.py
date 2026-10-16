@@ -11,10 +11,8 @@ pub = dt.datetime(d.year, d.month, d.day, *hhmm, tzinfo=ZoneInfo("Europe/Berlin"
 root = os.path.join(os.path.dirname(__file__), "..", "content", "editions", f"{date}-{slot}")
 os.makedirs(root, exist_ok=False)
 eds = os.path.join(os.path.dirname(__file__), "..", "content", "editions")
-issue = len([x for x in os.listdir(eds) if os.path.isdir(os.path.join(eds, x))])
 open(os.path.join(root, "edition.yaml"), "w").write(f'''date: "{date}"
 slot: {slot}
-issue: {issue}
 published: "{pub.isoformat()}"
 title: "EDITION HEADLINE"
 standfirst: "One or two sentences: what the day did."

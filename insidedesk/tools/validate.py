@@ -39,7 +39,7 @@ for p in pages:
         if path.startswith("/") and not (path.startswith("/insidedesk/") or path == "/InsideDesk.html"):
             continue  # site-wide pages owned by other parts of the repo (e.g. /imprint.html, /privacy.html)
         if not os.path.exists(target): problems.append(f"{rp}: broken link {r}")
-    if "/20" in rp.replace(os.sep, "/") and "evening" not in rp and "morning" not in rp and "sunday" not in rp:
+    if re.search(r"insidedesk/20\d\d/\d\d/\d\d/", rp.replace(os.sep, "/")) and "evening" not in rp and "morning" not in rp and "sunday" not in rp:
         if 'id="s-h"' not in txt: problems.append(f"{rp}: article without sources")
 for x in ("insidedesk/feed.xml", "insidedesk/sitemap.xml"):
     try: xml.dom.minidom.parse(os.path.join(ROOT, x))

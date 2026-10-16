@@ -1,0 +1,24 @@
+id: policy-rates-fed-ecb
+kind: line
+kicker: "The 2026 Ledger · Money"
+title: "Two committees, one corridor"
+subtitle: "Policy rates, %: Fed funds target range (upper limit) and ECB deposit facility rate"
+unit: "%"
+label_decimals: 2
+start: "2024-01-01"
+y_min: 0
+series:
+  - key: fed
+    label: "Fed funds, upper limit"
+    step: true
+    source: {type: fred, id: DFEDTARU}
+  - key: dfr
+    label: "ECB deposit rate"
+    step: true
+    source: {type: ecb, flow: FM, key: D.U2.EUR.4F.KR.DFR.LEV}
+annotations:
+  - {date: "2026-02-28", text: "War begins", anchor: end}
+licence: fred-h15
+licence_extra: ecb
+source_line: "Federal Reserve Board via FRED (DFEDTARU) · ECB Data Portal FM.D.U2.EUR.4F.KR.DFR.LEV"
+alt: "Step chart since January 2024 of the Fed funds target upper limit and the ECB deposit rate. The Fed's upper limit falls from 5.50% in 2024 to 3.75% by December 2025 and rises to 4.00% in September 2026. The ECB deposit rate falls from 4.00% to 2.00% by June 2025, then rises to 2.25% in June 2026 and 2.50% in September 2026."

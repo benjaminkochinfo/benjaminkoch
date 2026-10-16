@@ -201,3 +201,23 @@ html[data-theme="paper"] .lead-plate svg,html[data-theme="paper"] .plate-svg svg
   body{background:#fff;color:#111;font-size:12pt}.article-wrap{display:block}.prose{font-size:12pt}
   a{color:#111}.plate{break-inside:avoid;margin:12pt 0}
 }
+/* The 2026 Ledger */
+.event-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:6px 0 10px;font:600 clamp(20px,3vw,28px)/1.2 var(--mono);color:var(--signal)}
+.event-k{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line2);border-radius:4px;padding:2px 6px}
+.ledger-mod{margin:40px 0;padding:22px 0;border-top:2px solid var(--text);border-bottom:1px solid var(--line2)}
+.ledger-dek{color:var(--muted);margin:0 0 12px}
+.ledger-strip{list-style:none;padding:0;margin:0 0 14px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.ledger-strip a{display:block;height:100%;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--text);text-decoration:none}
+.ledger-strip .k{display:block;font:600 11px var(--mono);letter-spacing:.08em;color:var(--signal);margin-bottom:4px}
+.ledger-strip b{font:600 16px/1.25 var(--serif)}
+@media (max-width:900px){.ledger-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ledger-strip{grid-template-columns:1fr}}
+.series-line{font-style:italic;color:var(--muted);border-left:3px solid var(--signal);padding-left:12px}
+.timeline{margin:24px 0}
+.tl-m{font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:28px 0 6px}
+.tl{list-style:none;padding:0 0 0 18px;margin:0;border-left:2px solid var(--line2)}
+.tl-item{position:relative;padding:12px 0 12px 6px}
+.tl-item::before{content:"";position:absolute;left:-25px;top:19px;width:10px;height:10px;border-radius:50%;background:var(--signal)}
+.tl-ed::before{background:var(--text)}
+.tl-item ul{margin:8px 0 0;padding-left:18px} .tl-item small{color:var(--faint)}
+.tl .arch-head b{font-size:21px}

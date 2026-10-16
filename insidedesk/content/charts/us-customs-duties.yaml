@@ -1,0 +1,18 @@
+id: us-customs-duties
+kind: line
+kicker: "The 2026 Ledger · Politics"
+title: "The invoice, in the national accounts"
+subtitle: "US federal customs duties received, US$ billion, seasonally adjusted annual rate, quarterly"
+unit: ""
+label_decimals: 0
+start: "2024-01-01"
+y_min: 0
+series:
+  - key: customs
+    label: "Customs duties"
+    source: {type: fred, id: B235RC1Q027SBEA}
+annotations:
+  - {date: "2026-01-01", text: "Ruling: 20 Feb", anchor: end}
+licence: fred-bea
+source_line: "U.S. Bureau of Economic Analysis, B235RC1Q027SBEA, via FRED, St. Louis Fed · public domain"
+alt: "Line chart of quarterly US federal customs receipts at a seasonally adjusted annual rate. They are about $80 billion to $89 billion through 2024, jump to about $271 billion in the second quarter of 2025 and $367 billion in the fourth, then ease to $326 billion in the first quarter of 2026 and $306 billion in the second, after the February ruling."
