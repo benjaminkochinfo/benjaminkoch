@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Scaffold an edition:  python3 insidedesk/tools/new_edition.py 2026-10-19 am [lead-desk]
-Creates insidedesk/content/editions/<date>-<slot>/ with edition.yaml, one lead and nine desk notes,
-so every edition covers all ten desks. The lead desk rotates by date and slot unless you name one."""
+Creates insidedesk/content/editions/<date>-<slot>/ with edition.yaml, one lead and ten desk notes,
+so every edition covers all eleven desks. The lead desk rotates by date and slot unless you name one."""
 import os, sys, datetime as dt
 from zoneinfo import ZoneInfo
 
-DESKS = ["markets", "geoecon", "politics", "psych", "energy", "money", "ordinary", "tech", "health", "security"]
+DESKS = ["markets", "geoecon", "politics", "psych", "energy", "money", "ordinary", "tech", "health", "security", "climate"]
 date, slot = sys.argv[1], sys.argv[2]
 assert slot in ("am", "pm", "sun")
 d = dt.date.fromisoformat(date)
@@ -23,7 +23,16 @@ slot: {slot}
 published: "{pub.isoformat()}"   # set to the actual Berlin time when it goes live
 title: "EDITION HEADLINE"
 standfirst: "One or two sentences: what the day did."
-articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. All ten desks are required.
+closing:    # end-of-edition section, plain and warm; no mailbag
+  title: "Before you close the tab"
+  habit: {text: "One small, calm, practical habit for the week.", note: "A habit, not advice."}
+  went_right: {text: "One sourced piece of genuinely good news from data [1]."}
+  sentence: "The day in one line a non-expert could repeat at dinner."
+  euros: {text: "Only when the news touches prices: what it means for a household's month, from sourced figures [1].", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "A term used in this edition", text: "Two or three plain sentences."}
+  sources:
+    - {n: 1, title: "", publisher: "", url: "", date: ""}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
 ''' + "".join(f"  - {s}\n" for s in slugs))
 for i, (desk, slug) in enumerate(zip(order, slugs)):
     fmt = "lead" if i == 0 else "note"

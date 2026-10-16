@@ -221,3 +221,19 @@ html[data-theme="paper"] .lead-plate svg,html[data-theme="paper"] .plate-svg svg
 .tl-ed::before{background:var(--text)}
 .tl-item ul{margin:8px 0 0;padding-left:18px} .tl-item small{color:var(--faint)}
 .tl .arch-head b{font-size:21px}
+/* End-of-edition closing section */
+.closing{margin:36px 0 8px;padding:26px clamp(16px,3vw,32px);background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:14px}
+.closing-head .kicker time{font:inherit;color:inherit}
+.closing-title{font:600 clamp(24px,3vw,32px)/1.15 var(--serif);margin:6px 0 18px}
+.cl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cl-item{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.cl-item h3{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+.cl-item p{margin:0 0 8px;line-height:1.55}
+.cl-sentence{grid-column:1/-1;text-align:center}
+.cl-sentence p{font:500 clamp(19px,2.4vw,24px)/1.35 var(--serif);margin:4px auto;max-width:46ch}
+.cl-term{font:600 20px/1.2 var(--serif)!important;color:var(--text)}
+.cl-note{font-size:13px;color:var(--faint)}
+.cl-euros{border-left:3px solid var(--signal)}
+.cl-foot{margin-top:16px}
+.cl-src{font-size:14px;color:var(--muted);padding-left:20px}
+@media (max-width:760px){.cl-grid{grid-template-columns:1fr}}

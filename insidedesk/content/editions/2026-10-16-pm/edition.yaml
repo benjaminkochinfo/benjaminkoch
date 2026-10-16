@@ -2,7 +2,7 @@ date: "2026-10-16"
 slot: pm
 published: "2026-10-16T14:39:00+02:00"
 title: "Admit what the day actually did."
-standfirst: "Oil eased on the screen and stayed expensive in the tank. Eurostat confirmed 3.8% inflation. The IEA promised more diesel, and the strait stayed narrow. Ten desks, five charts, every number sourced."
+standfirst: "Oil eased on the screen and stayed expensive in the tank. Eurostat confirmed 3.8% inflation. The IEA promised more diesel, and the strait stayed narrow. Eleven desks, five charts, every number sourced."
 articles:
   - the-barrel-and-the-screen
   - podium-vs-print-iea-release
@@ -14,3 +14,24 @@ articles:
   - a-deadline-is-a-podium-the-negotiating-box-is-the-print
   - a-circuit-breaker-is-a-pause-not-a-verdict
   - the-slowest-emergency-has-a-known-fix
+  - el-nino-sends-its-invoices-by-river-field-and-claim-form
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-16T16:36:00+02:00"
+  habit:
+    text: "Once a month, write three numbers on one line: what you paid per litre of fuel, per unit of heating, and per kWh of electricity. Ten minutes, no app. Over a winter it turns this edition's headlines into your own line on the chart, and your own line is the one you can act on."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "The sun paid part of the bill. Between 1 March and 15 October, EU solar helped avoid more than €40 billion of gas imports, by the industry body SolarPower Europe's own estimate [1]. In the week of 5 October, Germany, France and Spain each set records for solar output on an October day, Germany with 297 GWh on 5 October, and windier days pulled weekly power prices down in most European markets even as gas rose [2]."
+  sentence: "Energy is still dear because of the war, the chip shares had a scare rather than a collapse, and the sun quietly paid part of Europe's bill."
+  euros:
+    text: "Eurostat's September figures: liquid fuels and fuels for transport cost 33.8% more across the euro area than a year earlier, 37.3% more in Germany; electricity, gas and heat cost 6.9% more [3]. So fuel that cost a household €100 in September 2025 cost about €134 in September 2026, or about €137 in Germany. A €100 electricity, gas and heat outlay became about €107."
+    note: "Desk arithmetic on Eurostat's annual rates. Your contract and your local prices are the binding numbers."
+  small_words:
+    term: "Equal-weighted index"
+    text: "A normal stock index gives big companies big weights, so a few giants can move the whole number. An equal-weighted index gives every company the same share. On Thursday the normal S&P 500 rose 0.33% and its equal-weighted version 1.36% [4]: the typical company had a better day than the giants."
+  sources:
+    - {n: 1, title: "€40 billion saved, but action is needed to cut Europe's fossil fuel bill for good", publisher: "SolarPower Europe", url: "https://www.solarpowereurope.org/press-releases/40-billion-saved-but-action-is-needed-to-cut-europe-s-fossil-fuel-bill-for-good", date: "15 Oct 2026"}
+    - {n: 2, title: "Gas price surge did not prevent prices from falling in most European electricity markets in the second week of October", publisher: "AleaSoft Energy Forecasting", url: "https://aleasoft.com/gas-price-surge-price-decline-second-week-october-2026/", date: "13 Oct 2026"}
+    - {n: 3, title: "HICP – monthly data, annual rate of change (prc_hicp_minr): FUEL, ELC_GAS; euro area and Germany", publisher: "Eurostat", url: "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr/default/table", date: "released 16 Oct 2026"}
+    - {n: 4, title: "Market Quick Take – Meltdown in AI stocks yields to late recovery", publisher: "Saxo Bank", url: "https://www.home.saxo/en-mena/content/articles/macro/market-quick-take--meltdown-in-ai-stocks-yields-to-late-recovery---16-october-2026-16102026", date: "16 Oct 2026"}

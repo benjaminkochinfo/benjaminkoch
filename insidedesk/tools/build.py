@@ -39,6 +39,7 @@ DESKS = {
     "energy": ("Energy & Industry", "ENERGY"), "money": ("Money, FX & Committees", "MONEY"),
     "ordinary": ("Ordinary & Inherited Life", "ORDINARY"), "tech": ("Tech & Compute", "TECH"),
     "health": ("Health & Care", "HEALTH"), "security": ("Security & Order", "SECURITY"),
+    "climate": ("Climate & Weather", "CLIMATE"),
 }
 FORMATS = {"lead": "Lead", "note": "Desk note", "podium-vs-print": "Podium vs Print", "sunday": "Sunday long-read", "annex": "The Annex"}
 SLOTS = {"am": ("Morning edition", "morning", "08:30"), "pm": ("Evening edition", "evening", "17:30"), "sun": ("Sunday long-read", "sunday", "10:00")}
@@ -219,8 +220,11 @@ def load_editions(specs):
             a.ledger = None
             arts.append(a)
         ed["arts"] = arts
+        if ed.get("closing"):
+            c = ed["closing"]
+            c["pub"] = dt.datetime.fromisoformat(str(c["published"])).astimezone(TZ) if c.get("published") else ed["pub"]
         missing = [k for k in DESKS if k not in {x.desk for x in arts}]
-        if missing:  # house rule: every edition covers all ten desks (one lead + notes)
+        if missing:  # house rule: every edition covers every desk (one lead + notes)
             sys.exit(f"edition {name} is missing desk(s): {', '.join(missing)}")
         eds.append(ed)
     eds.sort(key=lambda x: x["pub"], reverse=True)
@@ -534,6 +538,34 @@ def card(page, a, big=False, rendered=None):
 
 LATEST_SLOT = ""
 
+CLOSING_PARTS = [("habit", "One thing you can do this week"), ("went_right", "What went right"),
+                 ("sentence", "The day in one sentence"), ("euros", "In euros at home"), ("small_words", "Small words")]
+
+def closing_html(ed):
+    """Edition-level closing section, added after the desk notes. Own sources, own (real) publish time."""
+    c = ed.get("closing")
+    if not c: return ""
+    def para(t):
+        return re.sub(r"\[(\d+)\]", lambda m: f'<sup class="ref"><a href="#cl-s{m.group(1)}">{m.group(1)}</a></sup>', e(t))
+    cards = []
+    for key, label in CLOSING_PARTS:
+        part = c.get(key)
+        if not part: continue
+        if isinstance(part, str): part = {"text": part}
+        head = f'<h3>{e(label)}</h3>' + (f'<p class="cl-term">{e(part["term"])}</p>' if part.get("term") else "")
+        body = "".join(f"<p>{para(x)}</p>" for x in str(part["text"]).strip().split("\n\n"))
+        note = f'<p class="cl-note">{para(part["note"])}</p>' if part.get("note") else ""
+        cards.append(f'<div class="cl-item cl-{key.replace("_", "-")}">{head}{body}{note}</div>')
+    srcs = "".join(f'<li id="cl-s{x["n"]}"><a href="{e(x["url"])}" rel="noopener">{e(x["title"])}</a> — {e(x["publisher"])}, {e(x["date"])}</li>' for x in c.get("sources", []))
+    t = c["pub"]
+    return f'''<section class="closing" aria-labelledby="cl-h">
+  <div class="closing-head"><div class="kicker">End of edition · added <time datetime="{t.isoformat()}">{t:%H:%M} {tzlabel(t)}</time></div>
+  <h2 id="cl-h" class="closing-title">{e(c.get("title", "Before you close the tab"))}</h2></div>
+  <div class="cl-grid">{"".join(cards)}</div>
+  <div class="cl-foot"><h3 class="rail-h">Sources for this section</h3><ol class="cl-src">{srcs}</ol>
+  <p class="faint">Commentary for information only. Not investment, legal, tax, medical or political advice. "Desk arithmetic" is our own calculation from the cited figures.</p></div>
+</section>'''
+
 def edition_block(page, ed, rendered, h1=True):
     lead, rest = ed["arts"][0], ed["arts"][1:]
     tag = "h1" if h1 else "h2"
@@ -554,7 +586,8 @@ def edition_block(page, ed, rendered, h1=True):
     {support_ask(page, True)}
     <div class="rail"><h2 class="rail-h">The rhythm</h2><ul class="rhythm"><li><b>08:30</b> Morning: order the day before the day orders you.</li><li><b>17:30</b> Evening: admit what the day actually did.</li><li><b>Sun 10:00</b> The week, without the alerts.</li></ul><p class="faint">Berlin time (CET in winter, CEST in summer). Saturday is closed.</p></div>
   </aside>
-</div>'''
+</div>
+{closing_html(ed)}'''
 
 def ledger_module(page, se):
     if not se: return ""
