@@ -1,7 +1,7 @@
 # Inside Desk chart data: ea-hicp-vs-dfr
 # Source: Eurostat prc_hicp_minr (CC BY 4.0) · ECB Data Portal FM.D.U2.EUR.4F.KR.DFR.LEV
 # Licence: Eurostat. Reuse authorised under CC BY 4.0 (Commission Decision 2011/833/EU). European Central Bank Data Portal. Reuse permitted with source acknowledgement.
-# Retrieved: 2026-10-16T14:20+02:00
+# Retrieved: 2026-10-16T14:39+02:00
 date,headline,core,dfr
 2023-01-01,8.6,5.3,2.0
 2023-02-01,8.5,5.6,2.5
