@@ -44,6 +44,20 @@ energy-weather links). Shape: **one lead + ten desk notes** (a note may use the 
 Publication time: `published` in `edition.yaml` (ISO with offset). CET/CEST labels are derived from the
 Europe/Berlin tz database, so they are always correct for the date.
 
+## Archive and permanence (house rule)
+* Every morning, evening and Sunday edition keeps its permanent page `insidedesk/YYYY/MM/DD/{morning|evening|sunday}.html`
+  after a newer edition takes the front page. Never delete or rename an edition folder; corrections go into the same
+  folder (added notes carry their own real `published:` time).
+* An edition page is the complete edition on its own: lead, every desk note, the closing section, and a
+  "Charts and data" list linking each chart's SVG, PNG and CSV. It links to the previous and next edition.
+* `archive.html` is a timeline grouped by month (with a month jump bar). Under each edition it lists every piece, the
+  closing section (`#cl-h`) and the charts and data (`#data-h`). If it grows too long, split it by year
+  (`archive/2027.html`) and keep month grouping; do not drop entries.
+* The front page links the current edition's permanent page and the previous edition.
+* `validate.py` fails the build if an edition folder, edition page, article, closing section or chart CSV is
+  missing from the archive, the feed, the sitemap or its edition page, if a feed or sitemap URL has no page, if an
+  edition page has no source folder, or if any internal link or anchor is broken. Never commit past a failure.
+
 ## Charts (house style "Desk Plate")
 * One YAML per chart in `insidedesk/content/charts/`. Kinds: `line` (time series, optional `step`, `panel`,
   `derive: brent - wti`, `annotations`) and `hbar` (a few figures; `derived: true` bars are hatched = desk arithmetic).

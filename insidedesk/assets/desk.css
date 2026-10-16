@@ -237,3 +237,11 @@ html[data-theme="paper"] .lead-plate svg,html[data-theme="paper"] .plate-svg svg
 .cl-foot{margin-top:16px}
 .cl-src{font-size:14px;color:var(--muted);padding-left:20px}
 @media (max-width:760px){.cl-grid{grid-template-columns:1fr}}
+/* archive + edition completeness */
+.tl-jump{font:600 12px var(--mono);letter-spacing:.06em;margin:10px 0 4px}
+.tl-closing a{color:var(--teal)}
+.ed-data{margin:28px 0}
+.ed-data-list{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.ed-data-list li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px}
+.ed-data-list b{font:600 16px var(--serif)}
+.ed-nav{font:600 13px var(--mono);margin:24px 0;padding-top:14px;border-top:1px solid var(--line2)}

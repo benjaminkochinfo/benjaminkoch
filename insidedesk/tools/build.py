@@ -604,21 +604,47 @@ def home_page(eds, rendered, se=None):
          "email": PUBLISHER["email"], "publishingPrinciples": BASE + "insidedesk/method.html"},
         {"@type": "WebSite", "name": "Inside Desk", "url": BASE + HOME, "inLanguage": "en-GB", "publisher": {"@id": BASE + HOME + "#org"}},
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": a.url, "name": a.title} for i, a in enumerate(ed["arts"])]}]}
+    prev_link = f' · <a href="{eds[1]["path"]}">Previous edition: {e(eds[1]["slot_name"])}, {e(short_day(eds[1]["d"]))}</a>' if len(eds) > 1 else ""
     theses = "".join(f'<div class="thesis"><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t, d in INSIGHTS[:4])
     return (head(page, "Inside Desk — The twice-daily brief", DESCRIPTION, BASE + HOME, ed["arts"][0].og, "website", ld)
             + masthead(page, "home") + f'''<main id="main" class="wrap">
 {edition_block(page, ed, rendered)}
 {ledger_module(page, se)}
 <section class="theses" aria-labelledby="th-h"><h2 id="th-h" class="section-h">What this desk actually believes</h2><div class="thesis-grid">{theses}</div><p><a href="insidedesk/method.html">All standing theses and the method →</a></p></section>
-<section class="archive-teaser"><h2 class="section-h">Archive</h2><p class="archive-links"><a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
+<section class="archive-teaser"><h2 class="section-h">Archive</h2><p class="archive-links"><a href="{ed['path']}">This edition's permanent page</a>{prev_link} · <a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
 </main>
 ''' + footer(page))
 
-def edition_page(ed, rendered):
+def edition_charts(ed):
+    seen = []
+    for a in ed["arts"]:
+        for c in a.charts:
+            if c not in seen: seen.append(c)
+    return seen
+
+def edition_data_html(page, ed, rendered):
+    cs = edition_charts(ed)
+    if not cs: return ""
+    rows = "".join(f'''<li><b>{e(rendered[c][0]["title"])}</b> <small>in <a href="{rel(page, a.path)}">{e(a.title)}</a></small><br>
+      <a href="{rel(page, f"insidedesk/charts/{c}.svg")}">SVG</a> · <a href="{rel(page, f"insidedesk/charts/{c}.png")}">PNG</a> · <a href="{rel(page, f"insidedesk/data/{c}.csv")}">CSV</a></li>'''
+                   for c in cs for a in [next(x for x in ed["arts"] if c in x.charts)])
+    return f'<section class="ed-data" aria-labelledby="data-h"><h2 id="data-h" class="section-h">Charts and data in this edition</h2><ul class="ed-data-list">{rows}</ul></section>'
+
+def edition_nav(page, ed, eds):
+    i = eds.index(ed)  # eds is newest first
+    older = eds[i + 1] if i + 1 < len(eds) else None
+    newer = eds[i - 1] if i > 0 else None
+    parts = []
+    if older: parts.append(f'<a href="{rel(page, older["path"])}">← Previous: {e(older["slot_name"])}, {e(short_day(older["d"]))}</a>')
+    parts.append(f'<a href="{rel(page, "insidedesk/archive.html")}">All editions</a>')
+    if newer: parts.append(f'<a href="{rel(page, newer["path"])}">Next: {e(newer["slot_name"])}, {e(short_day(newer["d"]))} →</a>')
+    return f'<nav class="ed-nav" aria-label="Editions">{" · ".join(parts)}</nav>'
+
+def edition_page(ed, rendered, eds=None):
     page = ed["path"]
     t = f"{ed['slot_name']}, {pretty_day(ed['d'])} — Inside Desk"
     return (head(page, t, ed["standfirst"], BASE + page, ed["arts"][0].og) + masthead(page, "archive")
-            + f'<main id="main" class="wrap">{edition_block(page, ed, rendered)}</main>' + footer(page))
+            + f'<main id="main" class="wrap">{edition_block(page, ed, rendered)}{edition_data_html(page, ed, rendered)}{edition_nav(page, ed, eds or [ed])}</main>' + footer(page))
 
 def simple_page(page, title, desc, inner, current=""):
     return (head(page, title + " — Inside Desk", desc, BASE + page, "insidedesk/og/default.png") + masthead(page, current)
@@ -629,22 +655,29 @@ def archive_page(eds, se=None):
     entries = []
     for ed in eds:
         arts = "".join(f'<li><a href="{rel(page, a.path)}">{e(a.title)}</a> <small>{e(a.desk_name)}</small></li>' for a in ed["arts"])
-        entries.append((ed["d"], 1, f'''<li class="tl-item tl-ed"><a class="arch-head" href="{rel(page, ed['path'])}"><span class="k">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))}</span><b>{e(ed['title'])}</b></a><ul>{arts}</ul></li>'''))
+        if ed.get("closing"):
+            arts += f'<li class="tl-closing"><a href="{rel(page, ed["path"])}#cl-h">{e(ed["closing"].get("title", "Before you close the tab"))}</a> <small>End of edition</small></li>'
+        if edition_charts(ed):
+            arts += f'<li class="tl-closing"><a href="{rel(page, ed["path"])}#data-h">Charts and data</a> <small>SVG · PNG · CSV</small></li>'
+        entries.append((ed["d"], 1, ed["slot_time"], f'''<li class="tl-item tl-ed"><a class="arch-head" href="{rel(page, ed['path'])}"><span class="k">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))}</span><b>{e(ed['title'])}</b></a><ul>{arts}</ul></li>'''))
     if se:
         for a in se["arts"]:
-            entries.append((a.event_d, 0, f'''<li class="tl-item tl-ledger"><a class="arch-head" href="{rel(page, a.path)}"><span class="k">{e(a.event_label)} · {e(se['title'])}</span><b>{e(a.title)}</b><span>{e(a.dek)}</span></a></li>'''))
-    entries.sort(key=lambda x: (x[0], x[1]))
-    out, month = [], None
-    for d, _, html_ in entries:
+            entries.append((a.event_d, 0, "", f'''<li class="tl-item tl-ledger"><a class="arch-head" href="{rel(page, a.path)}"><span class="k">{e(a.event_label)} · {e(se['title'])}</span><b>{e(a.title)}</b><span>{e(a.dek)}</span></a></li>'''))
+    entries.sort(key=lambda x: (x[0], x[1], x[2]))
+    out, month, months = [], None, []
+    for d, _, _, html_ in entries:
         m = d.strftime("%B %Y")
         if m != month:
             if month: out.append("</ol></section>")
-            out.append(f'<section class="tl-month"><h2 class="tl-m">{e(m)}</h2><ol class="tl">'); month = m
+            mid = d.strftime("m-%Y-%m"); months.append((mid, d.strftime("%b %Y")))
+            out.append(f'<section class="tl-month" id="{mid}"><h2 class="tl-m">{e(m)}</h2><ol class="tl">'); month = m
         out.append(html_)
     if month: out.append("</ol></section>")
     series = f'<p class="deck">Editions, and <a href="{rel(page, se["path"])}">{e(se["title"])}</a>, in the order things happened.</p>' if se else ""
     inner = f'''<div class="kicker">Archive</div><h1 class="headline">2026, in order</h1>
 {series}
+<nav class="tl-jump" aria-label="Months">{" · ".join(f'<a href="#{i}">{e(l)}</a>' for i, l in months)}</nav>
+<p class="faint">{len(eds)} edition(s) · {sum(len(ed["arts"]) for ed in eds)} edition piece(s){f' · {len(se["arts"])} Ledger piece(s)' if se else ''}. Every edition stays at its own address.</p>
 <div class="timeline">{"".join(out)}</div>'''
     return simple_page(page, "Archive", "Every Inside Desk edition and The 2026 Ledger, as a timeline.", inner, "archive")
 
@@ -902,7 +935,7 @@ def main():
         if not args.no_png: chart_png(spec, svg)
         print("  chart", cid)
     for ed in eds:
-        write(ed["path"], edition_page(ed, rendered))
+        write(ed["path"], edition_page(ed, rendered, eds))
         for a in ed["arts"]:
             write(a.path, article_page(a, eds, rendered))
             if not args.no_png:
