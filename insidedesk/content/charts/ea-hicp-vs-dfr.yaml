@@ -1,0 +1,27 @@
+id: ea-hicp-vs-dfr
+kind: line
+kicker: "Money · Euro area"
+title: "The print and the committee"
+subtitle: "HICP, annual change, % (core excludes energy, food, alcohol, tobacco) · ECB deposit rate, %, month-end"
+unit: "%"
+start: "2023-01-01"
+y_min: 0
+series:
+  - key: headline
+    label: "HICP inflation"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: EA, unit: RCH_A, coicop18: TOTAL, freq: M}}
+  - key: core
+    label: "Core inflation"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: EA, unit: RCH_A, coicop18: TOT_X_NRG_FOOD, freq: M}}
+  - key: dfr
+    label: "ECB deposit rate"
+    step: true
+    dashed: false
+    transform: month_end
+    source: {type: ecb, flow: FM, key: D.U2.EUR.4F.KR.DFR.LEV}
+annotations:
+  - {date: "2026-02-27", text: "War begins", anchor: end}
+licence: eurostat
+licence_extra: ecb
+source_line: "Eurostat prc_hicp_minr (CC BY 4.0) · ECB Data Portal FM.D.U2.EUR.4F.KR.DFR.LEV"
+alt: "Line chart since January 2023 of euro-area HICP inflation, core inflation and the ECB deposit rate. Inflation falls from 8.6% to around 2% by 2025, then rises after the energy shock to 3.8% in September 2026; core is 2.5%. The deposit rate rises to 4% in 2023, steps down from 2024 to 2% in mid-2025 and back up to 2.5% by September 2026."

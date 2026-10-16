@@ -1,0 +1,14 @@
+id: hormuz-gap
+kind: hbar
+kicker: "Podium vs Print"
+title: "A bridge, not a pipeline"
+subtitle: "Million barrels per day · hatched bars are Inside Desk arithmetic"
+unit: " mb/d"
+rows:
+  - {label: "Hormuz flows, pre-war baseline (Kpler)", value: 17.0, note: "BBC Verify, 16 Oct"}
+  - {label: "Hormuz flows on 13 October (Kpler)", value: 12.6, note: "BBC Verify, 16 Oct"}
+  - {label: "Shortfall versus pre-war", value: 4.4, derived: true, note: "17.0 − 12.6"}
+  - {label: "Remaining IEA release (~100m bbl) spread over four months", value: 0.82, derived: true, note: "100m ÷ 122 days"}
+licence: reported
+source_line: "Kpler data as cited by BBC Verify (16 Oct 2026); IEA Governing Board (15 Oct); G7 deadline per S&P Global"
+alt: "Bar chart in million barrels per day: pre-war Hormuz flows about 17.0, flows on 13 October 12.6, a shortfall of 4.4, and the remaining IEA emergency release of about 100 million barrels equal to roughly 0.8 per day if spread over four months — under a fifth of the gap."

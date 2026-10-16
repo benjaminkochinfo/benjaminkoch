@@ -1,0 +1,12 @@
+Inside Desk self-hosts subsets of three typefaces. All three are licensed under the SIL Open Font License,
+Version 1.1 (https://openfontlicense.org). The files here are subsets and static instances, which counts as a
+Modified Version under the OFL. None of them uses a Reserved Font Name.
+
+newsreader-text.woff2, newsreader-disp.woff2, newsreader-it.woff2
+  Newsreader. Copyright 2020 The Newsreader Project Authors (https://github.com/productiontype/Newsreader)
+familjen.woff2
+  Familjen Grotesk. Copyright 2021 The Familjen Grotesk Project Authors (https://github.com/Familjen-Grotesk/Familjen-Grotesk)
+jetbrains-mono.woff2
+  JetBrains Mono. Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+
+The full licence text is in OFL-1.1.txt in this folder.
