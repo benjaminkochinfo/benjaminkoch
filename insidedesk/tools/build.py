@@ -593,7 +593,8 @@ def ledger_module(page, se):
     if not se: return ""
     items = "".join(f'<li><a href="{rel(page, a.path)}"><span class="k">{e(a.event_label)}</span><b>{e(a.title)}</b></a></li>' for a in se["arts"])
     return f'''<section class="ledger-mod" aria-labelledby="lg-h"><h2 id="lg-h" class="section-h">{e(se["title"])}</h2>
-<p class="ledger-dek">{e(se["dek"])}</p><ol class="ledger-strip">{items}</ol>
+<details class="ar-ed ledger-d"><summary><span class="ar-title">{e(se["dek"])}</span><span class="ar-n">{len(se["arts"])} pieces</span></summary>
+<div class="ar-body"><ol class="ledger-strip">{items}</ol></div></details>
 <p><a href="{rel(page, se["path"])}">The whole series →</a></p></section>'''
 
 def home_page(eds, rendered, se=None):
@@ -611,7 +612,9 @@ def home_page(eds, rendered, se=None):
 {edition_block(page, ed, rendered)}
 {ledger_module(page, se)}
 <section class="theses" aria-labelledby="th-h"><h2 id="th-h" class="section-h">What this desk actually believes</h2><div class="thesis-grid">{theses}</div><p><a href="insidedesk/method.html">All standing theses and the method →</a></p></section>
-<section class="archive-teaser"><h2 class="section-h">Archive</h2><p class="archive-links"><a href="{ed['path']}">This edition's permanent page</a>{prev_link} · <a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
+<section class="archive-teaser" aria-labelledby="ar-h"><h2 id="ar-h" class="section-h">Latest in the archive</h2>
+<div class="ar-recent">{"".join(edition_row(page, x, False, True) for x in eds[:4])}</div>
+<p class="archive-links"><a href="{ed['path']}">This edition's permanent page</a>{prev_link} · <a href="insidedesk/archive.html">Every edition →</a> · <a href="insidedesk/feed.xml">RSS</a></p></section>
 </main>
 ''' + footer(page))
 
@@ -650,36 +653,53 @@ def simple_page(page, title, desc, inner, current=""):
     return (head(page, title + " — Inside Desk", desc, BASE + page, "insidedesk/og/default.png") + masthead(page, current)
             + f'<main id="main" class="wrap narrow">{inner}</main>' + footer(page))
 
+def edition_pieces(page, ed):
+    """Every piece of an edition, plus its closing section and charts/data, as <li> rows."""
+    rows = "".join(f'<li><a href="{rel(page, a.path)}">{e(a.title)}</a> <small>{e(a.desk_name)}{" · lead" if i == 0 else ""}</small></li>' for i, a in enumerate(ed["arts"]))
+    if ed.get("closing"):
+        rows += f'<li class="tl-closing"><a href="{rel(page, ed["path"])}#cl-h">{e(ed["closing"].get("title", "Before you close the tab"))}</a> <small>End of edition</small></li>'
+    if edition_charts(ed):
+        rows += f'<li class="tl-closing"><a href="{rel(page, ed["path"])}#data-h">Charts and data</a> <small>SVG · PNG · CSV</small></li>'
+    return rows
+
+def edition_row(page, ed, is_open=False, show_day=False):
+    n = len(ed["arts"])
+    day = f'<span class="ar-day">{e(short_day(ed["d"]))}</span>' if show_day else ""
+    return f'''<details class="ar-ed"{" open" if is_open else ""}><summary><span class="ar-slot">{e(ed["slot_name"])}</span>{day}<span class="ar-title">{e(ed["title"])}</span><span class="ar-n">{n} pieces</span></summary>
+<div class="ar-body"><p class="ar-open"><a href="{rel(page, ed["path"])}">Open the full edition: {e(ed["slot_name"])}, {e(pretty_day(ed["d"]))} →</a></p><ol class="ar-pieces">{edition_pieces(page, ed)}</ol></div></details>'''
+
 def archive_page(eds, se=None):
+    """Compact archive: months (jump bar) > days (<details>, newest open) > editions (<details> rows) > pieces.
+    Works without JS; every link is in the HTML even when collapsed, so validate.py still sees it."""
     page = "insidedesk/archive.html"
-    entries = []
+    days = {}
     for ed in eds:
-        arts = "".join(f'<li><a href="{rel(page, a.path)}">{e(a.title)}</a> <small>{e(a.desk_name)}</small></li>' for a in ed["arts"])
-        if ed.get("closing"):
-            arts += f'<li class="tl-closing"><a href="{rel(page, ed["path"])}#cl-h">{e(ed["closing"].get("title", "Before you close the tab"))}</a> <small>End of edition</small></li>'
-        if edition_charts(ed):
-            arts += f'<li class="tl-closing"><a href="{rel(page, ed["path"])}#data-h">Charts and data</a> <small>SVG · PNG · CSV</small></li>'
-        entries.append((ed["d"], 1, ed["slot_time"], f'''<li class="tl-item tl-ed"><a class="arch-head" href="{rel(page, ed['path'])}"><span class="k">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))}</span><b>{e(ed['title'])}</b></a><ul>{arts}</ul></li>'''))
+        days.setdefault(ed["d"], {"eds": [], "ledger": []})["eds"].append(ed)
     if se:
         for a in se["arts"]:
-            entries.append((a.event_d, 0, "", f'''<li class="tl-item tl-ledger"><a class="arch-head" href="{rel(page, a.path)}"><span class="k">{e(a.event_label)} · {e(se['title'])}</span><b>{e(a.title)}</b><span>{e(a.dek)}</span></a></li>'''))
-    entries.sort(key=lambda x: (x[0], x[1], x[2]))
+            days.setdefault(a.event_d, {"eds": [], "ledger": []})["ledger"].append(a)
+    newest_day = max(days)
+    newest_ed = eds[0] if eds else None
     out, month, months = [], None, []
-    for d, _, _, html_ in entries:
+    for d in sorted(days, reverse=True):
         m = d.strftime("%B %Y")
         if m != month:
-            if month: out.append("</ol></section>")
+            if month: out.append("</div></section>")
             mid = d.strftime("m-%Y-%m"); months.append((mid, d.strftime("%b %Y")))
-            out.append(f'<section class="tl-month" id="{mid}"><h2 class="tl-m">{e(m)}</h2><ol class="tl">'); month = m
-        out.append(html_)
-    if month: out.append("</ol></section>")
-    series = f'<p class="deck">Editions, and <a href="{rel(page, se["path"])}">{e(se["title"])}</a>, in the order things happened.</p>' if se else ""
-    inner = f'''<div class="kicker">Archive</div><h1 class="headline">2026, in order</h1>
-{series}
+            out.append(f'<section class="ar-month" id="{mid}" aria-labelledby="{mid}-h"><h2 class="tl-m" id="{mid}-h">{e(m)}</h2><div class="ar-days">'); month = m
+        g = days[d]
+        rows = "".join(edition_row(page, ed, ed is newest_ed) for ed in sorted(g["eds"], key=lambda x: x["slot_time"]))
+        rows += "".join(f'''<div class="ar-ledger"><span class="ar-slot">{e(se["title"])}</span><a href="{rel(page, a.path)}" class="ar-title">{e(a.title)}</a><span class="ar-n">{e(a.event_label)}</span></div>''' for a in g["ledger"])
+        parts = ([f"{len(g['eds'])} edition{'s' if len(g['eds']) != 1 else ''}"] if g["eds"] else []) + ([f"{len(g['ledger'])} Ledger"] if g["ledger"] else [])
+        out.append(f'''<details class="ar-day-d"{" open" if d == newest_day else ""}><summary><time datetime="{d.isoformat()}">{e(pretty_day(d))}</time><span class="ar-n">{" · ".join(parts)}</span></summary><div class="ar-rows">{rows}</div></details>''')
+    if month: out.append("</div></section>")
+    series = f' The Ledger pieces from <a href="{rel(page, se["path"])}">{e(se["title"])}</a> sit under the day they are about.' if se else ""
+    inner = f'''<div class="kicker">Archive</div><h1 class="headline">2026, day by day</h1>
+<p class="deck">Newest first. Open a day to see its editions, open an edition to see every piece.{series}</p>
 <nav class="tl-jump" aria-label="Months">{" · ".join(f'<a href="#{i}">{e(l)}</a>' for i, l in months)}</nav>
 <p class="faint">{len(eds)} edition(s) · {sum(len(ed["arts"]) for ed in eds)} edition piece(s){f' · {len(se["arts"])} Ledger piece(s)' if se else ''}. Every edition stays at its own address.</p>
-<div class="timeline">{"".join(out)}</div>'''
-    return simple_page(page, "Archive", "Every Inside Desk edition and The 2026 Ledger, as a timeline.", inner, "archive")
+<div class="archive-c">{"".join(out)}</div>'''
+    return simple_page(page, "Archive", "Every Inside Desk edition and The 2026 Ledger, day by day.", inner, "archive")
 
 def ledger_page(se, rendered):
     page = se["path"]
