@@ -1,7 +1,7 @@
 # Inside Desk chart data: ledger-brent-2026
 "# Source: U.S. EIA spot price (Europe Brent FOB) via FRED, St. Louis Fed · public domain"
 "# Licence: EIA spot prices via FRED, Federal Reserve Bank of St. Louis. U.S. government data, public domain."
-# Retrieved: 2026-10-16T15:10+02:00
+# Retrieved: 2026-10-18T09:13+02:00
 date,brent
 2025-12-01,64.22
 2025-12-02,63.37

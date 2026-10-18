@@ -1,7 +1,7 @@
 # Inside Desk chart data: policy-rates-fed-ecb
 # Source: Federal Reserve Board via FRED (DFEDTARU) · ECB Data Portal FM.D.U2.EUR.4F.KR.DFR.LEV
 # Licence: Board of Governors of the Federal Reserve System (H.15) via FRED. Public domain. European Central Bank Data Portal. Reuse permitted with source acknowledgement.
-# Retrieved: 2026-10-16T15:10+02:00
+# Retrieved: 2026-10-18T09:13+02:00
 date,fed,dfr
 2024-01-01,5.5,4.0
 2024-01-02,5.5,4.0
@@ -1023,3 +1023,5 @@ date,fed,dfr
 2026-10-14,4.0,2.5
 2026-10-15,4.0,2.5
 2026-10-16,4.0,2.5
+2026-10-17,4.0,2.5
+2026-10-18,,2.5

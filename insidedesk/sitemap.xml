@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Inside Desk only. The front page https://benjaminkoch.info/InsideDesk.html lives outside /insidedesk/; submit it in Search Console. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://benjaminkoch.info/insidedesk/archive.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/method.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/support.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/archive.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/method.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/support.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/ledger/2026.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/01/03/a-president-removed-a-barrel-unimpressed.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/02/20/the-court-sends-the-invoice-back.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -15,6 +15,18 @@
   <url><loc>https://benjaminkoch.info/insidedesk/2026/08/27/six-months-five-ships-a-day.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/09/16/the-bypass-breaks-both-banks-hike.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/13/resilience-is-an-inventory.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/sunday.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/the-week-in-the-order-it-reached-the-kitchen.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/worst-week-since-june-from-a-record-nine-days-old.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/podium-vs-print-the-seven-day-plan.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/resilience-does-not-fall-from-the-sky.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/the-present-feels-worse-than-the-future.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/three-quarters-full-is-a-national-number.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/the-committees-are-moving-together-on-purpose.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/a-backlog-is-a-promise-cash-flow-is-the-invoice.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/ebola-readiness-is-a-checklist.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/energy-ceasefires-are-measured-in-units.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/18/dana-adam-is-a-water-budget.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/evening.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/the-barrel-and-the-screen.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/podium-vs-print-iea-release.html</loc><lastmod>2026-10-16</lastmod></url>

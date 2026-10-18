@@ -1,0 +1,36 @@
+date: "2026-10-18"
+slot: sun
+published: "2026-10-18T10:00:00+02:00"
+title: "Read the week in the order it was paid."
+standfirst: "Brent closed the week at $109.86 and diesel at the German pump at €2.247. The committees waited, on purpose, and Tehran's seven-day plan arrived after the screens went dark. Eleven desks, one sequence, every number sourced."
+articles:
+  - the-week-in-the-order-it-reached-the-kitchen
+  - worst-week-since-june-from-a-record-nine-days-old
+  - podium-vs-print-the-seven-day-plan
+  - resilience-does-not-fall-from-the-sky
+  - the-present-feels-worse-than-the-future
+  - three-quarters-full-is-a-national-number
+  - the-committees-are-moving-together-on-purpose
+  - a-backlog-is-a-promise-cash-flow-is-the-invoice
+  - ebola-readiness-is-a-checklist
+  - energy-ceasefires-are-measured-in-units
+  - dana-adam-is-a-water-budget
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-18T10:00:00+02:00"
+  habit:
+    text: "Pick one number from this edition that touches your own month, a litre of diesel, a gas store, a rate, and write it on the first page of your calendar for November. On the first of the month, look it up again. Two numbers a month apart teach you more than thirty headlines in between."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Brazil's space research agency Inpe reported that 3,335 square kilometres of Amazon rainforest were cleared between August 2025 and July 2026, the lowest since its records began in 1988 and nearly 42% less than the 5,731 square kilometres of the year before [1]. A climate group credited greater monitoring and stiffer penalties for illegal logging [1]. Satellites, inspectors and fines: dull machinery, very large result."
+  sentence: "Oil got dearer again by Friday, the central banks chose to wait for wages, and Brazil cut the clearing of its rainforest to the lowest level in nearly forty years."
+  euros:
+    text: "ADAC's weekly average put diesel at €2.247 a litre and Super E10 at €2.151 [2]. A 50-litre diesel tank therefore cost about €112.35, and a 50-litre E10 tank about €107.55. The fuel-tax cut in force since 1 October is worth just under 17 cents a litre including VAT, ADAC says [2], so, taking ADAC's 16.7-cent gross figure, it is worth roughly €8.35 on that 50-litre tank, until the end of December."
+    note: "Desk arithmetic on ADAC's national averages. Your local station's board is the binding number."
+  small_words:
+    term: "Credit default swap"
+    text: "An insurance contract against a borrower failing to pay its debts. The buyer pays a yearly fee, quoted in basis points (hundredths of a percent) of the amount insured. When the fee jumps, lenders are telling you they trust the borrower less: this week CoreWeave's five-year fee went briefly above 1,140 basis points, a level generally read as distress [3]."
+  sources:
+    - {n: 1, title: "Brazil: Amazon deforestation lowest in nearly 40 years", publisher: "DW, with AFP and Reuters", url: "https://www.dw.com/en/brazil-amazon-deforestation-lowest-in-nearly-40-years/a-79684906", date: "17 Oct 2026"}
+    - {n: 2, title: "Tanken in Deutschland: Benzinpreis und Dieselpreis steigen leicht an", publisher: "ADAC", url: "https://www.adac.de/news/aktueller-spritpreis/", date: "14 Oct 2026"}
+    - {n: 3, title: "CoreWeave credit default swaps hit distress levels as investors sour on AI debt", publisher: "CNBC", url: "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html", date: "15 Oct 2026"}

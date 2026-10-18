@@ -1,7 +1,7 @@
 # Inside Desk chart data: ea-fuel-bills
 "# Source: Eurostat prc_hicp_minr, ECOICOP v2 (FUEL, ELC_GAS, TOT_X_NRG_FOOD) · CC BY 4.0"
 # Licence: Eurostat. Reuse authorised under CC BY 4.0 (Commission Decision 2011/833/EU).
-# Retrieved: 2026-10-16T14:39+02:00
+# Retrieved: 2026-10-18T09:13+02:00
 date,de_fuel,ea_fuel,ea_elcgas,ea_core
 2025-01-01,-0.4,-0.1,3.5,2.7
 2025-02-01,-1.1,-2.4,2.4,2.6

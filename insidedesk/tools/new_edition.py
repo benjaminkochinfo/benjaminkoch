@@ -25,13 +25,13 @@ title: "EDITION HEADLINE"
 standfirst: "One or two sentences: what the day did."
 closing:    # end-of-edition section, plain and warm; no mailbag
   title: "Before you close the tab"
-  habit: {text: "One small, calm, practical habit for the week.", note: "A habit, not advice."}
-  went_right: {text: "One sourced piece of genuinely good news from data [1]."}
+  habit: {{text: "One small, calm, practical habit for the week.", note: "A habit, not advice."}}
+  went_right: {{text: "One sourced piece of genuinely good news from data [1]."}}
   sentence: "The day in one line a non-expert could repeat at dinner."
-  euros: {text: "Only when the news touches prices: what it means for a household's month, from sourced figures [1].", note: "Desk arithmetic on the cited figures."}
-  small_words: {term: "A term used in this edition", text: "Two or three plain sentences."}
+  euros: {{text: "Only when the news touches prices: what it means for a household's month, from sourced figures [1].", note: "Desk arithmetic on the cited figures."}}
+  small_words: {{term: "A term used in this edition", text: "Two or three plain sentences."}}
   sources:
-    - {n: 1, title: "", publisher: "", url: "", date: ""}
+    - {{n: 1, title: "", publisher: "", url: "", date: ""}}
 articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
 ''' + "".join(f"  - {s}\n" for s in slugs))
 for i, (desk, slug) in enumerate(zip(order, slugs)):
