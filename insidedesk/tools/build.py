@@ -916,6 +916,7 @@ def favicons(no_png):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true"); ap.add_argument("--no-png", action="store_true")
+    ap.add_argument("--fetch-all", action="store_true", help="refresh every chart, including ones only used by older pieces")
     ap.add_argument("--fetch", default="", help="comma list: fetch only these chart ids (others read local CSV)")
     args = ap.parse_args()
     specs = chart_specs()
@@ -925,10 +926,15 @@ def main():
     se = load_ledger()
     used = {c for ed in eds for a in ed["arts"] for c in a.charts} | ({c for a in se["arts"] for c in a.charts} if se else set())
     print(f"Inside Desk build · {len(eds)} edition(s) · {sum(len(x['arts']) for x in eds)} article(s) · {len(used)} chart(s)")
+    # Online fetch scope: charts used by the newest edition, plus charts with no CSV yet. Charts that only serve
+    # older pieces stay as published. --fetch a,b narrows it; --fetch-all refreshes everything.
+    newest = {c for a in eds[0]["arts"] for c in a.charts}
+    no_csv = {c for c in used if not os.path.exists(os.path.join(DESK, "data", c + ".csv"))}
+    fetch_ids = set(used) if args.fetch_all else (set(args.fetch.split(",")) if args.fetch else newest | no_csv)
     rendered = {}
     for cid in sorted(used):
         spec = specs[cid]
-        if not args.offline and spec["kind"] != "hbar" and (not args.fetch or cid in args.fetch.split(",")):
+        if not args.offline and spec["kind"] != "hbar" and cid in fetch_ids:
             print("  fetch", cid); fetch_chart_data(spec)
         svg, table = render_chart(spec)
         rendered[cid] = (spec, svg, table)

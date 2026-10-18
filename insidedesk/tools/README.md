@@ -44,6 +44,11 @@ energy-weather links). Shape: **one lead + ten desk notes** (a note may use the 
 Publication time: `published` in `edition.yaml` (ISO with offset). CET/CEST labels are derived from the
 Europe/Berlin tz database, so they are always correct for the date.
 
+## Chart data refresh
+An online `publish.sh` fetches only the charts used by the newest edition (plus any chart without a CSV). A chart
+shared with older pieces will update there too, so after any fetch check that each refreshed chart's `alt` text still
+describes the latest value. `--fetch id1,id2` narrows the fetch; `--fetch-all` refreshes everything.
+
 ## Archive and permanence (house rule)
 * Every morning, evening and Sunday edition keeps its permanent page `insidedesk/YYYY/MM/DD/{morning|evening|sunday}.html`
   after a newer edition takes the front page. Never delete or rename an edition folder; corrections go into the same
