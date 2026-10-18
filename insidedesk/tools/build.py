@@ -15,7 +15,7 @@ from email.utils import format_datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import yaml, markdown  # pip install pyyaml markdown
-import sources, charts
+import sources, charts, epaper
 
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))      # repo root
 DESK = os.path.join(ROOT, "insidedesk")
@@ -303,6 +303,15 @@ def head(page, title, desc, canonical, og_image, og_type="website", jsonld=None,
 <div class="progress" aria-hidden="true"><span></span></div>
 '''
 
+EP = {}   # edition key -> ePaper issue model (filled in main before any page is written)
+EP_SCHEDULE = ("Morning ePaper 06:30 (website 08:30) · Evening ePaper 17:30, updated until 22:30 · Sunday Magazine 10:00, Berlin time")
+
+def ep_links(page, ed, cls="ep-link"):
+    iss = EP.get(ed["key"])
+    if not iss: return ""
+    return (f'<a class="{cls}" href="{rel(page, iss["dir"] + "/index.html")}">Read this edition as ePaper →</a>'
+            f' <a class="ep-pdf" href="{rel(page, iss["dir"] + "/" + iss["pdf"])}" download>PDF</a>')
+
 def masthead(page, current=""):
     def nav(label, path, key):
         cur = ' aria-current="page"' if key == current else ""
@@ -322,7 +331,7 @@ def masthead(page, current=""):
     </div>
   </div>
   <nav class="wrap nav" aria-label="Sections">
-    {nav("Today", HOME, "home")}{nav("Archive", "insidedesk/archive.html", "archive")}{nav("Method", "insidedesk/method.html", "method")}{nav("Shelf", "insidedesk/shelf.html", "shelf")}{nav("Support", "insidedesk/support.html", "support")}<a href="{rel(page, 'insidedesk/feed.xml')}">RSS</a>
+    {nav("Today", HOME, "home")}{nav("Archive", "insidedesk/archive.html", "archive")}{nav("ePaper", "insidedesk/epaper/index.html", "epaper")}{nav("Method", "insidedesk/method.html", "method")}{nav("Shelf", "insidedesk/shelf.html", "shelf")}{nav("Support", "insidedesk/support.html", "support")}<a href="{rel(page, 'insidedesk/feed.xml')}">RSS</a>
   </nav>
 </header>
 '''
@@ -574,6 +583,7 @@ def edition_block(page, ed, rendered, h1=True):
   <{tag} id="ed-h" class="edition-title">{e(ed['title'])}</{tag}>
   <p class="lede-sub">{e(ed['standfirst'])}</p>
   <p class="meta-line"><span data-next data-latest-slot="{LATEST_SLOT}">Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time</span></p>
+  {f'<p class="ep-line">{ep_links(page, ed)}</p>' if ed["key"] in EP else ""}
 </section>
 <div class="layout">
   <div class="stack">
@@ -610,6 +620,7 @@ def home_page(eds, rendered, se=None):
     return (head(page, "Inside Desk — The twice-daily brief", DESCRIPTION, BASE + HOME, ed["arts"][0].og, "website", ld)
             + masthead(page, "home") + f'''<main id="main" class="wrap">
 {edition_block(page, ed, rendered)}
+{epaper_module(page)}
 {ledger_module(page, se)}
 <section class="theses" aria-labelledby="th-h"><h2 id="th-h" class="section-h">What this desk actually believes</h2><div class="thesis-grid">{theses}</div><p><a href="insidedesk/method.html">All standing theses and the method →</a></p></section>
 <section class="archive-teaser" aria-labelledby="ar-h"><h2 id="ar-h" class="section-h">Latest in the archive</h2>
@@ -643,6 +654,53 @@ def edition_nav(page, ed, eds):
     if newer: parts.append(f'<a href="{rel(page, newer["path"])}">Next: {e(newer["slot_name"])}, {e(short_day(newer["d"]))} →</a>')
     return f'<nav class="ed-nav" aria-label="Editions">{" · ".join(parts)}</nav>'
 
+def ep_latest():
+    return max(EP.values(), key=lambda i: i["avail"]) if EP else None
+
+def ep_cover(page, i, cls="ep-cover"):
+    return f'<a class="{cls}" href="{rel(page, i["dir"] + "/index.html")}"><img src="{rel(page, i["dir"] + "/thumbs/p01.png")}" alt="Cover of the {e(epaper.EP_SLOT[i["ed"]["slot"]][0])}, {e(pretty_day(i["ed"]["d"]))}" width="200" height="283" loading="lazy"></a>'
+
+def ep_status(i):
+    s = (f'Available {i["avail"]:%H:%M} {tzlabel(i["avail"])}' if i["ed"]["slot"] == "am" else f'Published {i["ed"]["pub"]:%H:%M} {tzlabel(i["ed"]["pub"])}')
+    if i["extras"]: s += f' · ePaper extras added {i["extras_added"]:%H:%M} {tzlabel(i["extras_added"])}'
+    if i["updated"]: s += f' · Updated {i["updated"]:%H:%M} {tzlabel(i["updated"])}'
+    return s
+
+def epaper_module(page):
+    i = ep_latest()
+    if not i: return ""
+    return f'''<section class="ep-mod" aria-labelledby="ep-h">{ep_cover(page, i)}<div class="ep-txt"><div class="kicker">ePaper · {e(epaper.EP_SLOT[i["ed"]["slot"]][0])} · {e(short_day(i["ed"]["d"]))}</div>
+<h2 id="ep-h" class="ep-title"><a href="{rel(page, i["dir"] + "/index.html")}">The edition as pages</a></h2>
+<p>{i["meta"]["pieces"]} pieces on {i["meta"]["pages"]} pages: every desk, interactive charts, a reading view, search and a PDF. {len(i["extras"])} pieces appear only in the ePaper.</p>
+<p class="faint">{e(ep_status(i))}</p>
+<p class="ep-actions"><a class="btn btn-amber" href="{rel(page, i["dir"] + "/index.html")}">Open the ePaper</a> <a class="btn" href="{rel(page, i["dir"] + "/" + i["pdf"])}" download>PDF</a> <a class="btn" href="{rel(page, "insidedesk/epaper/index.html")}">All issues</a></p></div></section>'''
+
+def epaper_index_page():
+    page = "insidedesk/epaper/index.html"
+    i = ep_latest()
+    rows, month = [], None
+    for x in sorted(EP.values(), key=lambda x: x["avail"], reverse=True):
+        m = x["ed"]["d"].strftime("%B %Y")
+        if m != month:
+            if month: rows.append("</ol>")
+            rows.append(f'<h3 class="tl-m">{e(m)}</h3><ol class="ep-arch">'); month = m
+        web = f' · <a href="{rel(page, x["ed"]["path"])}">Website edition</a>' if x["web_live"] else f' · website edition at {x["ed"]["pub"]:%H:%M}'
+        rows.append(f'''<li><span class="ar-day">{e(short_day(x["ed"]["d"]))}</span><span class="ar-slot">{e(epaper.EP_SLOT[x["ed"]["slot"]][0])}</span><a class="ar-title" href="{rel(page, x["dir"] + "/index.html")}">{e(x["ed"]["title"])}</a><span class="ar-n">{x["meta"]["pages"]} pages · {x["meta"]["pieces"]} pieces · <a href="{rel(page, x["dir"] + "/" + x["pdf"])}" download>PDF</a>{web}</span></li>''')
+    if month: rows.append("</ol>")
+    latest = f'''<section class="ep-mod ep-mod-big" aria-labelledby="ep-l">{ep_cover(page, i)}<div class="ep-txt"><div class="kicker">Latest issue · {e(epaper.EP_SLOT[i["ed"]["slot"]][0])} · {e(pretty_day(i["ed"]["d"]))}</div>
+<h2 id="ep-l" class="ep-title"><a href="{rel(page, i["dir"] + "/index.html")}">{e(i["ed"]["title"])}</a></h2><p>{e(i["ed"]["standfirst"])}</p>
+<p class="faint">{e(ep_status(i))} · {i["meta"]["pages"]} pages · {i["meta"]["pieces"]} pieces</p>
+<p class="ep-actions"><a class="btn btn-amber" href="{rel(page, i["dir"] + "/index.html")}">Open the ePaper</a> <a class="btn" href="{rel(page, i["dir"] + "/" + i["pdf"])}" download>Download the PDF</a>{f' <a class="btn" href="{rel(page, i["dir"] + "/index.html")}#page-3">Latest</a>' if i["ed"]["slot"] == "pm" else ""}</p></div></section>''' if i else ""
+    inner = f'''<div class="kicker">ePaper</div><h1 class="headline">Inside Desk, as pages</h1>
+<p class="deck">The same edition as the website, laid out as a newspaper: every desk on its own page, interactive charts, a reading view, search, and a PDF to keep. Some pieces appear only here, and each carries the time it was added.</p>
+{latest}
+<section class="ep-sched" aria-labelledby="ep-s"><h2 id="ep-s" class="section-h">When it appears</h2><ul class="rhythm">
+<li><b>06:30</b> Morning ePaper. The website's morning edition follows at 08:30, built from the same pieces.</li>
+<li><b>17:30</b> Evening ePaper. It can be updated until 22:30; an “Updated” time and a Latest page show what changed and when.</li>
+<li><b>Sun 10:00</b> The Sunday Magazine. Saturday is closed.</li></ul><p class="faint">Berlin time (CET in winter, CEST in summer). Free, like everything here. After you open an issue once, it stays readable offline on that device.</p></section>
+<section aria-labelledby="ep-a"><h2 id="ep-a" class="section-h">ePaper archive</h2>{"".join(rows)}<p class="faint">Every issue stays at its own address. The website <a href="{rel(page, "insidedesk/archive.html")}">archive</a> lists them under their day, too.</p></section>'''
+    return simple_page(page, "ePaper", "The Inside Desk ePaper: every edition as pages, with interactive charts, a reading view and a PDF. Free.", inner, "epaper")
+
 def edition_page(ed, rendered, eds=None):
     page = ed["path"]
     t = f"{ed['slot_name']}, {pretty_day(ed['d'])} — Inside Desk"
@@ -666,7 +724,7 @@ def edition_row(page, ed, is_open=False, show_day=False):
     n = len(ed["arts"])
     day = f'<span class="ar-day">{e(short_day(ed["d"]))}</span>' if show_day else ""
     return f'''<details class="ar-ed"{" open" if is_open else ""}><summary><span class="ar-slot">{e(ed["slot_name"])}</span>{day}<span class="ar-title">{e(ed["title"])}</span><span class="ar-n">{n} pieces</span></summary>
-<div class="ar-body"><p class="ar-open"><a href="{rel(page, ed["path"])}">Open the full edition: {e(ed["slot_name"])}, {e(pretty_day(ed["d"]))} →</a></p><ol class="ar-pieces">{edition_pieces(page, ed)}</ol></div></details>'''
+<div class="ar-body"><p class="ar-open"><a href="{rel(page, ed["path"])}">Open the full edition: {e(ed["slot_name"])}, {e(pretty_day(ed["d"]))} →</a>{" · " + ep_links(page, ed) if ed["key"] in EP else ""}</p><ol class="ar-pieces">{edition_pieces(page, ed)}</ol></div></details>'''
 
 def archive_page(eds, se=None):
     """Compact archive: months (jump bar) > days (<details>, newest open) > editions (<details> rows) > pieces.
@@ -675,6 +733,8 @@ def archive_page(eds, se=None):
     days = {}
     for ed in eds:
         days.setdefault(ed["d"], {"eds": [], "ledger": []})["eds"].append(ed)
+    for i in EP.values():
+        days.setdefault(i["ed"]["d"], {"eds": [], "ledger": []})
     if se:
         for a in se["arts"]:
             days.setdefault(a.event_d, {"eds": [], "ledger": []})["ledger"].append(a)
@@ -689,6 +749,8 @@ def archive_page(eds, se=None):
             out.append(f'<section class="ar-month" id="{mid}" aria-labelledby="{mid}-h"><h2 class="tl-m" id="{mid}-h">{e(m)}</h2><div class="ar-days">'); month = m
         g = days[d]
         rows = "".join(edition_row(page, ed, ed is newest_ed) for ed in sorted(g["eds"], key=lambda x: x["slot_time"]))
+        rows += "".join(f'''<div class="ar-ledger ar-ep"><span class="ar-slot">{e(epaper.EP_SLOT[i["ed"]["slot"]][0])}</span><a href="{rel(page, i["dir"] + "/index.html")}" class="ar-title">{e(i["ed"]["title"])}</a><span class="ar-n">ePaper only until {i["ed"]["pub"]:%H:%M} · <a href="{rel(page, i["dir"] + "/" + i["pdf"])}" download>PDF</a></span></div>'''
+                        for i in EP.values() if i["ed"]["d"] == d and not i["web_live"])
         rows += "".join(f'''<div class="ar-ledger"><span class="ar-slot">{e(se["title"])}</span><a href="{rel(page, a.path)}" class="ar-title">{e(a.title)}</a><span class="ar-n">{e(a.event_label)}</span></div>''' for a in g["ledger"])
         parts = ([f"{len(g['eds'])} edition{'s' if len(g['eds']) != 1 else ''}"] if g["eds"] else []) + ([f"{len(g['ledger'])} Ledger"] if g["ledger"] else [])
         out.append(f'''<details class="ar-day-d"{" open" if d == newest_day else ""}><summary><time datetime="{d.isoformat()}">{e(pretty_day(d))}</time><span class="ar-n">{" · ".join(parts)}</span></summary><div class="ar-rows">{rows}</div></details>''')
@@ -697,7 +759,7 @@ def archive_page(eds, se=None):
     inner = f'''<div class="kicker">Archive</div><h1 class="headline">2026, day by day</h1>
 <p class="deck">Newest first. Open a day to see its editions, open an edition to see every piece.{series}</p>
 <nav class="tl-jump" aria-label="Months">{" · ".join(f'<a href="#{i}">{e(l)}</a>' for i, l in months)}</nav>
-<p class="faint">{len(eds)} edition(s) · {sum(len(ed["arts"]) for ed in eds)} edition piece(s){f' · {len(se["arts"])} Ledger piece(s)' if se else ''}. Every edition stays at its own address.</p>
+<p class="faint">{len(eds)} edition(s) · {sum(len(ed["arts"]) for ed in eds)} edition piece(s){f' · {len(se["arts"])} Ledger piece(s)' if se else ''}{f' · {len(EP)} ePaper issue(s), all in the <a href="{rel(page, "insidedesk/epaper/index.html")}">ePaper archive</a>' if EP else ''}. Every edition stays at its own address.</p>
 <div class="archive-c">{"".join(out)}</div>'''
     return simple_page(page, "Archive", "Every Inside Desk edition and The 2026 Ledger, day by day.", inner, "archive")
 
@@ -862,7 +924,20 @@ def feed_xml(eds, rendered, se=None):
     <description>{e(a.dek)}</description>
     <content:encoded><![CDATA[{content.replace("]]>", "]]&gt;")}]]></content:encoded>
   </item>''')
-    now = format_datetime(max([eds[0]["pub"]] + [a.pub for a in eds[0]["arts"]] + ([se["pub"]] if se else [])))
+    for i in sorted(EP.values(), key=lambda i: i["avail"], reverse=True):
+        url = BASE + i["dir"] + "/"
+        xs = f' Includes {len(i["extras"])} ePaper-only pieces, added {i["extras_added"]:%H:%M} {tzlabel(i["extras_added"])}.' if i["extras"] else ""
+        items.append(f'''  <item>
+    <title>{e(f'ePaper · {epaper.EP_SLOT[i["ed"]["slot"]][0]}, {pretty_day(i["ed"]["d"])}')}</title>
+    <link>{url}</link>
+    <guid isPermaLink="true">{url}</guid>
+    <pubDate>{format_datetime(i["avail"])}</pubDate>
+    <category>ePaper</category>
+    <dc:creator>{e(AUTHOR)}</dc:creator>
+    <description>{e(i["ed"]["title"] + " " + i["ed"]["standfirst"] + xs)}</description>
+    <enclosure url="{url}{i["pdf"]}" length="{i.get("pdf_size", 0)}" type="application/pdf"/>
+  </item>''')
+    now = format_datetime(max([eds[0]["pub"]] + [a.pub for a in eds[0]["arts"]] + ([se["pub"]] if se else []) + [i["last"] for i in EP.values()]))
     return f'''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
@@ -887,6 +962,9 @@ def sitemap_xml(eds, se=None):
     for ed in eds:
         urls.append((ed["path"], ed["pub"]))
         urls += [(a.path, a.pub) for a in ed["arts"]]
+    if EP:
+        urls.append(("insidedesk/epaper/index.html", max(i["last"] for i in EP.values())))
+        urls += [(i["dir"] + "/", i["last"]) for i in EP.values()]
     body = "\n".join(f"  <url><loc>{BASE}{p}</loc><lastmod>{t.date().isoformat()}</lastmod></url>" for p, t in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<!-- Inside Desk only. The front page {BASE}{HOME} lives outside /insidedesk/; submit it in Search Console. -->\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n'
 
@@ -941,6 +1019,12 @@ def main():
     args = ap.parse_args()
     specs = chart_specs()
     eds = load_editions(specs)
+    now = dt.datetime.now(TZ)
+    # Morning concept: the ePaper can be available (06:30) before the website edition (08:30). An edition whose
+    # `published` time is still ahead is not built for the website yet; its ePaper is, once `epaper.available` has passed.
+    embargo = [x for x in eds if x["pub"] > now]
+    eds = [x for x in eds if x["pub"] <= now]
+    if embargo: print("  website edition not yet due:", ", ".join(x["key"] for x in embargo))
     global LATEST_SLOT
     LATEST_SLOT = max(f"{x['d'].isoformat()} {x['slot_time']}" for x in eds)  # Berlin wall time of the newest covered slot
     se = load_ledger()
@@ -960,6 +1044,21 @@ def main():
         rendered[cid] = (spec, svg, table)
         if not args.no_png: chart_png(spec, svg)
         print("  chart", cid)
+    cfg = dict(TZ=TZ, CONTENT=CONTENT, DESK=DESK, ROOT=ROOT, BASE=BASE, HOME=HOME, DESKS=DESKS, rel=rel, write=write, specs=specs)
+    for ed in sorted(eds + embargo, key=lambda x: x["pub"]):
+        iss = epaper.load_issue(ed, cfg)
+        if not iss or iss["avail"] > now: continue
+        iss["web_live"] = ed in eds
+        for c in epaper.DATA_SPREAD + [c for a in ed["arts"] for c in a.charts]:
+            if c not in rendered and c in specs and os.path.exists(os.path.join(DESK, "data", c + ".csv")):
+                svg, table = render_chart(specs[c]); rendered[c] = (specs[c], svg, table)
+                if not args.no_png: chart_png(specs[c], svg)
+        iss["args"] = (se if ed["slot"] == "sun" else None, iss["web_live"], now)
+        iss["html"], iss["json"], iss["meta"] = epaper.render_issue(iss, cfg, *iss["args"])
+        iss["last"] = max([iss["avail"]] + [x["pub"] for x in iss["extras"]] + [u["t"] for u in iss["updates"]])
+        pdf = os.path.join(ROOT, iss["dir"], iss["pdf"])
+        iss["pdf_size"] = os.path.getsize(pdf) if os.path.exists(pdf) else 0
+        EP[ed["key"]] = iss
     for ed in eds:
         write(ed["path"], edition_page(ed, rendered, eds))
         for a in ed["arts"]:
@@ -989,6 +1088,20 @@ def main():
     write("insidedesk/feed.xml", feed_xml(eds, rendered, se))
     write("insidedesk/sitemap.xml", sitemap_xml(eds, se))
     write("insidedesk/robots-snippet.txt", f"# Not a live robots.txt. If the owner approves a root robots.txt, add this line:\nSitemap: {BASE}insidedesk/sitemap.xml\n")
+    if EP:
+        epaper.copy_assets(cfg)
+        for iss in EP.values():
+            write(iss["dir"] + "/index.html", iss["html"]); write(iss["dir"] + "/edition.json", iss["json"])
+            if not args.no_png:   # fit pass: measured in headless Chrome, so no page is clipped
+                iss["html"], iss["json"], iss["meta"], over = epaper.fit_issue(iss, cfg, *iss["args"])
+                if over: print("  ! ePaper overflow (px by page):", over)
+            print("  epaper", iss["dir"], f'{iss["meta"]["pages"]} pages, {iss["meta"]["pieces"]} pieces')
+            if not args.no_png:
+                epaper.render_assets(iss, iss["html"], iss["json"], cfg, iss["meta"]["pages"])
+        write("insidedesk/epaper/index.html", epaper_index_page())
+        if not args.no_png:   # PDF size for the feed enclosure, now that it exists
+            for iss in EP.values(): iss["pdf_size"] = os.path.getsize(os.path.join(ROOT, iss["dir"], iss["pdf"]))
+            write("insidedesk/feed.xml", feed_xml(eds, rendered, se))
     favicons(args.no_png)
     if not args.no_png:
         chrome_shot(og_card("The twice-daily brief", "Inside Desk", "Markets, geo-economics, politics, psychology and ordinary life. Optimistic by habit. Data first. Commentary, not advice."),

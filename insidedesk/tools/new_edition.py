@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Scaffold an edition:  python3 insidedesk/tools/new_edition.py 2026-10-19 am [lead-desk]
 Creates insidedesk/content/editions/<date>-<slot>/ with edition.yaml, one lead and ten desk notes,
-so every edition covers all eleven desks. The lead desk rotates by date and slot unless you name one."""
+so every edition covers all eleven desks. The lead desk rotates by date and slot unless you name one.
+The website edition keeps that shape (lead + one note per desk + closing). The ePaper is built from the same
+pieces plus ePaper-only extras in epaper/: two per desk are scaffolded (a short item and a brief), so each desk has
+3 pieces; add a second story with update_epaper.py add-extra for 4. Extras are drafts until written; delete one
+(and its line under epaper.extras) rather than pad. update_epaper.py stamp gives them their real time."""
 import os, sys, datetime as dt
 from zoneinfo import ZoneInfo
 
@@ -11,6 +15,8 @@ assert slot in ("am", "pm", "sun")
 d = dt.date.fromisoformat(date)
 hhmm = {"am": (8, 30), "pm": (17, 30), "sun": (10, 0)}[slot]
 pub = dt.datetime(d.year, d.month, d.day, *hhmm, tzinfo=ZoneInfo("Europe/Berlin"))
+ep_hhmm = {"am": (6, 30), "pm": (17, 30), "sun": (10, 0)}[slot]   # morning ePaper comes out two hours before the website
+ep_avail = dt.datetime(d.year, d.month, d.day, *ep_hhmm, tzinfo=ZoneInfo("Europe/Berlin"))
 lead = sys.argv[3] if len(sys.argv) > 3 else DESKS[(d.toordinal() * 2 + (slot == "pm")) % len(DESKS)]
 assert lead in DESKS, f"lead desk must be one of {DESKS}"
 order = [lead] + [x for x in DESKS if x != lead]
@@ -53,4 +59,24 @@ comment: ""
 {size} Real news or data from the last day or two, checked at the source. Cite with [1].
 Place a chart on its own line: [[chart:chart-id]]
 ''')
-print("created", os.path.relpath(root), "· lead desk:", lead)
+extras = [f"{x}-{k}" for x in order for k in ("short", "brief")]
+open(os.path.join(root, "edition.yaml"), "a").write(f'''epaper:     # keep this block last; update_epaper.py edits it
+  available: "{ep_avail.isoformat()}"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+''' + "".join(f"    - {x}\n" for x in extras) + "  updates: []\n")
+os.makedirs(os.path.join(root, "epaper"))
+for x in extras:
+    desk, kind = x.rsplit("-", 1)
+    size = {"short": "150-250 words", "brief": "60-120 words"}[kind]
+    open(os.path.join(root, "epaper", x + ".md"), "w").write(f'''---
+title: "Headline"
+dek: "One-sentence dek in the desk voice."
+desk: {desk}
+kind: {kind}       # second | short | brief
+published: DRAFT    # update_epaper.py stamp sets the real time when it goes out
+sources:
+  - {{n: 1, title: "", publisher: "", url: "", date: ""}}
+---
+DRAFT: ePaper {kind}, {size}. A different story from the desk's website note: fresh news or data, checked at the source, cited with [1]. Delete this line.
+''')
+print("created", os.path.relpath(root), "· lead desk:", lead, f"· {len(extras)} ePaper extras (drafts)")

@@ -71,7 +71,8 @@ feed_txt = open(os.path.join(ROOT, "insidedesk/feed.xml"), encoding="utf-8").rea
 feed_links = set(re.findall(r"<link>([^<]+)</link>", feed_txt))
 smap = set(re.findall(r"<loc>([^<]+)</loc>", open(os.path.join(ROOT, "insidedesk/sitemap.xml"), encoding="utf-8").read()))
 for loc in smap | {l for l in feed_links if l.startswith(BASE + "insidedesk/")}:
-    if not os.path.exists(os.path.join(ROOT, loc[len(BASE):])): problems.append(f"feed/sitemap URL has no page: {loc}")
+    lp = loc[len(BASE):] + ("index.html" if loc.endswith("/") else "")
+    if not os.path.exists(os.path.join(ROOT, lp)): problems.append(f"feed/sitemap URL has no page: {loc}")
 ed_root = os.path.join(ROOT, "insidedesk", "content", "editions")
 known_ed_pages, n_eds = set(), 0
 editions = sorted(os.listdir(ed_root)) if os.path.isdir(ed_root) else []
@@ -83,6 +84,9 @@ for name in editions:
     d = _dt.date.fromisoformat(str(ed["date"]))
     ep = f"insidedesk/{d:%Y/%m/%d}/{SLOT_SLUG[ed['slot']]}.html"; known_ed_pages.add(ep)
     if latest is None or str(ed["published"]) > str(latest[1]): latest = (ep, ed["published"])
+    _now = _dt.datetime.now(_dt.timezone.utc)
+    if _dt.datetime.fromisoformat(str(ed["published"])) > _now:   # morning concept: website edition not due yet
+        known_ed_pages.add(ep); continue
     if not os.path.exists(os.path.join(ROOT, ep)): problems.append(f"{name}: edition page {ep} missing"); continue
     if ep not in arch: problems.append(f"{name}: edition page not linked from archive.html")
     if BASE + ep not in smap: problems.append(f"{name}: edition page not in sitemap")
@@ -103,12 +107,63 @@ for name in editions:
             if f"insidedesk/data/{c}.csv" not in ed_links: problems.append(f"{ep}: no CSV link for chart {c}")
     for f in os.listdir(os.path.join(ed_root, name)):
         if f.endswith(".md") and f[:-3] not in ed["articles"]: problems.append(f"{name}: {f} exists but is not listed in edition.yaml")
+    # ---- ePaper: every issue reachable from the ePaper archive and the main archive, in feed + sitemap, assets present
+    epb = ed.get("epaper")
+    xdir = os.path.join(ed_root, name, "epaper")
+    listed = set((epb or {}).get("extras") or [])
+    if os.path.isdir(xdir):
+        for f in os.listdir(xdir):
+            if f.endswith(".md") and f[:-3] not in listed: problems.append(f"{name}: epaper/{f} exists but is not listed under epaper.extras")
+    if epb:
+        for x in listed:
+            xf = os.path.join(xdir, x + ".md")
+            if not os.path.exists(xf): problems.append(f"{name}: ePaper extra {x}.md missing"); continue
+            fm = _fm(xf)
+            if "PUBLISHED_AT" in str(fm.get("published")) or not fm.get("published"): problems.append(f"{name}: ePaper extra {x} has no real published time")
+            if not fm.get("sources"): problems.append(f"{name}: ePaper extra {x} has no sources")
+            if "DRAFT:" in open(xf, encoding="utf-8").read() or str(fm.get("published")) == "DRAFT": problems.append(f"{name}: ePaper extra {x} is still a draft")
+        if _dt.datetime.fromisoformat(str(epb.get("available") or ed["published"])) <= _dt.datetime.now(_dt.timezone.utc):
+            idir = f"insidedesk/epaper/{d:%Y/%m/%d}/{SLOT_SLUG[ed['slot']]}"
+            ih = os.path.join(ROOT, idir, "index.html")
+            if not os.path.exists(ih): problems.append(f"{name}: ePaper issue {idir}/index.html missing"); continue
+            itxt = open(ih, encoding="utf-8").read()
+            for bad in ("noindex", "Preview placeholder", "ph-k", "PREVIEW", "PUBLISHED_AT"):
+                if bad in itxt: problems.append(f"{idir}: contains '{bad}'")
+            try: ej = json.load(open(os.path.join(ROOT, idir, "edition.json"), encoding="utf-8"))
+            except Exception as ex: problems.append(f"{idir}: edition.json unreadable ({ex})"); continue
+            pdf = os.path.join(ROOT, idir, ej["pdf"])
+            if not os.path.exists(pdf) or open(pdf, "rb").read(5) != b"%PDF-": problems.append(f"{idir}: PDF {ej['pdf']} missing or not a PDF")
+            for pg in ej["pages"]:
+                if not os.path.exists(os.path.join(ROOT, idir, "thumbs", f"p{pg['n']:02d}.png")): problems.append(f"{idir}: thumbnail p{pg['n']:02d}.png missing")
+            for x in listed:
+                if x not in ej["articles"]: problems.append(f"{idir}: extra {x} not in the issue")
+            for slug in ed["articles"]:
+                if slug not in ej["articles"]: problems.append(f"{idir}: edition piece {slug} not in the issue")
+            if idir + "/index.html" not in _hrefs("insidedesk/epaper/index.html"): problems.append(f"{idir}: not linked from the ePaper archive")
+            if idir + "/index.html" not in arch: problems.append(f"{idir}: not linked from archive.html")
+            if idir + "/" + ej["pdf"] not in arch: problems.append(f"{idir}: PDF not linked from archive.html")
+            if BASE + idir + "/" not in smap: problems.append(f"{idir}: not in sitemap.xml")
+            if BASE + idir + "/" not in feed_links: problems.append(f"{idir}: not in feed.xml")
 # rendered edition pages that have no source folder (would silently drop out of the archive)
 for dp, _, fs in os.walk(os.path.join(ROOT, "insidedesk")):
     for f in fs:
         rp = os.path.relpath(os.path.join(dp, f), ROOT).replace(os.sep, "/")
         if re.fullmatch(r"insidedesk/20\d\d/\d\d/\d\d/(morning|evening|sunday)\.html", rp) and rp not in known_ed_pages:
             problems.append(f"{rp}: edition page without an edition folder")
+for dp, _, fs in os.walk(os.path.join(ROOT, "insidedesk", "epaper")):
+    rp = os.path.relpath(dp, ROOT).replace(os.sep, "/")
+    if re.fullmatch(r"insidedesk/epaper/20\d\d/\d\d/\d\d/(morning|evening|sunday)", rp):
+        y, mo, dd, sl = rp.split("/")[2:]
+        key = f"{y}-{mo}-{dd}-" + {"morning": "am", "evening": "pm", "sunday": "sun"}[sl]
+        if not os.path.exists(os.path.join(ed_root, key, "edition.yaml")): problems.append(f"{rp}: ePaper issue without an edition folder")
+        elif not yaml.safe_load(open(os.path.join(ed_root, key, "edition.yaml"))).get("epaper"): problems.append(f"{rp}: ePaper issue but edition has no epaper block")
+sw = os.path.join(ROOT, "insidedesk", "epaper", "sw.js")
+if os.path.isdir(os.path.join(ROOT, "insidedesk", "epaper")):
+    if not os.path.exists(sw): problems.append("insidedesk/epaper/sw.js missing")
+    for p_ in pages:
+        t_ = open(p_, encoding="utf-8").read()
+        if "serviceWorker.register" in t_ and "/epaper/" not in p_.replace(os.sep, "/"): problems.append(f"{os.path.relpath(p_, ROOT)}: registers a service worker outside insidedesk/epaper/")
+    if "insidedesk/epaper/index.html" not in _hrefs("InsideDesk.html"): problems.append("front page does not link the ePaper")
 if latest and latest[0] not in _hrefs("InsideDesk.html"): problems.append("front page does not link the latest edition's permanent page")
 # with more than one edition, the front page must also link the previous one
 if n_eds > 1:
@@ -126,5 +181,5 @@ if os.path.exists(ser):
         ap = f"insidedesk/{d:%Y/%m/%d}/{fm['slug']}.html"
         for label, ok in (("archive.html", ap in arch), ("feed.xml", BASE + ap in feed_links), ("sitemap.xml", BASE + ap in smap), ("page", os.path.exists(os.path.join(ROOT, ap)))):
             if not ok: problems.append(f"ledger {ap}: missing from {label}")
-print("\n".join(problems) if problems else f"✓ validate ok — {len(pages)} pages checked · {n_eds} edition(s) complete in archive, feed and sitemap")
+print("\n".join(problems) if problems else f"✓ validate ok — {len(pages)} pages checked · {n_eds} edition(s) complete in archive, feed and sitemap · ePaper checked")
 sys.exit(1 if problems else 0)

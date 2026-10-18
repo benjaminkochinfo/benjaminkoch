@@ -277,3 +277,21 @@ a.ar-title{text-decoration:none} a.ar-title:hover{text-decoration:underline}
 .ledger-d .ledger-strip{margin-top:8px}
 @media (max-width:560px){.ar-n{margin-left:0}.ar-title{flex-basis:100%}}
 .ledger-mod{margin:24px 0;padding:14px 0}
+/* ePaper: front-page module, edition links, ePaper archive */
+.ep-line{margin:8px 0 0;font-size:14.5px}
+.ep-link{font-weight:600}
+.ep-pdf{margin-left:6px;font:600 12px var(--mono);letter-spacing:.06em}
+.ep-mod{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;margin:34px 0;padding:20px 0;border-top:2px solid var(--text);border-bottom:1px solid var(--line2)}
+.ep-cover{display:block;line-height:0;border:1px solid var(--line2);border-radius:4px;overflow:hidden;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:transform .15s}
+.ep-cover:hover{transform:translateY(-2px)}
+.ep-cover img{width:150px;height:auto;display:block}
+.ep-mod-big .ep-cover img{width:200px}
+.ep-title{margin:4px 0 6px;font-size:1.5rem;line-height:1.15}
+.ep-title a{color:inherit;text-decoration:none}.ep-title a:hover{text-decoration:underline}
+.ep-txt p{margin:0 0 8px}
+.ep-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px!important}
+.ep-arch{list-style:none;margin:0 0 18px;padding:0}
+.ep-arch li{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:9px 4px;border-bottom:1px solid var(--line2)}
+.ep-sched{margin:28px 0}
+.ar-ep{border-left-style:solid}
+@media (max-width:560px){.ep-mod{grid-template-columns:1fr}.ep-cover{justify-self:start}.ep-cover img,.ep-mod-big .ep-cover img{width:132px}}

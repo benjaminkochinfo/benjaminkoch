@@ -34,3 +34,32 @@ closing:
     - {n: 1, title: "Brazil: Amazon deforestation lowest in nearly 40 years", publisher: "DW, with AFP and Reuters", url: "https://www.dw.com/en/brazil-amazon-deforestation-lowest-in-nearly-40-years/a-79684906", date: "17 Oct 2026"}
     - {n: 2, title: "Tanken in Deutschland: Benzinpreis und Dieselpreis steigen leicht an", publisher: "ADAC", url: "https://www.adac.de/news/aktueller-spritpreis/", date: "14 Oct 2026"}
     - {n: 3, title: "CoreWeave credit default swaps hit distress levels as investors sour on AI debt", publisher: "CNBC", url: "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html", date: "15 Oct 2026"}
+epaper:
+  available: "2026-10-18T10:00:00+02:00"
+  extras:
+    - a-record-surplus-is-also-a-record-dependency
+    - brussels-asks-for-a-bigger-toolbox
+    - three-hundred-thousand-tonnes-in-context
+    - europe-had-the-week-america-did-not
+    - msci-writes-indonesia-a-deadline
+    - gold-the-dollar-and-the-euro-on-a-friday
+    - no-budget-deal-a-new-date-and-a-new-negotiator
+    - a-border-dispute-gets-a-week
+    - germanys-biggest-fear-has-a-price-tag
+    - the-bears-are-above-average-for-the-36th-week
+    - the-diesel-queue-reaches-2027
+    - what-the-summit-asked-for-on-energy
+    - oil-on-water-not-in-tanks
+    - americas-inflation-is-mostly-at-the-pump
+    - london-waits-for-wednesday
+    - the-2027-ceilings-and-who-they-touch
+    - two-point-nine-percent-held
+    - asml-says-supply-will-not-meet-demand
+    - tsmc-the-invoice-side-of-the-ai-trade
+    - found-in-quarantine-is-the-good-version
+    - police-and-doctors-sign-the-same-page
+    - five-percent-is-a-number-unity-is-the-target
+    - kyivs-bill-for-2027
+    - one-point-six-three-and-the-pacific-is-the-engine
+    - record-low-rivers-then-a-storm
+  updates: []

@@ -74,6 +74,54 @@ describes the latest value. `--fetch id1,id2` narrows the fetch; `--fetch-all` r
 * Rules: a chart only where it carries the argument; no projections drawn as data; no Yahoo/Bloomberg/index-vendor
   data or anything whose terms forbid redistribution; never restyle per article — change `charts.py` once.
 
+## ePaper
+
+Built by `build.py` (module `epaper.py`, assets in `tools/epaper/`) for every edition whose `edition.yaml` ends with an
+`epaper:` block. It starts with Sunday 18 October 2026; earlier editions have no ePaper.
+
+- Output: `insidedesk/epaper/YYYY/MM/DD/<morning|evening|sunday>/` with `index.html` (all pages server-rendered, works
+  without JS), `edition.json` (search, chart data, updates), `thumbs/pNN.png` and `inside-desk-YYYY-MM-DD-<slot>.pdf`.
+  `insidedesk/epaper/index.html` shows the latest issue and the ePaper archive. Shared: `epaper/assets/`, `epaper/sw.js`
+  (service worker, scope `insidedesk/epaper/` only, caches an issue for offline reading once opened), `manifest.webmanifest`.
+- Content: the website edition (lead + one note per desk + closing) plus ePaper-only extras in
+  `content/editions/<key>/epaper/*.md` (`kind: second | short | brief`), listed under `epaper.extras`. Aim for 3-4 pieces
+  per desk. Each extra carries its own real `published:` time and is shown as "ePaper extra, added hh:mm". No
+  placeholders: a desk with nothing fresh gets fewer pieces, never padding. `validate.py` refuses drafts.
+- Layout is measured, not guessed: the build renders each issue in headless Chrome, shortens the on-page part of an
+  over-long piece ("Continue in reading view"; the full text is always in the reading view) or gives a desk a
+  continuation page, then renders thumbnails and the PDF. Unchanged issues are not re-rendered (`render.sha256`).
+  Needs `node` (20+) and Chrome on the box; `--no-png` skips this step (validate will then report the missing assets).
+- Links: header nav "ePaper", front-page module, "Read this edition as ePaper" on edition pages, archive rows, feed
+  items (with the PDF as enclosure) and sitemap entries.
+
+### Schedule (Berlin time)
+
+| Issue | ePaper | Website | Updates |
+|---|---|---|---|
+| Morning | 06:30 | 08:30 (same pieces) | none |
+| Evening | 17:30 | 17:30 | until 22:30, each with its real time |
+| Sunday Magazine | 10:00 | 10:00 | none |
+
+Morning: set `epaper.available` to 06:30 and `published` to 08:30. Between the two, the build leaves the website
+edition out (it is not due yet) and publishes the ePaper only; the archive marks it "ePaper only until 08:30".
+Rebuild and release again after 08:30 so the website edition appears. Saturday is closed.
+
+### Routine
+
+    python3 insidedesk/tools/new_edition.py 2026-10-19 am            # edition + 2 draft extras per desk
+    python3 insidedesk/tools/update_epaper.py add-extra 2026-10-19-am energy second the-slug   # optional 4th piece
+    # write every piece; delete an extra you cannot source (and its line under epaper.extras)
+    python3 insidedesk/tools/update_epaper.py stamp 2026-10-19-am    # real time on every extra, at release
+    python3 insidedesk/tools/build.py && python3 insidedesk/tools/validate.py
+
+Evening updates (until 22:30 Berlin; the tool refuses later and has no way to pass a time):
+
+    python3 insidedesk/tools/update_epaper.py update 2026-10-19-pm "Energy: OPEC+ statement added" --piece the-slug
+    python3 insidedesk/tools/build.py && python3 insidedesk/tools/validate.py   # then release
+
+The toolbar then shows "Updated hh:mm", the Latest page (page 3 of every evening issue) lists each update, and an
+open evening issue checks for updates every five minutes until 22:30 and offers to load them.
+
 ## Guard
 `insidedesk/tools/check_paths.sh` fails if any changed path is outside `InsideDesk.html`, `q7c/`, `insidedesk/`.
 Modes: git (working tree + index + untracked + commits since `BASE`, default `origin/main`), `--tree DIR`, `--stdin`.
