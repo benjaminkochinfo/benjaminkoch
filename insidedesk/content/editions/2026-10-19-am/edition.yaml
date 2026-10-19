@@ -1,0 +1,59 @@
+date: "2026-10-19"
+slot: am
+published: "2026-10-19T08:30:00+02:00"
+title: "Count the follow-up, not the province."
+standfirst: "Ebola reached an eighth Congolese province while its own daily report printed the gaps. France answered a night of riots with a list of meetings. Brent slipped to $107.92 on a waiver nobody is obliged to use. Eleven desks, every number sourced."
+articles:
+  - an-outbreak-is-beaten-one-house-visit-at-a-time
+  - asia-sold-the-open-the-week-sells-invoices
+  - the-annex-what-the-russia-waiver-actually-waives
+  - france-answers-a-riot-with-a-list-of-meetings
+  - the-picture-is-the-minority-the-march-was-the-majority
+  - podium-vs-print-open-for-business
+  - a-blackout-week-belongs-to-the-prints
+  - ordinary-ledger-heating-oil-is-the-bill-with-a-delivery-date
+  - chip-shares-fell-the-bond-prices-say-why
+  - an-energy-ceasefire-nobody-is-counting-at-zero
+  - adam-the-warning-is-the-infrastructure
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-19T08:30:00+02:00"
+  habit:
+    text: "This week, when a number reaches you through a picture, a burning street, a red screen, a map with one more province shaded, ask one question before you form a view: out of how many? Write the denominator next to the number. It takes ten seconds, and it changes most stories."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Congo's Ebola response reported 38 patients discharged as recovered on 14 October alone, each after two negative control tests, bringing recoveries since the outbreak began to 2,486 [1]. The same day its laboratories analysed 506 samples, 28% more than the day before, while the share testing positive fell to 12.8% [1]. Twelve health zones have now gone at least 42 days without a new confirmed case [1]. Every one of those numbers was produced by someone with a swab, a vehicle and a clipboard."
+  sentence: "Ebola is spreading across a wider map but shrinking in some places, France answered a night of riots with a promise of meetings and teachers, and oil got a little cheaper because Washington chose not to use a law it had just signed."
+  euros:
+    text: "The comparison portal tanke-günstig put the national average for a 2,000-litre heating-oil order at €177.59 per 100 litres late on Sunday [2]. That order therefore costs about €3,551.80. The spread between Länder, from €171.90 in Saxony-Anhalt to €183.91 in Hesse [2], is €12.01 per 100 litres, or about €240 on the same order. The portal says heating oil has fallen by almost ten cents a litre since the start of October [2]: on 2,000 litres that is worth up to about €200."
+    note: "Desk arithmetic on the portal's averages. Your dealer's quote for your postcode is the binding number."
+  small_words:
+    term: "Contact follow-up rate"
+    text: "In an outbreak, everyone who was close to a confirmed case is a contact, and must be checked every day for symptoms until the incubation period has passed. The follow-up rate is the share of those contacts actually seen that day. Congo's response reported 78.0% on 14 October, against a required 95% [1]. The gap is the people whose chain nobody checked that day, which is why the response publishes it."
+  sources:
+    - {n: 1, title: "Rapport de situation de la 17e épidémie de la maladie à virus Ebola, SitRep N°153 (14 octobre 2026)", publisher: "Ministère de la Santé Publique, Hygiène et Prévoyance Sociale, RDC", url: "https://administration.sante.gouv.cd/wp-content/uploads/2026/10/SitRep_MVEBDB_153_14_10_2026.pdf", date: "published 15 Oct 2026"}
+    - {n: 2, title: "Heizölpreise vergleichen: regionale Heizölpreise (Stand 18.10.2026, 23:30, Basis 2.000 Liter) und ‘Heizölpreise geben nach’", publisher: "tanke-günstig (JUKANA GmbH)", url: "https://www.tanke-guenstig.de/Heizoelpreise", date: "16 and 18 Oct 2026"}
+epaper:
+  available: "2026-10-19T08:30:00+02:00"
+  extras:
+    - paying-for-vaccines-before-the-market-will
+    - kenya-thirty-eight-tests-one-positive
+    - chinas-growth-came-from-abroad
+    - the-week-in-reports
+    - macron-takes-the-fuel-question-to-the-gulf
+    - a-summit-proposed-not-agreed
+    - the-protests-cross-the-alps-and-the-atlantic-coast
+    - spain-votes-on-29-november
+    - one-hundred-thousand-contributions
+    - seven-point-six-million-barrels-in-context
+    - iraqs-sixty-billion-dollar-bill
+    - the-yen-is-weaker-than-septembers-average
+    - rent-is-the-price-on-the-banners
+    - berlin-signs-up-for-physical-ai
+    - a-data-centre-is-now-a-target
+    - an-alert-that-reached-half-the-country
+    - when-the-police-ran-out
+    - riyadh-works-from-home
+    - champi-missed-guam-by-twelve-miles
+    - a-noreaster-parks-off-the-carolinas
+  updates: []
