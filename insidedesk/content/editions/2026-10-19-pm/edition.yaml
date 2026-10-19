@@ -60,7 +60,11 @@ epaper:
   - two-hundred-to-three-hundred-millimetres
   - the-curfew-notices-were-posted
   - five-days-became-thirty
+  - the-custody-count-and-a-senate-file
   updates:
   - time: '2026-10-19T19:33:04+02:00'
     text: 'Security: Paris, Nord and Nice curfew orders posted with hours and streets; Money: insurance claim window extended from five to thirty days'
     piece: the-curfew-notices-were-posted
+  - time: '2026-10-19T21:59:26+02:00'
+    text: 'Security: 2,513 held in custody and 67 jailed; Lyon curfew; Paris gathering ban for Tuesday night; Senate inquiry opened'
+    piece: the-custody-count-and-a-senate-file
