@@ -36,26 +36,31 @@ closing:
 epaper:
   available: "2026-10-19T17:43:02+02:00"
   extras:
-    - milan-second-night-two-hundred-detained
-    - marseille-banned-the-gathering-for-a-day
-    - carrefour-fifty-stores-ten-million-euros
-    - destatis-nine-months-of-work-on-the-books
-    - kuwait-airways-and-the-airbus-line
-    - hormuz-coalition-still-waiting
-    - lecornu-rejected-a-paris-wide-curfew
-    - the-round-table-still-has-no-numbers
-    - a-picture-that-failed-the-finger-count
-    - limoges-mayor-called-it-an-attack-on-the-republic
-    - gasoil-still-above-fridays-afternoon
-    - european-gas-near-eighty-nine
-    - oat-bund-at-about-one-forty-five
-    - the-euro-hovered-near-one-twelve
-    - fifty-carrefour-tickets-on-one-chain
-    - louvre-closed-after-a-blockade-threat
-    - meta-and-tesla-land-wednesday
-    - campus-ai-rides-the-gulf-trip
-    - one-hundred-seventy-eight-cases-since-the-last-ecdc-note
-    - nord-ubangi-two-cases-eighth-province
-    - tuesday-eight-departments-in-orange
-    - two-hundred-to-three-hundred-millimetres
-  updates: []
+  - milan-second-night-two-hundred-detained
+  - marseille-banned-the-gathering-for-a-day
+  - carrefour-fifty-stores-ten-million-euros
+  - destatis-nine-months-of-work-on-the-books
+  - kuwait-airways-and-the-airbus-line
+  - hormuz-coalition-still-waiting
+  - lecornu-rejected-a-paris-wide-curfew
+  - the-round-table-still-has-no-numbers
+  - a-picture-that-failed-the-finger-count
+  - limoges-mayor-called-it-an-attack-on-the-republic
+  - gasoil-still-above-fridays-afternoon
+  - european-gas-near-eighty-nine
+  - oat-bund-at-about-one-forty-five
+  - the-euro-hovered-near-one-twelve
+  - fifty-carrefour-tickets-on-one-chain
+  - louvre-closed-after-a-blockade-threat
+  - meta-and-tesla-land-wednesday
+  - campus-ai-rides-the-gulf-trip
+  - one-hundred-seventy-eight-cases-since-the-last-ecdc-note
+  - nord-ubangi-two-cases-eighth-province
+  - tuesday-eight-departments-in-orange
+  - two-hundred-to-three-hundred-millimetres
+  - the-curfew-notices-were-posted
+  - five-days-became-thirty
+  updates:
+  - time: '2026-10-19T19:33:04+02:00'
+    text: 'Security: Paris, Nord and Nice curfew orders posted with hours and streets; Money: insurance claim window extended from five to thirty days'
+    piece: the-curfew-notices-were-posted
