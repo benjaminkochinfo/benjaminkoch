@@ -37,22 +37,27 @@ closing:
 epaper:
   available: "2026-10-20T17:30:00+02:00"
   extras:
-    - gold-slipped-while-brent-rose
-    - two-days-took-the-stoxx-back-to-mid-month
-    - the-cabinet-took-a-holiday-week
-    - seventy-two-hours-for-organised-crime
-    - the-24th-is-already-being-policed-on-paper
-    - limoges-suspect-and-a-denied-rumour
-    - iraq-pumped-closer-to-pre-war
-    - diesel-release-traders-not-convinced
-    - gas-and-power-at-the-factory-gate
-    - tokyo-auction-drew-record-demand
-    - french-ten-year-near-four-ninety-six
-    - austria-pays-nine-cents-more
-    - the-shopping-basket-got-cheaper-at-the-gate
-    - kaub-reads-twenty-one-centimetres
-    - paris-asks-platforms-to-pull-looted-goods
-    - most-people-think-they-can-spot-a-fake
-    - the-checkpoint-staff-who-were-not-paid
-    - ituri-still-carries-most-of-the-outbreak
-  updates: []
+  - gold-slipped-while-brent-rose
+  - two-days-took-the-stoxx-back-to-mid-month
+  - the-cabinet-took-a-holiday-week
+  - seventy-two-hours-for-organised-crime
+  - the-24th-is-already-being-policed-on-paper
+  - limoges-suspect-and-a-denied-rumour
+  - iraq-pumped-closer-to-pre-war
+  - diesel-release-traders-not-convinced
+  - gas-and-power-at-the-factory-gate
+  - tokyo-auction-drew-record-demand
+  - french-ten-year-near-four-ninety-six
+  - austria-pays-nine-cents-more
+  - the-shopping-basket-got-cheaper-at-the-gate
+  - kaub-reads-twenty-one-centimetres
+  - paris-asks-platforms-to-pull-looted-goods
+  - most-people-think-they-can-spot-a-fake
+  - the-checkpoint-staff-who-were-not-paid
+  - ituri-still-carries-most-of-the-outbreak
+  - the-second-night-of-orders
+  - four-promises-and-a-48-hour-deadline
+  updates:
+  - time: '2026-10-20T19:27:52+02:00'
+    text: 'Security: Paris curfew renewed with three metro stations shut, Nantes and Rennes ban night gatherings to Saturday; Tech: resale platforms'' four commitments and a 48-hour reporting deadline'
+    piece: the-second-night-of-orders
