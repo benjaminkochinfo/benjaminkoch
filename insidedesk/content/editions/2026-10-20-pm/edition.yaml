@@ -1,0 +1,58 @@
+date: "2026-10-20"
+slot: pm
+published: "2026-10-20T17:30:00+02:00"
+title: "Read the receipt before the chart."
+standfirst: "Shares fell for a second day on oil and AI nerves; Wiesbaden's quieter release said German producer prices rose 6.7% in a year, almost all of it energy. Corsica went red for rain, Alberta voted three to one to stay, and a French prime minister said \"too static\" in the chamber. Eleven desks, every number sourced."
+articles:
+  - the-factory-gate-printed-what-the-screen-was-selling
+  - the-prime-minister-said-too-static
+  - podium-vs-print-the-strait-is-open-the-diesel-is-not
+  - alberta-counted-three-to-one
+  - rehn-said-the-price-of-money-is-doing-the-work
+  - ordinary-ledger-three-prices-for-one-litre
+  - the-rain-moved-east-and-corsica-went-red
+  - the-ipo-was-388-times-subscribed-then-it-traded
+  - warmth-made-people-follow-wrong-advice-too
+  - ebola-the-beds-ran-out-before-the-cases-did
+  - shabwa-the-deadliest-day-of-the-escalation
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-20T17:30:00+02:00"
+  habit:
+    text: "This week, when a percentage in a headline makes you flinch, ask one quiet question before reading on: compared with what — last month or last year? Ten seconds. Germany's producer prices were up 6.7% on the year but 0.1% on the month once energy is taken out [1]. Both are true; they tell different stories."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "In Congo's Ebola outbreak, the recovery column keeps growing. The bulletin for 18 October counted 2,550 people who have recovered, 20 more than the day before, and 8,353 people vaccinated with Ervebo since the campaign began on 26 August [2]. Those are not slogans. They are people discharged and doses given, counted by a health ministry under strain."
+  sentence: "German factories paid much more for energy but barely more for everything else, the rain that spared Gard hit Corsica, and Alberta settled its argument with a count."
+  euros:
+    text: "HeizOel24 put Tuesday's German average for heating oil at €1.73 a litre, against about 90 cents a year ago; Hamburg was cheapest at €1.68 and North Rhine-Westphalia dearest at €1.78 [3]. Desk arithmetic: on a 2,000-litre order, today's average comes to about €3,460, roughly €1,660 more than the same order a year ago, and the ten-cent gap between Hamburg and North Rhine-Westphalia is about €200."
+    note: "Desk arithmetic on the cited per-litre averages. Your price depends on volume, postcode and the day you order. Nothing here is advice."
+  small_words:
+    term: "Producer prices"
+    text: "Producer prices are what factories, mines and utilities charge when they sell goods inside Germany, before VAT. Destatis records them on the 15th of every month, so they show cost pressure early, before it reaches shop shelves [1]. In September they were 6.7% higher than a year earlier, most of it from energy [1]."
+  sources:
+    - {n: 1, title: "Erzeugerpreise im September 2026: +6,7 % gegenüber September 2025 (Pressemitteilung Nr. 373)", publisher: "Destatis", url: "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_373_61241.html", date: "20 Oct 2026"}
+    - {n: 2, title: "DRC Ebola, 18 October 2026: 9,552 confirmed cases (SitRep 157)", publisher: "ebola-tracker.org (summary of the INSP/Ministry of Health daily bulletin)", url: "https://ebola-tracker.org/en/letter/157/", date: "bulletin of 18 Oct 2026"}
+    - {n: 3, title: "Gasöl treibt Heizölpreise nach oben", publisher: "HeizOel24", url: "https://www.heizoel24.de/news/artikel/005375-gasoel-treibt-heizoelpreise-nach-oben-20-10-2026", date: "20 Oct 2026, 11:02"}
+epaper:
+  available: "2026-10-20T17:30:00+02:00"
+  extras:
+    - gold-slipped-while-brent-rose
+    - two-days-took-the-stoxx-back-to-mid-month
+    - the-cabinet-took-a-holiday-week
+    - seventy-two-hours-for-organised-crime
+    - the-24th-is-already-being-policed-on-paper
+    - limoges-suspect-and-a-denied-rumour
+    - iraq-pumped-closer-to-pre-war
+    - diesel-release-traders-not-convinced
+    - gas-and-power-at-the-factory-gate
+    - tokyo-auction-drew-record-demand
+    - french-ten-year-near-four-ninety-six
+    - austria-pays-nine-cents-more
+    - the-shopping-basket-got-cheaper-at-the-gate
+    - kaub-reads-twenty-one-centimetres
+    - paris-asks-platforms-to-pull-looted-goods
+    - most-people-think-they-can-spot-a-fake
+    - the-checkpoint-staff-who-were-not-paid
+    - ituri-still-carries-most-of-the-outbreak
+  updates: []
