@@ -1,0 +1,65 @@
+date: "2026-10-20"
+slot: am
+published: "2026-10-20T08:30:00+02:00"
+title: "Better a closed bridge than a crossed one."
+standfirst: "Gard and Hérault were warned they could go red; by dawn nine départements were orange and none red. A warning that overshoots is cheap safety, not failure. Brent waited near $110. Eleven desks, every number sourced."
+articles:
+  - the-night-came-in-under-the-forecast
+  - parliament-booked-its-questions
+  - the-annex-two-paris-orders-read-line-by-line
+  - asia-did-not-buy-the-nasdaq-bounce
+  - podium-vs-print-the-waiver-already-signed
+  - wti-expires-brent-waits-near-110
+  - three-decisions-on-three-days
+  - ordinary-ledger-the-tank-held-its-price
+  - the-grid-set-the-opening-date
+  - north-kivu-stopped-for-a-day
+  - a-bright-post-wins-the-glance-not-the-memory
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-20T08:30:00+02:00"
+  habit:
+    text: "This week, before any journey in rough weather, open your national weather service's warning map once and note the colour where you are going, not just where you are. Ten seconds. If it is orange, think about bridges and underpasses on the way rather than the sky above you."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Germany's grid ran mostly on renewables this year. Fraunhofer ISE's Energy-Charts reports 215 TWh of renewable public net generation in the first three quarters of 2026 against 120 TWh from fossil sources, covering 62.1% of grid load [1] — up from 35.2% in the same months of 2015 [2]. Solar panels alone fed in more than 76 TWh, 21% more than a year earlier [3]. That is not a pledge. It is metered electricity."
+  sentence: "Southern France was warned of worse rain than came, and the closed bridges were the point; Paris read its curfew orders, oil waited near $110, and Parliament booked its questions."
+  euros:
+    text: "At 05:12 on Tuesday, the national average for a litre of Super E10 at open German stations was €2.089, from the official price-reporting data; Hessen averaged €2.139 and Baden-Württemberg €2.049 [4]. Desk arithmetic: that 9-cent gap comes to €4.50 on a 50-litre tank. The ADAC motoring club says prices are lowest shortly before 12:00 and rise sharply at noon [5], so the hour you fill up can matter about as much as where you live."
+    note: "Desk arithmetic on the cited averages. This is an early-morning snapshot; prices change through the day. Nothing here is advice."
+  small_words:
+    term: "Vigilance orange"
+    text: "Météo-France's warning colours run from yellow to orange to red. Orange means dangerous weather is forecast: keep informed and follow the safety advice from the authorities. Red is kept for phenomena of exceptional intensity [6]. On Tuesday morning nine départements were orange and none red [6]. The colour is a timetable for behaviour, not a forecast of disaster."
+  sources:
+    - {n: 1, title: "Öffentliche Nettostromerzeugung in den ersten drei Quartalen 2026 in Deutschland", publisher: "Fraunhofer ISE Energy-Charts (Bluesky)", url: "https://bsky.app/profile/energy-charts.bsky.social/post/3mws3zymbf22a", date: "1 Oct 2026"}
+    - {n: 2, title: "Anteil erneuerbarer Energien an der Last, erste drei Quartale 2015–2026", publisher: "Fraunhofer ISE Energy-Charts (Bluesky)", url: "https://bsky.app/profile/energy-charts.bsky.social/post/3mx4ahek5j22f", date: "4 Oct 2026"}
+    - {n: 3, title: "Solarstrom-Einspeisung in den ersten drei Quartalen 2026", publisher: "Fraunhofer ISE Energy-Charts (Bluesky)", url: "https://bsky.app/profile/energy-charts.bsky.social/post/3mwumjjxhls2f", date: "2 Oct 2026"}
+    - {n: 4, title: "Spritpreise heute (20.10.2026): Durchschnitt E5, E10 und Diesel in Deutschland", publisher: "kraftstoffbilliger.de (data: Markttransparenzstelle für Kraftstoffe)", url: "https://kraftstoffbilliger.de/spritpreise", date: "20 Oct 2026, 05:12"}
+    - {n: 5, title: "Leichter Preisanstieg bei Diesel und Benzin", publisher: "ADAC", url: "https://presse.adac.de/meldungen/adac-ev/verkehr/leichter-preisanstieg-bei-diesel-und-benzin.html", date: "14 Oct 2026"}
+    - {n: 6, title: "Vigilance accessible — Vigilance météo et crues pour mardi 20 octobre", publisher: "Météo-France", url: "https://vigilance.meteofrance.fr/fr/vigilance-accessible", date: "20 Oct 2026, 04:06 Paris"}
+epaper:
+  available: "2026-10-20T06:30:00+02:00"
+  extras:
+    - champi-points-at-the-sakishima-islands
+    - adams-first-invoice-is-in-greenhouses
+    - brussels-pointed-at-the-rulebook
+    - the-rn-will-send-a-vice-president
+    - the-curfews-now-have-end-dates
+    - rennes-banned-tuesdays-eleven-oclock
+    - kospi-pays-for-the-memory-haggle
+    - builders-cut-prices-buyers-stayed-home
+    - hormuz-seventy-percent-below
+    - macron-lands-in-bahrain
+    - houthi-claims-on-saudi-oil-sites
+    - germany-storage-sixty-one-percent
+    - beijing-held-the-rate-and-changed-the-dial
+    - takaichi-says-the-yen-is-not-hers
+    - the-early-pension-gets-a-longer-count
+    - the-pump-is-cheaper-before-noon
+    - tuesdays-tape-cars-a-streamer-and-an-airline
+    - the-nvidia-pact-arrived-without-a-number
+    - darmstadt-buys-a-quarterly-injection
+    - kenya-found-ninety-nine-percent-of-contacts
+    - the-shoe-video-had-a-receipt
+    - leboncoin-said-no-consolidated-data
+  updates: []
