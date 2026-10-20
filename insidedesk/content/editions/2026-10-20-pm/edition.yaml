@@ -57,7 +57,11 @@ epaper:
   - ituri-still-carries-most-of-the-outbreak
   - the-second-night-of-orders
   - four-promises-and-a-48-hour-deadline
+  - red-came-down-when-the-gauges-did
   updates:
   - time: '2026-10-20T19:27:52+02:00'
     text: 'Security: Paris curfew renewed with three metro stations shut, Nantes and Rennes ban night gatherings to Saturday; Tech: resale platforms'' four commitments and a 48-hour reporting deadline'
     piece: the-second-night-of-orders
+  - time: '2026-10-20T22:00:35+02:00'
+    text: 'Climate: Haute-Corse lowered from red to orange at 19:00, three départements still orange'
+    piece: red-came-down-when-the-gauges-did
