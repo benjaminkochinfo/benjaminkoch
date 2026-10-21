@@ -37,26 +37,30 @@ closing:
 epaper:
   available: "2026-10-21T17:30:00+02:00"
   extras:
-    - the-unions-left-matignon-with-a-date
-    - flood-cover-by-default-not-by-decree
-    - jio-was-three-times-covered-by-teatime
-    - gold-fell-while-the-war-went-on
-    - lingen-and-the-fuel-rods-for-the-east
-    - berlin-rejects-the-libya-turkey-sea-line
-    - personality-moved-with-the-mood
-    - happy-scenes-beat-your-own-goals
-    - brent-rose-on-words-from-tehran
-    - europes-gas-stores-stopped-filling
-    - britain-owes-three-trillion
-    - lane-wants-the-euro-to-carry-policy-abroad
-    - petrol-fell-diesel-did-not
-    - heating-oil-at-one-seventy-four
-    - google-gave-away-the-npu-design
-    - nvidia-wants-agents-on-a-leash
-    - kenyas-cases-came-from-the-quarantine-list
-    - an-appointment-should-not-ask-your-insurer
-    - the-bundeswehr-raised-its-own-threat-level
-    - berlin-watches-the-31-october-marches
-    - gard-left-orange-the-rivers-did-not-yet
-    - the-rhine-gave-the-rain-back
-  updates: []
+  - the-unions-left-matignon-with-a-date
+  - flood-cover-by-default-not-by-decree
+  - jio-was-three-times-covered-by-teatime
+  - gold-fell-while-the-war-went-on
+  - lingen-and-the-fuel-rods-for-the-east
+  - berlin-rejects-the-libya-turkey-sea-line
+  - personality-moved-with-the-mood
+  - happy-scenes-beat-your-own-goals
+  - brent-rose-on-words-from-tehran
+  - europes-gas-stores-stopped-filling
+  - britain-owes-three-trillion
+  - lane-wants-the-euro-to-carry-policy-abroad
+  - petrol-fell-diesel-did-not
+  - heating-oil-at-one-seventy-four
+  - google-gave-away-the-npu-design
+  - nvidia-wants-agents-on-a-leash
+  - kenyas-cases-came-from-the-quarantine-list
+  - an-appointment-should-not-ask-your-insurer
+  - the-bundeswehr-raised-its-own-threat-level
+  - berlin-watches-the-31-october-marches
+  - gard-left-orange-the-rivers-did-not-yet
+  - the-rhine-gave-the-rain-back
+  - a-directive-is-not-a-plan
+  updates:
+  - time: '2026-10-21T19:33:38+02:00'
+    text: 'Geoeconomics: Netanyahu says he has ordered the Iranian regime toppled; Tehran says indirect ceasefire talks continue'
+    piece: a-directive-is-not-a-plan

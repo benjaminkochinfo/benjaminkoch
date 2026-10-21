@@ -6,7 +6,8 @@ attribution + licence text that must appear under any chart that uses it.
 """
 import csv, io, json, urllib.request, urllib.parse
 
-UA = {"User-Agent": "InsideDesk-build/1.0 (+https://benjaminkoch.info/InsideDesk.html)"}
+UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; compatible; InsideDesk-build/1.1; +https://benjaminkoch.info/InsideDesk.html)",
+      "Accept": "text/csv,application/json,text/plain;q=0.9,*/*;q=0.5", "Accept-Language": "en"}
 
 LICENCES = {
     "fred-eia": "EIA spot prices via FRED, Federal Reserve Bank of St. Louis. U.S. government data, public domain.",
@@ -21,17 +22,37 @@ LICENCES = {
     "reported": "Figures as reported by the named organisations; facts cited with attribution.",
 }
 
-def _get(url, timeout=40):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8")
+def _get(url, timeout=40, expect_data=True):
+    """GET with one retry. A data endpoint that answers with an HTML page (bot check, maintenance page) is a failure,
+    so build.py falls back to the last saved CSV instead of parsing a web page as data."""
+    import time
+    last = None
+    for attempt in (1, 2):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                ctype = r.headers.get("Content-Type", "")
+                txt = r.read().decode("utf-8")
+            head = txt.lstrip()[:300].lower()
+            if expect_data and ("text/html" in ctype or head.startswith("<!doctype html") or head.startswith("<html") or "<html" in head):
+                raise ValueError(f"HTML page instead of data from {url.split('?')[0]} (bot check or maintenance?)")
+            if expect_data and not txt.strip():
+                raise ValueError(f"empty response from {url.split('?')[0]}")
+            return txt
+        except Exception as ex:
+            last = ex
+            if attempt == 1: time.sleep(3)
+    raise last
 
 def fred(series_id, start=None):
     """FRED CSV download. Use ONLY for series whose originating agency is public domain
     (e.g. EIA, Treasury, Fed H.15). Check the series' copyright note before adding new ones."""
     txt = _get("https://fred.stlouisfed.org/graph/fredgraph.csv?id=" + urllib.parse.quote(series_id))
     out = []
-    for row in csv.DictReader(io.StringIO(txt)):
+    rows = list(csv.DictReader(io.StringIO(txt)))
+    if not rows or series_id not in rows[0]:
+        raise ValueError(f"FRED {series_id}: response is not the expected CSV")
+    for row in rows:
         d = row.get("observation_date") or row.get("DATE")
         v = row.get(series_id)
         if not d or v in (None, "", "."):

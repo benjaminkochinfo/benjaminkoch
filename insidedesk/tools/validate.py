@@ -47,7 +47,7 @@ for x in ("insidedesk/feed.xml", "insidedesk/sitemap.xml"):
     try: xml.dom.minidom.parse(os.path.join(ROOT, x))
     except Exception as ex: problems.append(f"{x}: invalid XML {ex}")
 cd = os.path.join(ROOT, "insidedesk", "content", "charts")
-# A chart must have SVG+PNG+CSV once any piece uses it (front matter or shortcode) or once any of its files exists.
+# A chart must have SVG+PNG+CSV once any piece uses it (front matter or shortcode). Unused prepared specs may carry only a seed CSV.
 # A prepared spec that no piece uses yet (see charts-ready.md) has no files and is fine.
 _used = set()
 for _dp, _dn, _fn in os.walk(os.path.join(ROOT, "insidedesk", "content")):
@@ -65,9 +65,14 @@ for f in os.listdir(cd):
     cid = f[:-5]
     files = [(ext, d) for ext, d in ((".svg", "charts"), (".png", "charts"), (".csv", "data"))]
     have = [os.path.exists(os.path.join(ROOT, "insidedesk", d, cid + ext)) for ext, d in files]
-    if cid not in _used and not any(have): _ready.append(cid); continue
+    if cid not in _used: _ready.append(cid); continue   # prepared spec (may carry a seed CSV), not used by any piece yet
     for (ext, d), ok in zip(files, have):
         if not ok: problems.append(f"chart {cid}: missing {d}/{cid}{ext}")
+# ---- ePaper layout: the render step leaves render.clip in an issue folder when a page overflows; never release that
+_epd = os.path.join(ROOT, "insidedesk", "epaper")
+for _dp, _dn, _fn in os.walk(_epd):
+    if "render.clip" in _fn:
+        problems.append(f"{os.path.relpath(_dp, ROOT)}: ePaper content clipped ({open(os.path.join(_dp, 'render.clip'), encoding='utf-8').read().strip()})")
 # ---- completeness: every edition and every piece is reachable from archive, feed and sitemap
 import datetime as _dt, yaml
 BASE = "https://benjaminkoch.info/"

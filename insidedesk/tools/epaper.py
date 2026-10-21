@@ -309,16 +309,21 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
     cover_lines = [by_desk[k] for k in ("geoecon", "markets", "energy", "climate") if k in by_desk and by_desk[k] is not lead][:4]
     day_label = f"{d:%A}, {d:%-d %B %Y}"
     status = (f"Available {iss['avail']:%H:%M} {tz(iss['avail'])}" if ed["slot"] == "am" else f"Published {pub:%H:%M} {tz(pub)}")
+    cl = (fit or {}).get("_cover", 0)   # cover tightening level, set by fit_issue only when page 1 overflows
+    has_chart = bool(lead_chart and lead_chart in charts)
+    if cl >= 2 or (cl >= 1 and has_chart): inside = inside[:2]
+    inside_nav = f'''<nav class="cv-inside" aria-label="Also in this issue"><h3>Also inside · {len(arts) + xcount} pieces</h3><ol>{"".join(f'<li><a href="#page-{desk_page[k]}"><span>{desk_page[k]}</span>{e(cfg["DESKS"][k][0])}<b>{e(by_desk[k]["title"] if by_desk.get(k) and by_desk[k] is not lead else xs_by[k][0]["title"])}</b></a></li>' for k in inside)}</ol></nav>'''
+    nav_right = cl >= 1 and not has_chart   # no cover chart: the list moves under the quote in the right column
     pages[0]["inner"] = f'''<header class="cv-mast"><div class="cv-top"><span>{e(day_label)}</span><span>Always free</span></div>
   <h1 class="cv-title">Inside Desk</h1><div class="cv-sub"><span>{e("The Sunday Magazine" if ed["slot"] == "sun" else slot_name)}</span><span>{e(status)} · Berlin</span></div></header>
 <div class="cv-grid">
   <div class="cv-story" data-article="{e(lead["slug"])}"><span class="cv-k">{"Cover story" if ed["slot"] == "sun" else "Lead"} · {e(lead["desk_name"])}</span>
     <h2 class="cv-h"><button class="hl" data-open="{e(lead["slug"])}">{e(lead["title"])}</button></h2>
-    <p class="cv-dek">{e(lead["dek"])}</p>
+    {"" if cl >= 3 else f'<p class="cv-dek">{e(lead["dek"])}</p>'}
     <p class="cv-stand">{e(ed["standfirst"])}</p>
     <div>{open_btn(lead, "Read the cover story" if ed["slot"] == "sun" else "Read the lead")} <a class="cv-jump" href="#page-{lead_pages[0]}">Go to page {lead_pages[0]} →</a></div>
-    <nav class="cv-inside" aria-label="Also in this issue"><h3>Also inside · {len(arts) + xcount} pieces</h3><ol>{"".join(f'<li><a href="#page-{desk_page[k]}"><span>{desk_page[k]}</span>{e(cfg["DESKS"][k][0])}<b>{e(by_desk[k]["title"] if by_desk.get(k) and by_desk[k] is not lead else xs_by[k][0]["title"])}</b></a></li>' for k in inside)}</ol></nav></div>
-  <div class="cv-art">{chart_fig(lead_chart, "cover") if lead_chart and lead_chart in charts else f'<div class="cv-quote"><p>{e(c.get("sentence", ed["standfirst"]))}</p></div>'}</div>
+    {"" if nav_right else inside_nav}</div>
+  <div class="cv-art">{chart_fig(lead_chart, "cover") if lead_chart and lead_chart in charts else f'<div class="cv-quote"><p>{e(c.get("sentence", ed["standfirst"]))}</p></div>'}{f'<div class="cv-inside-r" style="margin-top:30px">{inside_nav}</div>' if nav_right else ""}</div>
 </div>
 <div class="cv-lines">{"".join(f'<div class="cv-line" data-article="{e(a["slug"])}"><span>{e(a["desk_name"])} · p. {desk_page[a["desk"]]}</span><button class="hl" data-open="{e(a["slug"])}">{e(a["title"])}</button></div>' for a in cover_lines)}</div>
 {f'<p class="cv-sentence"><span>The {"week" if ed["slot"] == "sun" else "day"} in one sentence</span>{e(c["sentence"])}</p>' if c.get("sentence") else ""}'''
@@ -438,6 +443,9 @@ def render_assets(iss, html_txt, json_txt, cfg, n_pages, force=False):
     print("  " + (r.stdout.strip() or r.stderr.strip()).replace("\n", "\n  "))
     if r.returncode != 0: raise SystemExit(f"ePaper render failed for {iss['dir']}")
     open(hf, "w").write(h + "\n")
+    clip, cf = [l for l in r.stdout.splitlines() if l.startswith("CLIPPED:")], os.path.join(root, "render.clip")
+    if clip: open(cf, "w").write(clip[0] + "\n")   # validate.py refuses a release while this file exists
+    elif os.path.exists(cf): os.unlink(cf)
     return "rendered"
 
 def audit(iss, cfg):
@@ -449,6 +457,15 @@ def audit(iss, cfg):
     line = [l for l in r.stdout.splitlines() if l.startswith("{")]
     return {int(k): v for k, v in json.loads(line[-1]).items()} if line else {}
 
+def cover_overflow(iss, cfg):
+    """Pixels by which the cover (page 1) overflows; 0 when it fits (headless Chrome)."""
+    node, chrome = shutil.which("node"), (shutil.which("google-chrome") or shutil.which("chromium"))
+    if not node or not chrome: return 0
+    r = subprocess.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "cover-audit.mjs"), cfg["ROOT"], iss["dir"], chrome],
+                       capture_output=True, text=True, timeout=120)
+    line = [l for l in r.stdout.splitlines() if l.startswith("{")]
+    return json.loads(line[-1]).get("cover", 0) if line else 0
+
 def fit_issue(iss, cfg, se, web_live, now):
     """Render, measure in headless Chrome, and shorten the on-page part of over-long desk pages (the whole text is
     always in the reading view), repeat. A desk that cannot fit on one page gets a continuation page instead."""
@@ -458,7 +475,11 @@ def fit_issue(iss, cfg, se, web_live, now):
         cfg["write"](iss["dir"] + "/index.html", h); cfg["write"](iss["dir"] + "/edition.json", j)
         over = audit(iss, cfg)
         bad = {k: over[n] for k, n in m["desk_pages"].items() if over.get(n)}
-        if not bad: return h, j, m, {}
+        if not bad:
+            # cover: only an issue whose page 1 actually overflows gets a tighter cover, so covers that fit never change
+            if fit.get("_cover", 0) < 3 and cover_overflow(iss, cfg):
+                fit["_cover"] = fit.get("_cover", 0) + 1; continue
+            return h, j, m, {}
         for key, o in bad.items():
             k = key.rstrip("+"); f = fit.setdefault(k, {})
             cols = o.get("cols", {})
