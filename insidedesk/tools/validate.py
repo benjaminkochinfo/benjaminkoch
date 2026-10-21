@@ -47,10 +47,27 @@ for x in ("insidedesk/feed.xml", "insidedesk/sitemap.xml"):
     try: xml.dom.minidom.parse(os.path.join(ROOT, x))
     except Exception as ex: problems.append(f"{x}: invalid XML {ex}")
 cd = os.path.join(ROOT, "insidedesk", "content", "charts")
+# A chart must have SVG+PNG+CSV once any piece uses it (front matter or shortcode) or once any of its files exists.
+# A prepared spec that no piece uses yet (see charts-ready.md) has no files and is fine.
+_used = set()
+for _dp, _dn, _fn in os.walk(os.path.join(ROOT, "insidedesk", "content")):
+    for _f in _fn:
+        if _f.endswith(".md"):
+            _t = open(os.path.join(_dp, _f), encoding="utf-8").read()
+            _used |= set(re.findall(r"\[\[chart:([a-z0-9\-]+)\]\]", _t))
+            _m = re.match(r"^---\n(.*?)\n---\n", _t, re.S)
+            if _m:
+                _c = re.search(r"^charts:\s*\[([^\]]*)\]", _m.group(1), re.M)
+                if _c: _used |= {x.strip().strip("'\"") for x in _c.group(1).split(",") if x.strip()}
+_ready = []
 for f in os.listdir(cd):
+    if not f.endswith(".yaml"): continue
     cid = f[:-5]
-    for ext, d in ((".svg", "charts"), (".png", "charts"), (".csv", "data")):
-        if not os.path.exists(os.path.join(ROOT, "insidedesk", d, cid + ext)): problems.append(f"chart {cid}: missing {d}/{cid}{ext}")
+    files = [(ext, d) for ext, d in ((".svg", "charts"), (".png", "charts"), (".csv", "data"))]
+    have = [os.path.exists(os.path.join(ROOT, "insidedesk", d, cid + ext)) for ext, d in files]
+    if cid not in _used and not any(have): _ready.append(cid); continue
+    for (ext, d), ok in zip(files, have):
+        if not ok: problems.append(f"chart {cid}: missing {d}/{cid}{ext}")
 # ---- completeness: every edition and every piece is reachable from archive, feed and sitemap
 import datetime as _dt, yaml
 BASE = "https://benjaminkoch.info/"
@@ -183,5 +200,5 @@ if os.path.exists(ser):
         ap = f"insidedesk/{d:%Y/%m/%d}/{fm['slug']}.html"
         for label, ok in (("archive.html", ap in arch), ("feed.xml", BASE + ap in feed_links), ("sitemap.xml", BASE + ap in smap), ("page", os.path.exists(os.path.join(ROOT, ap)))):
             if not ok: problems.append(f"ledger {ap}: missing from {label}")
-print("\n".join(problems) if problems else f"✓ validate ok — {len(pages)} pages checked · {n_eds} edition(s) complete in archive, feed and sitemap · ePaper checked")
+print("\n".join(problems) if problems else f"✓ validate ok — {len(pages)} pages checked · {n_eds} edition(s) complete in archive, feed and sitemap · ePaper checked" + (f" · {len(_ready)} chart spec(s) prepared, not used yet: {', '.join(sorted(_ready))}" if _ready else ""))
 sys.exit(1 if problems else 0)

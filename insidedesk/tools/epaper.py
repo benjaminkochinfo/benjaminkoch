@@ -17,7 +17,25 @@ e = lambda s: html.escape(str(s if s is not None else ""), quote=True)
 EP_SLOT = {"am": ("Morning ePaper", "morning"), "pm": ("Evening ePaper", "evening"), "sun": ("Sunday Magazine", "sunday")}
 KIND = {"second": "Second story", "short": "Short item", "brief": "Brief"}
 ORDER = ["geoecon", "markets", "politics", "psych", "energy", "money", "ordinary", "tech", "health", "security", "climate"]
-DATA_SPREAD = ["brent-wti-spot", "ust10-above-five", "policy-rates-fed-ecb", "ea-hicp-vs-dfr"]
+DATA_SPREAD = ["brent-wti-spot", "ust10-above-five", "policy-rates-fed-ecb", "ea-hicp-vs-dfr"]   # fixed spread, Sunday 18 Oct 2026 only
+SPREAD_FIXED_UNTIL = dt.date(2026, 10, 18)   # later Sundays pick their "week in data" from the week's own editions
+SPREAD_FALLBACK = ["de-power-day-ahead", "rates-fed-ecb-21oct", "ea-hicp-dfr-21oct", "ust10-21oct"]   # top-up if the week had < 3 line charts
+
+def week_spread(ed, cfg, have):
+    """Line charts used by the editions of the week ending this Sunday (newest first), not already in `have`."""
+    specs, out = cfg["specs"], []
+    eds = sorted([x for x in cfg.get("EDS", []) if 0 < (ed["d"] - x["d"]).days <= 6], key=lambda x: x["pub"], reverse=True)
+    for c in [c for x in eds for a in x["arts"] for c in a.charts] + SPREAD_FALLBACK:
+        if c in specs and specs[c]["kind"] == "line" and c not in have and c not in out \
+                and os.path.exists(os.path.join(cfg["DESK"], "data", c + ".csv")):
+            out.append(c)
+    return out
+
+def bar_model(cid, spec, cfg, page_dir):
+    return {"id": cid, "kind": "hbar", "title": spec["title"], "subtitle": spec.get("subtitle", ""), "kicker": spec.get("kicker", ""),
+            "unit": spec.get("unit", ""), "source": spec.get("source_line", ""), "alt": spec.get("alt", ""),
+            "rows": [{"label": r["label"], "value": r["value"], "derived": bool(r.get("derived")), "note": r.get("note", "")} for r in spec["rows"]],
+            "csv": cfg["rel"](page_dir + "/index.html", f"insidedesk/data/{cid}.csv")}
 UPDATE_CLOSE = (22, 30)   # evening ePaper: live updates until 22:30 Berlin time
 HERE = os.path.dirname(os.path.abspath(__file__))
 ASSET_SRC = os.path.join(HERE, "epaper")
@@ -132,14 +150,18 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
     for a in arts:
         for c in a["charts"]:
             if c not in chart_ids: chart_ids.append(c)
-    if ed["slot"] == "sun":
+    fixed_spread = ed["slot"] == "sun" and ed["d"] <= SPREAD_FIXED_UNTIL
+    if fixed_spread:
         for c in DATA_SPREAD:
             if c in specs and c not in chart_ids and os.path.exists(os.path.join(cfg["DESK"], "data", c + ".csv")): chart_ids.append(c)
+    elif ed["slot"] == "sun":
+        chart_ids += week_spread(ed, cfg, chart_ids)
     charts = {c: chart_model(c, specs[c], cfg, iss["dir"]) for c in chart_ids if specs[c]["kind"] != "hbar"}
+    bars = {c: bar_model(c, specs[c], cfg, iss["dir"]) for c in chart_ids if specs[c]["kind"] == "hbar"}
 
     def chart_fig(cid, size="m"):
-        if cid not in charts: return ""
-        c = charts[cid]
+        if cid not in charts and cid not in bars: return ""
+        c = charts.get(cid) or bars[cid]
         return f'''<figure class="ichart ichart-{size}" data-chart="{e(cid)}">
   <figcaption><span class="ic-kicker">{e(c["kicker"])}</span><b class="ic-title">{e(c["title"])}</b><span class="ic-sub">{e(c["subtitle"])}</span></figcaption>
   <div class="ic-plot" role="img" aria-label="{e(c["alt"])}"><img class="ic-static" src="{R(f"insidedesk/charts/{cid}.svg")}" alt="" loading="lazy" decoding="async"><p class="ic-nojs">{e(c["alt"])}</p></div>
@@ -246,22 +268,22 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
         page("Weekend reading", "Weekend reading", f'''<h2 class="sec-big">Weekend reading</h2>
 <div class="wr-grid"><section class="wr-ledger" aria-labelledby="wr-l"><h3 id="wr-l" class="wr-h">{e(se["title"])}</h3><p class="st-dek">{e(se["dek"])}</p><ol class="wr-list">{items}</ol></section>
 <section class="wr-side" aria-labelledby="wr-c"><h3 id="wr-c" class="wr-h">The week in desk comments</h3><p class="st-dek">One line from each desk. Tap to read the piece behind it.</p><ol class="wr-comments">{comments}</ol></section></div>''', "weekend")
-    def latest_table(ids):
+    def latest_table(ids, per_chart=None):
         rows = []
         for cid in ids:
             ch = charts[cid]
-            for s in ch["series"]:
+            for s in [x for x in ch["series"] if not (per_chart and x["panel"])][:per_chart]:
                 if not s["points"]: continue
                 dd, v = s["points"][-1]
                 rows.append(f'<tr><th scope="row">{e(s["label"])}</th><td>{v:,.{ch["decimals"]}f}{e(ch["unit"])}</td><td>{dt.date.fromisoformat(dd):%-d %b %Y}</td><td>{e(ch["title"])}</td></tr>')
         return f'''<section class="ds-table" aria-labelledby="dst-h"><h3 id="dst-h" class="wr-h">Latest values</h3><table><thead><tr><th scope="col">Series</th><th scope="col">Value</th><th scope="col">Date</th><th scope="col">Chart</th></tr></thead><tbody>{"".join(rows)}</tbody></table>
-<p class="faint">Last data point of each series in the charts above, from the Inside Desk data archive. Sources under each chart.</p></section>'''
+<p class="faint">Last data point of {"the main series in each chart" if per_chart else "each series in the charts"} above, from the Inside Desk data archive. Sources under each chart.</p></section>'''
     ds = [x for x in chart_ids if x in charts]
     if ed["slot"] == "sun" and len(ds) >= 3:
-        ds = ds[-4:] if len(ds) > 4 else ds
+        ds = (ds[-4:] if len(ds) > 4 else ds) if fixed_spread else ds[:4]
         page("The week in data", "Data spread", f'''<h2 class="sec-big">The week in data</h2><p class="st-dek">Interactive: hover or tap for values, switch series on and off, change the time range.</p>
 <div class="ds-grid">{"".join(chart_fig(x, "ds") for x in ds[:2])}</div>''', "spread-l")
-        page("The week in data, continued", "Data spread", f'''<div class="ds-grid">{"".join(chart_fig(x, "ds") for x in ds[2:4])}</div>{latest_table(ds)}''', "spread-r")
+        page("The week in data, continued", "Data spread", f'''<div class="ds-grid">{"".join(chart_fig(x, "ds") for x in ds[2:4])}</div>{latest_table(ds, None if fixed_spread else 2)}''', "spread-r")
     elif ds:
         page("Charts and data", "Charts and data", f'''<h2 class="sec-big">Charts and data</h2><div class="ds-grid">{"".join(chart_fig(x, "ds") for x in ds[:2])}</div>{latest_table(ds[:2])}''', "data")
     if c:
@@ -363,10 +385,12 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
             "updates": [{"time": u["t"].isoformat(), "text": u["text"], "piece": u.get("piece")} for u in iss["updates"]],
             "title": ed["title"], "pages": [{"n": i, "title": p["title"], "section": p["section"], "kind": p["kind"]} for i, p in enumerate(pages, 1)],
             "articles": idx, "charts": charts, "pdf": iss["pdf"]}
+    if bars: meta["bars"] = bars   # horizontal bar charts, drawn by epaper-bars.js (only issues that have one load it)
     thumbs = "".join(f'<li><button class="th" data-goto="{i}" aria-label="Page {i}: {e(p["title"])}"><img src="thumbs/p{i:02d}.png" alt="" width="100" height="141" loading="lazy" decoding="async"><span>{i}</span></button></li>' for i, p in enumerate(pages, 1))
     upd = f' · <b class="upd" id="upd">Updated <time datetime="{iss["updated"].isoformat()}">{iss["updated"]:%H:%M}</time></b>' if iss["updated"] else ' <b class="upd" id="upd" hidden></b>'
     xadd = f' · extras added {iss["extras_added"]:%H:%M}' if xcount and ed["slot"] == "sun" else ""
     tpl = open(os.path.join(ASSET_SRC, "shell.tpl"), encoding="utf-8").read()
+    if bars: tpl = tpl.replace("</body>", '<script src="{{ASSETS}}epaper-bars.js" defer></script>\n</body>', 1)
     title = f"Inside Desk ePaper · {slot_name} · {d:%-d %B %Y}"
     desc = f"{slot_name}, {d:%-d %B %Y}: {ed['title']} {ed['standfirst']}"
     out = (tpl.replace("{{TITLE}}", e(title)).replace("{{DESC}}", e(desc)).replace("{{CANONICAL}}", e(cfg["BASE"] + iss["dir"] + "/"))
@@ -386,7 +410,7 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
             "desk_pages": {**{k + "+": n for k, n in desk_cont.items()}, **desk_page, **({"_lead": lead_pages[0]} if not lead_long else {})}, "limits": {k: fit.get(k, {}) for k in desk_page}}
 
 def copy_assets(cfg):
-    for f in ("epaper.css", "epaper.js"):
+    for f in ("epaper.css", "epaper.js", "epaper-bars.js"):
         cfg["write"](f"insidedesk/epaper/assets/{f}", open(os.path.join(ASSET_SRC, f), encoding="utf-8").read())
     cfg["write"]("insidedesk/epaper/sw.js", open(os.path.join(ASSET_SRC, "sw.js"), encoding="utf-8").read())
     cfg["write"]("insidedesk/epaper/manifest.webmanifest", json.dumps({
@@ -397,7 +421,8 @@ def copy_assets(cfg):
 def render_assets(iss, html_txt, json_txt, cfg, n_pages, force=False):
     """Thumbnails + PDF via headless Chrome (CDP, tools/epaper/render.mjs). Skipped when the inputs have not changed."""
     root = os.path.join(cfg["ROOT"], iss["dir"])
-    h = hashlib.sha256((html_txt + json_txt + "".join(open(os.path.join(ASSET_SRC, f), encoding="utf-8").read() for f in ("epaper.css", "epaper.js", "render.mjs"))).encode()).hexdigest()
+    assets = ("epaper.css", "epaper.js", "render.mjs") + (("epaper-bars.js",) if "epaper-bars.js" in html_txt else ())
+    h = hashlib.sha256((html_txt + json_txt + "".join(open(os.path.join(ASSET_SRC, f), encoding="utf-8").read() for f in assets)).encode()).hexdigest()
     hf = os.path.join(root, "render.sha256")
     have = all(os.path.exists(os.path.join(root, "thumbs", f"p{i:02d}.png")) for i in range(1, n_pages + 1)) and os.path.exists(os.path.join(root, iss["pdf"]))
     if not force and have and os.path.exists(hf) and open(hf).read().strip() == h:

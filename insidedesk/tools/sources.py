@@ -15,6 +15,9 @@ LICENCES = {
     "eurostat": "Eurostat. Reuse authorised under CC BY 4.0 (Commission Decision 2011/833/EU).",
     "ecb": "European Central Bank Data Portal. Reuse permitted with source acknowledgement.",
     "worldbank": "World Bank Open Data. CC BY 4.0.",
+    "fred-ecb": "European Central Bank deposit facility rate (ECBDFR) via FRED, Federal Reserve Bank of St. Louis. © European Central Bank; reuse permitted with source acknowledgement.",
+    "smard": "Bundesnetzagentur | SMARD.de, market data. CC BY 4.0.",
+    "meteofrance": "Météo-France, Données climatologiques de base quotidiennes (meteo.data.gouv.fr). Licence Ouverte / Etalab 2.0.",
     "reported": "Figures as reported by the named organisations; facts cited with attribution.",
 }
 
@@ -79,6 +82,27 @@ def worldbank(country, indicator, start=None):
     out.sort()
     return [p for p in out if not start or p[0] >= start]
 
+def smard(filter_id, region="DE", resolution="day", start=None):
+    """SMARD.de chart data (Bundesnetzagentur, CC BY 4.0). e.g. filter 4169 = day-ahead price DE-LU, EUR/MWh.
+    Dates are Berlin delivery days; delivery days after today (next-day auction results) are left out."""
+    import datetime as _dt, zoneinfo
+    tz = zoneinfo.ZoneInfo("Europe/Berlin")
+    base = f"https://www.smard.de/app/chart_data/{filter_id}/{region}/"
+    stamps = json.loads(_get(base + f"index_{resolution}.json"))["timestamps"]
+    t0 = _dt.datetime.fromisoformat(start).replace(tzinfo=tz).timestamp() * 1000 if start else 0
+    # a chunk starting before `start` can still hold points after it: keep the last chunk before start too
+    keep = [t for t in stamps if t >= t0]
+    prev = [t for t in stamps if t < t0]
+    if prev: keep = [prev[-1]] + keep
+    today = _dt.datetime.now(tz).date().isoformat()
+    pts = {}
+    for t in keep:
+        for ts, v in json.loads(_get(base + f"{filter_id}_{region}_{resolution}_{t}.json"))["series"]:
+            if v is None: continue
+            d = _dt.datetime.fromtimestamp(ts / 1000, tz).date().isoformat()
+            if (not start or d >= start) and d <= today: pts[d] = float(v)
+    return sorted(pts.items())
+
 def fetch(spec):
     """spec: dict with 'type' and parameters (from a chart YAML)."""
     t = spec["type"]
@@ -89,6 +113,8 @@ def fetch(spec):
         return ecb(spec["flow"], spec["key"], start)
     if t == "eurostat":
         return eurostat(spec["dataset"], start, **spec["filters"])
+    if t == "smard":
+        return smard(spec["filter"], spec.get("region", "DE"), spec.get("resolution", "day"), start)
     if t == "worldbank":
         return worldbank(spec["country"], spec["indicator"], start)
     if t == "static":

@@ -96,6 +96,7 @@ def fetch_chart_data(spec):
         src = dict(s["source"]); src.setdefault("start", spec.get("start"))
         pts = sources.fetch(src)
         if s.get("transform") == "month_end": pts = sources.month_end(pts)
+        if not pts: raise ValueError(f"source returned no data for series {s['key']!r}")
         cols[s["key"]] = pts
     for dv in spec.get("derive", []):
         a, op, b = dv["expr"].split()
@@ -1039,17 +1040,23 @@ def main():
     for cid in sorted(used):
         spec = specs[cid]
         if not args.offline and spec["kind"] != "hbar" and cid in fetch_ids:
-            print("  fetch", cid); fetch_chart_data(spec)
+            print("  fetch", cid)
+            try:
+                fetch_chart_data(spec)
+            except Exception as ex:   # one unreachable source must never stop a release: keep the last saved CSV
+                if not os.path.exists(os.path.join(DESK, "data", cid + ".csv")):
+                    raise SystemExit(f"  ! fetch failed for {cid} and there is no saved CSV to fall back on: {ex!r}")
+                print(f"  ! WARNING: fetch failed for {cid} ({type(ex).__name__}: {ex}); using the last saved CSV")
         svg, table = render_chart(spec)
         rendered[cid] = (spec, svg, table)
         if not args.no_png: chart_png(spec, svg)
         print("  chart", cid)
-    cfg = dict(TZ=TZ, CONTENT=CONTENT, DESK=DESK, ROOT=ROOT, BASE=BASE, HOME=HOME, DESKS=DESKS, rel=rel, write=write, specs=specs)
+    cfg = dict(TZ=TZ, CONTENT=CONTENT, DESK=DESK, ROOT=ROOT, BASE=BASE, HOME=HOME, DESKS=DESKS, rel=rel, write=write, specs=specs, EDS=eds + embargo)
     for ed in sorted(eds + embargo, key=lambda x: x["pub"]):
         iss = epaper.load_issue(ed, cfg)
         if not iss or iss["avail"] > now: continue
         iss["web_live"] = ed in eds
-        for c in epaper.DATA_SPREAD + [c for a in ed["arts"] for c in a.charts]:
+        for c in epaper.DATA_SPREAD + epaper.SPREAD_FALLBACK + [c for a in ed["arts"] for c in a.charts]:
             if c not in rendered and c in specs and os.path.exists(os.path.join(DESK, "data", c + ".csv")):
                 svg, table = render_chart(specs[c]); rendered[c] = (specs[c], svg, table)
                 if not args.no_png: chart_png(specs[c], svg)

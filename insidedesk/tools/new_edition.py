@@ -49,7 +49,7 @@ title: "Headline"
 dek: "One-sentence dek in the desk voice."
 desk: {desk}
 format: {fmt}    # lead | note | podium-vs-print | sunday | annex
-charts: []      # ids from insidedesk/content/charts/*.yaml, only where a chart carries the argument
+charts: []      # chart ids (insidedesk/content/charts/*.yaml) where data carries the story; the edition needs at least one, usually 2-3
 sources:
   - {{n: 1, title: "", publisher: "", url: "", date: ""}}
 watch:
@@ -57,7 +57,9 @@ watch:
 comment: ""
 ---
 {size} Real news or data from the last day or two, checked at the source. Cite with [1].
-Place a chart on its own line: [[chart:chart-id]]
+Charts: every edition carries at least one chart, usually 2-3, on pieces where data carries the story. Pick from
+/workspace/insidedesk/charts-ready.md or the dated specs (e.g. rates-fed-ecb-21oct), or create a new open-data spec with a NEW
+dated id (never refresh a shared id: published pages would change). Place it on its own line: [[chart:chart-id]]
 ''')
 extras = [f"{x}-{k}" for x in order for k in ("short", "brief")]
 open(os.path.join(root, "edition.yaml"), "a").write(f'''epaper:     # keep this block last; update_epaper.py edits it
@@ -79,4 +81,5 @@ sources:
 ---
 DRAFT: ePaper {kind}, {size}. A different story from the desk's website note: fresh news or data, checked at the source, cited with [1]. Delete this line.
 ''')
+print("reminder: at least one chart per edition, usually 2-3, where data carries the story (see tools/README.md, Charts)")
 print("created", os.path.relpath(root), "· lead desk:", lead, f"· {len(extras)} ePaper extras (drafts)")

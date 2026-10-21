@@ -1,0 +1,62 @@
+date: "2026-10-21"
+slot: pm
+published: "2026-10-21T17:30:00+02:00"
+title: "Trust the date on the notice."
+standfirst: "Berlin's tobacco-tax law came into force by mistake and the customs office simply kept the old rates until January. UNEP counted the gap between pledges and cuts, Britain printed 3.5% with most of it at the pump, and Europe's shares were sorted by quarterly results. Eleven desks, every number sourced."
+articles:
+  - the-law-said-today-the-customs-office-said-january
+  - europe-was-sorted-by-receipts-not-moods
+  - nine-ships-and-a-fire-off-bukha
+  - the-nurse-lost-and-the-patients-improved
+  - podium-vs-print-cheap-power-has-not-reached-germany
+  - britain-printed-three-point-five-at-the-pump
+  - ordinary-ledger-the-occasional-rider-waits
+  - a-data-centre-that-arrives-on-a-truck
+  - nigeria-is-the-fifth-country
+  - the-curfew-moved-to-eleven
+  - the-annex-the-point-of-return
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-21T17:30:00+02:00"
+  habit:
+    text: "This week, look up one river gauge near you, on PEGELONLINE in Germany or Vigicrues in France, and note two things: its usual level and its record low or high [1]. Kaub on the Rhine, for example, averaged 208 cm over 2010–2020, and its lowest low water was 25 cm in October 2018 [1]. With those two numbers written down, the next headline about a river has a ruler next to it."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "The machinery of climate policy is measurably working. UNEP's Emissions Gap Report 2026, published today, finds that global renewable electricity capacity has grown three times faster since the Paris Agreement than was anticipated, and solar seven times faster [2]. Across more than 220 policy evaluations, electricity-sector policies cut emissions by an average of 9% [2]. The report is blunt that the cuts are not yet fast enough; it is just as clear that the tools already exist and have been counted."
+  sentence: "A tax law took effect by mistake and the customs office quietly kept the old rates until January, UNEP counted how far the pledges fall short, and Germany's power auction is still waiting for the cheaper electricity Spain already has."
+  euros:
+    text: "A litre of Super E10 cost €2.110 on Wednesday's national average, 4.1 cents less than a week ago, while diesel rose 0.8 cents to €2.255, according to the ADAC [3]. Desk arithmetic: on a 50-litre fill, E10 is €2.05 cheaper than last week and diesel €0.40 dearer, and the gap between the two is now 14.5 cents a litre, or €7.25 a tank. The ADAC says most of the fuel-tax rebate now seems to be reaching the pump for petrol, while colder weather lifts heating-oil demand and with it diesel [3]."
+    note: "Desk arithmetic on the ADAC national averages. Local prices differ by station and time of day. Nothing here is advice."
+  small_words:
+    term: "Gauge zero"
+    text: "A river level such as \"Kaub 11 cm\" is not the depth of the water. It is measured from a fixed mark, the gauge zero, which at Kaub sits 67.669 metres above sea level [1]. The shipping channel lies well below that mark: the waterways administration guarantees a fairway depth of 190 cm at the reference low level of 77 cm on the gauge [1]. Desk arithmetic: at 11 cm, that is still roughly 124 cm of channel. Low, and expensive for barges, but not a dry riverbed."
+  sources:
+    - {n: 1, title: "PEGELONLINE: Kaub (Rhein), Wasserstand and characteristic values", publisher: "Wasserstraßen- und Schifffahrtsverwaltung des Bundes", url: "https://pegelonline.wsv.de/gast/pegelinformationen?gewaesser=RHEIN&pegel=KAUB", date: "21 Oct 2026, 16:15"}
+    - {n: 2, title: "New UNEP report lays out emission cuts needed for return to 1.5°C", publisher: "UN Environment Programme", url: "https://www.unep.org/en/news-and-stories/press-release/new-unep-report-lays-out-emission-cuts-needed-return-15degc", date: "21 Oct 2026, Nairobi"}
+    - {n: 3, title: "Wochenvergleich: Benzinpreis gibt nach / Diesel etwas teurer / Ölpreis legt weiter zu", publisher: "ADAC via news aktuell (Presseportal)", url: "https://www.presseportal.de/pm/7849/6375614", date: "21 Oct 2026, 15:39"}
+epaper:
+  available: "2026-10-21T17:30:00+02:00"
+  extras:
+    - the-unions-left-matignon-with-a-date
+    - flood-cover-by-default-not-by-decree
+    - jio-was-three-times-covered-by-teatime
+    - gold-fell-while-the-war-went-on
+    - lingen-and-the-fuel-rods-for-the-east
+    - berlin-rejects-the-libya-turkey-sea-line
+    - personality-moved-with-the-mood
+    - happy-scenes-beat-your-own-goals
+    - brent-rose-on-words-from-tehran
+    - europes-gas-stores-stopped-filling
+    - britain-owes-three-trillion
+    - lane-wants-the-euro-to-carry-policy-abroad
+    - petrol-fell-diesel-did-not
+    - heating-oil-at-one-seventy-four
+    - google-gave-away-the-npu-design
+    - nvidia-wants-agents-on-a-leash
+    - kenyas-cases-came-from-the-quarantine-list
+    - an-appointment-should-not-ask-your-insurer
+    - the-bundeswehr-raised-its-own-threat-level
+    - berlin-watches-the-31-october-marches
+    - gard-left-orange-the-rivers-did-not-yet
+    - the-rhine-gave-the-rain-back
+  updates: []

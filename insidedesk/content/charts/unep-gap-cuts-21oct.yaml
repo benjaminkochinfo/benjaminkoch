@@ -1,0 +1,15 @@
+id: unep-gap-cuts-21oct
+kind: hbar
+kicker: "Climate & Weather · Emissions Gap Report 2026"
+title: "What is needed, and what is pledged"
+subtitle: "Cut in global greenhouse gas emissions relative to 2025, %"
+unit: "%"
+rows:
+  - {label: "2030 — needed for the lowest 1.5°C overshoot path", value: 18, note: "UNEP EGR 2026"}
+  - {label: "2030 — all NDCs implemented (upper end of 5–8%)", value: 8, note: "UNEP EGR 2026, range 5–8%"}
+  - {label: "2035 — needed for the lowest 1.5°C overshoot path", value: 45, note: "UNEP EGR 2026"}
+  - {label: "2035 — all NDCs implemented (upper end of 11–15%)", value: 15, note: "UNEP EGR 2026, range 11–15%"}
+  - {label: "2040 — needed for the lowest 1.5°C overshoot path", value: 69, note: "UNEP EGR 2026"}
+licence: reported
+source_line: "UN Environment Programme, Emissions Gap Report 2026: The Point of Return (press release, Nairobi, 21 Oct 2026)"
+alt: "Bar chart of cuts in global greenhouse gas emissions relative to 2025 in UNEP's Emissions Gap Report 2026. The lowest 1.5°C overshoot path needs 18% by 2030, 45% by 2035 and 69% by 2040. Full implementation of national pledges (NDCs) gives 5–8% by 2030 and 11–15% by 2035; the bars show the upper ends, 8% and 15%."

@@ -1,0 +1,17 @@
+id: ust10-21oct
+kind: line
+kicker: "Markets · Rates"
+title: "The long rate stayed up"
+subtitle: "US 10-year Treasury yield, market yield at constant maturity, daily, %"
+unit: "%"
+label_decimals: 2
+start: "2026-01-01"
+series:
+  - key: ust10
+    label: "10-year yield"
+    source: {type: fred, id: DGS10}
+annotations:
+  - {date: "2026-09-15", text: "First close at 5%", anchor: end}
+licence: fred-h15
+source_line: "Board of Governors of the Federal Reserve System (H.15), DGS10, via FRED, St. Louis Fed · public domain"
+alt: "Line chart of the daily US 10-year Treasury yield since January 2026. It starts the year at 4.19%, is at its low of 3.97% on 27 February, rises through the summer, closes at 5% for the first time on 15 September, peaks at 5.31% on 5 October and is 5.15% on 19 October, the latest value."

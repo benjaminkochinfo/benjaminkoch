@@ -19,6 +19,10 @@ Health & Care · Security & Order · Climate & Weather (harvests, heat, storms, 
 energy-weather links). Shape: **one lead + ten desk notes** (a note may use the `podium-vs-print` or
 `annex` format instead of `note`).
 * Lead: 600–900 words, the day's main argument, a chart if one carries it.
+* **Charts (house rule): every edition carries at least one chart, usually 2–3**, on the pieces where data carries the
+  story (never decoration). Pick from `/workspace/insidedesk/charts-ready.md` or the existing dated specs
+  (`*-21oct` style), or create a new open-data spec. Prefer a **new dated id** (`rates-fed-ecb-21oct`) over refreshing
+  a shared one, because refreshing a shared id redraws every published page that uses it.
 * Notes: 3–6 short paragraphs each. A quiet desk still gets a brief note: brief is fine, empty is not.
 * Rotating depth: the lead desk rotates (the scaffold picks one by date and slot; override with a third argument),
   so each desk leads about once a week (eleven desks, two weekday slots). Give one or two notes extra depth per edition, preferably
@@ -73,6 +77,14 @@ describes the latest value. `--fetch id1,id2` narrows the fetch; `--fetch-all` r
   In articles the SVG is inlined with `<title>/<desc>`, a written description, a values table and download links.
 * Rules: a chart only where it carries the argument; no projections drawn as data; no Yahoo/Bloomberg/index-vendor
   data or anything whose terms forbid redistribution; never restyle per article — change `charts.py` once.
+* Quantity: at least one chart per edition, usually 2–3 (see "Writing an edition"). The coordinator or a writer may add
+  new open-data specs at any time: new dated id, `source_line`, `licence`, `alt` written against the latest value.
+* More sources: `smard` (Bundesnetzagentur day-ahead power etc., CC BY 4.0), FRED `ECBDFR` with licence `fred-ecb`
+  (the ECB Data Portal API is unreachable from the box, so prefer this for the ECB deposit rate), `static` with
+  licence `meteofrance` (Météo-France open data, Licence Ouverte 2.0). AGSI+ gas storage needs an API key (none set up).
+* Fetch failures never stop a build: if a source cannot be reached, `build.py` prints `! WARNING: fetch failed …` and
+  draws the chart from the last saved CSV. Only a brand-new chart without any CSV stops the build. After a warning, check
+  that the chart's `alt` text still matches the data it shows.
 
 ## ePaper
 
@@ -91,6 +103,11 @@ Built by `build.py` (module `epaper.py`, assets in `tools/epaper/`) for every ed
   over-long piece ("Continue in reading view"; the full text is always in the reading view) or gives a desk a
   continuation page, then renders thumbnails and the PDF. Unchanged issues are not re-rendered (`render.sha256`).
   Needs `node` (20+) and Chrome on the box; `--no-png` skips this step (validate will then report the missing assets).
+- Charts in the ePaper are interactive: line charts (hover/tap, series toggles, ranges) and, since 21 Oct 2026, bar
+  charts (`hbar`, hover/tap/arrow keys; drawn by `epaper/assets/epaper-bars.js`, loaded only by issues that have one).
+- Sunday "The week in data": from 25 Oct 2026 the spread is picked automatically: the Sunday pieces' own line charts,
+  then line charts used by that week's editions (newest first), topped up from `SPREAD_FALLBACK` in `epaper.py`.
+  Sunday 18 Oct keeps its original fixed spread (`DATA_SPREAD`), so the published issue does not change.
 - Links: header nav "ePaper", front-page module, "Read this edition as ePaper" on edition pages, archive rows, feed
   items (with the PDF as enclosure) and sitemap entries.
 

@@ -1,0 +1,9 @@
+# Inside Desk chart data: unep-gap-cuts-21oct
+"# Source: UN Environment Programme, Emissions Gap Report 2026: The Point of Return (press release, Nairobi, 21 Oct 2026)"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+2030 — needed for the lowest 1.5°C overshoot path,18,no,UNEP EGR 2026
+2030 — all NDCs implemented (upper end of 5–8%),8,no,"UNEP EGR 2026, range 5–8%"
+2035 — needed for the lowest 1.5°C overshoot path,45,no,UNEP EGR 2026
+2035 — all NDCs implemented (upper end of 11–15%),15,no,"UNEP EGR 2026, range 11–15%"
+2040 — needed for the lowest 1.5°C overshoot path,69,no,UNEP EGR 2026
