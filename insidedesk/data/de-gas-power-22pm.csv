@@ -1,7 +1,7 @@
 # Inside Desk chart data: de-gas-power-22pm
 "# Source: Bundesnetzagentur | SMARD.de, realised generation from natural gas, Germany (filter 4071), days to 21 Oct 2026 · CC BY 4.0"
 "# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
-# Retrieved: 2026-10-22T16:34+02:00
+# Retrieved: 2026-10-22T19:33+02:00
 date,gas
 2025-07-01,160349.75
 2025-07-02,151720.0
