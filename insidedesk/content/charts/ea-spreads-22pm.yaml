@@ -1,0 +1,15 @@
+id: ea-spreads-22pm
+kind: hbar
+kicker: "Money · Podium vs Print"
+title: "Every spread widened, France most"
+subtitle: "10-year government bond yield premium over German Bunds, basis points, Thursday 22 Oct 2026 (morning, as reported)"
+unit: " bp"
+rows:
+  - {label: "France", value: 173.58, note: "widest since Nov 2011"}
+  - {label: "Italy", value: 123, note: "+10.5 bp on the day"}
+  - {label: "Belgium", value: 111.28, note: "highest since 2012"}
+  - {label: "Greece", value: 102, note: "+8.5 bp on the day"}
+  - {label: "Spain", value: 71, note: "+7.5 bp on the day"}
+licence: reported
+source_line: "Reuters (Stefano Rebaudo), \"French debt risk premium reaches euro zone sovereign crisis levels\", 22 Oct 2026, via Investing.com"
+alt: "Bar chart of 10-year bond spreads over German Bunds on the morning of 22 October 2026, as reported by Reuters: France 173.58 basis points, its widest since November 2011; Italy 123; Belgium 111.28, its highest since 2012; Greece 102; Spain 71. All five widened on the day."

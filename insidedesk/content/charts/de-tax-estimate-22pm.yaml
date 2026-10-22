@@ -1,0 +1,13 @@
+id: de-tax-estimate-22pm
+kind: hbar
+kicker: "Inside Desk · Politics & Institutions"
+title: "The plus, and the two wishes"
+subtitle: "Federal budget 2027, € billion: new tax-estimate plus for the Bund against two proposed reliefs"
+unit: "€ bn"
+rows:
+  - {label: "Bund tax revenue 2027, plus vs May estimate", value: 4.1, note: "171st tax estimate, 22 Oct 2026 (dpa-AFX)"}
+  - {label: "Electricity tax cut to EU minimum, households and small firms, a year", value: 5.4, note: "expected annual cost (dpa-AFX)"}
+  - {label: "Offsetting 'cold progression' in 2027", value: 4.0, note: "about, extra cost next year (dpa-AFX)"}
+licence: reported
+source_line: "Arbeitskreis Steuerschätzungen, 171st estimate, as reported by dpa-AFX via onvista, 22 Oct 2026; cost figures as reported by dpa-AFX"
+alt: "Bar chart: the October tax estimate adds about €4.1 billion to federal tax revenue for 2027 compared with May, against an expected €5.4 billion a year for cutting the electricity tax to the EU minimum and about €4 billion for offsetting cold progression in 2027."

@@ -1,0 +1,16 @@
+id: us-young-adult-anxiety-22pm
+kind: hbar
+kicker: "Inside Desk · Psychology & Behaviour"
+title: "More of them, not more of it"
+subtitle: "US adults aged 18 to 25, National Health Interview Survey, % of respondents, 2020 and 2024"
+unit: "%"
+rows:
+  - {label: "Feel anxious every day, 2020", value: 15.0, note: "NHIS"}
+  - {label: "Feel anxious every day, 2024", value: 19.5, note: "NHIS"}
+  - {label: "Report an anxiety diagnosis, 2020", value: 17.9, note: "NHIS"}
+  - {label: "Report an anxiety diagnosis, 2024", value: 23.4, note: "NHIS"}
+  - {label: "Take prescription anxiety medication, 2020", value: 9.8, note: "NHIS"}
+  - {label: "Take prescription anxiety medication, 2024", value: 13.3, note: "NHIS"}
+licence: reported
+source_line: "Villodas et al., American Journal of Public Health (2026), DOI 10.2105/AJPH.2026.308632, as reported by George Mason University via Medical Xpress, 22 Oct 2026"
+alt: "Bar chart: among US adults aged 18 to 25, daily anxiety rose from 15% in 2020 to 19.5% in 2024, reported anxiety diagnoses from 17.9% to 23.4%, and prescription anxiety medication use from 9.8% to 13.3%."

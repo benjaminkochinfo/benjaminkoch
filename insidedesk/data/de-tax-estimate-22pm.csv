@@ -1,0 +1,7 @@
+# Inside Desk chart data: de-tax-estimate-22pm
+"# Source: Arbeitskreis Steuerschätzungen, 171st estimate, as reported by dpa-AFX via onvista, 22 Oct 2026; cost figures as reported by dpa-AFX"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Bund tax revenue 2027, plus vs May estimate",4.1,no,"171st tax estimate, 22 Oct 2026 (dpa-AFX)"
+"Electricity tax cut to EU minimum, households and small firms, a year",5.4,no,expected annual cost (dpa-AFX)
+Offsetting 'cold progression' in 2027,4.0,no,"about, extra cost next year (dpa-AFX)"

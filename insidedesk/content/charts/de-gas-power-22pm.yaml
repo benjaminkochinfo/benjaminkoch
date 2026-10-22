@@ -1,0 +1,17 @@
+id: de-gas-power-22pm
+kind: line
+kicker: "Energy · Power"
+title: "Germany burned a sixth less gas for power this October"
+subtitle: "Electricity generated from natural gas in Germany, realised, daily total, MWh"
+unit: ""
+label_decimals: 0
+start: "2025-07-01"
+series:
+  - key: gas
+    label: "Gas-fired generation DE"
+    source: {type: smard, filter: 4071, region: DE, resolution: day}
+annotations:
+  - {date: "2026-02-27", text: "War begins", anchor: end}
+licence: smard
+source_line: "Bundesnetzagentur | SMARD.de, realised generation from natural gas, Germany (filter 4071), days to 21 Oct 2026 · CC BY 4.0"
+alt: "Line chart of daily electricity generation from natural gas in Germany since July 2025, in megawatt hours. It rises each autumn and peaks in winter, at 417,047 MWh on 27 January 2026, and falls to a low of 43,247 MWh on 13 June 2026. Over 1 to 21 October 2026 gas plants generated about 3,421 gigawatt hours, against about 4,054 for the same days of 2025, roughly 16% less. The latest value, for Wednesday 21 October 2026, is 241,431 MWh, the highest daily total since 25 February 2026."

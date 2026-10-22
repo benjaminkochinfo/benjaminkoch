@@ -1,0 +1,9 @@
+# Inside Desk chart data: ea-spreads-22pm
+"# Source: Reuters (Stefano Rebaudo), ""French debt risk premium reaches euro zone sovereign crisis levels"", 22 Oct 2026, via Investing.com"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+France,173.58,no,widest since Nov 2011
+Italy,123,no,+10.5 bp on the day
+Belgium,111.28,no,highest since 2012
+Greece,102,no,+8.5 bp on the day
+Spain,71,no,+7.5 bp on the day

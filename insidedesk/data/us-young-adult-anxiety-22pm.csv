@@ -1,0 +1,10 @@
+# Inside Desk chart data: us-young-adult-anxiety-22pm
+"# Source: Villodas et al., American Journal of Public Health (2026), DOI 10.2105/AJPH.2026.308632, as reported by George Mason University via Medical Xpress, 22 Oct 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Feel anxious every day, 2020",15.0,no,NHIS
+"Feel anxious every day, 2024",19.5,no,NHIS
+"Report an anxiety diagnosis, 2020",17.9,no,NHIS
+"Report an anxiety diagnosis, 2024",23.4,no,NHIS
+"Take prescription anxiety medication, 2020",9.8,no,NHIS
+"Take prescription anxiety medication, 2024",13.3,no,NHIS

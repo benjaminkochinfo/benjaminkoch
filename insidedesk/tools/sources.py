@@ -19,6 +19,7 @@ LICENCES = {
     "fred-ecb": "European Central Bank deposit facility rate (ECBDFR) via FRED, Federal Reserve Bank of St. Louis. © European Central Bank; reuse permitted with source acknowledgement.",
     "smard": "Bundesnetzagentur | SMARD.de, market data. CC BY 4.0.",
     "meteofrance": "Météo-France, Données climatologiques de base quotidiennes (meteo.data.gouv.fr). Licence Ouverte / Etalab 2.0.",
+    "pegelonline": "Wasserstraßen- und Schifffahrtsverwaltung des Bundes (WSV), PEGELONLINE. Datenlizenz Deutschland – Zero – Version 2.0.",
     "reported": "Figures as reported by the named organisations; facts cited with attribution.",
 }
 

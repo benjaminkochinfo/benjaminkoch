@@ -1,0 +1,61 @@
+date: "2026-10-22"
+slot: pm
+published: "2026-10-22T17:30:00+02:00"
+title: "The price is for the risk, not the barrel."
+standfirst: "Oil rose on what might happen, not on what did. Germany paid more for power while burning less gas, Paris paid more than Washington to borrow, and the Rhine at Kaub has spent a month below its 2018 low. Eleven desks, every number sourced."
+articles:
+  - germany-burned-less-gas-and-paid-more
+  - paris-paid-more-than-washington
+  - podium-vs-print-fairly-soon-and-four-ships
+  - podium-vs-print-the-one-percent-met-the-debt-brake
+  - more-young-adults-feel-it-not-more-of-it
+  - podium-vs-print-no-fragmentation-wider-spreads
+  - ordinary-ledger-the-ticket-rises-the-light-one-waits
+  - the-fabs-are-built-the-cash-arrives
+  - who-calls-ebola-a-regional-test
+  - the-court-let-the-students-march
+  - kaub-spent-a-month-below-the-2018-low
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-22T17:30:00+02:00"
+  habit:
+    text: "This weekend, write down one reading from your own home: the gas or electricity meter, or the level in the oil tank. Do it again next weekend. Tonight's edition is full of gauges, from the Rhine at Kaub to the spread on French bonds, and the one in your hallway is the only one that tells you about your own winter."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Employers in the United States are still not letting people go. Initial claims for unemployment benefits fell to 194,000 in the week to 17 October, against 200,000 expected, close to the lowest levels since the late 1960s [1]. In a week of oil spikes and bond nerves, the dullest form in the system said the job you have is fairly safe."
+  sentence: "Oil got dearer because of what might happen rather than what did, Germany paid more for power while burning less gas, and France now pays more than the United States to borrow."
+  euros:
+    text: "Heating oil cost €172.72 per 100 litres on Thursday's German average, 0.38% less than on Wednesday, €2.34 more than a week ago and €39.50 more than three months ago [2]. Desk arithmetic: a 3,000-litre delivery costs about €5,182 today, some €1,185 more than the same order three months ago."
+    note: "Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice."
+  small_words:
+    term: "Spread"
+    text: "The extra interest one government pays over another to borrow for the same length of time, here measured against Germany. On Thursday France paid 173.58 basis points (1.7358 percentage points) more than Germany for ten-year money, the widest gap since November 2011 [3]. A basis point is a hundredth of a percentage point."
+  sources:
+    - {n: 1, title: "Jobless claims near the lowest since the 1960s as low-fire trend continues", publisher: "CNBC", url: "https://www.cnbc.com/2026/10/22/jobless-claims-record-low-weekly.html", date: "22 Oct 2026"}
+    - {n: 2, title: "Heizölpreise", publisher: "HeizOel24", url: "https://www.heizoel24.de/heizoelpreise", date: "22 Oct 2026, 16:24"}
+    - {n: 3, title: "French debt risk premium reaches euro zone sovereign crisis levels", publisher: "Reuters via Investing.com", url: "https://www.investing.com/news/economy-news/french-debt-risk-premium-reaches-euro-zone-sovereign-crisis-levels-4965495", date: "22 Oct 2026"}
+epaper:
+  available: "2026-10-22T17:30:00+02:00"
+  extras:
+    - a-valve-near-zawiya
+    - the-methane-clock-moved-to-2031
+    - barclays-cut-jobs-and-paid-shareholders
+    - hermes-grew-and-still-missed
+    - a-cheese-tariff-goes-to-court
+    - brussels-shelved-the-tuition-ask
+    - a-budget-is-an-achievement
+    - two-hours-is-not-a-lawyer
+    - the-smartest-computer-in-the-world
+    - the-pattern-not-the-count
+    - claims-fell-to-one-ninety-four-thousand
+    - the-oil-fund-lost-on-its-bonds
+    - petrol-gave-way-diesel-did-not
+    - seoul-sold-its-chipmakers-again
+    - nvidia-booked-substrate-lines-in-korea
+    - kenya-asked-for-ten-thousand-doses
+    - nigeria-read-the-strain-three-times
+    - aramco-sent-dhahran-home
+    - paris-is-taking-in-its-bins
+    - fifteen-departements-in-orange
+    - boelo-named-a-day-behind-austen
+  updates: []
