@@ -59,7 +59,11 @@ epaper:
   - fifteen-departements-in-orange
   - boelo-named-a-day-behind-austen
   - the-lander-asked-for-a-cap
+  - a-seven-under-the-high-plateau
   updates:
   - time: '2026-10-22T19:33:22+02:00'
     text: 'Ordinary: state premiers ask Berlin for a fuel-price cap before the lower fuel tax expires on 1 January'
     piece: the-lander-asked-for-a-cap
+  - time: '2026-10-22T22:00:26+02:00'
+    text: 'Climate & Weather: magnitude 7.0 earthquake in northern Tibet; early casualty reports still differ'
+    piece: a-seven-under-the-high-plateau
