@@ -1,0 +1,61 @@
+date: "2026-10-22"
+slot: am
+published: "2026-10-22T08:30:00+02:00"
+title: "Read the release before the reaction."
+standfirst: "A merger remark lifted Tesla before its quarter did, and companies that beat their forecasts fell anyway. Meta spent more on buildings than it brought in, and the wind came back to Germany's power auction. Eleven desks, every number sourced."
+articles:
+  - a-sentence-moved-the-price-before-the-quarter-did
+  - the-index-rose-the-long-rate-did-not-move
+  - ten-ships-and-a-letter-to-washington
+  - the-annex-letter-a-has-no-date
+  - the-wind-came-back-to-the-auction
+  - podium-vs-print-quite-close-depends-on-the-ruler
+  - ordinary-ledger-the-new-contract-pays-first
+  - meta-spent-more-than-it-took-in
+  - one-in-three-outside-the-centres
+  - paris-closed-its-squares-from-eight-to-eight
+  - austen-was-named-before-it-arrived
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-22T08:30:00+02:00"
+  habit:
+    text: "This week, when a company you know reports its quarter, skip the headline and find two lines in its own release: the cash its operations brought in and what it spent on buildings and equipment. Meta's release, for example, puts them side by side: $32.79 billion in, $34.91 billion out [1]. Two numbers from the source make the next day's commentary easier to weigh."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Nigeria's Ebola contact tracing is closing files, not only opening them. Ogun State said it had recorded no Ebola case as of 21 October, and 111 people under watch completed their monitoring period and were discharged; in Anambra, 33 of 40 contacts completed monitoring and were cleared, with seven still followed up [2]. Monitoring periods that end on schedule are what containment looks like when it works."
+  sentence: "A single remark moved Tesla's shares more than its quarter did, Meta spent more on data centres than its business brought in, and on Thursday the wind came back and cut Germany's wholesale power price by almost a third."
+  euros:
+    text: "Heating oil cost €173.38 per 100 litres on Thursday's German average for a 3,000-litre order, unchanged on the day, €3.00 more than a week ago and €40.16 more than three months ago [3]. Desk arithmetic: a 3,000-litre delivery costs about €5,201 today, some €1,205 more than the same order in July."
+    note: "Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice."
+  small_words:
+    term: "Free cash flow"
+    text: "The cash a business's operations bring in, minus what it spends on buildings and equipment. It is what is left to pay dividends, buy back shares or save. Meta's was minus $2.12 billion in the third quarter: $32.79 billion in, $34.91 billion spent, against plus $10.63 billion a year earlier [1]."
+  sources:
+    - {n: 1, title: "Meta Reports Third Quarter 2026 Results", publisher: "Meta Platforms", url: "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Third-Quarter-2026-Results/default.aspx", date: "21 Oct 2026"}
+    - {n: 2, title: "Ebola fears: FG, states on alert as infected diplomat suffers organ failure", publisher: "Punch", url: "https://punchng.com/ebola-fears-fg-states-on-alert-as-infected-diplomat-suffers-organ-failure/", date: "22 Oct 2026"}
+    - {n: 3, title: "Heizölpreise", publisher: "HeizOel24", url: "https://www.heizoel24.de/heizoelpreise", date: "22 Oct 2026, 05:13"}
+epaper:
+  available: "2026-10-22T06:34:26+02:00"
+  extras:
+    - the-tax-register-counted-the-generous
+    - older-memories-carry-more-facts
+    - att-beat-raised-and-fell
+    - without-constraints-or-fees
+    - canada-put-nine-billion-behind-its-mills
+    - lecornu-wrote-to-the-parties
+    - forty-six-complaints-to-the-ombudsman
+    - the-heating-oil-reserve-goes-on-loan
+    - crude-fell-three-million-barrels
+    - hauser-weighed-the-job-against-the-price
+    - bank-indonesia-held-and-raised-the-floor
+    - a-letter-will-cost-one-fifteen
+    - heating-oil-held-at-one-seventy-three
+    - lam-sold-the-tools-china-bought
+    - the-mainframe-paused-the-servers-did-not
+    - forty-six-names-on-a-no-fly-list
+    - a-medicaid-insurer-sees-a-plateau
+    - dammam-and-shaybah-in-one-day
+    - drones-over-toulon
+    - the-carbon-reserve-keeps-seven-hundred-million
+    - kaub-rose-again-overnight
+  updates: []

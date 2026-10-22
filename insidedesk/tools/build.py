@@ -1030,6 +1030,8 @@ def main():
     LATEST_SLOT = max(f"{x['d'].isoformat()} {x['slot_time']}" for x in eds)  # Berlin wall time of the newest covered slot
     se = load_ledger()
     used = {c for ed in eds for a in ed["arts"] for c in a.charts} | ({c for a in se["arts"] for c in a.charts} if se else set())
+    # An embargoed edition's ePaper can already be out (06:30 before the 08:30 website): its charts need data too.
+    used |= {c for ed in embargo for a in ed["arts"] for c in a.charts}
     print(f"Inside Desk build · {len(eds)} edition(s) · {sum(len(x['arts']) for x in eds)} article(s) · {len(used)} chart(s)")
     # Online fetch scope: charts used by the newest edition, plus charts with no CSV yet. Charts that only serve
     # older pieces stay as published. --fetch a,b narrows it; --fetch-all refreshes everything.

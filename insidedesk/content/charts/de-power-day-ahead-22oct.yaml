@@ -1,0 +1,17 @@
+id: de-power-day-ahead-22oct
+kind: line
+kicker: "Energy · Power"
+title: "A windy Thursday cleared 30% below Wednesday, in a dear October"
+subtitle: "Germany/Luxembourg day-ahead electricity price, daily average, € per MWh"
+unit: ""
+label_decimals: 2
+start: "2025-07-01"
+series:
+  - key: dayahead
+    label: "Day-ahead DE-LU"
+    source: {type: smard, filter: 4169, region: DE, resolution: day}
+annotations:
+  - {date: "2026-02-27", text: "War begins", anchor: end}
+licence: smard
+source_line: "Bundesnetzagentur | SMARD.de, day-ahead price DE-LU (filter 4169), delivery days to 22 Oct 2026 · CC BY 4.0"
+alt: "Line chart of the daily average German-Luxembourg day-ahead electricity price since July 2025, in euros per megawatt hour. Monthly averages stay between about €77 and €110 through July 2026, including the months after the war begins at the end of February; the daily low is −€16.34 on 5 April. The price climbs from August, averaging €144.82 in September with a daily high of €256.55 on 14 September, and €168.96 over 1 to 22 October, against €95.54 over the same days of 2025. The latest value, for delivery on Thursday 22 October 2026, is €148.61, down from €211.94 for Wednesday 21 October."
