@@ -60,7 +60,11 @@ epaper:
   - umm-al-quwain-closed-its-beaches
   - force-ten-in-the-channel
   - eight-days-of-diesel
+  - a-gas-with-no-substitute
   updates:
   - time: '2026-10-23T19:38:09+02:00'
     text: 'Energy: Germany lowers its oil reserve to 82 days; first Russian diesel heads for New York'
     piece: eight-days-of-diesel
+  - time: '2026-10-23T22:02:21+02:00'
+    text: 'Tech: the US lists helium as a critical material; Europe''s supply stays tight'
+    piece: a-gas-with-no-substitute
