@@ -37,26 +37,30 @@ articles:
 epaper:
   available: "2026-10-23T18:40:48+02:00"
   extras:
-    - four-dollars-twenty-nine
-    - saturday-trains-in-the-north
-    - the-fear-gauge-crossed-twenty
-    - telecoms-met-a-rocket-company
-    - eight-ministers-three-straits
-    - india-and-europe-set-a-date
-    - merz-goes-east-for-a-week
-    - seventy-five-years-with-islamabad
-    - a-bubble-said-kindly
-    - gucci-and-the-lack-of-interest
-    - brent-left-ninety-seven-behind
-    - the-bottleneck-is-electricians
-    - le-spread-stayed-above-170
-    - japan-found-two-point-four
-    - meta-printed-a-new-share
-    - an-upgrade-of-two-hundred-and-thirty-three-per-cent
-    - a-leak-cost-a-quarter
-    - flu-season-starts-in-november
-    - al-dasma-twice
-    - a-spy-case-in-brandenburg
-    - umm-al-quwain-closed-its-beaches
-    - force-ten-in-the-channel
-  updates: []
+  - four-dollars-twenty-nine
+  - saturday-trains-in-the-north
+  - the-fear-gauge-crossed-twenty
+  - telecoms-met-a-rocket-company
+  - eight-ministers-three-straits
+  - india-and-europe-set-a-date
+  - merz-goes-east-for-a-week
+  - seventy-five-years-with-islamabad
+  - a-bubble-said-kindly
+  - gucci-and-the-lack-of-interest
+  - brent-left-ninety-seven-behind
+  - the-bottleneck-is-electricians
+  - le-spread-stayed-above-170
+  - japan-found-two-point-four
+  - meta-printed-a-new-share
+  - an-upgrade-of-two-hundred-and-thirty-three-per-cent
+  - a-leak-cost-a-quarter
+  - flu-season-starts-in-november
+  - al-dasma-twice
+  - a-spy-case-in-brandenburg
+  - umm-al-quwain-closed-its-beaches
+  - force-ten-in-the-channel
+  - eight-days-of-diesel
+  updates:
+  - time: '2026-10-23T19:38:09+02:00'
+    text: 'Energy: Germany lowers its oil reserve to 82 days; first Russian diesel heads for New York'
+    piece: eight-days-of-diesel
