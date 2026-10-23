@@ -11,6 +11,7 @@ Content: the website edition (lead + one note per desk + closing) plus ePaper-on
 content/editions/<key>/epaper/*.md (kind: second | short | brief), each with its own real `published:` time.
 No placeholders: a desk page shows only pieces that exist."""
 import csv, datetime as dt, hashlib, html, json, os, re, shutil, subprocess
+import proc
 import markdown, yaml
 
 e = lambda s: html.escape(str(s if s is not None else ""), quote=True)
@@ -438,8 +439,8 @@ def render_assets(iss, html_txt, json_txt, cfg, n_pages, force=False):
     if os.path.isdir(os.path.join(root, "thumbs")):
         for f in os.listdir(os.path.join(root, "thumbs")):
             if f.endswith(".png"): os.unlink(os.path.join(root, "thumbs", f))
-    r = subprocess.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "render.mjs"), cfg["ROOT"], iss["dir"], str(n_pages), iss["pdf"], chrome],
-                       capture_output=True, text=True, timeout=600)
+    r = proc.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "render.mjs"), cfg["ROOT"], iss["dir"], str(n_pages), iss["pdf"], chrome],
+                       capture=True, timeout=600)
     print("  " + (r.stdout.strip() or r.stderr.strip()).replace("\n", "\n  "))
     if r.returncode != 0: raise SystemExit(f"ePaper render failed for {iss['dir']}")
     open(hf, "w").write(h + "\n")
@@ -452,8 +453,8 @@ def audit(iss, cfg):
     """Overflow in px per page (headless Chrome). {} when everything fits."""
     node, chrome = shutil.which("node"), (shutil.which("google-chrome") or shutil.which("chromium"))
     if not node or not chrome: return {}
-    r = subprocess.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "render.mjs"), cfg["ROOT"], iss["dir"], "0", "-", chrome, "audit"],
-                       capture_output=True, text=True, timeout=300)
+    r = proc.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "render.mjs"), cfg["ROOT"], iss["dir"], "0", "-", chrome, "audit"],
+                       capture=True, timeout=300)
     line = [l for l in r.stdout.splitlines() if l.startswith("{")]
     return {int(k): v for k, v in json.loads(line[-1]).items()} if line else {}
 
@@ -461,10 +462,42 @@ def cover_overflow(iss, cfg):
     """Pixels by which the cover (page 1) overflows; 0 when it fits (headless Chrome)."""
     node, chrome = shutil.which("node"), (shutil.which("google-chrome") or shutil.which("chromium"))
     if not node or not chrome: return 0
-    r = subprocess.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "cover-audit.mjs"), cfg["ROOT"], iss["dir"], chrome],
-                       capture_output=True, text=True, timeout=120)
+    r = proc.run([node, "--experimental-websocket", os.path.join(ASSET_SRC, "cover-audit.mjs"), cfg["ROOT"], iss["dir"], chrome],
+                       capture=True, timeout=120)
     line = [l for l in r.stdout.splitlines() if l.startswith("{")]
     return json.loads(line[-1]).get("cover", 0) if line else 0
+
+def fit_key(iss):
+    """Hash of an issue's unfitted pages plus the layout assets. Same key = the fit result is still valid."""
+    css = "".join(open(os.path.join(ASSET_SRC, f), encoding="utf-8").read() for f in ("epaper.css", "epaper.js"))
+    return hashlib.sha256((iss["html"] + iss["json"] + css).encode()).hexdigest()
+
+def _git_clean(root, rel):
+    """True when the file is tracked and identical to the last commit (i.e. it is the published version)."""
+    try:
+        r = subprocess.run(["git", "-C", root, "ls-files", "--error-unmatch", rel], capture_output=True)
+        if r.returncode: return False
+        return subprocess.run(["git", "-C", root, "diff", "--quiet", "HEAD", "--", rel]).returncode == 0
+    except OSError:
+        return False
+
+def kept_fit(iss, cfg):
+    """Published issues keep their fitted pages: when the unfitted input is unchanged (fit.sha256), the on-disk
+    index.html/edition.json are reused, so a Chrome update cannot re-measure, re-shorten and re-render an issue that
+    is already out. Bootstrap: an issue without fit.sha256 whose pages are committed and unmodified adopts them once.
+    Returns (html, json, meta) or None (fit as usual)."""
+    root = os.path.join(cfg["ROOT"], iss["dir"]); key = fit_key(iss)
+    hp, jp, kp = (os.path.join(root, f) for f in ("index.html", "edition.json", "fit.sha256"))
+    if not (os.path.exists(hp) and os.path.exists(jp)): return None
+    if os.path.exists(kp):
+        if open(kp).read().strip() != key: return None
+    elif not all(_git_clean(cfg["ROOT"], os.path.join(iss["dir"], f)) for f in ("index.html", "edition.json", "render.sha256")):
+        return None
+    else:
+        open(kp, "w").write(key + "\n")
+    h, j = open(hp, encoding="utf-8").read(), open(jp, encoding="utf-8").read()
+    meta = dict(iss["meta"]); meta["pages"] = len(json.loads(j)["pages"])
+    return h, j, meta
 
 def fit_issue(iss, cfg, se, web_live, now):
     """Render, measure in headless Chrome, and shorten the on-page part of over-long desk pages (the whole text is

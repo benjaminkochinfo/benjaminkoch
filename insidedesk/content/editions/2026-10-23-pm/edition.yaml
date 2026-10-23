@@ -1,0 +1,62 @@
+date: "2026-10-23"
+slot: pm
+published: "2026-10-23T18:40:48+02:00"
+title: "The wind paid for Friday. The tank did not."
+standfirst: "Wholesale power fell by a third because the wind came back; heating oil and Brent kept climbing because the Gulf did not calm down. Europe's business surveys cooled, chip stocks learned what \"off the charts\" costs, and the Rhine at Kaub held above its 2018 line all day."
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-23T18:40:48+02:00"
+  habit:
+    text: "Before Monday, find the date your electricity or gas contract ends, and the notice period, and write both on this month's page of your calendar. Tonight's edition is about prices that move without asking you. The end date of your contract is the one price moment you get to choose."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Euro-area factories are selling abroad again. New export orders rose for a third month in a row in October, after nearly four and a half years of declines, according to the flash PMI survey [1]. On a day when growth slowed and France shrank, the line about customers abroad pointed the right way."
+  sentence: "The wind made Friday's electricity cheaper, the Gulf made oil dearer, and a survey of purchasing managers told the ECB it can afford to wait."
+  euros:
+    text: "Heating oil cost €174.25 per 100 litres on Friday's German average, 0.90% more than on Thursday, €4.96 more than a week ago and €40.21 more than three months ago [2]. Desk arithmetic: a 3,000-litre delivery costs about €5,227.50 today, some €1,206 more than the same order three months ago."
+    note: "Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice."
+  small_words:
+    term: "Day-ahead auction"
+    text: "The daily auction in which electricity for each hour of the next day is bought and sold. Germany and Luxembourg share one price zone; Friday's average came to €137.59 per megawatt hour [3]. Desk arithmetic: that is 13.8 cents per kilowatt hour, before grid fees, taxes and levies."
+  sources:
+    - {n: 1, title: "Euro zone growth slows to 4-month low amid rising costs and French strife, survey shows", publisher: "Reuters via Investing.com", url: "https://www.investing.com/news/economic-indicators/euro-zone-growth-slows-to-4month-low-amid-rising-costs-and-french-turmoil-pmi-shows-4968292", date: "23 Oct 2026"}
+    - {n: 2, title: "Heizölpreise aktuell für Deutschland", publisher: "HeizOel24", url: "https://www.heizoel24.de/heizoelpreise", date: "23 Oct 2026, 16:26"}
+    - {n: 3, title: "Day-ahead price DE-LU, daily (filter 4169)", publisher: "Bundesnetzagentur | SMARD.de", url: "https://www.smard.de/home/marktdaten", date: "retrieved 23 Oct 2026, 16:45 CEST"}
+articles:
+  - the-wind-paid-for-friday-the-tank-did-not
+  - oil-bought-the-war-bonds-bought-the-fear
+  - podium-vs-print-more-oil-than-before-and-six-ships
+  - podium-vs-print-a-promise-to-keep-and-five-point-four-billion
+  - britons-felt-worse-faster-than-they-spent-less
+  - eleven-refineries-and-a-dialogue
+  - the-survey-cooled-the-committee
+  - podium-vs-print-off-the-charts-and-six-point-seven-per-cent
+  - ebola-passed-nine-thousand-seven-hundred
+  - trappes-and-the-seventy-thousand
+  - the-storm-went-west-the-rhine-got-a-day
+epaper:
+  available: "2026-10-23T18:40:48+02:00"
+  extras:
+    - four-dollars-twenty-nine
+    - saturday-trains-in-the-north
+    - the-fear-gauge-crossed-twenty
+    - telecoms-met-a-rocket-company
+    - eight-ministers-three-straits
+    - india-and-europe-set-a-date
+    - merz-goes-east-for-a-week
+    - seventy-five-years-with-islamabad
+    - a-bubble-said-kindly
+    - gucci-and-the-lack-of-interest
+    - brent-left-ninety-seven-behind
+    - the-bottleneck-is-electricians
+    - le-spread-stayed-above-170
+    - japan-found-two-point-four
+    - meta-printed-a-new-share
+    - an-upgrade-of-two-hundred-and-thirty-three-per-cent
+    - a-leak-cost-a-quarter
+    - flu-season-starts-in-november
+    - al-dasma-twice
+    - a-spy-case-in-brandenburg
+    - umm-al-quwain-closed-its-beaches
+    - force-ten-in-the-channel
+  updates: []

@@ -103,6 +103,9 @@ Built by `build.py` (module `epaper.py`, assets in `tools/epaper/`) for every ed
   over-long piece ("Continue in reading view"; the full text is always in the reading view) or gives a desk a
   continuation page, then renders thumbnails and the PDF. Unchanged issues are not re-rendered (`render.sha256`).
   Needs `node` (20+) and Chrome on the box; `--no-png` skips this step (validate will then report the missing assets).
+- Chrome housekeeping (`tools/proc.py`): every headless Chrome of a build keeps its profile and temp files in one
+  per-run dir (`$TMPDIR/insidedesk-build-<pid>-*`, exported as `INSIDEDESK_RUN_TMP` and `TMPDIR`). On exit, also on
+  error, Ctrl-C or SIGTERM, the build kills any Chrome left from the run and removes that dir.
 - Charts in the ePaper are interactive: line charts (hover/tap, series toggles, ranges) and, since 21 Oct 2026, bar
   charts (`hbar`, hover/tap/arrow keys; drawn by `epaper/assets/epaper-bars.js`, loaded only by issues that have one).
 - Sunday "The week in data": from 25 Oct 2026 the spread is picked automatically: the Sunday pieces' own line charts,

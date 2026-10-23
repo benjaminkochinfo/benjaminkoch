@@ -15,7 +15,7 @@ from email.utils import format_datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import yaml, markdown  # pip install pyyaml markdown
-import sources, charts, epaper
+import sources, charts, epaper, proc
 
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))      # repo root
 DESK = os.path.join(ROOT, "insidedesk")
@@ -174,13 +174,18 @@ def font_css_abs():
 def chrome_shot(html_text, out_path, w, h, scale=1):
     chrome = shutil.which("google-chrome") or shutil.which("chromium") or shutil.which("chromium-browser")
     if not chrome: print("  ! no Chrome found, skipping", out_path); return False
-    with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8") as t:
-        t.write(html_text); tmp = t.name
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
-    subprocess.run([chrome, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
-                    f"--force-device-scale-factor={scale}", f"--window-size={w},{h}", "--virtual-time-budget=3000",
-                    f"--screenshot={out_path}", "file://" + tmp], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=90)
-    os.unlink(tmp); return os.path.exists(out_path)
+    work = tempfile.mkdtemp(prefix="shot-")   # inside the per-run dir (proc.run_dir sets TMPDIR); removed below
+    try:
+        tmp = os.path.join(work, "page.html")
+        with open(tmp, "w", encoding="utf-8") as t: t.write(html_text)
+        proc.run([chrome, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
+                  f"--user-data-dir={os.path.join(work, 'profile')}",
+                  f"--force-device-scale-factor={scale}", f"--window-size={w},{h}", "--virtual-time-budget=3000",
+                  f"--screenshot={out_path}", "file://" + tmp], timeout=90)
+    finally:
+        shutil.rmtree(work, ignore_errors=True)
+    return os.path.exists(out_path)
 
 def chart_png(spec, svg):
     m = re.search(r'viewBox="0 0 (\d+) (\d+)"', svg); w, h = int(m.group(1)), int(m.group(2))
@@ -1100,10 +1105,16 @@ def main():
     if EP:
         epaper.copy_assets(cfg)
         for iss in EP.values():
-            write(iss["dir"] + "/index.html", iss["html"]); write(iss["dir"] + "/edition.json", iss["json"])
-            if not args.no_png:   # fit pass: measured in headless Chrome, so no page is clipped
+            kept = None if args.no_png else epaper.kept_fit(iss, cfg)   # unchanged issue: keep its fitted pages
+            if kept:
+                iss["html"], iss["json"], iss["meta"] = kept
+            else:
+                pre = epaper.fit_key(iss)
+                write(iss["dir"] + "/index.html", iss["html"]); write(iss["dir"] + "/edition.json", iss["json"])
+            if not args.no_png and not kept:   # fit pass: measured in headless Chrome, so no page is clipped
                 iss["html"], iss["json"], iss["meta"], over = epaper.fit_issue(iss, cfg, *iss["args"])
                 if over: print("  ! ePaper overflow (px by page):", over)
+                write(iss["dir"] + "/fit.sha256", pre + "\n")
             print("  epaper", iss["dir"], f'{iss["meta"]["pages"]} pages, {iss["meta"]["pieces"]} pieces')
             if not args.no_png:
                 epaper.render_assets(iss, iss["html"], iss["json"], cfg, iss["meta"]["pages"])
@@ -1118,4 +1129,5 @@ def main():
     print("done.")
 
 if __name__ == "__main__":
-    main()
+    with proc.run_dir():   # all headless-Chrome profiles/temp files of this run; removed (and Chrome killed) on exit
+        main()
