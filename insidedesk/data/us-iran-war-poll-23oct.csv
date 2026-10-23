@@ -1,0 +1,10 @@
+# Inside Desk chart data: us-iran-war-poll-23oct
+"# Source: Reuters/Ipsos mid-October survey topline, interviews 16–19 Oct 2026, conducted by Ipsos (KnowledgePanel), ipsos.com"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Approve of US military strikes against Iran,34,no,Reuters/Ipsos
+Disapprove of US military strikes against Iran,61,no,Reuters/Ipsos
+"Say it has been worth it, costs and benefits considered",23,no,Reuters/Ipsos
+Say it has not been worth it,54,no,Reuters/Ipsos
+Approve of Trump's handling of Iran,25,no,Reuters/Ipsos
+Think the administration has a clear strategy,16,no,Reuters/Ipsos

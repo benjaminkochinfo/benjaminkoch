@@ -1,0 +1,8 @@
+# Inside Desk chart data: ten-year-yields-23oct
+"# Source: Reuters (Stella Qiu), ""Asian shares wobble as tech rout boosts bonds, dents rate hike bets"", 23 Oct 2026 03:50, via Euronext"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Australia,5.164,no,down 10 bp
+France,5.0601,no,"up 6 bp, highest since 2002"
+United States,4.9591,no,"down 19+ bp, most since Mar 2023"
+Japan,2.79,no,down 9 bp

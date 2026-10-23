@@ -1,0 +1,19 @@
+id: measles-infant-seropositive-23oct
+kind: hbar
+kicker: "Inside Desk · Health"
+title: "By six months, most babies had lost their mothers' measles shield"
+subtitle: "US infants with detectable measles neutralising antibodies, % of 92 mother-infant pairs, by age and virus strain"
+unit: "%"
+rows:
+  - {label: "Vaccine strain (Edmonston), at birth", value: 96.7, note: "IDWeek 2026"}
+  - {label: "Vaccine strain (Edmonston), 2 months", value: 89.1, note: "IDWeek 2026"}
+  - {label: "Vaccine strain (Edmonston), 6 months", value: 8.7, note: "IDWeek 2026"}
+  - {label: "Wild type B3, at birth", value: 98.9, note: "IDWeek 2026"}
+  - {label: "Wild type B3, 2 months", value: 91.3, note: "IDWeek 2026"}
+  - {label: "Wild type B3, 6 months", value: 19.6, note: "IDWeek 2026"}
+  - {label: "Wild type D8, at birth", value: 98.9, note: "IDWeek 2026"}
+  - {label: "Wild type D8, 2 months", value: 91.3, note: "IDWeek 2026"}
+  - {label: "Wild type D8, 6 months", value: 17.4, note: "IDWeek 2026"}
+licence: reported
+source_line: "Creech CB et al., presented at IDWeek, Washington, 21-24 Oct 2026, as reported by Healio, 22 Oct 2026"
+alt: "Bar chart: the share of 92 US infants with detectable measles neutralising antibodies was 96.7% at birth, 89.1% at two months and 8.7% at six months for the vaccine strain; 98.9%, 91.3% and 19.6% for wild type B3; and 98.9%, 91.3% and 17.4% for wild type D8."

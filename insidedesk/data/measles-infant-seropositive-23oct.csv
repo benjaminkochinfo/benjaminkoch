@@ -1,0 +1,13 @@
+# Inside Desk chart data: measles-infant-seropositive-23oct
+"# Source: Creech CB et al., presented at IDWeek, Washington, 21-24 Oct 2026, as reported by Healio, 22 Oct 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Vaccine strain (Edmonston), at birth",96.7,no,IDWeek 2026
+"Vaccine strain (Edmonston), 2 months",89.1,no,IDWeek 2026
+"Vaccine strain (Edmonston), 6 months",8.7,no,IDWeek 2026
+"Wild type B3, at birth",98.9,no,IDWeek 2026
+"Wild type B3, 2 months",91.3,no,IDWeek 2026
+"Wild type B3, 6 months",19.6,no,IDWeek 2026
+"Wild type D8, at birth",98.9,no,IDWeek 2026
+"Wild type D8, 2 months",91.3,no,IDWeek 2026
+"Wild type D8, 6 months",17.4,no,IDWeek 2026

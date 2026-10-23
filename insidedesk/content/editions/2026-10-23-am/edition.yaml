@@ -1,0 +1,61 @@
+date: "2026-10-23"
+slot: am
+published: "2026-10-23T08:40:57+02:00"
+title: "The bonds caught what the shares dropped."
+standfirst: "Tech shares had their worst day since June, and the long rate fell further than it has since March 2023. The wind cut Germany's power price by a third, the Rhine at Kaub climbed back over its 2018 low, and a poll answered the podium. Eleven desks, every number sourced."
+articles:
+  - the-market-met-before-the-committees
+  - capital-became-the-scarce-input
+  - a-comment-period-for-capital
+  - podium-vs-print-they-love-it-and-thirty-four-per-cent
+  - the-child-sets-the-rules-too
+  - the-wind-did-what-the-strait-could-not
+  - ordinary-ledger-the-cheapest-tariff-climbed
+  - the-annex-western-digital-priced-the-exabyte
+  - the-shield-wears-off-at-six-months
+  - airports-pipelines-and-interceptors
+  - kaub-climbed-back-over-the-2018-line
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-23T08:40:57+02:00"
+  habit:
+    text: "This week, find two lines on your electricity paperwork: the price per kilowatt-hour you actually pay and the date your contract can end. Write them down somewhere you will see them again. Today's Ordinary Ledger shows how far apart the cheapest new-customer tariff and basic supply can sit; knowing your own two numbers makes the next headline about tariffs easier to read."
+    note: "A habit, not advice. Nothing here tells you what to buy, sign or switch."
+  went_right:
+    text: "Kenya says it traced 135 contacts of its first Ebola death and has accounted for all of them, \"100 per cent\" in the health ministry's words [1]. Contact lists that close completely are the dull, decisive work of containment."
+  sentence: "When tech shares fell, bonds caught the drop; in Germany the wind cut the wholesale power price by about a third in two days, and the Rhine at Kaub climbed back over its 2018 low."
+  euros:
+    text: "Heating oil costs €172.71 per 100 litres on Friday's German average for a 3,000-litre order, unchanged on the day, €3.42 more than a week ago and €38.67 more than three months ago [2]. Desk arithmetic: a 3,000-litre delivery costs about €5,181 today, some €1,160 more than the same order three months ago."
+    note: "Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice."
+  small_words:
+    term: "Basis point"
+    text: "One hundredth of a percentage point, the unit bond markets use for small moves in interest rates. When the US ten-year yield fell by more than 19 basis points overnight, its biggest fall since March 2023, it dropped by roughly 0.19 of a percentage point; on Friday it stood at 4.9591% [3]."
+  sources:
+    - {n: 1, title: "DR Congo: Ebola responders under pressure as outbreak expands", publisher: "UN News", url: "https://news.un.org/en/story/2026/10/1168647", date: "22 Oct 2026"}
+    - {n: 2, title: "Heizölpreise aktuell für Deutschland", publisher: "HeizOel24", url: "https://www.heizoel24.de/heizoelpreise", date: "23 Oct 2026, 05:09"}
+    - {n: 3, title: "Asian shares wobble, tech rout boosts bonds, dents rate hike bets", publisher: "Reuters via Euronext", url: "https://live.euronext.com/en/financial-news/asian-shares-wobble-tech-rout-boosts-bonds-dents-rate-hike-bets", date: "23 Oct 2026"}
+epaper:
+  available: "2026-10-23T08:40:57+02:00"
+  extras:
+    - green-tea-rose-a-third-rice-fell-a-fifth
+    - gold-did-not-hide-anyone
+    - lower-yields-lifted-the-homebuilders
+    - solidigm-put-its-listing-away
+    - aramco-wants-tanks-abroad
+    - a-sanction-on-a-fuel-supplier
+    - the-berlin-process-asked-for-speed
+    - senators-asked-for-the-diesel-files
+    - depression-and-a-smaller-subfield
+    - progesterone-is-not-a-switch
+    - europe-bought-less-lng-than-last-october
+    - fifteen-dollars-between-two-barrels
+    - heating-oil-at-one-seventy-two-seventy-one
+    - e10-at-two-zero-seven-before-dawn
+    - appfolio-runs-the-rent-ledger
+    - a-vaccine-for-another-strain
+    - one-hundred-thirty-five-contacts-all-found
+    - two-hundred-and-seventeen-jailed
+    - no-bets-on-the-mission
+    - normandy-stopped-its-trains-before-the-wind
+    - baqen-counted-sixteen-dead
+  updates: []

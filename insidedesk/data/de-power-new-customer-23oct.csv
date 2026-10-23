@@ -1,0 +1,12 @@
+# Inside Desk chart data: de-power-new-customer-23oct
+"# Source: StromAuskunft daily evaluation of tariffs in more than 6,300 towns, as reported by Berliner Zeitung, 22 Oct 2026, 17:25 (March, May and July not reported)"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+January,23.84,no,StromAuskunft
+February,23.9,no,StromAuskunft
+April (interim high),27.24,no,StromAuskunft
+June,23.47,no,StromAuskunft
+August,27.03,no,StromAuskunft
+September,27.78,no,StromAuskunft
+22 October,30.64,no,StromAuskunft
+"Basic supply (Grundversorgung), 22 October",40.39,no,StromAuskunft

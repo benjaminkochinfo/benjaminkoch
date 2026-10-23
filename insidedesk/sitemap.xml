@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Inside Desk only. The front page https://benjaminkoch.info/InsideDesk.html lives outside /insidedesk/; submit it in Search Console. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://benjaminkoch.info/insidedesk/archive.html</loc><lastmod>2026-10-22</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/method.html</loc><lastmod>2026-10-22</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/support.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/archive.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/method.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/support.html</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/ledger/2026.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/01/03/a-president-removed-a-barrel-unimpressed.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/02/20/the-court-sends-the-invoice-back.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -15,6 +15,18 @@
   <url><loc>https://benjaminkoch.info/insidedesk/2026/08/27/six-months-five-ships-a-day.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/09/16/the-bypass-breaks-both-banks-hike.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/13/resilience-is-an-inventory.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/morning.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/the-market-met-before-the-committees.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/capital-became-the-scarce-input.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/a-comment-period-for-capital.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/podium-vs-print-they-love-it-and-thirty-four-per-cent.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/the-child-sets-the-rules-too.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/the-wind-did-what-the-strait-could-not.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/ordinary-ledger-the-cheapest-tariff-climbed.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/the-annex-western-digital-priced-the-exabyte.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/the-shield-wears-off-at-six-months.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/airports-pipelines-and-interceptors.html</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/10/23/kaub-climbed-back-over-the-2018-line.html</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/22/evening.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/22/germany-burned-less-gas-and-paid-more.html</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/22/paris-paid-more-than-washington.html</loc><lastmod>2026-10-22</lastmod></url>
@@ -135,7 +147,7 @@
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/a-circuit-breaker-is-a-pause-not-a-verdict.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/the-slowest-emergency-has-a-known-fix.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/el-nino-sends-its-invoices-by-river-field-and-claim-form.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/epaper/index.html</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/epaper/index.html</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/18/sunday/</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/19/morning/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/19/evening/</loc><lastmod>2026-10-19</lastmod></url>
@@ -145,4 +157,5 @@
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/21/evening/</loc><lastmod>2026-10-21</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/22/morning/</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/22/evening/</loc><lastmod>2026-10-22</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/23/morning/</loc><lastmod>2026-10-23</lastmod></url>
 </urlset>

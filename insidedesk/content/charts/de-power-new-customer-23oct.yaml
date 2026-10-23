@@ -1,0 +1,18 @@
+id: de-power-new-customer-23oct
+kind: hbar
+kicker: "Inside Desk · Ordinary Ledger"
+title: "The cheapest tariff climbed back to 30.64 cents"
+subtitle: "Germany, average of the cheapest new-customer electricity tariffs, cents per kWh, 2026, and basic supply for comparison"
+unit: "ct/kWh"
+rows:
+  - {label: "January", value: 23.84, note: "StromAuskunft"}
+  - {label: "February", value: 23.90, note: "StromAuskunft"}
+  - {label: "April (interim high)", value: 27.24, note: "StromAuskunft"}
+  - {label: "June", value: 23.47, note: "StromAuskunft"}
+  - {label: "August", value: 27.03, note: "StromAuskunft"}
+  - {label: "September", value: 27.78, note: "StromAuskunft"}
+  - {label: "22 October", value: 30.64, note: "StromAuskunft"}
+  - {label: "Basic supply (Grundversorgung), 22 October", value: 40.39, note: "StromAuskunft"}
+licence: reported
+source_line: "StromAuskunft daily evaluation of tariffs in more than 6,300 towns, as reported by Berliner Zeitung, 22 Oct 2026, 17:25 (March, May and July not reported)"
+alt: "Bar chart: the average cheapest new-customer electricity tariff in Germany was 23.84 cents per kWh in January and 23.90 in February, 27.24 in April, 23.47 in June, 27.03 in August, 27.78 in September and 30.64 cents on 22 October 2026, the latest value. Basic supply averaged 40.39 cents on 22 October."

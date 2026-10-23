@@ -1,0 +1,16 @@
+id: us-iran-war-poll-23oct
+kind: hbar
+kicker: "Inside Desk · Politics & Power"
+title: "The podium says they love it; the panel says 34%"
+subtitle: "US adults, Reuters/Ipsos survey, 16–19 October 2026, % of all respondents (n = 1,679, margin of error ±2.4 points)"
+unit: "%"
+rows:
+  - {label: "Approve of US military strikes against Iran", value: 34, note: "Reuters/Ipsos"}
+  - {label: "Disapprove of US military strikes against Iran", value: 61, note: "Reuters/Ipsos"}
+  - {label: "Say it has been worth it, costs and benefits considered", value: 23, note: "Reuters/Ipsos"}
+  - {label: "Say it has not been worth it", value: 54, note: "Reuters/Ipsos"}
+  - {label: "Approve of Trump's handling of Iran", value: 25, note: "Reuters/Ipsos"}
+  - {label: "Think the administration has a clear strategy", value: 16, note: "Reuters/Ipsos"}
+licence: reported
+source_line: "Reuters/Ipsos mid-October survey topline, interviews 16–19 Oct 2026, conducted by Ipsos (KnowledgePanel), ipsos.com"
+alt: "Bar chart from the Reuters/Ipsos survey of 16 to 19 October 2026: 34% of US adults approve of US military strikes against Iran and 61% disapprove; 23% say the action has been worth it and 54% say it has not; 25% approve of Trump's handling of Iran; 16% think the administration has a clear strategy."

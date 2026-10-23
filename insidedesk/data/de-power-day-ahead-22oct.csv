@@ -1,7 +1,7 @@
 # Inside Desk chart data: de-power-day-ahead-22oct
 "# Source: Bundesnetzagentur | SMARD.de, day-ahead price DE-LU (filter 4169), delivery days to 22 Oct 2026 · CC BY 4.0"
 "# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
-# Retrieved: 2026-10-22T22:00+02:00
+# Retrieved: 2026-10-23T08:17+02:00
 date,dayahead
 2025-07-01,138.36
 2025-07-02,103.89
@@ -482,3 +482,4 @@ date,dayahead
 2026-10-20,195.66
 2026-10-21,211.94
 2026-10-22,148.61
+2026-10-23,137.59
