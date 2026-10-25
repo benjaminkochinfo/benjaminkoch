@@ -1,0 +1,8 @@
+# Inside Desk chart data: france-protests-25oct
+"# Source: French Interior Ministry figures as reported by franceinfo, TF1 Info and BFMTV, 24 Oct 2026 · ratios: desk arithmetic (1,000 used for ""almost 1,000"")"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Saturday 17 October (reference),100,no,= 100
+"Marchers: 550,000 → 410,000",74.5,yes,"CGT: 800,000 both days"
+Actions: 430 → 289,67.2,yes,
+"Arrests by early evening: 385 → almost 1,000",259.7,yes,"""almost 1,000"", expected to rise"

@@ -1,0 +1,55 @@
+date: "2026-10-25"
+slot: sun
+published: "2026-10-25T10:00:07+01:00"
+title: "The second Saturday was counted"
+standfirst: "France marched again and the ledger, not the slogans, told you how it went. Oil ended the week at $116.72, the wind sold German power at €13, and the dull machinery of counting, warning and reconnecting kept doing its job."
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-25T10:00:07+01:00"
+  habit: {text: "Once this week, look at the fuel board before 12:00 rather than after, and compare two stations on your usual route. Write the difference down; after a month you will know what your habit is worth.", note: "A habit, not advice."}
+  went_right: {text: "After two storms in two days, National Grid said on Saturday that more than 124,000 properties in Britain had been reconnected since the storms began [1]. Crews worked through the wind, and the lights came back."}
+  sentence: "France counted fewer marchers and far more arrests, oil priced the risk of another round, and the wind sold Sunday's wholesale power at a sixteenth of Wednesday's price."
+  euros: {text: "ADAC's weekly reading put Super E10 at €2.110 a litre, 4.1 cents lower than a week earlier, and diesel at €2.255, 0.8 cents higher [2]. For a 50-litre tank, that is about €2.05 less for petrol and 40 cents more for diesel than the week before.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Second-round effects", text: "When energy gets dearer, the first round is the bill itself. The second round is what follows: firms raising prices and workers asking for higher pay to keep up. Central banks worry most about the second round, because it can keep inflation going after oil calms down."}
+  sources:
+    - {n: 1, title: "Storm Boelo hits UK with gusts up to 85mph gusts as amber warnings hold", publisher: "BBC News", url: "https://www.bbc.co.uk/news/articles/cmr4ydglq9r3o", date: "24 Oct 2026, updated 25 Oct"}
+    - {n: 2, title: "Tanken in Deutschland: Benzinpreis sinkt, Dieselpreis steigt leicht", publisher: "ADAC", url: "https://www.adac.de/news/aktueller-spritpreis/", date: "21 Oct 2026, 14:00"}
+articles:
+  - the-second-saturday-was-counted
+  - the-sunday-sequence-the-week-in-the-order-it-was-priced
+  - podium-vs-print-absolutely-and-116-72
+  - one-candidate-and-ninety-eight-point-nine-eight
+  - the-mood-moves-in-a-fortnight-the-till-in-a-season
+  - the-annex-a-refinery-paper-and-a-two-section-regulation
+  - seventy-of-seventy-three
+  - ordinary-ledger-the-storm-sold-power-at-thirteen-euros
+  - the-hyperscalers-send-their-invoices-this-week
+  - a-list-one-name-at-a-time
+  - boelo-blew-the-price-down-the-rhine-barely-rose
+epaper:
+  available: "2026-10-25T10:00:07+01:00"
+  extras:
+    - the-other-front-reached-riyadh-again
+    - rennes-marched-despite-a-ban
+    - arrest-judge-warrant
+    - the-fear-gauge-found-twenty
+    - shanghais-eleventh-week
+    - aramco-is-shopping-for-tanks
+    - india-and-europe-set-a-start-date
+    - what-the-electricity-tax-cut-is-worth-at-home
+    - merz-spends-a-week-on-supply-chains
+    - a-careful-study-a-small-effect
+    - smaller-treats-not-no-treats
+    - europe-bought-less-gas-japan-filled-its-tanks
+    - brent-five-weeks-up
+    - layoffs-stayed-rare
+    - japan-found-its-two-per-cent
+    - where-the-pump-is-cheapest
+    - four-twenty-nine-a-gallon
+    - helium-joined-the-list
+    - meta-printed-a-share-without-a-vote
+    - no-data-yet-is-an-honest-answer
+    - a-leak-is-not-a-result
+    - austen-came-first
+    - umm-al-quwain-cleaned-its-beaches
+  updates: []

@@ -1,0 +1,14 @@
+id: france-protests-25oct
+kind: hbar
+kicker: "Security · France"
+title: "Fewer marchers, fewer marches, more than twice the arrests"
+subtitle: "Saturday 24 Oct 2026 as a percentage of Saturday 17 Oct (= 100), Interior Ministry figures as reported"
+unit: ""
+rows:
+  - {label: "Saturday 17 October (reference)", value: 100, note: "= 100"}
+  - {label: "Marchers: 550,000 → 410,000", value: 74.5, derived: true, note: "CGT: 800,000 both days"}
+  - {label: "Actions: 430 → 289", value: 67.2, derived: true}
+  - {label: "Arrests by early evening: 385 → almost 1,000", value: 259.7, derived: true, note: "\"almost 1,000\", expected to rise"}
+licence: reported
+source_line: "French Interior Ministry figures as reported by franceinfo, TF1 Info and BFMTV, 24 Oct 2026 · ratios: desk arithmetic (1,000 used for \"almost 1,000\")"
+alt: "Bar chart comparing France's second Saturday of cost-of-living protests, 24 October 2026, with the first, 17 October, set at 100, using Interior Ministry figures as reported by franceinfo, TF1 Info and BFMTV. Marchers fell from 550,000 to 410,000, or 74.5. Actions fell from 430 to 289, or 67.2. Arrests by early evening rose from 385 to almost 1,000, or about 260, a figure the minister said would rise. The CGT union counted 800,000 marchers on both days."
