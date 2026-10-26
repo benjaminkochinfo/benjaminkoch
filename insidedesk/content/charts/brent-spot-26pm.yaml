@@ -1,0 +1,15 @@
+id: brent-spot-26pm
+kind: line
+kicker: "Geo-economics · The barrel"
+title: "The premium came in October, and it has not left"
+subtitle: "Europe Brent spot price (FOB), US$ per barrel, daily · 3 Aug to 20 Oct 2026, the latest EIA value"
+unit: ""
+label_decimals: 2
+start: "2026-08-01"
+series:
+  - key: brent
+    label: "Brent spot (EIA)"
+    source: {type: fred, id: DCOILBRENTEU, start: "2026-08-01"}
+licence: fred-eia
+source_line: "U.S. EIA, Europe Brent spot price FOB (DCOILBRENTEU) via FRED, St. Louis Fed, retrieved 26 Oct 2026 · public domain · latest value 20 Oct 2026"
+alt: "Line chart of the daily Europe Brent spot price from 3 August to 20 October 2026, in US dollars per barrel. It starts at $88.90 on 3 August, with the period low of $86.47 on 4 August, climbs through September to a peak of $135.51 on 2 October, and stands at $115.22 on 20 October, the latest value published by the EIA. Futures prices quoted on 26 October are not part of this series."

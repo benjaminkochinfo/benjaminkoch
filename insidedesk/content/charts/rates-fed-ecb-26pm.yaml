@@ -1,0 +1,24 @@
+id: rates-fed-ecb-26pm
+kind: line
+kicker: "Money · Committees"
+title: "Two committees, two days apart, both on hold since September"
+subtitle: "Policy rates, %: Fed funds target range (upper limit) and ECB deposit facility rate, daily"
+unit: "%"
+label_decimals: 2
+start: "2025-01-01"
+y_min: 0
+series:
+  - key: fed
+    label: "Fed funds, upper limit"
+    step: true
+    source: {type: fred, id: DFEDTARU}
+  - key: dfr
+    label: "ECB deposit rate"
+    step: true
+    source: {type: fred, id: ECBDFR}
+annotations:
+  - {date: "2026-02-28", text: "War begins", anchor: end}
+licence: fred-h15
+licence_extra: fred-ecb
+source_line: "Federal Reserve Board (DFEDTARU) and European Central Bank (ECBDFR), both via FRED, St. Louis Fed"
+alt: "Step chart since January 2025 of the Fed funds target upper limit and the ECB deposit rate. The Fed's upper limit falls from 4.50% to 3.75% between September and December 2025, then rises to 4.00% in September 2026. The ECB deposit rate falls from 3.00% to 2.00% by June 2025, rises to 2.25% in June 2026 and to 2.50% in September 2026. Both are unchanged since September; the latest values, for 26 October 2026, are 4.00% and 2.50%. The Fed meets on 27–28 October and the ECB decides on 29 October."
