@@ -36,21 +36,25 @@ closing:
 epaper:
   available: "2026-10-26T17:59:01+01:00"
   extras:
-    - crude-in-singapore-from-2027
-    - audi-builds-where-it-sells
-    - ibex-and-psi-paid-for-brazil
-    - the-ten-year-sits-at-five
-    - who-congratulated-and-who-waited
-    - one-vote-two-ballots-no-deal
-    - hope-ran-ahead-of-the-order-book
-    - sunday-wind-monday-price
-    - above-120-the-demand-answers
-    - december-is-the-natural-moment
-    - two-to-three-thousand-litres
-    - demand-ahead-of-supply
-    - nubeqa-58-per-cent
-    - lilly-on-thursday
-    - october-the-worst-month-at-sea
-    - ninety-five-on-the-brocken
-    - rain-floods-and-the-ballot
-  updates: []
+  - crude-in-singapore-from-2027
+  - audi-builds-where-it-sells
+  - ibex-and-psi-paid-for-brazil
+  - the-ten-year-sits-at-five
+  - who-congratulated-and-who-waited
+  - one-vote-two-ballots-no-deal
+  - hope-ran-ahead-of-the-order-book
+  - sunday-wind-monday-price
+  - above-120-the-demand-answers
+  - december-is-the-natural-moment
+  - two-to-three-thousand-litres
+  - demand-ahead-of-supply
+  - nubeqa-58-per-cent
+  - lilly-on-thursday
+  - october-the-worst-month-at-sea
+  - ninety-five-on-the-brocken
+  - rain-floods-and-the-ballot
+  - one-line-of-paper-and-a-seven-day-plan
+  updates:
+  - time: '2026-10-26T19:28:09+01:00'
+    text: 'Geoecon: Tehran''s joint statement promises more talks; Iran resubmits a seven-day plan for the straits'
+    piece: one-line-of-paper-and-a-seven-day-plan

@@ -1,7 +1,7 @@
 # Inside Desk chart data: rates-fed-ecb-26pm
 "# Source: Federal Reserve Board (DFEDTARU) and European Central Bank (ECBDFR), both via FRED, St. Louis Fed"
 "# Licence: Board of Governors of the Federal Reserve System (H.15) via FRED. Public domain. European Central Bank deposit facility rate (ECBDFR) via FRED, Federal Reserve Bank of St. Louis. © European Central Bank; reuse permitted with source acknowledgement."
-# Retrieved: 2026-10-26T19:00+01:00
+# Retrieved: 2026-10-26T19:28+01:00
 date,fed,dfr
 2025-01-01,4.5,3.0
 2025-01-02,4.5,3.0
