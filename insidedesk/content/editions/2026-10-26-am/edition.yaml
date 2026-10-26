@@ -1,0 +1,61 @@
+date: "2026-10-26"
+slot: am
+published: "2026-10-26T08:30:00+01:00"
+title: "The referees meet in the same week as the invoices."
+standfirst: "Oil eased on a flight to Tehran, not a ceasefire. The US ten-year closed Friday at 5.00% before three central banks and three hyperscalers report. A storm sold German power at €13 on Sunday, the Rhine cleared its 2018 low, and Brazil counted to 100%. Eleven desks, every number sourced."
+articles:
+  - the-referees-speak-after-the-invoices
+  - the-mediators-flew-the-barrel-fell-two-dollars
+  - the-court-counted-and-the-loser-said-no
+  - podium-vs-print-a-shallow-cycle-and-three-point-one
+  - storm-power-at-thirteen-euros-monday-back-at-116
+  - three-committees-one-pause-and-the-sentence-after
+  - ordinary-ledger-heating-oil-at-one-seventy-four
+  - sk-hynix-may-hand-back-the-kioxia-gain
+  - ebola-fewer-cases-a-day-more-deaths
+  - ten-missiles-south-two-drones-for-riyadh
+  - the-rhine-cleared-the-2018-low-by-a-hand
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-26T08:30:00+01:00"
+  habit:
+    text: "This week, when you next pass your heating, look at one number: the oil tank gauge, the gas meter or the thermostat setting. Write it down with the date. Do it again next Monday. Two readings a week apart tell you more about your own winter than any price headline in this edition."
+    note: "A habit, not advice. Nothing here tells you what to buy, order or switch."
+  went_right:
+    text: "Germany's onshore wind turbines generated more than 1,000 gigawatt hours on both Saturday and Sunday, and Sunday's day-ahead power price averaged €13.12 per megawatt hour, against €211.94 for delivery on 21 October [1]. The storm arrived and the grid was ready to use it."
+  sentence: "Oil eased because mediators flew to Tehran, not because anything was signed; this week the central banks and the big tech companies show their paperwork, and the paperwork usually wins."
+  euros:
+    text: "Heating oil costs €174.34 per 100 litres on Monday's German average for a 3,000-litre order, €3.70 more than a week ago and €40.79 more than three months ago [2]. Desk arithmetic: a 3,000-litre delivery costs about €5,230, some €1,224 more than the same order three months ago."
+    note: "Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice."
+  small_words:
+    term: "Day-ahead price"
+    text: "The price of electricity for each hour of tomorrow, set in an auction the day before. Germany's daily average for Sunday 25 October was €13.12 per megawatt hour, and for Monday it is €116.57 [1]: the wind dropped, and tomorrow's auction noticed."
+  sources:
+    - {n: 1, title: "Market data: day-ahead price DE-LU and realised generation, daily", publisher: "Bundesnetzagentur / SMARD.de", url: "https://www.smard.de/home/marktdaten", date: "retrieved 26 Oct 2026, 05:30 CET"}
+    - {n: 2, title: "Heizölpreise aktuell für Deutschland", publisher: "HeizOel24", url: "https://www.heizoel24.de/heizoelpreise", date: "26 Oct 2026, 05:18"}
+epaper:
+  available: "2026-10-26T06:30:00+01:00"
+  extras:
+    - seoul-gave-back-a-fifth-in-october
+    - gold-fell-four-per-cent-in-a-war-week
+    - the-plenum-is-about-discipline-not-plans
+    - two-scenarios-one-strait
+    - moody-s-held-france-at-aa3
+    - healey-s-first-budget-is-on-wednesday
+    - heizoel-poll-wait-or-buy
+    - the-poorest-fifth-expects-the-worst-jobs-market
+    - brent-best-week-since-2022-then-the-mediators
+    - gasoil-eased-before-the-boiler-did
+    - new-zealand-is-expected-to-move-first
+    - the-committees-homework-arrives-on-tuesday
+    - e10-fell-diesel-rose
+    - what-the-co2-levy-adds-per-litre
+    - four-hyperscaler-numbers-to-hold
+    - the-chip-index-longest-losing-run-since-november
+    - nord-kivu-has-more-patients-than-beds
+    - us-measles-cases-twice-last-year
+    - a-spill-off-umm-al-quwain
+    - the-count-was-public-the-complaint-goes-to-judges
+    - cop17-talks-money-for-nature-today
+    - a-thousand-gigawatt-hours-of-wind-twice
+  updates: []
