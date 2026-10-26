@@ -15,9 +15,15 @@ Requirements: Python 3.11+, `pip install pyyaml markdown`, Google Chrome/Chromiu
 ## Writing an edition
 **House rule: every edition covers all eleven desks.** Markets & Macro · Geo-economics · Politics & Institutions ·
 Psychology & Behaviour · Energy & Industry · Money, FX & Committees · Ordinary & Inherited Life · Tech & Compute ·
-Health & Care · Security & Order · Climate & Weather (harvests, heat, storms, insurance costs, water,
-energy-weather links). Shape: **one lead + ten desk notes** (a note may use the `podium-vs-print` or
+Health & Care · Security & Order · Climate & Weather. Shape: **one lead + ten desk notes** (a note may use the `podium-vs-print` or
 `annex` format instead of `note`).
+* **Desk mix (owner, 26 Oct 2026):** Climate & Weather and Health & Care must rotate topics. Do not keep returning to
+  the same few stories (for example Ebola, or Rhine/Kaub water levels). Prefer a wider mix of *current* and
+  *forward-looking* pieces: for Climate, harvests, heat/cold snaps, storms, insurance and reinsurance costs, drought
+  and flood elsewhere, air quality, seasonal outlooks, energy–weather links, COP/adaptation policy; for Health,
+  vaccines and seroprevalence, hospital capacity, drug shortages, occupational health, mental-health data, new
+  approvals or guidelines, and non-outbreak infectious disease when it is genuinely news. A Rhine or outbreak piece
+  is fine when it is the day's real story; it must not be the default.
 * Lead: 600–900 words, the day's main argument, a chart if one carries it.
 * **Charts (house rule): every edition carries at least one chart, usually 2–3**, on the pieces where data carries the
   story (never decoration). Pick from `/workspace/insidedesk/charts-ready.md` or the existing dated specs
@@ -106,6 +112,16 @@ Built by `build.py` (module `epaper.py`, assets in `tools/epaper/`) for every ed
 - Chrome housekeeping (`tools/proc.py`): every headless Chrome of a build keeps its profile and temp files in one
   per-run dir (`$TMPDIR/insidedesk-build-<pid>-*`, exported as `INSIDEDESK_RUN_TMP` and `TMPDIR`). On exit, also on
   error, Ctrl-C or SIGTERM, the build kills any Chrome left from the run and removes that dir.
+- Chrome binary: the box's system Google Chrome hangs in headless mode (since ~23 Oct 2026). Builds must use the
+  Chrome-for-Testing copy via `PATH=/workspace/chs/bin:$PATH`. `build.py` also prepends that directory itself when
+  the shim is present, so a forgotten export cannot fall back to the hanging binary.
+- Chart PNG / OG cost: `chart_png` skips when `insidedesk/charts/<id>.png.sha256` still matches the SVG; OG images are
+  only re-shot for the newest edition (or when the file is missing). A full release should stay near ~3 minutes.
+  Published ePapers stay locked via `fit.sha256` (unchanged issues are not re-measured or re-rendered).
+- Detached releases on this box: source `/workspace/insidedesk-release-helper.sh` (heartbeat while waiting, `ensure`
+  relaunch if a waiter is frozen after a VM fork, curl `--max-time` on the live check). The 17:25 / 06:25 safety net
+  must call `ensure` if the log has no `start` line by two minutes past the slot — a `sleep`ing waiter survives a
+  failed writing run, but a VM fork freezes it until wall-clock resumes.
 - Charts in the ePaper are interactive: line charts (hover/tap, series toggles, ranges) and, since 21 Oct 2026, bar
   charts (`hbar`, hover/tap/arrow keys; drawn by `epaper/assets/epaper-bars.js`, loaded only by issues that have one).
 - Sunday "The week in data": from 25 Oct 2026 the spread is picked automatically: the Sunday pieces' own line charts,

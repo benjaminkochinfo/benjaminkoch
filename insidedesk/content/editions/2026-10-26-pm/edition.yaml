@@ -54,7 +54,11 @@ epaper:
   - ninety-five-on-the-brocken
   - rain-floods-and-the-ballot
   - one-line-of-paper-and-a-seven-day-plan
+  - a-prospectus-and-the-bill-for-the-buildings
   updates:
   - time: '2026-10-26T19:28:09+01:00'
     text: 'Geoecon: Tehran''s joint statement promises more talks; Iran resubmits a seven-day plan for the straits'
     piece: one-line-of-paper-and-a-seven-day-plan
+  - time: '2026-10-26T21:55:03+01:00'
+    text: 'Markets: New York closes higher on Anthropic''s prospectus; Meta and SpaceX raise money for AI; Brazilian listings fall'
+    piece: a-prospectus-and-the-bill-for-the-buildings

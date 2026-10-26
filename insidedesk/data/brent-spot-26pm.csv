@@ -1,7 +1,7 @@
 # Inside Desk chart data: brent-spot-26pm
 "# Source: U.S. EIA, Europe Brent spot price FOB (DCOILBRENTEU) via FRED, St. Louis Fed, retrieved 26 Oct 2026 · public domain · latest value 20 Oct 2026"
 "# Licence: EIA spot prices via FRED, Federal Reserve Bank of St. Louis. U.S. government data, public domain."
-# Retrieved: 2026-10-26T19:28+01:00
+# Retrieved: 2026-10-26T21:55+01:00
 date,brent
 2026-08-03,88.9
 2026-08-04,86.47

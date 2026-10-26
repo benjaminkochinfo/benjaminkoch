@@ -8,7 +8,7 @@
 Run from the repository root. Writes ONLY to InsideDesk.html and insidedesk/**.
 """
 import sys; sys.dont_write_bytecode = True
-import argparse, csv, datetime as dt, html, json, os, posixpath, re, shutil, subprocess, sys, tempfile
+import argparse, csv, datetime as dt, hashlib, html, json, os, posixpath, re, shutil, subprocess, sys, tempfile
 from zoneinfo import ZoneInfo
 from email.utils import format_datetime
 
@@ -18,6 +18,10 @@ import yaml, markdown  # pip install pyyaml markdown
 import sources, charts, epaper, proc
 
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))      # repo root
+# Box Chrome hangs headless since 23 Oct 2026; prefer the build-only Chrome-for-Testing copy when present.
+_CHS = "/workspace/chs/bin"
+if os.path.isdir(_CHS) and os.access(os.path.join(_CHS, "google-chrome"), os.X_OK):
+    os.environ["PATH"] = _CHS + os.pathsep + os.environ.get("PATH", "")
 DESK = os.path.join(ROOT, "insidedesk")
 CONTENT = os.path.join(DESK, "content")
 BASE = "https://benjaminkoch.info/"
@@ -187,10 +191,19 @@ def chrome_shot(html_text, out_path, w, h, scale=1):
         shutil.rmtree(work, ignore_errors=True)
     return os.path.exists(out_path)
 
-def chart_png(spec, svg):
+def chart_png(spec, svg, force=False):
+    """Rasterise the SVG. Skipped when the PNG is already present and still matches this SVG (sha sidecar),
+    so a release does not relaunch Chrome ~40 times for unchanged older charts."""
+    out = os.path.join(DESK, "charts", spec["id"] + ".png")
+    hf = out + ".sha256"
+    dig = hashlib.sha256(svg.encode()).hexdigest()
+    if not force and os.path.exists(out) and os.path.exists(hf) and open(hf).read().strip() == dig:
+        return False
     m = re.search(r'viewBox="0 0 (\d+) (\d+)"', svg); w, h = int(m.group(1)), int(m.group(2))
     page = f'<!doctype html><meta charset=utf-8><style>{font_css_abs()}html,body{{margin:0;background:#0D1015}}svg{{display:block}}</style>{svg}'
-    chrome_shot(page, os.path.join(DESK, "charts", spec["id"] + ".png"), w, h, scale=2)
+    ok = chrome_shot(page, out, w, h, scale=2)
+    if ok: open(hf, "w").write(dig + "\n")
+    return ok
 
 # ----------------------------------------------------------------- content model
 class Article:
@@ -1037,7 +1050,7 @@ def main():
     used = {c for ed in eds for a in ed["arts"] for c in a.charts} | ({c for a in se["arts"] for c in a.charts} if se else set())
     # An embargoed edition's ePaper can already be out (06:30 before the 08:30 website): its charts need data too.
     used |= {c for ed in embargo for a in ed["arts"] for c in a.charts}
-    print(f"Inside Desk build · {len(eds)} edition(s) · {sum(len(x['arts']) for x in eds)} article(s) · {len(used)} chart(s)")
+    print(f"Inside Desk build · {len(eds)} edition(s) · {sum(len(x['arts']) for x in eds)} article(s) · {len(used)} chart(s) · {dt.datetime.now().astimezone(TZ).strftime('%H:%M:%S %Z')}")
     # Online fetch scope: charts used by the newest edition, plus charts with no CSV yet. Charts that only serve
     # older pieces stay as published. --fetch a,b narrows it; --fetch-all refreshes everything.
     newest = {c for a in eds[0]["arts"] for c in a.charts}
@@ -1079,14 +1092,19 @@ def main():
             write(a.path, article_page(a, eds, rendered))
             if not args.no_png:
                 svg = rendered[a.charts[0]][1] if a.charts else None
-                chrome_shot(og_card(a.title, f"{a.kicker} · {a.format_name}", a.dek, svg), os.path.join(ROOT, a.og), 1200, 630)
+                og_path = os.path.join(ROOT, a.og)
+                # Only re-shoot OG for the newest edition (or a missing file). Older cards stay as published.
+                if ed is eds[0] or not os.path.exists(og_path):
+                    chrome_shot(og_card(a.title, f"{a.kicker} · {a.format_name}", a.dek, svg), og_path, 1200, 630)
             print("  page", a.path)
     if se:
         for a in se["arts"]:
             write(a.path, article_page(a, eds, rendered))
             if not args.no_png:
                 svg = rendered[a.charts[0]][1] if a.charts else None
-                chrome_shot(og_card(a.title, f"{se['title']} · {a.event_label}", a.dek, svg), os.path.join(ROOT, a.og), 1200, 630)
+                og_path = os.path.join(ROOT, a.og)
+                if not os.path.exists(og_path):
+                    chrome_shot(og_card(a.title, f"{se['title']} · {a.event_label}", a.dek, svg), og_path, 1200, 630)
             print("  ledger", a.path)
         write(se["path"], ledger_page(se, rendered))
         if not args.no_png:
@@ -1126,7 +1144,7 @@ def main():
     if not args.no_png:
         chrome_shot(og_card("The twice-daily brief", "Inside Desk", "Markets, geo-economics, politics, psychology and ordinary life. Optimistic by habit. Data first. Commentary, not advice."),
                     os.path.join(DESK, "og", "default.png"), 1200, 630)
-    print("done.")
+    print(f"done. · {dt.datetime.now().astimezone(TZ).strftime('%H:%M:%S %Z')}")
 
 if __name__ == "__main__":
     with proc.run_dir():   # all headless-Chrome profiles/temp files of this run; removed (and Chrome killed) on exit
