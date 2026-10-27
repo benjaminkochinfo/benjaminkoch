@@ -1,0 +1,84 @@
+date: '2026-10-27'
+slot: am
+published: '2026-10-27T08:30:00+01:00'
+title: A vote decides who sits in the room; the counting decides whether anyone believes it.
+standfirst: Israel votes today with no bloc near a majority, and in Brazil the loser's own party accepted the count. Seoul bought on its growth print, the US two-year sits at 4.68% before Wednesday's Fed,
+  and German power is back at €155 once the storm moved on. Eleven desks, every number sourced.
+articles:
+- israel-votes-and-the-count-is-only-the-first
+- seoul-printed-its-numbers-then-seoul-bought
+- 492-ships-at-anchor-and-a-tanker-reported-three
+- the-chatbot-as-confidant-and-the-question-nobody-has
+- the-storm-discount-lasted-a-weekend-tuesdays-power-is
+- podium-vs-print-price-stability-and-4-68-per
+- ordinary-ledger-the-last-invoice-rose-faster-than-prices
+- the-chip-maker-vouches-for-its-own-chips
+- 526-shortage-notices-and-why-most-of-them-are
+- missiles-on-a-campus-at-night-a-truce-in
+- athens-had-a-months-rain-six-times-over-and
+closing:
+  title: Before you close the tab
+  published: '2026-10-27T08:30:00+01:00'
+  habit:
+    text: 'This week, before you forward any claim about an election, a price or a war, find the one number it rests on and write it next to the claim. If there is no number, wait a day. Today''s example:
+      about 35,000 late votes in Brazil, set against a margin of 4.4 million [4]. Most outrage shrinks when it meets its own denominator.'
+    note: A habit, not advice.
+  went_right:
+    text: Libya says the UN aviation agency has lifted restrictions on its airspace imposed in 2015, during the civil war. The transport ministry reported 61,968 flight permits a month for the November
+      2026 to March 2027 winter season, against an average of 2,000 monthly transit flights the winter before [1]. Eleven years after the planes went round it, a country's sky is open to them again.
+  sentence: 'Israel votes today with no bloc near a majority, Bolsonaro''s own party accepted the Brazilian count, and a US court left 20,000 ballots in the pile: on three continents, the counting held.'
+  euros:
+    text: 'Heating oil averages €174.58 per 100 litres in Germany this morning for a 3,000-litre order, unchanged on the day, €0.76 above a week ago and €43.30 above three months ago [2]. A litre holds
+      about 10 kilowatt hours of heat, which HeizOel24 turns into roughly 17.46 cents per kilowatt hour, a figure you can lay directly beside the price per kilowatt hour on a gas bill [2]. Desk arithmetic:
+      a 2,000-litre order at today''s average costs about €3,492, some €866 more than at the price of three months ago.'
+    note: Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice.
+  small_words:
+    term: Electoral threshold
+    text: 'The minimum share of the national vote a party needs to win any seats at all. In Israel it is 3.25%. One joint list averaged 3.10% in the final four polls, just 0.15 points short [3]: a few thousand
+      votes either side of the line can decide which coalitions are even possible.'
+  sources:
+  - n: 1
+    title: 'World in brief: Libya says UN aviation restrictions lifted after 11 years'
+    publisher: BusinessDay (citing Reuters)
+    url: https://businessday.ng/world/article/world-in-brief-us-canada-seek-tariff-deal-measles-cases-rise-in-pennsylvania-libya-lifts-aviation-restrictions-and-other-stories/
+    date: 27 Oct 2026
+  - n: 2
+    title: Heizölpreise aktuell für Deutschland
+    publisher: HeizOel24
+    url: https://www.heizoel24.de/heizoelpreise
+    date: 27 Oct 2026, exchange values 05:12, retrieved 05:13 CET
+  - n: 3
+    title: 'Israel Election 2026: Gadi Eisenkot leads Benjamin Netanyahu but Knesset deadlock looms'
+    publisher: The Jerusalem Post (Maariv Online)
+    url: https://www.jpost.com/israel-election-2026/article-912743
+    date: 25 Oct 2026
+  - n: 4
+    title: Bolsonaro's party accepts Brazil election after Trump calls vote 'rigged'
+    publisher: Al Jazeera (with AFP and Reuters)
+    url: https://www.aljazeera.com/news/2026/10/27/bolsonaros-party-accepts-result-after-trump-suggests-vote-was
+    date: 27 Oct 2026
+epaper:
+  available: '2026-10-27T06:30:00+01:00'
+  extras:
+  - brazil-the-party-signed-the-police-asked-for-the
+  - twenty-thousand-ballots-stay-in-the-count
+  - output-rose-1-per-cent-income-rose-3-4
+  - brent-slipped-the-strategist-kept-the-120-line
+  - not-serious-and-no-european-paper
+  - no-help-without-feeling-the-need-for-it
+  - anger-runs-on-a-story
+  - brent-gave-back-91-cents-and-kept-the-week
+  - gas-exporters-meet-in-moscow
+  - a-hold-is-still-a-price-23-96-per
+  - friday-in-tokyo-157-72-and-a-14-year
+  - diesel-19-cents-dearer-than-e10-and-berlin-under
+  - 900-trainees-and-41-9-per-cent-on-mini
+  - back-to-full-load-in-under-two-seconds
+  - memory-tight-into-2028-and-a-warning-for-200
+  - mothers-jab-or-babys-antibody-both-worked
+  - 59-per-cent-for-over-65s-and-a-sentence
+  - brasov-a-fire-in-september-two-arrests-in-germany
+  - cairos-parliament-gives-sisi-a-blank-line-for-riyadh
+  - arnab-heads-for-andhra-pradesh-and-the-boats-are
+  - champi-the-years-strongest-storm-and-one-death
+  updates: []
