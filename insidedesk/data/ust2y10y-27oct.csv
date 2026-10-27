@@ -1,7 +1,7 @@
 # Inside Desk chart data: ust2y10y-27oct
 "# Source: U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates, 2-year and 10-year (home.treasury.gov), retrieved 27 Oct 2026 · U.S. government data, public domain"
 # Licence: Figures as reported by the named organisations; facts cited with attribution.
-# Retrieved: 2026-10-27T06:30+01:00
+# Retrieved: 2026-10-27T08:30+01:00
 date,ust2,ust10
 2026-01-02,3.47,4.19
 2026-01-05,3.46,4.17

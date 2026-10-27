@@ -1,7 +1,7 @@
 # Inside Desk chart data: athens-rain-27oct
 "# Source: Open-Meteo Historical Weather API (open-meteo.com), daily precipitation at 37.98°N 23.73°E; 2026 from its default reanalysis/analysis blend, 1991–2020 average from ERA5 (Copernicus/ECMWF); desk running totals; retrieved 27 Oct 2026 · Open-Meteo data CC BY 4.0. Modelled grid values, not station readings; local stations recorded more."
 # Licence: Figures as reported by the named organisations; facts cited with attribution.
-# Retrieved: 2026-10-27T06:30+01:00
+# Retrieved: 2026-10-27T08:30+01:00
 date,rain2026,avg9120
 2026-10-01,0.2,0.9
 2026-10-02,7.1,1.5
