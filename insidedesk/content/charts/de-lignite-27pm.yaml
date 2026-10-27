@@ -1,0 +1,15 @@
+id: de-lignite-27pm
+kind: line
+kicker: "Energy · Power"
+title: "Lignite took the storm weekend off, then went back to work"
+subtitle: "Electricity generated from lignite in Germany, realised, daily total, MWh"
+unit: ""
+label_decimals: 0
+start: "2026-09-01"
+series:
+  - key: lignite
+    label: "Lignite generation DE"
+    source: {type: smard, filter: 1223, region: DE, resolution: day, start: "2026-09-01"}
+licence: smard
+source_line: "Bundesnetzagentur | SMARD.de, realised generation from lignite, Germany (filter 1223), days 1 Sep to 26 Oct 2026, retrieved 27 Oct 2026 · CC BY 4.0"
+alt: "Line chart of daily electricity generation from lignite in Germany from 1 September to 26 October 2026, in megawatt hours. It averages about 197,771 MWh a day in September and peaks at 291,434 MWh on 2 October. It stands at 255,448 MWh on Wednesday 21 October, drops to 54,346 MWh on storm Saturday 24 October, the lowest day since 14 June 2026, and 62,470 MWh on Sunday 25 October, then climbs back to 162,086 MWh on Monday 26 October, the latest value."

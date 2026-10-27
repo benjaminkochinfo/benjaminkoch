@@ -1,0 +1,18 @@
+id: israel-turnout-27pm
+kind: hbar
+kicker: "Inside Desk · Psychology & Behaviour"
+title: "Ahead of 2022 at every hour"
+subtitle: "Israel, Knesset election turnout reported by the Central Elections Committee, % of eligible voters by the hour shown, 2022 and 27 Oct 2026"
+unit: "%"
+rows:
+  - {label: "By 10:00, 2022", value: 15.9, note: "CEC"}
+  - {label: "By 10:00, 2026", value: 16.68, note: "CEC"}
+  - {label: "By 12:00, 2022", value: 28.4, note: "CEC"}
+  - {label: "By 12:00, 2026", value: 31.5, note: "CEC"}
+  - {label: "By 14:00, 2022", value: 38.9, note: "CEC"}
+  - {label: "By 14:00, 2026", value: 44.9, note: "CEC"}
+  - {label: "By 16:00, 2022", value: 47.5, note: "CEC"}
+  - {label: "By 16:00, 2026", value: 55.7, note: "CEC"}
+licence: reported
+source_line: "Israel Central Elections Committee turnout readings (local time, CET+1), as reported by The Times of Israel, Israel Hayom and thestateofisrael.com, retrieved 27 Oct 2026 · polls close 22:00 local; final turnout not yet known"
+alt: "Bar chart of Israeli election turnout by the hour, 2022 against 27 October 2026. By 10:00 local time it was 15.9% in 2022 and 16.68% in 2026; by 12:00, 28.4% and 31.5%; by 14:00, 38.9% and 44.9%; by 16:00, 47.5% in 2022 and 55.7% in 2026, the latest reading."

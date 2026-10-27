@@ -1,0 +1,61 @@
+date: "2026-10-27"
+slot: pm
+published: "2026-10-27T17:59:37+01:00"
+title: "Israel queued, Europe saved, and the barrels moved."
+standfirst: "Israelis voted in record numbers by the afternoon and both camps called it a threat. Wednesday's German power price came in at €249, the ECB meets on a 3.8% print, German households keep €189 of every €1,000, and Gulf crude reached buyers again. Eleven desks, every number sourced."
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-27T17:59:37+01:00"
+  habit:
+    text: "Before bed, open the fridge and name the three things that need eating first. Plan tomorrow's lunch around one of them. Not to save anything in particular, just to let the food you already paid for go first."
+    note: "A habit, not advice."
+  went_right:
+    text: "American households cheered up in October: the Conference Board's consumer confidence index rose 7.5 points to 91.7, back to June's level, and the share saying jobs are 'plentiful' rose to 26.7% from 24.3% [1]."
+  sentence: "More people queued to vote than anyone expected, more oil got through than anyone feared, and Germans quietly kept saving; the machinery held."
+  euros:
+    text: "Heating oil averaged €175.02 per 100 litres in Germany on Tuesday, €1.20 more than a week ago and €43.74 more than three months ago [2]. Desk arithmetic: a standard 3,000-litre order costs about €5,250.60 at today's average, €36 more than a week ago and about €1,312 more than three months ago."
+    note: "Desk arithmetic on the cited average price. Local prices differ by region, quantity and supplier. Nothing here is advice."
+  small_words:
+    term: "Expectations index"
+    text: "The part of a confidence survey that asks about the next six months rather than today: income, business and jobs. In October the Conference Board's version rose 6.9 points to 72.6, only partly reversing three months of decline [1]. It measures a mood, not a pay slip."
+  sources:
+    - {n: 1, title: "US Consumer Confidence Increased in October", publisher: "The Conference Board via PR Newswire", url: "https://www.prnewswire.com/news-releases/us-consumer-confidence-increased-in-october-302920731.html", date: "27 Oct 2026, 15:00 CET"}
+    - {n: 2, title: "Heizölpreise aktuell für Deutschland", publisher: "HeizOel24", url: "https://www.heizoel24.de/heizoelpreise", date: "27 Oct 2026, retrieved 16:35 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - a-queue-is-a-vote-of-confidence
+  - hsbc-met-on-profit-and-still-fell-7-per-cent
+  - oil-on-paper-rose-oil-in-hand-fell-15
+  - serbia-a-majority-without-a-name-and-a-calendar
+  - wednesday-s-power-is-249-and-lignite-is-back-at
+  - podium-vs-print-look-through-and-3-8-per-cent
+  - ordinary-ledger-189-of-every-1-000-put-aside
+  - the-suppliers-buy-a-slice-of-the-customer
+  - 48-000-warnings-35-responses-europe-s-health
+  - one-call-from-helsinki-two-readouts
+  - five-indian-states-have-now-declared-drought-and
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-10-27T17:59:37+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - kindness-to-yourself-works-through-flexibility
+    - eight-per-cent-ask-the-machine-about-the-midterms
+    - orders-up-1-8-per-cent-confidence-at-91-7-and-coca
+    - gold-at-4-010-the-euro-near-its-may-low
+    - neither-war-nor-peace-and-a-supreme-leader-who
+    - 1-4-million-a-day-to-move-a-supertanker
+    - ankara-s-committee-signs-off-the-mecca-pact-the
+    - wisconsin-a-20-000-cap-and-35-million-through-the
+    - moscow-writes-a-declaration-buyers-read-the
+    - brent-slips-again-113-88-at-four-in-the-afternoon
+    - the-scenario-said-100-and-75-the-market-says-115
+    - the-fed-starts-talking-the-two-year-answers-4-741
+    - heating-oil-at-175-and-the-case-for-asking-the
+    - saarland-s-bin-bill-about-ten-euros-more
+    - a-laptop-with-a-bill-of-materials-you-can-audit
+    - opera-puts-the-model-in-the-browser
+    - a-hospital-switched-off-its-computers-and-the
+    - sepsis-joins-the-readmission-ledger
+    - raf-fairford-two-charges-under-the-2023-act
+    - sanaa-calls-cairo-s-vote-a-declaration-of-war
+    - michigan-s-fires-may-sleep-under-the-snow
+    - the-soybeans-caught-up-the-corn-is-still-in-the
+  updates: []

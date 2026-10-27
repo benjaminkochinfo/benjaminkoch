@@ -1,0 +1,24 @@
+id: ea-hicp-dfr-27pm
+kind: line
+kicker: "Money · Euro area"
+title: "Prices ran ahead, the rate walked behind"
+subtitle: "Euro-area HICP inflation, annual change, %, monthly · ECB deposit facility rate, %, month-end"
+unit: "%"
+label_decimals: 1
+start: "2025-01-01"
+y_min: 0
+series:
+  - key: headline
+    label: "HICP inflation"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: EA, unit: RCH_A, coicop18: TOTAL, freq: M}}
+  - key: dfr
+    label: "ECB deposit rate"
+    step: true
+    transform: month_end
+    source: {type: ecb, flow: FM, key: D.U2.EUR.4F.KR.DFR.LEV}
+annotations:
+  - {date: "2026-02-27", text: "War begins", anchor: end}
+licence: eurostat
+licence_extra: ecb
+source_line: "Eurostat prc_hicp_minr (CC BY 4.0) · ECB Data Portal FM.D.U2.EUR.4F.KR.DFR.LEV · retrieved 27 Oct 2026 · latest inflation value September 2026"
+alt: "Line chart since January 2025 of euro-area HICP inflation and the ECB deposit rate. Inflation is 2.5% in January 2025, between 1.9% and 2.2% for the rest of 2025, 1.7% in January 2026 and 1.9% in February, then rises after the energy shock to 3.2% in May, 2.8% in June and 3.8% in September 2026, the latest value. The deposit rate falls from 3.00% to 2.00% by mid-2025, rises to 2.25% in June 2026 and to 2.50% in September 2026, where it stands in October 2026. The ECB decides on 29 October."

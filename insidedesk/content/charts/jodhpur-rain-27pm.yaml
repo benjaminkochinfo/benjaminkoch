@@ -1,0 +1,65 @@
+id: jodhpur-rain-27pm
+kind: line
+kicker: "Climate & Weather · Rajasthan"
+title: "Wet until mid-August, then almost nothing"
+subtitle: "Rain since 1 June, running total, mm · Jodhpur grid point (modelled), 2026 vs 1991–2020 average for the same days"
+unit: " mm"
+label_decimals: 1
+start: "2026-06-01"
+y_min: 0
+series:
+  - key: rain2026
+    label: "2026"
+    source:
+      type: static
+      values:
+        - ['2026-06-01', 0.5]
+        - ['2026-06-08', 4.1]
+        - ['2026-06-15', 5.1]
+        - ['2026-06-22', 8.6]
+        - ['2026-07-01', 23.0]
+        - ['2026-07-08', 50.3]
+        - ['2026-07-15', 51.0]
+        - ['2026-07-22', 81.9]
+        - ['2026-08-01', 146.2]
+        - ['2026-08-08', 183.3]
+        - ['2026-08-15', 231.6]
+        - ['2026-08-22', 231.6]
+        - ['2026-09-01', 232.7]
+        - ['2026-09-08', 232.7]
+        - ['2026-09-15', 239.8]
+        - ['2026-09-22', 256.0]
+        - ['2026-10-01', 256.3]
+        - ['2026-10-08', 256.3]
+        - ['2026-10-15', 256.4]
+        - ['2026-10-22', 257.1]
+        - ['2026-10-26', 257.1]
+  - key: avg9120
+    label: "1991–2020 average"
+    source:
+      type: static
+      values:
+        - ['2026-06-01', 0.0]
+        - ['2026-06-08', 2.6]
+        - ['2026-06-15', 8.8]
+        - ['2026-06-22', 18.2]
+        - ['2026-07-01', 27.8]
+        - ['2026-07-08', 41.3]
+        - ['2026-07-15', 61.5]
+        - ['2026-07-22', 91.8]
+        - ['2026-08-01', 139.1]
+        - ['2026-08-08', 163.1]
+        - ['2026-08-15', 197.4]
+        - ['2026-08-22', 211.7]
+        - ['2026-09-01', 233.2]
+        - ['2026-09-08', 251.2]
+        - ['2026-09-15', 259.7]
+        - ['2026-09-22', 263.5]
+        - ['2026-10-01', 269.7]
+        - ['2026-10-08', 273.0]
+        - ['2026-10-15', 273.8]
+        - ['2026-10-22', 277.4]
+        - ['2026-10-26', 277.5]
+licence: reported
+source_line: "Open-Meteo Historical Weather API (open-meteo.com), daily precipitation at 26.29°N 73.02°E; 2026 from its default reanalysis/analysis blend, 1991–2020 average from ERA5 (Copernicus/ECMWF); desk running totals at weekly points; retrieved 27 Oct 2026 · Open-Meteo data CC BY 4.0. Modelled grid values for one point, not station readings or a district average."
+alt: "Line chart of modelled rainfall at a Jodhpur grid point, running total from 1 June. In 2026 the total runs slightly below the 1991–2020 average through July, pulls ahead in early August to 231.6 mm by 15 August, then adds only 25.5 mm more, ending at 257.1 mm on Monday 26 October 2026, the latest value. The 1991–2020 average for the same days keeps climbing to 277.5 mm by 26 October."
