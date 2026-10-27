@@ -59,7 +59,11 @@ epaper:
   - michigan-s-fires-may-sleep-under-the-snow
   - the-soybeans-caught-up-the-corn-is-still-in-the
   - goodwill-asked-for-an-envoy-on-the-way
+  - first-numbers-no-majority-yet
   updates:
   - time: '2026-10-27T19:28:42+01:00'
     text: 'Geoecon: Qatar asks Iran to show goodwill on Hormuz; China says it will send an envoy to the region'
     piece: goodwill-asked-for-an-envoy-on-the-way
+  - time: '2026-10-27T22:00:02+01:00'
+    text: 'Politics: Israel''s exit polls show no bloc with 61 seats; Likud largest party, Arab parties at a record'
+    piece: first-numbers-no-majority-yet

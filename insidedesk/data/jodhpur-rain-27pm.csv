@@ -1,7 +1,7 @@
 # Inside Desk chart data: jodhpur-rain-27pm
 "# Source: Open-Meteo Historical Weather API (open-meteo.com), daily precipitation at 26.29°N 73.02°E; 2026 from its default reanalysis/analysis blend, 1991–2020 average from ERA5 (Copernicus/ECMWF); desk running totals at weekly points; retrieved 27 Oct 2026 · Open-Meteo data CC BY 4.0. Modelled grid values for one point, not station readings or a district average."
 # Licence: Figures as reported by the named organisations; facts cited with attribution.
-# Retrieved: 2026-10-27T19:29+01:00
+# Retrieved: 2026-10-27T22:00+01:00
 date,rain2026,avg9120
 2026-06-01,0.5,0.0
 2026-06-08,4.1,2.6
