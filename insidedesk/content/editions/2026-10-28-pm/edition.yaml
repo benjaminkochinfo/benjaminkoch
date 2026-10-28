@@ -77,26 +77,30 @@ articles:
 epaper:
   available: "2026-10-28T17:30:02+01:00"
   extras:
-    - ottawa-moved-first-2-5-and-a-warning-about-pass
-    - germans-see-the-upswing-and-keep-their-wallets
-    - a-boring-budget-and-the-gilt-market-said-thank
-    - adyen-grew-23-and-fell-about-12
-    - stay-clear-unless-you-must-the-first-such-public
-    - legal-action-from-1-november-for-ships-their
-    - a-president-asks-for-an-open-mind-and-for-no
-    - 809-polling-stations-in-uniform
-    - moral-surgery-we-rewrite-the-artist-not-the
-    - fomo-hits-the-body-before-the-mind
-    - crude-down-1-9-million-barrels-petrol-up-3-9
-    - crude-up-gasoil-down-and-russia-s-refineries
-    - seven-letters-so-far-and-20-november-is-the-last
-    - next-door-to-the-datacentre-an-offer-to-move
-    - a-10-000-key-to-android-s-front-door-but-not-for
-    - one-million-id-numbers-queried-82-services
-    - 824-waiting-for-a-bed-and-two-ways-to-count-them
-    - one-in-nine-scots-on-a-waiting-list-and-the-long
-    - a-warning-dated-after-3-november
-    - belgrade-two-knives-a-light-wound-and-a-red
-    - arnab-came-ashore-and-the-shelters-held
-    - frost-tonight-in-the-south-fog-by-friday
-  updates: []
+  - ottawa-moved-first-2-5-and-a-warning-about-pass
+  - germans-see-the-upswing-and-keep-their-wallets
+  - a-boring-budget-and-the-gilt-market-said-thank
+  - adyen-grew-23-and-fell-about-12
+  - stay-clear-unless-you-must-the-first-such-public
+  - legal-action-from-1-november-for-ships-their
+  - a-president-asks-for-an-open-mind-and-for-no
+  - 809-polling-stations-in-uniform
+  - moral-surgery-we-rewrite-the-artist-not-the
+  - fomo-hits-the-body-before-the-mind
+  - crude-down-1-9-million-barrels-petrol-up-3-9
+  - crude-up-gasoil-down-and-russia-s-refineries
+  - seven-letters-so-far-and-20-november-is-the-last
+  - next-door-to-the-datacentre-an-offer-to-move
+  - a-10-000-key-to-android-s-front-door-but-not-for
+  - one-million-id-numbers-queried-82-services
+  - 824-waiting-for-a-bed-and-two-ways-to-count-them
+  - one-in-nine-scots-on-a-waiting-list-and-the-long
+  - a-warning-dated-after-3-november
+  - belgrade-two-knives-a-light-wound-and-a-red
+  - arnab-came-ashore-and-the-shelters-held
+  - frost-tonight-in-the-south-fog-by-friday
+  - held-at-3-75-two-hands-up-for-more
+  updates:
+  - time: '2026-10-28T19:35:45+01:00'
+    text: 'Money: the Fed holds at 3.75%–4% by 10 votes to 2; Cook and Hammack wanted a rise'
+    piece: held-at-3-75-two-hands-up-for-more
