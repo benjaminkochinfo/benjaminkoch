@@ -1,0 +1,8 @@
+# Inside Desk chart data: bank-profits-28pm
+"# Source: Company third-quarter results as reported by Reuters (via Investing.com and Euronext), 28 Oct 2026, retrieved 28 Oct 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Santander, underlying net profit",19,no,helped by lenders acquired in Britain and the US (Reuters)
+"BNP Paribas, profit",14,no,"to €3.46 billion, equities trading surged (Reuters)"
+"UBS, net profit",8,no,"$2.69 billion, broadly in line with consensus (Reuters)"
+"Deutsche Bank, profit",2,no,beat forecasts that expected a decline (Reuters)

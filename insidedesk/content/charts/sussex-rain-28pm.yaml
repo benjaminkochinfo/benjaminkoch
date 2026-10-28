@@ -1,0 +1,77 @@
+id: sussex-rain-28pm
+kind: line
+kicker: "Climate & Weather · Sussex"
+title: "The rain came. The reservoir barely noticed"
+subtitle: "Rain since 1 October, running total, mm · grid point near Haywards Heath, West Sussex, a few miles from Ardingly reservoir (modelled), 2026 vs 1991–2020 average for the same days"
+unit: " mm"
+label_decimals: 1
+start: "2026-10-01"
+y_min: 0
+series:
+  - key: rain2026
+    label: "October 2026"
+    source:
+      type: static
+      values:
+        - ['2026-10-01', 0.3]
+        - ['2026-10-02', 0.3]
+        - ['2026-10-03', 0.3]
+        - ['2026-10-04', 0.3]
+        - ['2026-10-05', 0.3]
+        - ['2026-10-06', 0.3]
+        - ['2026-10-07', 9.5]
+        - ['2026-10-08', 9.6]
+        - ['2026-10-09', 10.7]
+        - ['2026-10-10', 10.7]
+        - ['2026-10-11', 10.7]
+        - ['2026-10-12', 13.0]
+        - ['2026-10-13', 14.4]
+        - ['2026-10-14', 14.4]
+        - ['2026-10-15', 14.6]
+        - ['2026-10-16', 18.9]
+        - ['2026-10-17', 18.9]
+        - ['2026-10-18', 20.8]
+        - ['2026-10-19', 21.7]
+        - ['2026-10-20', 28.7]
+        - ['2026-10-21', 38.2]
+        - ['2026-10-22', 50.7]
+        - ['2026-10-23', 76.4]
+        - ['2026-10-24', 96.6]
+        - ['2026-10-25', 96.8]
+        - ['2026-10-26', 101.1]
+        - ['2026-10-27', 107.0]
+  - key: avg9120
+    label: "1991–2020 average"
+    source:
+      type: static
+      values:
+        - ['2026-10-01', 3.3]
+        - ['2026-10-02', 6.1]
+        - ['2026-10-03', 7.9]
+        - ['2026-10-04', 9.7]
+        - ['2026-10-05', 11.9]
+        - ['2026-10-06', 15.4]
+        - ['2026-10-07', 17.8]
+        - ['2026-10-08', 20.1]
+        - ['2026-10-09', 23.1]
+        - ['2026-10-10', 24.3]
+        - ['2026-10-11', 27.2]
+        - ['2026-10-12', 29.2]
+        - ['2026-10-13', 32.2]
+        - ['2026-10-14', 33.8]
+        - ['2026-10-15', 35.4]
+        - ['2026-10-16', 37.0]
+        - ['2026-10-17', 38.5]
+        - ['2026-10-18', 40.1]
+        - ['2026-10-19', 42.2]
+        - ['2026-10-20', 45.2]
+        - ['2026-10-21', 48.8]
+        - ['2026-10-22', 50.7]
+        - ['2026-10-23', 53.7]
+        - ['2026-10-24', 57.3]
+        - ['2026-10-25', 59.1]
+        - ['2026-10-26', 60.2]
+        - ['2026-10-27', 62.4]
+licence: reported
+source_line: "Open-Meteo Historical Weather API (open-meteo.com), daily precipitation at 51.00°N 0.16°W; 2026 from its default reanalysis/analysis blend, 1991–2020 average from ERA5 (Copernicus/ECMWF); desk running totals; retrieved 28 Oct 2026 · Open-Meteo data CC BY 4.0. Modelled grid values, not station readings."
+alt: "Line chart of modelled rainfall at a grid point near Haywards Heath in West Sussex, running total from 1 October. In 2026 almost nothing falls in the first six days, the total reaches only 21.7 mm by 19 October, then storms from 20 to 24 October lift it to 96.6 mm, and it reaches 107.0 mm on Tuesday 27 October 2026, the latest value. The 1991–2020 average for the same days rises steadily to 62.4 mm by 27 October; the 2026 line overtakes it on 23 October."

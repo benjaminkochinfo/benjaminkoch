@@ -1,0 +1,65 @@
+id: cpi-ppi-28pm
+kind: line
+kicker: "Money · Prices"
+title: "The wholesale bill runs ahead of the shop price"
+subtitle: "US consumer prices (CPI-U, all items) and producer prices (PPI final demand), change on a year earlier, %, monthly"
+unit: "%"
+label_decimals: 1
+start: "2025-01-01"
+series:
+  - key: ppi
+    label: "Producer prices, final demand"
+    source:
+      type: static
+      values:
+        - ["2025-01-01", 3.8]
+        - ["2025-02-01", 3.4]
+        - ["2025-03-01", 3.2]
+        - ["2025-04-01", 2.4]
+        - ["2025-05-01", 2.7]
+        - ["2025-06-01", 2.4]
+        - ["2025-07-01", 3.2]
+        - ["2025-08-01", 2.7]
+        - ["2025-09-01", 3.0]
+        - ["2025-10-01", 2.8]
+        - ["2025-11-01", 3.1]
+        - ["2025-12-01", 3.1]
+        - ["2026-01-01", 3.1]
+        - ["2026-02-01", 3.4]
+        - ["2026-03-01", 4.3]
+        - ["2026-04-01", 5.7]
+        - ["2026-05-01", 5.9]
+        - ["2026-06-01", 5.6]
+        - ["2026-07-01", 4.9]
+        - ["2026-08-01", 5.6]
+        - ["2026-09-01", 6.3]
+  - key: cpi
+    label: "Consumer prices"
+    source:
+      type: static
+      values:
+        - ["2025-01-01", 3.0]
+        - ["2025-02-01", 2.8]
+        - ["2025-03-01", 2.4]
+        - ["2025-04-01", 2.3]
+        - ["2025-05-01", 2.4]
+        - ["2025-06-01", 2.7]
+        - ["2025-07-01", 2.7]
+        - ["2025-08-01", 2.9]
+        - ["2025-09-01", 3.0]
+        - ["2025-11-01", 2.7]
+        - ["2025-12-01", 2.7]
+        - ["2026-01-01", 2.4]
+        - ["2026-02-01", 2.4]
+        - ["2026-03-01", 3.3]
+        - ["2026-04-01", 3.8]
+        - ["2026-05-01", 4.2]
+        - ["2026-06-01", 3.5]
+        - ["2026-07-01", 3.4]
+        - ["2026-08-01", 3.4]
+        - ["2026-09-01", 3.7]
+annotations:
+  - {date: "2026-02-28", text: "War begins", anchor: end}
+licence: reported
+source_line: "U.S. Bureau of Labor Statistics, CPI-U all items (CUUR0000SA0) and PPI final demand (WPUFD4), not seasonally adjusted index levels via the BLS public data API, retrieved 28 Oct 2026. Annual rates are desk arithmetic from the index levels. BLS published no October 2025 CPI index · U.S. government data, public domain"
+alt: "Line chart of the annual change in US consumer prices and producer prices for final demand, monthly since January 2025. In January 2025 consumer prices are up 3.0% on a year earlier and producer prices 3.8%. Both run between about 2.3% and 3.1% through 2025; no consumer price figure exists for October 2025. From March 2026 producer prices pull away: 4.3% in March, 5.9% in May and 6.3% in September 2026, the latest value. Consumer prices peak at 4.2% in May 2026 and stand at 3.7% in September 2026, the latest value, 2.6 percentage points below producer prices."

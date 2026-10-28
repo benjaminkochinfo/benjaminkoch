@@ -1,0 +1,26 @@
+# Inside Desk chart data: cpi-ppi-28pm
+"# Source: U.S. Bureau of Labor Statistics, CPI-U all items (CUUR0000SA0) and PPI final demand (WPUFD4), not seasonally adjusted index levels via the BLS public data API, retrieved 28 Oct 2026. Annual rates are desk arithmetic from the index levels. BLS published no October 2025 CPI index · U.S. government data, public domain"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+# Retrieved: 2026-10-28T16:28+01:00
+date,ppi,cpi
+2025-01-01,3.8,3.0
+2025-02-01,3.4,2.8
+2025-03-01,3.2,2.4
+2025-04-01,2.4,2.3
+2025-05-01,2.7,2.4
+2025-06-01,2.4,2.7
+2025-07-01,3.2,2.7
+2025-08-01,2.7,2.9
+2025-09-01,3.0,3.0
+2025-10-01,2.8,
+2025-11-01,3.1,2.7
+2025-12-01,3.1,2.7
+2026-01-01,3.1,2.4
+2026-02-01,3.4,2.4
+2026-03-01,4.3,3.3
+2026-04-01,5.7,3.8
+2026-05-01,5.9,4.2
+2026-06-01,5.6,3.5
+2026-07-01,4.9,3.4
+2026-08-01,5.6,3.4
+2026-09-01,6.3,3.7

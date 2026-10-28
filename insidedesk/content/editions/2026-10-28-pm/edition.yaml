@@ -1,0 +1,102 @@
+date: "2026-10-28"
+slot: pm
+published: "2026-10-28T17:30:02+01:00"   # set to the actual Berlin time when it goes live
+title: "Before the statement, the invoices; the committees will speak tonight and tomorrow, the bills already have."
+standfirst: "The Fed decides after this edition, so we read what it read: 3.7% on the shelf, 6.3% at the wholesale gate, and Ottawa hiking first. German power for Thursday cleared at €314.85, Israel's opposition says it can count to 61 while the tally gives its bloc 48, and South Africa is short of everyday pills. Eleven desks, every number sourced."
+closing:
+  title: Before you close the tab
+  published: '2026-10-28T17:30:00+01:00'
+  habit:
+    text: 'This weekend, write down your electricity and gas meter readings and the
+      price per kilowatt hour on your current contract, on one sheet of paper. Default
+      suppliers in Germany have until 20 November to announce price changes for 1
+      January, and seven of 116 tracked tariffs have already done so, all upwards
+      [3]. If a letter arrives, you will have the numbers to compare in five minutes
+      rather than fifty.'
+    note: A habit, not advice.
+  went_right:
+    text: 'The overall age-adjusted death rate in the United States fell to 689.2
+      deaths per 100,000 people in 2025, the lowest ever reported, according to
+      provisional CDC figures analysed in a new report from the US health department''s
+      planning office [1]. Between March 2015 and March 2026, measured per head of population, opioid prescriptions dispensed fell
+      to 45.3% of their March 2015 level, while patients filling prescriptions for
+      the addiction treatments buprenorphine or naltrexone rose to 218% of it [1].
+      Fewer pills handed out, more treatment taken up: two slow lines in a pharmacy
+      ledger, moving the right way [1].'
+  sentence: 'Germany''s power for Thursday cleared at €314.85 a megawatt hour, gas
+    touched €100, consumers think better of the country than of their own pay, and
+    two central banks decide tonight and tomorrow: a day when the invoices spoke louder
+    than the forecasts.'
+  euros:
+    text: 'Heating oil cost €1.73 a litre on the German average on Wednesday morning,
+      almost two cents less than the day before, HeizOel24 reports for orders of
+      3,000 litres [2]. It was cheapest in Brandenburg at €1.70 and dearest in Hesse
+      at €1.77 [2]. Desk arithmetic: a 3,000-litre fill at the national average
+      costs about €5,190, nearly €60 less than a day earlier, and the gap between
+      Brandenburg and Hesse on the same order is about €210.'
+    note: Desk arithmetic on the cited averages. Prices differ by dealer, region,
+      order size and time of day. Nothing here is advice.
+  small_words:
+    term: Grundversorgung (default supply)
+    text: 'The tariff you are on if you never chose an electricity or gas supplier:
+      you are supplied by the default supplier for your area on its standard terms. That supplier may change
+      its prices at the start of any month, but must announce it publicly at least
+      six weeks ahead, and when it does, you may cancel without notice to the day
+      of the change [3]. That is why 20 November matters this year: it is the last
+      day to announce a price change for 1 January [3].'
+  sources:
+  - n: 1
+    title: Trump Administration Drives Opioid Deaths to Lowest in Nearly a Decade
+      (ASPE analysis of CDC provisional mortality data and pharmacy dispensing, March
+      2015 to March 2026)
+    publisher: US Department of Health and Human Services
+    url: https://www.hhs.gov/press-room/hhs-reports-opioid-deaths-lowest-nearly-decade.html
+    date: 27 Oct 2026
+  - n: 2
+    title: Heizöl wird zur Wochenmitte günstiger
+    publisher: HeizOel24
+    url: https://www.heizoel24.de/news/artikel/005381-heizoel-wird-zur-wochenmitte-guenstiger-28-10-2026
+    date: 28 Oct 2026, 10:25 CET
+  - n: 3
+    title: 'Preisänderungen 2027 in der Grundversorgung: alle Ankündigungen'
+    publisher: Grundversorgung Preise
+    url: https://grundversorgung-preise.de/preiserhoehungen-2027/
+    date: checked 27–28 Oct 2026, retrieved 28 Oct 2026, 16:32 CET
+articles:
+  - before-the-statement-the-invoices-3-7-6-3-and-a
+  - four-banks-brought-receipts-and-the-market-still
+  - seven-days-on-paper-not-an-offer-in-tehran
+  - podium-vs-print-we-have-a-majority-and-48-seats
+  - the-machine-wrote-it-better-people-still-wanted
+  - 314-85-for-thursday-and-no-cheap-hour-in-the
+  - ordinary-ledger-hope-for-the-country-caution-for
+  - amazon-stops-counting-tokens-and-starts-counting
+  - amlodipine-metformin-and-a-list-of-up-to-50
+  - satellites-overhead-every-time-what-one-firm
+  - 107-millimetres-of-rain-1-8-points-of-reservoir
+epaper:
+  available: "2026-10-28T17:30:02+01:00"
+  extras:
+    - ottawa-moved-first-2-5-and-a-warning-about-pass
+    - germans-see-the-upswing-and-keep-their-wallets
+    - a-boring-budget-and-the-gilt-market-said-thank
+    - adyen-grew-23-and-fell-about-12
+    - stay-clear-unless-you-must-the-first-such-public
+    - legal-action-from-1-november-for-ships-their
+    - a-president-asks-for-an-open-mind-and-for-no
+    - 809-polling-stations-in-uniform
+    - moral-surgery-we-rewrite-the-artist-not-the
+    - fomo-hits-the-body-before-the-mind
+    - crude-down-1-9-million-barrels-petrol-up-3-9
+    - crude-up-gasoil-down-and-russia-s-refineries
+    - seven-letters-so-far-and-20-november-is-the-last
+    - next-door-to-the-datacentre-an-offer-to-move
+    - a-10-000-key-to-android-s-front-door-but-not-for
+    - one-million-id-numbers-queried-82-services
+    - 824-waiting-for-a-bed-and-two-ways-to-count-them
+    - one-in-nine-scots-on-a-waiting-list-and-the-long
+    - a-warning-dated-after-3-november
+    - belgrade-two-knives-a-light-wound-and-a-red
+    - arnab-came-ashore-and-the-shelters-held
+    - frost-tonight-in-the-south-fog-by-friday
+  updates: []

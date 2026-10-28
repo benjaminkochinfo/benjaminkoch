@@ -1,0 +1,14 @@
+id: bank-profits-28pm
+kind: hbar
+kicker: "Markets · Banks"
+title: "Four receipts, all up on the year"
+subtitle: "Third-quarter 2026 profit, change on a year earlier, %, as reported on Wednesday 28 October"
+unit: "%"
+rows:
+  - {label: "Santander, underlying net profit", value: 19, note: "helped by lenders acquired in Britain and the US (Reuters)"}
+  - {label: "BNP Paribas, profit", value: 14, note: "to €3.46 billion, equities trading surged (Reuters)"}
+  - {label: "UBS, net profit", value: 8, note: "$2.69 billion, broadly in line with consensus (Reuters)"}
+  - {label: "Deutsche Bank, profit", value: 2, note: "beat forecasts that expected a decline (Reuters)"}
+licence: reported
+source_line: "Company third-quarter results as reported by Reuters (via Investing.com and Euronext), 28 Oct 2026, retrieved 28 Oct 2026"
+alt: "Bar chart of the year-on-year change in third-quarter 2026 profit reported on 28 October by four European banks: Santander underlying net profit up 19%, BNP Paribas up 14% to €3.46 billion, UBS net profit up 8% to $2.69 billion, and Deutsche Bank up 2%."
