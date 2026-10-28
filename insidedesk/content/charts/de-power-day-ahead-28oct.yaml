@@ -1,0 +1,75 @@
+id: de-power-day-ahead-28oct
+kind: line
+kicker: "Energy · Power"
+title: "From €13 on a stormy Sunday to €249 on a still Wednesday"
+subtitle: "Germany/Luxembourg day-ahead electricity price, daily average by delivery day, € per MWh"
+unit: ""
+label_decimals: 2
+start: "2026-09-01"
+series:
+  - key: dayahead
+    label: "Day-ahead DE-LU"
+    source:
+      type: static
+      values:
+        - ["2026-09-01", 143.8]
+        - ["2026-09-02", 163.73]
+        - ["2026-09-03", 133.62]
+        - ["2026-09-04", 88.95]
+        - ["2026-09-05", 42.14]
+        - ["2026-09-06", 107.55]
+        - ["2026-09-07", 155.88]
+        - ["2026-09-08", 146.58]
+        - ["2026-09-09", 143.15]
+        - ["2026-09-10", 191.82]
+        - ["2026-09-11", 195.23]
+        - ["2026-09-12", 137.96]
+        - ["2026-09-13", 166.1]
+        - ["2026-09-14", 256.55]
+        - ["2026-09-15", 180.07]
+        - ["2026-09-16", 182.33]
+        - ["2026-09-17", 142.89]
+        - ["2026-09-18", 120.53]
+        - ["2026-09-19", 42.67]
+        - ["2026-09-20", 21.75]
+        - ["2026-09-21", 96.6]
+        - ["2026-09-22", 226.18]
+        - ["2026-09-23", 180.68]
+        - ["2026-09-24", 138.12]
+        - ["2026-09-25", 176.63]
+        - ["2026-09-26", 150.07]
+        - ["2026-09-27", 111.06]
+        - ["2026-09-28", 195.4]
+        - ["2026-09-29", 165.83]
+        - ["2026-09-30", 140.75]
+        - ["2026-10-01", 195.18]
+        - ["2026-10-02", 200.5]
+        - ["2026-10-03", 169.01]
+        - ["2026-10-04", 168.28]
+        - ["2026-10-05", 156.62]
+        - ["2026-10-06", 201.7]
+        - ["2026-10-07", 192.03]
+        - ["2026-10-08", 139.35]
+        - ["2026-10-09", 78.58]
+        - ["2026-10-10", 51.08]
+        - ["2026-10-11", 122.31]
+        - ["2026-10-12", 197.23]
+        - ["2026-10-13", 160.23]
+        - ["2026-10-14", 178.99]
+        - ["2026-10-15", 187.3]
+        - ["2026-10-16", 210.67]
+        - ["2026-10-17", 168.27]
+        - ["2026-10-18", 175.21]
+        - ["2026-10-19", 208.44]
+        - ["2026-10-20", 195.66]
+        - ["2026-10-21", 211.94]
+        - ["2026-10-22", 148.61]
+        - ["2026-10-23", 137.59]
+        - ["2026-10-24", 30.12]
+        - ["2026-10-25", 13.12]
+        - ["2026-10-26", 116.57]
+        - ["2026-10-27", 155.11]
+        - ["2026-10-28", 249.21]
+licence: smard
+source_line: "Bundesnetzagentur | SMARD.de, day-ahead price DE-LU (filter 4169), delivery days 1 Sep to 28 Oct 2026, retrieved 27 and 28 Oct 2026 · CC BY 4.0"
+alt: "Line chart of the daily average German-Luxembourg day-ahead electricity price from 1 September to 28 October 2026, in euros per megawatt hour. It peaks at €256.55 on 14 September. It falls to €30.12 on Saturday 24 October and €13.12 on Sunday 25 October during the storm, recovers to €116.57 on Monday 26 October and €155.11 on Tuesday 27 October, and rises to €249.21 for delivery on Wednesday 28 October, the latest value and the highest since 14 September."

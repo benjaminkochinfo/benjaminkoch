@@ -1,0 +1,75 @@
+id: glen-shiel-rain-28oct
+kind: line
+kicker: "Climate & Weather · Scottish Highlands"
+title: "Two Octobers' rain in one"
+subtitle: "Rain since 1 October, running total, mm · grid point near Cluanie Inn, Glen Shiel (modelled), 2026 vs 1991–2020 average for the same days"
+unit: " mm"
+label_decimals: 1
+start: "2026-10-01"
+y_min: 0
+series:
+  - key: rain2026
+    label: "October 2026"
+    source:
+      type: static
+      values:
+        - ['2026-10-01', 2.6]
+        - ['2026-10-02', 20.4]
+        - ['2026-10-03', 25.0]
+        - ['2026-10-04', 55.6]
+        - ['2026-10-05', 64.7]
+        - ['2026-10-06', 66.9]
+        - ['2026-10-07', 70.5]
+        - ['2026-10-08', 78.0]
+        - ['2026-10-09', 94.6]
+        - ['2026-10-10', 103.6]
+        - ['2026-10-11', 103.6]
+        - ['2026-10-12', 106.6]
+        - ['2026-10-13', 138.6]
+        - ['2026-10-14', 168.4]
+        - ['2026-10-15', 180.0]
+        - ['2026-10-16', 181.6]
+        - ['2026-10-17', 181.6]
+        - ['2026-10-18', 181.6]
+        - ['2026-10-19', 181.6]
+        - ['2026-10-20', 187.4]
+        - ['2026-10-21', 193.2]
+        - ['2026-10-22', 194.6]
+        - ['2026-10-23', 195.7]
+        - ['2026-10-24', 231.0]
+        - ['2026-10-25', 252.1]
+        - ['2026-10-26', 269.0]
+  - key: avg9120
+    label: "1991–2020 average"
+    source:
+      type: static
+      values:
+        - ['2026-10-01', 5.4]
+        - ['2026-10-02', 10.7]
+        - ['2026-10-03', 17.2]
+        - ['2026-10-04', 22.6]
+        - ['2026-10-05', 25.6]
+        - ['2026-10-06', 31.3]
+        - ['2026-10-07', 37.0]
+        - ['2026-10-08', 42.3]
+        - ['2026-10-09', 49.5]
+        - ['2026-10-10', 54.8]
+        - ['2026-10-11', 60.7]
+        - ['2026-10-12', 65.4]
+        - ['2026-10-13', 68.3]
+        - ['2026-10-14', 71.4]
+        - ['2026-10-15', 74.1]
+        - ['2026-10-16', 79.0]
+        - ['2026-10-17', 83.2]
+        - ['2026-10-18', 87.4]
+        - ['2026-10-19', 92.5]
+        - ['2026-10-20', 96.6]
+        - ['2026-10-21', 101.6]
+        - ['2026-10-22', 107.0]
+        - ['2026-10-23', 113.0]
+        - ['2026-10-24', 120.3]
+        - ['2026-10-25', 127.0]
+        - ['2026-10-26', 133.5]
+licence: reported
+source_line: "Open-Meteo Historical Weather API (open-meteo.com), daily precipitation at 57.15°N 5.10°W; 2026 from its default reanalysis/analysis blend, 1991–2020 average from ERA5 (Copernicus/ECMWF); desk running totals; retrieved 28 Oct 2026 · Open-Meteo data CC BY 4.0. Modelled grid values, not station readings."
+alt: "Line chart of modelled rainfall at a grid point near Cluanie Inn in the Scottish Highlands, running total from 1 October. In 2026 the total passes 100 mm by 10 October, jumps to 180.0 mm by 15 October after a wet 13th and 14th, stays flat through a dry spell to 19 October, then climbs again with Storms Austen and Boelo to 269.0 mm on Monday 26 October 2026, the latest value. The 1991–2020 average for the same days rises steadily to 133.5 mm by 26 October."

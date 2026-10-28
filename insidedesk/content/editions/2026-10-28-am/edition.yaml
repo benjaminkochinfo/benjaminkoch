@@ -1,0 +1,62 @@
+date: "2026-10-28"
+slot: am
+published: "2026-10-28T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "A still day costs more than a stormy one; the meter noticed before the speeches did."
+standfirst: "The wind left Germany on Tuesday and Wednesday's power cleared at €249.21 a megawatt hour. Israel's count gives no bloc 61 yet, the Fed decides tonight with the three-month bill above its ceiling, and two storms left Britain counting reconnections. Eleven desks, every number sourced."
+closing:
+  title: "Before you close the tab"
+  published: "2026-10-28T08:30:00+01:00"
+  habit:
+    text: "This week, if you owe a small business money, a plumber, a printer, the café that did the catering, pay the invoice on the day it is due rather than at the last possible moment. Allianz Trade expects 25,900 company insolvencies in Germany this year, the most in 13 years [2]. An invoice paid on time is the cheapest support a local firm can get."
+    note: "A habit, not advice."
+  went_right:
+    text: "Scientists at The Wertheim UF Scripps Institute have found new compounds, sphaeriaurantins, made by rare soil bacteria, that in laboratory tests cleared 99.9% of a multidrug-resistant malaria parasite from blood and liver cells [1]. They came from a collection of 122,550 microbial strains gathered over 80 years [1]. The road to a medicine is long, the researchers say, but old freezers full of patient collecting are still paying out [1]."
+  sentence: "The wind dropped and Wednesday's German power cost €249 a megawatt hour, Israel's count has handed no one 61 seats yet, and the Fed decides tonight: a day for meters and tallies, not speeches."
+  euros:
+    text: "Super E10 cost €2.059 a litre on the German average at 17:01 on Tuesday, 3.0 cents less than the day before, according to Tankerkönig's market briefing on official MTS-K data [3]. Over the month, the daily average fell from €2.261 on 28 September to €2.049 on 27 October, a drop of 21.2 cents, mainly because the fuel-price brake cut energy tax by 17 cents a litre from 1 October [3]. Desk arithmetic: a 50-litre tank at Tuesday's daily average costs about €102.45, some €10.60 less than four weeks earlier."
+    note: "Desk arithmetic on the cited national averages. Prices differ by station, region and time of day. Nothing here is advice."
+  small_words:
+    term: "Credit insurance"
+    text: "A policy a supplier buys so that, if a customer fails to pay an invoice, the insurer covers much of the loss. It is why credit insurers watch insolvencies so closely: Allianz Trade insured business transactions worth €1,400 billion worldwide in 2025 and tracks more than 83 million companies [2]. When its forecast moves, it is because its own invoices are on the line."
+  sources:
+    - {n: 1, title: "Potential antimalarial compound discovered in natural products collection", publisher: "UF Health", url: "https://ufhealth.org/news/2026/potent-antimalarial-compound-discovered-in-natural-products-collection", date: "27 Oct 2026"}
+    - {n: 2, title: "Deutsche Insolvenzen steigen 2026 um 8 % auf höchsten Stand seit 2013 und bleiben 2027 unvermindert hoch", publisher: "Allianz Trade", url: "https://www.allianz-trade.de/presse/pressemitteilungen/deutsche-insolvenzen-steigen-2026-um-8-prozent.html", date: "27 Oct 2026"}
+    - {n: 3, title: "Marktbriefing", publisher: "Tankerkönig (MTS-K data)", url: "https://www.tankerkoenig.de/marktbriefing", date: "27 Oct 2026, data 04:01 and 17:01 CET, retrieved 28 Oct 2026, 05:20 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - the-wind-left-on-tuesday-and-wednesday-s-bill
+  - seoul-gained-6-6-on-a-memory-maker-that
+  - two-maps-of-the-same-water
+  - the-exit-polls-gave-way-to-the-count-and
+  - type-1-diabetes-and-the-second-chart-nobody-hands
+  - podium-vs-print-the-wrong-policy-measure-and-4
+  - ordinary-ledger-25-900-unpaid-endings
+  - a-door-held-open-for-60-000
+  - start-the-hpv-jab-at-nine-and-more-children
+  - eight-ships-hit-one-french-aircraft-and-a-chart
+  - two-storms-829-400-reconnections-and-now-the-fog
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-10-28T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - a-missile-claim-115-36-and-a-cartel-that
+    - gas-at-96-68-storage-at-75-and-germany
+    - wellington-held-and-the-kiwi-fell-almost-2
+    - jio-lists-dongshan-slips-anthropic-courts-the-retail-buyer
+    - diesel-first-then-the-fund-that-sells-it
+    - hormuz-on-the-agenda-in-moscow
+    - under-3-25-the-votes-that-elect-nobody
+    - eighty-per-cent-and-a-balance-to-hold
+    - eight-hours-a-week-and-nobody-wrote-it-into
+    - trouble-falling-asleep-came-first
+    - a-chair-who-dislikes-signals-on-the-day-everyone
+    - frankfurt-meets-with-paris-on-its-mind
+    - two-cents-on-the-euro-and-13-fewer-shops
+    - spending-up-3-7-income-up-1-1
+    - 155-answers-that-belonged-to-someone-else
+    - the-machine-found-45-the-fuzzer-37
+    - a-strep-a-vaccine-through-the-nose-in-mice
+    - the-mrna-flu-jab-a-modest-gain-and-more
+    - shrapnel-in-riyadh-claims-about-ras-tanura
+    - when-the-bridges-are-targets-kyiv-budgets-for-ferries
+    - one-storm-or-two-the-excess-depends-on-it
+    - singapore-s-haze-moderate-and-the-rain-is-helping
+  updates: []
