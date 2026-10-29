@@ -1,0 +1,26 @@
+id: de-household-lines-29oct
+kind: line
+kicker: "Ordinary · The household basket"
+title: "The pump ran away; the plate and the boiler did not"
+subtitle: "Germany, HICP, annual rate of change, % · all items and three household lines"
+unit: "%"
+label_decimals: 1
+start: "2025-01-01"
+series:
+  - key: de_fuels
+    label: "Fuels for your car"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: DE, unit: RCH_A, coicop18: CP0722, freq: M}}
+  - key: de_total
+    label: "All items"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: DE, unit: RCH_A, coicop18: TOTAL, freq: M}}
+  - key: de_food
+    label: "Food and soft drinks"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: DE, unit: RCH_A, coicop18: CP01, freq: M}}
+  - key: de_home_energy
+    label: "Electricity, gas and other household fuels"
+    source: {type: eurostat, dataset: prc_hicp_minr, filters: {geo: DE, unit: RCH_A, coicop18: CP045, freq: M}}
+annotations:
+  - {date: "2026-02-27", text: "War begins", anchor: end}
+licence: eurostat
+source_line: "Eurostat prc_hicp_minr, Germany, ECOICOP v2 (TOTAL, CP01, CP0722, CP045), release of 16 Oct 2026, retrieved 29 Oct 2026 · CC BY 4.0"
+alt: "Line chart of annual price changes in Germany since January 2025, from Eurostat's harmonised index. Fuels for personal transport fall by up to 8.4% a year in April 2025, are near zero in early 2026, then jump to 19.8% in March 2026 and reach 36.8% in September 2026, the latest value. In September 2026 all items stand at 3.3%, food and non-alcoholic beverages at 0.4%, and electricity, gas and other household fuels at -1.9%, below zero throughout the period."

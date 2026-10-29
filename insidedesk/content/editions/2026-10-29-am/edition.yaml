@@ -1,0 +1,61 @@
+date: "2026-10-29"
+slot: am
+published: "2026-10-29T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "One receipt, three stories; the ledger reads slower than the podium, and more honestly."
+standfirst: "Germany's price index splits three ways on the morning the ECB meets: car fuel up 36.8% in a year, food up 0.4%, heating and light down 1.9%. Power for today cleared at €314.85, the Fed's chair met the payroll ledger, and Moscow counted drones by the hundred. Eleven desks, every number sourced."
+closing:
+  title: Before you close the tab
+  published: '2026-10-29T08:30:00+01:00'
+  habit:
+    text: 'This week, keep the receipt from your next fill-up and write the litres and the price per litre on the back. Over the seven days to Wednesday, the German average for Super E10 fell 4.7 cents while diesel rose 2.5 cents, Tankerkönig reports from official MTS-K data [2]. A month of your own receipts tells you what your car actually costs, which no national average can.'
+    note: A habit, not advice.
+  went_right:
+    text: 'The Southampton Island caribou herd in Nunavut is showing encouraging signs of recovery, a Government of Nunavut study drawing on Inuit knowledge has found, with Coral Harbour hunters and Elders reporting healthy animals and strong calf survival [1]. The island''s original herd was gone by the mid-1950s; 48 caribou were brought back from Coats Island in 1967 at the request of Coral Harbour Inuit [1]. After a decline in the 2000s, ending commercial harvesting and setting a total allowable harvest helped steady the herd, with aerial surveys counting 12,054 animals in 2019 and 12,651 in 2023 [1]. A quota, a survey and fifteen careful interviews: dull machinery, working [1].'
+  sentence: 'Petrol got cheaper, heating got cheaper, diesel and power got dearer, and the Fed''s chair said hiring had picked up: on ECB morning, the receipts disagreed with one another and agreed with the ledger.'
+  euros:
+    text: 'Diesel cost €2.259 a litre on the German average on Wednesday, against €2.049 for Super E10, both a cent cheaper than the day before, Tankerkönig reports from official MTS-K data at 17:01 [2]. Over the past week the two went separate ways: E10 fell 4.7 cents and diesel rose 2.5 cents [2]. ADAC''s figures in today''s lead are a separate measure and run a few cents higher. Desk arithmetic: a 50-litre tank of diesel at Wednesday''s average costs about €112.95, some €10.50 more than the same tank of E10.'
+    note: Desk arithmetic on the cited national averages. Prices differ by station, region and time of day. Nothing here is advice.
+  small_words:
+    term: Total allowable harvest
+    text: 'A ceiling on how many animals of a population may be taken in a season, set by the people who manage it and shared out among hunters. On Southampton Island in Nunavut it is 1,000 caribou, and the territory''s environment department is not recommending a change, though some residents would like household tags raised from four to six [1]. It is a number agreed before the season, so that nobody has to argue during it.'
+  sources:
+  - {n: 1, title: "Inuit knowledge reveals encouraging signs for Southampton Island caribou herd", publisher: "Nunavut News", url: "https://nunavutnews.com/2026/10/28/inuit-knowledge-reveals-encouraging-signs-for-southampton-island-caribou-herd/", date: "28 Oct 2026"}
+  - {n: 2, title: "Marktbriefing", publisher: "Tankerkönig (MTS-K data)", url: "https://www.tankerkoenig.de/marktbriefing", date: "28 Oct 2026, data 04:01 and 17:01 CET, retrieved 29 Oct 2026, 05:30 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - ordinary-ledger-one-receipt-three-different-stories
+  - a-record-107-trillion-won-and-a-5
+  - a-letter-to-rezaei-a-denial-from-trump
+  - thirty-nine-million-ballots-and-none-of-them
+  - thin-at-ten-heavier-at-fifty-seven-what
+  - 314-85-for-today-and-wednesday-s-receipts
+  - podium-vs-print-noticeably-above-last-year-s
+  - the-servers-sold-out-the-landlords-were-late
+  - 1-398-cases-and-the-vaccine-queue-doubled
+  - a-night-over-moscow-counted-by-the-mayor
+  - wet-ground-a-second-soaking-and-a-halloween
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-10-29T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - three-months-of-cushion-for-about-half-of
+    - 67-53-and-a-works-pension-for-everyone
+    - minus-9-07-billion-of-free-cash-and
+    - tokyo-opens-its-own-two-day-meeting
+    - 350-000-hybrids-was-the-template
+    - a-missile-over-the-eastern-province-a-strike
+    - double-envelopes-on-the-table-and-four-leaders
+    - 43-the-lowest-vote-of-confidence-in-thirty
+    - lying-flat-one-day-at-a-time
+    - one-speech-two-directions
+    - gas-at-100-and-the-bill-arrives-in
+    - brent-gives-back-82-cents-on-a-letter
+    - eight-meetings-and-one-of-them-without-a
+    - frankfurt-at-14-15-a-hold-is-the
+    - a-company-run-by-an-agent-and-a
+    - three-clouds-three-cash-flow-lines
+    - 4-874-newborns-and-none-of-the-protected
+    - two-vaccines-that-come-in-two-parts
+    - stay-clear-unless-you-must-washington-s-new
+    - kharkiv-a-fire-in-kholodnohirskyi-a-school-building
+    - harvest-weather-continent-by-continent
+    - 229-in-delhi-and-moderate-rain-on-the
+  updates: []
