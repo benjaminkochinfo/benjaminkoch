@@ -60,7 +60,11 @@ epaper:
   - tripling-a-number-nobody-has-written-down
   - in-fa-at-140-mph-and-the-next-advisory-on-schedule
   - super-again-at-150-mph-and-a-wider-reach
+  - a-record-margin-and-a-cash-line-in-the-red
   updates:
   - time: '2026-10-29T19:27:49+01:00'
     text: 'Climate & Weather: In-fa upgraded to a super typhoon again at 150 mph; damaging winds now reach further'
     piece: super-again-at-150-mph-and-a-wider-reach
+  - time: '2026-10-29T22:00:47+01:00'
+    text: 'Tech: Amazon''s record margin and a twelve-month cash outflow of $42.4bn'
+    piece: a-record-margin-and-a-cash-line-in-the-red
