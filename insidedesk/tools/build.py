@@ -554,6 +554,7 @@ def card(page, a, big=False, rendered=None):
     first = ""
     if big:
         para = re.split(r"\n\s*\n", a.body_md.strip())
+        para = [x for x in para if not re.match(r"^\[\[chart:[a-z0-9\-]+\]\]\s*$", x.strip())]
         first = "".join(f"<p>{e(strip_refs(x))}</p>" for x in para[:2])
     return f'''<article class="{cls}">
   <div class="kicker">{e(a.kicker)} · {e(a.format_name.upper())} {badge}</div>

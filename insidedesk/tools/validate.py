@@ -151,6 +151,7 @@ for name in editions:
             ih = os.path.join(ROOT, idir, "index.html")
             if not os.path.exists(ih): problems.append(f"{name}: ePaper issue {idir}/index.html missing"); continue
             itxt = open(ih, encoding="utf-8").read()
+            itxt = re.sub(r'<ol class="ra-src">.*?</ol>', '', itxt, flags=re.S)  # source titles may legitimately say "PREVIEW"
             for bad in ("noindex", "Preview placeholder", "ph-k", "PREVIEW", "PUBLISHED_AT"):
                 if bad in itxt: problems.append(f"{idir}: contains '{bad}'")
             try: ej = json.load(open(os.path.join(ROOT, idir, "edition.json"), encoding="utf-8"))
