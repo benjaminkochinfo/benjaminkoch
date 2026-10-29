@@ -34,29 +34,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - three-in-four-once-you-count-the-brains-nobody
   - a-platform-in-dnipro-and-1-700-attacks-on-the
   - half-a-million-heat-deaths-and-the-two-thirds-that
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-10-29T17:30:01+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-10-29T17:30:01+01:00"
   extras:
-    - half-the-code-ai-assisted-and-the-headcount-still
-    - the-landlords-landlords-need-lenders
-    - the-sell-off-stayed-in-its-lane
-    - 151-basis-points-down-from-almost-178
-    - brent-at-114-10-and-a-bank-that-says-the-shelf-is
-    - sixty-signatures-and-some-of-them-secret
-    - stolen-said-the-party-no-basis-said-the-committee
-    - 40-5-million-ballots-in-and-texas-at-69-6-of-2022
-    - the-hug-you-still-remember
-    - spotting-the-advert-does-not-switch-it-off
-    - friday-is-46-cheaper-and-the-evening-peak-is
-    - 74-6-full-the-lowest-late-october-level-since-2009
-    - 7-february-2027-a-date-a-treaty-article-and-a
-    - 3-4-growth-and-a-household-that-stood-still
-    - a-ten-year-price-guarantee-three-weeks-notice
-    - from-sunday-2-more-on-every-cheap-parcel-charged
-    - six-peptides-and-a-promise-not-to-enforce
-    - from-3-to-10-2-in-three-years
-    - three-tankers-three-mines-and-a-route-tehran-calls
-    - oleshky-54-hours-without-a-recorded-violation
-    - tripling-a-number-nobody-has-written-down
-    - in-fa-at-140-mph-and-the-next-advisory-on-schedule
-  updates: []
+  - half-the-code-ai-assisted-and-the-headcount-still
+  - the-landlords-landlords-need-lenders
+  - the-sell-off-stayed-in-its-lane
+  - 151-basis-points-down-from-almost-178
+  - brent-at-114-10-and-a-bank-that-says-the-shelf-is
+  - sixty-signatures-and-some-of-them-secret
+  - stolen-said-the-party-no-basis-said-the-committee
+  - 40-5-million-ballots-in-and-texas-at-69-6-of-2022
+  - the-hug-you-still-remember
+  - spotting-the-advert-does-not-switch-it-off
+  - friday-is-46-cheaper-and-the-evening-peak-is
+  - 74-6-full-the-lowest-late-october-level-since-2009
+  - 7-february-2027-a-date-a-treaty-article-and-a
+  - 3-4-growth-and-a-household-that-stood-still
+  - a-ten-year-price-guarantee-three-weeks-notice
+  - from-sunday-2-more-on-every-cheap-parcel-charged
+  - six-peptides-and-a-promise-not-to-enforce
+  - from-3-to-10-2-in-three-years
+  - three-tankers-three-mines-and-a-route-tehran-calls
+  - oleshky-54-hours-without-a-recorded-violation
+  - tripling-a-number-nobody-has-written-down
+  - in-fa-at-140-mph-and-the-next-advisory-on-schedule
+  - super-again-at-150-mph-and-a-wider-reach
+  updates:
+  - time: '2026-10-29T19:27:49+01:00'
+    text: 'Climate & Weather: In-fa upgraded to a super typhoon again at 150 mph; damaging winds now reach further'
+    piece: super-again-at-150-mph-and-a-wider-reach
