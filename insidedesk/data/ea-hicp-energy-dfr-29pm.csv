@@ -1,0 +1,27 @@
+# Inside Desk chart data: ea-hicp-energy-dfr-29pm
+"# Source: Eurostat prc_hicp_minr, EA, annual rate of change, all items (TOTAL) and excluding energy (TOT_X_NRG), dataset updated 16 Oct 2026 (CC BY 4.0) · ECB, key ECB interest rates, deposit facility, month-end, unchanged on 29 Oct 2026 · retrieved 29 Oct 2026"
+# Licence: Eurostat. Reuse authorised under CC BY 4.0 (Commission Decision 2011/833/EU). European Central Bank Data Portal. Reuse permitted with source acknowledgement.
+# Retrieved: 2026-10-29T16:30+01:00
+date,headline,exenergy,dfr
+2025-01-01,2.5,2.6,3.0
+2025-02-01,2.3,2.6,2.75
+2025-03-01,2.2,2.5,2.5
+2025-04-01,2.2,2.8,2.25
+2025-05-01,1.9,2.5,2.25
+2025-06-01,2.0,2.5,2.0
+2025-07-01,2.0,2.5,2.0
+2025-08-01,2.0,2.5,2.0
+2025-09-01,2.2,2.5,2.0
+2025-10-01,2.1,2.4,2.0
+2025-11-01,2.1,2.4,2.0
+2025-12-01,2.0,2.4,2.0
+2026-01-01,1.7,2.3,2.0
+2026-02-01,1.9,2.4,2.0
+2026-03-01,2.6,2.3,2.0
+2026-04-01,3.0,2.2,2.0
+2026-05-01,3.2,2.4,2.0
+2026-06-01,2.8,2.2,2.25
+2026-07-01,2.9,2.2,2.25
+2026-08-01,3.2,2.1,2.25
+2026-09-01,3.8,2.3,2.5
+2026-10-01,,,2.5

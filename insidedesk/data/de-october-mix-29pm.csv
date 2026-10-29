@@ -1,0 +1,10 @@
+# Inside Desk chart data: de-october-mix-29pm
+"# Source: Bundesnetzagentur | SMARD.de, realised generation, Germany: lignite (filter 1223), photovoltaics (4068), natural gas (4071), daily totals 1–28 Oct 2025 and 2026, retrieved 29 Oct 2026, 16:24 CET, summed and rounded to 0.1 GWh by Inside Desk · CC BY 4.0"
+"# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
+label,value,derived_by_inside_desk,note
+"Lignite, 1–28 Oct 2026",6081.3,no,+19%
+"Lignite, 1–28 Oct 2025",5111.5,no,
+"Solar, 1–28 Oct 2026",4742.6,no,+46%
+"Solar, 1–28 Oct 2025",3244.9,no,
+"Natural gas, 1–28 Oct 2026",4223.2,no,−13%
+"Natural gas, 1–28 Oct 2025",4852.7,no,

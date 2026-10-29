@@ -1,0 +1,16 @@
+id: heat-deaths-lancet-29pm
+kind: hbar
+kicker: "Climate & Weather · Heat and health"
+title: "The extra deaths are the warming's share"
+subtitle: "Estimated heat-related deaths worldwide a year, thousands: as observed, and in the same model with temperatures as they would have been without human-caused climate change · Lancet Countdown 2026"
+unit: "k"
+rows:
+  - {label: "2006–15 average, observed climate", value: 398.4, note: "Lancet Countdown"}
+  - {label: "2006–15 average, without climate change", value: 179.3, note: "Lancet Countdown"}
+  - {label: "2016–23 average, observed climate", value: 540.8, note: "Lancet Countdown"}
+  - {label: "2016–23 average, without climate change", value: 170.9, note: "Lancet Countdown"}
+  - {label: "2023, observed climate", value: 708.7, note: "Lancet Countdown"}
+  - {label: "2023, without climate change", value: 202.0, note: "Lancet Countdown"}
+licence: reported
+source_line: "Lancet Countdown 2026, indicator 1.1.5 heat-related mortality, 'deaths by period' data file (data.lancetcountdown.org), global estimates rounded to thousands; retrieved 29 Oct 2026 · Modelled estimates, not counted deaths; the model assumes people's sensitivity to heat does not change over time."
+alt: "Bar chart of estimated heat-related deaths worldwide per year, in thousands. The 2006–15 average was 398.4 thousand in the observed climate and 179.3 thousand without climate change. The 2016–23 average was 540.8 thousand observed and 170.9 thousand without climate change. In 2023, the latest year, the estimate was 708.7 thousand observed and 202.0 thousand without climate change."

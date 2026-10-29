@@ -1,0 +1,96 @@
+id: ea-hicp-energy-dfr-29pm
+kind: line
+kicker: "Money · Euro area"
+title: "Energy ran to 18.9%; the rest of the basket stayed near 2.3%"
+subtitle: "Euro-area HICP inflation, annual change, %, monthly: all items and all items excluding energy · ECB deposit facility rate, %, month-end"
+unit: "%"
+label_decimals: 1
+start: "2025-01-01"
+y_min: 0
+series:
+  - key: headline
+    label: "HICP, all items"
+    source:
+      type: static
+      values:
+        - ["2025-01-01", 2.5]
+        - ["2025-02-01", 2.3]
+        - ["2025-03-01", 2.2]
+        - ["2025-04-01", 2.2]
+        - ["2025-05-01", 1.9]
+        - ["2025-06-01", 2.0]
+        - ["2025-07-01", 2.0]
+        - ["2025-08-01", 2.0]
+        - ["2025-09-01", 2.2]
+        - ["2025-10-01", 2.1]
+        - ["2025-11-01", 2.1]
+        - ["2025-12-01", 2.0]
+        - ["2026-01-01", 1.7]
+        - ["2026-02-01", 1.9]
+        - ["2026-03-01", 2.6]
+        - ["2026-04-01", 3.0]
+        - ["2026-05-01", 3.2]
+        - ["2026-06-01", 2.8]
+        - ["2026-07-01", 2.9]
+        - ["2026-08-01", 3.2]
+        - ["2026-09-01", 3.8]
+  - key: exenergy
+    label: "HICP excluding energy"
+    source:
+      type: static
+      values:
+        - ["2025-01-01", 2.6]
+        - ["2025-02-01", 2.6]
+        - ["2025-03-01", 2.5]
+        - ["2025-04-01", 2.8]
+        - ["2025-05-01", 2.5]
+        - ["2025-06-01", 2.5]
+        - ["2025-07-01", 2.5]
+        - ["2025-08-01", 2.5]
+        - ["2025-09-01", 2.5]
+        - ["2025-10-01", 2.4]
+        - ["2025-11-01", 2.4]
+        - ["2025-12-01", 2.4]
+        - ["2026-01-01", 2.3]
+        - ["2026-02-01", 2.4]
+        - ["2026-03-01", 2.3]
+        - ["2026-04-01", 2.2]
+        - ["2026-05-01", 2.4]
+        - ["2026-06-01", 2.2]
+        - ["2026-07-01", 2.2]
+        - ["2026-08-01", 2.1]
+        - ["2026-09-01", 2.3]
+  - key: dfr
+    label: "ECB deposit rate"
+    step: true
+    source:
+      type: static
+      values:
+        - ["2025-01-01", 3.0]
+        - ["2025-02-01", 2.75]
+        - ["2025-03-01", 2.5]
+        - ["2025-04-01", 2.25]
+        - ["2025-05-01", 2.25]
+        - ["2025-06-01", 2.0]
+        - ["2025-07-01", 2.0]
+        - ["2025-08-01", 2.0]
+        - ["2025-09-01", 2.0]
+        - ["2025-10-01", 2.0]
+        - ["2025-11-01", 2.0]
+        - ["2025-12-01", 2.0]
+        - ["2026-01-01", 2.0]
+        - ["2026-02-01", 2.0]
+        - ["2026-03-01", 2.0]
+        - ["2026-04-01", 2.0]
+        - ["2026-05-01", 2.0]
+        - ["2026-06-01", 2.25]
+        - ["2026-07-01", 2.25]
+        - ["2026-08-01", 2.25]
+        - ["2026-09-01", 2.5]
+        - ["2026-10-01", 2.5]
+annotations:
+  - {date: "2026-02-27", text: "War begins", anchor: end}
+licence: eurostat
+licence_extra: ecb
+source_line: "Eurostat prc_hicp_minr, EA, annual rate of change, all items (TOTAL) and excluding energy (TOT_X_NRG), dataset updated 16 Oct 2026 (CC BY 4.0) · ECB, key ECB interest rates, deposit facility, month-end, unchanged on 29 Oct 2026 · retrieved 29 Oct 2026"
+alt: "Line chart since January 2025 of euro-area HICP inflation, all items and excluding energy, with the ECB deposit rate. Both inflation lines run between 1.9% and 2.8% through 2025. From March 2026 the all-items line climbs, to 3.2% in May and August and 3.8% in September 2026, the latest value. Inflation excluding energy stays between 2.1% and 2.4% throughout 2026 and is 2.3% in September 2026, the latest value. The deposit rate falls from 3.00% in January 2025 to 2.00% from June 2025, rises to 2.25% in June 2026 and to 2.50% in September 2026, where the ECB left it on 29 October 2026."

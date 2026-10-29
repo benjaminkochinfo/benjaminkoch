@@ -1,0 +1,16 @@
+id: de-october-mix-29pm
+kind: hbar
+kicker: "Energy · Power"
+title: "October's ledger: solar up by almost half, gas down by an eighth"
+subtitle: "Germany, realised electricity generation, 1 to 28 October, GWh, 2026 against the same days of 2025 (sum of SMARD daily totals, desk arithmetic)"
+unit: " GWh"
+rows:
+  - {label: "Lignite, 1–28 Oct 2026", value: 6081.3, color: "#F2A93B", note: "+19%"}
+  - {label: "Lignite, 1–28 Oct 2025", value: 5111.5, color: "#C9D1D9"}
+  - {label: "Solar, 1–28 Oct 2026", value: 4742.6, color: "#4CC9B0", note: "+46%"}
+  - {label: "Solar, 1–28 Oct 2025", value: 3244.9, color: "#C9D1D9"}
+  - {label: "Natural gas, 1–28 Oct 2026", value: 4223.2, color: "#FF7A5C", note: "−13%"}
+  - {label: "Natural gas, 1–28 Oct 2025", value: 4852.7, color: "#C9D1D9"}
+licence: smard
+source_line: "Bundesnetzagentur | SMARD.de, realised generation, Germany: lignite (filter 1223), photovoltaics (4068), natural gas (4071), daily totals 1–28 Oct 2025 and 2026, retrieved 29 Oct 2026, 16:24 CET, summed and rounded to 0.1 GWh by Inside Desk · CC BY 4.0"
+alt: "Bar chart of German electricity generation from 1 to 28 October, in gigawatt hours, 2026 against 2025. Lignite generated 6,081.3 GWh in 2026 against 5,111.5 GWh in 2025, up about 19%. Solar generated 4,742.6 GWh against 3,244.9 GWh, up about 46%. Natural gas generated 4,223.2 GWh against 4,852.7 GWh, down about 13%. The latest day included is Wednesday 28 October 2026."

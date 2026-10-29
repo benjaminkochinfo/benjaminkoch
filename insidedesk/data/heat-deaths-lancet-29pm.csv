@@ -1,0 +1,10 @@
+# Inside Desk chart data: heat-deaths-lancet-29pm
+"# Source: Lancet Countdown 2026, indicator 1.1.5 heat-related mortality, 'deaths by period' data file (data.lancetcountdown.org), global estimates rounded to thousands; retrieved 29 Oct 2026 · Modelled estimates, not counted deaths; the model assumes people's sensitivity to heat does not change over time."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"2006–15 average, observed climate",398.4,no,Lancet Countdown
+"2006–15 average, without climate change",179.3,no,Lancet Countdown
+"2016–23 average, observed climate",540.8,no,Lancet Countdown
+"2016–23 average, without climate change",170.9,no,Lancet Countdown
+"2023, observed climate",708.7,no,Lancet Countdown
+"2023, without climate change",202.0,no,Lancet Countdown

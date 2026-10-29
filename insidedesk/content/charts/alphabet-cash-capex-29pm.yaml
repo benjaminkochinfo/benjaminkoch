@@ -1,0 +1,18 @@
+id: alphabet-cash-capex-29pm
+kind: hbar
+kicker: "Inside Desk · Technology"
+title: "The spending line crossed the cash line"
+subtitle: "Alphabet, cash from operations and purchases of property and equipment by quarter, $ billion, as filed on 28 October 2026"
+unit: " bn"
+rows:
+  - {label: "Q4 2025 · cash from operations", value: 52.4, note: "$52,402 million"}
+  - {label: "Q4 2025 · capital spending", value: 27.9, note: "$27,851 million"}
+  - {label: "Q1 2026 · cash from operations", value: 45.8, note: "$45,790 million"}
+  - {label: "Q1 2026 · capital spending", value: 35.7, note: "$35,674 million"}
+  - {label: "Q2 2026 · cash from operations", value: 39.1, note: "$39,069 million"}
+  - {label: "Q2 2026 · capital spending", value: 44.9, note: "$44,924 million"}
+  - {label: "Q3 2026 · cash from operations", value: 42.3, note: "$42,290 million"}
+  - {label: "Q3 2026 · capital spending", value: 51.4, note: "$51,355 million"}
+licence: reported
+source_line: "Alphabet Inc., third-quarter 2026 results, Exhibit 99.1 to Form 8-K (free cash flow reconciliation), SEC EDGAR, 28 Oct 2026, retrieved 29 Oct 2026. Figures rounded to $0.1 billion"
+alt: "Bar chart of Alphabet's quarterly cash from operations and capital spending. In Q4 2025 cash from operations was $52.4 billion against capital spending of $27.9 billion; in Q1 2026, $45.8 billion against $35.7 billion; in Q2 2026, $39.1 billion against $44.9 billion. In the latest quarter, Q3 2026, cash from operations was $42.3 billion and capital spending $51.4 billion, leaving free cash flow of minus $9.1 billion."

@@ -1,0 +1,62 @@
+date: "2026-10-29"
+slot: pm
+published: "2026-10-29T17:30:01+01:00"   # set to the actual Berlin time when it goes live
+title: "The president named her last day; the rate stayed where it was, and the invoices did the talking."
+standfirst: "The ECB held at 2.50% and Christine Lagarde will step down on 7 February 2027. Alphabet's capital spending ran past its operating cash, Israel's count is complete and still short of 61, and German solar output rose 46% in October. Eleven desks, every number sourced."
+closing:
+  title: Before you close the tab
+  published: '2026-10-29T17:30:00+01:00'
+  habit:
+    text: 'Next time you fill up, glance at the price board before you glance at the pump, and note the date beside the figure in your phone. The fuel tax cut that took 17 cents a litre off the energy tax began on 1 October, Tankerkönig notes from official MTS-K data [2]; a month of your own notes will tell you how much of it reached your street. It takes ten seconds a visit.'
+    note: A habit, not advice.
+  went_right:
+    text: 'About 252 million hectares of degraded land and sea across 149 countries are now documented as being under restoration, an area the size of Kazakhstan, according to a UN Environment Programme report published today [1]. The flagship restoration drives it recognises are linked to more than one million green jobs [1]. The report is frank that the world is off track: that is only 34% of the benchmark for 2030, and freshwater restoration stands at just 5% [1]. A stocktake that counts honestly is how a pledge becomes a programme.'
+  sentence: 'The ECB held at 2.50% and Christine Lagarde named 7 February as her last day, Alphabet''s capital spending outran its operating cash, and Germany''s October ran on more sun and less gas: the people at the top changed, and the ledgers kept counting.'
+  euros:
+    text: 'A litre of Super E10 cost €2.019 on the German average early on Thursday, 20.6 cents less than on 30 September, and diesel cost €2.238, down 13.6 cents, Tankerkönig reports from official MTS-K data at 04:01 [2]. Most of the fall dates from 1 October, when the fuel tax cut lowered the energy tax on petrol and diesel by 17 cents a litre [2]. Desk arithmetic: a 50-litre tank of E10 costs about €10.30 less than a month ago, and the same tank of diesel about €6.80 less.'
+    note: Desk arithmetic on the cited national averages. Prices differ by station, region and time of day. Nothing here is advice.
+  small_words:
+    term: Deposit facility rate
+    text: 'The interest the European Central Bank pays banks on money they leave with it overnight. Because banks will not lend to each other much below what the central bank pays them for doing nothing, it sets the floor for short-term rates across the euro area. Today the Governing Council left it at 2.50% [3].'
+  sources:
+  - {n: 1, title: "UN report shows nature is being restored at an unprecedented scale (Restoration Progress Report: Nature's Comeback)", publisher: "UN Environment Programme", url: "https://www.unep.org/en/news-and-stories/story/un-report-shows-nature-being-restored-unprecedented-scale", date: "29 Oct 2026"}
+  - {n: 2, title: "Marktbriefing", publisher: "Tankerkönig (MTS-K data)", url: "https://www.tankerkoenig.de/marktbriefing", date: "29 Oct 2026, data 04:01 CET, retrieved 29 Oct 2026, 16:30 CET"}
+  - {n: 3, title: "Monetary policy decisions", publisher: "European Central Bank", url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp261029~9a493adf17.en.html", date: "29 Oct 2026, 14:15 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - alphabet-s-filing-the-spending-line-crossed-the
+  - the-euro-took-the-day-s-news-the-treasuries-let-it
+  - 27-billion-at-the-podium-3-9-in-the-ledger
+  - 5-589-836-votes-entered-and-still-no-61
+  - 2-175-people-in-scanners-and-no-single-dial-for
+  - october-s-ledger-more-sun-more-lignite-less-gas
+  - podium-vs-print-broadly-stable-and-2-3
+  - shops-expect-to-raise-prices-households-are
+  - three-in-four-once-you-count-the-brains-nobody
+  - a-platform-in-dnipro-and-1-700-attacks-on-the
+  - half-a-million-heat-deaths-and-the-two-thirds-that
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-10-29T17:30:01+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - half-the-code-ai-assisted-and-the-headcount-still
+    - the-landlords-landlords-need-lenders
+    - the-sell-off-stayed-in-its-lane
+    - 151-basis-points-down-from-almost-178
+    - brent-at-114-10-and-a-bank-that-says-the-shelf-is
+    - sixty-signatures-and-some-of-them-secret
+    - stolen-said-the-party-no-basis-said-the-committee
+    - 40-5-million-ballots-in-and-texas-at-69-6-of-2022
+    - the-hug-you-still-remember
+    - spotting-the-advert-does-not-switch-it-off
+    - friday-is-46-cheaper-and-the-evening-peak-is
+    - 74-6-full-the-lowest-late-october-level-since-2009
+    - 7-february-2027-a-date-a-treaty-article-and-a
+    - 3-4-growth-and-a-household-that-stood-still
+    - a-ten-year-price-guarantee-three-weeks-notice
+    - from-sunday-2-more-on-every-cheap-parcel-charged
+    - six-peptides-and-a-promise-not-to-enforce
+    - from-3-to-10-2-in-three-years
+    - three-tankers-three-mines-and-a-route-tehran-calls
+    - oleshky-54-hours-without-a-recorded-violation
+    - tripling-a-number-nobody-has-written-down
+    - in-fa-at-140-mph-and-the-next-advisory-on-schedule
+  updates: []

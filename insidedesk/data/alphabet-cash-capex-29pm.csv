@@ -1,0 +1,12 @@
+# Inside Desk chart data: alphabet-cash-capex-29pm
+"# Source: Alphabet Inc., third-quarter 2026 results, Exhibit 99.1 to Form 8-K (free cash flow reconciliation), SEC EDGAR, 28 Oct 2026, retrieved 29 Oct 2026. Figures rounded to $0.1 billion"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Q4 2025 · cash from operations,52.4,no,"$52,402 million"
+Q4 2025 · capital spending,27.9,no,"$27,851 million"
+Q1 2026 · cash from operations,45.8,no,"$45,790 million"
+Q1 2026 · capital spending,35.7,no,"$35,674 million"
+Q2 2026 · cash from operations,39.1,no,"$39,069 million"
+Q2 2026 · capital spending,44.9,no,"$44,924 million"
+Q3 2026 · cash from operations,42.3,no,"$42,290 million"
+Q3 2026 · capital spending,51.4,no,"$51,355 million"
