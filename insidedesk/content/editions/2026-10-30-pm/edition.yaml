@@ -60,7 +60,11 @@ epaper:
   - triple-it-they-agreed-triple-what-nobody-wrote
   - frost-at-the-alpine-edge-fog-in-the-lowlands-snow
   - all-clear-in-the-marianas-and-a-loop-ahead
+  - the-month-ended-on-the-chips-and-the-groceries
   updates:
   - time: '2026-10-30T19:28:51+01:00'
     text: 'Climate & Weather: In-fa has passed the Marianas and the typhoon warnings are cancelled'
     piece: all-clear-in-the-marianas-and-a-loop-ahead
+  - time: '2026-10-30T21:57:07+01:00'
+    text: 'Markets: Wall Street closes October with the Nasdaq''s worst day since June'
+    piece: the-month-ended-on-the-chips-and-the-groceries
