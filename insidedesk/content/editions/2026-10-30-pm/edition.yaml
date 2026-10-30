@@ -34,29 +34,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 578-billion-owed-to-amazon-884-billion-owed-by-it
   - three-in-four-hospitals-in-the-red-and-most-of
   - 91-billion-a-quiet-year-by-the-invoices-and-55
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-10-30T17:30:03+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-10-30T17:30:03+01:00"
   extras:
-    - oleshky-the-buses-left-and-the-number-was
-    - twenty-one-bridges-because-the-old-ones-are
-    - 46-7-a-barrel-for-refining-and-a-debt-bill-cut-in
-    - gold-under-4-000-oil-up-again
-    - 45-billion-and-31-7-billion-of-it-for-factories
-    - up-to-48-1-on-a-roofing-fabric-and-a-warning-from
-    - novaya-gazeta-stops-and-says-who-stopped-it
-    - just-dont-be-loud-washingtons-advice-to-the
-    - thirty-sessions-in-a-group-and-fewer-people-walked
-    - the-talk-about-puberty-is-worth-having
-    - 102-78-for-december-gas-and-a-storage-tank-three
-    - on-the-stillest-day-lignite-out-generated-gas
-    - 40-000-fewer-out-of-work-4-000-more-once-the
-    - three-capitals-three-directions-2-8-3-8-5-6
-    - italys-shopping-trolley-2-5-and-fresh-food-at-7-5
-    - france-shrank-french-shoppers-spent-0-4-more
-    - operating-profit-up-61-net-profit-down-2-the
-    - 690-million-megawatt-hours-signed-for-18-years
-    - colds-lead-covid-and-flu-are-clearing-their
-    - the-donors-microbes-moved-in-the-symptoms-stayed
-    - triple-it-they-agreed-triple-what-nobody-wrote
-    - frost-at-the-alpine-edge-fog-in-the-lowlands-snow
-  updates: []
+  - oleshky-the-buses-left-and-the-number-was
+  - twenty-one-bridges-because-the-old-ones-are
+  - 46-7-a-barrel-for-refining-and-a-debt-bill-cut-in
+  - gold-under-4-000-oil-up-again
+  - 45-billion-and-31-7-billion-of-it-for-factories
+  - up-to-48-1-on-a-roofing-fabric-and-a-warning-from
+  - novaya-gazeta-stops-and-says-who-stopped-it
+  - just-dont-be-loud-washingtons-advice-to-the
+  - thirty-sessions-in-a-group-and-fewer-people-walked
+  - the-talk-about-puberty-is-worth-having
+  - 102-78-for-december-gas-and-a-storage-tank-three
+  - on-the-stillest-day-lignite-out-generated-gas
+  - 40-000-fewer-out-of-work-4-000-more-once-the
+  - three-capitals-three-directions-2-8-3-8-5-6
+  - italys-shopping-trolley-2-5-and-fresh-food-at-7-5
+  - france-shrank-french-shoppers-spent-0-4-more
+  - operating-profit-up-61-net-profit-down-2-the
+  - 690-million-megawatt-hours-signed-for-18-years
+  - colds-lead-covid-and-flu-are-clearing-their
+  - the-donors-microbes-moved-in-the-symptoms-stayed
+  - triple-it-they-agreed-triple-what-nobody-wrote
+  - frost-at-the-alpine-edge-fog-in-the-lowlands-snow
+  - all-clear-in-the-marianas-and-a-loop-ahead
+  updates:
+  - time: '2026-10-30T19:28:51+01:00'
+    text: 'Climate & Weather: In-fa has passed the Marianas and the typhoon warnings are cancelled'
+    piece: all-clear-in-the-marianas-and-a-loop-ahead
