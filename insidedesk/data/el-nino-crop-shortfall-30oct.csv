@@ -1,0 +1,9 @@
+# Inside Desk chart data: el-nino-crop-shortfall-30oct
+"# Source: FEWS NET, 2026-2027 El Niño food security impacts, Special Report October 2026, Table 1 (FEWS NET using USDA and NOAA data), retrieved 30 Oct 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"South Africa, maize",27.7,no,FEWS NET/USDA
+"Australia, wheat",15.3,no,FEWS NET/USDA
+"India, rice",5.7,no,FEWS NET/USDA
+"Indonesia and Malaysia, palm oil",4.0,no,FEWS NET/USDA
+"Thailand, rice",3.0,no,FEWS NET/USDA

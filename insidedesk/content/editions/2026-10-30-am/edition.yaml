@@ -1,0 +1,62 @@
+date: "2026-10-30"
+slot: am
+published: "2026-10-30T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "The shares took the blame, the bonds took the money, and the Bank of Japan finally said two per cent."
+standfirst: "Asia's chipmakers fell and Treasuries headed for their best month since December 2023. The BoJ held at 1.25% and called its target in reach, Germany's wind dropped by seven-eighths before the year's dearest power day, and Hormuz traffic is still 70% below normal. Eleven desks, every number sourced."
+closing:
+  title: Before you close the tab
+  published: '2026-10-30T08:30:00+01:00'
+  habit:
+    text: 'On Sunday, the first of November, write down your meter readings: gas, electricity, or the level in the oil tank. Heating oil cost about €1.72 a litre on the German average on Thursday, HeizOel24 reports [2], but that is a price, not your bill. A reading on the first of every month turns the national number into your own, and makes the next statement something you can check rather than merely pay.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Some 252 million hectares in 149 countries are now under restoration, an area about the size of Kazakhstan, a UN report published on Thursday finds, creating more than one million green jobs: the largest documented restoration effort to date [1]. Restoration on land has reached nearly half of the global goal of putting 30% of degraded land ecosystems under restoration by 2030 [1]. The share of countries reporting wetland restoration programmes has risen from 8% to 54% since 2022, and the flagship projects count mountain gorillas, jaguars, snow leopards and Ganges river dolphins among their recoveries [1]. Rivers and coasts still lag, and the money must more than quadruple, the report says [1]; but the ledger is being kept, and it is growing.'
+  sentence: 'Shares in the companies spending most on AI fell, the money moved into government bonds, and Japan''s central bank said its two per cent target is finally in sight: a loud week ended with the quiet instruments doing the work.'
+  euros:
+    text: 'Heating oil cost €171.77 per 100 litres on the German average on Thursday at 12:20, for an order of 3,000 litres, against €171.79 the day before, HeizOel24 reports [2]. Per litre that is about €1.72, barely changed on the day; among large cities Munich was cheapest at €1.67 and Frankfurt dearest at €1.76 [2]. Desk arithmetic: a 3,000-litre delivery at the national average comes to about €5,153; the nine-cent gap between Munich and Frankfurt is worth about €270 on the same order.'
+    note: Desk arithmetic on the cited averages. Prices differ by dealer, region, order size and day. Nothing here is advice.
+  small_words:
+    term: Flash estimate
+    text: 'A first, quick reading of how much an economy grew, published before all the data are in. Eurostat releases its preliminary flash estimate for euro-area growth in the third quarter today at 11:00 CET, with further GDP releases scheduled for 13 November and 7 December [3]. Each one uses more information than the last, so the number can move. A flash is a photograph taken early, not the final portrait; it is useful precisely because it comes on time.'
+  sources:
+  - {n: 1, title: "Nature is making a comeback, but the world must move faster to meet restoration targets – UN Report", publisher: "UN Environment Programme (with FAO and the CBD Secretariat)", url: "https://www.unep.org/en/news-and-stories/press-release/nature-making-comeback-world-must-move-faster-meet-restoration", date: "29 Oct 2026"}
+  - {n: 2, title: "Heizöl folgt Gasöl nach unten", publisher: "HeizOel24", url: "https://www.heizoel24.de/news/artikel/005382-heizoel-folgt-gasoel-nach-unten-29-10-2026", date: "29 Oct 2026, 12:20 CET"}
+  - {n: 3, title: "Euro area and EU GDP (preliminary flash, flash and regular estimates): release schedule", publisher: "Econfeed (from Eurostat's release calendar)", url: "https://econfeed.io/releases/eu-eurostat-gdp/", date: "retrieved 30 Oct 2026, 05:15 CET"}
+articles:   # lead first
+  - the-shares-took-the-blame-the-bonds-got-the-money
+  - podium-vs-print-free-and-clear-and-241-transits
+  - 28-days-then-14-then-the-knesset-s-own-pen
+  - three-in-ten-asked-the-chatbot-how-they-felt
+  - the-wind-fell-by-seven-eighths-and-gas-almost
+  - two-per-cent-declared-at-last-and-one-hand-up-for
+  - ordinary-ledger-rice-down-31-the-burger-up-16
+  - one-customer-a-tenth-of-the-till-microsoft-s
+  - a-vaccine-approved-in-august-and-nobody-yet-to
+  - a-pause-nobody-announced-and-a-refinery-ledger
+  - a-tenth-of-a-soybean-crop-and-a-warning-that
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-10-30T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 6-3-billion-hit-about-half-frozen
+    - down-23-after-hours-and-one-cost-line-down-40
+    - ras-tanura-claimed-a-cruise-missile-intercepted
+    - a-security-finding-on-robots-and-180-days-to-talk
+    - 43-million-in-and-the-parties-share-of-the-queue
+    - section-86-where-stolen-has-to-go-to-be-tested
+    - horror-is-not-just-more-fear
+    - lonely-short-of-sleep-and-lost-for-words
+    - brent-at-115-74-and-a-fourth-monthly-gain-in-view
+    - the-november-gas-contract-left-the-stage-above-100
+    - a-day-of-receipts-four-growth-figures-five
+    - from-112-years-to-43
+    - 4-907-each-the-town-hall-s-ledger-grew-9-9
+    - missed-bills-flat-at-7-1-belt-tightening-up-to-53
+    - eighty-won-in-every-hundred-and-half-the-factory
+    - 319-million-for-a-bigger-wafer-in-carinthia
+    - one-fifth-of-a-dose-three-doses-of-ipv-and-fewer
+    - a-500-shot-and-the-babies-who-go-home-without-it
+    - a-welder-at-zaporizhzhia-and-a-watchdog-s-seven
+    - oleshky-the-mines-are-cleared-now-the-lorries
+    - half-the-usual-rain-on-the-mississippi-and-the
+    - in-fa-steps-down-to-145-mph-and-heads-over-agrihan
+  updates: []
