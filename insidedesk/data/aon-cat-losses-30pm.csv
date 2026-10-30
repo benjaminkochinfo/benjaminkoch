@@ -1,0 +1,8 @@
+# Inside Desk chart data: aon-cat-losses-30pm
+"# Source: Aon, Global Catastrophe Recap: Third Quarter of 2026 (press release, Dublin, 29 Oct 2026), estimates in US dollars; retrieved 30 Oct 2026 · Early estimates, subject to revision."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Insured losses, Jan–Sep 2026",91,no,Aon
+"Insured, 21st-century average",88,no,Aon
+"Insured, average of past five years",135,no,Aon
+"Economic losses, Jan–Sep 2026",204,no,Aon

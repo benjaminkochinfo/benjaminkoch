@@ -1,0 +1,14 @@
+id: aon-cat-losses-30pm
+kind: hbar
+kicker: "Climate & Weather · Catastrophe ledger"
+title: "A cheaper year for insurers, not for everyone"
+subtitle: "Natural-catastrophe losses worldwide, January–September, US$ billion · Aon Global Catastrophe Recap, Q3 2026"
+unit: " bn"
+rows:
+  - {label: "Insured losses, Jan–Sep 2026", value: 91, note: "Aon"}
+  - {label: "Insured, 21st-century average", value: 88, note: "Aon"}
+  - {label: "Insured, average of past five years", value: 135, note: "Aon"}
+  - {label: "Economic losses, Jan–Sep 2026", value: 204, note: "Aon"}
+licence: reported
+source_line: "Aon, Global Catastrophe Recap: Third Quarter of 2026 (press release, Dublin, 29 Oct 2026), estimates in US dollars; retrieved 30 Oct 2026 · Early estimates, subject to revision."
+alt: "Bar chart of worldwide natural-catastrophe losses for January to September, in US dollars. Insured losses in 2026 were an estimated 91 billion, against a 21st-century average of 88 billion and a past-five-year average of 135 billion. Economic losses in the same nine months of 2026, the latest figure, were about 204 billion."

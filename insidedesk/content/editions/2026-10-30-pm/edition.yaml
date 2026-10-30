@@ -1,0 +1,62 @@
+date: "2026-10-30"
+slot: pm
+published: "2026-10-30T17:30:03+01:00"   # set to the actual Berlin time when it goes live
+title: "The refinery lull ended in one sentence; the armoured vehicles arrive in 2033, and the invoices kept their own clock."
+standfirst: "Ukraine's refinery strikes resumed while NATO capitals signed orders that deliver years from now. France shrank 0.1% as the euro area grew 0.4%, German inflation eased to 2.8%, Saturday power costs €251.42 a megawatt hour, and three in four German hospitals ran a loss. Eleven desks, every number sourced."
+closing:
+  title: Before you close the tab
+  published: "2026-10-30T17:30:03+01:00"
+  habit:
+    text: 'The clocks went back last weekend, and the dark now arrives before most people leave work. This week, pick one fixed time for the lights out and the phone down, and keep it on Saturday as well as Tuesday. A study in today''s Psych note links a late-running body clock to a kind of tiredness that does not lift; you do not need a diagnosis to give your own clock a regular appointment.'
+    note: A habit, not advice.
+  went_right:
+    text: 'The Green Climate Fund''s board ended its meeting in Songdo with the largest approval it has ever made: $1.97 billion for 21 projects [1]. That takes the fund''s approvals for 2026 to $3.3 billion, a second record year running, and a third of the money (34%) will flow through national and regional institutions [1]. Algeria, Cameroon, Moldova and Yemen get their first single-country projects, and reviews took six months on average against a nine-month target [1]. Faster paperwork is how a pledge reaches a field.'
+  sentence: 'Drones flew by the hour and armour was ordered by the decade, France shrank while its shoppers spent, and Germany''s prices cooled even as Saturday''s power got dear: the speeches ran fast, and the ledgers kept their own time.'
+  euros:
+    text: 'A litre of diesel cost €2.289 on the German national average this week, against €2.084 for Super E10, the ADAC reports, so diesel is 20.5 cents dearer [2]. Diesel rose 3.4 cents in a week while E10 fell 2.6 cents [2]. Desk arithmetic: a 50-litre diesel fill costs about €10.25 more than the same fill of E10, and the week''s rise alone adds about €1.70.'
+    note: Desk arithmetic on the cited national averages. Prices differ by station, region and time of day. Nothing here is advice.
+  small_words:
+    term: Preliminary flash estimate
+    text: 'The first official reading of how much an economy grew, published about a month after the quarter ends from incomplete data. It is designed to be early rather than final, and later releases revise it. Today''s euro-area flash put growth at 0.4% for the third quarter [3].'
+  sources:
+  - {n: 1, title: "GCF financing tops USD 3 billion for consecutive record year as reforms continue to deliver", publisher: "Green Climate Fund", url: "https://www.greenclimate.fund/about/news-and-updates/gcf-financing-tops-usd-3-billion-consecutive-record-year-reforms-continue-deliver", date: "29 Oct 2026"}
+  - {n: 2, title: "Preise für Sprit entwickeln sich aktuell gegenläufig", publisher: "ADAC e.V.", url: "https://presse.adac.de/meldungen/adac-ev/verkehr/preise-fuer-sprit-entwickeln-sich-aktuell-gegenlaeufig.html", date: "28 Oct 2026"}
+  - {n: 3, title: "GDP up by 0.4% in the euro area and by 0.5% in the EU (preliminary flash estimate, Q3 2026)", publisher: "Eurostat", url: "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/2-30102026-ap", date: "30 Oct 2026, 11:00 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - the-lull-ended-in-one-sentence-the-vehicles-arrive
+  - podium-vs-print-we-need-a-budget-and-4-944
+  - 117-38-on-expiry-day-and-a-tanker-that-kept
+  - every-no-is-a-subtraction
+  - late-to-bed-late-to-rise-and-still-tired-a-quarter
+  - 251-42-for-a-saturday-and-the-weekend-discount
+  - 0-4-for-the-area-0-1-for-france-and-2-8-for-german
+  - ordinary-ledger-food-up-0-4-energy-up-12-2-diesel
+  - 578-billion-owed-to-amazon-884-billion-owed-by-it
+  - three-in-four-hospitals-in-the-red-and-most-of
+  - 91-billion-a-quiet-year-by-the-invoices-and-55
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-10-30T17:30:03+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - oleshky-the-buses-left-and-the-number-was
+    - twenty-one-bridges-because-the-old-ones-are
+    - 46-7-a-barrel-for-refining-and-a-debt-bill-cut-in
+    - gold-under-4-000-oil-up-again
+    - 45-billion-and-31-7-billion-of-it-for-factories
+    - up-to-48-1-on-a-roofing-fabric-and-a-warning-from
+    - novaya-gazeta-stops-and-says-who-stopped-it
+    - just-dont-be-loud-washingtons-advice-to-the
+    - thirty-sessions-in-a-group-and-fewer-people-walked
+    - the-talk-about-puberty-is-worth-having
+    - 102-78-for-december-gas-and-a-storage-tank-three
+    - on-the-stillest-day-lignite-out-generated-gas
+    - 40-000-fewer-out-of-work-4-000-more-once-the
+    - three-capitals-three-directions-2-8-3-8-5-6
+    - italys-shopping-trolley-2-5-and-fresh-food-at-7-5
+    - france-shrank-french-shoppers-spent-0-4-more
+    - operating-profit-up-61-net-profit-down-2-the
+    - 690-million-megawatt-hours-signed-for-18-years
+    - colds-lead-covid-and-flu-are-clearing-their
+    - the-donors-microbes-moved-in-the-symptoms-stayed
+    - triple-it-they-agreed-triple-what-nobody-wrote
+    - frost-at-the-alpine-edge-fog-in-the-lowlands-snow
+  updates: []

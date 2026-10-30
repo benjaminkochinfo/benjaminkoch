@@ -1,0 +1,9 @@
+# Inside Desk chart data: de-october-saturdays-30pm
+"# Source: Bundesnetzagentur | SMARD.de, day-ahead price DE-LU (filter 4169), daily averages, delivery days 3 to 31 Oct 2026, retrieved 30 Oct 2026, 16:30 CET · CC BY 4.0"
+"# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
+label,value,derived_by_inside_desk,note
+Sat 3 Oct,169.01,no,
+Sat 10 Oct,51.08,no,
+Sat 17 Oct,168.27,no,
+Sat 24 Oct,30.12,no,
+Sat 31 Oct,251.42,no,highest Saturday of 2026
