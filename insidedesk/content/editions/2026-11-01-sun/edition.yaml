@@ -1,0 +1,55 @@
+date: "2026-11-01"
+slot: sun
+published: "2026-11-01T10:15:46+01:00"   # set to the actual Berlin time when it goes live
+title: "The week was written in ship counts"
+standfirst: "Speeches about Hormuz filled the week; the paperwork counted 277 transits, a contract that expired $4.21 above its successor, and two central banks that held and pointed at December. November opens with a heating bill worth reading."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-01T10:15:46+01:00"
+  habit: {text: "The heating season starts in earnest this month. Once this week, find your gas or electricity contract and write three things on one sheet of paper: the price per kilowatt-hour, the monthly base charge and the date the price guarantee ends. Put the sheet where the post arrives. When a letter about new prices comes, you will already know what you are comparing.", note: "A habit, not advice."}
+  went_right: {text: "Deutsche Bahn's family ticket was meant to be a summer-holiday offer. Demand was high enough that from 1 November it is permanent: €99.99 for a return journey for up to five people, with an ICE seat reservation included [1]. A good idea was tried, people used it, and it stayed. That is how public services are supposed to learn."}
+  sentence: "Shares rose three days on a prospectus and fell two on the accounts, two central banks held and pointed at December, and at home November opened with a dearer parcel, a cheaper family train and a heating bill worth reading."
+  euros: {text: "Verivox puts a new gas contract at about 14 cents per kilowatt-hour for a household using 20,000 kWh a year, as of 30 October; the average across all customers was about 12.7 cents on 1 October [2]. Desk arithmetic: at 14 cents that household pays €2,800 a year, at 12.7 cents €2,540, so the gap between a new contract and the average one is about €260 a year, or roughly €22 a month.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Hawkish pause", text: "When a central bank leaves interest rates where they are but makes clear it may raise them soon, markets call it a hawkish pause. The ECB did that on Thursday: no change, but its president said a hike had been discussed and the direction was clear. The pause is real; so is the warning that comes with it."}
+  sources:
+    - {n: 1, title: "PayPal, Pakete, Bahn: Wichtige Änderungen kommen im November 2026", publisher: "t-online", url: "https://www.t-online.de/finanzen/aktuelles/verbraucher/id_101499292/paypal-bahn-pakete-das-aendert-sich-im-november-2026.html", date: "1 Nov 2026, 03:00 CET"}
+    - {n: 2, title: "Gaspreise vergleichen", publisher: "Verivox", url: "https://www.verivox.de/gas/gaspreise/", date: "as of 30 Oct 2026, retrieved 1 Nov 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - the-sunday-long-read-the-week-was-written-in-ship
+  - the-sunday-sequence-three-days-up-on-a-prospectus
+  - podium-vs-print-i-thought-i-could-relax-and-50-5
+  - 48-0-and-the-fridge-is-the-part-that-fell
+  - 13-12-last-sunday-255-91-this-one
+  - two-holds-in-two-days-and-both-pointed-at-december
+  - ordinary-ledger-14-cents-for-a-new-gas-contract-20
+  - intels-filing-the-cash-came-from-shareholders-the
+  - the-skin-check-and-the-check-up-go-back-to-the
+  - five-hundred-interceptors-paid-for-by-three-allies
+  - the-first-wet-month-since-february-and-120-litres
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-01T10:15:46+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 1850
+  extras:
+    - carpets-in-plywood-out-the-tariff-list-that
+    - suez-had-its-busiest-four-weeks-in-years
+    - october-in-three-lines-staples-up-11-tech-down-9
+    - eighty-one-per-cent-beat-and-the-price-still-fell
+    - eleven-days-to-the-night-session-berlins-budget
+    - harris-county-862-700-against-564-500
+    - lonely-in-two-ways-and-they-move-in-opposite
+    - two-nights-in-colorado-and-in-arizona
+    - half-the-wind-a-third-more-lignite-the-week-in
+    - october-closed-at-117-64-a-fourth-monthly-gain-for
+    - lagarde-will-leave-on-7-february-and-the-rulebook
+    - the-fed-will-hold-one-meeting-next-year-without-a
+    - novembers-small-print-2-per-parcel-category-a-99
+    - two-forms-before-30-november
+    - openai-asked-for-30-billion-and-settled-on-asking
+    - apple-reports-on-monday-at-23-00-our-time
+    - seven-of-26-needed-no-surgery-for-a-year
+    - one-in-five-has-had-an-app-on-prescription
+    - oleshky-the-longest-truce-since-2022-and-still-no
+    - the-crimea-road-counted-in-lorries
+    - 546-millimetres-at-patrapur-and-boats-for-the
+    - 532-of-normal-in-galkacyo-16-in-qardho
+  updates: []

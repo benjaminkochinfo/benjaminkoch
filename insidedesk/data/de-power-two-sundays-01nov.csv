@@ -1,0 +1,19 @@
+# Inside Desk chart data: de-power-two-sundays-01nov
+"# Source: Bundesnetzagentur | SMARD.de, day-ahead price DE-LU (filter 4169), hourly values averaged by delivery day, 19 Oct to 1 Nov 2026, retrieved 1 Nov 2026 · CC BY 4.0"
+"# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
+# Retrieved: 2026-11-01T08:59+01:00
+date,dayahead
+2026-10-19,208.44
+2026-10-20,195.66
+2026-10-21,211.94
+2026-10-22,148.61
+2026-10-23,137.59
+2026-10-24,30.12
+2026-10-25,13.12
+2026-10-26,116.57
+2026-10-27,155.12
+2026-10-28,249.21
+2026-10-29,314.85
+2026-10-30,268.62
+2026-10-31,251.42
+2026-11-01,255.91

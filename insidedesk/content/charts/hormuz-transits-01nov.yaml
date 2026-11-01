@@ -1,0 +1,42 @@
+id: hormuz-transits-01nov
+kind: line
+kicker: "Geoecon · Strait of Hormuz"
+title: "October's ships, counted one week at a time"
+subtitle: "Combined Strait of Hormuz transits in seven days (AIS-observed plus US-stated facilitated), by UKMTO weekly overview, reports dated 2 Oct to 30 Oct 2026"
+unit: ""
+label_decimals: 0
+start: "2026-10-02"
+series:
+  - key: total
+    label: "All transits"
+    source:
+      type: static
+      values:
+        - ["2026-10-02", 247]
+        - ["2026-10-09", 275]
+        - ["2026-10-16", 254]
+        - ["2026-10-23", 241]
+        - ["2026-10-30", 277]
+  - key: inbound
+    label: "Inbound"
+    source:
+      type: static
+      values:
+        - ["2026-10-02", 123]
+        - ["2026-10-09", 146]
+        - ["2026-10-16", 129]
+        - ["2026-10-23", 127]
+        - ["2026-10-30", 155]
+  - key: outbound
+    label: "Outbound"
+    source:
+      type: static
+      values:
+        - ["2026-10-02", 124]
+        - ["2026-10-09", 129]
+        - ["2026-10-16", 125]
+        - ["2026-10-23", 114]
+        - ["2026-10-30", 122]
+licence: reported
+source_line: "UK Maritime Trade Operations (UKMTO), Voluntary Reporting Area weekly overviews dated 2, 9, 16, 23 and 30 Oct 2026, total inbound and outbound transits last 7 days (AIS derived via S&P plus US NCAGS stated facilitated transits, which UKMTO says it cannot independently verify); totals are Inside Desk arithmetic · retrieved 1 Nov 2026"
+alt: "Line chart of weekly Strait of Hormuz transits reported by UKMTO, from the overview dated 2 October to the one dated 30 October 2026. All transits go 247, 275, 254, 241 and 277, the latest value and the highest of the five weeks. Inbound transits go 123, 146, 129, 127 and 155, the latest value. Outbound transits go 124, 129, 125, 114 and 122, the latest value. UKMTO describes the latest week as approximately 70% below pre-conflict levels."

@@ -240,7 +240,7 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
 <h2 class="cs-h"><button class="hl" data-open="{e(lead["slug"])}">{e(lead["title"])}</button></h2><p class="cs-dek">{e(lead["dek"])}</p></div>
 <div class="st-body cols-3 cs-body" data-article="{e(lead["slug"])}">{body(lead, bl[:half])}</div>''', "spread-l"))
         lead_pages.append(page(lead["title"] + ", continued", "The Sunday Sequence" if ed["slot"] == "sun" else "Lead", f'''{chart_fig(lead_charts[0], "l") if lead_charts else ""}
-<div class="st-body cols-3 cs-body" data-article="{e(lead["slug"])}">{body(lead, bl[half:])}<p class="st-more">{open_btn(lead, "Whole piece in reading view")}</p></div>
+<div class="st-body cols-3 cs-body" data-article="{e(lead["slug"])}">{body(lead, clip_blocks(bl[half:], int(ed["epaper"]["spread_chars"]))[0] if (ed.get("epaper") or {}).get("spread_chars") else bl[half:])}<p class="st-more">{open_btn(lead, "Whole piece in reading view")}</p></div>
 <div class="row-2">{watch_box(lead)}{comment_box(lead)}</div>''', "spread-r"))
     else:
         lead_pages.append(page(lead["title"], "Lead", f'''{story(lead, cols=3, size="xl", limit=fit.get("_lead", {}).get("main"))}<div class="row-2">{watch_box(lead)}{comment_box(lead)}</div>''', "lead"))

@@ -1,0 +1,9 @@
+# Inside Desk chart data: ust-week-curve-01nov
+"# Source: U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates, 23 and 30 Oct 2026 (home.treasury.gov), retrieved 1 Nov 2026 · U.S. government data, public domain · Bars are desk arithmetic: the difference between the two closing yields."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+3-month: 4.22% to 4.16%,6,no,Treasury
+2-year: 4.69% to 4.56%,13,no,Treasury
+5-year: 4.82% to 4.71%,11,no,Treasury
+10-year: 5.00% to 4.94%,6,no,Treasury
+30-year: 5.33% to 5.31%,2,no,Treasury

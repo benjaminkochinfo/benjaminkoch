@@ -1,0 +1,15 @@
+id: ust-week-curve-01nov
+kind: hbar
+kicker: "Markets · The Sunday Sequence"
+title: "The middle of the curve did the most work"
+subtitle: "Fall in US Treasury par yields over the week, Fri 23 Oct to Fri 30 Oct 2026, basis points (one basis point = 0.01 percentage point)"
+unit: " bp"
+rows:
+  - {label: "3-month: 4.22% to 4.16%", value: 6, note: "Treasury"}
+  - {label: "2-year: 4.69% to 4.56%", value: 13, note: "Treasury"}
+  - {label: "5-year: 4.82% to 4.71%", value: 11, note: "Treasury"}
+  - {label: "10-year: 5.00% to 4.94%", value: 6, note: "Treasury"}
+  - {label: "30-year: 5.33% to 5.31%", value: 2, note: "Treasury"}
+licence: reported
+source_line: "U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates, 23 and 30 Oct 2026 (home.treasury.gov), retrieved 1 Nov 2026 · U.S. government data, public domain · Bars are desk arithmetic: the difference between the two closing yields."
+alt: "Bar chart of how far US Treasury par yields fell over the week from Friday 23 October to Friday 30 October 2026, in basis points. The 3-month yield fell 6, from 4.22% to 4.16%. The 2-year fell 13, from 4.69% to 4.56%, the largest move. The 5-year fell 11, from 4.82% to 4.71%. The 10-year fell 6, from 5.00% to 4.94%. The 30-year fell 2, from 5.33% to 5.31%. All yields were lower on the week; the latest values are the 30 October closes."

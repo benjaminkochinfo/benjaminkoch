@@ -1,0 +1,20 @@
+id: de-october-rain-by-land-01nov
+kind: hbar
+kicker: "Climate & Weather · Germany"
+title: "A wet October in the north, a dry one by the Oder"
+subtitle: "Precipitation in October 2026 by federal state, litres per square metre (preliminary), with the 1961–1990 October mean in the note · DWD"
+unit: " l/m²"
+rows:
+  - {label: "Schleswig-Holstein", value: 129, note: "mean 73"}
+  - {label: "North Rhine-Westphalia", value: 108, note: "mean 62"}
+  - {label: "Hamburg", value: 107, note: "mean 60"}
+  - {label: "Saarland", value: 100, note: "mean 77"}
+  - {label: "Lower Saxony", value: 94, note: "mean 56"}
+  - {label: "Germany", value: 76, note: "mean 56"}
+  - {label: "Bavaria", value: 64, note: "mean 61"}
+  - {label: "Saxony", value: 43, note: "mean 47"}
+  - {label: "Brandenburg", value: 35, note: "mean 37"}
+  - {label: "Berlin", value: 31, note: "mean 35"}
+licence: reported
+source_line: "Deutscher Wetterdienst, Deutschlandwetter im Oktober 2026 (press release, Offenbach, 30 Oct 2026), preliminary values, last two days based on forecasts; retrieved 1 Nov 2026"
+alt: "Bar chart of October 2026 precipitation in selected German federal states, in litres per square metre, preliminary DWD values. Schleswig-Holstein had 129 against a 1961–1990 mean of 73, North Rhine-Westphalia 108 against 62, Hamburg 107 against 60, Saarland 100 against 77, Lower Saxony 94 against 56. Germany as a whole had about 76 against 56. Bavaria had 64 against 61, Saxony 43 against 47, Brandenburg 35 against 37, and Berlin, the last bar, 31 against a mean of 35."

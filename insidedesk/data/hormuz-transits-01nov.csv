@@ -1,0 +1,10 @@
+# Inside Desk chart data: hormuz-transits-01nov
+"# Source: UK Maritime Trade Operations (UKMTO), Voluntary Reporting Area weekly overviews dated 2, 9, 16, 23 and 30 Oct 2026, total inbound and outbound transits last 7 days (AIS derived via S&P plus US NCAGS stated facilitated transits, which UKMTO says it cannot independently verify); totals are Inside Desk arithmetic · retrieved 1 Nov 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+# Retrieved: 2026-11-01T08:59+01:00
+date,total,inbound,outbound
+2026-10-02,247.0,123.0,124.0
+2026-10-09,275.0,146.0,129.0
+2026-10-16,254.0,129.0,125.0
+2026-10-23,241.0,127.0,114.0
+2026-10-30,277.0,155.0,122.0

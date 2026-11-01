@@ -1,0 +1,14 @@
+# Inside Desk chart data: de-october-rain-by-land-01nov
+"# Source: Deutscher Wetterdienst, Deutschlandwetter im Oktober 2026 (press release, Offenbach, 30 Oct 2026), preliminary values, last two days based on forecasts; retrieved 1 Nov 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Schleswig-Holstein,129,no,mean 73
+North Rhine-Westphalia,108,no,mean 62
+Hamburg,107,no,mean 60
+Saarland,100,no,mean 77
+Lower Saxony,94,no,mean 56
+Germany,76,no,mean 56
+Bavaria,64,no,mean 61
+Saxony,43,no,mean 47
+Brandenburg,35,no,mean 37
+Berlin,31,no,mean 35
