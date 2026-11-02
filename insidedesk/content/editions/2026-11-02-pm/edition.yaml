@@ -34,29 +34,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 75-5-for-the-babies-and-a-14-day-rule-for-the
   - 122-false-alarms-in-seven-minutes-and-the-sirens
   - a-storm-with-a-name-and-warnings-with-colours-from
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-02T17:30:05+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-02T17:30:05+01:00"
   extras:
-    - 61-2-on-the-day-the-law-said-70-and-nobody-is
-    - 3-54-cents-with-the-subsidy-6-52-without-and-a-7
-    - alstom-down-27-1-on-a-margin-of-about-one-per-cent
-    - 3-64-billion-out-of-binance-and-a-dispute-over-the
-    - two-hundred-dollars-a-box-for-the-black-sea
-    - abu-dhabi-down-76-4-jeddah-up-19-8
-    - michigan-one-endorsement-65-000-donors-one-day
-    - the-other-ballot-line-who-sets-your-power-bill
-    - ninety-five-per-cent-after-three-years-the-carers
-    - 6-367-in-treatment-per-100-000-and-a-budget-that
-    - ryanair-2-billion-more-for-fuel-and-fares-that
-    - 2-676-for-three-months-and-a-money-market-that
-    - 613-in-hamburg-335-in-mecklenburg-the-part-of-the
-    - less-gas-burnt-the-same-pipes-to-pay-for
-    - sold-out-twice-what-samsung-and-sk-hynix-actually
-    - before-tonights-numbers-a-beta-with-a-date-on-it
-    - 53-6-of-the-over-65s-a-little-behind-last-years-56
-    - 36-sounds-modest-until-you-count-the-waiting-rooms
-    - after-the-truce-a-94-year-old-four-parrots-and-a
-    - yemen-a-missile-over-saudi-arabia-strikes-on-a-red
-    - 1-79-million-tonnes-south-africas-wheat-is-a
-    - code-orange-on-the-black-sea-seven-bulgarian
-  updates: []
+  - 61-2-on-the-day-the-law-said-70-and-nobody-is
+  - 3-54-cents-with-the-subsidy-6-52-without-and-a-7
+  - alstom-down-27-1-on-a-margin-of-about-one-per-cent
+  - 3-64-billion-out-of-binance-and-a-dispute-over-the
+  - two-hundred-dollars-a-box-for-the-black-sea
+  - abu-dhabi-down-76-4-jeddah-up-19-8
+  - michigan-one-endorsement-65-000-donors-one-day
+  - the-other-ballot-line-who-sets-your-power-bill
+  - ninety-five-per-cent-after-three-years-the-carers
+  - 6-367-in-treatment-per-100-000-and-a-budget-that
+  - ryanair-2-billion-more-for-fuel-and-fares-that
+  - 2-676-for-three-months-and-a-money-market-that
+  - 613-in-hamburg-335-in-mecklenburg-the-part-of-the
+  - less-gas-burnt-the-same-pipes-to-pay-for
+  - sold-out-twice-what-samsung-and-sk-hynix-actually
+  - before-tonights-numbers-a-beta-with-a-date-on-it
+  - 53-6-of-the-over-65s-a-little-behind-last-years-56
+  - 36-sounds-modest-until-you-count-the-waiting-rooms
+  - after-the-truce-a-94-year-old-four-parrots-and-a
+  - yemen-a-missile-over-saudi-arabia-strikes-on-a-red
+  - 1-79-million-tonnes-south-africas-wheat-is-a
+  - code-orange-on-the-black-sea-seven-bulgarian
+  - gas-fell-6-tuesdays-power-2-5-the-wind-did-the-rest
+  updates:
+  - time: '2026-11-02T19:28:44+01:00'
+    text: 'Energy: Tuesday''s day-ahead power price is in, about 2.5% below Monday''s'
+    piece: gas-fell-6-tuesdays-power-2-5-the-wind-did-the-rest
