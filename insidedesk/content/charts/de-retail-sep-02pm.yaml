@@ -1,0 +1,15 @@
+id: de-retail-sep-02pm
+kind: hbar
+kicker: "Money · Shops"
+title: "September's tills fell in every aisle"
+subtitle: "Fall in German retail sales in September 2026 against August, real (price-adjusted), calendar and seasonally adjusted, provisional, %"
+unit: "%"
+rows:
+  - {label: "Petrol stations (nominal +2.1%)", value: 3.4, note: "Destatis"}
+  - {label: "Non-food retail", value: 2.4, note: "Destatis"}
+  - {label: "Online and mail order", value: 2.2, note: "Destatis"}
+  - {label: "All retail", value: 2.0, note: "Destatis"}
+  - {label: "Food retail", value: 1.4, note: "Destatis"}
+licence: reported
+source_line: "Statistisches Bundesamt (Destatis), press release no. 383 of 2 November 2026, retail turnover September 2026 (provisional), retrieved 2 Nov 2026 · Data licence Germany – attribution – version 2.0 · Bars show the size of the fall."
+alt: "Bar chart of how far German retail sales fell in September 2026 against August, in real terms, calendar and seasonally adjusted, provisional. Petrol stations fell 3.4%, although their nominal sales rose 2.1%. Non-food retail fell 2.4%. Online and mail order fell 2.2%. All retail fell 2.0%. Food retail fell 1.4%, the smallest fall. The latest values are for September 2026, published on 2 November 2026."

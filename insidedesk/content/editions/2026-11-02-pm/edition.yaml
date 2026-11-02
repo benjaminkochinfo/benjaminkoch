@@ -1,0 +1,62 @@
+date: "2026-11-02"
+slot: pm
+published: "2026-11-02T17:30:05+01:00"   # set to the actual Berlin time when it goes live
+title: "A barrel answers a sentence, a turbine answers the wind"
+standfirst: "Brent fell 6.4% and European gas about 6.5% on Monday after soft words between Washington and Tehran, while German gas plants had run near flat out through a windless weekend. Elsewhere: a factory survey that cheered and a retail print that did not, a slow count that is not a suspicious one, and a storm named Agneta in the south."
+closing:
+  title: Before you close the tab
+  published: '2026-11-02T17:30:00+01:00'
+  habit:
+    text: 'If you want to follow the American results, pick one time to look on Wednesday morning, and leave the screen alone until then. Counts firm up over hours, not minutes, and a figure read once over breakfast tends to be calmer, and more complete, than the same figure refreshed at three in the morning.'
+    note: A habit, not advice.
+  went_right:
+    text: 'NASA''s Perseverance rover has now driven farther than any vehicle on another world: on 11 October its total reached 45.22 kilometres, or 28.10 miles, and Guinness World Records has recognised the mark [1]. The record could have come two months earlier, when the rover sat about 200 metres short, but the team kept it working among ancient rock outcrops first [1]. Engineers got there with thousands of simulations, braking software that steers around rocks, and a way for the rover to fix its own position from orbital pictures without help from Earth [1]. Patience first, record second, and the paperwork followed.'
+  sentence: "Oil fell on a diplomat's words today, but your electricity bill still depends more on whether the wind comes back."
+  euros:
+    text: 'A litre of Super E10 cost €2.114 on Germany''s October average, about 15.2 cents less than in September, and diesel €2.261, 12.5 cents less, according to ADAC''s monthly review published today [2]. The motoring club credits the fuel tax cut that runs from 1 October to the end of the year, and says it has largely reached drivers at the petrol pump but only partly at the diesel pump [2]. Desk arithmetic: a 50-litre tank of E10 at October''s average comes to about €105.70, roughly €7.60 less than at September''s €2.266; the same tank of diesel cost about €6.25 less than in September.'
+    note: Desk arithmetic on the cited averages. Prices differ by station, region and time of day. Nothing here is advice.
+  small_words:
+    term: Tankrabatt
+    text: 'The German word for the temporary fuel tax cut. From 1 October to the end of December, the energy tax on petrol and diesel is 14 cents a litre lower, which with VAT comes to almost 17 cents [3]. Whether a driver actually sees it depends on whether the stations pass it on, which is why ADAC checks the monthly averages [2].'
+  sources:
+  - {n: 1, title: "NASA's Perseverance Mars rover breaks historic record after traveling 28 miles", publisher: "ScienceDaily (materials provided by NASA)", url: "https://www.sciencedaily.com/releases/2026/11/261101010536.htm", date: "2 Nov 2026"}
+  - {n: 2, title: "Spritpreis-Entwicklung: Benzin- und Dieselpreise seit 1950", publisher: "ADAC", url: "https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/deutschland/kraftstoffpreisentwicklung/", date: "2 Nov 2026, 12:00 CET"}
+  - {n: 3, title: "Spritkosten: Benzin- und Dieselpreis entwickeln sich aktuell gegenläufig", publisher: "ADAC", url: "https://www.adac.de/news/aktueller-spritpreis/", date: "28 Oct 2026, 13:45 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - oil-fell-6-on-a-sentence-gas-fell-6-by-teatime-and
+  - factories-at-55-5-prices-paid-off-the-boil-and
+  - robots-on-the-list-and-a-180-day-clock-instead-of
+  - tomorrow-night-slow-is-not-suspicious
+  - seven-in-ten-had-a-problem-three-in-ten-asked-for
+  - podium-vs-print-resilience-in-the-factories-and-2
+  - ordinary-ledger-18-days-to-the-price-letters-and
+  - due-today-the-dullest-line-in-the-ivanti-story-is
+  - 75-5-for-the-babies-and-a-14-day-rule-for-the
+  - 122-false-alarms-in-seven-minutes-and-the-sirens
+  - a-storm-with-a-name-and-warnings-with-colours-from
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-02T17:30:05+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 61-2-on-the-day-the-law-said-70-and-nobody-is
+    - 3-54-cents-with-the-subsidy-6-52-without-and-a-7
+    - alstom-down-27-1-on-a-margin-of-about-one-per-cent
+    - 3-64-billion-out-of-binance-and-a-dispute-over-the
+    - two-hundred-dollars-a-box-for-the-black-sea
+    - abu-dhabi-down-76-4-jeddah-up-19-8
+    - michigan-one-endorsement-65-000-donors-one-day
+    - the-other-ballot-line-who-sets-your-power-bill
+    - ninety-five-per-cent-after-three-years-the-carers
+    - 6-367-in-treatment-per-100-000-and-a-budget-that
+    - ryanair-2-billion-more-for-fuel-and-fares-that
+    - 2-676-for-three-months-and-a-money-market-that
+    - 613-in-hamburg-335-in-mecklenburg-the-part-of-the
+    - less-gas-burnt-the-same-pipes-to-pay-for
+    - sold-out-twice-what-samsung-and-sk-hynix-actually
+    - before-tonights-numbers-a-beta-with-a-date-on-it
+    - 53-6-of-the-over-65s-a-little-behind-last-years-56
+    - 36-sounds-modest-until-you-count-the-waiting-rooms
+    - after-the-truce-a-94-year-old-four-parrots-and-a
+    - yemen-a-missile-over-saudi-arabia-strikes-on-a-red
+    - 1-79-million-tonnes-south-africas-wheat-is-a
+    - code-orange-on-the-black-sea-seven-bulgarian
+  updates: []
