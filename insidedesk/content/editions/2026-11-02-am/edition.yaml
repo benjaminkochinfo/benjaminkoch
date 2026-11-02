@@ -1,0 +1,65 @@
+date: "2026-11-02"
+slot: am
+published: "2026-11-02T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Anxious about the winner, calm about the count"
+standfirst: "America votes on Tuesday: seven in ten adults say the vote stresses them, while nearly eight in ten voters trust the in-person count. Elsewhere, the ten-year Treasury yield ended October 35 basis points lower, German power costs €259.31 a megawatt hour for Monday, and Delhi's smog season opened on schedule."
+closing:
+  title: Before you close the tab
+  published: '2026-11-02T08:30:00+01:00'
+  habit:
+    text: 'Find the date your gas or electricity contract can next be changed, and put a note in your calendar a month before it. Price letters for January are already going out: one municipal utility has written to its basic-tariff gas customers about a rise from 1 January [4]. A date you chose is calmer than a letter you didn''t expect, whatever you then decide.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Barbados has eliminated mother-to-child transmission of HIV as a public health problem, the World Health Organization announced on Friday: from 2022 to 2024, no new HIV infections passed from mother to child were reported among babies born on the island [1]. The assessment found that 98% of pregnant women received antenatal care, 98% were tested for HIV, and 98% of those living with HIV were treated [1]. Testing and treatment are free for every pregnant woman, regardless of nationality [1]. Barbados joins 26 countries and territories recognised for elimination or progress towards it, 15 of them in the Americas [1]. The machinery here is not a breakthrough drug: it is clinics, a hospital that delivers about 93% of the births, and a register kept carefully for three years [1].'
+  sentence: "Most Americans are anxious about who wins on Tuesday, and most still trust the people who will count the votes; the second fact is the one that matters."
+  euros:
+    text: 'Heating oil cost €173.47 per 100 litres on the German average early on Monday, for an order of 3,000 litres, HeizOel24 reports [2], against €171.77 last Thursday at midday [3]. Brent closed Thursday at $114.88 a barrel, the same service notes [2]. Desk arithmetic: a 3,000-litre delivery at Monday''s average comes to about €5,204, about €51 more than at Thursday''s price; per litre the difference is under two cents.'
+    note: Desk arithmetic on the cited averages. Prices differ by dealer, region, order size and day. Nothing here is advice.
+  small_words:
+    term: Urgency list
+    text: 'A short official list of essential children''s medicines that may be in tight supply, kept by Germany''s drug agency, BfArM [5]. If a drug is on it and the pharmacy cannot get the prescribed product, the pharmacist may hand over the same active ingredient in another form, or make it up in the pharmacy, without first ringing the doctor [5]. It is refreshed roughly every 14 days [5]. Not a cure for shortages; a permission slip that saves a trip back to the surgery.'
+  sources:
+  - {n: 1, title: "Barbados eliminates mother-to-child transmission of HIV", publisher: "PAHO/WHO", url: "https://www.paho.org/en/news/30-10-2026-barbados-eliminates-mother-child-transmission-hiv", date: "30 Oct 2026"}
+  - {n: 2, title: "Heizöl-News: Heizölpreise zum Wochenende uneinheitlich; Heizöl-Preisanzeige Ø DE €/100l bei 3.000l", publisher: "HeizOel24", url: "https://www.heizoel24.de/news", date: "price shown 2 Nov 2026, 05:14 CET; article 30 Oct 2026, 09:55 CET"}
+  - {n: 3, title: "Heizöl folgt Gasöl nach unten", publisher: "HeizOel24", url: "https://www.heizoel24.de/news/artikel/005382-heizoel-folgt-gasoel-nach-unten-29-10-2026", date: "29 Oct 2026, 12:20 CET"}
+  - {n: 4, title: "Angespannte geopolitische Lage sorgt für eine Erhöhung der Energieeinkaufspreise", publisher: "Stadtwerke Hamm", url: "https://www.stadtwerke-hamm.de/das-unternehmen/presse/aktuelles/aktuelles-detailseite/news/angespannte-geopolitische-lage-sorgt-fuer-eine-erhoehung-der-energieeinkaufspreise", date: "05 Oct 2026"}
+  - {n: 5, title: "Erneut aktualisierte Dringlichkeitsliste nach § 129 Abs. 2b SGB V", publisher: "Pharma Deutschland", url: "https://www.pharmadeutschland.de/newsroom/news/erneut-aktualisierte-dringlichkeitsliste-nach-129-abs-2b-sgb-v-4/", date: "16 Oct 2026, 07:54 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - seven-in-ten-are-stressed-by-the-vote-eight-in-ten
+  - 35-basis-points-off-the-ten-year-in-october-and-a
+  - podium-vs-print-a-complex-international
+  - 54-8-million-ballots-in-and-none-of-them-counted
+  - 259-31-for-monday-after-a-weekend-that-used-less
+  - three-central-banks-four-days-and-the-minutes
+  - ordinary-ledger-174-per-100-litres-13-between
+  - the-annex-a-judge-reads-mobile-source-and-finds-a
+  - 855-shortage-notices-and-a-list-that-lets-the
+  - 433-drones-in-a-night-and-the-repair-crews-ledger
+  - from-60-to-261-in-two-days-delhis-smog-season
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-02T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 1850
+  extras:
+    - the-painter-and-the-inventor-are-not-the-same
+    - a-bow-adds-15-points-in-japan-and-almost-none-in
+    - kioxia-down-15-tsmc-up-2-asia-sorted-its-chips-one
+    - 52-0-and-49-3-chinas-two-factory-surveys-disagree
+    - eight-ships-no-tankers-hormuz-on-a-sunday
+    - eight-days-to-10-november-and-the-notices-still
+    - serbias-last-53-polling-stations-and-a-count-that
+    - bulgaria-counted-half-its-protocols-by-midnight
+    - brent-near-111-on-talks-in-doha-and-three-numbers
+    - 102-5-for-gas-and-storage-at-74-62-on-the-first-of
+    - 75-expect-it-55-want-it-the-gap-in-australias-rate
+    - gold-fell-6-8-in-october-the-yuan-sits-near-a-four
+    - from-20-november-a-no-from-a-machine-can-be-put-to
+    - 47-15-a-month-in-hamm-or-12-31-if-you-switch
+    - one-allowance-for-everything-counted-in-tokens
+    - apple-reports-tonight-at-22-30-with-a-new-chief
+    - cutting-the-dose-does-not-spare-the-baby-a-cord
+    - r6-39-off-the-hpv-vial-south-africas-vaccine
+    - kstovo-by-night-what-kyiv-calls-long-range
+    - latvia-takes-the-chair-at-the-security-council
+    - fog-below-150-metres-frost-to-minus-three-and-a
+    - one-week-to-antalya-and-a-timetable-already-in
+  updates: []

@@ -1,0 +1,11 @@
+# Inside Desk chart data: us-midterm-stress-02nov
+"# Source: LifeStance Health, survey of 1,000 US adults conducted online by Dynata in October 2026, published 29 Oct 2026; retrieved 2 Nov 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Feel at least some stress about the midterms,70,no,all adults
+Full-time employees with moderate or significant stress,51,no,full-time employees
+Gen Z with moderate or significant stress,55,no,Gen Z
+Millennials with moderate or significant stress,48,no,millennials
+All adults with moderate or significant stress,43,no,all adults
+Have a plan to protect their mental health on election night,32,no,all adults
+Have used an AI chatbot to talk through election stress,26,no,all adults

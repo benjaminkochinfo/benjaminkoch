@@ -1,0 +1,17 @@
+id: china-pmi-falls-02nov
+kind: hbar
+kicker: "Geoecon · Podium vs Print"
+title: "Prices and production fell furthest; export orders more than the headline"
+subtitle: "Fall in China's official manufacturing PMI and selected sub-indices, September to October 2026, index points (50 separates expansion from contraction)"
+unit: " pts"
+rows:
+  - {label: "Headline PMI: 50.1 to 49.3", value: 0.8, note: "NBS"}
+  - {label: "Production: to 49.8", value: 1.9, note: "NBS"}
+  - {label: "New orders: to 49.4", value: 1.1, note: "NBS"}
+  - {label: "New export orders: 50.0 to 48.7", value: 1.3, derived: true, note: "desk arithmetic"}
+  - {label: "Large firms: to 50.2", value: 0.4, note: "NBS"}
+  - {label: "Factory-gate prices: to 51.7", value: 2.3, note: "NBS"}
+  - {label: "Purchase prices: to 56.8", value: 4.0, note: "NBS"}
+licence: reported
+source_line: "National Bureau of Statistics of China, official manufacturing PMI for October 2026, published 31 Oct 2026, as reported by Xinhua and The Asia Business Daily · the export-orders bar is desk arithmetic from the two reported readings · retrieved 2 Nov 2026"
+alt: "Bar chart of how far China's official manufacturing PMI and selected sub-indices fell from September to October 2026, in index points. The headline PMI fell 0.8, from 50.1 to 49.3. Production fell 1.9 to 49.8. New orders fell 1.1 to 49.4. New export orders fell 1.3, from 50.0 to 48.7 (desk arithmetic). The large-firm PMI fell 0.4 to 50.2. Factory-gate prices fell 2.3 to 51.7. Purchase prices fell 4.0 to 56.8, the largest fall. All figures are for October 2026, the latest month."

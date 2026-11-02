@@ -1,0 +1,17 @@
+id: us-midterm-stress-02nov
+kind: hbar
+kicker: "Inside Desk · Psychology & Behaviour"
+title: "Stressed by the vote, still planning to cast it"
+subtitle: "US adults, LifeStance/Dynata online survey, October 2026, % of respondents (1,000 adults)"
+unit: "%"
+rows:
+  - {label: "Feel at least some stress about the midterms", value: 70, note: "all adults"}
+  - {label: "Full-time employees with moderate or significant stress", value: 51, note: "full-time employees"}
+  - {label: "Gen Z with moderate or significant stress", value: 55, note: "Gen Z"}
+  - {label: "Millennials with moderate or significant stress", value: 48, note: "millennials"}
+  - {label: "All adults with moderate or significant stress", value: 43, note: "all adults"}
+  - {label: "Have a plan to protect their mental health on election night", value: 32, note: "all adults"}
+  - {label: "Have used an AI chatbot to talk through election stress", value: 26, note: "all adults"}
+licence: reported
+source_line: "LifeStance Health, survey of 1,000 US adults conducted online by Dynata in October 2026, published 29 Oct 2026; retrieved 2 Nov 2026"
+alt: "Bar chart from a LifeStance survey of 1,000 US adults in October 2026: 70% feel at least some stress about the 3 November midterms; 55% of Gen Z, 51% of full-time employees, 48% of millennials and 43% of all adults report moderate or significant stress; 32% have a plan to protect their mental health on election night; 26% have used an AI chatbot to talk through election stress."

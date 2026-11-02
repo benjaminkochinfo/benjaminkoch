@@ -1,0 +1,15 @@
+id: ust-october-curve-02nov
+kind: hbar
+kicker: "Markets · Bonds"
+title: "October's rally reached every maturity except the bills"
+subtitle: "Fall in US Treasury par yields over October, Wed 30 Sep to Fri 30 Oct 2026, basis points (one basis point = 0.01 percentage point)"
+unit: " bp"
+rows:
+  - {label: "3-month: 4.20% to 4.16%", value: 4, note: "Treasury"}
+  - {label: "2-year: 4.88% to 4.56%", value: 32, note: "Treasury"}
+  - {label: "5-year: 5.09% to 4.71%", value: 38, note: "Treasury"}
+  - {label: "10-year: 5.29% to 4.94%", value: 35, note: "Treasury"}
+  - {label: "30-year: 5.64% to 5.31%", value: 33, note: "Treasury"}
+licence: reported
+source_line: "U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates, 30 Sep and 30 Oct 2026 (home.treasury.gov), retrieved 2 Nov 2026 · U.S. government data, public domain · Bars are desk arithmetic: the difference between the two closing yields."
+alt: "Bar chart of how far US Treasury par yields fell over October 2026, from Wednesday 30 September to Friday 30 October, in basis points. The 3-month yield fell 4, from 4.20% to 4.16%. The 2-year fell 32, from 4.88% to 4.56%. The 5-year fell 38, from 5.09% to 4.71%, the largest move. The 10-year fell 35, from 5.29% to 4.94%. The 30-year fell 33, from 5.64% to 5.31%. The latest values are the 30 October closes."

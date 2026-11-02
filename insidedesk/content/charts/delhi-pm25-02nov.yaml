@@ -1,0 +1,25 @@
+id: delhi-pm25-02nov
+kind: line
+kicker: "Climate & Weather · Delhi"
+title: "The rain washed it out, the smoke came back in two days"
+subtitle: "Fine particles (PM2.5), daily mean, µg/m³ · central Delhi grid point (modelled), 26 Oct – 1 Nov 2026, India time"
+unit: " µg/m³"
+label_decimals: 1
+start: "2026-10-26"
+y_min: 0
+series:
+  - key: pm25
+    label: "PM2.5, daily mean"
+    source:
+      type: static
+      values:
+        - ['2026-10-26', 78.5]
+        - ['2026-10-27', 85.2]
+        - ['2026-10-28', 82.4]
+        - ['2026-10-29', 47.4]
+        - ['2026-10-30', 28.8]
+        - ['2026-10-31', 59.1]
+        - ['2026-11-01', 81.0]
+licence: reported
+source_line: "Open-Meteo Air Quality API (open-meteo.com), hourly PM2.5 from the Copernicus Atmosphere Monitoring Service (CAMS) model at 28.6°N 77.2°E, desk daily means of 24 hourly values (Asia/Kolkata days); retrieved 2 Nov 2026 · Open-Meteo data CC BY 4.0, contains Copernicus Atmosphere Monitoring Service information. Modelled grid values, not CPCB station readings."
+alt: "Line chart of modelled daily mean PM2.5 at a central Delhi grid point. It sits around 80 µg/m³ from 26 to 28 October, falls to 47.4 on 29 October and 28.8 on 30 October after rain, then climbs to 59.1 on 31 October and 81.0 µg/m³ on Sunday 1 November 2026, the latest value."
