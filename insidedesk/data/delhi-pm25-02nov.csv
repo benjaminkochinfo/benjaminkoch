@@ -1,7 +1,7 @@
 # Inside Desk chart data: delhi-pm25-02nov
 "# Source: Open-Meteo Air Quality API (open-meteo.com), hourly PM2.5 from the Copernicus Atmosphere Monitoring Service (CAMS) model at 28.6°N 77.2°E, desk daily means of 24 hourly values (Asia/Kolkata days); retrieved 2 Nov 2026 · Open-Meteo data CC BY 4.0, contains Copernicus Atmosphere Monitoring Service information. Modelled grid values, not CPCB station readings."
 # Licence: Figures as reported by the named organisations; facts cited with attribution.
-# Retrieved: 2026-11-02T06:30+01:00
+# Retrieved: 2026-11-02T08:30+01:00
 date,pm25
 2026-10-26,78.5
 2026-10-27,85.2
