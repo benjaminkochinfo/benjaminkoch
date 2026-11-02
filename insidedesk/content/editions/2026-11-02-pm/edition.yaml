@@ -60,7 +60,11 @@ epaper:
   - 1-79-million-tonnes-south-africas-wheat-is-a
   - code-orange-on-the-black-sea-seven-bulgarian
   - gas-fell-6-tuesdays-power-2-5-the-wind-did-the-rest
+  - up-1-1-by-lunch-flat-by-tea-the-bounce-met-the-bills
   updates:
   - time: '2026-11-02T19:28:44+01:00'
     text: 'Energy: Tuesday''s day-ahead power price is in, about 2.5% below Monday''s'
     piece: gas-fell-6-tuesdays-power-2-5-the-wind-did-the-rest
+  - time: '2026-11-02T22:05:26+01:00'
+    text: 'Markets: Monday''s bounce faded in the last hour as Oracle, Marvell and Intel fell'
+    piece: up-1-1-by-lunch-flat-by-tea-the-bounce-met-the-bills
