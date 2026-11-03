@@ -1,0 +1,64 @@
+date: "2026-11-03"
+slot: am
+published: "2026-11-03T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Two clocks for one vote"
+standfirst: "America votes today: polls close between midnight and seven, Berlin time, and the law gives states until December to certify. Elsewhere, Apple's warehouse holds two and a half times last year's stock, Treasury needs $618 billion by Christmas, Australia raised rates again, and German power stayed above €250 for a sixth day."
+closing:
+  title: Before you close the tab
+  published: '2026-11-03T08:30:00+01:00'
+  habit:
+    text: 'Decide now when you will look at the American results: once, tomorrow morning, with a coffee, rather than every hour tonight. Polls close across the evening and the counting runs on for days in some states; a refresh at 2 a.m. adds worry, not ballots.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Germany''s solar panels fed 5.1 billion kilowatt hours into the grid in October, 40.4% more than a year earlier, according to an IWR analysis of grid operators'' data published on Monday [1]. October was the eighth month in a row with more sunshine than the long-term average, the German Weather Service''s provisional figures show [1], but the bigger reason is plainer: more panels on more roofs. From January to October renewables supplied 63.4% of the electricity fed into the grid, up from 62.5% a year earlier, and they accounted for about 79% of this year''s growth in supply [1]. Wind had a weaker October, down 12.6% [1]; the ledger has two columns, and the good one grew.'
+  sentence: "America votes today and will count for days, and a slow count is the system doing its job, not failing at it."
+  euros:
+    text: 'A litre of Super E10 cost €2.022 on the German average at 05:19 this morning and diesel €2.238, across stations reporting to the federal fuel price register [2]. In October, the motoring club ADAC says, E10 averaged €2.114 and diesel €2.261, both lower than in September, mainly because of the temporary fuel tax cut, which runs to the end of the year [3]. Desk arithmetic: a 50-litre tank of E10 at this morning''s average comes to about €101.10, some €4.60 less than at October''s average; for diesel the difference is about €1.15. Early-morning averages are snapshots, and prices move through the day.'
+    note: Desk arithmetic on the cited averages. Prices differ by station, region and hour. Nothing here is advice.
+  small_words:
+    term: Certification
+    text: 'The official, signed confirmation of an election result, made by a state body after the counting and checks are done [4]. It is different from a projection, which is a news organisation''s estimate made from unofficial returns. In America each state sets its own date in law: this year the earliest fall on 10 November, the latest on 31 December [4]. Slow by design, and dull on purpose.'
+  sources:
+  - {n: 1, title: "40 Prozent mehr Solarstrom im Oktober - EE-Anteil seit Jahresbeginn bei über 63 Prozent", publisher: "IWR", url: "https://www.iwr.de/news/40-prozent-mehr-solarstrom-im-oktober-ee-anteil-seit-jahresbeginn-bei-ueber-63-prozent-news40154", date: "02 Nov 2026, 13:56 CET"}
+  - {n: 2, title: "Spritpreise heute (03.11.2026): Durchschnitt E5, E10 und Diesel in Deutschland (source: MTS-K)", publisher: "kraftstoffbilliger.de", url: "https://kraftstoffbilliger.de/spritpreise", date: "as of 03 Nov 2026, 05:19 CET"}
+  - {n: 3, title: "Spritpreis-Entwicklung: Benzin- und Dieselpreise seit 1950", publisher: "ADAC", url: "https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/deutschland/kraftstoffpreisentwicklung/", date: "02 Nov 2026, 12:00 CET"}
+  - {n: 4, title: "Election results certification dates, 2026", publisher: "Ballotpedia", url: "https://ballotpedia.org/Election_results_certification_dates,_2026", date: "retrieved 03 Nov 2026, 05:27 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - polls-close-between-midnight-and-seven-berlin-time
+  - podium-vs-print-an-incredible-lineup-and-45-to-46
+  - twenty-six-days-to-29-november-and-the-comment
+  - two-roads-to-breaking-the-rules-and-they-do-not
+  - 316-gigawatt-hours-of-gas-on-the-day-gas-got
+  - 618-billion-to-borrow-by-christmas-and-a-30-year
+  - ordinary-ledger-15-2-cents-back-on-petrol-12-5-on
+  - the-annex-apples-warehouse-holds-14-5-billion-two
+  - 3-25-gone-on-31-october-and-three-in-four
+  - election-night-in-america-ballistic-missiles-in
+  - corn-74-soybeans-88-the-harvest-report-that-came
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-03T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 600
+  extras:
+    - smallest-first-herzog-turns-the-coalition-queue
+    - mr-veto-and-a-plan-drafted-since-april
+    - the-close-was-worse-than-the-lunch-nasdaq-1-07-dow
+    - seouls-prices-cooled-to-2-8-its-chip-shares-did
+    - hundreds-of-signatures-for-a-fee-nobody-is-paying
+    - 115-3-billion-out-and-half-of-it-was-chips
+    - trees-and-parks-not-just-any-grass-what-helped
+    - remembered-after-you-are-gone-and-a-little-better
+    - brent-fell-8-66-on-talk-then-rose-48-cents-on-a
+    - 44-84-across-the-border-austria-paid-more-for
+    - 4-85-australia-raises-rates-for-the-fifth-time
+    - 1-9-on-the-building-sites-and-the-paint-shops
+    - a-directive-called-pds3-and-a-24-hour-deadline-how
+    - 1-15-for-butter-while-the-milk-is-getting-dearer
+    - eighteen-measures-2030-targets-and-a-line-saying
+    - 7-billion-in-shares-became-5-7-billion-in-cash
+    - 76-say-yes-to-their-records-helping-research-10
+    - a-reserve-of-doctors-and-stockpiles-longer-than
+    - latvias-interceptor-blew-itself-up-rather-than
+    - 96-bomb-threats-on-file-and-gloves-in-the-post
+    - fifteen-hailstorms-or-one-big-hurricane-the-cover
+    - yellow-dust-on-monday-frost-on-tuesday-seouls
+  updates: []

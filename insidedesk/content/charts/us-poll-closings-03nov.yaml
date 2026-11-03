@@ -1,0 +1,20 @@
+id: us-poll-closings-03nov
+kind: hbar
+kicker: "Inside Desk · Politics & Institutions"
+title: "Most of the House is out of the polling booth by 03:00 Berlin time"
+subtitle: "US House seats by the latest scheduled poll-closing time for each race, 3–4 November 2026, Berlin time (CET); 435 seats"
+unit: " seats"
+rows:
+  - {label: "00:00 CET (6 p.m. ET)", value: 11, note: "parts of Indiana and Kentucky"}
+  - {label: "01:00 CET (7 p.m. ET)", value: 63, note: "incl. Georgia, Virginia, most of Florida"}
+  - {label: "01:30 CET (7:30 p.m. ET)", value: 31, note: "North Carolina, Ohio, West Virginia"}
+  - {label: "02:00 CET (8 p.m. ET)", value: 161, note: "incl. Pennsylvania, Maine, most of Michigan and Texas"}
+  - {label: "02:30 CET (8:30 p.m. ET)", value: 4, note: "Arkansas"}
+  - {label: "03:00 CET (9 p.m. ET)", value: 82, note: "incl. New York, Wisconsin, Arizona, Minnesota"}
+  - {label: "04:00 CET (10 p.m. ET)", value: 11, note: "incl. Nevada, Montana, Utah"}
+  - {label: "05:00 CET (11 p.m. ET)", value: 69, note: "California, Washington, most of Oregon"}
+  - {label: "06:00 CET (midnight ET)", value: 2, note: "Hawaii"}
+  - {label: "07:00 CET (1 a.m. ET)", value: 1, note: "Alaska (last polls)"}
+licence: reported
+source_line: "270toWin, 2026 Election Poll Closing Times (latest scheduled closing per race, Eastern Standard Time), converted to CET by Inside Desk (ET + 6 hours); retrieved 3 Nov 2026"
+alt: "Bar chart of the 435 US House seats by the latest scheduled poll-closing time for each race, in Berlin time. 11 seats close at 00:00 CET, 63 at 01:00, 31 at 01:30, 161 at 02:00, 4 at 02:30, 82 at 03:00, 11 at 04:00, 69 at 05:00, 2 at 06:00 and the last, Alaska's single seat, at 07:00 CET on Wednesday 4 November. By 03:00 CET polls have closed for 352 of the 435 seats."

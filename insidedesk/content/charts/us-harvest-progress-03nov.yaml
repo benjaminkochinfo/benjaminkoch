@@ -1,0 +1,15 @@
+id: us-harvest-progress-03nov
+kind: hbar
+kicker: "Climate & Weather · US harvest"
+title: "Soybeans and cotton ahead, sorghum and corn behind"
+subtitle: "Share of US crop harvested by 1 November 2026, % of planted area in the main producing states (USDA crop progress); the label gives the 2021–2025 average for the same week"
+unit: "%"
+rows:
+  - {label: "Soybeans: 88% (average 84%)", value: 88, note: "18 states"}
+  - {label: "Corn: 74% (average 77%)", value: 74, note: "18 states"}
+  - {label: "Peanuts: 66% (average 72%)", value: 66, note: "8 states"}
+  - {label: "Sorghum: 64% (average 78%)", value: 64, note: "6 states"}
+  - {label: "Cotton: 63% (average 54%)", value: 63, note: "15 states"}
+licence: reported
+source_line: "USDA National Agricultural Statistics Service, Crop Progress, released 2 Nov 2026 (week ending 1 Nov 2026); five-year averages 2021–2025, with 2025 imputed because last autumn's reports were cancelled during the funding lapse; retrieved 3 Nov 2026 · US government work, public domain"
+alt: "Bar chart of the share of each US crop harvested by 1 November 2026, the latest week, from USDA's Crop Progress report. Soybeans 88% against a 2021–2025 average of 84%. Corn 74% against 77%. Peanuts 66% against 72%. Sorghum 64% against 78%. Cotton 63% against 54%."

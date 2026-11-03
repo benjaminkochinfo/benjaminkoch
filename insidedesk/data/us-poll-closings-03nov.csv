@@ -1,0 +1,14 @@
+# Inside Desk chart data: us-poll-closings-03nov
+"# Source: 270toWin, 2026 Election Poll Closing Times (latest scheduled closing per race, Eastern Standard Time), converted to CET by Inside Desk (ET + 6 hours); retrieved 3 Nov 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+00:00 CET (6 p.m. ET),11,no,parts of Indiana and Kentucky
+01:00 CET (7 p.m. ET),63,no,"incl. Georgia, Virginia, most of Florida"
+01:30 CET (7:30 p.m. ET),31,no,"North Carolina, Ohio, West Virginia"
+02:00 CET (8 p.m. ET),161,no,"incl. Pennsylvania, Maine, most of Michigan and Texas"
+02:30 CET (8:30 p.m. ET),4,no,Arkansas
+03:00 CET (9 p.m. ET),82,no,"incl. New York, Wisconsin, Arizona, Minnesota"
+04:00 CET (10 p.m. ET),11,no,"incl. Nevada, Montana, Utah"
+05:00 CET (11 p.m. ET),69,no,"California, Washington, most of Oregon"
+06:00 CET (midnight ET),2,no,Hawaii
+07:00 CET (1 a.m. ET),1,no,Alaska (last polls)

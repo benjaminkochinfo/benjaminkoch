@@ -1,0 +1,9 @@
+# Inside Desk chart data: us-harvest-progress-03nov
+"# Source: USDA National Agricultural Statistics Service, Crop Progress, released 2 Nov 2026 (week ending 1 Nov 2026); five-year averages 2021–2025, with 2025 imputed because last autumn's reports were cancelled during the funding lapse; retrieved 3 Nov 2026 · US government work, public domain"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Soybeans: 88% (average 84%),88,no,18 states
+Corn: 74% (average 77%),74,no,18 states
+Peanuts: 66% (average 72%),66,no,8 states
+Sorghum: 64% (average 78%),64,no,6 states
+Cotton: 63% (average 54%),63,no,15 states
