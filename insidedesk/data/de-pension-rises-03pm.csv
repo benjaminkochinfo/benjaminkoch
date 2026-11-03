@@ -1,0 +1,11 @@
+# Inside Desk chart data: de-pension-rises-03pm
+"# Source: Deutsche Rentenversicherung, Rentenversicherung in Zeitreihen 2025 and press release of 5 March 2026, as tabulated by finanzfacts.de (Stand 23 Oct 2026), retrieved 3 Nov 2026 · Official adjustment rates, freely usable · Actual adjustments only; the 4.09% estimate for 2027 is not drawn."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+1 July 2020,3.45,no,DRV
+1 July 2021 (zero round),0.0,no,DRV
+1 July 2022,5.35,no,DRV
+1 July 2023,4.39,no,DRV
+1 July 2024,4.57,no,DRV
+1 July 2025,3.74,no,DRV
+1 July 2026,4.24,no,DRV

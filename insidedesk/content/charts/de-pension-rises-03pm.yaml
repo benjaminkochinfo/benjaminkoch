@@ -1,0 +1,17 @@
+id: de-pension-rises-03pm
+kind: hbar
+kicker: "Ordinary · Pensions"
+title: "Seven Julys of pension rises, one of them zero"
+subtitle: "Statutory pension adjustment on 1 July, West Germany until 2023, nationwide from 2024, %"
+unit: "%"
+rows:
+  - {label: "1 July 2020", value: 3.45, note: "DRV"}
+  - {label: "1 July 2021 (zero round)", value: 0.0, note: "DRV"}
+  - {label: "1 July 2022", value: 5.35, note: "DRV"}
+  - {label: "1 July 2023", value: 4.39, note: "DRV"}
+  - {label: "1 July 2024", value: 4.57, note: "DRV"}
+  - {label: "1 July 2025", value: 3.74, note: "DRV"}
+  - {label: "1 July 2026", value: 4.24, note: "DRV"}
+licence: reported
+source_line: "Deutsche Rentenversicherung, Rentenversicherung in Zeitreihen 2025 and press release of 5 March 2026, as tabulated by finanzfacts.de (Stand 23 Oct 2026), retrieved 3 Nov 2026 · Official adjustment rates, freely usable · Actual adjustments only; the 4.09% estimate for 2027 is not drawn."
+alt: "Bar chart of the German statutory pension adjustment on 1 July of each year from 2020 to 2026, for West Germany until 2023 and nationwide from 2024. 2020: 3.45%. 2021: zero, because wages had fallen in 2020. 2022: 5.35%. 2023: 4.39%. 2024: 4.57%. 2025: 3.74%. The latest value is 4.24% on 1 July 2026. The government's draft estimate of 4.09% for July 2027 is not shown, because it is not yet decided."

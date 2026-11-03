@@ -1,0 +1,19 @@
+id: brevard-rain-03pm
+kind: hbar
+kicker: "Climate & Weather · Florida"
+title: "Two feet of rain on the Space Coast, a third of that inland"
+subtitle: "Rain totals of the Central Florida storm from Sunday 1 Nov to Tuesday morning 3 Nov 2026, millimetres · preliminary NWS Melbourne reports"
+unit: " mm"
+rows:
+  - {label: "Grant-Valkaria (Brevard)", value: 601.7, note: "23.69 in"}
+  - {label: "Malabar (Brevard)", value: 595.4, note: "23.44 in"}
+  - {label: "Palm Bay (Brevard)", value: 501.7, note: "19.75 in"}
+  - {label: "Melbourne Beach (Brevard)", value: 352.6, note: "13.88 in"}
+  - {label: "Melbourne (Brevard)", value: 333.0, note: "13.11 in"}
+  - {label: "Titusville (Brevard)", value: 294.9, note: "11.61 in"}
+  - {label: "Kennedy Space Center (Brevard)", value: 247.4, note: "9.74 in"}
+  - {label: "Lake Harney (Seminole)", value: 214.4, note: "8.44 in"}
+  - {label: "Eatonville (Orange)", value: 188.7, note: "7.43 in"}
+licence: reported
+source_line: "National Weather Service Melbourne, preliminary rain reports, as published by WKMG ClickOrlando (3 Nov 2026, 08:33 EST / 14:33 CET); inches converted to millimetres by the desk (1 in = 25.4 mm); retrieved 3 Nov 2026 · Preliminary, subject to revision."
+alt: "Bar chart of preliminary rain totals from the Central Florida storm of 1 to 3 November 2026, in millimetres. Grant-Valkaria in Brevard County had 601.7 mm (23.69 inches), Malabar 595.4 mm, Palm Bay 501.7 mm, Melbourne Beach 352.6 mm, Melbourne 333.0 mm, Titusville 294.9 mm and Kennedy Space Center 247.4 mm. Inland, Lake Harney in Seminole County had 214.4 mm and Eatonville in Orange County 188.7 mm, the last figure shown."

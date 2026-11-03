@@ -1,0 +1,13 @@
+# Inside Desk chart data: brevard-rain-03pm
+"# Source: National Weather Service Melbourne, preliminary rain reports, as published by WKMG ClickOrlando (3 Nov 2026, 08:33 EST / 14:33 CET); inches converted to millimetres by the desk (1 in = 25.4 mm); retrieved 3 Nov 2026 · Preliminary, subject to revision."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Grant-Valkaria (Brevard),601.7,no,23.69 in
+Malabar (Brevard),595.4,no,23.44 in
+Palm Bay (Brevard),501.7,no,19.75 in
+Melbourne Beach (Brevard),352.6,no,13.88 in
+Melbourne (Brevard),333.0,no,13.11 in
+Titusville (Brevard),294.9,no,11.61 in
+Kennedy Space Center (Brevard),247.4,no,9.74 in
+Lake Harney (Seminole),214.4,no,8.44 in
+Eatonville (Orange),188.7,no,7.43 in

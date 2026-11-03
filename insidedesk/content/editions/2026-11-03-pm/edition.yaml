@@ -1,0 +1,62 @@
+date: "2026-11-03"
+slot: pm
+published: "2026-11-03T17:30:02+01:00"   # set to the actual Berlin time when it goes live
+title: "A pension rise in a draft, a strait in a speech"
+standfirst: "The government pencilled in a 4.09% pension rise for next July, and the formula will check it against this year's pay in spring. Elsewhere: a president's claim about Hormuz against a ship count, Wednesday's power price slipping below €250, an early flu season, 23 inches of rain on Florida's polling day, and a likely Bank of England rise on Thursday."
+closing:
+  title: Before you close the tab
+  published: "2026-11-03T17:30:02+01:00"
+  habit:
+    text: 'Find your last pension statement or payslip and write one number on a card: your monthly gross pension, or your monthly gross pay. When the spring figure for July arrives, or the 2028 contribution rate is settled, you will know in a minute what it means for you, without reading a single forecast in between.'
+    note: A habit, not advice.
+  went_right:
+    text: 'A cancer treatment built for one patient at a time has passed its first large test. In the INTerpath-001 trial of 1,137 people whose high-risk melanoma had been removed, adding a personalised mRNA treatment, intismeran autogene, to the immunotherapy Keytruda cut the risk of the cancer returning or of death by 42% over about two years [1]. At two years, 82.2% of patients on the combination were cancer-free, against 70% on Keytruda alone, with no new safety concerns [1]. It is still investigational, and survival data are not in yet; the makers plan to file with regulators [1]. Slow trials, careful numbers, and a door opened.'
+  sentence: "Pensions could rise about 4% next July, but the real number will be worked out in spring from what people actually earned this year."
+  euros:
+    text: 'The draft pension report expects a rise of 4.09% on 1 July 2027, which the FAZ puts at about €41 more for every €1,000 of monthly gross pension, and €78.30 a month for the standard pension of 45 average years [2][3]. Desk arithmetic: a gross pension of €1,200 a month would rise by about €49, and one of €1,500 by about €61, if the estimate holds. It is a draft: last year''s estimate of 3.73% became 4.24% [3].'
+    note: Desk arithmetic on a draft estimate, before tax and health and care contributions. The final rise is set in spring. Nothing here is advice.
+  small_words:
+    term: Haltelinie
+    text: 'The "holding line": a legal floor that keeps the statutory pension level at 48% of average earnings, before tax, until 2031 [2][3]. When the normal formula would let pensions fall behind wages, the holding line tops up the rise, and the federal budget refunds the extra cost, put at €1.7 billion in 2027 [3].'
+  sources:
+  - {n: 1, title: "Personalized mRNA treatment reduces melanoma recurrence in landmark Phase 3 trial", publisher: "Inova Newsroom", url: "https://www.inovanewsroom.org/expert-commentary/2026/11/personalized-mrna-treatment-reduces-melanoma-recurrence-in-landmark-phase-3-trial/", date: "2 Nov 2026"}
+  - {n: 2, title: "Regierung erwartet 2027 Rentenerhöhung von mehr als vier Prozent", publisher: "Frankfurter Allgemeine Zeitung", url: "https://www.faz.net/aktuell/wirtschaft/regierung-erwartet-2027-rentenerhoehung-von-mehr-als-vier-prozent-201647776.html", date: "3 Nov 2026, 14:18 CET"}
+  - {n: 3, title: "Entwurf: Renten könnten 2027 um 4,09 Prozent steigen", publisher: "Reuters via onvista", url: "https://www.onvista.de/news/2026/11-03-entwurf-renten-koennten-2027-um-4-09-prozent-steigen-0-20-26571891", date: "3 Nov 2026, 14:57 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - ordinary-lead
+  - markets-note
+  - geoecon-note
+  - politics-note
+  - psych-note
+  - energy-note
+  - money-note
+  - tech-note
+  - health-note
+  - security-note
+  - climate-note
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-03T17:30:02+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - ordinary-short
+    - ordinary-brief
+    - markets-short
+    - markets-brief
+    - geoecon-short
+    - geoecon-brief
+    - politics-short
+    - politics-brief
+    - psych-short
+    - psych-brief
+    - energy-short
+    - energy-brief
+    - money-short
+    - money-brief
+    - tech-short
+    - tech-brief
+    - health-short
+    - health-brief
+    - security-short
+    - security-brief
+    - climate-short
+    - climate-brief
+  updates: []
