@@ -1,0 +1,15 @@
+id: us-senate-seats-04nov
+kind: hbar
+kicker: "Inside Desk · Politics & Institutions"
+title: "Twelve Senate seats still being counted"
+subtitle: "US Senate seats by status, NBC News Decision Desk projections on Associated Press data, 11:14 p.m. ET on 3 November 2026 (05:14 CET, 4 November); 100 seats, 51 for a majority"
+unit: " seats"
+rows:
+  - {label: "Democrats, not up this year", value: 34, note: "holdovers"}
+  - {label: "Democrats, projected winners on Tuesday", value: 15, note: "incl. 4 flips: NC, SC, TX, Ohio"}
+  - {label: "Republicans, not up this year", value: 31, note: "holdovers"}
+  - {label: "Republicans, projected winners on Tuesday", value: 8, note: "incl. Florida special"}
+  - {label: "Not yet projected", value: 12, note: "incl. Maine, Michigan, Kansas, Iowa, Alaska"}
+licence: reported
+source_line: "NBC News, 2026 Senate Results (data provided by The Associated Press, projections by the NBC News Decision Desk), page updated 11:14 p.m. ET; Democratic and Republican Tuesday winners derived by Inside Desk from totals minus seats not up for election; retrieved 4 Nov 2026, about 05:15 CET. Projections, not certified results."
+alt: "Bar chart of the 100 US Senate seats by status at 05:14 CET on Wednesday 4 November 2026, per NBC News projections on AP data: 34 Democratic seats not up this year and 15 Democratic projected winners on Tuesday (49 in total, including four flips), 31 Republican seats not up and 8 Republican projected winners (39 in total), and 12 races not yet projected. A majority is 51."

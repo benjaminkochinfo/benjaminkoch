@@ -1,0 +1,64 @@
+date: "2026-11-04"
+slot: am
+published: "2026-11-04T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Projected, not certified"
+standfirst: "By breakfast in Berlin the networks had called the House for the Democrats, while twelve Senate seats and a warehouse of bagged ballots in Westchester were still being counted. Elsewhere, AMD's margin outlook slipped a point, the 10-year Treasury yield slipped to about 4.90% overnight, and German wind nearly doubled without moving the gas plants or the price."
+closing:
+  title: Before you close the tab
+  published: '2026-11-04T08:30:00+01:00'
+  habit:
+    text: 'Read the American results once this morning, from one source that is willing to write "too early to call", and then close it. A race nobody has called is not a race anybody has lost; it is ballots still being counted by people paid to be careful. Let the uncalled stay uncalled until lunch.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Five people who set out on 30 July on what should have been a one-hour boat trip between two atolls in Micronesia were found alive on Sunday off Fanning Island in Kiribati, about 5,400 kilometres away, after roughly three months adrift [1][2]. The three men and two boys were severely dehydrated and malnourished and were put straight on drips; the local nursing officer said they could already "give a smile face" and wanted to eat [1]. The US Coast Guard, which had searched 85,700 square kilometres of ocean for ten days after the boat was reported missing, called it "truly amazing and joyful news", while sending condolences for the four who did not come back [2]. Chuuk State has begun talks with Kiribati about bringing the survivors home [2]. Local people spotted the boat; a small island clinic did the rest.'
+  sentence: "America voted, the television networks have called the House, and the counting goes on in rooms where nobody is in a hurry, which is exactly as it should be."
+  euros:
+    text: 'A litre of Super E10 cost €2.003 on the German average at 05:13 this morning, diesel €2.228, across stations reporting to the federal fuel price register [3]. Where you fill up matters more than you might think: E10 averaged €1.932 in Berlin and €2.044 in North Rhine-Westphalia, and among the 15 largest brands it ranged from €1.947 at SB stations to €2.071 at Agip Eni [3]. Desk arithmetic: the gap between Berlin and North Rhine-Westphalia is 11.2 cents a litre, about €5.60 on a 50-litre tank; between the cheapest and dearest of those brands it is 12.4 cents, about €6.20. Early-morning averages are snapshots, and prices move through the day.'
+    note: Desk arithmetic on the cited averages. Prices differ by station, region and hour. Nothing here is advice.
+  small_words:
+    term: Race call
+    text: 'When a news agency such as the Associated Press declares a winner before every vote is counted [4]. It is not a guess: AP''s Decision Team of journalists, data analysts and political scientists waits until the trailing candidate no longer has any path to victory. "Our certainty is our standard," says David Scott, who runs AP''s election services [4]. Some races take days; in 2000 AP never called Florida at all because it was too close [4]. A call is still not the official result, which comes later, with certification.'
+  sources:
+  - {n: 1, title: "Five survivors have been rescued after three months adrift in the Pacific Ocean", publisher: "ABC Pacific (Pacific Beat)", url: "https://www.abc.net.au/pacific/programs/pacificbeat/kiribati-survivors/107339830", date: "03 Nov 2026"}
+  - {n: 2, title: "5 Missing in Pacific Rescued on Fanning Island After Drifting for 3 Months", publisher: "SBS News", url: "https://news.sbs.co.kr/english/article.do?news_id=N1008829195", date: "03 Nov 2026, 16:08 CET"}
+  - {n: 3, title: "Spritpreise heute (04.11.2026): Durchschnitt E5, E10 und Diesel in Deutschland (source: MTS-K)", publisher: "kraftstoffbilliger.de", url: "https://kraftstoffbilliger.de/spritpreise", date: "as of 04 Nov 2026, 05:13 CET"}
+  - {n: 4, title: "How does The Associated Press call 2026 midterm election winners? 4 things to know", publisher: "PBS News", url: "https://www.pbs.org/newshour/politics/watch-how-does-the-associated-press-call-2026-midterm-election-winners-4-things-to-know", date: "29 Oct 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - projected-not-certified-the-house-turns-and-twelve
+  - podium-vs-print-expanding-profitability-and-55
+  - sixty-days-89-already-on-ordinary-tariffs-and-a
+  - the-annex-5-501-people-one-sentence-about-violence
+  - wind-nearly-doubled-on-tuesday-and-the-gas-plants
+  - 4-95-at-tuesday-s-close-about-4-90-by-berlin-s
+  - ordinary-ledger-a-fuel-price-cap-with-three
+  - search-off-by-default-and-no-search-without-the-ai
+  - 300-before-anyone-audits-the-surgery-and-seven-in
+  - nine-ships-in-24-days-317-in-six-months-and-a-40
+  - two-cyclones-in-a-week-on-the-same-coast-and-12
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-04T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 600
+  extras:
+    - a-public-health-doctor-in-columbus-and-15
+    - mail-down-13-in-person-up-46-how-americans-voted
+    - up-1-5-at-the-open-down-1-5-by-mid-morning-seoul
+    - revenue-up-32-shares-down-8-7-shopify-missed-by-a
+    - 360-billion-short-and-a-package-due-by-mid
+    - oil-revenue-down-23-financing-costs-up-38-riyadh-s
+    - a-calm-room-and-a-playlist-or-an-mri-scanner-where
+    - babies-hardly-blink-by-six-some-children-blink-20
+    - brent-at-103-34-near-a-four-week-low-and-a-crude
+    - voerde-weisweiler-werne-where-rwe-s-backup
+    - 4-to-6-on-15-november-beijing-leans-on-its-own
+    - up-to-25-billion-in-bonds-a-third-in-euros-days
+    - 2-9-again-the-health-insurance-add-on-holds-for
+    - ihre-mailservice-verwaltungscenter-the-pension
+    - 27-of-america-s-data-centre-gigawatts-and-a
+    - 19-9-billion-of-sales-and-434-million-of-cash-out
+    - one-injection-one-visit-who-writes-the
+    - a-tongue-swab-for-people-who-cannot-cough-up-a
+    - tech-on-the-cheap-britain-s-cyber-chief-sends-the
+    - eight-phones-some-ammunition-and-a-third-arrest
+    - fifth-sunniest-october-13-more-rain-and-a-drought
+    - embargoed-until-9-november-the-year-s-climate
+  updates: []

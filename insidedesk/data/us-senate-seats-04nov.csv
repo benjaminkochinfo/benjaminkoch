@@ -1,0 +1,9 @@
+# Inside Desk chart data: us-senate-seats-04nov
+"# Source: NBC News, 2026 Senate Results (data provided by The Associated Press, projections by the NBC News Decision Desk), page updated 11:14 p.m. ET; Democratic and Republican Tuesday winners derived by Inside Desk from totals minus seats not up for election; retrieved 4 Nov 2026, about 05:15 CET. Projections, not certified results."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Democrats, not up this year",34,no,holdovers
+"Democrats, projected winners on Tuesday",15,no,"incl. 4 flips: NC, SC, TX, Ohio"
+"Republicans, not up this year",31,no,holdovers
+"Republicans, projected winners on Tuesday",8,no,incl. Florida special
+Not yet projected,12,no,"incl. Maine, Michigan, Kansas, Iowa, Alaska"
