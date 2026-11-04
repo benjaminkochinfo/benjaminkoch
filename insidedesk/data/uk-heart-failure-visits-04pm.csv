@@ -1,0 +1,7 @@
+# Inside Desk chart data: uk-heart-failure-visits-04pm
+"# Source: British Heart Foundation, CVD Observatory analysis, published 4 Nov 2026; retrieved 4 Nov 2026"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"All hospital visits, UK",20,no,BHF CVD Observatory
+"Heart failure visits, UK (173,744 to 264,417)",52,no,BHF CVD Observatory
+"Heart failure visits, England",58,no,BHF CVD Observatory

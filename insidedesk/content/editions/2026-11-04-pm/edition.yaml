@@ -1,0 +1,62 @@
+date: "2026-11-04"
+slot: pm
+published: "2026-11-04T17:30:05+01:00"   # set to the actual Berlin time when it goes live
+title: "Found on the ward, cheered on the floor"
+standfirst: "UK hospital visits for heart failure hit a record 264,417 a year, and up to eight in ten diagnoses in England are made on the ward. Elsewhere: markets cheering a divided Washington, euro-area inflation at 4.0% but 2.3% without energy, Thursday's power back above €250, 310 drones at Ukraine's grid, and schools shut in Sardinia a day before the storm."
+closing:
+  title: Before you close the tab
+  published: "2026-11-04T17:30:05+01:00"
+  habit:
+    text: 'If you heat with oil, look at the gauge on your tank this week and write the level and the date on a card taped next to it. Do it again in a fortnight. Two readings tell you how many litres a cold week really costs your house, and with deliveries running at about 26 days, that is the number you need before you call anyone.'
+    note: A habit, not advice.
+  went_right:
+    text: 'People with bladder cancer who cannot have the standard chemotherapy have one more option that works. In the VOLGA trial of 695 people in 25 countries, adding two medicines, durvalumab and enfortumab vedotin, around bladder-removal surgery meant an estimated 78 in every 100 were alive two years later, against 69 in every 100 offered surgery without them [1]. The benefit came with more severe side effects, 71 in every 100 against 50, and it still needs regulatory approval before routine use [1]. The results were published in the New England Journal of Medicine and announced at the ESMO congress; AstraZeneca sponsored the study [1]. Nine more people in every hundred, counted carefully.'
+  sentence: "Heart failure is now found mostly in hospital beds, and the cheapest remedy for that is a doctor listening to a breathless patient's chest a few months sooner."
+  euros:
+    text: 'Heating oil cost a national average of €173 per 100 litres in Germany on Wednesday, against €92 at the same time last year, agrarheute reported; prices ranged from about €167 in Brandenburg, Berlin and Schleswig-Holstein to €177–179 in Hesse and Rhineland-Palatinate, and deliveries take about 26 days [2]. Desk arithmetic: a typical bridging order of 2,000 litres costs about €3,460 at today''s average, against about €1,840 a year ago, roughly €1,620 more. Between the cheapest and dearest states, the same order differs by about €240 [2].'
+    note: Desk arithmetic on reported national and state averages, before delivery surcharges. Nothing here is advice.
+  small_words:
+    term: Event-free survival
+    text: 'A way trials count how long patients live without something bad happening: the cancer growing or returning, death, or, in VOLGA, not getting the planned surgery while cancer remained [1]. It moves sooner than overall survival, which is why trials report it first; overall survival is the slower, firmer number [1].'
+  sources:
+  - {n: 1, title: "Drug combination helps more people with bladder cancer live longer", publisher: "Queen Mary University of London", url: "https://www.qmul.ac.uk/news/latest-news/2026/medicine-and-dentistry/fmd/drug-combination-helps-more-people-with-bladder-cancer-live-longer.html", date: "4 Nov 2026"}
+  - {n: 2, title: "Heizölpreise bleiben teuer – obwohl Ölpreise fallen: Was Heizöl im November kostet", publisher: "agrarheute", url: "https://www.agrarheute.com/energie/heizoel/heizoelpreise-bleiben-teuer-obwohl-oelpreise-fallen-heizoel-november-kostet-643725", date: "4 Nov 2026, 11:41 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - health-lead
+  - markets-note
+  - geoecon-note
+  - politics-note
+  - psych-note
+  - energy-note
+  - money-note
+  - ordinary-note
+  - tech-note
+  - security-note
+  - climate-note
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-04T17:30:05+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 600
+  extras:
+    - health-short
+    - health-brief
+    - markets-short
+    - markets-brief
+    - geoecon-short
+    - geoecon-brief
+    - politics-short
+    - politics-brief
+    - psych-short
+    - psych-brief
+    - energy-short
+    - energy-brief
+    - money-short
+    - money-brief
+    - ordinary-short
+    - ordinary-brief
+    - tech-short
+    - tech-brief
+    - security-short
+    - security-brief
+    - climate-short
+    - climate-brief
+  updates: []

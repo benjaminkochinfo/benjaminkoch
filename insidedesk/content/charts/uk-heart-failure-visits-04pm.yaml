@@ -1,0 +1,13 @@
+id: uk-heart-failure-visits-04pm
+kind: hbar
+kicker: "Inside Desk · Health"
+title: "Heart failure is filling beds faster than everything else"
+subtitle: "Rise in hospital visits between 2014/15 and 2024/25, %"
+unit: "%"
+rows:
+  - {label: "All hospital visits, UK", value: 20, note: "BHF CVD Observatory"}
+  - {label: "Heart failure visits, UK (173,744 to 264,417)", value: 52, note: "BHF CVD Observatory"}
+  - {label: "Heart failure visits, England", value: 58, note: "BHF CVD Observatory"}
+licence: reported
+source_line: "British Heart Foundation, CVD Observatory analysis, published 4 Nov 2026; retrieved 4 Nov 2026"
+alt: "Bar chart: between 2014/15 and 2024/25, all UK hospital visits rose by 20%, UK hospital visits for heart failure rose by 52%, from 173,744 to 264,417, and heart failure visits in England rose by 58%, the steepest of the UK nations."
