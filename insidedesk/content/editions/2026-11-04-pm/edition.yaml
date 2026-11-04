@@ -60,7 +60,11 @@ epaper:
   - climate-short
   - climate-brief
   - dax-closes-up-2-22-banks-up-4-6-and-siemens-energy-down-8
+  - wall-street-closes-up-1-72-and-the-chip-index-down-3-6
   updates:
   - time: '2026-11-04T19:27:21+01:00'
     text: 'Markets: Frankfurt''s settled close is in, DAX up 2.22%, banks up 4.6%, Siemens Energy down 8%'
     piece: dax-closes-up-2-22-banks-up-4-6-and-siemens-energy-down-8
+  - time: '2026-11-04T22:00:15+01:00'
+    text: 'Markets: Wall Street''s close is in, S&P 500 up 1.72%, chip index down 3.6%'
+    piece: wall-street-closes-up-1-72-and-the-chip-index-down-3-6
