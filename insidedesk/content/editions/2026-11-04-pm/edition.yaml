@@ -33,30 +33,34 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - tech-note
   - security-note
   - climate-note
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-04T17:30:05+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-04T17:30:05+01:00"
   spread_chars: 600
   extras:
-    - health-short
-    - health-brief
-    - markets-short
-    - markets-brief
-    - geoecon-short
-    - geoecon-brief
-    - politics-short
-    - politics-brief
-    - psych-short
-    - psych-brief
-    - energy-short
-    - energy-brief
-    - money-short
-    - money-brief
-    - ordinary-short
-    - ordinary-brief
-    - tech-short
-    - tech-brief
-    - security-short
-    - security-brief
-    - climate-short
-    - climate-brief
-  updates: []
+  - health-short
+  - health-brief
+  - markets-short
+  - markets-brief
+  - geoecon-short
+  - geoecon-brief
+  - politics-short
+  - politics-brief
+  - psych-short
+  - psych-brief
+  - energy-short
+  - energy-brief
+  - money-short
+  - money-brief
+  - ordinary-short
+  - ordinary-brief
+  - tech-short
+  - tech-brief
+  - security-short
+  - security-brief
+  - climate-short
+  - climate-brief
+  - dax-closes-up-2-22-banks-up-4-6-and-siemens-energy-down-8
+  updates:
+  - time: '2026-11-04T19:27:21+01:00'
+    text: 'Markets: Frankfurt''s settled close is in, DAX up 2.22%, banks up 4.6%, Siemens Energy down 8%'
+    piece: dax-closes-up-2-22-banks-up-4-6-and-siemens-energy-down-8
