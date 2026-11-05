@@ -1,0 +1,30 @@
+---
+title: "Eight phones, two warrants, one judge in Stuttgart: Europe's police reach the man who allegedly paid for the fire"
+dek: "A Starlink gateway in Poland burned in September. On Tuesday German special police arrested the suspected organiser near Stuttgart. Hybrid war is loud; the answer to it is paperwork that crosses borders."
+desk: security
+format: lead
+charts: []
+sources:
+  - {n: 1, title: "Germany apprehends alleged mastermind behind Starlink arson in Poland", publisher: "PAP (Polish Press Agency)", url: "https://www.pap.pl/en/news/germany-apprehends-alleged-mastermind-behind-starlink-arson-poland", date: "3 Nov 2026, 22:20 CET"}
+  - {n: 2, title: "Germany just caught the man suspected of ordering sabotage on Ukraine's Starlink lifeline", publisher: "Euromaidan Press", url: "https://euromaidanpress.com/2026/11/04/germany-just-caught-the-man-suspected-of-ordering-sabotage-on-ukraines-starlink-lifeline/", date: "4 Nov 2026, 14:05 CET"}
+  - {n: 3, title: "Vermoedelijke opdrachtgever van Starlink-sabotage Polen opgepakt", publisher: "NOS Nieuws", url: "https://nos.nl/artikel/2637951-vermoedelijke-opdrachtgever-van-starlink-sabotage-polen-opgepakt", date: "4 Nov 2026, 03:24 CET"}
+watch:
+  - "The extradition proceedings for the two alleged arsonists held in Germany on Polish warrants since 12 October, which are still under way [2]."
+  - "Whether prosecutors in Stuttgart, who have opened their own domestic case, say more about who commissioned the organiser; they have so far cited the ongoing investigation [1][2]."
+comment: "Saboteurs need one night. Prosecutors need a year. The year is the deterrent."
+---
+On the night of 22 to 23 September, two men were driven from Germany to Wola Krobowska, a village in Poland's Mazowieckie province, and a fire broke out at a Starlink ground station there [1]. The site is a gateway: it links the satellites passing over Central Europe to fibre-optic lines on the ground, and it carries internet traffic through Poland to countries including Ukraine [1]. For Ukraine's drone units and front-line troops that link is not a convenience. Poland alone has supplied 29,500 of the terminals they use [2].
+
+On Tuesday, German special police arrested a Turkish citizen in the district of Reutlingen, south of Stuttgart [1][3]. The Stuttgart Prosecutor General's Office and Baden-Württemberg's State Criminal Police Office say he ordered the two men to carry out the attack while he was in Germany, and arranged for another suspect to drive them to Poland [1][2]. Officers seized eight mobile phones and ammunition [1]. A Stuttgart court ordered him held on strong suspicion of preparing a terrorist offence [2]. Prosecutors have opened their own domestic case rather than only acting on Poland's requests, and they gave no further details, citing the ongoing investigation [1][2].
+
+That is the news. The argument is in how it happened.
+
+**The warrant came first.** The two alleged arsonists, aged 38 and 34, were detained in Nürtingen on 12 October under European arrest warrants issued by Poland, and their extradition proceedings are still under way [2]. A Polish prosecutor had opened a sabotage and terrorism investigation two days after the fire [1]. Polish paperwork, German police, a German judge: that is the European arrest warrant doing what it was built for, quietly, six weeks after a blaze that made headlines for a day. Until now, arrests in Europe's run of attacks on Starlink sites had reached only people suspected of doing the deed, Euromaidan Press notes; this is the first suspect held as the one who ordered an attack [2].
+
+**The pattern is cheap labour.** Warsaw has blamed Russian intelligence for the fire, and Prime Minister Donald Tusk called it an act of hybrid warfare, NOS reports [3]. Tomasz Siemoniak, the minister who coordinates Poland's special services, said those services increasingly turn to people tied to the criminal world [2]. Der Spiegel reported in October that the trail leads to the Daltons, a Turkish organised-crime group also active in Germany, whose members may have worked for Russian intelligence, as summarised by Euromaidan Press [2]. Germany's interior ministry warned in May that working with organised crime suits Russian services especially for "sabotage or killing operations", Der Spiegel reported [2]. None of that has been tested in court, and the arrested man has not been convicted of anything. But the method explains the defence. A service that rents petty criminals buys deniability. It also buys people who leave traces: phones, drivers, travel. Separately, on 27 October Turkish police detained 85 suspected Daltons members, 30 of them minors, across 30 provinces; they did not mention Starlink [2].
+
+**The guards count too.** The Polish fire was the first of three attacks on Starlink sites in Europe in under a month [2]. In October intruders burned antennas at a ground station near Sofia; two 19-year-old Germans, arrested in Duisburg, are held pending extradition to Bulgaria [2][3]. On 18 October night guards at a Lithuanian company foiled an attempt to burn Starlink antennas, and Sofia says the same pair were behind it [2]. One fire caught, one fire put down, one fire never started. The difference between the second and the third was a person on shift.
+
+For you, the useful reading is not "Europe is under attack", which you have heard, but "Europe is answering", which you rarely hear because the answer is slow. Sabotage by proxy is designed to look like random crime and to make governments seem helpless. The reply is to treat it exactly as crime: warrants honoured across borders, phones read under court order, extraditions argued in front of judges, and a domestic terrorism case opened where the orders were allegedly given. It will take months. That is not weakness. A night's arson costs a few hired hands; a prosecution that climbs from the arsonists to the organiser raises the price of hiring the next ones.
+
+The speeches about hybrid war will continue. The thing to watch is the docket.

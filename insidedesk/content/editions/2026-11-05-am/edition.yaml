@@ -1,0 +1,63 @@
+date: "2026-11-05"
+slot: am
+published: "2026-11-05T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Eight phones, two warrants, one judge"
+standfirst: "A Starlink ground station in Poland burned in September; this week German special police arrested the man suspected of organising it, on paperwork that crossed two borders. Elsewhere, the 10-year Treasury yield ended the first session after the vote at 4.90%, and German day-ahead power runs from €196.97 a megawatt-hour at midnight to €349.36 for the hour from 17:00."
+closing:
+  title: Before you close the tab
+  published: '2026-11-05T08:30:00+01:00'
+  habit:
+    text: 'Find the letter or email from your electricity and gas supplier with this year''s prices, and put it where January''s letter will land. The useful comparison next year is cents per kilowatt-hour against cents per kilowatt-hour, not one monthly instalment against another. Two minutes now saves a guess later.'
+    note: A habit, not advice.
+  went_right:
+    text: 'After the black summer bushfires of 2019-20, scientists in East Gippsland, Australia, found puddles of tadpoles of the southern giant burrowing frog, critically endangered in Victoria, and took about 160 of them to Melbourne zoo [1]. More than five years later, The Guardian reported on Wednesday, 53 of those tadpoles, now male frogs about five years old, were returned to their native habitat, released just after thunderstorms had soaked the sites with 80 to 100 mm of rain [1]. Each frog is tagged, and song meters at the release sites are listening for their calls [1]. The species bred in captivity for the first time last year, and there are only five known breeding sites in Victoria [1]. "The best thing to do was just to raise those frogs up and release them back out," said Ryan Moes, an amphibian keeper at Zoos Victoria [1]. Patience, genetic tests and a zoo that keeps its records: that is what a rescue looks like.'
+  sentence: "A fire in Poland was answered by a warrant, a police raid and a judge in Stuttgart, which is how Europe usually wins: slowly, on paper, and for good."
+  euros:
+    text: 'A gas contract that a German household can sign today costs on average 14.9 cents per kilowatt-hour, 3.8 cents or 34% more than at the start of the year, according to the energy industry association BDEW, based on a detached house using 20,000 kWh a year [2]. For customers on running tariffs, BDEW says, there has so far been no effect [2]. Desk arithmetic: on 20,000 kWh, 3.8 cents is about €760 a year, or about €63 a month, between a contract signed in January and one signed now. That is why a household on a good running deal has every reason to read the small print before it switches, and a household whose contract is ending has every reason to compare before it lapses into whatever comes next.'
+    note: Desk arithmetic on BDEW's average for a 20,000 kWh household. Your own price depends on supplier, region and contract. Nothing here is advice.
+  small_words:
+    term: Bank Rate
+    text: 'The interest rate the Bank of England charges other banks and building societies to borrow money [3]. It feeds through to what they charge for mortgages and pay on savings [3]. It is 3.75% now, and most analysts expect a rise to 4% when the Bank announces its decision at 12:00 GMT, 13:00 in Berlin, today; it would be the first increase since August 2023 [3]. Borrowers on tracker mortgages feel a change at once; those on fixed deals feel it when the deal ends [3]. The euro area''s equivalent is set by the European Central Bank in Frankfurt.'
+  sources:
+  - {n: 1, title: "Endangered giant burrowing frog returns to wild after tadpoles rescued from ashes of black summer fires", publisher: "The Guardian", url: "https://www.theguardian.com/australia-news/2026/nov/05/giant-burrowing-frog-returns-to-wild-after-tadpoles-rescued-black-summer-fires-australia", date: "04 Nov 2026, 15:01 CET"}
+  - {n: 2, title: "Quick-Check Gas- und Strompreise, Stand 3. November 2026", publisher: "BDEW", url: "https://www.bdew.de/media/documents/BDEW_Quick_Check_Gas_und_Strompreise_261103.pdf", date: "03 Nov 2026"}
+  - {n: 3, title: "Interest rates expected to rise for first time in over three years", publisher: "BBC News", url: "https://www.bbc.co.uk/news/articles/ck5ynw45jrgqo", date: "05 Nov 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - eight-phones-two-warrants-one-judge-in-stuttgart
+  - podium-vs-print-sequential-growth-now-on-android
+  - canola-meal-peas-lobster-and-crab-ottawa-and
+  - 133-laws-two-empty-court-seats-and-a-2028-deadline
+  - the-annex-309-746-adults-four-months-of-biological
+  - 196-97-at-midnight-349-36-at-five-thursdays-power
+  - 4-90-at-the-first-close-after-the-vote-and-34
+  - ordinary-ledger-1-95-cents-a-kilowatt-hour-about-5
+  - 36-of-38-american-towns-voted-on-data-centres-and
+  - three-new-strains-late-reagents-and-a-flu-jab-you
+  - only-a-quarter-of-europes-catastrophe-losses-were
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-05T06:30:00+01:00"
+  spread_chars: 600   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - about-150-ballistic-missiles-in-october-11-shot
+    - perhaps-90-tried-as-terrorists-438-dead-in
+    - seoul-pulls-the-brake-hong-kong-rises-3-5-one-chip
+    - beat-the-forecast-lose-the-shares-wednesday-nights
+    - 30-cents-on-the-dollar-an-escrow-account-and-22
+    - 4-142-exhibitors-six-days-and-a-fair-built-to-sell
+    - 1-138-votes-about-3-600-envelopes-and-13-november
+    - 21-chapters-closed-four-roadmaps-and-one-candidate
+    - 20-now-or-50-in-a-month-146-brain-scans-and-a
+    - 59-against-76-a-t-bingen-study-of-how-men-with
+    - 60-81-full-70-required-and-the-regulator-says-it
+    - brent-gives-back-8-98-in-a-day-then-keeps-going
+    - 5-89-before-the-bank-has-said-a-word-britains
+    - 53-billion-of-orders-for-9-billion-of-bonds-what
+    - 3-800-registration-offices-74-2-million-people-and
+    - 1-15-for-250-grams-butter-gets-cheaper-at-the
+    - 1-271-people-22-of-canva-growth-slowed-for-the
+    - a-pharmaceutical-chief-for-the-pc-maker-hp-picks
+    - 517-shortages-on-the-list-and-five-of-the-newest
+    - 5-000-leukaemia-patients-three-months-and-a-tender
+    - frances-2003-drought-once-every-24-years-now-every
+    - nine-minutes-1-600-pupils-no-one-lost
+  updates: []

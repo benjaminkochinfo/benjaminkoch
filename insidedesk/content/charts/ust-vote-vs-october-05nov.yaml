@@ -1,0 +1,18 @@
+id: ust-vote-vs-october-05nov
+kind: hbar
+kicker: "Money · Rates"
+title: "The vote moved yields a few points; the five weeks before it moved them thirty"
+subtitle: "Fall in US Treasury par yields, basis points (one basis point = 0.01 percentage point): election-day close (Tue 3 Nov) to first close after the vote (Wed 4 Nov), and Thu 1 Oct to Wed 4 Nov 2026"
+unit: " bp"
+rows:
+  - {label: "2-year, 3 to 4 Nov: 4.61% to 4.58%", value: 3, note: "Treasury"}
+  - {label: "2-year, 1 Oct to 4 Nov: 4.78% to 4.58%", value: 20, note: "Treasury"}
+  - {label: "5-year, 3 to 4 Nov: 4.74% to 4.69%", value: 5, note: "Treasury"}
+  - {label: "5-year, 1 Oct to 4 Nov: 5.01% to 4.69%", value: 32, note: "Treasury"}
+  - {label: "10-year, 3 to 4 Nov: 4.95% to 4.90%", value: 5, note: "Treasury"}
+  - {label: "10-year, 1 Oct to 4 Nov: 5.24% to 4.90%", value: 34, note: "Treasury"}
+  - {label: "30-year, 3 to 4 Nov: 5.32% to 5.28%", value: 4, note: "Treasury"}
+  - {label: "30-year, 1 Oct to 4 Nov: 5.61% to 5.28%", value: 33, note: "Treasury"}
+licence: reported
+source_line: "U.S. Department of the Treasury, Daily Treasury Par Yield Curve Rates, 1 Oct, 3 Nov and 4 Nov 2026 (home.treasury.gov), retrieved 5 Nov 2026 · U.S. government data, public domain · Bars are desk arithmetic: the difference between two official closing yields."
+alt: "Bar chart comparing how far US Treasury par yields fell on the first trading day after the 3 November 2026 election with how far they fell from 1 October to 4 November, in basis points. The 2-year fell 3 on the day, from 4.61% to 4.58%, and 20 since 1 October, from 4.78%. The 5-year fell 5 on the day, from 4.74% to 4.69%, and 32 since 1 October, from 5.01%. The 10-year fell 5 on the day, from 4.95% to 4.90%, and 34 since 1 October, from 5.24%. The 30-year fell 4 on the day, from 5.32% to 5.28%, and 33 since 1 October, from 5.61%. The latest values are the Wednesday 4 November closes."
