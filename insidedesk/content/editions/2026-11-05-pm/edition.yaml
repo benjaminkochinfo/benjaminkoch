@@ -61,7 +61,11 @@ epaper:
   - six-detained-21-searches-cars-with-hidden
   - drones-air-defence-long-range-germanys-security
   - dax-closes-down-0-43-rheinmetall-down-16-and-stoxx-tech-down-3-2
+  - wall-street-closes-down-4-29-nasdaq-down-5-42-and-chips-down-10
   updates:
   - time: '2026-11-05T19:37:59+01:00'
     text: 'Markets: Frankfurt''s settled close is in, DAX down 0.43%, Rheinmetall down 16%, Stoxx tech down 3.2%'
     piece: dax-closes-down-0-43-rheinmetall-down-16-and-stoxx-tech-down-3-2
+  - time: '2026-11-05T22:03:20+01:00'
+    text: 'Markets: Wall Street closes down 4.29%, Nasdaq down 5.42%, chips down 10%'
+    piece: wall-street-closes-down-4-29-nasdaq-down-5-42-and-chips-down-10
