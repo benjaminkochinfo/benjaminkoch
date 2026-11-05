@@ -1,0 +1,10 @@
+# Inside Desk chart data: unep-adaptation-gap-05pm
+"# Source: UN Environment Programme, Adaptation Gap Report 2026: Ready? Not (press release, Nairobi, 4 Nov 2026); retrieved 5 Nov 2026 · Needs largely exclude the private sector's own needs."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Flows between developing countries, 2019",3.8,no,UNEP AGR 2026
+"Flows between developing countries, 2024",9.6,no,UNEP AGR 2026
+"International public flows, 2024 (upper end of 28.2–31.7)",31.7,no,"UNEP AGR 2026, range 28.2–31.7"
+Glasgow goal for 2025 (double 2019),40,no,Glasgow Climate Pact
+Tripled flows by 2035 (upper end of 85–120),120,no,"UNEP AGR 2026, range 85–120"
+Estimated needs by 2035 (central estimate),305,no,UNEP AGR 2026

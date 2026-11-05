@@ -1,0 +1,17 @@
+id: unep-adaptation-gap-05pm
+kind: hbar
+kicker: "Climate & Weather · Adaptation Gap Report 2026"
+title: "The bill, the promise and the cheque"
+subtitle: "Adaptation finance for developing countries, US$ billion a year · UNEP Adaptation Gap Report 2026; ranges shown at their upper end"
+unit: " bn"
+label_decimals: 1
+rows:
+  - {label: "Flows between developing countries, 2019", value: 3.8, note: "UNEP AGR 2026"}
+  - {label: "Flows between developing countries, 2024", value: 9.6, note: "UNEP AGR 2026"}
+  - {label: "International public flows, 2024 (upper end of 28.2–31.7)", value: 31.7, note: "UNEP AGR 2026, range 28.2–31.7"}
+  - {label: "Glasgow goal for 2025 (double 2019)", value: 40, note: "Glasgow Climate Pact"}
+  - {label: "Tripled flows by 2035 (upper end of 85–120)", value: 120, note: "UNEP AGR 2026, range 85–120"}
+  - {label: "Estimated needs by 2035 (central estimate)", value: 305, note: "UNEP AGR 2026"}
+licence: reported
+source_line: "UN Environment Programme, Adaptation Gap Report 2026: Ready? Not (press release, Nairobi, 4 Nov 2026); retrieved 5 Nov 2026 · Needs largely exclude the private sector's own needs."
+alt: "Bar chart of adaptation finance for developing countries in US dollars a year, from UNEP's Adaptation Gap Report 2026. Flows between developing countries rose from 3.8 billion in 2019 to 9.6 billion in 2024. International public flows from developed countries were 28.2 to 31.7 billion in 2024 (bar at 31.7). The Glasgow goal for 2025 is 40 billion. Tripling by 2035 would give 85 to 120 billion (bar at 120). Estimated needs by 2035, the largest bar, are about 305 billion a year."
