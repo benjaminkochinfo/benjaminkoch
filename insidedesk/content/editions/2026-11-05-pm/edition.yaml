@@ -34,30 +34,34 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - patched-on-28-october-exploited-by-3-november
   - 12-3-against-13-7-what-a-million-ontario-hospital
   - at-least-15-more-hoaxes-three-diversions-no
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-05T17:30:04+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-05T17:30:04+01:00"
   spread_chars: 600
   extras:
-    - from-about-23-to-35-in-ten-years-antalyas
-    - grants-not-loans-africas-negotiators-ask-how-much
-    - 1-10-a-share-and-11-000-broadband-lines-telekoms
-    - 189-000-new-claims-americas-layoff-count-matches
-    - 1-billion-a-day-a-kill-switch-by-year-end-and-a
-    - 30-billion-each-way-first-soybeans-after-beijings
-    - 637-votes-nearly-a-quarter-uncounted-and-18
-    - seven-of-17-one-green-premier-and-no-name-from-the
-    - not-warm-feelings-but-duties-12-247-people-in-100
-    - is-everyone-looking-at-me-514-people-and-a-social
-    - 2-8-gigawatts-of-orders-and-379-million-of-cash
-    - brent-back-to-97-20-gas-to-89-35-the-energy-sell
-    - 53-0-the-us-labour-share-hits-its-lowest-since-the
-    - one-dissent-and-it-pointed-upwards
-    - 162-to-615-a-year-for-the-same-1-500-monthly
-    - gas-20-dearer-in-one-city-unchanged-next-door-the
-    - 19-billion-of-leases-and-googles-credit-standing
-    - meta-buys-conductor-and-the-cloud-service-closes
-    - 41-3-million-admissions-and-17-more-dehydration-on
-    - 12-7-against-23-9-an-ai-guide-nearly-halves
-    - six-detained-21-searches-cars-with-hidden
-    - drones-air-defence-long-range-germanys-security
-  updates: []
+  - from-about-23-to-35-in-ten-years-antalyas
+  - grants-not-loans-africas-negotiators-ask-how-much
+  - 1-10-a-share-and-11-000-broadband-lines-telekoms
+  - 189-000-new-claims-americas-layoff-count-matches
+  - 1-billion-a-day-a-kill-switch-by-year-end-and-a
+  - 30-billion-each-way-first-soybeans-after-beijings
+  - 637-votes-nearly-a-quarter-uncounted-and-18
+  - seven-of-17-one-green-premier-and-no-name-from-the
+  - not-warm-feelings-but-duties-12-247-people-in-100
+  - is-everyone-looking-at-me-514-people-and-a-social
+  - 2-8-gigawatts-of-orders-and-379-million-of-cash
+  - brent-back-to-97-20-gas-to-89-35-the-energy-sell
+  - 53-0-the-us-labour-share-hits-its-lowest-since-the
+  - one-dissent-and-it-pointed-upwards
+  - 162-to-615-a-year-for-the-same-1-500-monthly
+  - gas-20-dearer-in-one-city-unchanged-next-door-the
+  - 19-billion-of-leases-and-googles-credit-standing
+  - meta-buys-conductor-and-the-cloud-service-closes
+  - 41-3-million-admissions-and-17-more-dehydration-on
+  - 12-7-against-23-9-an-ai-guide-nearly-halves
+  - six-detained-21-searches-cars-with-hidden
+  - drones-air-defence-long-range-germanys-security
+  - dax-closes-down-0-43-rheinmetall-down-16-and-stoxx-tech-down-3-2
+  updates:
+  - time: '2026-11-05T19:37:59+01:00'
+    text: 'Markets: Frankfurt''s settled close is in, DAX down 0.43%, Rheinmetall down 16%, Stoxx tech down 3.2%'
+    piece: dax-closes-down-0-43-rheinmetall-down-16-and-stoxx-tech-down-3-2
