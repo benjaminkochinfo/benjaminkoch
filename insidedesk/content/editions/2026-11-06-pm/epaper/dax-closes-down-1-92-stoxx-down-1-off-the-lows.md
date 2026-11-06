@@ -1,8 +1,8 @@
 ---
-title: "DAX closes down 1.92%, Stoxx 600 down 1%, off the lows as Wall Street rebounds"
-dek: "This evening's Markets lead left Frankfurt near 25,706 and the Stoxx near 643. Xetra and the pan-European close settled higher than that trough, with insurance and Teleperformance still the sore spots."
+title: "DAX closes down 1.92%, Stoxx down 1%"
+dek: "Xetra and the Stoxx settled off the evening lead's trough as Wall Street's chip rebound bled into Europe."
 desk: markets
-kind: short
+kind: brief
 published: "2026-11-06T19:29:14+01:00"
 sources:
   - {n: 1, title: "Aktien Frankfurt Schluss: Dax fällt wegen KI-Panik vom Rekord zurück", publisher: "dpa-AFX via MarketScreener", url: "https://de.marketscreener.com/boerse-nachrichten/aktien-frankfurt-schluss-dax-faellt-wegen-ki-panik-vom-rekord-zurueck-ce785fd2da80f321", date: "6 Nov 2026, 17:59 CET"}
@@ -10,8 +10,4 @@ sources:
   - {n: 3, title: "Risk-off mood sweeps European stocks as AI concerns deepen (Reuters)", publisher: "StreetInsider", url: "https://www.streetinsider.com/Reuters/European+shares+fall+as+global+AI+rout+gathers+pace/27302409.html", date: "6 Nov 2026"}
   - {n: 4, title: "ROUNDUP/Aktien Europa Schluss: Verluste etwas eingedämmt mit erholten US-Börsen", publisher: "dpa-AFX via onvista", url: "https://www.onvista.de/news/2026/11-06-roundup-aktien-europa-schluss-verluste-etwas-eingedaemmt-mit-erholten-us-boersen-0-10-26573592", date: "6 Nov 2026, 17:25 CET"}
 ---
-The evening's Markets lead left the DAX near 25,706, down about 2.3%, and the Stoxx Europe 600 near 643.72, down about 1.7%. Xetra has since closed the DAX 1.92% lower at 25,820.36, and the Stoxx 600 settled 1% lower at 648.33 — red, but clearly off those earlier troughs as Wall Street's chip rebound bled into the European afternoon [1][2][3]. The CAC 40 finished 0.8% lower at 8,139.00; the FTSE 100 closed about 1% lower at 10,673.94; the EuroStoxx 50 fell 0.98% to 6,170.49 [2][4]. The MDax closed 0.81% lower at 30,642.23 [1]. On the week the DAX gave back its interim gain; the Stoxx still eked out a small advance [1][3].
-
-Inside the day the sorting held. Insurance led the Stoxx lower, down 2.6%, after a JPMorgan downgrade of German reinsurers: Munich Re fell about 4.3%, Hannover Re about 4.4%, Swiss Re 4.6% [1][3]. Teleperformance was the Stoxx's biggest faller, down 15.3% after cutting its full-year revenue-growth outlook [2][3]. Rheinmetall closed 3.4% lower at €812.70 on fresh target cuts after its warning [1]. Travel was the only Stoxx sector up, rising 0.9% with help from IAG [3][4]. Chip-equipment names recovered with New York: ASML closed about 2.7% higher, and Sharecast noted BE Semiconductor and Aixtron ended in the black after earlier heavy losses [2][4]. Hochtief jumped 5.5% on reports ACS may bid for the rest of the German builder [1].
-
-dpa-AFX's Nicklas Wolf put CapTrader's Timo Emden on the point: relief at a clear midterm result on one side, fear that stricter AI rules become a growth brake on the other [1]. Saxo Bank's Ruben Dalfovo told Reuters the market was "selling first and asking questions later" while company fundamentals had not changed [3]. A trough in the afternoon and a less-red close by the bell is a mood swing, not a ledger. Wall Street is still open as Europe packs up; that verdict belongs to tonight's US close. Nothing here is investment advice.
+Xetra closed the DAX 1.92% lower at 25,820.36 and the Stoxx 600 settled 1% lower at 648.33 — red, but off the evening lead's trough near 25,706 / 643.72 [1][2][3]. The CAC 40 finished 0.8% lower at 8,139; the FTSE 100 about 1% lower at 10,673.94 [2][4]. Insurance led the Stoxx (−2.6%); Teleperformance fell 15.3% [1][2][3]. Saxo Bank's Ruben Dalfovo told Reuters the market was "selling first and asking questions later" [3]. Nothing here is investment advice.
