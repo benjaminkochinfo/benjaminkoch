@@ -1,0 +1,65 @@
+date: "2026-11-06"
+slot: pm
+published: "2026-11-06T17:30:02+01:00"   # set to the actual Berlin time when it goes live
+title: "165,000 jobs, a 2.3% DAX drop, and a pause that is not yet a recovery"
+standfirst: "October US payrolls beat forecasts by more than 100,000 jobs; Europe still closed lower on AI-regulation fear after the midterms. Elsewhere: Saturday's German power at €259.83, Brent near $97, flu-jab delays across Europe, England's drought maths, and another day of flight-hoax procedure."
+closing:
+  title: Before you close the tab
+  published: "2026-11-06T17:30:02+01:00"
+  habit:
+    text: 'When two loud numbers arrive on the same afternoon — today a jobs print and an index close — write both down before you refresh again. One labour figure and one price. The rest of the commentary can wait until those two lines are on paper.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Germany''s factories produced more in September than in August. Destatis put the seasonally and calendar-adjusted rise at 0.7% month on month and 0.4% year on year, with car plants jumping 17.1% after a soft summer [1]. A single month does not repair a hard year; it does show the production line can still accelerate when orders and parts allow.'
+  sentence: "America hired faster than expected, Europe sold AI fear, and Saturday's German power eased but stayed expensive."
+  euros:
+    text: 'Saturday''s day-ahead power base is €259.83 per megawatt hour, or about €0.260 per kilowatt-hour before taxes and network charges [2]. Desk arithmetic: shifting a 2 kWh dishwasher cycle from the €0.325 evening block into the €0.226 late-morning trough saves roughly €0.20 on the wholesale leg alone — cents, not a holiday, and only if you are on a dynamic tariff that tracks the auction [2]. Brent''s weekly drop from above $110 toward about $97 is the input your fuel supplier will eventually feel [3].'
+    note: Desk arithmetic on cited wholesale averages. Your household tariff and station prices differ. Nothing here is advice.
+  small_words:
+    term: Nonfarm payrolls
+    text: 'The US Bureau of Labor Statistics monthly count of jobs outside farming, seasonally adjusted [4]. Today''s print said employers added 165,000 such jobs in October, against a Wall Street guess near 59,000 [4]. It is the single labour number the Federal Reserve watches most closely, which is why a surprise this large moved December rate-hike odds within minutes.'
+  sources:
+  - {n: 1, title: "Production in September 2026: +0.7% on the previous month", publisher: "Destatis", url: "https://www.destatis.de/EN/Press/2026/11/PE26_389_421.html", date: "6 Nov 2026"}
+  - {n: 2, title: "Strompreis morgen: Day-Ahead for 07.11.2026", publisher: "VoltWatch", url: "https://voltwatch.eu/strompreis-morgen", date: "6 Nov 2026, ~13:00 CET"}
+  - {n: 3, title: "Oil price today: Brent, WTI", publisher: "CNBC", url: "https://www.cnbc.com/2026/11/06/oil-price-today-brent-wti.html", date: "6 Nov 2026"}
+  - {n: 4, title: "Jobs report October 2026: U.S. economy added 165,000 jobs", publisher: "CNBC", url: "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html", date: "6 Nov 2026, 14:31 CET"}
+articles:
+  - 165000-jobs-a-23-dax-drop-and-a-pause
+  - brent-near-97-and-an-80-percent-guess
+  - fifty-four-senate-seats-and-a-house
+  - the-annex-40-percent-of-planned-capacity
+  - 259-83-for-saturday-and-a-floor-still
+  - podium-vs-print-information-rich-and-768
+  - ordinary-ledger-saturday-power-and-a
+  - forty-percent-of-planned-us-capacity
+  - flu-jabs-at-70-percent-of-orders
+  - at-least-18-more-flights-and-0-0674
+  - england-needs-120-percent-of-normal
+epaper:
+  available: "2026-11-06T17:30:02+01:00"
+  spread_chars: 600
+  extras:
+    - albares-hybrid-aggression-psychological
+    - boe-already-at-4-fed-still-deciding
+    - brent-down-16-percent-on-the-week
+    - dishwasher-in-the-trough-saves-cents
+    - earnings-up-0-4-and-long-term-jobless
+    - fifty-litre-tank-at-mornings-e10
+    - france-nl-belgium-within-a-euro
+    - german-factories-up-0-7-cars-up-17
+    - hungary-scrambled-jets-three-times
+    - infineon-up-24-after-thursdays-8
+    - ing-shops-500m-of-data-centre-loans
+    - labor-force-up-421000
+    - magnificent-seven-and-29-trillion
+    - mississippi-and-alaska-still-counting
+    - nikkei-down-6-kospi-trips-a-halt
+    - pei-batch-testing-started-late
+    - sanders-aoc-moratorium-still-a-proposal
+    - saturday-evening-block-above-300
+    - streeter-volatility-until-january
+    - third-drought-in-five-years
+    - three-strains-updated-at-once
+    - trump-blames-dumocrats-for-the-crash
+    - wimbleball-from-full-to-13-percent
+  updates: []

@@ -1,0 +1,8 @@
+# Inside Desk chart data: us-payrolls-06pm
+"# Source: US Bureau of Labor Statistics October 2026 Employment Situation via CNBC, 6 Nov 2026; Dow Jones consensus cited by CNBC; retrieved 6 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+October actual,165,no,"BLS, seasonally adjusted"
+October consensus,59,no,Dow Jones estimate
+September revised,60,no,was lower; +31k revision
+August revised,186,no,+53k revision

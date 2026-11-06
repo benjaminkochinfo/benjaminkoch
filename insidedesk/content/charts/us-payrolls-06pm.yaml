@@ -1,0 +1,14 @@
+id: us-payrolls-06pm
+kind: hbar
+kicker: "Markets · Macro"
+title: "October payrolls: 165,000 against a 59,000 forecast"
+subtitle: "US nonfarm payroll change, thousands of jobs, Bureau of Labor Statistics October 2026 report (released 6 Nov 2026); Dow Jones consensus for October"
+unit: "k"
+rows:
+  - {label: "October actual", value: 165, note: "BLS, seasonally adjusted"}
+  - {label: "October consensus", value: 59, note: "Dow Jones estimate"}
+  - {label: "September revised", value: 60, note: "was lower; +31k revision"}
+  - {label: "August revised", value: 186, note: "+53k revision"}
+licence: reported
+source_line: "US Bureau of Labor Statistics October 2026 Employment Situation via CNBC, 6 Nov 2026; Dow Jones consensus cited by CNBC; retrieved 6 Nov 2026 · reported figures"
+alt: "Bar chart of US nonfarm payroll changes in thousands: October 2026 actual 165,000 against a Dow Jones consensus of 59,000; September revised to 60,000 and August revised to 186,000, per the Bureau of Labor Statistics as reported by CNBC on 6 November 2026."

@@ -1,0 +1,12 @@
+id: euro-indexes-friday-06pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Friday's European close: DAX −2.3%, Stoxx −1.7%"
+subtitle: "One-day percentage change on selected European indexes, Friday 6 November 2026 close (MarketScreener / Reuters; Stoxx Europe 600 per CloseLook)"
+unit: "%"
+rows:
+  - {label: "DAX fall", value: 2.3, note: "close 25,706; record was 26,692.90 Thursday"}
+  - {label: "Stoxx Europe 600 fall", value: 1.7, note: "close about 643.72"}
+licence: reported
+source_line: "MarketScreener / Reuters, 'AI Stock Selloff Sends DAX Reeling', DAX close 25,706 (−2.3%), 6 Nov 2026; Stoxx Europe 600 close ~643.72 (−1.70%) via CloseLook price history; retrieved 6 Nov 2026 · reported figures"
+alt: "Bar chart of Friday 6 November 2026 one-day percentage falls in Europe: Germany's DAX 2.3 percent to 25,706 points after Thursday's record 26,692.90, and the Stoxx Europe 600 about 1.7 percent to roughly 643.72, per MarketScreener/Reuters and CloseLook."

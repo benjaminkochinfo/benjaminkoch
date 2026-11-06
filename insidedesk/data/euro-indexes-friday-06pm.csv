@@ -1,0 +1,6 @@
+# Inside Desk chart data: euro-indexes-friday-06pm
+"# Source: MarketScreener / Reuters, 'AI Stock Selloff Sends DAX Reeling', DAX close 25,706 (−2.3%), 6 Nov 2026; Stoxx Europe 600 close ~643.72 (−1.70%) via CloseLook price history; retrieved 6 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+DAX fall,2.3,no,"close 25,706; record was 26,692.90 Thursday"
+Stoxx Europe 600 fall,1.7,no,close about 643.72
