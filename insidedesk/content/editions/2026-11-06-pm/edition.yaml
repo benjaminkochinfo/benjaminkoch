@@ -39,27 +39,31 @@ epaper:
   available: "2026-11-06T17:30:02+01:00"
   spread_chars: 600
   extras:
-    - albares-hybrid-aggression-psychological
-    - boe-already-at-4-fed-still-deciding
-    - brent-down-16-percent-on-the-week
-    - dishwasher-in-the-trough-saves-cents
-    - earnings-up-0-4-and-long-term-jobless
-    - fifty-litre-tank-at-mornings-e10
-    - france-nl-belgium-within-a-euro
-    - german-factories-up-0-7-cars-up-17
-    - hungary-scrambled-jets-three-times
-    - infineon-up-24-after-thursdays-8
-    - ing-shops-500m-of-data-centre-loans
-    - labor-force-up-421000
-    - magnificent-seven-and-29-trillion
-    - mississippi-and-alaska-still-counting
-    - nikkei-down-6-kospi-trips-a-halt
-    - pei-batch-testing-started-late
-    - sanders-aoc-moratorium-still-a-proposal
-    - saturday-evening-block-above-300
-    - streeter-volatility-until-january
-    - third-drought-in-five-years
-    - three-strains-updated-at-once
-    - trump-blames-dumocrats-for-the-crash
-    - wimbleball-from-full-to-13-percent
-  updates: []
+  - albares-hybrid-aggression-psychological
+  - boe-already-at-4-fed-still-deciding
+  - brent-down-16-percent-on-the-week
+  - dishwasher-in-the-trough-saves-cents
+  - earnings-up-0-4-and-long-term-jobless
+  - fifty-litre-tank-at-mornings-e10
+  - france-nl-belgium-within-a-euro
+  - german-factories-up-0-7-cars-up-17
+  - hungary-scrambled-jets-three-times
+  - infineon-up-24-after-thursdays-8
+  - ing-shops-500m-of-data-centre-loans
+  - labor-force-up-421000
+  - magnificent-seven-and-29-trillion
+  - mississippi-and-alaska-still-counting
+  - nikkei-down-6-kospi-trips-a-halt
+  - pei-batch-testing-started-late
+  - sanders-aoc-moratorium-still-a-proposal
+  - saturday-evening-block-above-300
+  - streeter-volatility-until-january
+  - third-drought-in-five-years
+  - three-strains-updated-at-once
+  - trump-blames-dumocrats-for-the-crash
+  - wimbleball-from-full-to-13-percent
+  - dax-closes-down-1-92-stoxx-down-1-off-the-lows
+  updates:
+  - time: '2026-11-06T19:29:14+01:00'
+    text: 'Markets: Xetra closes DAX down 1.92% at 25,820, Stoxx 600 down 1% at 648.33, off the lows as Wall Street rebounds'
+    piece: dax-closes-down-1-92-stoxx-down-1-off-the-lows
