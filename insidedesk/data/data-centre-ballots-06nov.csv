@@ -1,0 +1,6 @@
+# Inside Desk chart data: data-centre-ballots-06nov
+"# Source: CNBC analysis of Ballotpedia data and additional results, 'Voters rebuff data centers in every ballot measure except one during the 2026 midterms', updated 5 Nov 2026, 1:08 p.m. ET · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Voters sided against data centres,40,no,restrictions passed or pro-build measures failed
+"Voters rejected extra review (Harwood, ND)",1,no,the only exception reported

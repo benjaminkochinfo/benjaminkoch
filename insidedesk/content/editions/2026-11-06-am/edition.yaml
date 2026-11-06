@@ -1,0 +1,64 @@
+date: "2026-11-06"
+slot: am
+published: "2026-11-06T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Four percent off the index, and a jobs print at half past two"
+standfirst: "Wall Street's AI sell-off cut the S&P by about 4.4% and put the Nasdaq into a correction; Friday's US payrolls are next. Elsewhere: the Bank of England at 4%, Friday's German power at €275.64, voters rejecting data centres in 40 of 41 local ballots, Europe's flight hoaxes, and a split map for winter sowing."
+closing:
+  title: Before you close the tab
+  published: '2026-11-06T08:30:00+01:00'
+  habit:
+    text: 'When a market day is loud, write down one number you will wait for before you refresh again — today, the 14:30 CET payrolls print, or this noon''s day-ahead power auction. One appointment beats a morning of scrolling.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Ireland''s tillage farmers have had an almost perfect autumn for planting winter oilseed rape and cereals, the European Commission''s crop monitors told Agriland this week, even as much of the continent wrestles with either dust-dry soils or waterlogged fields [1]. A quiet success on one island does not cancel a hard season elsewhere; it does show that the same weather system still leaves room for a crop to establish when the rain arrives on time.'
+  sentence: "Wall Street had its worst day since April, the Bank of England raised to 4%, and the next hard number is this afternoon's jobs print."
+  euros:
+    text: 'A litre of Super E10 averaged €1.974 at German stations open early this morning and diesel €2.212, according to the federal price register [2]. Desk arithmetic: a 50-litre tank of E10 costs about €98.70 at that average, about €3.35 less than at Wednesday''s ADAC national average of €2.041; the same tank of diesel costs about €110.60, about €2.40 less than Wednesday''s €2.260 [2][3]. Early prints often firm after midday.'
+    note: Desk arithmetic on cited national averages. Your station differs by region, brand and hour. Nothing here is advice.
+  small_words:
+    term: Correction
+    text: 'In market shorthand, a fall of 10% or more from a recent high in a stock index [4]. On Thursday the Nasdaq Composite closed more than 10% below its recent high after a 5.5% one-day drop, which is why desks called it a correction rather than only a bad session [4]. It is a description of distance travelled, not a prediction of what comes next.'
+  sources:
+  - {n: 1, title: "Weather extremes still impacting on Europe's tillage sectors", publisher: "Agriland (European Commission / MARS)", url: "https://www.agriland.ie/farming-news/weather-extremes-still-impacting-on-europes-tillage-sectors/", date: "3 Nov 2026"}
+  - {n: 2, title: "Spritpreise heute (06.11.2026): Durchschnitt E5, E10 und Diesel in Deutschland (source: MTS-K)", publisher: "kraftstoffbilliger.de", url: "https://kraftstoffbilliger.de/spritpreise", date: "as of 06 Nov 2026, 05:20 CET"}
+  - {n: 3, title: "Kraftstoffpreise: Rückgang bei Benzin und Diesel", publisher: "ADAC", url: "https://presse.adac.de/meldungen/adac-ev/verkehr/kraftstoffpreise-rueckgang-bei-benzin-und-diesel.html", date: "04 Nov 2026"}
+  - {n: 4, title: "Stock futures fall after Nasdaq correction; Japan's Nikkei 225 enters bear market: Live updates", publisher: "CNBC", url: "https://www.cnbc.com/2026/11/05/stock-market-today-live-updates.html", date: "5 Nov 2026, updated 8:54 p.m. ET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - four-percent-off-the-index-and-a-jobs-print-at
+  - brent-at-98-after-the-midterms-and-a-war-that
+  - 40-local-votes-one-exception-and-a-house
+  - the-annex-eight-in-ten-like-the-idea-of-a
+  - 275-64-for-friday-and-a-floor-that-beats
+  - podium-vs-print-not-on-a-pre-set-path-and-50
+  - ordinary-ledger-1-974-for-e10-and-2-212-for
+  - 40-of-41-ballots-went-against-the-server-hall
+  - ramipril-on-a-serious-shortage-protocol-and
+  - at-least-34-flights-zero-bombs-and-the-cost-of
+  - dry-soils-in-france-and-the-benelux-waterlogging
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-06T06:30:00+01:00"
+  spread_chars: 600
+  extras:
+    - 357-12-at-six-and-a-night-floor-above-220
+    - a-50-litre-tank-at-this-mornings-e10-average
+    - bailey-can-see-the-argument-for-a-further
+    - bornemann-when-attitude-becomes-control
+    - casar-wants-ai-ceos-under-oath-garcia-says
+    - cpi-toward-5-by-mid-2027-and-limited-second
+    - dax-hit-a-record-then-gave-it-back-as-chips
+    - eurasia-cuts-strike-odds-to-60-and-a-deal-to
+    - heathrow-not-credible-birmingham-full-process
+    - hinojosa-wants-deals-with-musk-on-our-terms
+    - iata-find-the-origins-eurocontrol-27400
+    - ireland-the-quiet-exception-in-a-hard-sowing
+    - landwehr-a-vague-wish-to-switch-off-now-has-a
+    - lenzetto-propranolol-and-the-hormuz-surcharge
+    - magnificent-seven-lose-more-than-1-trillion
+    - nikkei-enters-a-bear-market-kospi-trips
+    - openai-8-gw-in-ohio-under-a-new-governor
+    - septembers-average-was-144-82-fridays-is-almost
+    - serious-shortage-protocol-caps-ramipril-at-one
+    - silicon-valley-spent-big-and-still-lost-the
+    - temporary-fuel-tax-cut-still-runs-to-year-end
+    - winter-area-may-shrink-where-the-mud-won
+  updates: []

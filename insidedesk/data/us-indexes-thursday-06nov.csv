@@ -1,0 +1,7 @@
+# Inside Desk chart data: us-indexes-thursday-06nov
+"# Source: CNBC live markets blog, 'Stock futures fall after Nasdaq correction', figures for Thursday 5 Nov 2026 regular session; FactSet cited for worst-since-April-2025 comparison; retrieved 6 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nasdaq Composite fall,5.5,no,"into correction, >10% below recent high"
+S&P 500 fall,4.4,no,all 11 sectors lower
+Dow Jones Industrial Average fall,3.4,no,"more than 1,800 points"

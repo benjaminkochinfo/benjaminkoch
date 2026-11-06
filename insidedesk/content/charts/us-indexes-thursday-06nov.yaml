@@ -1,0 +1,13 @@
+id: us-indexes-thursday-06nov
+kind: hbar
+kicker: "Markets · Macro"
+title: "Thursday's close: the worst session since April 2025"
+subtitle: "One-day percentage fall on Wall Street, Thursday 5 November 2026, CNBC / FactSet (bars show the size of the decline)"
+unit: "%"
+rows:
+  - {label: "Nasdaq Composite fall", value: 5.5, note: "into correction, >10% below recent high"}
+  - {label: "S&P 500 fall", value: 4.4, note: "all 11 sectors lower"}
+  - {label: "Dow Jones Industrial Average fall", value: 3.4, note: "more than 1,800 points"}
+licence: reported
+source_line: "CNBC live markets blog, 'Stock futures fall after Nasdaq correction', figures for Thursday 5 Nov 2026 regular session; FactSet cited for worst-since-April-2025 comparison; retrieved 6 Nov 2026 · reported figures"
+alt: "Bar chart of Thursday 5 November 2026 one-day percentage falls on Wall Street: Nasdaq Composite 5.5 percent (into correction territory), S&P 500 4.4 percent, Dow Jones Industrial Average 3.4 percent, per CNBC. The three major averages posted their worst session since April 2025, FactSet cited."

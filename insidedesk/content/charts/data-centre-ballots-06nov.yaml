@@ -1,0 +1,12 @@
+id: data-centre-ballots-06nov
+kind: hbar
+kicker: "Tech · Compute"
+title: "Forty local votes against data centres, one for"
+subtitle: "US midterm local ballot measures on data centres, Ballotpedia count of 41 measures in 10 states, results as of 5 November 2026"
+unit: " measures"
+rows:
+  - {label: "Voters sided against data centres", value: 40, note: "restrictions passed or pro-build measures failed"}
+  - {label: "Voters rejected extra review (Harwood, ND)", value: 1, note: "the only exception reported"}
+licence: reported
+source_line: "CNBC analysis of Ballotpedia data and additional results, 'Voters rebuff data centers in every ballot measure except one during the 2026 midterms', updated 5 Nov 2026, 1:08 p.m. ET · reported figures"
+alt: "Bar chart of 41 local US ballot measures about data centres in the 2026 midterms: voters sided against data centres in 40 contests, and rejected an added review of industrial projects including data centres in one contest in Harwood, North Dakota, the only exception reported by CNBC on Ballotpedia data as of 5 November 2026."
