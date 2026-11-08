@@ -3,7 +3,7 @@ title: "Heating oil at a monthly low, and orders at a monthly high"
 dek: "When the price dipped mid-week, households noticed. Then it rose three cents in a morning."
 desk: ordinary
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Turbulente Woche für Öl- und Heizölpreise", publisher: "HeizOel24", url: "https://www.heizoel24.de/news/artikel/005388-turbulente-woche-fuer-oel-und-heizoelpreise-06-11-2026", date: "6 Nov 2026, 11:49 CET (price panel 8 Nov 2026, 09:00 CET)"}
 ---

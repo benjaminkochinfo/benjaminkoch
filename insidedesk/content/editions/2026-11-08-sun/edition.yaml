@@ -1,11 +1,11 @@
 date: "2026-11-08"
 slot: sun
-published: "2026-11-08T10:09:00+01:00"   # set to the actual Berlin time when it goes live
+published: "2026-11-08T10:23:55+01:00"   # set to the actual Berlin time when it goes live
 title: "Oil answered the ballot box. The power price answered the weather"
 standfirst: "Brent had its steepest weekly fall since April 2020 after the midterms, yet German wholesale power never cleared below €242 a megawatt-hour all week. Chips crashed and bounced, COP31 opens in Antalya on Monday, and the week's most useful numbers were the dull ones: a 2.9% contribution rate, 190,000 soldiers and €2.15 off a tank."
 closing:
   title: "Before you close the tab"
-  published: "2026-11-08T10:09:00+01:00"
+  published: "2026-11-08T10:23:55+01:00"
   habit: {text: "On Sunday evening, write three numbers on one card: what a litre of fuel cost the last time you filled up, the price per kilowatt-hour on your electricity contract, and how full your heating-oil tank is or what your gas meter reads. Do the same next Sunday. After a month you will know which of this winter's headlines actually reached your house, and which only reached the news.", note: "A habit, not advice."}
   went_right: {text: "Researchers in Hannover and Würzburg note that prospective studies put malnutrition among hospital patients at 30% to 70% at least, yet only 1.16% to 1.30% of inpatients are diagnosed with it. Instead of stopping at the warning, Hannover Medical School signed a contract with the Techniker Krankenkasse so that insured patients are screened for malnutrition on admission, during longer stays and at discharge, with the insurer paying for it, and the data will go to the body that sets hospital quality rules [1]. A study found a gap; a clinic and an insurer wrote a contract to close it."}
   sentence: "Oil fell hard on an American vote, German electricity stayed dear because November is dark and still, and the numbers that will matter most this winter were the quiet ones: a stable health-insurance rate, a record headcount in the army, and two euros off a tank of petrol."
@@ -28,7 +28,7 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - two-point-nine-percent-again-and-a-commission
   - cop31-opens-in-antalya-and-the-electrification-goal
 epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-08T10:09:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  available: "2026-11-08T10:23:55+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
   spread_chars: 1850
   extras:
     - brent-near-98-and-35-ships-on-octobers-list

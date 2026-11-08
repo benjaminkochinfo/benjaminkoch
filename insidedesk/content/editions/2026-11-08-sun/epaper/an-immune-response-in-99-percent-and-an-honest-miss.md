@@ -3,7 +3,7 @@ title: "An immune response in 99%, and a survival benefit that did not reach sig
 dek: "A pancreatic cancer vaccine trial reports carefully, which is the good news."
 desk: health
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Experimental pancreatic cancer vaccine shows promise in clinical trial", publisher: "Medical News Today", url: "https://www.medicalnewstoday.com/articles/experimental-pancreatic-cancer-vaccine-shows-promise-in-clinical-trial", date: "7 Nov 2026"}
 ---

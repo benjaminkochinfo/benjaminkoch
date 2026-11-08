@@ -3,7 +3,7 @@ title: "€7 million of €1.2 billion: the school fund that has barely been spe
 dek: "A federal special fund for education buildings has paid out less than 1% of this year's money."
 desk: politics
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Die Nachrichten des Bayerischen Rundfunks, 08:36", publisher: "BR24", url: "https://www.br.de/nachrichten/meldungen/nachrichten-bayerischer-rundfunk100.html", date: "8 Nov 2026, 08:36 CET"}
 ---

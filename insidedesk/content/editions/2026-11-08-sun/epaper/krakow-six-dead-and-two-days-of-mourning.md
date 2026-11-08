@@ -3,7 +3,7 @@ title: "Kraków: six dead on the market square, and two days of mourning"
 dek: "A gunman fired from a car on one of Europe's best-known squares. Poland's prime minister called it terrorism."
 desk: security
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Poland: Gunman kills 6 in Krakow main square", publisher: "DW (with AP, Reuters)", url: "https://www.dw.com/en/deadly-shooting-at-krakows-main-square-was-act-of-terrorism-says-polish-prime-minister-donald-tusk/a-79886489", date: "7 Nov 2026"}
 ---

@@ -3,7 +3,7 @@ title: "AMD beat, fell with the crowd, and gained 11% on Friday"
 dek: "A results season inside a political season."
 desk: tech
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Markets News, Nov. 4, 2026: Dow Jumps Nearly 1,600 Points as Stocks Soar After Democrats Decisive Win in Midterms", publisher: "Investopedia", url: "https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-nasdaq-11042026-12234321", date: "4 Nov 2026, 22:53 CET"}
   - {n: 2, title: "Nasdaq rebounds but posts fourth straight weekly decline", publisher: "Reuters via StreetInsider", url: "https://www.streetinsider.com/General+News/Nasdaq+rebounds+but+posts+fourth+straight+weekly+decline/27302782.html", date: "6 Nov 2026"}

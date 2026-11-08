@@ -3,7 +3,7 @@ title: "More than 90% of Germany's LNG now comes from the United States"
 dek: "The Gulf supplies little of Europe's gas directly. It still sets the competition for what is left."
 desk: energy
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Gasspeicher: Der aktuelle Füllstand in Deutschland", publisher: "NDR", url: "https://www.ndr.de/nachrichten/info/Gasspeicher-in-Deutschland-So-steht-es-um-die-Fuellstaende,gasspeicher120.html", date: "8 Nov 2026, 08:30 CET"}
 ---

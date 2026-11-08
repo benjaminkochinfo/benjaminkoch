@@ -3,7 +3,7 @@ title: "The dynamic tariff and the 13:00 hour"
 dek: "Since 2025 every supplier must offer one to customers with a smart meter. Sunday shows why it suits some homes and not others."
 desk: ordinary
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Strompreis Börse heute & morgen", publisher: "contracting.green, from Bundesnetzagentur | SMARD.de", url: "https://contracting.green/energiepreise/strompreis", date: "updated 7 Nov 2026, 18:44 CET, retrieved 8 Nov 2026"}
 ---

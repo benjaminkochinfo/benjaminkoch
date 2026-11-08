@@ -3,7 +3,7 @@ title: "$115 billion on Monday, minus 28% by Friday"
 dek: "The week's biggest chip deal was announced before the vote and punished after it."
 desk: markets
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "[New York Stock Market] Mixed Close a Day Before Election as Oil Plunges and Tech Stocks Sell Off", publisher: "The Asia Business Daily", url: "https://www.asiae.co.kr/en/article/2026110306494088619", date: "2 Nov 2026, 22:49 CET"}
   - {n: 2, title: "Market Wrap: Stocks Down After Big Losses in Energy and Tech", publisher: "Morningstar", url: "https://www.morningstar.com/markets/weekly-market-update-stocks-down-after-big-losses-energy-tech", date: "6 Nov 2026"}

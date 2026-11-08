@@ -3,7 +3,7 @@ title: "Aigner's nomination this weekend, the announcement Monday, the vote on 3
 dek: "The search for Germany's next head of state is ending in procedure: party committees this weekend, a Federal Convention in winter."
 desk: politics
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Die Nachrichten des Bayerischen Rundfunks, 08:36", publisher: "BR24", url: "https://www.br.de/nachrichten/meldungen/nachrichten-bayerischer-rundfunk100.html", date: "8 Nov 2026, 08:36 CET"}
   - {n: 2, title: "Liveticker Bundespolitik", publisher: "Frankfurter Allgemeine Zeitung", url: "https://www.faz.net/aktuell/politik/inland/liveticker-bundespolitik-nouripour-kritisiert-merz-in-bundespraesidenten-frage-faz-110093143.html", date: "7 Nov 2026, updated 19:35 CET"}

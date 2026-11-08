@@ -3,7 +3,7 @@ title: "\"AI on trial\", and copper as the witness"
 dek: "Strategists reached for courtroom language this week. The more interesting habit was to check a dull commodity before believing the mood."
 desk: psych
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Nasdaq rebounds but posts fourth straight weekly decline", publisher: "Reuters via StreetInsider", url: "https://www.streetinsider.com/General+News/Nasdaq+rebounds+but+posts+fourth+straight+weekly+decline/27302782.html", date: "6 Nov 2026"}
   - {n: 2, title: "Markets This Week: Brent Falls 13%, Kospi 12%, Gold Gains 4.5%", publisher: "Global Terminal", url: "https://globalterminal.org/news/markets-this-week-brent-kospi-gold-nov-2026/", date: "6 Nov 2026"}

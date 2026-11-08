@@ -3,7 +3,7 @@ title: "480 of 880 rose in the worst week since April 2025"
 dek: "The index fell 2.68%. Most of the stocks Morningstar covers went up. Both are true, and the second is the more useful."
 desk: markets
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Market Wrap: Stocks Down After Big Losses in Energy and Tech", publisher: "Morningstar", url: "https://www.morningstar.com/markets/weekly-market-update-stocks-down-after-big-losses-energy-tech", date: "6 Nov 2026"}
 ---

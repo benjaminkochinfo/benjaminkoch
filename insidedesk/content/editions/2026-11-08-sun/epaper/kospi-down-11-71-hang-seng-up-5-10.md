@@ -3,7 +3,7 @@ title: "Kospi down 11.71%, Hang Seng up 5.10%: Asia sorted itself by what it mak
 dek: "The same week, the same continent, opposite signs. The split followed the chip supply chain, not the map."
 desk: geoecon
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Markets This Week: Brent Falls 13%, Kospi 12%, Gold Gains 4.5%", publisher: "Global Terminal", url: "https://globalterminal.org/news/markets-this-week-brent-kospi-gold-nov-2026/", date: "6 Nov 2026"}
 ---

@@ -3,7 +3,7 @@ title: "Brent near $98, China's diesel stays home, and 35 ships on October's lis
 dek: "The crude crash met a product market with its own problems. That is why heating oil and diesel fell less than the barrel."
 desk: energy
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Turbulente Woche für Öl- und Heizölpreise", publisher: "HeizOel24", url: "https://www.heizoel24.de/news/artikel/005388-turbulente-woche-fuer-oel-und-heizoelpreise-06-11-2026", date: "6 Nov 2026, 11:49 CET (price panel 8 Nov 2026, 09:00 CET)"}
 ---

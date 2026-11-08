@@ -3,7 +3,7 @@ title: "18 terawatt-hours in a week, 14.2% below normal: a mild start to the hea
 dek: "Germany burned less gas than usual in the last week of October. The weather is doing much of the work, and storage is lower than it should be."
 desk: climate
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Gasspeicher: Der aktuelle Füllstand in Deutschland", publisher: "NDR", url: "https://www.ndr.de/nachrichten/info/Gasspeicher-in-Deutschland-So-steht-es-um-die-Fuellstaende,gasspeicher120.html", date: "8 Nov 2026, 08:30 CET"}
 ---

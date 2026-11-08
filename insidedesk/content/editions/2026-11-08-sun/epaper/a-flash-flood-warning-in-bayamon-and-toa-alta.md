@@ -3,7 +3,7 @@ title: "A flash-flood warning in Bayamón and Toa Alta"
 dek: "Slow storms over saturated ground in northern Puerto Rico."
 desk: climate
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Flash-flood warning and advisories follow slow storms in northern Puerto Rico", publisher: "Air Sports Net (from NWS San Juan)", url: "https://www.usairnet.com/weather/news/2026/11/20261107-210047-puerto-rico-heavy-rain-flash-flood-warning-november-2026/", date: "7 Nov 2026, 20:54 CET"}
 ---

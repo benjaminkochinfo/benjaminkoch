@@ -3,7 +3,7 @@ title: "People who live alone scored lower, and hybrid beat fully remote"
 dek: "Two small findings from a 92-country survey about the circumstances that shape well-being."
 desk: psych
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "More Stress, Less Hope: Alarming Trends in Global Mental Health", publisher: "Max Planck Institute for the Study of Crime, Security and Law", url: "https://csl.mpg.de/1071468/more-stress-less-hope", date: "6 Nov 2026"}
 ---

@@ -3,7 +3,7 @@ title: "Three auctions, $125 billion, and an inflation figure in between"
 dek: "Next week the US Treasury sells debt on Monday, Tuesday and Thursday. Tuesday also brings consumer prices."
 desk: money
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Markets This Week: Brent Falls 13%, Kospi 12%, Gold Gains 4.5%", publisher: "Global Terminal", url: "https://globalterminal.org/news/markets-this-week-brent-kospi-gold-nov-2026/", date: "6 Nov 2026"}
   - {n: 2, title: "Market Wrap: Stocks Down After Big Losses in Energy and Tech", publisher: "Morningstar", url: "https://www.morningstar.com/markets/weekly-market-update-stocks-down-after-big-losses-energy-tech", date: "6 Nov 2026"}

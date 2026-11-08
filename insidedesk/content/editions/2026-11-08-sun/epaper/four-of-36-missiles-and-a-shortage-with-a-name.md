@@ -3,7 +3,7 @@ title: "Four of 36 missiles intercepted, and a shortage that has a name"
 dek: "Ukraine's air defence ran short where it is hardest to replace."
 desk: security
 kind: brief
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Zelenskyy accuses Russia of escalating strikes ahead of peace talks", publisher: "Al Jazeera (with AFP, AP and Reuters)", url: "https://www.aljazeera.com/news/2026/11/7/russia-launches-missile-attack-on-kyiv-injuring-residents", date: "7 Nov 2026"}
 ---

@@ -3,7 +3,7 @@ title: "Oracle's $20 billion, and how the market treated the week's funding plan
 dek: "Before the vote, before the crash, the first sign of strain was in the financing."
 desk: tech
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "[New York Stock Market] Mixed Close a Day Before Election as Oil Plunges and Tech Stocks Sell Off", publisher: "The Asia Business Daily", url: "https://www.asiae.co.kr/en/article/2026110306494088619", date: "2 Nov 2026, 22:49 CET"}
   - {n: 2, title: "Markets News, Nov. 4, 2026: Dow Jumps Nearly 1,600 Points as Stocks Soar After Democrats Decisive Win in Midterms", publisher: "Investopedia", url: "https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-nasdaq-11042026-12234321", date: "4 Nov 2026, 22:53 CET"}

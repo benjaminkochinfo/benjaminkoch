@@ -3,7 +3,7 @@ title: "Up to 70% of hospital patients malnourished, about 1.3% diagnosed"
 dek: "A Hannover-Würzburg study finds a wide gap between risk and diagnosis on German wards. A quality contract with an insurer is trying to close it."
 desk: health
 kind: short
-published: "2026-11-08T10:09:00+01:00"
+published: "2026-11-08T10:23:55+01:00"
 sources:
   - {n: 1, title: "Krankheitsbedingte Mangelernährung: ein unterschätztes Problem in Krankenhäusern", publisher: "Medizinische Hochschule Hannover via idw", url: "https://nachrichten.idw-online.de/2026/11/06/krankheitsbedingte-mangelernaehrung-ein-unterschaetztes-problem-in-krankenhaeusern", date: "6 Nov 2026, 11:32 CET"}
 ---
