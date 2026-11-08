@@ -1,0 +1,56 @@
+date: "2026-11-08"
+slot: sun
+published: "2026-11-08T10:09:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Oil answered the ballot box. The power price answered the weather"
+standfirst: "Brent had its steepest weekly fall since April 2020 after the midterms, yet German wholesale power never cleared below €242 a megawatt-hour all week. Chips crashed and bounced, COP31 opens in Antalya on Monday, and the week's most useful numbers were the dull ones: a 2.9% contribution rate, 190,000 soldiers and €2.15 off a tank."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-08T10:09:00+01:00"
+  habit: {text: "On Sunday evening, write three numbers on one card: what a litre of fuel cost the last time you filled up, the price per kilowatt-hour on your electricity contract, and how full your heating-oil tank is or what your gas meter reads. Do the same next Sunday. After a month you will know which of this winter's headlines actually reached your house, and which only reached the news.", note: "A habit, not advice."}
+  went_right: {text: "Researchers in Hannover and Würzburg note that prospective studies put malnutrition among hospital patients at 30% to 70% at least, yet only 1.16% to 1.30% of inpatients are diagnosed with it. Instead of stopping at the warning, Hannover Medical School signed a contract with the Techniker Krankenkasse so that insured patients are screened for malnutrition on admission, during longer stays and at discharge, with the insurer paying for it, and the data will go to the body that sets hospital quality rules [1]. A study found a gap; a clinic and an insurer wrote a contract to close it."}
+  sentence: "Oil fell hard on an American vote, German electricity stayed dear because November is dark and still, and the numbers that will matter most this winter were the quiet ones: a stable health-insurance rate, a record headcount in the army, and two euros off a tank of petrol."
+  euros: {text: "ADAC's survey on Wednesday put Super E10 at €2.041 a litre, 4.3 cents cheaper than a week earlier, and diesel at €2.260, 2.9 cents cheaper [2]. Desk arithmetic: on a 50-litre tank that is €2.15 saved on petrol and €1.45 on diesel. For electricity, Sunday's wholesale average of 24.21 cents per kilowatt-hour compares with a household average of 36.18 cents including taxes, levies and grid fees in the first half of 2026 [3]; on a fixed contract, this week's wholesale moves do not reach your bill until your supplier's next price change [3].", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Day-ahead auction", text: "Every day at noon, Europe's power exchanges hold an auction for each quarter-hour of the next day. Generators say what they will sell and at what price, buyers say what they need, and the auction finds the price that clears. In Germany and Luxembourg the result is published shortly after midday, which is why this edition can tell you on Sunday morning that Sunday's power averages €242.13 a megawatt-hour, but not yet what Monday's will be."}
+  sources:
+    - {n: 1, title: "Krankheitsbedingte Mangelernährung: ein unterschätztes Problem in Krankenhäusern", publisher: "Medizinische Hochschule Hannover via idw", url: "https://nachrichten.idw-online.de/2026/11/06/krankheitsbedingte-mangelernaehrung-ein-unterschaetztes-problem-in-krankenhaeusern", date: "6 Nov 2026, 11:32 CET"}
+    - {n: 2, title: "Kraftstoffpreise: Rückgang bei Benzin und Diesel", publisher: "ADAC", url: "https://presse.adac.de/meldungen/adac-ev/verkehr/kraftstoffpreise-rueckgang-bei-benzin-und-diesel.html", date: "4 Nov 2026"}
+    - {n: 3, title: "Strompreis Börse heute & morgen", publisher: "contracting.green, from Bundesnetzagentur | SMARD.de and Eurostat", url: "https://contracting.green/energiepreise/strompreis", date: "updated 7 Nov 2026, 18:44 CET, retrieved 8 Nov 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - the-sunday-long-read-oil-answered-the-ballot-box
+  - the-sunday-sequence-a-ballot-a-bounce-a-correction
+  - podium-vs-print-no-growth-problems-and-70000
+  - the-ballot-moved-the-barrel-the-red-sea-did-not-vote
+  - the-annex-a-flat-a-council-and-three-months-of-data
+  - fine-at-home-worried-about-the-world-92-countries
+  - seventy-eight-percent-for-december-and-a-jobs-report
+  - ordinary-ledger-2-041-at-the-pump-and-24-cents
+  - packaging-was-the-boring-part-now-it-is-the-queue
+  - two-point-nine-percent-again-and-a-commission
+  - cop31-opens-in-antalya-and-the-electrification-goal
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-08T10:09:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 1850
+  extras:
+    - brent-near-98-and-35-ships-on-octobers-list
+    - more-than-90-percent-of-germanys-lng-is-american
+    - 480-of-880-rose-in-the-worst-week-since-april
+    - 115-billion-on-monday-minus-28-by-friday
+    - kospi-down-11-71-hang-seng-up-5-10
+    - three-paths-on-the-table-and-seven-conditions
+    - aigner-today-monday-and-30-january
+    - seven-million-of-1-2-billion-for-schools
+    - ai-on-trial-and-copper-as-the-witness
+    - people-who-live-alone-scored-lower
+    - three-auctions-125-billion-and-a-cpi-between
+    - the-euro-at-1-1141-on-sunday-morning
+    - heating-oil-at-a-monthly-low-and-orders-at-a-high
+    - the-dynamic-tariff-and-the-13-00-hour
+    - oracle-20-billion-and-the-week-of-funding-plans
+    - amd-beat-fell-with-the-crowd-and-gained-11
+    - up-to-70-percent-at-risk-1-3-percent-diagnosed
+    - an-immune-response-in-99-percent-and-an-honest-miss
+    - krakow-six-dead-and-two-days-of-mourning
+    - four-of-36-missiles-and-a-shortage-with-a-name
+    - 18-terawatt-hours-in-a-week-and-14-percent-below-normal
+    - a-flash-flood-warning-in-bayamon-and-toa-alta
+  updates: []

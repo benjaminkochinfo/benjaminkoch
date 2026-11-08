@@ -1,0 +1,17 @@
+id: markets-week-falls-08nov
+kind: hbar
+kicker: "Markets · The week"
+title: "Oil and chips fell furthest; the Dow barely moved"
+subtitle: "Percentage fall over the week, close of Friday 30 October to close of Friday 6 November 2026 (bars show the size of the decline)"
+unit: "%"
+rows:
+  - {label: "Brent crude, January contract", value: 13.32, note: "$113.43 to $98.32"}
+  - {label: "PHLX Semiconductor index", value: 12.15, note: "10,688.80 to 9,390.25"}
+  - {label: "Kospi (South Korea)", value: 11.71, note: "5,730.74 to 5,059.69"}
+  - {label: "Nikkei 225 (Japan)", value: 9.25, note: "63,290.11 to 57,434.77"}
+  - {label: "Nasdaq Composite", value: 3.37, note: "25,437.00 to 24,579.42"}
+  - {label: "S&P 500", value: 2.68, note: "7,580.07 to 7,376.86"}
+  - {label: "Dow Jones Industrial Average", value: 0.94, note: "51,770.31 to 51,285.73"}
+licence: reported
+source_line: "Global Terminal weekly table of closes (Yahoo Finance closes; Brent settlement reported by Bloomberg via Rigzone), 'Markets This Week', 6 Nov 2026; S&P 500 weekly fall confirmed by Dow Jones Market Data via Morningstar; retrieved 8 Nov 2026 · reported figures"
+alt: "Bar chart of weekly percentage falls from 30 October to 6 November 2026: Brent crude 13.32 percent, PHLX Semiconductor index 12.15 percent, Kospi 11.71 percent, Nikkei 225 9.25 percent, Nasdaq Composite 3.37 percent, S&P 500 2.68 percent and Dow Jones Industrial Average 0.94 percent. Over the same week Hong Kong's Hang Seng rose 5.10 percent and the Stoxx Europe 600 0.24 percent."

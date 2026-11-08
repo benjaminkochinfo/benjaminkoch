@@ -1,0 +1,11 @@
+# Inside Desk chart data: markets-week-falls-08nov
+"# Source: Global Terminal weekly table of closes (Yahoo Finance closes; Brent settlement reported by Bloomberg via Rigzone), 'Markets This Week', 6 Nov 2026; S&P 500 weekly fall confirmed by Dow Jones Market Data via Morningstar; retrieved 8 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Brent crude, January contract",13.32,no,$113.43 to $98.32
+PHLX Semiconductor index,12.15,no,"10,688.80 to 9,390.25"
+Kospi (South Korea),11.71,no,"5,730.74 to 5,059.69"
+Nikkei 225 (Japan),9.25,no,"63,290.11 to 57,434.77"
+Nasdaq Composite,3.37,no,"25,437.00 to 24,579.42"
+S&P 500,2.68,no,"7,580.07 to 7,376.86"
+Dow Jones Industrial Average,0.94,no,"51,770.31 to 51,285.73"
