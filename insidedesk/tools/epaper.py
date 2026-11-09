@@ -489,6 +489,14 @@ def kept_fit(iss, cfg):
     root = os.path.join(cfg["ROOT"], iss["dir"]); key = fit_key(iss)
     hp, jp, kp = (os.path.join(root, f) for f in ("index.html", "edition.json", "fit.sha256"))
     if not (os.path.exists(hp) and os.path.exists(jp)): return None
+    # Issues from earlier days are final: if their committed pages are unmodified, keep them byte-identical even when
+    # the unfitted input drifts (e.g. cross-issue navigation), so a release never re-renders a published issue.
+    _m = re.search(r"epaper/(\d{4})/(\d{2})/(\d{2})/", iss["dir"] + "/")
+    if _m and "-".join(_m.groups()) < dt.datetime.now(__import__("zoneinfo").ZoneInfo("Europe/Berlin")).strftime("%Y-%m-%d") and os.path.exists(kp) \
+            and all(_git_clean(cfg["ROOT"], os.path.join(iss["dir"], f)) for f in ("index.html", "edition.json", "fit.sha256")):
+        h, j = open(hp, encoding="utf-8").read(), open(jp, encoding="utf-8").read()
+        meta = dict(iss["meta"]); meta["pages"] = len(json.loads(j)["pages"])
+        return h, j, meta
     if os.path.exists(kp):
         if open(kp).read().strip() != key: return None
     elif not all(_git_clean(cfg["ROOT"], os.path.join(iss["dir"], f)) for f in ("index.html", "edition.json", "render.sha256")):

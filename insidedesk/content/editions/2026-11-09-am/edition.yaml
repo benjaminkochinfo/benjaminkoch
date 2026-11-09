@@ -1,0 +1,62 @@
+date: "2026-11-09"
+slot: am
+published: "2026-11-09T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "A week that runs on paperwork"
+standfirst: "Pump prices start Monday a few cents kinder, and the decisions that shape your bills sit on dull calendars: US inflation on Tuesday, Berlin's budget committee on Thursday, COP31 from today. Elsewhere: Monday power at €345.64, Taiwan's market curbs, Brent below $98 while the physical barrel firms, and Ukraine's line crews after a night of strikes."
+closing:
+  title: Before you close the tab
+  published: '2026-11-09T08:30:00+01:00'
+  habit:
+    text: 'Pick one morning this week and read your electricity and gas meters, then write the numbers and the date on the back of the last bill. Do it again on the same weekday next month. A month of your own readings tells you more about your winter costs than any average in any newspaper, this one included.'
+    note: A habit, not advice.
+  went_right:
+    text: 'When the Freshwater Biological Association began work on the River Kent in Cumbria, it could find only three adult freshwater pearl mussels [1]. "When we started, we could only find three adult specimens," said Sarah Raubenheimer, who manages the project [1]. The association bred young mussels in its Freshwater Pearl Mussel Ark, releases began in 2025, and by the summer of 2026 almost two thousand were settled in the river''s gravels, with about three thousand planned by 2027 [1]. A young mussel spends its first months riding harmlessly on the gills of a brown trout or Atlantic salmon, and some adults live well over a hundred years [1]. Natural England, the Environment Agency, South Cumbria Rivers Trust and the EU''s LIFE programme are partners [1]. Three in a river, then thousands: that is what patient institutions look like.'
+  sentence: "A week of committee sessions, release calendars and conference texts begins today, and that is good news: the decisions that shape your bills are being made in public, on paper, with dates attached."
+  euros:
+    text: 'At 05:11 this morning the federal fuel-price register put the average litre of Super E10 at €2.035 in Schleswig-Holstein and €1.920 in Saarland and Thuringia, and the brand averages ranged from €1.929 at HEM to €2.028 at Agip Eni [2]. Desk arithmetic: on a 50-litre tank, the regional gap is about €5.75 and the brand gap about €4.95. If you fill up twice a month, choosing the cheaper end of the brand range is worth roughly €10 a month, or about €120 a year, without driving a kilometre further.'
+    note: Desk arithmetic on early-morning MTS-K averages via kraftstoffbilliger.de. Prices change by station and hour; your own saving depends on where and when you fill up. Nothing here is advice.
+  small_words:
+    term: Bereinigungssitzung
+    text: 'The final session of the Bundestag''s budget committee before the budget is passed, where the coalition settles its last disputes and amends the government''s draft line by line [3]. For the 2027 budget it begins on Thursday [3]. This year''s open items include a plastic tax worth about €670 million in 2027, a sugar tax worth €690 million, and planned savings on housing benefit [3]. It is the least glamorous meeting of the parliamentary year, and one of the most important.'
+  sources:
+  - {n: 1, title: "Three left in the river, nearly two thousand put back: England's River Kent gets its pearl mussels home", publisher: "Earth to Sea News (from Rewilding Europe)", url: "https://www.earthtoseanews.com/river-kent-pearl-mussels/", date: "07 Nov 2026"}
+  - {n: 2, title: "Spritpreise heute (09.11.2026): Durchschnitt E5, E10 und Diesel in Deutschland (source: MTS-K)", publisher: "kraftstoffbilliger.de", url: "https://kraftstoffbilliger.de/spritpreise", date: "as of 09 Nov 2026, 05:11 CET"}
+  - {n: 3, title: "Koalition verhandelt über Haushalt: Was auf dem Spiel steht", publisher: "ZDFheute", url: "https://www.zdfheute.de/politik/deutschland/bundeshaushalt-verhandlungen-schwarz-rote-koalition-streit-finanzierung-100.html", date: "08 Nov 2026, 19:12 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - ordinary-ledger-1-968-at-the-pump-1-69-for-heating
+  - podium-vs-print-nt-500-billion-on-the-table-at
+  - brent-97-49-murban-99-17-the-paper-barrel-relaxed
+  - aigner-today-1-260-electors-in-january-and-a
+  - the-annex-100-false-claims-50-repetitions-and-the
+  - 345-64-for-monday-the-dearest-day-of-the-year-and
+  - tuesdays-price-index-and-an-80-bet-on-a-december
+  - an-export-licence-is-a-promise-and-an-empty-office
+  - vaccination-week-starts-today-and-the-gap-worth
+  - 850-000-without-power-on-sunday-and-the-repair
+  - cop31-opens-in-antalya-a-third-of-the-economy-on
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-09T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - heating-oil-at-1-69-a-year-in-fourteen-rows
+    - 2-8-in-october-and-a-fuel-tax-cut-with-an-end-date
+    - coreweave-applied-materials-cisco-the-week-the
+    - kospi-up-kosdaq-down-and-a-three-month-pause-on
+    - six-refineries-in-ten-days-and-a-diesel-market
+    - chinas-october-trade-figures-land-at-04-00-cet-on
+    - 555-4-billion-four-open-items-and-a-gap-of-115
+    - a-flag-swapped-at-the-reichstag-an-hour-on-the
+    - the-nonapology-and-the-harder-silence
+    - one-bullet-at-a-time-1-second-against-5-75
+    - gas-storage-at-59-54-falling-0-44-points-a-day
+    - solars-share-fell-from-25-4-in-june-to-13-2-in
+    - chinas-factory-gates-at-5-7-its-shop-shelves-at-0
+    - gold-up-1-4-bitcoin-down-2-two-shelters-two
+    - openais-11-billion-at-1-25-trillion-and-the-30
+    - eight-jet-engines-in-mississippi-and-the-grid
+    - canadas-advisers-say-every-infant-should-get-the
+    - fourteen-measles-cases-in-bor-and-a-hospital
+    - abu-dhabi-tuesday-and-wednesday-working-level
+    - komyshuvakha-a-drone-at-the-rubble-of-a-strike
+    - a-storm-in-finnmark-and-123-7-mm-of-rain-in-a-week
+    - singapores-haze-law-gets-teeth-and-its-minister
+  updates: []

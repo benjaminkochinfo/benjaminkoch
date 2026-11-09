@@ -1,0 +1,9 @@
+# Inside Desk chart data: asia-monday-open-09nov
+"# Source: Kaohoon International, 'Asia-Pacific Stocks Follow Wall Street Rebounds Amid Persistent Concerns Over AI Developments', early-session levels at 09:13 Bangkok time (03:13 CET), 9 Nov 2026; Australia's ASX 200 (−0.19% to 9,004.00) not shown as a bar; intraday snapshot, not closing levels; retrieved 9 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nikkei 225 (Japan) rise,3.07,no,"59,197.53"
+Kospi (South Korea) rise,1.32,no,"5,126.25"
+Shenzhen Component rise,0.73,no,"11,257.61"
+Hang Seng (Hong Kong) rise,0.68,no,"24,648.94"
+Shanghai Composite rise,0.62,no,"3,671.75"

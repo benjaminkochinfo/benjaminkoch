@@ -1,0 +1,16 @@
+id: asia-monday-open-09nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Monday's first hour in Asia: green almost everywhere, Tokyo most"
+subtitle: "Percentage change on selected Asia-Pacific indexes, early Monday session, 9 November 2026, 09:13 Bangkok time (03:13 CET), per Kaohoon International"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Nikkei 225 (Japan) rise", value: 3.07, note: "59,197.53"}
+  - {label: "Kospi (South Korea) rise", value: 1.32, note: "5,126.25"}
+  - {label: "Shenzhen Component rise", value: 0.73, note: "11,257.61"}
+  - {label: "Hang Seng (Hong Kong) rise", value: 0.68, note: "24,648.94"}
+  - {label: "Shanghai Composite rise", value: 0.62, note: "3,671.75"}
+licence: reported
+source_line: "Kaohoon International, 'Asia-Pacific Stocks Follow Wall Street Rebounds Amid Persistent Concerns Over AI Developments', early-session levels at 09:13 Bangkok time (03:13 CET), 9 Nov 2026; Australia's ASX 200 (−0.19% to 9,004.00) not shown as a bar; intraday snapshot, not closing levels; retrieved 9 Nov 2026 · reported figures"
+alt: "Bar chart of early Monday 9 November 2026 percentage changes in Asia at 03:13 CET, per Kaohoon International: Nikkei 225 up 3.07 percent to 59,197.53, Kospi up 1.32 percent to 5,126.25, Shenzhen Component up 0.73 percent to 11,257.61, Hang Seng up 0.68 percent to 24,648.94 and Shanghai Composite up 0.62 percent to 3,671.75. Australia's ASX 200 was down 0.19 percent to 9,004.00. These are intraday snapshot levels, not closes."
