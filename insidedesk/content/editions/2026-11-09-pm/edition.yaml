@@ -60,7 +60,11 @@ epaper:
   - lahore-at-590-then-196-a-smog-morning
   - typhoon-samuel-120-km-h-1-370-km-away-and-no
   - dax-closes-up-1-73-stoxx-up-1-26-brent-lower-still
+  - wall-street-up-2-41-percent-brent-settles-at-92-57
   updates:
   - time: '2026-11-09T19:30:51+01:00'
     text: 'Markets: Xetra closes DAX up 1.73% at 26,267, Stoxx 600 up 1.26% at 656.52; Brent down 4.6%'
     piece: dax-closes-up-1-73-stoxx-up-1-26-brent-lower-still
+  - time: '2026-11-09T22:00:53+01:00'
+    text: 'Markets: Wall Street closes up 2.41% (S&P 500); Brent settles 5.85% lower at $92.57'
+    piece: wall-street-up-2-41-percent-brent-settles-at-92-57
