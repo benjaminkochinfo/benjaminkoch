@@ -1,0 +1,8 @@
+# Inside Desk chart data: de-fuel-e10-diesel-09pm
+"# Source: dpa via t-online, 'Spritpreise sinken: E10 im Tagesschnitt unter 2 Euro, Diesel weiter teuer', ADAC national daily averages, 9 Nov 2026, 11:51 CET; 1 November values are desk arithmetic from the reported week-on-week falls (7.6 cents for E10, 4.1 cents for diesel); retrieved 9 Nov 2026 · reported figures. Three dates only, lines join them."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+# Retrieved: 2026-11-09T17:30+01:00
+date,e10,diesel
+2026-10-08,2.14,2.242
+2026-11-01,2.072,2.282
+2026-11-08,1.996,2.241

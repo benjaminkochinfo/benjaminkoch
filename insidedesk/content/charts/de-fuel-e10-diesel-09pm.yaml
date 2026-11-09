@@ -1,0 +1,28 @@
+id: de-fuel-e10-diesel-09pm
+kind: line
+kicker: "Ordinary · Germany at the pump"
+title: "Petrol fell 14.4 cents in a month; diesel 0.1"
+subtitle: "ADAC national daily average pump price, € per litre, Super E10 vs diesel, on 8 October, 1 November and 8 November 2026 (as reported by dpa)"
+unit: " €/l"
+label_decimals: 3
+start: "2026-10-08"
+series:
+  - key: e10
+    label: "Super E10"
+    source:
+      type: static
+      values:
+        - ['2026-10-08', 2.140]
+        - ['2026-11-01', 2.072]
+        - ['2026-11-08', 1.996]
+  - key: diesel
+    label: "Diesel"
+    source:
+      type: static
+      values:
+        - ['2026-10-08', 2.242]
+        - ['2026-11-01', 2.282]
+        - ['2026-11-08', 2.241]
+licence: reported
+source_line: "dpa via t-online, 'Spritpreise sinken: E10 im Tagesschnitt unter 2 Euro, Diesel weiter teuer', ADAC national daily averages, 9 Nov 2026, 11:51 CET; 1 November values are desk arithmetic from the reported week-on-week falls (7.6 cents for E10, 4.1 cents for diesel); retrieved 9 Nov 2026 · reported figures. Three dates only, lines join them."
+alt: "Line chart of German national average pump prices on three dates. Super E10 falls from €2.140 a litre on 8 October to about €2.072 on 1 November and €1.996 on Sunday 8 November 2026, the latest value. Diesel goes from €2.242 to about €2.282 and back to €2.241 on 8 November, leaving a gap of 24.5 cents a litre."

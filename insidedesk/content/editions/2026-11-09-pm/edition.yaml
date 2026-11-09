@@ -1,0 +1,62 @@
+date: "2026-11-09"
+slot: pm
+published: "2026-11-09T17:30:02+01:00"   # set to the actual Berlin time when it goes live
+title: "Two checks, one weekend, and the dearest power day of the year again"
+standfirst: "Nvidia's board opens a file on its own chief while Washington's AI-safety office runs without a lamp. Elsewhere: Tuesday's German power at €351.48, banks lift the DAX back above 26,000, ships hit near Hormuz while Brent falls, Aigner nominated, COP31 adopts its agenda, and a hospital winter plan that does its own arithmetic."
+closing:
+  title: Before you close the tab
+  published: "2026-11-09T17:30:02+01:00"
+  habit:
+    text: 'Find your last electricity bill and look for one word: the name of your tariff. If it says basic supply, or you cannot tell, write that down and put the bill somewhere you will see it on Saturday. You do not have to decide anything tonight. Knowing which tariff you are on is the first line of every sensible decision about it.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Petrol is back below €2. The ADAC national daily average for Super E10 on Sunday was €1.996 a litre, 7.6 cents below a week earlier and, dpa reports, the cheapest daily average in more than four months [1]. Diesel has not followed yet, but the cheaper of the two fuels is moving the right way.'
+  sentence: "A chip company investigated its own boss, Tuesday's power set another record, and petrol slipped back under two euros."
+  euros:
+    text: 'Tuesday''s German day-ahead power averages €351.48 per megawatt hour, about €0.35 per kilowatt-hour before taxes, levies and network charges [2]. In Verivox''s worked example, a 4,000 kWh household in Schmalkalden pays €2,169.41 a year on basic supply against €1,261.43 on the cheapest tariff, a gap of €907.98 [3]. Desk arithmetic: at Sunday''s averages, a 50-litre tank costs about €99.80 in E10 and €112.05 in diesel [1].'
+    note: Desk arithmetic on cited averages. Your household tariff and station prices differ. Nothing here is advice.
+  small_words:
+    term: Basic supply (Grundversorgung)
+    text: 'The default electricity tariff in Germany, from the local supplier that serves the most households in your area. You land on it if you never chose a contract or your supplier stopped serving you. It is a safety net, which is why it is often not the cheapest option: in Verivox''s example the gap to the cheapest tariff is €907.98 a year [3].'
+  sources:
+  - {n: 1, title: "Spritpreise sinken: E10 im Tagesschnitt unter 2 Euro, Diesel weiter teuer", publisher: "dpa via t-online", url: "https://www.t-online.de/mobilitaet/aktuelles/id_101519566/spritpreise-sinken-e10-im-tagesschnitt-unter-2-euro-diesel-weiter-teuer.html", date: "09 Nov 2026, 11:51 CET"}
+  - {n: 2, title: "Großhandelspreise: Day-ahead DE-LU, delivery day 10 Nov 2026", publisher: "Bundesnetzagentur | SMARD.de", url: "https://www.smard.de/app/chart_data/4169/DE/4169_DE_hour_1794178800000.json", date: "retrieved 09 Nov 2026, 16:31 CET"}
+  - {n: 3, title: "Strompreise vergleichen und sparen", publisher: "Verivox", url: "https://www.verivox.de/strom/strompreise/", date: "as of 09 Nov 2026 (example calculation as of 06 Nov 2026)"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - a-board-opens-a-file-on-its-own-chief-and-a-safety
+  - banks-up-2-4-percent-the-dax-back-above-26-000-and
+  - a-tanker-hit-twice-and-a-strait-counting-its-ships
+  - clear-and-understandable-aigner-is-nominated-and
+  - the-annex-40-datasets-2-175-brains-and-the-region
+  - 351-48-for-tuesday-a-lower-peak-a-higher-floor-and
+  - podium-vs-print-very-high-and-volatile-and-a-gas
+  - ordinary-ledger-24-5-cents-between-two-pumps-and-a
+  - forty-beds-short-in-january-98-percent-full-every
+  - medinsky-ryabkov-umerov-budanov-read-the-names
+  - cop31s-first-decision-no-agenda-fight-and-seven
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-09T17:30:02+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 3-4-billion-for-1-7-gigawatts-anthropic-buys
+    - 70-percent-of-the-requirements-26-4-percent
+    - brent-down-about-3-percent-to-95-08-and-the
+    - hochtief-down-as-much-as-7-1-percent-hannover
+    - 8-billion-two-days-and-a-deal-nobody-has
+    - 158-kilometres-of-wire-and-a-country-that
+    - 2-574-votes-in-mississippi-637-in-alaska-and
+    - thursday-into-friday-the-long-night-when-the
+    - twenty-years-of-ptsd-sixteen-sessions-and
+    - over-one-in-five-adults-and-65-percent-who
+    - oil-down-about-3-percent-gas-up-1-4-percent
+    - tuesdays-cheapest-hour-is-the-last-one-219-66
+    - from-1-2-percent-to-2-percent-defence
+    - a-digital-euro-deal-by-the-end-of-this-year
+    - 907-98-what-one-household-in-schmalkalden
+    - heating-oil-16-cents-between-hamburg-and
+    - r3-6-billion-in-unpaid-invoices-and-the
+    - when-the-pills-run-out-the-ward-fills-up
+    - paris-before-abu-dhabi-seven-ministers-two
+    - zaporizhzhia-on-diesel-for-about-ten-hours
+    - lahore-at-590-then-196-a-smog-morning
+    - typhoon-samuel-120-km-h-1-370-km-away-and-no
+  updates: []
