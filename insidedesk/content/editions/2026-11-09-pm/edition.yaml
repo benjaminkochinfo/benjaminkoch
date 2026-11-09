@@ -34,29 +34,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - forty-beds-short-in-january-98-percent-full-every
   - medinsky-ryabkov-umerov-budanov-read-the-names
   - cop31s-first-decision-no-agenda-fight-and-seven
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-09T17:30:02+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-09T17:30:02+01:00"
   extras:
-    - 3-4-billion-for-1-7-gigawatts-anthropic-buys
-    - 70-percent-of-the-requirements-26-4-percent
-    - brent-down-about-3-percent-to-95-08-and-the
-    - hochtief-down-as-much-as-7-1-percent-hannover
-    - 8-billion-two-days-and-a-deal-nobody-has
-    - 158-kilometres-of-wire-and-a-country-that
-    - 2-574-votes-in-mississippi-637-in-alaska-and
-    - thursday-into-friday-the-long-night-when-the
-    - twenty-years-of-ptsd-sixteen-sessions-and
-    - over-one-in-five-adults-and-65-percent-who
-    - oil-down-about-3-percent-gas-up-1-4-percent
-    - tuesdays-cheapest-hour-is-the-last-one-219-66
-    - from-1-2-percent-to-2-percent-defence
-    - a-digital-euro-deal-by-the-end-of-this-year
-    - 907-98-what-one-household-in-schmalkalden
-    - heating-oil-16-cents-between-hamburg-and
-    - r3-6-billion-in-unpaid-invoices-and-the
-    - when-the-pills-run-out-the-ward-fills-up
-    - paris-before-abu-dhabi-seven-ministers-two
-    - zaporizhzhia-on-diesel-for-about-ten-hours
-    - lahore-at-590-then-196-a-smog-morning
-    - typhoon-samuel-120-km-h-1-370-km-away-and-no
-  updates: []
+  - 3-4-billion-for-1-7-gigawatts-anthropic-buys
+  - 70-percent-of-the-requirements-26-4-percent
+  - brent-down-about-3-percent-to-95-08-and-the
+  - hochtief-down-as-much-as-7-1-percent-hannover
+  - 8-billion-two-days-and-a-deal-nobody-has
+  - 158-kilometres-of-wire-and-a-country-that
+  - 2-574-votes-in-mississippi-637-in-alaska-and
+  - thursday-into-friday-the-long-night-when-the
+  - twenty-years-of-ptsd-sixteen-sessions-and
+  - over-one-in-five-adults-and-65-percent-who
+  - oil-down-about-3-percent-gas-up-1-4-percent
+  - tuesdays-cheapest-hour-is-the-last-one-219-66
+  - from-1-2-percent-to-2-percent-defence
+  - a-digital-euro-deal-by-the-end-of-this-year
+  - 907-98-what-one-household-in-schmalkalden
+  - heating-oil-16-cents-between-hamburg-and
+  - r3-6-billion-in-unpaid-invoices-and-the
+  - when-the-pills-run-out-the-ward-fills-up
+  - paris-before-abu-dhabi-seven-ministers-two
+  - zaporizhzhia-on-diesel-for-about-ten-hours
+  - lahore-at-590-then-196-a-smog-morning
+  - typhoon-samuel-120-km-h-1-370-km-away-and-no
+  - dax-closes-up-1-73-stoxx-up-1-26-brent-lower-still
+  updates:
+  - time: '2026-11-09T19:30:51+01:00'
+    text: 'Markets: Xetra closes DAX up 1.73% at 26,267, Stoxx 600 up 1.26% at 656.52; Brent down 4.6%'
+    piece: dax-closes-up-1-73-stoxx-up-1-26-brent-lower-still
