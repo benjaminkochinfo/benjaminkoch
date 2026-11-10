@@ -179,9 +179,9 @@
   // commerce: prices, Stripe payment links, Brevo newsletter form (all configured in config.js)
   (function commerce() {
     const P = C.PRICING || {}, L = C.PAYMENT_LINKS || {}, N = C.NEWSLETTER || {};
-    $$("[data-price]").forEach((e) => { const p = P[e.dataset.price]; if (p) e.innerHTML = `${p.label} <small>${p.per}</small><span class="price-alt">${p.alt}</span>`; });
+    $$("[data-price]").forEach((e) => { const p = P[e.dataset.price]; if (p) e.innerHTML = `${p.label} <small>${p.per}</small>`; });
     $$("[data-pay]").forEach((a) => { const t = a.dataset.pay, link = L[t];
-      if (link) { a.href = link; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Subscribe"; }
+      if (link) { a.href = link; a.target = "_blank"; a.rel = "noopener"; if (a.classList.contains("btn")) a.textContent = "Subscribe"; }
       else a.addEventListener("click", () => { const s = $("#subCadence"); if (s) { s.value = t; s.dispatchEvent(new Event("change")); } }); });
     const f = $("#subscribe"), cad = $("#subCadence"), cf = $("#subCadenceField"), note = $("#subNote");
     if (N.CADENCE_FIELD) { cf.name = N.CADENCE_FIELD; cad.addEventListener("change", () => (cf.value = cad.value)); } else cf.remove();

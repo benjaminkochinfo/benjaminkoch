@@ -5,19 +5,24 @@ window.WMT_CONFIG = {
   MODELS_URL: "landing/data/models.json",
   SEEDS_URL: "landing/data/seeds.json",
   COUNTRIES_URL: "landing/assets/geo/countries.geojson",
-  /* Final EUR prices (incl. VAT), approved 10 Nov 2026. */
+  /* Final EUR prices, approved 10 Nov 2026. No VAT is charged (small business, no VAT ID). */
   PRICING: {
     approved: true,
     weekly:    { label: "€9",  per: "/ month",   alt: "or €90 / year" },
     monthly:   { label: "€19", per: "/ month",   alt: "or €190 / year" },
-    quarterly: { label: "€79", per: "/ quarter", alt: "or €290 / year" }
+    quarterly: { label: "€79", per: "/ quarter", alt: "or €290 / year" },
+    pro:       { label: "€1,490", per: "/ year" }
   },
-  /* Payments (Stripe only): paste a Stripe Payment Link (https://buy.stripe.com/...) per tier.
+  /* Payments (Stripe only): Stripe Payment Link (https://buy.stripe.com/...) per tier.
      Empty = button falls back to the waitlist form. No backend required. */
   PAYMENT_LINKS: {
-    weekly: "",
-    monthly: "",
-    quarterly: ""
+    weekly: "https://buy.stripe.com/eVq7sMahEdQrc1a4Oocs800",
+    weekly_yearly: "https://buy.stripe.com/00w7sM3Tg13Ffdm3Kkcs801",
+    monthly: "https://buy.stripe.com/cNiaEY3Tg6nZ1mw6Wwcs803",
+    monthly_yearly: "https://buy.stripe.com/7sY5kE61o27J9T2a8Ics804",
+    quarterly: "https://buy.stripe.com/28EbJ2fBY3bNc1a2Ggcs805",
+    quarterly_yearly: "https://buy.stripe.com/14A5kEdtQ6nZ2qAft2cs806",
+    pro: "https://buy.stripe.com/9B614odtQbIjfdm3Kkcs807"
   },
   /* Newsletter / waitlist: Brevo embedded form. Paste the form's action URL from
      Brevo > Contacts > Forms > (your form) > Share > HTML code, e.g.
