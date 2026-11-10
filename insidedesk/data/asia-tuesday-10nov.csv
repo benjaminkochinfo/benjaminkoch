@@ -1,0 +1,10 @@
+# Inside Desk chart data: asia-tuesday-10nov
+"# Source: Kaohoon International, 'Asia-Pacific Markets Rise on Tech Recovery and Easing Energy Prices, Investors Eye US Inflation Data', levels at 10:28 Bangkok time (04:28 CET), 10 Nov 2026; intraday snapshot, not closing levels; retrieved 10 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Kospi (South Korea) rise,4.46,no,"5,242.49"
+Nikkei 225 (Japan) rise,2.89,no,"60,475.78"
+ASX 200 (Australia) rise,1.28,no,"9,145.50"
+Shenzhen Component rise,0.85,no,"11,240.17"
+Hang Seng (Hong Kong) rise,0.36,no,"24,537.00"
+Shanghai Composite rise,0.14,no,"3,665.74"

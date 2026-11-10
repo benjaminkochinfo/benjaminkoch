@@ -1,0 +1,61 @@
+date: "2026-11-10"
+slot: am
+published: "2026-11-10T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "A price index that admits a gap, and a strait that is slow, not shut"
+standfirst: "US consumer prices arrive at 14:30 CET without their usual annual figure, and that honesty is the point. Elsewhere: €351.48 for Tuesday's power, 325 Hormuz transits in a week, the budget's last 48 hours and a Shigella vaccine that passed a real test."
+closing:
+  title: Before you close the tab
+  published: '2026-11-10T08:30:00+01:00'
+  habit:
+    text: 'Find your electricity contract or your last annual statement and look for two dates: when your price guarantee ends and when you can give notice. Write both in your calendar, a month early. Most money lost on energy is not lost on the price; it is lost on a date nobody noticed.'
+    note: A habit, not advice.
+  went_right:
+    text: 'When the Black Summer fires of 2019/2020 burned through East Gippsland in Victoria, scientists found southern giant burrowing frogs surviving as tadpoles in pools "no larger than a puddle", in the words of herpetologist Matt Clancy [1]. In 2021 the tadpoles went to Healesville Sanctuary; keepers raised them, and last year bred the critically endangered species in captivity for the first time [1]. Now 53 frogs, each roughly the size of a cricket ball, have been released back into the forest, with song meters listening for their call [1]. There are fewer than five known breeding sites in Victoria [1]. "To know the species is going to continue ... is just the best news we could ever hear as keepers," said Zoos Victoria''s Meagan Lane [1]. A puddle, a sanctuary, a release: rescue is mostly patience with a budget line.'
+  sentence: "A vaccine passed its next gate, a lake rose twenty feet and fifty-three frogs went home: slow, careful work keeps paying off, usually without a sound."
+  euros:
+    text: 'On 9 November the cheapest electricity tariff for new customers averaged 33.34 cents per kWh across Germany, against 40.39 cents in basic supply; at 3,500 kWh a year, switching from basic supply to the cheapest tariff saves €246.91 a year, StromAuskunft calculates [2]. The spread is very uneven: the possible saving is €657.25 in Thuringia but €41.46 in Bremen [2]. And the gap has narrowed: a year ago new-customer tariffs cost 24.82 cents and basic supply 45.47 cents, a difference of 20.65 cents; today it is 7.05 cents [2]. Desk arithmetic: €246.91 a year is about €20.58 a month.'
+    note: StromAuskunft averages for 9 Nov 2026 across 6,355 places at 3,500 kWh a year, with standing charges and new-customer bonuses netted in. Your own figure depends on your postcode, your usage and your current contract. Nothing here is advice.
+  small_words:
+    term: Preisgarantie (price guarantee)
+    text: 'A clause in an energy contract by which the supplier promises that the agreed price stays the same for a set period [2]. It is what turns a tariff into something you can plan with. StromAuskunft''s daily price index only counts tariffs with a guarantee of at least 12 months and a contract term of up to 12 months, so the comparison is between offers that hold still [2]. The word to look for in the small print is the end date.'
+  sources:
+  - {n: 1, title: "Southern giant burrowing frogs released in East Gippsland after Black Summer devastation", publisher: "ABC News (Australia)", url: "https://www.abc.net.au/news/2026-11-08/giant-southern-burrowing-frogs-released/107138502", date: "08 Nov 2026"}
+  - {n: 2, title: "Strompreis aktuell: Das kostet Strom in Deutschland am 09. November 2026", publisher: "StromAuskunft.de", url: "https://www.stromauskunft.de/strompreise/", date: "09 Nov 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - todays-us-price-index-arrives-without-its-annual
+  - podium-vs-print-highly-unlikely-and-91-74
+  - 325-transits-in-a-week-hormuz-is-slow-not-shut
+  - 1-4-billion-of-room-and-about-10-billion-of
+  - the-annex-491-families-four-waves-and-a-link-that
+  - 351-48-for-tuesday-a-second-record-in-two-days
+  - ordinary-ledger-71-say-heat-pump-80-say-the-price
+  - softbank-reports-at-07-30-cet-and-the-only-number
+  - no-licensed-vaccine-165-million-infections-and-a
+  - abu-dhabi-day-one-security-architecture-first
+  - 1-47c-to-september-a-supersized-el-nino-and-the
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-10T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - japans-surplus-nearly-halved-and-the-yen-at-158
+    - the-weeks-calendar-prices-today-a-holiday
+    - five-minutes-of-calm-in-seoul-the-kospis-sidecar
+    - the-fear-gauge-fell-22-gold-edged-up
+    - g7-in-paris-no-communique-needed-to-agree-on
+    - opec-back-to-90-percent-of-february-and-a
+    - merz-receives-magyar-six-months-of-a-different
+    - no-negotiation-show-wadephuls-line-before-abu
+    - too-much-order-70-adults-a-scanner-and-adhd-as-a
+    - 83-in-one-group-70-in-the-next-a-brain-signature
+    - brent-at-91-88-in-asia-about-22-percent-below-its
+    - four-substations-hit-and-an-eu-fast-lane-for-grid
+    - japans-households-spent-6-8-less-the-tenth-fall
+    - australian-consumer-mood-at-78-2-its-lowest-since
+    - sixteen-capitals-one-missed-deadline-the-ai-act
+    - google-splits-its-ai-chip-in-two-and-brings-amd
+    - a-flu-shot-into-the-tumour-18-patients-seven
+    - japans-own-covid-vaccine-gets-its-new-strain-for
+    - 412-576-death-certificates-what-a-leaked-russian
+    - a-refinery-near-st-petersburg-and-a-rocket-fuel
+    - lake-powell-up-20-feet-still-just-over-a-quarter
+    - 80-mm-where-30-were-forecast-erbil-floods-and
+  updates: []

@@ -1,0 +1,17 @@
+id: asia-tuesday-10nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Tuesday morning in Asia: Seoul ran, Shanghai walked"
+subtitle: "Percentage change on selected Asia-Pacific indexes, Tuesday session, 10 November 2026, 10:28 Bangkok time (04:28 CET), per Kaohoon International"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Kospi (South Korea) rise", value: 4.46, note: "5,242.49"}
+  - {label: "Nikkei 225 (Japan) rise", value: 2.89, note: "60,475.78"}
+  - {label: "ASX 200 (Australia) rise", value: 1.28, note: "9,145.50"}
+  - {label: "Shenzhen Component rise", value: 0.85, note: "11,240.17"}
+  - {label: "Hang Seng (Hong Kong) rise", value: 0.36, note: "24,537.00"}
+  - {label: "Shanghai Composite rise", value: 0.14, note: "3,665.74"}
+licence: reported
+source_line: "Kaohoon International, 'Asia-Pacific Markets Rise on Tech Recovery and Easing Energy Prices, Investors Eye US Inflation Data', levels at 10:28 Bangkok time (04:28 CET), 10 Nov 2026; intraday snapshot, not closing levels; retrieved 10 Nov 2026 · reported figures"
+alt: "Bar chart of Tuesday 10 November 2026 percentage changes in Asia at 04:28 CET, per Kaohoon International: Kospi up 4.46 percent to 5,242.49, Nikkei 225 up 2.89 percent to 60,475.78, ASX 200 up 1.28 percent to 9,145.50, Shenzhen Component up 0.85 percent to 11,240.17, Hang Seng up 0.36 percent to 24,537.00 and Shanghai Composite up 0.14 percent to 3,665.74. These are intraday snapshot levels, not closes."
