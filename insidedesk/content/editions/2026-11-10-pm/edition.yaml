@@ -33,27 +33,31 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 26-fewer-second-strokes-748-50-a-month-and-a-new
   - four-and-a-half-hours-a-40-minute-break-and-a
   - bruna-on-tuesday-charles-on-wednesday-eight-red
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-10T17:30:03+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-10T17:30:03+01:00"
   extras:
-    - brent-under-90-and-a-governor-who-counts-the
-    - kospi-up-4-4-nikkei-up-2-9-asia-bought-the-chip
-    - 350-000-cars-a-year-and-a-pace-of-800-000
-    - rare-earths-8-7-fewer-tonnes-46-4-more-dollars
-    - about-5-billion-no-counter-financing-yet-the
-    - orbans-brother-detained-and-magyar-announces-it-in
-    - from-11-at-age-four-to-14-at-sixteen-genes-iq-and
-    - 415-students-posts-after-11-p-m-and-fewer-faces
-    - 70-in-april-168-in-october-277-so-far-in-november
-    - european-gas-at-82-a-one-month-low-as-the-war
-    - three-seats-two-names-one-december-the-ecbs-quiet
-    - a-net-37-plan-to-raise-prices-the-most-since-july
-    - rents-up-3-5-house-prices-up-1-0-the-two-halves-of
-    - 49-99-for-more-ai-apple-starts-selling-usage-by
-    - up-to-65-worried-up-to-37-held-back-who-europe-on
-    - a-november-shipment-that-will-not-come-australias
-    - 700-sites-about-20-fires-one-cyber-unit-france
-    - 4-8-billion-kroner-from-denmark-and-a-request-for
-    - from-23-to-35-by-2035-cop31s-electrification
-    - 100-billion-of-insured-catastrophe-losses-again
-  updates: []
+  - brent-under-90-and-a-governor-who-counts-the
+  - kospi-up-4-4-nikkei-up-2-9-asia-bought-the-chip
+  - 350-000-cars-a-year-and-a-pace-of-800-000
+  - rare-earths-8-7-fewer-tonnes-46-4-more-dollars
+  - about-5-billion-no-counter-financing-yet-the
+  - orbans-brother-detained-and-magyar-announces-it-in
+  - from-11-at-age-four-to-14-at-sixteen-genes-iq-and
+  - 415-students-posts-after-11-p-m-and-fewer-faces
+  - 70-in-april-168-in-october-277-so-far-in-november
+  - european-gas-at-82-a-one-month-low-as-the-war
+  - three-seats-two-names-one-december-the-ecbs-quiet
+  - a-net-37-plan-to-raise-prices-the-most-since-july
+  - rents-up-3-5-house-prices-up-1-0-the-two-halves-of
+  - 49-99-for-more-ai-apple-starts-selling-usage-by
+  - up-to-65-worried-up-to-37-held-back-who-europe-on
+  - a-november-shipment-that-will-not-come-australias
+  - 700-sites-about-20-fires-one-cyber-unit-france
+  - 4-8-billion-kroner-from-denmark-and-a-request-for
+  - from-23-to-35-by-2035-cop31s-electrification
+  - 100-billion-of-insured-catastrophe-losses-again
+  - charles-could-enter-near-lisbon-and-ipma-will-not-rule-out-a-sting-jet
+  updates:
+  - time: '2026-11-10T19:34:38+01:00'
+    text: 'Climate & Weather: IPMA''s evening bulletin on Charles and the sting-jet risk'
+    piece: charles-could-enter-near-lisbon-and-ipma-will-not-rule-out-a-sting-jet
