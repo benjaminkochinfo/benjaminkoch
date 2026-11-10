@@ -1,0 +1,59 @@
+date: "2026-11-10"
+slot: pm
+published: "2026-11-10T17:30:03+01:00"   # set to the actual Berlin time when it goes live
+title: "A month without its year, and a market that read it anyway"
+standfirst: "US consumer prices rose 0.4% in October, core 0.3% for a third month, and two-year yields jumped. Elsewhere: €316.65 for Wednesday's power, a second day in Abu Dhabi, €8.2 billion for the job agency and a Portuguese storm alert declared a day early."
+closing:
+  title: Before you close the tab
+  published: '2026-11-10T17:30:00+01:00'
+  habit:
+    text: 'Tonight, before the heating clicks on, walk through your home and put a hand near each radiator valve and each window frame. Note one draught and one radiator that stays cold at the top. Two small notes on paper are the start of a winter that costs less; the rest is a bleed key and a strip of draught tape.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Researchers at Oxford Population Health, funded by Cancer Research UK, followed blood samples from more than 20,000 men and found that higher levels of certain immune-activating proteins went with a lower risk of prostate cancer [1]. Higher levels of one protein, interleukin-15, were linked to a 14% lower risk seven or more years later, and in one cohort to a 26% lower risk of advanced disease [1]. The study, published today in Nature Communications, compared 368 proteins in 1,434 men who later developed the cancer with 1,434 who did not [1]. "The strongest immune signals were present more than seven years before diagnosis," said Professor Karl Smith-Byrne [1]. The authors are careful: these are associations, not a treatment yet [1]. But a decade of stored blood, patiently kept in freezers, has just told us when to look.'
+  sentence: "Prices were counted, a power auction cleared and old blood samples taught us something new: the patient bookkeeping of institutions did the day's quiet work."
+  euros:
+    text: 'Heating oil got a little cheaper today. The Funke papers'' daily table puts the litre at €1.63 on esyoil and €1.69 on Tecson on 10 November, against €1.69 and €1.74 a day earlier [2]. That is up to 14 cents a litre below a week ago, but still around 80 cents above the end of October 2025 [2]. "An end to the high price level is not in sight," writes esyoil''s Klaus Bergmann, who suggests buying part of a year''s needs rather than all of it [2]. Desk arithmetic: for a 2,000-litre fill, a 6-cent drop on esyoil''s figure is €120; the roughly 80-cent gap to a year ago is about €1,600.'
+    note: Average per-litre prices from comparison portals as reported by Berliner Morgenpost on 10 Nov 2026; your price depends on postcode, quantity and delivery charges. Nothing here is advice.
+  small_words:
+    term: Teilmenge (part order)
+    text: 'Ordering only part of the heating oil you will need for the winter, instead of filling the whole tank at once [2]. It spreads the price risk across two or more delivery dates: you give up the chance of catching the single best day in exchange for not catching the worst one. Heating-oil traders suggest it when prices are high and the direction is unclear [2].'
+  sources:
+  - {n: 1, title: "Signs the immune system could help prevent prostate cancer", publisher: "Cancer Research UK", url: "https://news.cancerresearchuk.org/2026/11/10/immune-system-proteins-prevent-prostate-cancer/", date: "10 Nov 2026"}
+  - {n: 2, title: "Heizölpreise aktuell: Das kostet ein Liter Heizöl heute (10. November)", publisher: "Berliner Morgenpost", url: "https://www.morgenpost.de/wirtschaft/article413625215/heizoelpreise-aktuell-10-november-2026-preis-heizoel-heizung-liter-heute-kaufen.html", date: "10 Nov 2026, 09:50 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 0-4-0-3-and-a-2-year-yield-up-15-basis-points
+  - 1-04-trillion-in-ten-months-and-imports-that
+  - 3-billion-more-for-the-job-agency-the-budget-line
+  - the-annex-20-rats-a-group-five-in-each-corner-and
+  - 316-65-for-wednesday-the-first-step-down-after-two
+  - podium-vs-print-stable-is-not-healthy-and-real-pay
+  - ordinary-ledger-11-3-cents-between-saarland-and
+  - 10-became-8-and-50-became-40-the-ai-news-that
+  - 26-fewer-second-strokes-748-50-a-month-and-a-new
+  - four-and-a-half-hours-a-40-minute-break-and-a
+  - bruna-on-tuesday-charles-on-wednesday-eight-red
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-10T17:30:03+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - brent-under-90-and-a-governor-who-counts-the
+    - kospi-up-4-4-nikkei-up-2-9-asia-bought-the-chip
+    - 350-000-cars-a-year-and-a-pace-of-800-000
+    - rare-earths-8-7-fewer-tonnes-46-4-more-dollars
+    - about-5-billion-no-counter-financing-yet-the
+    - orbans-brother-detained-and-magyar-announces-it-in
+    - from-11-at-age-four-to-14-at-sixteen-genes-iq-and
+    - 415-students-posts-after-11-p-m-and-fewer-faces
+    - 70-in-april-168-in-october-277-so-far-in-november
+    - european-gas-at-82-a-one-month-low-as-the-war
+    - three-seats-two-names-one-december-the-ecbs-quiet
+    - a-net-37-plan-to-raise-prices-the-most-since-july
+    - rents-up-3-5-house-prices-up-1-0-the-two-halves-of
+    - 49-99-for-more-ai-apple-starts-selling-usage-by
+    - up-to-65-worried-up-to-37-held-back-who-europe-on
+    - a-november-shipment-that-will-not-come-australias
+    - 700-sites-about-20-fires-one-cyber-unit-france
+    - 4-8-billion-kroner-from-denmark-and-a-request-for
+    - from-23-to-35-by-2035-cop31s-electrification
+    - 100-billion-of-insured-catastrophe-losses-again
+  updates: []

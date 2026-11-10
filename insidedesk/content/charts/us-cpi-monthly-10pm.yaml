@@ -1,0 +1,38 @@
+id: us-cpi-monthly-10pm
+kind: line
+kicker: "Markets · Prices"
+title: "A smaller rise is still a rise"
+subtitle: "US CPI-U, change from preceding month, seasonally adjusted, %, April–October 2026"
+unit: "%"
+label_decimals: 1
+start: "2026-04-01"
+series:
+  - key: allitems
+    label: "All items"
+    source:
+      type: static
+      values:
+        - ["2026-04-01", 0.6]
+        - ["2026-05-01", 0.5]
+        - ["2026-06-01", -0.4]
+        - ["2026-07-01", 0.1]
+        - ["2026-08-01", 0.4]
+        - ["2026-09-01", 0.6]
+        - ["2026-10-01", 0.4]
+  - key: core
+    label: "Less food and energy"
+    source:
+      type: static
+      values:
+        - ["2026-04-01", 0.4]
+        - ["2026-05-01", 0.2]
+        - ["2026-06-01", 0.0]
+        - ["2026-07-01", 0.2]
+        - ["2026-08-01", 0.3]
+        - ["2026-09-01", 0.3]
+        - ["2026-10-01", 0.3]
+annotations:
+  - {date: "2026-06-01", text: "Energy −5.7%", anchor: start}
+licence: reported
+source_line: "U.S. Bureau of Labor Statistics, Consumer Price Index – October 2026, Table A (bls.gov), released 10 Nov 2026, retrieved 10 Nov 2026 · U.S. government data, public domain"
+alt: "Line chart of the monthly change in the US consumer price index, seasonally adjusted, from April to October 2026. All items rose 0.6% in April, 0.5% in May, fell 0.4% in June, then rose 0.1% in July, 0.4% in August and 0.6% in September. Core prices, excluding food and energy, rose 0.4%, 0.2%, 0.0%, 0.2%, 0.3% and 0.3% over the same months. In October 2026, the latest value, all items rose 0.4% and core rose 0.3%, a third straight 0.3% core reading."

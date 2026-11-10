@@ -1,0 +1,12 @@
+# Inside Desk chart data: us-cpi-monthly-10pm
+"# Source: U.S. Bureau of Labor Statistics, Consumer Price Index – October 2026, Table A (bls.gov), released 10 Nov 2026, retrieved 10 Nov 2026 · U.S. government data, public domain"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+# Retrieved: 2026-11-10T17:30+01:00
+date,allitems,core
+2026-04-01,0.6,0.4
+2026-05-01,0.5,0.2
+2026-06-01,-0.4,0.0
+2026-07-01,0.1,0.2
+2026-08-01,0.4,0.3
+2026-09-01,0.6,0.3
+2026-10-01,0.4,0.3
