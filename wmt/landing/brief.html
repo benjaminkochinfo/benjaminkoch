@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sample brief · ISOLINE</title>
+<meta name="description" content="ISOLINE sample brief: a one-page WMT read with key judgements, indicator readings, scenarios and sources." />
+<meta name="theme-color" content="#06070a" />
+<link rel="icon" type="image/svg+xml" href="assets/logos/favicon-isoline.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/site.css" />
+<style>
+  :root{--navy:#0a1424;--navy-2:#0f1c31}
+  body{background:radial-gradient(1200px 600px at 80% -10%,rgba(74,158,255,.10),transparent 60%),linear-gradient(180deg,var(--navy),var(--ink-0) 520px)}
+  .bnav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);border-bottom:1px solid var(--line);background:rgba(6,8,14,.82);backdrop-filter:blur(10px)}
+  .bnav .brand img{width:30px;height:30px}
+  .bnav nav{display:flex;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+  .bnav nav a{padding:9px 14px;border:1px solid var(--line-hi)}.bnav nav a.cta{background:var(--amber);color:#000;border-color:var(--amber)}
+  .doc{max-width:980px;margin:0 auto;padding:56px var(--pad) 40px}
+  .stamp{display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:#000;background:var(--amber);padding:6px 10px}
+  .meta{display:flex;flex-wrap:wrap;gap:18px;margin:22px 0 10px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--text-dim);text-transform:uppercase}
+  .meta b{color:var(--amber);font-weight:500}
+  h1{font-size:clamp(34px,5vw,58px);line-height:1.05;letter-spacing:-.025em;font-weight:500;margin:8px 0 28px}
+  h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--amber)}
+  h2{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--amber);font-weight:500;margin:0 0 14px;display:flex;gap:12px;align-items:center}
+  h2::after{content:"";flex:1;height:1px;background:var(--line-hi)}
+  section.blk{margin:0 0 44px}
+  .bluf{border-left:2px solid var(--amber);background:linear-gradient(90deg,var(--amber-glow),transparent);padding:22px 24px;font-size:20px;line-height:1.5;font-weight:300}
+  ol.kj{list-style:none;counter-reset:k;padding:0;margin:0;display:grid;gap:10px}
+  ol.kj li{counter-increment:k;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px;border:1px solid var(--line);background:var(--ink-1);color:var(--text-dim);font-size:15px}
+  ol.kj li::before{content:"K" counter(k);font-family:var(--mono);color:var(--amber);font-size:12px;letter-spacing:.1em}
+  .sit{font-size:16px;color:var(--text-dim);font-weight:300;max-width:760px}
+  .readings{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .rd{background:var(--navy-2);padding:18px}
+  .rd .k{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--text-dim)}
+  .rd .v{font-family:var(--mono);font-size:44px;font-weight:500;color:var(--amber);margin:6px 0 2px}
+  .rd .v small{font-size:13px;color:var(--text-dim);margin-left:8px}
+  .rd .bar{height:4px;background:var(--ink-3);margin:8px 0 10px}.rd .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--amber) 55%,var(--red))}
+  .rd p{margin:0;font-size:13px;color:var(--text-dim)}
+  .illu{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--orange);margin-top:10px}
+  .scn{display:grid;gap:10px}
+  .sc{display:grid;grid-template-columns:90px 1fr;gap:18px;align-items:center;padding:16px 18px;border:1px solid var(--line);background:var(--ink-1)}
+  .sc .p{font-family:var(--mono);font-size:30px;color:var(--amber)}.sc .p small{font-size:12px}
+  .sc b{display:block;font-weight:500;margin-bottom:4px}.sc span{color:var(--text-dim);font-size:14.5px}
+  .sc .pb{grid-column:1/-1;height:3px;background:var(--ink-3)}.sc .pb i{display:block;height:100%;background:var(--amber)}
+  ul.watch{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+  ul.watch li{padding:14px 16px;border:1px dashed var(--line-hi);font-size:14px;color:var(--text-dim)}ul.watch li::before{content:"◎ ";color:var(--cyan)}
+  ol.src{padding-left:20px;margin:0;font-size:14px;color:var(--text-dim)}ol.src li{margin:0 0 8px}ol.src a{color:var(--text);border-bottom:1px solid var(--amber-dim)}ol.src a:hover{color:var(--amber)}
+  .ctab{margin:56px 0 0;padding:34px;border:1px solid rgba(245,166,35,.4);background:linear-gradient(135deg,rgba(245,166,35,.12),var(--navy-2));display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  .ctab h3{margin:0;font-size:28px;font-weight:500;letter-spacing:-.015em}.ctab h3 em{font-family:var(--serif);color:var(--amber);font-weight:400}
+  .ctab p{margin:6px 0 0;color:var(--text-dim)}
+  .ctab a{font-family:var(--mono);font-size:12px;letter-spacing:.16em;padding:14px 20px;background:var(--amber);color:#000}
+  .ctab a.ghost{background:transparent;color:var(--text);border:1px solid var(--line-hi);margin-left:8px}
+  .disc{margin-top:28px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--text-mute);line-height:1.7}
+  .more{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:40px}
+  .more a{padding:14px;border:1px solid var(--line);font-size:14px}.more a small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--text-mute);margin-bottom:6px}.more a:hover{border-color:var(--amber)}
+  @media (max-width:640px){.sc{grid-template-columns:1fr}.bnav nav a:not(.cta){display:none}.bluf{font-size:17px}}
+</style>
+</head>
+<body>
+<header class="bnav">
+  <a class="brand" href="../wm_terminal.html#briefs" aria-label="ISOLINE home"><img src="assets/logos/isoline-mark.svg" alt="" /><span class="brand-txt"><b>ISOLINE</b><small>WORLD INTELLIGENCE · WMT</small></span></a>
+  <nav><a href="../wm_terminal.html#briefs">← ALL BRIEFS</a><a href="../terminal.html" target="_blank" rel="noopener">TERMINAL ↗</a><a class="cta" href="../wm_terminal.html#reports">SUBSCRIBE</a></nav>
+</header>
+<main class="doc" id="doc"><p class="mono small mute">Loading brief…</p></main>
+<script>
+(function () {
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const id = new URLSearchParams(location.search).get("id") || "";
+  const doc = document.getElementById("doc");
+  fetch("data/briefs.json").then((r) => r.json()).then((d) => {
+    const list = d.briefs || [];
+    const b = list.find((x) => x.slug === id || x.id === id) || list[0];
+    if (!b) { doc.innerHTML = "<p>Brief not found.</p>"; return; }
+    document.title = `SAMPLE BRIEF · ${b.title} · ISOLINE`;
+    const words = b.title.split(": ");
+    const h1 = words.length > 1 ? `${esc(words[0])}: <em>${esc(words.slice(1).join(": "))}</em>` : esc(b.title);
+    const dt = new Date(b.date + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    doc.innerHTML = `
+      <span class="stamp">SAMPLE BRIEF · ILLUSTRATIVE</span>
+      <div class="meta"><span>${esc(dt)}</span><span>${esc(b.region)}</span><span>${esc(b.read)} read</span><span>Models <b>${b.models.map(esc).join(" · ")}</b></span></div>
+      <h1>${h1}</h1>
+      <section class="blk"><h2>BLUF · BOTTOM LINE UP FRONT</h2><div class="bluf">${esc(b.bluf)}</div></section>
+      <section class="blk"><h2>KEY JUDGEMENTS</h2><ol class="kj">${b.judgements.map((j) => `<li>${esc(j)}</li>`).join("")}</ol></section>
+      <section class="blk"><h2>SITUATION</h2><p class="sit">${esc(b.situation)}</p></section>
+      <section class="blk"><h2>WMT INDICATOR READINGS</h2><div class="readings">${b.readings.map((r) => `<div class="rd"><div class="k"><span>${esc(r.m)}</span><span>WK/WK ${esc(r.d)}</span></div><div class="v">${esc(r.v)}<small>/ 100</small></div><div class="bar"><i style="width:${Math.max(0, Math.min(100, +r.v))}%"></i></div><p>${esc(r.note)}</p></div>`).join("")}</div><div class="illu">⚠ ILLUSTRATIVE VALUES FOR THIS SAMPLE. NOT LIVE MODEL OUTPUT. LIVE READINGS ARE IN THE TERMINAL.</div></section>
+      <section class="blk"><h2>SCENARIOS · NEXT 90 DAYS</h2><div class="scn">${b.scenarios.map((s) => `<div class="sc"><div class="p">${esc(s.p)}<small>%</small></div><div><b>${esc(s.name)}</b><span>${esc(s.text)}</span></div><div class="pb"><i style="width:${+s.p}%"></i></div></div>`).join("")}</div><div class="illu">SAMPLE PROBABILITIES: EDITORIAL JUDGEMENT FOR DEMONSTRATION, NOT A FORECAST.</div></section>
+      <section class="blk"><h2>WHAT TO WATCH</h2><ul class="watch">${b.watch.map((w) => `<li>${esc(w)}</li>`).join("")}</ul></section>
+      <section class="blk"><h2>SOURCES</h2><ol class="src">${b.sources.map((s) => /^https:\/\//.test(s.url) ? `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a></li>` : `<li>${esc(s.name)}</li>`).join("")}</ol></section>
+      <div class="ctab"><div><h3>Get the read <em>every week.</em></h3><p>Weekly, monthly or quarterly editions in the same ISOLINE house style.</p></div><div><a href="../wm_terminal.html#reports">SUBSCRIBE →</a><a class="ghost" href="../terminal.html" target="_blank" rel="noopener">OPEN TERMINAL ↗</a></div></div>
+      <div class="more">${list.filter((x) => x !== b).map((x) => `<a href="brief.html?id=${encodeURIComponent(x.slug)}"><small>${esc(x.region)}</small>${esc(x.title)}</a>`).join("")}</div>
+      <p class="disc">SAMPLE BRIEF. Context and sources reflect public reporting as of ${esc(dt)}; indicator values and scenario probabilities are illustrative and shown only to demonstrate the format. Not investment advice. ISOLINE · World intelligence by WMT · Developed by Dr. Benjamin Koch.</p>`;
+  }).catch(() => { doc.innerHTML = "<p>Could not load brief.</p>"; });
+})();
+</script>
+</body>
+</html>

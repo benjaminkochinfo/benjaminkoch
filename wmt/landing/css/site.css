@@ -234,7 +234,9 @@ button.chip:hover,button.chip.on{border-color:var(--amber);color:var(--amber)}
 .day.today .day-h span{color:var(--amber)}
 .ev{font-size:12.5px;line-height:1.4;padding:9px;border:1px solid var(--line);background:var(--ink-0);color:var(--text-dim)}
 .ev i{display:block;font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.14em;margin-bottom:4px;color:var(--amber)}
-.ev.live i{color:var(--green)}.ev.elec i{color:var(--cyan)}.ev.quake i{color:var(--orange)}
+.ev.elec{display:block}.ev.live i{color:var(--green)}.ev.elec i{color:var(--cyan)}.ev.quake i{color:var(--orange)}
+.ev-meta{display:block;margin-top:6px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--text-mute,#7d828c);text-transform:uppercase}
+.ev-src{display:inline-block;margin-top:4px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--amber);text-decoration:none;border-bottom:1px solid transparent}.ev-src:hover{border-color:var(--amber)}
 
 /* watched */
 .watched{min-height:100vh;padding:calc(var(--nav-h) + var(--wire-h) + 60px) 0 100px;position:relative}

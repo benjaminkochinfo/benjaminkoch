@@ -1,0 +1,307 @@
+{
+  "_readme": "Full SAMPLE briefs opened from the brief cards (landing/brief.html?id=<slug>). Indicator readings are illustrative, not live model output. Real context and sources as of 10 Nov 2026.",
+  "briefs": [
+    {
+      "id": "b1",
+      "slug": "bab-el-mandeb-war-risk-premium",
+      "region": "MENA · Red Sea",
+      "date": "2026-11-10",
+      "read": "4 min",
+      "models": [
+        "TRI",
+        "IRI",
+        "ERI"
+      ],
+      "title": "Bab el-Mandeb: what a sticky war-risk premium means for landed cost",
+      "bluf": "Southern Red Sea war-risk cover has repriced to multiples of its pre-blockade level and is unlikely to normalise this winter, even though no merchant ship has been confirmed struck at sea since late August. For importers the premium, not the missiles, is now the binding cost line.",
+      "judgements": [
+        "War-risk quotes for Saudi-linked tonnage have tripled since summer; general transit cover remains far above the 0.2–0.3% of hull value seen for non-exposed ships.",
+        "Large container lines are cautiously routing services back through Suez, so physical transit risk and priced risk have decoupled.",
+        "A single strike on a non-Saudi container ship would likely reverse the Suez return within days: a low-probability, high-impact tail."
+      ],
+      "situation": "The Houthis declared a blockade of Saudi Arabia on 20 July and enforced it with strikes on Saudi tankers through 24 August. Since then the sea lane has been quiet while missile and drone attacks on Saudi territory continued in late September. Insurers have not followed the quiet: Reuters reported on 24 September that the cost of insuring a tanker loaded at Yanbu had tripled in weeks, and market commentary puts southern Red Sea additional premiums around 3% of hull value for exposed risks. Maersk and Hapag-Lloyd have nonetheless moved several Gemini services back to Suez.",
+      "readings": [
+        {
+          "m": "TRI",
+          "v": 71,
+          "d": "+6",
+          "note": "Corridor posture elevated; Suez return partial"
+        },
+        {
+          "m": "IRI",
+          "v": 78,
+          "d": "+9",
+          "note": "War-risk proxy sticky at elevated level"
+        },
+        {
+          "m": "ERI",
+          "v": 64,
+          "d": "+3",
+          "note": "Crude routing via Red Sea under cost pressure"
+        }
+      ],
+      "scenarios": [
+        {
+          "p": 55,
+          "name": "Sticky premium",
+          "text": "No new strikes at sea; premiums ease slowly but stay well above pre-July levels into Q1 2027."
+        },
+        {
+          "p": 30,
+          "name": "Re-escalation",
+          "text": "Strikes on Saudi-linked tankers resume once Yanbu loadings pick up; carriers pause Suez returns and freight reprices."
+        },
+        {
+          "p": 15,
+          "name": "De-escalation",
+          "text": "Regional talks produce a credible pause; premiums fall back toward 1% of hull value or lower."
+        }
+      ],
+      "watch": [
+        "Lloyd's Joint War Committee listed-areas updates",
+        "Yanbu crude loadings and tanker fixtures",
+        "Carrier service announcements for Suez routings",
+        "Any strike on a non-Saudi-linked merchant vessel"
+      ],
+      "sources": [
+        {
+          "name": "Reuters · Saudi oil export strategy hits new hurdle as Red Sea insurance costs soar (24 Sep 2026)",
+          "url": "https://www.reuters.com/business/energy/saudi-oil-export-strategy-hits-new-hurdle-red-sea-insurance-costs-soar-2026-09-24/"
+        },
+        {
+          "name": "Drake Maritime Services · Houthi Blockade and the Bab el-Mandeb",
+          "url": "https://drakemaritimeservices.com/reports/houthi-blockade-bab-el-mandeb.pdf"
+        },
+        {
+          "name": "Council on Foreign Relations · Another Hormuz? The Houthi threat to the Red Sea",
+          "url": "https://www.cfr.org/articles/another-hormuz-the-red-seas-threat-to-the-global-economy"
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "slug": "black-sea-grain-corridor-stress",
+      "region": "Black Sea",
+      "date": "2026-11-09",
+      "read": "3 min",
+      "models": [
+        "FSI",
+        "KMRI"
+      ],
+      "title": "Grain corridor stress and the bread-price lag",
+      "bluf": "The Black Sea has become a two-way port war that has choked both Ukrainian and Russian grain exports. Wheat futures are up about a fifth year on year; the household bread-price effect arrives with a lag of one to two quarters, hitting import-dependent MENA, African and South Asian buyers first.",
+      "judgements": [
+        "Ukraine's seaborne grain exports fell to 0.81 Mt in September from 2.1 Mt a year earlier, despite Danube and Romanian rerouting.",
+        "Russia's Black Sea and Azov grain exports collapsed to about 0.3 Mt in September from 4.74 Mt, pushing trials via Murmansk and Baltic terminals.",
+        "Strikes near Romanian and Bulgarian waters raise the NATO-flank dimension and the insurance cost of every remaining corridor."
+      ],
+      "situation": "Ambrey Analytics counts 317 merchant and other vessels hit in the Black Sea and Sea of Azov between May and October, more than four times the prior half-year. Ukraine suspended operations at its Black Sea ports in late July; a container ship was sunk by naval drones off Bulgaria on 28 October. On 10 November India signalled readiness to help broker food corridors, but any deal would need Türkiye's Bosphorus role, insurers and an inspection mechanism like the 2022 Black Sea Grain Initiative.",
+      "readings": [
+        {
+          "m": "FSI",
+          "v": 74,
+          "d": "+5",
+          "note": "Export capacity and price pressure both elevated"
+        },
+        {
+          "m": "KMRI",
+          "v": 58,
+          "d": "+2",
+          "note": "Food channel adding to composite stress"
+        }
+      ],
+      "scenarios": [
+        {
+          "p": 50,
+          "name": "Grinding constraint",
+          "text": "Attacks continue at current tempo; exports stay near half of normal via rail and Danube; prices drift higher into spring."
+        },
+        {
+          "p": 30,
+          "name": "Corridor deal",
+          "text": "A brokered food corridor reopens some Odesa capacity; futures retrace part of the year's gain."
+        },
+        {
+          "p": 20,
+          "name": "Wider escalation",
+          "text": "Strikes in NATO members' territorial waters trigger escorts or new restrictions; freight and insurance spike."
+        }
+      ],
+      "watch": [
+        "Ukrainian ministry monthly export data",
+        "Strikes inside Romanian or Bulgarian territorial waters",
+        "Progress on India-brokered or UN/Türkiye corridor talks",
+        "CBOT wheat and Black Sea FOB quotes"
+      ],
+      "sources": [
+        {
+          "name": "Al Jazeera · Grain under fire: Black Sea attacks threaten food supply (3 Nov 2026)",
+          "url": "https://www.aljazeera.com/news/2026/11/3/disruptions-of-black-sea-grain-exports-spike-global-prices"
+        },
+        {
+          "name": "World Ports Organization · The Black Sea escalation testing NATO",
+          "url": "https://www.worldports.org/feature-the-high-risk-black-sea-escalation-testing-nato-like-never-before/"
+        },
+        {
+          "name": "Al Jazeera · Why is India trying to broker a Black Sea food corridor? (10 Nov 2026)",
+          "url": "https://www.aljazeera.com/news/2026/11/10/why-is-india-trying-to-broker-a-russia-ukraine-black-sea-food-corridor"
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "slug": "taiwan-strait-chips-supply-chain",
+      "region": "APAC · Taiwan Strait",
+      "date": "2026-11-08",
+      "read": "5 min",
+      "models": [
+        "TSI",
+        "GSI",
+        "CPR"
+      ],
+      "title": "Chips, copper and a strait: reading tension through the supply chain",
+      "bluf": "A possible unannounced PLA exercise simulating Taiwan's isolation puts the strait back into supply-chain pricing. The first-order transmission is marine insurance and freight in the western Pacific, not chip prices; a sustained disruption would show up in autos, industrial electronics and medical devices months later.",
+      "judgements": [
+        "More than 100 PLA Navy and China Coast Guard vessels were reported operating in the West Pacific on 3 November, in two concentrations between Taiwan and its partners.",
+        "Air activity is uneven: October sorties were lower than a year earlier, but joint combat readiness patrols hit a 2026 high of five.",
+        "Rare-earth leverage is the slower channel: TSMC is reportedly seeking alternatives to rare-earth magnets for factory automation."
+      ],
+      "situation": "AEI and ISW assessed on 6 November that the PRC may be running a major unannounced exercise that simulates surrounding and isolating Taiwan, potentially larger than 'Justice Mission 2025' and drawing on three theater commands, including the Liaoning carrier group, with the Fujian carrier seen leaving Sanya on 2 November. Taiwan Security Monitor counted 232 PLA sorties in October and 12 PRC government-vessel incursions, tying the year's high. Taiwan's ITRI plans a rare-earth facility to cover half of domestic demand by 2030.",
+      "readings": [
+        {
+          "m": "TSI",
+          "v": 69,
+          "d": "+8",
+          "note": "Naval posture elevated; air tempo mixed"
+        },
+        {
+          "m": "GSI",
+          "v": 61,
+          "d": "+4",
+          "note": "Theater stress spills into regional risk"
+        },
+        {
+          "m": "CPR",
+          "v": 55,
+          "d": "+2",
+          "note": "Copper and chip-input pressure modest so far"
+        }
+      ],
+      "scenarios": [
+        {
+          "p": 60,
+          "name": "Signal, then stand-down",
+          "text": "Deployments return to port within weeks; insurance and freight retrace; no chip shipment disruption."
+        },
+        {
+          "p": 30,
+          "name": "Prolonged grey-zone pressure",
+          "text": "Coast Guard 'law-enforcement patrols' and inspections become routine east of Taiwan; premiums stay elevated."
+        },
+        {
+          "p": 10,
+          "name": "Quarantine-style disruption",
+          "text": "Shipments are delayed or inspected; downstream shortages build over three to six months."
+        }
+      ],
+      "watch": [
+        "Taiwan MND daily PLA activity reports",
+        "China Coast Guard patrol announcements east of Taiwan",
+        "Western Pacific hull and cargo war-risk quotes",
+        "PRC rare-earth and magnet export licensing"
+      ],
+      "sources": [
+        {
+          "name": "ISW / AEI · China & Taiwan Update, 6 Nov 2026",
+          "url": "https://understandingwar.org/research/china-taiwan/china-taiwan-update-november-6-2026/"
+        },
+        {
+          "name": "Taiwan Security Monitor · Strait Snapshot, October 2026",
+          "url": "https://tsm.schar.gmu.edu/strait-snapshot-october-2026-update/"
+        },
+        {
+          "name": "Taipei Times · PLA may be simulating Taiwan isolation (8 Nov 2026)",
+          "url": "https://www.taipeitimes.com/News/front/archives/2026/11/08/2003867351"
+        },
+        {
+          "name": "ISW / AEI · China & Taiwan Update, 27 Oct 2026",
+          "url": "https://understandingwar.org/research/china-taiwan/china-taiwan-update-october-27-2026/"
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "slug": "baltic-gnss-jamming-undersea-cables",
+      "region": "Europe · Baltic",
+      "date": "2026-11-07",
+      "read": "4 min",
+      "models": [
+        "IIS",
+        "TSI"
+      ],
+      "title": "GNSS jamming and undersea cables: the infrastructure flank",
+      "bluf": "In the Baltic, the two infrastructure threats are diverging: NATO reports a drastic drop in undersea-infrastructure incidents since Baltic Sentry began, while satellite-navigation interference has intensified through 2026. The live risk to shipping and aviation is now in the spectrum, not on the seabed.",
+      "judgements": [
+        "NATO told the European Parliament on 3 November that its last observed Baltic undersea-infrastructure incident was in January 2026 and limited in impact.",
+        "Poland's National Institute of Telecommunications recorded all-band GNSS interference on 70% of days in May and June around the Tri-City area.",
+        "Deterrence is hard to prove: the threat may have moved to other regions or domains rather than disappeared."
+      ],
+      "situation": "Baltic Sentry, launched on 14 January 2025, combines frigates, maritime patrol aircraft and naval drones with the MAINSAIL data tool. Separately, the Commission funded two regional cable-security hubs (€5.8m) and a €40m repair-capacity call in June 2026. On the spectrum side, Finland's Traficom reports increased disruption in the eastern Gulf of Finland, and NATO tested its GANDALF 4 jamming-detection sensor at sea in July. Researchers have traced Baltic interference to electronic-warfare sites in Kaliningrad.",
+      "readings": [
+        {
+          "m": "IIS",
+          "v": 62,
+          "d": "+3",
+          "note": "Spectrum stress up, cable incidents down"
+        },
+        {
+          "m": "TSI",
+          "v": 48,
+          "d": "0",
+          "note": "Baltic theater posture steady"
+        }
+      ],
+      "scenarios": [
+        {
+          "p": 60,
+          "name": "Persistent spectrum pressure",
+          "text": "Jamming continues at 2026 levels; cable incidents stay rare; costs fall on aviation and shipping navigation."
+        },
+        {
+          "p": 25,
+          "name": "Seabed relapse",
+          "text": "A new cable or pipeline incident tests attribution and shadow-fleet sanctions enforcement."
+        },
+        {
+          "p": 15,
+          "name": "Easing",
+          "text": "Interference subsides after diplomatic or technical countermeasures."
+        }
+      ],
+      "watch": [
+        "Polish and Finnish GNSS interference monitoring",
+        "NATO Baltic Sentry statements and shadow-fleet boardings",
+        "EU cable-security action plan funding calls",
+        "NOTAMs on GNSS outages across Baltic airspace"
+      ],
+      "sources": [
+        {
+          "name": "EU Perspectives · Baltic Sentry makes sabotage too costly, NATO tells lawmakers (Nov 2026)",
+          "url": "https://euperspectives.eu/2026/11/baltic-sentry-made-sabotage-too-costly-for-russia-nato-man-tells-lawmakers/"
+        },
+        {
+          "name": "2eu.brussels · NATO reports fewer Baltic undersea infrastructure incidents",
+          "url": "https://2eu.brussels/en/news/nato-reports-sharp-decline-in-baltic-undersea-infrastructure-incidents-but-says-baltic-sentry-s-impact-is-difficult-to-measure"
+        },
+        {
+          "name": "Inside GNSS · GNSS jamming intensifies along Poland's Baltic coast",
+          "url": "https://insidegnss.com/gnss-jamming-intensifies-along-polands-baltic-coast-institute-reports/"
+        },
+        {
+          "name": "YACHT · NATO tests GANDALF 4 against GNSS jamming",
+          "url": "https://www.yacht.de/en/sailing-knowledge/navigation/navigation-gnss-jamming-nato-tests-sensor-against-gps-jamming-at-sea/"
+        }
+      ]
+    }
+  ]
+}

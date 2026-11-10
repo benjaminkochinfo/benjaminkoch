@@ -1,5 +1,5 @@
 {
-  "_readme": "WMT landing content. Edit weekly. Fields marked status:'sample' render with a SAMPLE tag until replaced with real editorial. Elections: verify each date against the official source before publishing.",
+  "_readme": "WMT landing content. Edit weekly. Briefs marked status:'sample' render with a SAMPLE tag until replaced with real editorial. thisWeek: real scheduled events only, each with date (YYYY-MM-DD), region, related WMT models and a source URL; items render on the matching date of the current week. Elections: verify each date against the official source before publishing.",
   "edition": {
     "week": "2026-W46",
     "label": "Week 46 · 9–15 Nov 2026",
@@ -20,8 +20,9 @@
       "lat": 12.5,
       "lon": 43.3,
       "title": "Bab el-Mandeb: what a sticky war-risk premium means for landed cost",
-      "dek": "SAMPLE BRIEF. Template showing how a one-page WMT brief reads: corridor posture from the terminal's transport desk, the insurance proxy, and the energy read-through, in plain language.",
-      "read": "4 min"
+      "dek": "Southern Red Sea war-risk cover has repriced to multiples of its pre-blockade level and is unlikely to normalise this winter, even though no merchant ship has been confirmed struck at sea since late August.",
+      "read": "4 min",
+      "slug": "bab-el-mandeb-war-risk-premium"
     },
     {
       "id": "b2",
@@ -35,8 +36,9 @@
       "lat": 46,
       "lon": 32,
       "title": "Grain corridor stress and the bread-price lag",
-      "dek": "SAMPLE BRIEF. Shows how FSI pressure from Black Sea export stress is translated into a household-level affordability note.",
-      "read": "3 min"
+      "dek": "The Black Sea has become a two-way port war that has choked both Ukrainian and Russian grain exports.",
+      "read": "3 min",
+      "slug": "black-sea-grain-corridor-stress"
     },
     {
       "id": "b3",
@@ -51,8 +53,9 @@
       "lat": 24.5,
       "lon": 119.5,
       "title": "Chips, copper and a strait: reading tension through the supply chain",
-      "dek": "SAMPLE BRIEF. Theater posture meets the Chips & Data desk: semiconductor exposure, data-center power, and what a TSI move would mean.",
-      "read": "5 min"
+      "dek": "A possible unannounced PLA exercise simulating Taiwan's isolation puts the strait back into supply-chain pricing.",
+      "read": "5 min",
+      "slug": "taiwan-strait-chips-supply-chain"
     },
     {
       "id": "b4",
@@ -66,8 +69,9 @@
       "lat": 56,
       "lon": 20,
       "title": "GNSS jamming and undersea cables: the infrastructure flank",
-      "dek": "SAMPLE BRIEF. How IIS reads grid, telecom and cable stress alongside the Baltic theater posture.",
-      "read": "4 min"
+      "dek": "In the Baltic, the two infrastructure threats are diverging: NATO reports a drastic drop in undersea-infrastructure incidents since Baltic Sentry began, while satellite-navigation interference has intensified through 2026.",
+      "read": "4 min",
+      "slug": "baltic-gnss-jamming-undersea-cables"
     }
   ],
   "elections": [
@@ -78,8 +82,9 @@
       "type": "Presidential, 1st round",
       "lat": 15.1,
       "lon": -23.6,
-      "watch": "Possible runoff",
-      "source": "IFES ElectionGuide / worldelect.online"
+      "watch": "Runoff 29 Nov if no majority · 6 candidates",
+      "source": "Presidência da República de Cabo Verde",
+      "url": "https://presidencia.cv/eleicoes-presidenciais-marcadas-para-15-de-novembro/"
     },
     {
       "date": "2026-11-28",
@@ -89,7 +94,8 @@
       "lat": 25.03,
       "lon": 121.56,
       "watch": "TSI context",
-      "source": "worldelect.online"
+      "source": "Central Election Commission (Taiwan)",
+      "url": "https://web.cec.gov.tw/english/article/23941"
     },
     {
       "date": "2026-11-29",
@@ -99,7 +105,8 @@
       "lat": 40.42,
       "lon": -3.7,
       "watch": "350 Congress seats",
-      "source": "IFES ElectionGuide / worldelect.online"
+      "source": "INE / Junta Electoral Central",
+      "url": "https://ine.es/dyngs/Prensa/en/EG2026.htm"
     },
     {
       "date": "2026-11-29",
@@ -108,8 +115,9 @@
       "type": "Federal referendums",
       "lat": 46.95,
       "lon": 7.45,
-      "watch": "Incl. war materiel",
-      "source": "IFES ElectionGuide"
+      "watch": "AHV/VAT, war materiel act + 2 more",
+      "source": "Swiss Federal Chancellery",
+      "url": "https://www.admin.ch/de/newnsb/KpnrPOW9cpZAvB6IXOekf"
     },
     {
       "date": "2026-12-05",
@@ -194,28 +202,169 @@
   ],
   "thisWeek": [
     {
+      "date": "2026-11-09",
       "day": "Mon",
-      "tag": "EDITION",
-      "status": "sample",
-      "text": "Weekly edition published: KMRI week-over-week, top three movers across the model suite."
+      "tag": "CLIMATE",
+      "region": "Global · Antalya, Türkiye",
+      "models": [
+        "ERI",
+        "WRI"
+      ],
+      "text": "COP31 opens in Antalya (9–20 Nov). Energy-security and grid day on Tue; watch transition-finance language for the ERI read.",
+      "source": {
+        "name": "UNFCCC",
+        "url": "https://unfccc.int/cop31"
+      }
     },
     {
-      "day": "Wed",
+      "date": "2026-11-09",
+      "day": "Mon",
       "tag": "MACRO",
-      "status": "sample",
-      "text": "Placeholder: key macro release for the Inflation desk. Replace with the week's real calendar item."
+      "region": "APAC · China",
+      "models": [
+        "CPR",
+        "GSI"
+      ],
+      "text": "China CPI/PPI for October (NBS). Factory-gate prices are the pass-through test for global goods inflation.",
+      "source": {
+        "name": "NBS China",
+        "url": "https://www.stats.gov.cn/sj/sjjd/202611/t20261109_1965796.html"
+      }
     },
     {
-      "day": "Thu",
+      "date": "2026-11-10",
+      "day": "Tue",
+      "tag": "INFLATION",
+      "region": "Americas · United States",
+      "models": [
+        "KMRI",
+        "ROR"
+      ],
+      "text": "US CPI for October, 08:30 ET (14:30 Berlin). No 12-month change published (Oct 2025 data gap); m/m is the read for December Fed pricing.",
+      "source": {
+        "name": "BLS",
+        "url": "https://www.bls.gov/schedule/news_release/cpi.htm"
+      }
+    },
+    {
+      "date": "2026-11-10",
+      "day": "Tue",
       "tag": "ENERGY",
-      "status": "sample",
-      "text": "Placeholder: energy inventory or OPEC-type event feeding ERI. Replace weekly."
+      "region": "Global",
+      "models": [
+        "ERI",
+        "CPR"
+      ],
+      "text": "EIA Short-Term Energy Outlook: crude and gas balance revisions feed the ERI baseline.",
+      "source": {
+        "name": "EIA",
+        "url": "https://www.eia.gov/outlooks/steo/release_schedule.php"
+      }
     },
     {
+      "date": "2026-11-11",
+      "day": "Wed",
+      "tag": "ENERGY",
+      "region": "Global · OPEC",
+      "models": [
+        "ERI",
+        "CPR"
+      ],
+      "text": "OPEC Monthly Oil Market Report: the producer group's demand call and quota compliance read.",
+      "source": {
+        "name": "OPEC",
+        "url": "https://www.opec.org/monthly-oil-market-report.html"
+      }
+    },
+    {
+      "date": "2026-11-11",
+      "day": "Wed",
+      "tag": "SUMMIT",
+      "region": "Global · Antalya, Türkiye",
+      "models": [
+        "ERI",
+        "GSI"
+      ],
+      "text": "COP31 World Leaders Climate Action Summit, 11–12 Nov: heads of state set the political temperature for the second week.",
+      "source": {
+        "name": "COP31 Türkiye",
+        "url": "https://cop31.tr/programme-overview"
+      }
+    },
+    {
+      "date": "2026-11-12",
+      "day": "Thu",
+      "tag": "GROWTH",
+      "region": "Europe · United Kingdom",
+      "models": [
+        "KMRI",
+        "SPI"
+      ],
+      "text": "UK GDP first estimate, Q3 (Jul–Sep), 07:00 UK (08:00 Berlin). Growth backdrop for the BoE's next move.",
+      "source": {
+        "name": "ONS",
+        "url": "https://www.ons.gov.uk/releases/gdpfirstquarterlyestimateukjulytoseptember2026timeseries"
+      }
+    },
+    {
+      "date": "2026-11-13",
       "day": "Fri",
-      "tag": "BRIEF",
-      "status": "sample",
-      "text": "Friday 60-second brief: what changed, what it means, what to watch next week."
+      "tag": "INFLATION",
+      "region": "Americas · United States",
+      "models": [
+        "CPR",
+        "KMRI"
+      ],
+      "text": "US PPI for October, 08:30 ET (14:30 Berlin). Pipeline pressure after Tuesday's CPI.",
+      "source": {
+        "name": "BLS",
+        "url": "https://www.bls.gov/schedule/2026/11_sched.htm"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "day": "Fri",
+      "tag": "GROWTH",
+      "region": "Europe · Euro area",
+      "models": [
+        "KMRI",
+        "SPI"
+      ],
+      "text": "Euro area and EU GDP and employment flash, Q3 (Eurostat T+45).",
+      "source": {
+        "name": "Eurostat",
+        "url": "https://ec.europa.eu/eurostat/documents/24987/6642470/QNA_release_calendar.pdf"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "day": "Fri",
+      "tag": "ENERGY",
+      "region": "Global",
+      "models": [
+        "ERI",
+        "TRI"
+      ],
+      "text": "IEA Oil Market Report for November: consumer-side counterpoint to Wednesday's OPEC demand view.",
+      "source": {
+        "name": "IEA",
+        "url": "https://www.iea.org/events/oil-market-report-november-2026"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "day": "Fri",
+      "tag": "SUMMIT",
+      "region": "Europe · Dublin",
+      "models": [
+        "IIS",
+        "GSI"
+      ],
+      "text": "Informal meeting of EU leaders in Dublin on AI: competitiveness, sovereignty, infrastructure and clean-energy capacity.",
+      "source": {
+        "name": "Council of the EU",
+        "url": "https://www.consilium.europa.eu/en/meetings/european-council/2026/11/13/"
+      }
     }
   ],
   "headline": {
