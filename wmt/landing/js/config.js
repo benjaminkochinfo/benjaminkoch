@@ -26,8 +26,8 @@ window.WMT_CONFIG = {
      attribute name (create a text attribute "CADENCE"), or set it to "" to omit. */
   NEWSLETTER: {
     provider: "brevo",
-    formAction: "",
-    CADENCE_FIELD: "CADENCE"
+    formAction: "https://39e981b8.sibforms.com/serve/MUIFAHWzkV1-LBO8X8eOZ8mZDRtvzGYJx8rYo9pRpIeAZZfQQLjU8UsnSLZRBPzRiFon0JS3Ntz8XwVpKzkHKswBDGNSR9w0z0WNnyuQEqIOpbCPliFN1DG5D1OcdLaWXhNItB7Oic_HcHmvwG-hFV1XTTD1FpS6HTtua00EO20WxF5NLW8zk86ri2oXKMcg1H0Hnn9Wqrq9bpoznA==",
+    CADENCE_FIELD: ""
   },
   PRESETS: [
     { name: "Berlin", lat: 52.52, lon: 13.405 },
