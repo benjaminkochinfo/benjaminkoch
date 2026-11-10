@@ -24,6 +24,8 @@ window.WMT_CONFIG = {
     quarterly_yearly: "https://buy.stripe.com/14A5kEdtQ6nZ2qAft2cs806",
     pro: "https://buy.stripe.com/9B614odtQbIjfdm3Kkcs807"
   },
+  /* Stripe customer portal (login): manage or cancel a subscription. */
+  PORTAL_URL: "https://billing.stripe.com/p/login/eVq7sMahEdQrc1a4Oocs800",
   /* Newsletter / waitlist: Brevo embedded form. Paste the form's action URL from
      Brevo > Contacts > Forms > (your form) > Share > HTML code, e.g.
      "https://xxxxxxxx.sibforms.com/serve/MUIFA...". Empty = form stays disconnected (preview).
