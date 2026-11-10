@@ -4472,7 +4472,7 @@
   }
 
   /** Keep installed app on the production entry URL when possible */
-  const PWA_ENTRY = "https://benjaminkoch.info/wm_terminal.html";
+  const PWA_ENTRY = "https://benjaminkoch.info/wmt/terminal.html";
 
   function applyStandaloneLayout() {
     const standalone = isStandaloneApp();
@@ -4537,7 +4537,7 @@
       state.deferredInstall = null;
       const btn = $("#btnInstall");
       if (btn) btn.hidden = true;
-      UI.toast("Added · opens wm_terminal.html");
+      UI.toast("Added · opens terminal.html");
       applyStandaloneLayout();
     });
   }
@@ -4561,9 +4561,9 @@
       return;
     }
     if (isIos) {
-      // iOS uses the *current* page URL for the icon — ensure users add from wm_terminal
-      if (!/wm_terminal\.html/i.test(location.pathname)) {
-        UI.toast("Open wm_terminal.html first, then Share → Add to Home Screen");
+      // iOS uses the *current* page URL for the icon — ensure users add from terminal.html
+      if (!/\/terminal\.html$/i.test(location.pathname)) {
+        UI.toast("Open terminal.html first, then Share → Add to Home Screen");
         return;
       }
       UI.toast("iPhone: Share → Add to Home Screen");

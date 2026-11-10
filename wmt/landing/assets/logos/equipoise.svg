@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140" width="560" height="140"><style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;display=swap");.w{font-family:"IBM Plex Mono",Menlo,Consolas,monospace;font-weight:600;letter-spacing:.2em;fill:#e8eaed}.s{font-family:"IBM Plex Mono",Menlo,Consolas,monospace;font-weight:500;letter-spacing:.3em;fill:#9aa3b5}</style><rect width="560" height="140" fill="#05060a"/><line x1="8" y1="70" x2="132" y2="70" stroke="#e8eaed" stroke-width="2"/>
+<circle cx="70" cy="70" r="40" fill="none" stroke="#e8eaed" stroke-width="2.2"/>
+<path d="M30 70 A40 40 0 0 0 110 70 Z" fill="#f5a623" fill-opacity=".16"/>
+<ellipse cx="70" cy="70" rx="16" ry="40" fill="none" stroke="#e8eaed" stroke-opacity=".45" stroke-width="1.2"/>
+<circle cx="10" cy="70" r="5" fill="#f5a623"/><circle cx="130" cy="70" r="5" fill="#f5a623"/>
+<path d="M70 112 L61 128 H79 Z" fill="#f5a623"/><text class="w" x="160" y="80" font-size="46">EQUIPOISE</text><rect x="160" y="96" width="28" height="2" fill="#f5a623"/><text class="s" x="198" y="101" font-size="11">RESILIENCE INTELLIGENCE · WMT</text></svg>

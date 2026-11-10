@@ -2,9 +2,9 @@
   "name": "World Monitor Terminal",
   "short_name": "WMT",
   "description": "Live world intelligence desk - news, markets, weather, affordability, impact.",
-  "id": "https://benjaminkoch.info/wm_terminal.html",
-  "start_url": "https://benjaminkoch.info/wm_terminal.html",
-  "scope": "https://benjaminkoch.info/",
+  "id": "https://benjaminkoch.info/wmt/terminal.html",
+  "start_url": "https://benjaminkoch.info/wmt/terminal.html",
+  "scope": "https://benjaminkoch.info/wmt/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "any",
@@ -15,25 +15,25 @@
   "categories": ["news", "finance", "utilities"],
   "icons": [
     {
-      "src": "https://benjaminkoch.info/icons/icon-192.png",
+      "src": "https://benjaminkoch.info/wmt/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://benjaminkoch.info/icons/icon-512.png",
+      "src": "https://benjaminkoch.info/wmt/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://benjaminkoch.info/icons/icon-192.png",
+      "src": "https://benjaminkoch.info/wmt/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://benjaminkoch.info/icons/icon-512.png",
+      "src": "https://benjaminkoch.info/wmt/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

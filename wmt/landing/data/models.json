@@ -1,0 +1,211 @@
+{
+ "_source": "Copied from WMT terminal data.js DEFAULT_INDICATORS (definitions only, no values)",
+ "models": [
+  {
+   "id": "kmri",
+   "name": "KMRI",
+   "label": "Koch Macro Resilience Index",
+   "desc": "Flagship model: kinetic tension + macro fear + food/energy stress + insurance/war-risk tone. Higher = broader multi-domain risk.",
+   "summary": "Main score for “how stressed is the world right now?”",
+   "weights": {
+    "kinetic": 28,
+    "riskTone": 18,
+    "energy": 14,
+    "food": 12,
+    "insurance": 12,
+    "newsCrisis": 10,
+    "transport": 6
+   },
+   "bipolar": false
+  },
+  {
+   "id": "gsi",
+   "name": "GSI",
+   "label": "Geopolitical Stress Index",
+   "desc": "Hotspot heat + crisis news + risk-asset tone.",
+   "summary": "",
+   "weights": {
+    "hotspots": 40,
+    "newsCrisis": 30,
+    "riskTone": 30
+   },
+   "bipolar": false
+  },
+  {
+   "id": "tsi",
+   "name": "TSI",
+   "label": "Tension Score Index",
+   "desc": "Theater posture + tensions layer + great-power keywords.",
+   "summary": "War and tension score.",
+   "weights": {
+    "theaters": 45,
+    "kinetic": 35,
+    "newsCrisis": 20
+   },
+   "bipolar": false
+  },
+  {
+   "id": "wri",
+   "name": "WRI",
+   "label": "Weather Risk Index",
+   "desc": "Storms/disasters (live EONET/USGS) + weather news velocity.",
+   "summary": "Weather and disaster stress.",
+   "weights": {
+    "weather": 50,
+    "quakes": 25,
+    "velocity": 15,
+    "newsCrisis": 10
+   },
+   "bipolar": false
+  },
+  {
+   "id": "fsi",
+   "name": "FSI",
+   "label": "Food Security Index",
+   "desc": "Wheat/cocoa/food basket pressure + ag region stress + Black Sea risk.",
+   "summary": "Food and crop stress.",
+   "weights": {
+    "food": 55,
+    "weather": 20,
+    "kinetic": 15,
+    "transport": 10
+   },
+   "bipolar": false
+  },
+  {
+   "id": "eri",
+   "name": "ERI",
+   "label": "Energy Risk Index",
+   "desc": "Oil/gas moves + Gulf/Red Sea/Black Sea energy-adjacent stress.",
+   "summary": "Oil and energy stress.",
+   "weights": {
+    "energy": 50,
+    "chokepoints": 30,
+    "theaters": 20
+   },
+   "bipolar": false
+  },
+  {
+   "id": "tri",
+   "name": "TRI",
+   "label": "Transport Risk Index",
+   "desc": "Chokepoints, freight proxies, shipping news.",
+   "summary": "Shipping and transport stress.",
+   "weights": {
+    "transport": 55,
+    "chokepoints": 25,
+    "insurance": 20
+   },
+   "bipolar": false
+  },
+  {
+   "id": "iri",
+   "name": "IRI",
+   "label": "Insurance Risk Proxy",
+   "desc": "War-risk + CAT proxies + marine corridor stress.",
+   "summary": "Insurance stress (storms and war).",
+   "weights": {
+    "insurance": 50,
+    "transport": 20,
+    "weather": 15,
+    "kinetic": 15
+   },
+   "bipolar": false
+  },
+  {
+   "id": "cpr",
+   "name": "CPR",
+   "label": "Commodity Pressure Ratio",
+   "desc": "Softs + energy + metals simultaneous pressure.",
+   "summary": "When many commodity prices rise together.",
+   "weights": {
+    "food": 35,
+    "energy": 35,
+    "riskTone": 15,
+    "transport": 15
+   },
+   "bipolar": false
+  },
+  {
+   "id": "ror",
+   "name": "ROR",
+   "label": "Risk-On / Risk-Off",
+   "desc": "−100 risk-off … +100 risk-on from crypto/equity vs gold/fear.",
+   "summary": "",
+   "weights": {
+    "riskOn": 50,
+    "safeHaven": 50
+   },
+   "bipolar": true
+  },
+  {
+   "id": "nvi",
+   "name": "NVI",
+   "label": "News Velocity Index",
+   "desc": "Headline throughput scaled — spikes often lead tape moves.",
+   "summary": "",
+   "weights": {
+    "velocity": 100
+   },
+   "bipolar": false
+  },
+  {
+   "id": "cci",
+   "name": "CCI",
+   "label": "Crisis Convergence",
+   "desc": "Co-firing of elevated theaters, critical alerts, strong quakes.",
+   "summary": "",
+   "weights": {
+    "theaters": 35,
+    "alerts": 40,
+    "quakes": 25
+   },
+   "bipolar": false
+  },
+  {
+   "id": "spi",
+   "name": "SPI",
+   "label": "Stability Path Index",
+   "desc": "Constructive-stability model: lower kinetic + higher risk-on + cooler insurance = more room for positive paths. Higher SPI = more constructive headroom.",
+   "summary": "Room for things to get better (higher is better).",
+   "weights": {
+    "riskOn": 35,
+    "safeHaven": 15,
+    "kinetic": 25,
+    "insurance": 15,
+    "transport": 10
+   },
+   "bipolar": false
+  },
+  {
+   "id": "osi",
+   "name": "OSI",
+   "label": "Open-Source Intensity",
+   "desc": "Live public signal density: news velocity + crisis tone + disaster/quake heat.",
+   "summary": "How loud the news feed is.",
+   "weights": {
+    "velocity": 40,
+    "newsCrisis": 30,
+    "weather": 15,
+    "quakes": 15
+   },
+   "bipolar": false
+  },
+  {
+   "id": "iis",
+   "name": "IIS",
+   "label": "Infrastructure Integrity Stress",
+   "desc": "Overall power-grid, telecom, and outage stress. Higher = more fragile electricity and networks.",
+   "summary": "Power grid, telecom, and outage stress.",
+   "weights": {
+    "outageHeat": 40,
+    "powerStress": 25,
+    "telecomStress": 20,
+    "energy": 10,
+    "weather": 5
+   },
+   "bipolar": false
+  }
+ ],
+ "_note": "KMRI = Koch Macro Resilience Index (per Dr. Benjamin Koch). The terminal UI itself still labels it \"Kinetic-Macro Risk Index\" in data.js; that file was not modified."
+}

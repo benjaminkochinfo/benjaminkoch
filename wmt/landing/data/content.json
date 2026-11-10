@@ -1,0 +1,226 @@
+{
+  "_readme": "WMT landing content. Edit weekly. Fields marked status:'sample' render with a SAMPLE tag until replaced with real editorial. Elections: verify each date against the official source before publishing.",
+  "edition": {
+    "week": "2026-W46",
+    "label": "Week 46 · 9–15 Nov 2026",
+    "updated": "2026-11-10",
+    "status": "sample"
+  },
+  "briefs": [
+    {
+      "id": "b1",
+      "status": "sample",
+      "date": "2026-11-10",
+      "region": "MENA · Red Sea",
+      "models": [
+        "TRI",
+        "IRI",
+        "ERI"
+      ],
+      "lat": 12.5,
+      "lon": 43.3,
+      "title": "Bab el-Mandeb: what a sticky war-risk premium means for landed cost",
+      "dek": "SAMPLE BRIEF. Template showing how a one-page WMT brief reads: corridor posture from the terminal's transport desk, the insurance proxy, and the energy read-through, in plain language.",
+      "read": "4 min"
+    },
+    {
+      "id": "b2",
+      "status": "sample",
+      "date": "2026-11-09",
+      "region": "Black Sea",
+      "models": [
+        "FSI",
+        "KMRI"
+      ],
+      "lat": 46,
+      "lon": 32,
+      "title": "Grain corridor stress and the bread-price lag",
+      "dek": "SAMPLE BRIEF. Shows how FSI pressure from Black Sea export stress is translated into a household-level affordability note.",
+      "read": "3 min"
+    },
+    {
+      "id": "b3",
+      "status": "sample",
+      "date": "2026-11-08",
+      "region": "APAC · Taiwan Strait",
+      "models": [
+        "TSI",
+        "GSI",
+        "CPR"
+      ],
+      "lat": 24.5,
+      "lon": 119.5,
+      "title": "Chips, copper and a strait: reading tension through the supply chain",
+      "dek": "SAMPLE BRIEF. Theater posture meets the Chips & Data desk: semiconductor exposure, data-center power, and what a TSI move would mean.",
+      "read": "5 min"
+    },
+    {
+      "id": "b4",
+      "status": "sample",
+      "date": "2026-11-07",
+      "region": "Europe · Baltic",
+      "models": [
+        "IIS",
+        "TSI"
+      ],
+      "lat": 56,
+      "lon": 20,
+      "title": "GNSS jamming and undersea cables: the infrastructure flank",
+      "dek": "SAMPLE BRIEF. How IIS reads grid, telecom and cable stress alongside the Baltic theater posture.",
+      "read": "4 min"
+    }
+  ],
+  "elections": [
+    {
+      "date": "2026-11-15",
+      "country": "Cabo Verde",
+      "iso": "CPV",
+      "type": "Presidential, 1st round",
+      "lat": 15.1,
+      "lon": -23.6,
+      "watch": "Possible runoff",
+      "source": "IFES ElectionGuide / worldelect.online"
+    },
+    {
+      "date": "2026-11-28",
+      "country": "Taiwan",
+      "iso": "TWN",
+      "type": "Local elections",
+      "lat": 25.03,
+      "lon": 121.56,
+      "watch": "TSI context",
+      "source": "worldelect.online"
+    },
+    {
+      "date": "2026-11-29",
+      "country": "Spain",
+      "iso": "ESP",
+      "type": "Snap general election",
+      "lat": 40.42,
+      "lon": -3.7,
+      "watch": "350 Congress seats",
+      "source": "IFES ElectionGuide / worldelect.online"
+    },
+    {
+      "date": "2026-11-29",
+      "country": "Switzerland",
+      "iso": "CHE",
+      "type": "Federal referendums",
+      "lat": 46.95,
+      "lon": 7.45,
+      "watch": "Incl. war materiel",
+      "source": "IFES ElectionGuide"
+    },
+    {
+      "date": "2026-12-05",
+      "country": "The Gambia",
+      "iso": "GMB",
+      "type": "Presidential",
+      "lat": 13.45,
+      "lon": -16.58,
+      "watch": "",
+      "source": "IFES / NDI"
+    },
+    {
+      "date": "2026-12-13",
+      "country": "Haiti",
+      "iso": "HTI",
+      "type": "General, 1st round",
+      "lat": 18.54,
+      "lon": -72.34,
+      "watch": "High CII country",
+      "source": "worldelect.online (NDI lists a different phase date)"
+    },
+    {
+      "date": "2026-12-22",
+      "country": "South Sudan",
+      "iso": "SSD",
+      "type": "General",
+      "lat": 4.85,
+      "lon": 31.58,
+      "watch": "Date tentative",
+      "source": "IFES ElectionGuide (tentative)"
+    },
+    {
+      "date": "2027-01-16",
+      "country": "Nigeria",
+      "iso": "NGA",
+      "type": "General",
+      "lat": 9.07,
+      "lon": 7.49,
+      "watch": "Sahel theater adjacency",
+      "source": "NDI / StanfordVotes"
+    },
+    {
+      "date": "2027-01-30",
+      "country": "Germany",
+      "iso": "DEU",
+      "type": "Federal President (Bundesversammlung)",
+      "lat": 52.52,
+      "lon": 13.4,
+      "watch": "Indirect",
+      "source": "worldelect.online"
+    },
+    {
+      "date": "2027-02-28",
+      "country": "El Salvador",
+      "iso": "SLV",
+      "type": "General",
+      "lat": 13.69,
+      "lon": -89.22,
+      "watch": "",
+      "source": "NDI / StanfordVotes"
+    },
+    {
+      "date": "2027-03-07",
+      "country": "Estonia",
+      "iso": "EST",
+      "type": "Parliamentary",
+      "lat": 59.44,
+      "lon": 24.75,
+      "watch": "Baltic hybrid zone",
+      "source": "worldelect.online (sources differ on date)"
+    },
+    {
+      "date": "2027-04-18",
+      "country": "France",
+      "iso": "FRA",
+      "type": "Presidential, 1st round",
+      "lat": 48.86,
+      "lon": 2.35,
+      "watch": "Date to confirm",
+      "source": "StanfordVotes (to confirm)"
+    }
+  ],
+  "thisWeek": [
+    {
+      "day": "Mon",
+      "tag": "EDITION",
+      "status": "sample",
+      "text": "Weekly edition published: KMRI week-over-week, top three movers across the model suite."
+    },
+    {
+      "day": "Wed",
+      "tag": "MACRO",
+      "status": "sample",
+      "text": "Placeholder: key macro release for the Inflation desk. Replace with the week's real calendar item."
+    },
+    {
+      "day": "Thu",
+      "tag": "ENERGY",
+      "status": "sample",
+      "text": "Placeholder: energy inventory or OPEC-type event feeding ERI. Replace weekly."
+    },
+    {
+      "day": "Fri",
+      "tag": "BRIEF",
+      "status": "sample",
+      "text": "Friday 60-second brief: what changed, what it means, what to watch next week."
+    }
+  ],
+  "headline": {
+    "kicker": "ISOLINE · WORLD INTELLIGENCE BY WMT",
+    "title": "The world, connected in one terminal.",
+    "sub": "WMT fuses live public news, markets, weather, disasters and shipping into fifteen self-developed risk models, led by the KMRI flagship. Open the terminal for the live desk, or get the read delivered weekly, monthly or quarterly."
+  }
+}

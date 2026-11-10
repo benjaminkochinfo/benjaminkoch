@@ -1,427 +1,348 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5" />
-  <meta name="description" content="World Intelligence Terminal — live multiview desk: self-contained broadcast map, Answer Desk, KMRI models, public news & markets, Bloomberg-style charts." />
-  <meta name="theme-color" content="#07080b" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#07080b" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="WMT" />
-  <meta name="application-name" content="WMT" />
-  <meta name="format-detection" content="telephone=no" />
-  <link rel="canonical" href="https://benjaminkoch.info/wm_terminal.html" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-192.png" />
-  <title>WMT // WORLD INTELLIGENCE TERMINAL</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ISOLINE · World intelligence by WMT: the world, connected</title>
+<meta name="description" content="WMT World Monitor: a live world intelligence terminal and weekly, monthly and quarterly risk reports built on fifteen self-developed models led by KMRI." />
+<meta name="theme-color" content="#06070a" />
+<meta property="og:title" content="ISOLINE · World intelligence by WMT" />
+<meta property="og:description" content="The world, read before it is news. Live terminal and subscription reports." />
+<link rel="icon" type="image/svg+xml" href="landing/assets/logos/favicon-isoline.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.3.27/dist/lenis.css" />
+<link rel="stylesheet" href="landing/css/site.css" />
 </head>
-<body class="view-desktop">
-  <div class="terminal" id="app">
-    <header class="topbar" role="banner">
-      <div class="topbar-left">
-        <div class="brand" data-tip="World Intelligence Terminal. Scenario × Lens × Country triad. Layout and models save only for this visit (no cookies).">
-          <span class="brand-logo" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="1.25" opacity="0.35"/>
-              <ellipse cx="16" cy="16" rx="6.5" ry="14.5" stroke="currentColor" stroke-width="1.1" opacity="0.45"/>
-              <path d="M2 16h28M16 2c3.5 3.2 5.5 7.4 5.5 14S19.5 26.8 16 30C12.5 26.8 10.5 22.6 10.5 16S12.5 5.2 16 2z" stroke="currentColor" stroke-width="1.1" opacity="0.55"/>
-              <circle cx="16" cy="16" r="2.2" fill="currentColor"/>
-              <path d="M22 8.5h5.5v5.5" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M27.5 8.5L18 18" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <div class="brand-text">
-            <span class="brand-name">WORLD<span class="brand-name-sep"> </span><span class="accent">MONITOR</span></span>
-            <span class="brand-sub">INTELLIGENCE TERMINAL</span>
-          </div>
-          <span class="brand-live" title="Live" aria-label="Live">
-            <span class="brand-cursor" aria-hidden="true"></span>
-          </span>
-        </div>
-      </div>
-
-      <div class="topbar-center">
-        <div class="search-box" data-tip="Search country, ticker, crisis, answer. Shortcut: /">
-          <span class="search-ico">⌕</span>
-          <input type="search" id="globalSearch" placeholder="Search country, ticker, crisis, answer…" autocomplete="off" aria-label="Global search" role="combobox" aria-autocomplete="list" aria-controls="searchSuggest" aria-expanded="false" />
-          <div class="search-suggest" id="searchSuggest" role="listbox" hidden></div>
-        </div>
-      </div>
-
-      <div class="topbar-right">
-        <!-- Layout is automatic (responsive). Hidden toggle kept for app.js compatibility. -->
-        <div class="view-toggle" id="viewToggle" hidden aria-hidden="true">
-          <button type="button" class="vt-btn active" data-viewmode="desktop">DESK</button>
-          <button type="button" class="vt-btn" data-viewmode="mobile">PHONE</button>
-        </div>
-        <button type="button" class="icon-btn" id="btnRailToggle" data-tip="Collapse / expand desk rail" aria-label="Collapse desks" aria-pressed="false" title="Collapse desks">‹</button>
-        <button type="button" class="icon-btn" id="btnStreamToggle" data-tip="Collapse / expand bottom stream" aria-label="Collapse stream" aria-pressed="false" title="Collapse stream">▾</button>
-        <button type="button" class="icon-btn install-btn" id="btnInstall" data-tip="Add World Monitor to the home screen" aria-label="Add to home screen" hidden>↓ HOME</button>
-        <div class="feed-health" id="feedHealth" data-tip="Feed health. Click for details." role="status">
-          <span class="fh-dot ok" id="fhDot"></span>
-          <span id="fhLabel">FEEDS</span>
-          <span class="fh-count" id="fhCount">—</span>
-        </div>
-        <div class="status-live" data-tip="Auto-refresh active across live sources.">
-          <span class="pulse"></span><span>AUTO</span>
-        </div>
-        <div class="clock-block" data-tip="UTC reference time">
-          <span class="clock-label">UTC</span>
-          <span class="clock" id="clock">--:--:--</span>
-        </div>
-        <button class="icon-btn" id="btnLayout" data-tip="Layout edit: drag panel headers to reorder" aria-label="Layout edit" aria-pressed="false">⊡</button>
-        <button class="icon-btn" id="btnHowTo" data-tip="How to use" aria-label="How to use">?</button>
-        <button class="icon-btn" id="btnSettings" data-tip="Sources, indicators, intervals" aria-label="Settings">⚙</button>
-      </div>
-    </header>
-
-    <div class="context-bar" id="contextBar">
-      <div class="ctx-group" data-tip="Domain filter — what desk you are on.">
-        <label class="ctx-label">DOMAIN</label>
-        <div class="domain-pills" id="domainPills" role="tablist"></div>
-      </div>
-      <div class="ctx-group grow" data-tip="World region filter — Americas, Europe, APAC, Africa, MENA… scopes country list and panels.">
-        <label class="ctx-label" for="regionSelect">REGION</label>
-        <select id="regionSelect" aria-label="World region">
-          <option value="all">All regions</option>
-        </select>
-      </div>
-      <div class="ctx-group grow" data-tip="Developed or developing / emerging economies (illustrative advanced-economy list).">
-        <label class="ctx-label" for="develSelect">ECONOMY</label>
-        <select id="develSelect" aria-label="Developed or developing">
-          <option value="all">All economies</option>
-          <option value="developed">Developed</option>
-          <option value="developing">Developing</option>
-        </select>
-      </div>
-      <div class="ctx-group grow" data-tip="Country focus. Map flies there; briefs, weather, affordability, and news re-filter. All countries in scope are listed.">
-        <label class="ctx-label" for="countrySelect">COUNTRY</label>
-        <select id="countrySelect" aria-label="Focus country">
-          <option value="">Global / region</option>
-        </select>
-      </div>
-      <div class="ctx-group grow" data-tip="Intelligence lens — the decision question the Answer Desk prioritizes.">
-        <label class="ctx-label" for="lensSelect">LENS</label>
-        <select id="lensSelect" aria-label="Intelligence lens"></select>
-      </div>
-      <div class="ctx-group grow" data-tip="Scenario lens — filters events and stresses relevant risk models.">
-        <label class="ctx-label" for="scenarioSelect">SCENARIO</label>
-        <select id="scenarioSelect" aria-label="Scenario lens"></select>
-      </div>
-      <div class="ctx-group grow" data-tip="Focus a macro instrument or commodity.">
-        <label class="ctx-label" for="instrumentSelect">INSTRUMENT</label>
-        <select id="instrumentSelect" aria-label="Focus instrument">
-          <option value="">All instruments</option>
-        </select>
-      </div>
-      <div class="ctx-group" data-tip="Event time window">
-        <label class="ctx-label">RANGE</label>
-        <div class="time-range" id="timeRange">
-          <button data-range="1h">1H</button>
-          <button data-range="6h">6H</button>
-          <button data-range="24h" class="active">24H</button>
-          <button data-range="7d">7D</button>
-          <button data-range="all">ALL</button>
-        </div>
-      </div>
-      <div class="ctx-focus-chip" id="focusChip" hidden>
-        <span id="focusChipText"></span>
-        <button type="button" id="focusClear" aria-label="Clear focus">×</button>
-      </div>
-    </div>
-
-    <div class="body-row">
-      <nav class="side-nav" id="sideNav" aria-label="Pre-configured desks">
-        <div class="nav-section">
-          <span>DESKS</span>
-          <button type="button" class="rail-pin" id="btnRailToggle2" title="Collapse desks" aria-label="Collapse desks">‹</button>
-        </div>
-        <div id="deskNav"></div>
-        <div class="nav-foot mono" id="navFoot">KMRI —</div>
-      </nav>
-
-      <div class="main-col">
-        <div class="ticker-wrap" data-tip="Flash headlines (top) · live indices (bottom). Hover flash to pause.">
-          <div class="flash-row">
-            <div class="ticker-label">FLASH</div>
-            <div class="ticker" id="ticker"><div class="ticker-track" id="tickerTrack"></div></div>
-          </div>
-          <div class="indices-row">
-            <div class="indices-label">INDICES</div>
-            <div class="macro-strip" id="macroStrip" data-tip="Click an instrument to set focus."></div>
-          </div>
-        </div>
-
-        <main class="workspace" id="workspace">
-          <div class="view-header" id="viewHeader">
-            <div class="view-header-main">
-              <div class="view-path" id="viewPath">GLOBAL · OVERVIEW · BASELINE</div>
-              <h1 id="viewTitle">COMMAND</h1>
-              <p id="viewDesc">At a glance: pulse, map, answers, KMRI.</p>
-            </div>
-            <div class="view-header-meta">
-              <span class="pill" id="viewPill">GLOBAL</span>
-              <span class="pill soft" id="lensPill">OVERVIEW</span>
-              <span class="pill soft" id="modelPill">KMRI —</span>
-              <button type="button" class="btn-ghost sm" id="btnHowToInline">HOW TO USE</button>
-            </div>
-          </div>
-          <div class="layout-banner" id="layoutBanner" hidden>
-            <strong>LAYOUT EDIT ON</strong>
-            <span>Drag a <b>panel header</b> onto another panel to reorder · drag the <b>corner</b> to resize · saves for this visit only</span>
-            <button id="btnLayoutDone" class="btn-amber">DONE</button>
-            <button id="btnLayoutReset" class="btn-ghost">RESET ALL</button>
-          </div>
-          <div class="widget-grid" id="widgetGrid" data-edit="false"></div>
-        </main>
-      </div>
-    </div>
-
-    <footer class="bottom-bar" id="bottomBar" role="contentinfo" data-stream-mode="open">
-      <div class="stream-head">
-        <div class="stream-tabs" id="streamTabs">
-          <button class="st active" data-stream="multi">MULTIVIEW</button>
-          <button class="st" data-stream="news">NEWS</button>
-          <button class="st" data-stream="markets">MARKETS</button>
-          <button class="st" data-stream="events">EVENTS</button>
-          <button class="st" data-stream="disasters">DISASTERS</button>
-          <button class="st" data-stream="log">LOG</button>
-        </div>
-        <span class="stream-hint mono">4-COL · NEWEST ↑ · LIVE SOURCES</span>
-        <div class="stream-tools">
-          <button type="button" class="stool active" id="btnStreamOpen" title="Expand stream">▴ FULL</button>
-          <button type="button" class="stool" id="btnStreamCompact" title="Compact stream">▾ COMPACT</button>
-          <button type="button" class="stool" id="btnStreamHide" title="Hide stream">× HIDE</button>
-        </div>
-      </div>
-      <div class="stream-pane multiview-tape" id="streamPane"></div>
-      <div class="func-keys">
-        <span><kbd>/</kbd> search</span>
-        <span><kbd>E</kbd> layout</span>
-        <span><kbd>R</kbd> refresh</span>
-        <span><kbd>G</kbd> map</span>
-        <span><kbd>A</kbd> answers</span>
-        <span><kbd>K</kbd> models</span>
-        <span><kbd>1</kbd>–<kbd>0</kbd> desks</span>
-        <span><kbd>?</kbd> help</span>
-        <span class="dev-credit" title="Developer credit">developed by Dr. Benjamin Koch</span>
-        <span class="fk-right mono" id="footerStatus">BOOTING…</span>
-      </div>
-    </footer>
-
-    <!-- Mobile / phone navigation: filters sheet · desk rail · thumb bar -->
-    <nav class="mobile-dock" id="mobileDock" aria-label="Phone navigation" hidden>
-      <div class="md-sheet" id="mdFilterSheet" hidden>
-        <div class="md-sheet-head">
-          <strong>Filters</strong>
-          <button type="button" class="md-sheet-x" id="mdFilterClose" aria-label="Close filters">×</button>
-        </div>
-        <p class="md-sheet-hint">Region · economy · country · lens — same controls as the top bar</p>
-        <div class="md-filter-actions">
-          <button type="button" class="md-fa" id="mdJumpCountry">Open country list</button>
-          <button type="button" class="md-fa" id="mdJumpRegion">Open region</button>
-          <button type="button" class="md-fa" id="mdJumpLens">Open lens</button>
-          <button type="button" class="md-fa ghost" id="mdClearFocus">Clear focus</button>
-        </div>
-      </div>
-      <div class="md-sheet md-sheet-more" id="mdMoreSheet" hidden>
-        <div class="md-sheet-head">
-          <strong>All desks</strong>
-          <button type="button" class="md-sheet-x" id="mdMoreClose" aria-label="Close desks">×</button>
-        </div>
-        <div class="md-more-grid" id="mdMoreGrid"></div>
-      </div>
-      <div class="md-rail-wrap">
-        <div class="md-rail" id="mobileDeskRail" role="tablist" aria-label="Desks"></div>
-      </div>
-      <div class="md-quick" role="toolbar" aria-label="Quick actions">
-        <button type="button" class="md-q" id="mdFilters" aria-label="Filters">
-          <span class="md-q-ico">☰</span><span class="md-q-lab">Filters</span>
-        </button>
-        <button type="button" class="md-q" id="mdAnswers" aria-label="Answers">
-          <span class="md-q-ico">✦</span><span class="md-q-lab">Answers</span>
-        </button>
-        <button type="button" class="md-q primary" id="mdMap" aria-label="Map">
-          <span class="md-q-ico">◎</span><span class="md-q-lab">Map</span>
-        </button>
-        <button type="button" class="md-q" id="mdMore" aria-label="All desks">
-          <span class="md-q-ico">▦</span><span class="md-q-lab">Desks</span>
-        </button>
-        <button type="button" class="md-q" id="mdHelp" aria-label="Help">
-          <span class="md-q-ico">?</span><span class="md-q-lab">Help</span>
-        </button>
-      </div>
-    </nav>
-    <div class="md-backdrop" id="mdBackdrop" hidden></div>
+<body>
+<div id="boot" aria-hidden="true">
+  <div class="boot-in">
+    <svg viewBox="0 0 140 140" class="boot-glyph" aria-hidden="true"><defs><clipPath id="cb"><circle cx="70" cy="70" r="50"/></clipPath></defs>
+<circle cx="70" cy="70" r="50" fill="#0b0d12" stroke="#e8eaed" stroke-width="2.2"/>
+<g clip-path="url(#cb)" fill="none" stroke="#f5a623">
+<path d="M14 92 C30 60 52 44 78 40 C104 36 122 50 126 66" stroke-opacity=".35" stroke-width="1.6"/>
+<ellipse cx="80" cy="64" rx="38" ry="27" transform="rotate(-22 80 64)" stroke-opacity=".5" stroke-width="1.8"/>
+<ellipse cx="86" cy="59" rx="24" ry="16" transform="rotate(-22 86 59)" stroke-opacity=".75" stroke-width="2"/>
+<ellipse cx="90" cy="56" rx="11" ry="7.5" transform="rotate(-22 90 56)" stroke-width="2.2"/>
+</g><circle cx="91" cy="55.5" r="3.6" fill="#f5a623"/></svg>
+    <div class="boot-mark">ISOLINE<span class="dot"></span></div>
+    <div class="boot-sub">WORLD INTELLIGENCE · POWERED BY THE WMT TERMINAL</div>
+    <div class="boot-bar"><i></i></div>
+    <div class="boot-log" id="bootLog">BOOTING…</div>
   </div>
+</div>
 
-  <aside class="drawer" id="drawer" aria-hidden="true" role="dialog">
-    <div class="drawer-head"><span id="drawerTitle">DETAIL</span><button id="drawerClose" aria-label="Close">×</button></div>
-    <div class="drawer-body" id="drawerBody"></div>
-  </aside>
-  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+<div id="globeLayer" aria-hidden="true"><div id="globe"></div><div class="globe-vignette"></div></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 
-  <div class="modal" id="settingsModal" hidden role="dialog" aria-modal="true">
-    <div class="modal-card wide">
-      <div class="modal-head">
-        <h2>SETTINGS · SOURCES · INDICATORS</h2>
-        <button class="icon-btn" id="settingsClose" aria-label="Close">×</button>
-      </div>
-      <div class="modal-body">
-        <div class="settings-tabs" id="settingsTabs">
-          <button class="stab active" data-stab="intervals">Intervals</button>
-          <button class="stab" data-stab="indicators">Indicators</button>
-          <button class="stab" data-stab="news">News Sources</button>
-          <button class="stab" data-stab="models">Risk Models</button>
-          <button class="stab" data-stab="maint">Maintenance</button>
-        </div>
-        <div class="stab-panel" data-panel="intervals">
-          <h3>Refresh intervals (seconds)</h3>
-          <div class="settings-grid" id="intervalSettings"></div>
-        </div>
-        <div class="stab-panel" data-panel="indicators" hidden>
-          <h3>Custom &amp; proprietary indicators (KMRI, SPI, and more)</h3>
-          <p class="hint">Weights 0–100. This visit only (no browser storage). KMRI is the flagship multi-domain composite.</p>
-          <div id="indicatorEditor"></div>
-          <button class="btn-amber" id="btnAddIndicator" type="button">+ ADD INDICATOR</button>
-        </div>
-        <div class="stab-panel" data-panel="news" hidden>
-          <h3>News sources</h3>
-          <div class="feed-toggles" id="newsSourceToggles"></div>
-        </div>
-        <div class="stab-panel" data-panel="models" hidden>
-          <h3>Risk model catalog</h3>
-          <div id="modelCatalog"></div>
-        </div>
-        <div class="stab-panel" data-panel="maint" hidden>
-          <h3>Maintenance</h3>
-          <div class="btn-row">
-            <button class="btn-ghost" id="btnRefreshAll" type="button">REFRESH ALL FEEDS</button>
-            <button class="btn-ghost danger" id="btnFactoryReset" type="button">RESET THIS VISIT</button>
-          </div>
-          <p class="hint">
-            <strong>Privacy:</strong> no cookies, no local browser storage, no feed cache on the device. Live public sources only for this visit;
-            if a feed fails, the terminal uses in-memory fallbacks for this session, then model seeds — nothing is written to disk.
-            Sources include major public news RSS, Yahoo quotes, CoinGecko, FX APIs, USGS, NASA EONET, and Open-Meteo. The situation map is fully local (no external map tiles).
-          </p>
-          <p class="hint dev-credit-settings">Developed by Dr. Benjamin Koch</p>
-        </div>
-      </div>
+<header class="nav" id="nav">
+  <a href="#top" class="brand" aria-label="ISOLINE home"><svg viewBox="0 0 140 140" class="brand-glyph" aria-hidden="true"><defs><clipPath id="c"><circle cx="70" cy="70" r="50"/></clipPath></defs>
+<circle cx="70" cy="70" r="50" fill="#0b0d12" stroke="#e8eaed" stroke-width="2.2"/>
+<g clip-path="url(#c)" fill="none" stroke="#f5a623">
+<path d="M14 92 C30 60 52 44 78 40 C104 36 122 50 126 66" stroke-opacity=".35" stroke-width="1.6"/>
+<ellipse cx="80" cy="64" rx="38" ry="27" transform="rotate(-22 80 64)" stroke-opacity=".5" stroke-width="1.8"/>
+<ellipse cx="86" cy="59" rx="24" ry="16" transform="rotate(-22 86 59)" stroke-opacity=".75" stroke-width="2"/>
+<ellipse cx="90" cy="56" rx="11" ry="7.5" transform="rotate(-22 90 56)" stroke-width="2.2"/>
+</g><circle cx="91" cy="55.5" r="3.6" fill="#f5a623"/></svg><span class="brand-txt"><b>ISOLINE</b><small>WORLD INTELLIGENCE · WMT</small></span></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#models">Models</a>
+    <a href="#briefs">Briefs</a>
+    <a href="#elections">Elections</a>
+    <a href="#week">This Week</a>
+    <a href="#watched">Watched</a>
+    <a href="#reports">Reports</a>
+  </nav>
+  <div class="nav-right">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu"><span></span><span></span><em>MENU</em></button>
+    <a class="btn btn-solid btn-sm" data-terminal href="#">Launch terminal <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+
+<div class="wire" id="wire" aria-label="Live wire">
+  <span class="live"><i></i>LIVE</span>
+  <span id="wireDate">—</span>
+  <span class="wire-utc">UTC <b id="wireClock">--:--:--</b></span>
+  <div class="wire-track"><div class="wire-roll" id="wireRoll"><span class="mute">Connecting to public sources…</span></div></div>
+</div>
+
+<aside class="menu" id="menu" aria-hidden="true">
+  <div class="menu-grid">
+    <ol class="menu-list">
+      <li><a href="#top"><span>00</span>Overview</a></li>
+      <li><a href="#signal"><span>01</span>How WMT reads the world</a></li>
+      <li><a href="#models"><span>02</span>The model suite</a></li>
+      <li><a href="#briefs"><span>03</span>Intelligence briefs</a></li>
+      <li><a href="#elections"><span>04</span>Elections tracker</a></li>
+      <li><a href="#week"><span>05</span>This week</a></li>
+      <li><a href="#watched"><span>06</span>Watched · near you</a></li>
+      <li><a href="#reports"><span>07</span>Reports &amp; subscriptions</a></li>
+      <li><a href="#" data-terminal><span>↗</span>Launch the terminal</a></li>
+    </ol>
+    <div class="menu-side">
+      <div class="label">DESKS IN THE TERMINAL</div>
+      <ul class="menu-desks" id="menuDesks"></ul>
+      <div class="label" style="margin-top:28px">STATUS</div>
+      <p class="mono small">No cookies · no browser storage · live public sources only.</p>
     </div>
   </div>
+</aside>
 
-  <div class="modal" id="howToModal" hidden role="dialog" aria-modal="true">
-    <div class="modal-card wide howto-card">
-      <div class="modal-head">
-        <h2>HOW TO USE · WORLD INTELLIGENCE TERMINAL</h2>
-        <button class="icon-btn" id="howToClose" aria-label="Close">×</button>
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="kicker"><i></i><span id="heroKicker">WORLD MONITOR · INTELLIGENCE TERMINAL</span></div>
+        <h1 class="h-hero" id="heroTitle"><span class="line">The world,</span><span class="line"><em>connected</em></span><span class="line">in one terminal.</span></h1>
+        <p class="lede" id="heroSub"></p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" data-terminal href="#">Launch the terminal <span>↗</span></a>
+          <a class="btn btn-ghost" href="#reports">Get the reports <span>→</span></a>
+        </div>
+        <dl class="hero-stats">
+          <div><dt>Risk models</dt><dd data-count="15">0</dd></div>
+          <div><dt>Desks</dt><dd data-count="19">0</dd></div>
+          <div><dt>Public sources</dt><dd data-count="40" data-suffix="+">0</dd></div>
+          <div><dt>Cookies</dt><dd>0</dd></div>
+        </dl>
       </div>
-      <div class="modal-body">
-        <div class="about-block" id="aboutBlock">
-          <h3 class="about-title">What is this terminal?</h3>
-          <p>
-            World Monitor is a <strong>live world desk</strong> in the browser. It brings together public news, markets,
-            weather, disasters, maps, and simple risk scores — so you can see the big picture in one place.
-          </p>
-          <h3 class="about-title">What is it for?</h3>
-          <p>
-            To <strong>watch and understand</strong> what is happening: wars and calm, food and fuel prices, chips and metals,
-            storms, shipping, and how life may feel cheaper or more expensive (housing, school, groceries, and more).
-            It is built for learning, awareness, and clear thinking — not for giving orders or secret intelligence.
-          </p>
-          <h3 class="about-title">What can you do with it?</h3>
-          <ul class="about-list">
-            <li>Pick a <strong>desk</strong> (Command, Compare, Inflation, Affordability, Power · Net, Chips…)</li>
-            <li>Choose a <strong>country</strong> and a <strong>lens</strong> (a simple question)</li>
-            <li>Filter by <strong>region</strong> (Americas, Europe, APAC…) and <strong>developed / developing</strong></li>
-            <li>Read <strong>answers</strong>, <strong>costs</strong>, <strong>power mix</strong>, <strong>telecoms</strong>, <strong>outages</strong>, inflation, and weather / travel warnings</li>
-            <li>Layout adapts automatically on desktop, tablet, and phone · <strong>Add to Home Screen</strong> / UWP</li>
-            <li>Collapse the <strong>desk rail</strong> or <strong>bottom stream</strong> for more workspace</li>
-            <li>Follow <strong>live headlines and prices</strong>, and open the map</li>
-          </ul>
-          <h3 class="about-title">Why does that help?</h3>
-          <p>
-            The world is noisy. Putting news, prices, and risks side by side — in plain language — helps you notice
-            connections (for example food prices and storms, or chips and copper) and stay calm with constructive paths,
-            not only bad news.
-          </p>
-          <p class="about-privacy">
-            <strong>Privacy.</strong> This app does <strong>not</strong> set cookies and does <strong>not</strong> save
-            layout, settings, or feed cache on the device. When you close the tab, the session ends.
-            Data is fetched live for this visit only. “Add to Home Screen” uses a tiny install helper only —
-            it does <strong>not</strong> store feeds or settings for this visit offline.
-            (News sites you open may use their own cookies — that is outside this terminal. The map itself uses no external tiles.)
-          </p>
-        </div>
-        <div class="howto-grid" id="howToBody"></div>
-        <div class="howto-models" id="howToModels"></div>
-        <div class="btn-row" style="margin-top:14px">
-          <button class="btn-amber" id="howToTour" type="button">START QUICK TOUR</button>
-          <button class="btn-ghost" id="howToDesks" type="button">SHOW DESKS</button>
-          <button class="btn-ghost" id="howToClose2" type="button">CLOSE</button>
-        </div>
-        <p class="disclaimer-foot">
-          <strong>Disclaimer.</strong> For information and education only. Not investment, legal, medical, or professional advice.
-          Not affiliated with any news agency, exchange, or government. Third-party data may be delayed, incomplete, or wrong;
-          models and scores are illustrative. Always check original sources. No cookies · no browser storage on the device.
-          Developed by Dr. Benjamin Koch.
-        </p>
+      <div class="hero-hud" aria-hidden="true">
+        <div class="hud-tag hud-tl">ORTHOGRAPHIC · LIVE ROTATION</div>
+        <div class="hud-tag hud-br" id="hudHot">HOTSPOT —</div>
       </div>
     </div>
-  </div>
-
-  <div class="tour-overlay" id="tourOverlay" hidden>
-    <div class="tour-card">
-      <div class="tour-step" id="tourStep">1</div>
-      <h3 id="tourTitle">Welcome</h3>
-      <p id="tourText"></p>
-      <div class="tour-actions">
-        <button class="btn-ghost" id="tourSkip">SKIP</button>
-        <button class="btn-amber" id="tourNext">NEXT</button>
-      </div>
-      <p class="disclaimer-foot tour-disclaimer">
-        Information only · not advice · no cookies · nothing saved on the device · check original sources
-      </p>
+    <div class="wrap hero-pillars">
+      <div><span class="label">01 · DESKS</span><p>Command, Crisis, Markets, Food, Power · Net and more, one keystroke apart.</p></div>
+      <div><span class="label">02 · MODELS</span><p>KMRI and fourteen companion indices, weighted and explained in plain language.</p></div>
+      <div><span class="label">03 · BRIEFS</span><p>One-page reads that turn the signal into what it means and what to watch.</p></div>
+      <div><span class="label">04 · REPORTS</span><p>Weekly, monthly and quarterly editions in one unmistakable house style.</p></div>
     </div>
-  </div>
+    <div class="scroll-cue"><span>SCROLL</span><i></i></div>
+  </section>
 
-  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
-  <div class="toast" id="toast" hidden></div>
+  <!-- NARRATIVE -->
+  <section class="signal" id="signal">
+    <div class="wrap signal-pin">
+      <div class="signal-steps">
+        <div class="label">HOW WMT READS THE WORLD</div>
+        <div class="step is-on" data-step="0" data-lat="15" data-lng="42" data-alt="1.6">
+          <span class="step-n">01 · SIGNAL</span>
+          <h2>Thousands of public signals, every hour.</h2>
+          <p>Wire headlines, prices, quakes, storms, outages and shipping chokepoints flow in live from open sources: news RSS, Yahoo quotes, CoinGecko, FX, USGS, NASA EONET and Open-Meteo.</p>
+        </div>
+        <div class="step" data-step="1" data-lat="46" data-lng="32" data-alt="1.5">
+          <span class="step-n">02 · MODEL</span>
+          <h2>Fifteen self-developed models weigh them.</h2>
+          <p>Kinetic tension, macro fear, food and energy stress, insurance tone and transport friction are fused into composite scores, led by the Koch Macro Resilience Index.</p>
+        </div>
+        <div class="step" data-step="2" data-lat="24.5" data-lng="119.5" data-alt="1.5">
+          <span class="step-n">03 · BRIEF</span>
+          <h2>Every move becomes a sentence.</h2>
+          <p>Plain-language answers explain what changed, why it matters for prices and daily life, and which constructive paths remain open.</p>
+        </div>
+        <div class="step" data-step="3" data-lat="30" data-lng="10" data-alt="2.6">
+          <span class="step-n">04 · DECISION</span>
+          <h2>Read the desk live, or receive the edition.</h2>
+          <p>Open the terminal for the live picture, or subscribe to the weekly, monthly or quarterly report built from the same models.</p>
+        </div>
+      </div>
+      <div class="signal-meter" aria-hidden="true">
+        <div class="meter-row"><span>SIGNAL</span><b id="mSig">0</b></div>
+        <div class="meter-row"><span>MODEL</span><b id="mMod">0</b></div>
+        <div class="meter-row"><span>BRIEF</span><b id="mBrf">0</b></div>
+        <div class="meter-bar"><i id="mBar"></i></div>
+      </div>
+    </div>
+  </section>
 
-  <template id="tpl-widget">
-    <section class="widget" draggable="false">
-      <header class="widget-head" title="In layout edit (E): drag this header to reorder">
-        <span class="widget-grip" aria-hidden="true">⠿</span>
-        <span class="widget-title"></span>
-        <span class="widget-meta"></span>
-        <button class="widget-help" type="button" aria-label="Explain panel">?</button>
-        <button class="widget-collapse" type="button" aria-label="Collapse">▾</button>
+  <!-- STATEMENT -->
+  <section class="statement">
+    <div class="wrap">
+      <p class="big-quote reveal-words">Most screens show you what happened. WMT shows you how the pieces connect: food prices and storms, chips and copper, a strait and your grocery bill.</p>
+    </div>
+  </section>
+
+  <!-- MODELS -->
+  <section class="models" id="models">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="label">02 · THE MODEL SUITE</span>
+        <h2 class="h2">Self-developed indicators. <em>Fifteen lenses</em> on one world.</h2>
+        <p class="sec-sub">Definitions and weights below come straight from the terminal. Live values are computed in your browser when you open WMT.</p>
       </header>
-      <div class="widget-body"></div>
-      <div class="widget-resize" title="Drag to resize" aria-hidden="true"></div>
-    </section>
-  </template>
+      <div class="kmri" id="kmriCard">
+        <div class="kmri-left">
+          <span class="label amber">FLAGSHIP</span>
+          <div class="kmri-name">KMRI</div>
+          <div class="kmri-label">Koch Macro Resilience Index</div>
+          <p id="kmriDesc"></p>
+          <div class="kmri-scale"><span class="g">GREEN · UNDER 40</span><span class="o">ORANGE · MID</span><span class="r">RED · 75+</span></div>
+          <a class="btn btn-ghost btn-sm" data-terminal href="#">See today's KMRI live <span>↗</span></a>
+        </div>
+        <div class="kmri-right">
+          <div class="dial" id="kmriDial"><svg viewBox="0 0 200 200"><circle class="dial-bg" cx="100" cy="100" r="84"/><circle class="dial-fg" id="dialFg" cx="100" cy="100" r="84"/></svg><div class="dial-c"><small>WEIGHT MIX</small><b>7</b><small>FACTORS</small></div></div>
+          <ul class="weights" id="kmriWeights"></ul>
+        </div>
+      </div>
+      <div class="model-grid" id="modelGrid"></div>
+    </div>
+  </section>
 
-  <script src="js/countries.js"></script>
-  <script src="js/country_borders.js"></script>
-  <script src="data.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/feeds.js"></script>
-  <script src="js/indicators.js"></script>
-  <script src="js/intel.js"></script>
-  <script src="js/charts.js"></script>
-  <script src="js/map3d.js"></script>
-  <script src="js/layout.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="app.js"></script>
-  <script src="js/classic_polish.js"></script>
+  <!-- BRIEFS -->
+  <section class="briefs" id="briefs">
+    <div class="briefs-pin">
+      <div class="wrap">
+        <header class="sec-head row">
+          <div><span class="label">03 · INTELLIGENCE BRIEFS</span><h2 class="h2">One page. <em>Every claim on a model.</em></h2></div>
+          <p class="sec-sub" id="briefEdition">—</p>
+        </header>
+      </div>
+      <div class="briefs-track" id="briefTrack"></div>
+    </div>
+  </section>
+
+  <!-- ELECTIONS -->
+  <section class="elections" id="elections">
+    <div class="wrap">
+      <header class="sec-head row">
+        <div><span class="label">04 · ELECTIONS TRACKER</span><h2 class="h2">Votes that can <em>move the models.</em></h2></div>
+        <p class="sec-sub">Scheduled national votes, with countdown and the WMT lens that will watch them. Dates per public election calendars; verify each against the official source.</p>
+      </header>
+      <div class="elec-timeline" id="elecTimeline"></div>
+      <div class="elec-list" id="elecList"></div>
+    </div>
+  </section>
+
+  <!-- THIS WEEK -->
+  <section class="week" id="week">
+    <div class="wrap">
+      <header class="sec-head row">
+        <div><span class="label">05 · THIS WEEK</span><h2 class="h2">Seven days, <em>one desk.</em></h2></div>
+        <div class="week-live" id="weekLive"></div>
+      </header>
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+  </section>
+
+  <!-- WATCHED -->
+  <section class="watched" id="watched">
+    <div class="wrap watched-grid">
+      <div class="watched-copy">
+        <div class="kicker"><i></i><span>LAST 7 DAYS · <b id="wRange">—</b></span></div>
+        <h2 class="h-watched">The world <em>watched</em><br/>you back.</h2>
+        <p class="lede">Pick any place on Earth. WMT shows what passed overhead, what shook, what burned and which hotspot was closest, all in the last seven days, computed live in your browser.</p>
+        <form class="w-search" id="wForm" autocomplete="off">
+          <span class="label">01 / PLACE</span>
+          <div class="w-input"><span aria-hidden="true">⌕</span><input id="wInput" type="text" placeholder="Search a place" aria-label="Search a place"/><button type="submit" class="w-go">ENTER</button></div>
+          <button type="button" class="w-loc" id="wLoc">◎ USE MY LOCATION</button>
+          <div class="w-results" id="wResults"></div>
+        </form>
+        <span class="label">02 / OR TRY</span>
+        <div class="chips" id="wPresets"></div>
+      </div>
+      <div class="watched-out">
+        <div class="dossier" id="dossier">
+          <div class="dossier-head"><span class="label">WMT EXPOSURE CARD</span><span class="mono small" id="dPlace">—</span></div>
+          <div class="dossier-big"><b id="dTotal">—</b><span id="dTotalLbl">satellites, quakes and natural events near this place in seven days</span></div>
+          <div class="dossier-rows" id="dRows"><div class="mute mono small">Pick a place to compute.</div></div>
+          <div class="dossier-foot mono small" id="dFoot">Sources: CelesTrak GP · USGS · NASA EONET · Open-Meteo · WMT hotspot seeds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORTS -->
+  <section class="reports" id="reports">
+    <div class="wrap">
+      <header class="sec-head">
+        <span class="label">07 · REPORTS &amp; SUBSCRIPTIONS</span>
+        <h2 class="h2">Same models. <em>Same house style.</em> Your cadence.</h2>
+        <p class="sec-sub">Every edition shares the WMT look: amber on ink, model scorecards, a one-page lead and a map of what moved.</p>
+      </header>
+      <div class="tiers" id="tiers">
+        <article class="tier">
+          <div class="tier-top"><span class="label">WEEKLY</span><span class="cover-mini">W46</span></div>
+          <h3>The Weekly Read</h3>
+          <div class="price" data-price="weekly">€ TBD <small>/ month</small></div>
+          <ul><li>KMRI and suite, week over week</li><li>Top 3 movers with plain-language read</li><li>Elections and this-week calendar</li><li>Friday 60-second brief</li></ul>
+          <a href="#subscribe" class="btn btn-ghost" data-pay="weekly">Join the waitlist</a>
+        </article>
+        <article class="tier tier-hot">
+          <div class="tier-top"><span class="label amber">MONTHLY · RECOMMENDED</span><span class="cover-mini">NOV</span></div>
+          <h3>The Monthly Ledger</h3>
+          <div class="price" data-price="monthly">€ TBD <small>/ month</small></div>
+          <ul><li>Everything in Weekly</li><li>Regional deep-dives by theater</li><li>Affordability and inflation desk read</li><li>Chokepoint and insurance outlook</li><li>Scenario lens: three paths, one month</li></ul>
+          <a href="#subscribe" class="btn btn-solid" data-pay="monthly">Join the waitlist</a>
+        </article>
+        <article class="tier">
+          <div class="tier-top"><span class="label">QUARTERLY</span><span class="cover-mini">Q1</span></div>
+          <h3>The Quarterly Outlook</h3>
+          <div class="price" data-price="quarterly">€ TBD <small>/ quarter</small></div>
+          <ul><li>Everything in Monthly</li><li>Model back-test and calibration notes</li><li>Elections and policy horizon, 90 days</li><li>Board-ready PDF with executive summary</li></ul>
+          <a href="#subscribe" class="btn btn-ghost" data-pay="quarterly">Join the waitlist</a>
+        </article>
+      </div>
+      <div class="cover-row">
+        <div class="cover" aria-label="Sample report cover">
+          <div class="cover-top"><span>WMT · WEEKLY READ</span><span>2026-W46</span></div>
+          <div class="cover-k">KMRI</div>
+          <div class="cover-v">--.-</div>
+          <div class="cover-t">The world, this week.</div>
+          <div class="cover-lines"><i></i><i></i><i></i><i></i></div>
+          <div class="cover-foot">SAMPLE COVER · VALUES FILLED AT PUBLICATION</div>
+        </div>
+        <div class="audiences">
+          <div><span class="label">FOR ENTERPRISES</span><p>Supply chain, procurement, treasury and security teams: chokepoints, commodities, insurance tone and country stress on one page.</p></div>
+          <div><span class="label">FOR GOVERNMENTS</span><p>Policy and resilience units: food security, energy, infrastructure integrity and election horizons, framed for briefing rooms.</p></div>
+          <div><span class="label">FOR INDIVIDUALS</span><p>Curious readers: what the world means for groceries, rent, fuel and travel, without the noise.</p></div>
+          <div class="enterprise"><span class="label amber">ENTERPRISE &amp; GOVERNMENT</span><p>Custom model weights, private desks and bespoke briefings. Pricing on request.</p><a href="#subscribe" class="btn btn-ghost btn-sm">Talk to us →</a></div>
+        </div>
+      </div>
+      <form class="subscribe" id="subscribe" method="POST" target="_blank" novalidate>
+        <span class="label">WAITLIST &amp; FREE WEEKLY SIGNAL</span>
+        <div class="sub-row"><input type="email" name="EMAIL" required autocomplete="email" placeholder="you@organisation.org" aria-label="Email"/><select id="subCadence" aria-label="Cadence"><option value="weekly">Weekly</option><option value="monthly" selected>Monthly</option><option value="quarterly">Quarterly</option><option value="enterprise">Enterprise / Government</option></select><input type="hidden" id="subCadenceField" name="CADENCE" value="monthly"/><input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true"/><input type="hidden" name="locale" value="en"/><button class="btn btn-solid" type="submit" id="subBtn">Notify me</button></div>
+        <label class="consent small"><input type="checkbox" id="subConsent" name="OPT_IN" value="1" required/> I agree to receive ISOLINE emails and can unsubscribe at any time. You will get a confirmation email first (double opt-in). See the privacy notice.</label>
+        <p class="mono small mute" id="subNote">Preview build: this form is not connected yet.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="wrap">
+      <span class="label">THE TERMINAL</span>
+      <h2 class="h-cta">Open the <em>live</em> desk.</h2>
+      <a class="btn btn-solid btn-lg" data-terminal href="#">Launch WMT terminal <span>↗</span></a>
+      <div class="cta-shot"><img src="landing/assets/img/terminal.jpg" alt="The WMT terminal: Command desk with World Pulse, KMRI flagship and world map" loading="lazy" width="1440" height="900"/></div>
+      <div class="keys mono small"><span><kbd>/</kbd> search</span><span><kbd>G</kbd> map</span><span><kbd>A</kbd> answers</span><span><kbd>K</kbd> models</span><span><kbd>1–0</kbd> desks</span><span><kbd>?</kbd> help</span></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div><div class="brand foot-brand"><svg viewBox="0 0 140 140" class="brand-glyph" aria-hidden="true"><defs><clipPath id="cf"><circle cx="70" cy="70" r="50"/></clipPath></defs>
+<circle cx="70" cy="70" r="50" fill="#0b0d12" stroke="#e8eaed" stroke-width="2.2"/>
+<g clip-path="url(#cf)" fill="none" stroke="#f5a623">
+<path d="M14 92 C30 60 52 44 78 40 C104 36 122 50 126 66" stroke-opacity=".35" stroke-width="1.6"/>
+<ellipse cx="80" cy="64" rx="38" ry="27" transform="rotate(-22 80 64)" stroke-opacity=".5" stroke-width="1.8"/>
+<ellipse cx="86" cy="59" rx="24" ry="16" transform="rotate(-22 86 59)" stroke-opacity=".75" stroke-width="2"/>
+<ellipse cx="90" cy="56" rx="11" ry="7.5" transform="rotate(-22 90 56)" stroke-width="2.2"/>
+</g><circle cx="91" cy="55.5" r="3.6" fill="#f5a623"/></svg><span class="brand-txt"><b>ISOLINE</b><small>WORLD INTELLIGENCE · WMT</small></span></div><p class="mono small">Built on the WMT World Monitor terminal · Developed by Dr. Benjamin Koch</p></div>
+    <p class="small mute">Information and education only. Not investment, legal, medical, or professional advice. Not affiliated with any news agency, exchange, or government. Third-party data may be delayed, incomplete, or wrong; models and scores are illustrative. Always check original sources. No cookies · no browser storage on the device.</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/gsap@3.15.1/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3.15.1/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/globe.gl@2.46.2/dist/globe.gl.min.js"></script>
+<script src="https://unpkg.com/satellite.js@5.0.0/dist/satellite.min.js"></script>
+<script src="landing/js/config.js"></script>
+<script src="landing/js/globe.js"></script>
+<script src="landing/js/watched.js"></script>
+<script src="landing/js/main.js"></script>
 </body>
 </html>
