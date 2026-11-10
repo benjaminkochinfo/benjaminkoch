@@ -1,7 +1,7 @@
 # Inside Desk chart data: de-power-day-ahead-10nov
 "# Source: Bundesnetzagentur | SMARD.de day-ahead DE-LU daily averages, delivery days 1 Sep to 10 Nov 2026 (Tuesday 10 Nov €351.48, auction of 9 Nov), retrieved 10 Nov 2026 · CC BY 4.0"
 "# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
-# Retrieved: 2026-11-10T06:30+01:00
+# Retrieved: 2026-11-10T08:30+01:00
 date,dayahead
 2026-09-01,143.8
 2026-09-02,163.74
