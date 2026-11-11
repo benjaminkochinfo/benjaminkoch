@@ -60,7 +60,11 @@ epaper:
   - 122-2-litres-in-guadalcanal-73-1-in-the-reservoirs
   - on-track-for-2030-says-von-der-leyen-the-eeas
   - two-record-closes-and-a-whisker-short-of-the-highs
+  - 1630-call-outs-881-floods-and-the-alert-stood-down
   updates:
   - time: '2026-11-11T19:29:47+01:00'
     text: 'Markets: Stoxx 600 and DAX set record closes'
     piece: two-record-closes-and-a-whisker-short-of-the-highs
+  - time: '2026-11-11T21:57:21+01:00'
+    text: 'Climate: Charles tally 1,630 incidents, alert ended'
+    piece: 1630-call-outs-881-floods-and-the-alert-stood-down
