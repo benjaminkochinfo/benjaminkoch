@@ -1,0 +1,62 @@
+date: "2026-11-11"
+slot: pm
+published: "2026-11-11T17:30:04+01:00"   # set to the actual Berlin time when it goes live
+title: "0.37% from the high, and a bond market on holiday"
+standfirst: "Europe closed just below its record on order books and dividends, while US bonds took Veterans Day off."
+closing:
+  title: Before you close the tab
+  published: '2026-11-11T17:30:00+01:00'
+  habit:
+    text: 'Once a quarter, on the day the inflation figure comes out, write two numbers on one line: the interest rate on each account you hold, and the latest inflation rate. Then add a third: the change in the one price that matters most in your house, whether that is heating oil, electricity or the weekly shop. Three numbers, five minutes, and next time a headline says "inflation", you will know what it means for you.'
+    note: A habit, not advice.
+  went_right:
+    text: 'In a single water-filled cavern in Death Valley, divers and surface counters from the US National Park Service and the Fish and Wildlife Service counted 137 endangered Devils Hole pupfish on 10 October, nearly double the 77 seen in spring and about double the 69 recorded in autumn 2025 [1]. Two earthquakes in 2025 had knocked the population back; scientists then released 72 captive-raised fish between March 2025 and February 2026 and fed the pool while its algae recovered [1]. Because the fish live only 10 to 14 months, biologists believe most of the 137 hatched and grew in Devils Hole itself [1]. "While challenges remain, we''re encouraged by this progress," said park superintendent Mike Reynolds [1]. The two agencies have counted these fish the same way since 1972 [1]. Fifty-four years of patient counting is why we can call this good news, rather than guess.'
+  sentence: "The statisticians confirmed October's prices line by line, a heart association counted what service leaves behind, and divers counted 137 small fish in a desert cave: a day when counting carefully was the work that mattered."
+  euros:
+    text: 'With October inflation confirmed at 2.8%, money in an account that pays nothing loses purchasing power: €10,000 would be worth about €9,728 in today''s money a year from now, a loss of about €272, according to an example calculation published with today''s figures [2]. At 2.5% interest, the European Central Bank''s current deposit rate, the same €10,000 earns €250 a year if it falls within the tax-free saver''s allowance, or about €184 after withholding tax and solidarity surcharge [2]. Desk arithmetic: the gap between earning nothing and earning €184 after tax is €184 a year on €10,000, and the remaining real loss on the taxed account is about €88 (€272 minus €184).'
+    note: Example figures from Merkur/€uro-Finanzwissen, 11 Nov 2026, based on the Federal Statistical Office's confirmed October CPI and the ECB's deposit rate; tax example at 25% withholding tax plus solidarity surcharge, no church tax. Your own rate, taxes and allowance will differ. Nothing here is advice.
+  small_words:
+    term: Kerninflation (core inflation)
+    text: 'Inflation measured without energy and food, the two groups whose prices jump around most [3]. In October it was 2.1% in Germany, against 2.8% for the full basket [3]. Economists watch it because it shows the slower, stickier part of price rises; households should remember it leaves out exactly the bills, heating and groceries, that many of them feel most.'
+  sources:
+  - {n: 1, title: "Rare Devils Hole Pupfish Count Doubles Since Fall 2025", publisher: "US National Park Service, Death Valley National Park", url: "https://www.nps.gov/deva/learn/news/rare-devils-hole-pupfish-count-doubles-since-fall-2025.htm", date: "6 Nov 2026, updated 10 Nov 2026"}
+  - {n: 2, title: "2,8 Prozent Inflation: Heizöl kostet 84,5 Prozent mehr, Butter fast ein Fünftel weniger", publisher: "Merkur", url: "https://www.merkur.de/wirtschaft/prozent-inflation-heizoel-kostet-84-prozent-mehr-butter-fast-ein-fuenftel-weniger-zr-94584332.html", date: "11 Nov 2026, 11:40 CET"}
+  - {n: 3, title: "\"Tankrabatt\" drückt Inflation im Oktober", publisher: "tagesschau.de", url: "https://www.tagesschau.de/wirtschaft/konjunktur/inflation-tankrabatt-spritpreise-oktober-100.html", date: "11 Nov 2026, 12:00 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 0-37-from-the-high-and-a-bond-market-on-holiday
+  - six-cuts-then-a-pause-opecs-november-report-holds
+  - sauber-gegenfinanziert-the-spd-opens-the-door-on
+  - the-annex-26-210-people-208-candidate-factors-35
+  - 199-05-for-thursday-a-third-off-in-one-auction
+  - podium-vs-print-inflation-is-too-high-and-a-core
+  - ordinary-ledger-heating-oil-up-84-5-electricity
+  - 13-7-billion-a-year-and-an-off-switch-for-autoplay
+  - fewer-than-5-against-about-20-on-veterans-day-the
+  - one-swap-agreed-two-flights-booked-abu-dhabi-ends
+  - two-cores-538-call-outs-by-noon-charles-reaches
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-11T17:30:04+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 0-70-became-2-30-siemens-energy-pays-out-of-its
+    - 27-fewer-megawatts-ordered-77-9bn-still-on-the
+    - 22-3-to-51-5-the-eus-trade-defence-works-through
+    - 16-7-against-17-gulf-crude-found-its-way-round-at
+    - 84-in-catalonia-41-in-extremadura-spain-strikes
+    - two-marches-one-republic-polands-108th
+    - health-scores-9-3-out-of-10-and-money-6-1-what
+    - one-in-ten-cannabis-use-disorder-in-pregnancy-and
+    - 24-billion-kwh-in-reserve-about-4-a-year-on-a
+    - from-23-to-35-the-electrification-pledge-cop31-is
+    - petrol-5-5-in-a-month-heating-oil-4-6-the-discount
+    - a-digital-euro-pilot-next-year-and-no-greater
+    - eggs-up-15-4-butter-down-18-9-the-shopping-basket
+    - 389-8-million-nights-germanys-guesthouses-set-a
+    - three-providers-over-70-of-the-market-meps-want
+    - 3-7-billion-of-revenue-and-9-billion-paid-up-front
+    - office-light-an-hour-of-daylight-and-20-grass-rats
+    - vaccinated-as-a-baby-now-a-nurse-the-dutch-health
+    - four-ships-by-teatime-hormuz-on-day-256
+    - theyll-pick-up-the-phone-london-and-moscow-talk
+    - 122-2-litres-in-guadalcanal-73-1-in-the-reservoirs
+    - on-track-for-2030-says-von-der-leyen-the-eeas
+  updates: []

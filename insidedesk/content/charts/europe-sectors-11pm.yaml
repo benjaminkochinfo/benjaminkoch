@@ -1,0 +1,20 @@
+id: europe-sectors-11pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Wednesday in Europe: oil and chips carried the Stoxx 600, food and health care paid"
+subtitle: "Percentage change on the Stoxx Europe 600 and selected Stoxx 600 sector indexes, Wednesday 11 November 2026, 16:16 CET, per Finanz und Wirtschaft"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Oil & gas rise", value: 2.22, note: "551.84"}
+  - {label: "Technology rise", value: 1.85, note: "1,020.89"}
+  - {label: "Basic resources rise", value: 1.33, note: "768.76"}
+  - {label: "Industrial goods rise", value: 0.76, note: "1,151.10"}
+  - {label: "Stoxx Europe 600 rise", value: 0.40, note: "660.97; 52-week high 663.41"}
+  - {label: "Banks rise", value: 0.03, note: "406.53"}
+  - {label: "Health care fall", value: -0.37, note: "1,265.17"}
+  - {label: "Retail fall", value: -0.45, note: "517.62"}
+  - {label: "Food & beverages fall", value: -0.86, note: "706.63"}
+licence: reported
+source_line: "Finanz und Wirtschaft, 'Indizes Europa' (Stoxx Europe 600 and Stoxx 600 sector indexes), values at 16:16 CET, 11 Nov 2026; intraday snapshot, not closing levels; retrieved 11 Nov 2026 · reported figures"
+alt: "Bar chart of Wednesday 11 November 2026 percentage changes at 16:16 CET, per Finanz und Wirtschaft: Stoxx 600 oil and gas up 2.22 percent, technology up 1.85 percent, basic resources up 1.33 percent, industrial goods up 0.76 percent, the Stoxx Europe 600 up 0.40 percent to 660.97, banks up 0.03 percent, health care down 0.37 percent, retail down 0.45 percent and food and beverages down 0.86 percent. These are intraday snapshot levels, not closes."

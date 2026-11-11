@@ -1,0 +1,13 @@
+# Inside Desk chart data: europe-sectors-11pm
+"# Source: Finanz und Wirtschaft, 'Indizes Europa' (Stoxx Europe 600 and Stoxx 600 sector indexes), values at 16:16 CET, 11 Nov 2026; intraday snapshot, not closing levels; retrieved 11 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Oil & gas rise,2.22,no,551.84
+Technology rise,1.85,no,"1,020.89"
+Basic resources rise,1.33,no,768.76
+Industrial goods rise,0.76,no,"1,151.10"
+Stoxx Europe 600 rise,0.4,no,660.97; 52-week high 663.41
+Banks rise,0.03,no,406.53
+Health care fall,-0.37,no,"1,265.17"
+Retail fall,-0.45,no,517.62
+Food & beverages fall,-0.86,no,706.63
