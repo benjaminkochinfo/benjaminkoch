@@ -1,0 +1,61 @@
+date: "2026-11-11"
+slot: am
+published: "2026-11-11T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Charles counted: 323.8 mm on a Madeira hillside, 84 call-outs, and schools shut before the first gust"
+standfirst: "Storm Charles hit Madeira overnight and reaches mainland Portugal today under red warnings; the institutions moved first. Also: a Fed speech against a calm Kospi, a trade truce with a date on it, Abu Dhabi day two, and what Wednesday's wind does to your power price."
+closing:
+  title: Before you close the tab
+  published: '2026-11-11T08:30:00+01:00'
+  habit:
+    text: 'Pick one day a month, say the first Sunday, and read your own meters: electricity, gas or the oil gauge, and the water meter if you have one. Write the numbers on one line in a notebook, with the date. It takes four minutes. After a winter you will know your house better than any bill can tell you, and a surprise will look like a surprise instead of like weather.'
+    note: A habit, not advice.
+  went_right:
+    text: 'In Kerala, a road was going to take the trees, and the orchids growing on them with it. Researchers collected 27,324 of those orchids from felled or condemned trees and planted them on trees at a beach and two urban wetlands [1]. After 12 to 24 months more than 19,500, nearly 71%, were still alive; of the 6,126 endemic orchids, nearly 55% survived, and many flowered and set seed [1]. "That was a really big surprise," said Viswambharan Sarasan of the Royal Botanic Gardens, Kew [1]. At one park, QR tags on ten species drew more than 126,000 scans in two years [1]. The authors call such rescue "a last resort" [1]. A last resort that works is still a resort worth having.'
+  sentence: "A storm reached Madeira first and left counted call-outs, a restored power line and a mainland that closed its schools in good time, which is what it looks like when the dull machinery of warnings does its job."
+  euros:
+    text: 'At 05:13 CET this morning the German average price for heating oil was €161.82 per 100 litres at a 3,000-litre order, 5.2% cheaper than a week earlier, according to the comparison site esyoil [2]. The four-week high was €174.31 on 25 October [2]. Regions differ more than days do: €151.34 in Bremen against €168.51 in Hesse [2]. Desk arithmetic: a 3,000-litre fill costs about €4,854.60 at today''s average, €374.70 less than at the 25 October high, and the Bremen–Hesse gap alone is about €515 on the same order.'
+    note: esyoil national and state averages per 100 litres incl. VAT for 3,000 litres of standard low-sulphur heating oil, 11 Nov 2026, 05:13 CET. Your own price depends on postcode, quantity and delivery date. Nothing here is advice.
+  small_words:
+    term: Abnahmemenge (order quantity)
+    text: 'The amount you buy in one delivery. Heating-oil prices in Germany are quoted per 100 litres for a given order quantity, and the headline average on comparison sites is set at 3,000 litres for a household [2]. Change the quantity and the price per litre changes with it, since a delivery has costs that do not shrink with the order. When you compare a quote with a headline, compare it at the same quantity first.'
+  sources:
+  - {n: 1, title: "Tens of thousands of orchids saved from road development in southern India", publisher: "Mongabay", url: "https://news.mongabay.com/short-article/2026/11/tens-of-thousands-of-orchids-saved-from-road-development-in-southern-india/", date: "10 Nov 2026"}
+  - {n: 2, title: "Heizölpreise Deutschlandweit aktuell von heute", publisher: "esyoil", url: "https://www.esyoil.com/heizoelpreise", date: "11 Nov 2026, 05:13 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 323-8-mm-in-12-hours-on-a-madeira-hillside-84-call
+  - podium-vs-print-excess-inflation-is-unacceptable
+  - 178-exclusions-24-points-on-hold-one-date-the
+  - 90-billion-lent-45-billion-pledged-four-countries
+  - the-annex-90-women-two-months-of-diaries-three
+  - the-wind-came-back-for-wednesday-but-mostly-at
+  - 12-00-14-30-then-thursday-at-11-00-two-documents
+  - ordinary-ledger-gas-up-34-for-new-contracts-and
+  - close-to-4-billion-for-the-plugs-infineons-ai
+  - 11-and-rising-covid-leads-europes-autumn-tests-flu
+  - half-of-donbas-on-paper-a-prisoner-swap-in-the
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-11T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 4-for-every-1-two-climate-funds-agree-a-route-from
+    - spains-turn-aemet-calls-wednesday-the-worst-day
+    - 1-12-trillion-of-loss-down-as-much-as-11-softbanks
+    - no-treasury-trading-today-so-tokyos-2-765-does-the
+    - 96-76-billion-in-a-month-taiwans-exports-now-lean
+    - japans-surplus-shrinks-to-2-37-trillion-as-imports
+    - 211-to-204-the-house-sends-the-hegseth-articles-to
+    - six-weeks-for-eisenkot-one-vote-for-a-speaker
+    - 400-mothers-a-chatbot-called-rosie-and-a-year-with
+    - 276-adults-a-14-channel-headset-and-an-eeg-index
+    - 61-on-1-november-6-6-twh-short-in-a-frozen-march
+    - brent-back-at-92-20-and-37-ships-attacked-in
+    - 0-52-at-the-sparkasse-2-37-across-the-market-the
+    - from-2028-to-2033-the-coronavirus-debt-repayment
+    - 20-to-24-a-kilo-st-martins-goose-costs-more-and
+    - 2-2-million-before-the-first-alaaf-what-cologne
+    - nt-586-89-billion-in-october-tsmcs-monthly-invoice
+    - 17-billion-against-15-16-billion-amd-guides-above
+    - 56-against-3-2-the-fda-approves-a-once-daily-pill
+    - emend-is-going-a-chemotherapy-anti-sickness
+    - a-fire-at-ust-luga-and-red-alerts-in-eight
+    - italys-13th-package-for-kyiv-waits-for-one
+  updates: []

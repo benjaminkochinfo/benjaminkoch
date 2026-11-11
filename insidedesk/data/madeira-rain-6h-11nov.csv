@@ -1,0 +1,11 @@
+# Inside Desk chart data: madeira-rain-6h-11nov
+"# Source: DNOTICIAS.PT, 'Chuva ultrapassa 320 litros por metro quadrado em 12 horas no Areeiro', 11 Nov 2026, 05:06 CET, citing IPMA station data analysed up to 03:00 local time (04:00 CET); provisional observations, not a final storm total; retrieved 11 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Chão do Areeiro,232.1,no,323.8 mm in 12 hours
+São Vicente,141.5,no,
+Santo da Serra,130.4,no,
+Pico do Areeiro,123.9,no,
+Pico Alto,116.7,no,
+Monte,83.6,no,
+Prazeres (Calheta),70.8,no,

@@ -1,0 +1,10 @@
+# Inside Desk chart data: asia-wednesday-11nov
+"# Source: Kaohoon International, 'Asia-Pacific Markets Trade Mixed as Investors Assess US Inflation and Rate Direction', levels at 09:28 Bangkok time (03:28 CET), 11 Nov 2026; intraday snapshot, not closing levels; retrieved 11 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nikkei (Japan) rise,0.76,no,"60,921.60"
+Kospi (South Korea) rise,0.7,no,"5,275.92"
+ASX 200 (Australia) rise,0.02,no,"9,130.80"
+Shanghai Composite fall,-0.28,no,"3,653.57"
+Shenzhen Component fall,-0.48,no,"11,187.24"
+Hang Seng (Hong Kong) fall,-0.68,no,"24,389.57"

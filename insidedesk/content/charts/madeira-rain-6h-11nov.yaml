@@ -1,0 +1,18 @@
+id: madeira-rain-6h-11nov
+kind: hbar
+kicker: "Climate · Storm Charles"
+title: "Madeira's night under Charles: seven stations past the red line"
+subtitle: "Highest six-hour rainfall totals at Madeira weather stations, millimetres, IPMA data analysed up to 03:00 local time (04:00 CET) on Wednesday 11 November 2026, per DNOTICIAS.PT; IPMA's red-warning threshold is 60 mm in six hours"
+unit: " mm"
+label_decimals: 1
+rows:
+  - {label: "Chão do Areeiro", value: 232.1, note: "323.8 mm in 12 hours"}
+  - {label: "São Vicente", value: 141.5}
+  - {label: "Santo da Serra", value: 130.4}
+  - {label: "Pico do Areeiro", value: 123.9}
+  - {label: "Pico Alto", value: 116.7}
+  - {label: "Monte", value: 83.6}
+  - {label: "Prazeres (Calheta)", value: 70.8}
+licence: reported
+source_line: "DNOTICIAS.PT, 'Chuva ultrapassa 320 litros por metro quadrado em 12 horas no Areeiro', 11 Nov 2026, 05:06 CET, citing IPMA station data analysed up to 03:00 local time (04:00 CET); provisional observations, not a final storm total; retrieved 11 Nov 2026 · reported figures"
+alt: "Bar chart of the highest six-hour rainfall totals at seven Madeira weather stations during Storm Charles, IPMA data up to 03:00 local time (04:00 CET) on 11 November 2026, per DNOTICIAS.PT: Chão do Areeiro 232.1 mm, São Vicente 141.5 mm, Santo da Serra 130.4 mm, Pico do Areeiro 123.9 mm, Pico Alto 116.7 mm, Monte 83.6 mm and Prazeres in Calheta 70.8 mm. All seven are above IPMA's red-warning threshold of 60 mm in six hours. Chão do Areeiro also recorded 323.8 mm in 12 hours."
