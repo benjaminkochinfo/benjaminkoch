@@ -1,7 +1,7 @@
 # Inside Desk chart data: rki-flu-weekly-12nov
 "# Source: Robert Koch-Institut, ARE-Wochenbericht KW 45/2026, Tab. 3 (notifications under the Infection Protection Act, data as of 10 Nov 2026); retrieved 12 Nov 2026. Late notifications can still change the latest and earlier weeks."
 # Licence: Figures as reported by the named organisations; facts cited with attribution.
-# Retrieved: 2026-11-12T06:30+01:00
+# Retrieved: 2026-11-12T08:30+01:00
 date,cases,hosp
 2026-09-28,438.0,116.0
 2026-10-05,554.0,156.0
