@@ -60,7 +60,11 @@ epaper:
   - a-quarter-less-energy-per-square-metre-by-2035
   - minus-6-and-the-first-cold-health-alert-britains
   - 230-points-short-of-27-000-and-still-a-record-close
+  - five-per-cent-on-the-ten-year-and-wall-street-gives
   updates:
   - time: '2026-11-12T19:29:02+01:00'
     text: 'Markets: DAX and Stoxx 600 set record closes'
     piece: 230-points-short-of-27-000-and-still-a-record-close
+  - time: '2026-11-12T22:03:42+01:00'
+    text: 'Markets: Wall Street closes lower as the 10-year yield tops 5%'
+    piece: five-per-cent-on-the-ten-year-and-wall-street-gives
