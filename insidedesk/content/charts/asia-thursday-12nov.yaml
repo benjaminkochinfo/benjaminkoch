@@ -1,0 +1,15 @@
+id: asia-thursday-12nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Thursday morning in Asia: Seoul and Tokyo up, Hong Kong down, while Nvidia fell overnight"
+subtitle: "Percentage change on selected Asia-Pacific indexes, Thursday session, 12 November 2026, snapshot at the Tokyo lunch break (11:30 Tokyo time, 03:30 CET), per AFP"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Kospi (South Korea) rise", value: 1.2, note: "5,463.98"}
+  - {label: "Nikkei 225 (Japan) rise", value: 0.8, note: "61,714.16"}
+  - {label: "Shanghai Composite rise", value: 0.4, note: "3,694.28"}
+  - {label: "Hang Seng (Hong Kong) fall", value: -1.1, note: "24,043.69"}
+licence: reported
+source_line: "AFP, 'Asian stocks extend gains but traders keep eye on Nvidia crisis', published 12 Nov 2026; Nikkei at the Tokyo midday break (11:30 Tokyo time, 03:30 CET); intraday snapshot, not closing levels; retrieved 12 Nov 2026 · reported figures"
+alt: "Bar chart of Thursday 12 November 2026 percentage changes in Asia at the Tokyo midday break, about 03:30 CET, per AFP: Kospi up 1.2 percent to 5,463.98, Nikkei 225 up 0.8 percent to 61,714.16, Shanghai Composite up 0.4 percent to 3,694.28 and Hang Seng down 1.1 percent to 24,043.69. These are intraday snapshot levels, not closes."

@@ -1,0 +1,8 @@
+# Inside Desk chart data: asia-thursday-12nov
+"# Source: AFP, 'Asian stocks extend gains but traders keep eye on Nvidia crisis', published 12 Nov 2026; Nikkei at the Tokyo midday break (11:30 Tokyo time, 03:30 CET); intraday snapshot, not closing levels; retrieved 12 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Kospi (South Korea) rise,1.2,no,"5,463.98"
+Nikkei 225 (Japan) rise,0.8,no,"61,714.16"
+Shanghai Composite rise,0.4,no,"3,694.28"
+Hang Seng (Hong Kong) fall,-1.1,no,"24,043.69"

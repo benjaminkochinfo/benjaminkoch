@@ -1,0 +1,35 @@
+id: rki-flu-weekly-12nov
+kind: line
+kicker: "Health & Care · Germany"
+title: "Flu is climbing, one notified week at a time"
+subtitle: "Laboratory-confirmed influenza cases notified to the RKI per reporting week, and those admitted to hospital · season 2026/27, weeks 40 to 45 (dated by the Monday of each week)"
+unit: " cases"
+label_decimals: 0
+start: "2026-09-28"
+y_min: 0
+series:
+  - key: cases
+    label: "Confirmed flu cases"
+    source:
+      type: static
+      values:
+        - ['2026-09-28', 438]
+        - ['2026-10-05', 554]
+        - ['2026-10-12', 514]
+        - ['2026-10-19', 492]
+        - ['2026-10-26', 726]
+        - ['2026-11-02', 844]
+  - key: hosp
+    label: "Of which admitted to hospital"
+    source:
+      type: static
+      values:
+        - ['2026-09-28', 116]
+        - ['2026-10-05', 156]
+        - ['2026-10-12', 150]
+        - ['2026-10-19', 136]
+        - ['2026-10-26', 193]
+        - ['2026-11-02', 212]
+licence: reported
+source_line: "Robert Koch-Institut, ARE-Wochenbericht KW 45/2026, Tab. 3 (notifications under the Infection Protection Act, data as of 10 Nov 2026); retrieved 12 Nov 2026. Late notifications can still change the latest and earlier weeks."
+alt: "Line chart of weekly laboratory-confirmed influenza cases notified to the Robert Koch Institute in Germany, reporting weeks 40 to 45 of 2026. Cases move between 438 and 554 in the first four weeks, rise to 726 in week 44 and reach 844 in week 45 (2 to 8 November 2026), the latest value. Hospital admissions among them rise from 116 in week 40 to 212 in week 45."

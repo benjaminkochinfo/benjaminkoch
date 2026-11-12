@@ -1,0 +1,99 @@
+date: "2026-11-12"
+slot: am
+published: "2026-11-12T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Ten ships in ten days, Brent at $91.62: the screen prices the talks, the strait still prices the war"
+standfirst: "Oil fell overnight on hopes for diplomacy while Hormuz kept its count; the institutions keep the ledger either way. Also: a bond market back from its holiday, Asia buying chips, the budget committee's €25 a month, flu season starting on schedule, and Delhi's smog by the numbers."
+closing:
+  title: Before you close the tab
+  published: '2026-11-12T08:30:00+01:00'
+  habit:
+    text: 'Write down every medicine you take on one card: name, strength, how often,
+      and what it is for, plus any allergy. Put it in your wallet next to your health
+      insurance card and update it whenever a prescription changes. It takes ten minutes
+      once. In a waiting room, a pharmacy or an emergency department, it answers the
+      first question before anyone has to ask it twice.'
+    note: A habit, not advice.
+  went_right:
+    text: In 2024, Butterfly Conservation released 20 adult Wood Whites, a butterfly
+      classified as endangered in Great Britain, at Fineshade Wood in Rockingham Forest
+      near Corby [1]. This year its volunteers and the public recorded 746 there, against
+      73 in 2025, a rise of 922% [1]. The charity thinks a warm spring "may have turbo-charged
+      larval growth" [1]. Since 1992 the butterfly's distribution has shrunk by 76%,
+      and it survives in only a dozen parts of its former range [1]. "Only two years
+      ago we were releasing butterflies here," said Jamie Wildman of the charity [1].
+      The work was funded by Natural England's Species Recovery Programme [1]. A ditch
+      edge, a grant and hundreds of volunteer hours are not a headline until, one
+      summer, they are.
+  sentence: A Thursday of budget numbers, flu notifications and price lists, which
+    is to say a day when the useful news arrives in tables, and the tables are being
+    kept.
+  euros:
+    text: 'Germany''s Christmas tree growers expect a Nordmann fir, the country''s
+      favourite, to cost €25 to €33 per metre this season, against about €18 to €23
+      ten years ago, according to the Association for Natural Christmas Trees, quoted
+      by the Tagesspiegel on 8 November [2]. Blue spruce is put at €17 to €22 per metre
+      and Norway spruce at €14 to €19 [2]. One grower near Potsdam charges €49.90 for
+      a 1.75-metre premium Nordmann fir, up from €46 last year; another in Schleswig-Holstein
+      says trees up to two metres keep last year''s price, while larger ones rise by
+      three to four euros [2]. Desk arithmetic: a two-metre Nordmann fir comes to €50
+      to €66 at this year''s range, against €36 to €46 at the range of ten years ago;
+      the Potsdam premium tree is €3.90, or about 8.5%, dearer than last year.'
+    note: Indicative retail ranges per metre from growers' associations, reported
+      8 Nov 2026; your price depends on region, quality, size and seller. Nothing
+      here is advice.
+  small_words:
+    term: Meterpreis (price per metre)
+    text: How Christmas trees are usually priced in Germany, by height rather than
+      by the tree [2]. It makes trees of different sizes comparable at a glance, but
+      it is a range, not a rule, and sellers may add more for taller or premium trees
+      [2]. When you compare two stands, compare the price per metre at the same quality
+      first, then the height you actually need for your ceiling.
+  sources:
+  - n: 1
+    title: Butterfly's 900% boom as larvae 'turbo-charged'
+    publisher: BBC News
+    url: https://www.bbc.co.uk/news/articles/c6gqx23levzwo
+    date: 11 Nov 2026
+  - n: 2
+    title: 'Die Tanne wird teurer: 2026 muss für den Weihnachtsbaum mehr gezahlt werden – fast überall'
+    publisher: Tagesspiegel (Potsdamer Neueste Nachrichten)
+    url: https://www.tagesspiegel.de/potsdam/brandenburg/die-tanne-wird-teurer-2026-muss-fur-den-weihnachtsbaum-mehr-gezahlt-werden--fast-uberall-16241057.html
+    date: 8 Nov 2026, 14:45 CET
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - ten-ships-in-ten-days-brent-at-91-62-the-screen
+  - asia-bought-the-chips-americas-futures-sold-nvidia
+  - podium-vs-print-a-certain-priority-and-the-25-a
+  - the-annex-11-868-families-two-interviews-each-and
+  - the-wind-arrives-on-thursday-mostly-after-dark-479
+  - 4-77-at-two-years-4-99-at-ten-the-bond-market
+  - ordinary-ledger-e10-at-1-978-diesel-at-2-217-and-a
+  - eleven-directors-one-bylaw-no-named-successor
+  - 844-confirmed-cases-in-a-week-16-deaths-so-far-and
+  - what-there-is-to-discuss-the-envoys-carry-europes
+  - delhi-at-323-one-station-at-414-a-warm-windless
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-12T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - one-call-two-readouts-washington-and-beijing
+    - myanmar-pitches-its-rare-earths-to-washington
+    - 90-4-billion-at-the-top-of-the-range-and-orders
+    - below-4-000-gold-trades-like-a-rate-not-a-refuge
+    - 48-leaders-one-room-in-dublin-and-two-envoys-on
+    - three-tiers-and-six-more-months-the-sugar-tax-gets
+    - 434-young-people-five-scans-in-eight-months-and-a
+    - 51-to-61-more-problems-no-more-appointments-women
+    - back-to-87-european-gas-rebounds-from-its-one
+    - 3-840-megawatts-and-a-deadline-of-29-december-the
+    - 7-1-at-the-factory-gate-japans-producer-prices
+    - 0-7-expected-britains-third-quarter-at-08-00-cet
+    - two-minutes-and-a-deadline-of-today-the-bank-email
+    - heating-oil-at-165-48-2-44-cheaper-than-last-week
+    - research-yes-buying-no-united-shuts-the-door-on-ai
+    - 10-billion-in-10-9-billion-out-openais-quarter
+    - one-in-seven-every-day-what-barmer-found-about
+    - three-hours-a-day-on-paperwork-the-hospital
+    - not-a-single-particle-tehrans-red-line-arrives-as
+    - a-strike-on-the-lights-iran-hits-navigation
+    - 1-47-c-and-three-delegations-who-would-rather-not
+    - a-noreaster-brings-the-first-snow-of-the-season-to
+  updates: []
