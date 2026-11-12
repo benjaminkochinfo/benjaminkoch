@@ -34,29 +34,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 9-3-months-against-7-4-and-available-from-today
   - two-and-a-half-hours-in-the-kremlin-and-a-mine
   - 514-million-for-nature-80-0-on-the-ratio-munich
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-12T17:33:10+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-12T17:33:10+01:00"
   extras:
-    - two-supertankers-two-mines-and-a-price-that-went
-    - three-days-up-europes-gas-walks-back-from-its-one
-    - 13-4-million-shares-at-39-fresenius-sells-a-slice
-    - nearly-15-for-a-staffing-agency-permanent-hiring
-    - two-supertankers-more-than-four-million-barrels
-    - 30-billion-for-30-billion-beijing-asks-washington
-    - tests-first-staff-later-the-bundestag-passes-its
-    - 1-1-million-and-a-promised-15-million-credit-line
-    - once-a-week-birth-to-eleven-park-visits-and-a-16-5
-    - 1-065-posts-on-r-mentalhealth-the-top-reply
-    - good-news-higher-rates-what-a-0-7-quarter-does-to
-    - 200-000-americas-layoffs-tick-up-and-stay-low
-    - six-default-suppliers-eleven-tariffs-all-of-them
-    - 102-99-back-on-your-card-the-refund-email-that
-    - seven-more-countries-one-loophole-washington-moves
-    - 16-flaws-seven-rated-high-patch-your-node-js
-    - there-are-too-few-people-in-hospitals-what
-    - 130-hospitals-almost-100-doing-artificial-joints
-    - deeply-concerning-and-if-confirmed-unacceptable
-    - 1-800-schools-ten-regions-and-an-order-to-keep
-    - a-quarter-less-energy-per-square-metre-by-2035
-    - minus-6-and-the-first-cold-health-alert-britains
-  updates: []
+  - two-supertankers-two-mines-and-a-price-that-went
+  - three-days-up-europes-gas-walks-back-from-its-one
+  - 13-4-million-shares-at-39-fresenius-sells-a-slice
+  - nearly-15-for-a-staffing-agency-permanent-hiring
+  - two-supertankers-more-than-four-million-barrels
+  - 30-billion-for-30-billion-beijing-asks-washington
+  - tests-first-staff-later-the-bundestag-passes-its
+  - 1-1-million-and-a-promised-15-million-credit-line
+  - once-a-week-birth-to-eleven-park-visits-and-a-16-5
+  - 1-065-posts-on-r-mentalhealth-the-top-reply
+  - good-news-higher-rates-what-a-0-7-quarter-does-to
+  - 200-000-americas-layoffs-tick-up-and-stay-low
+  - six-default-suppliers-eleven-tariffs-all-of-them
+  - 102-99-back-on-your-card-the-refund-email-that
+  - seven-more-countries-one-loophole-washington-moves
+  - 16-flaws-seven-rated-high-patch-your-node-js
+  - there-are-too-few-people-in-hospitals-what
+  - 130-hospitals-almost-100-doing-artificial-joints
+  - deeply-concerning-and-if-confirmed-unacceptable
+  - 1-800-schools-ten-regions-and-an-order-to-keep
+  - a-quarter-less-energy-per-square-metre-by-2035
+  - minus-6-and-the-first-cold-health-alert-britains
+  - 230-points-short-of-27-000-and-still-a-record-close
+  updates:
+  - time: '2026-11-12T19:29:02+01:00'
+    text: 'Markets: DAX and Stoxx 600 set record closes'
+    piece: 230-points-short-of-27-000-and-still-a-record-close
