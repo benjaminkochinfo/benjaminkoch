@@ -1,0 +1,62 @@
+date: "2026-11-12"
+slot: pm
+published: "2026-11-12T17:33:10+01:00"   # set to the actual Berlin time when it goes live
+title: "Friday at €161.74: the wind turned up as promised, and the auction kept the discount"
+standfirst: "The forecast wind arrived almost to the gigawatt-hour and Friday's power got cheaper; the forecast held, and the auction priced it in. Also: the DAX touches 27,000 on order books, Britain's 0.7% quarter, the budget committee's late night, Munich Re's quieter quarter and a new drug for a rare cancer."
+closing:
+  title: Before you close the tab
+  published: '2026-11-12T17:30:00+01:00'
+  habit:
+    text: 'When the first frost arrives, make one short list of the people you would check on if the heating failed or the pavement froze: an older neighbour, a relative who lives alone, a friend just out of hospital. Put a phone number next to each name and, on the first cold evening, call one of them. Five minutes, and the list is ready for the next cold night too.'
+    note: A habit, not advice.
+  went_right:
+    text: 'On Scotland''s Moray coast, where 2 to 3 metres of land have collapsed into the sea in recent years, conservationists and 18 volunteers moved 3,400 one-flowered wintergreens, one of Britain''s rarest wildflowers, to safety deeper in Culbin Forest [1]. In the UK the tiny star-shaped flower grows only in pine woods in north-east Scotland, at just seven sites, and it has lost an estimated half of its UK population in 50 years [1]. Because the plant depends on fungi in the soil, volunteers cut out whole sections of earth around each one to keep those networks intact [1]. Plantlife Scotland, Forestry and Land Scotland and NatureScot ran the work, with money from the Scottish government''s nature restoration fund [1]. "Any survival will be a success," said Iain Macdonald of NatureScot [1]. Nobody promised a miracle; they dug carefully, which is better.'
+  sentence: "A reinsurer counted its disasters and found them within budget, England paid for a new cancer drug on the day it was licensed, and volunteers in Scotland carried 3,400 small flowers away from the sea: a day of careful work done on time."
+  euros:
+    text: 'If you sign a new energy contract today, it costs more than it did in January. The energy industry association BDEW puts the average household electricity price for new contracts at 40.1 cents per kilowatt hour, 2.9 cents or 8% higher than at the start of the year, and the average gas price at 14.9 cents, up 3.8 cents or 34% [2]. For customers on running tariffs, whose prices were usually set at the start of the year or fixed, there has so far been no effect, BDEW says [2]. Desk arithmetic: for a household using 3,500 kWh of electricity a year, BDEW''s reference, 2.9 cents more is about €102 a year; for a single-family house using 20,000 kWh of gas, 3.8 cents more is €760 a year.'
+    note: Average prices for contracts available to sign, BDEW Quick-Check of 10 Nov 2026 (data as of 3 Nov). Your tariff, region and consumption will differ; if you are on a fixed price, check its end date before you compare. Nothing here is advice.
+  small_words:
+    term: Combined ratio
+    text: 'The share of each premium euro an insurer spends on claims and running costs. Below 100% means the insurance business itself made money before investment income; Munich Re reported 80.0% for its property-casualty reinsurance in the third quarter, against 62.7% a year earlier [3]. When a reinsurer says the figure rose but stayed below plan, it means it paid out more for disasters and still priced them correctly.'
+  sources:
+  - {n: 1, title: "Rare wildflowers at risk of falling into sea rescued from eroding Scottish coast", publisher: "The Guardian", url: "https://www.theguardian.com/environment/2026/nov/11/one-flowered-wintergreen-rescue-eroding-coast-scotland", date: "11 Nov 2026, 06:00 CET"}
+  - {n: 2, title: "Quick-Check Gas- und Strompreise", publisher: "BDEW", url: "https://www.bdew.de/media/documents/BDEW_Quick_Check_Gas_und_Strompreise_261110.pdf", date: "10 Nov 2026"}
+  - {n: 3, title: "Quarterly statement: Munich Re expands its business and raises its profit target to €6.6bn", publisher: "Munich Re", url: "https://www.munichre.com/en/company/media-relations/media-information-and-corporate-news/media-information/2026/quarterly-statement-3-2026.html", date: "12 Nov 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - friday-at-161-74-the-wind-turned-up-as-promised
+  - 27-001-for-a-morning-and-a-results-table-doing-the
+  - ten-out-of-ten-britain-sanctions-slavneft-and
+  - three-hours-late-555-billion-long-the-budget
+  - the-annex-about-23-000-smart-rings-154-nights-each
+  - podium-vs-print-standout-resilience-and-private
+  - ordinary-ledger-1-45-cents-more-for-gas-in-cologne
+  - 34-77-billion-of-orders-against-23-68-billion-of
+  - 9-3-months-against-7-4-and-available-from-today
+  - two-and-a-half-hours-in-the-kremlin-and-a-mine
+  - 514-million-for-nature-80-0-on-the-ratio-munich
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-12T17:33:10+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - two-supertankers-two-mines-and-a-price-that-went
+    - three-days-up-europes-gas-walks-back-from-its-one
+    - 13-4-million-shares-at-39-fresenius-sells-a-slice
+    - nearly-15-for-a-staffing-agency-permanent-hiring
+    - two-supertankers-more-than-four-million-barrels
+    - 30-billion-for-30-billion-beijing-asks-washington
+    - tests-first-staff-later-the-bundestag-passes-its
+    - 1-1-million-and-a-promised-15-million-credit-line
+    - once-a-week-birth-to-eleven-park-visits-and-a-16-5
+    - 1-065-posts-on-r-mentalhealth-the-top-reply
+    - good-news-higher-rates-what-a-0-7-quarter-does-to
+    - 200-000-americas-layoffs-tick-up-and-stay-low
+    - six-default-suppliers-eleven-tariffs-all-of-them
+    - 102-99-back-on-your-card-the-refund-email-that
+    - seven-more-countries-one-loophole-washington-moves
+    - 16-flaws-seven-rated-high-patch-your-node-js
+    - there-are-too-few-people-in-hospitals-what
+    - 130-hospitals-almost-100-doing-artificial-joints
+    - deeply-concerning-and-if-confirmed-unacceptable
+    - 1-800-schools-ten-regions-and-an-order-to-keep
+    - a-quarter-less-energy-per-square-metre-by-2035
+    - minus-6-and-the-first-cold-health-alert-britains
+  updates: []

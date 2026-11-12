@@ -1,0 +1,19 @@
+id: europe-results-movers-12pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Results day in Europe: B&M, Burberry and Siemens up, Telefónica down"
+subtitle: "Percentage share-price change on Thursday morning, 12 November 2026, for selected European companies that reported or were in the news, snapshot as reported by dpa-AFX/RTTNews at 10:48 CET"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "B&M European Value Retail rise", value: 17.0, note: "first-half sales, margins and profit beat forecasts"}
+  - {label: "Burberry rise", value: 8.0, note: "first-half adjusted operating profit +225%"}
+  - {label: "Siemens rise", value: 4.6, note: "raised medium-term targets"}
+  - {label: "Munich Re rise", value: 1.7, note: "Q3 beat expectations"}
+  - {label: "Zurich Insurance rise", value: 1.3, note: "nine-month P&C premiums +7%"}
+  - {label: "BHP fall", value: -1.2, note: "new finance chief"}
+  - {label: "BAE Systems fall", value: -1.3, note: "despite higher cash-flow projection"}
+  - {label: "Telefónica fall", value: -2.3, note: "cut full-year revenue forecast"}
+licence: reported
+source_line: "dpa-AFX / RTTNews, 'European Shares Hit Record High As Investors Cheer Earnings', 12 Nov 2026, 10:48 CET; intraday morning snapshot, not closing levels; retrieved 12 Nov 2026 · reported figures"
+alt: "Bar chart of share-price moves on Thursday morning 12 November 2026, as reported by dpa-AFX/RTTNews at 10:48 CET: B&M European Value Retail up 17 percent, Burberry up 8 percent, Siemens up 4.6 percent, Munich Re up 1.7 percent, Zurich Insurance up 1.3 percent, BHP down 1.2 percent, BAE Systems down 1.3 percent and Telefónica down 2.3 percent. These are morning snapshot moves, not closes."

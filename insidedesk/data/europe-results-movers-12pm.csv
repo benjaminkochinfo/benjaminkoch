@@ -1,0 +1,12 @@
+# Inside Desk chart data: europe-results-movers-12pm
+"# Source: dpa-AFX / RTTNews, 'European Shares Hit Record High As Investors Cheer Earnings', 12 Nov 2026, 10:48 CET; intraday morning snapshot, not closing levels; retrieved 12 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+B&M European Value Retail rise,17.0,no,"first-half sales, margins and profit beat forecasts"
+Burberry rise,8.0,no,first-half adjusted operating profit +225%
+Siemens rise,4.6,no,raised medium-term targets
+Munich Re rise,1.7,no,Q3 beat expectations
+Zurich Insurance rise,1.3,no,nine-month P&C premiums +7%
+BHP fall,-1.2,no,new finance chief
+BAE Systems fall,-1.3,no,despite higher cash-flow projection
+Telefónica fall,-2.3,no,cut full-year revenue forecast
