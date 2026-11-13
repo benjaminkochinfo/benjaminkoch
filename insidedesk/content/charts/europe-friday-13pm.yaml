@@ -1,0 +1,21 @@
+id: europe-friday-13pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "DAX +0.07%, Wise +9.8%, Acciona −7%: flat on top"
+subtitle: "Percentage change on selected European indexes and shares, Friday 13 November 2026, intraday snapshot at about 15:27 CET per XTB; not closing levels"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Wise rise (intraday, up to)", value: 9.8, note: "settlement in Belgian probe, revenue +23%"}
+  - {label: "Eni rise", value: 1.5, note: "top Euro Stoxx 50 gainer"}
+  - {label: "TotalEnergies rise", value: 1.4}
+  - {label: "FTSE 100 rise", value: 0.21}
+  - {label: "DAX rise", value: 0.07}
+  - {label: "Euro Stoxx 50 rise", value: 0.07, note: "23 gainers, 27 losers"}
+  - {label: "CAC 40 rise", value: 0.03}
+  - {label: "Siemens fall", value: -1.4}
+  - {label: "Prosus fall", value: -1.75}
+  - {label: "Acciona fall (about)", value: -7.0, note: "bottom of the Stoxx 600"}
+licence: reported
+source_line: "XTB (Jens Klatt), 'Börse Aktuell: Europa vor bester Woche seit Juni: Richemont drückt Luxuswerte', 13 Nov 2026, 15:27 CET; intraday snapshot, not closing levels; Wise figure is its intraday high; retrieved 13 Nov 2026 · reported figures"
+alt: "Bar chart of Friday 13 November 2026 percentage changes in Europe at about 15:27 CET, per XTB: Wise up as much as 9.8 percent, Eni up 1.5, TotalEnergies up 1.4, FTSE 100 up 0.21, DAX up 0.07, Euro Stoxx 50 up 0.07, CAC 40 up 0.03, Siemens down 1.4, Prosus down 1.75 and Acciona down about 7 percent. These are intraday snapshot figures, not closes."

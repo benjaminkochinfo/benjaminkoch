@@ -1,0 +1,104 @@
+date: "2026-11-13"
+slot: pm
+published: "2026-11-13T17:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Less demand, a dearer Saturday: the auction that refused to follow the calendar"
+standfirst: "Saturday's power was bought on Friday for more than Friday's, while the oil watchdog sees a barrel back in surplus. Also: a flat DAX over busy shares, the 2027 budget signed off with one promise left open, new powers and new checks for the intelligence services, a record month in England's A&E, and Spain's new olive oil near three euros."
+closing:
+  title: Before you close the tab
+  published: "2026-11-13T17:30:00+01:00"
+  habit:
+    text: 'Pick one day a month, the first Saturday will do, and press the test button
+      on every smoke alarm in your home until it beeps. Note the date on a sticky label
+      inside a kitchen cupboard, and next to it the year printed on the back of each
+      alarm. It takes three minutes. A device that only speaks in an emergency deserves
+      to be asked, now and then, whether it can still speak at all.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Two years after the Wood White butterfly was returned to Fineshade Wood in
+      Northamptonshire, volunteers recorded 746 sightings there this year, against 73
+      in 2025, a rise of 922%, the charity Butterfly Conservation says [1]. The project
+      began in 2024 with 20 adult butterflies moved from two other Forestry England woods,
+      and 23 more were released last summer [1]. Since 1992 the species'' distribution
+      has fallen by 76%, and it now survives in only a dozen fragments of its former
+      range [1]. The warm spring helped, but the charity credits years of habitat work:
+      keeping the grassy rides open and the caterpillars'' food plants growing [1]. "Seeing
+      hundreds of Wood Whites flying through Fineshade today shows what''s possible,"
+      said Dr Jamie Wildman of Butterfly Conservation [1]. The money came from Natural
+      England''s Species Recovery Programme [1]. Mowing a path on schedule is not a headline;
+      it is how a headline like this one gets made.'
+  sentence: The Bundestag gave the intelligence services new powers and a panel of former
+    judges to check them first, the DAX took a breather after its record, and the pumps
+    passed on a week of cheaper oil; on Friday the checks mattered as much as the powers.
+  euros:
+    text: 'Filling up got cheaper again this week. On Thursday a litre of Super E10 cost
+      €1.949 on the ADAC''s nationwide daily average, a little over six cents or 3.2%
+      less than a week earlier, and diesel fell by a little over six cents to €2.188
+      [2]. Diesel, unusually, is still well above petrol [2]. Brent crude stood at a little
+      over $93 a barrel on Thursday, against a little over $113 before the US congressional
+      elections [2]. Desk arithmetic: six cents less on a 50-litre tank of E10 is about
+      €3 a fill-up; and at Thursday''s prices the same 50 litres of diesel cost about
+      €11.95 more than E10 (23.9 cents a litre).'
+    note: ADAC nationwide daily averages for Thursday 12 Nov 2026, as reported by dpa-AFX
+      on 13 Nov; prices vary by region, station and time of day. Nothing here is advice.
+  small_words:
+    term: Nachrichtendienst (intelligence service)
+    text: 'In German law, a service that gathers information, covertly if need be, under
+      legal and parliamentary oversight, but without police powers: it cannot arrest
+      anyone [3]. Friday''s reform lets the BND and the domestic intelligence service
+      do more, from disrupting attackers'' servers to acting against explosives, while
+      arrests and open searches stay with the police [3]. "Intelligence services are
+      becoming real secret services," said Interior Minister Alexander Dobrindt; 309
+      MPs voted yes, 190 no and 71 abstained [3].'
+  sources:
+  - n: 1
+    title: Reintroduced butterfly numbers rocket by 922% after sunshine 'turbo charges' caterpillar growth
+    publisher: Inside Ecology
+    url: https://insideecology.com/2026/11/12/reintroduced-butterfly-numbers-rocket-by-922-after-sunshine-turbo-charges-caterpillar-growth/
+    date: 12 Nov 2026
+  - n: 2
+    title: Benzinpreise in Deutschland sinken
+    publisher: dpa-AFX (via onvista)
+    url: https://www.onvista.de/news/2026/11-13-benzinpreise-in-deutschland-sinken-0-10-26576094
+    date: 13 Nov 2026, 11:18 CET
+  - n: 3
+    title: 'BND und Verfassungsschutz dürfen jetzt viel mehr'
+    publisher: tagesschau.de
+    url: https://www.tagesschau.de/inland/innenpolitik/nachrichtendienst-reform-beschlossen-100.html
+    date: 13 Nov 2026, 14:11 CET
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - less-demand-a-dearer-saturday-the-auction-that
+  - a-flat-friday-on-top-wise-up-9-8-acciona-down-7
+  - a-gas-carrier-a-mine-and-no-name-hormuzs-friday
+  - 560-9-billion-signed-off-5-4-billion-still-open
+  - the-annex-148-adults-on-antidepressants-one-phone
+  - podium-vs-print-going-the-wrong-way-and-a-6-5
+  - ordinary-ledger-a-euro-more-for-the-small-parcel
+  - under-1-of-workspaces-one-vendor-down-the-chain
+  - 2-5-million-at-a-e-almost-66-within-18-weeks
+  - 309-to-190-germanys-intelligence-services-get
+  - 6-to-10-degrees-down-up-to-40-mm-of-snow-chinas
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-13T17:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - four-billion-euros-one-line-in-the-budget-and
+    - 18-4-million-barrels-a-day-out-of-the-gulf-and
+    - 6-5-at-the-factory-gate-and-diesel-7-9-cheaper
+    - sixty-per-cent-off-the-january-high-and-a-lender
+    - shenzhen-18-to-19-november-apec-and-a-three-way
+    - 1-198-drones-one-refinery-six-reservoirs-ukraine
+    - please-no-surprises-merzs-message-to-washington
+    - 8-2-billion-loan-20-billion-owed-the-job-agencys
+    - within-72-hours-of-trauma-a-video-call-about
+    - spirals-rings-and-straight-lines-24-brains-and
+    - cannot-guarantee-and-71-economists-out-of-71-who
+    - about-1-105-for-your-euro-and-a-third-losing-week
+    - 1-949-for-e10-2-188-for-diesel-and-a-pump-price
+    - 74-billion-promised-one-county-hearing-to-go
+    - potentially-infeasible-in-public-possible-in
+    - not-only-in-hospital-the-bundestag-changes-where
+    - 86-of-326-most-volunteer-firefighters-in-texas
+    - readiness-to-contribute-the-kremlin-puts-a
+    - twelve-regions-without-power-a-kyiv-hospital-on
+    - 250-mm-in-tofino-already-a-typhoons-remnants-reach
+    - 3-18-a-kilo-at-the-mill-gate-spains-new-olive-oil
+  updates: []

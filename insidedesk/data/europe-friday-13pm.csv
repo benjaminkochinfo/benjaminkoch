@@ -1,0 +1,14 @@
+# Inside Desk chart data: europe-friday-13pm
+"# Source: XTB (Jens Klatt), 'Börse Aktuell: Europa vor bester Woche seit Juni: Richemont drückt Luxuswerte', 13 Nov 2026, 15:27 CET; intraday snapshot, not closing levels; Wise figure is its intraday high; retrieved 13 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Wise rise (intraday, up to)",9.8,no,"settlement in Belgian probe, revenue +23%"
+Eni rise,1.5,no,top Euro Stoxx 50 gainer
+TotalEnergies rise,1.4,no,
+FTSE 100 rise,0.21,no,
+DAX rise,0.07,no,
+Euro Stoxx 50 rise,0.07,no,"23 gainers, 27 losers"
+CAC 40 rise,0.03,no,
+Siemens fall,-1.4,no,
+Prosus fall,-1.75,no,
+Acciona fall (about),-7.0,no,bottom of the Stoxx 600

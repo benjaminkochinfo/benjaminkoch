@@ -1,0 +1,47 @@
+id: tofino-rain-13pm
+kind: line
+kicker: "Climate & Weather · British Columbia"
+title: "Tofino: almost double November's usual rain by the 12th"
+subtitle: "Rain since 1 November, running total, mm · grid point near Tofino, Vancouver Island (modelled), 2026 vs 1991–2020 average for the same days"
+unit: " mm"
+label_decimals: 1
+start: "2026-11-01"
+y_min: 0
+series:
+  - key: rain2026
+    label: "November 2026"
+    source:
+      type: static
+      values:
+        - ['2026-11-01', 0.0]
+        - ['2026-11-02', 0.0]
+        - ['2026-11-03', 0.3]
+        - ['2026-11-04', 15.3]
+        - ['2026-11-05', 48.6]
+        - ['2026-11-06', 148.4]
+        - ['2026-11-07', 186.5]
+        - ['2026-11-08', 203.1]
+        - ['2026-11-09', 213.5]
+        - ['2026-11-10', 282.1]
+        - ['2026-11-11', 345.7]
+        - ['2026-11-12', 385.3]
+  - key: avg9120
+    label: "1991–2020 average"
+    source:
+      type: static
+      values:
+        - ['2026-11-01', 12.6]
+        - ['2026-11-02', 27.5]
+        - ['2026-11-03', 47.5]
+        - ['2026-11-04', 59.9]
+        - ['2026-11-05', 73.4]
+        - ['2026-11-06', 92.2]
+        - ['2026-11-07', 114.7]
+        - ['2026-11-08', 130.4]
+        - ['2026-11-09', 145.8]
+        - ['2026-11-10', 157.5]
+        - ['2026-11-11', 174.8]
+        - ['2026-11-12', 197.9]
+licence: reported
+source_line: "Open-Meteo Historical Weather API (open-meteo.com), daily precipitation near 49.15°N 125.91°W (local days, Vancouver time); 2026 from its default reanalysis/analysis blend, 1991–2020 average from ERA5 (Copernicus/ECMWF); desk running totals; retrieved 13 Nov 2026 · Open-Meteo data CC BY 4.0. Modelled grid values, not station readings."
+alt: "Line chart of modelled rainfall at a grid point near Tofino on Vancouver Island, running total from 1 November. In 2026 the first three days are almost dry, then the total jumps to 148.4 mm by 6 November and climbs again from 10 November to 385.3 mm on Thursday 12 November 2026, the latest value. The 1991–2020 average for the same days rises steadily to 197.9 mm by 12 November."
