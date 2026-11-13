@@ -1,0 +1,15 @@
+id: amr-england-13nov
+kind: hbar
+kicker: "Health · Antibiotic resistance"
+title: "Still rising, more slowly: antibiotic-resistant bloodstream infections in England"
+subtitle: "Reported antibiotic-resistant bacteraemia cases per year, England, selected years as published by UKHSA (2020–2022 not shown in the release)"
+unit: " cases"
+label_decimals: 0
+rows:
+  - {label: "2019", value: 18086, note: "baseline year"}
+  - {label: "2023", value: 18732, note: ""}
+  - {label: "2024", value: 20468, note: "+9.3% on 2023"}
+  - {label: "2025", value: 21129, note: "+3.2% on 2024; 406 a week"}
+licence: reported
+source_line: "UK Health Security Agency, 'Over 400 antibiotic-resistant infections each week in 2025' (ESPAUR report 2025 to 2026), published 12 Nov 2026; retrieved 13 Nov 2026 · Contains public sector information licensed under the Open Government Licence v3.0"
+alt: "Bar chart of antibiotic-resistant bacteraemia cases reported in England: 18,086 in 2019, 18,732 in 2023, 20,468 in 2024 and 21,129 in 2025, the latest value, an average of 406 a week. The rise was 9.3 percent from 2023 to 2024 and 3.2 percent from 2024 to 2025."

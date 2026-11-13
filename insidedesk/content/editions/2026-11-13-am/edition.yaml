@@ -1,0 +1,94 @@
+date: "2026-11-13"
+slot: am
+published: "2026-11-13T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Minus 14%, then minus 4.3%: Nvidia loses its founder, and the market keeps its nerve"
+standfirst: "Jensen Huang resigned and Nvidia's rivals rose; the heavier move was a ten-year Treasury yield back above 5.1%. Also: a budget settled after 3am, a pipeline around Hormuz under fire, wind that kept its word on your power price, drought in the Mid-South and an antibiotic-resistance ledger that slows but does not turn."
+closing:
+  title: Before you close the tab
+  published: '2026-11-13T08:30:00+01:00'
+  habit:
+    text: 'This weekend, when the heating is on anyway, look at the small device on
+      each radiator and note what it shows: a display, a number, or only a sealed
+      glass tube. Write the readings on the back of last year''s heating statement.
+      It takes five minutes, and when the next statement arrives you will be reading
+      it against your own notes rather than against a feeling.'
+    note: A habit, not advice.
+  went_right:
+    text: At Culbin Forest in Moray, 18 volunteers have moved 3,400 one-flowered wintergreens,
+      one of Britain's rarest wildflowers, away from a shoreline where 2 to 3 metres
+      of land had collapsed into the sea [1]. In the UK the plant survives at just
+      seven sites, only three of them with healthy populations, according to Plantlife
+      Scotland [1]. Volunteers cut out whole sections of soil so the fungi the plant
+      depends on travelled with it [1]. "Any survival will be a success," said Iain
+      Macdonald of NatureScot [1]. The money came from the Scottish government's nature
+      restoration fund [1]. A spade, a soil block and a public fund are not glamorous;
+      they are how a species gets a second address.
+  sentence: A founder resigned in an afternoon, the bond market moved more than the
+    chip index, and the budget committee worked past 3am; on Friday the weight sat with
+    the dull numbers.
+  euros:
+    text: 'By the end of 2026 most heat cost allocators in buildings with central
+      heating or hot water and at least two flats must be readable remotely; from
+      1 January 2027 that is mandatory for the majority of such buildings, the Verbraucherzentrale
+      Bayern says [2]. If the remote-readable devices are missing, tenants may cut
+      the consumption-based share of their heating bill by 3%, and by a further 3%
+      if the required monthly consumption information is missing or incomplete; the
+      two cuts can be combined [2]. The statement must also arrive no later than
+      twelve months after the billing period ends [2]. Desk arithmetic: on every
+      €100 of consumption-based heating costs, the two cuts together come to €6.'
+    note: Rules as summarised by Verbraucherzentrale Bayern on 4 Nov 2026; your
+      statement and building decide what applies. Nothing here is advice.
+  small_words:
+    term: Heizkostenverteiler (heat cost allocator)
+    text: The small device on a radiator that records how much of the building's
+      heat that radiator used, so the bill can be split by use rather than by floor
+      space alone [2].  A remote-readable one sends its figures without anyone ringing your doorbell.
+  sources:
+  - n: 1
+    title: Rare wildflowers at risk of falling into sea rescued from eroding Scottish coast
+    publisher: The Guardian
+    url: https://www.theguardian.com/environment/2026/nov/11/one-flowered-wintergreen-rescue-eroding-coast-scotland
+    date: 11 Nov 2026, 06:00 CET
+  - n: 2
+    title: 'Frist läuft: Bis Ende 2026 müssen Heizkostenverteiler fernablesbar sein'
+    publisher: Verbraucherzentrale Bayern
+    url: https://www.verbraucherzentrale.bayern/pressemitteilungen/frist-laeuft-bis-ende-2026-muessen-heizkostenverteiler-fernablesbar-sein-126854
+    date: 4 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - minus-14-then-minus-4-3-nvidia-loses-its-founder
+  - the-road-around-hormuz-has-a-pumping-station-and
+  - podium-vs-print-big-chunks-and-a-600-million-line
+  - the-annex-48-autistic-adults-90-others-one
+  - 480-gwh-promised-480-gwh-delivered-the-week-the
+  - 555-029-and-a-30-7-deposit-the-hurdle-to-a-home-is
+  - ordinary-ledger-4-60-a-mug-of-gl-hwein-six-cents
+  - 130-000-reports-no-cyber-attack-microsofts
+  - 406-a-week-rising-3-2-instead-of-9-3-englands
+  - a-chair-for-europe-a-warning-about-its-soldiers
+  - 94-in-drought-76-of-pastures-poor-a-record-warm
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-13T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 6-6-expected-americas-producer-prices-meet-a
+    - 2-870-in-tokyo-5-12-in-sydney-the-treasury-sell
+    - eight-plants-3-5-million-tonnes-and-the-seed
+    - five-tanks-at-ust-luga-the-baltics-oil-and-grain
+    - a-dash-under-2027-the-sugar-tax-waits-the-plastics
+    - shortly-after-3am-item-21-the-digital-ministry
+    - 34-down-from-37-americas-students-report-less
+    - the-jolt-as-you-drift-off-194-adults-and-a-link
+    - plus-7-9-in-a-day-norway-coughs-the-forecast-cools
+    - 4-7-million-barrels-the-analysts-did-not-expect
+    - 160-yen-to-the-dollar-and-a-finance-ministry-that
+    - 3-877-then-3-913-golds-bad-thursday-and-a-small
+    - 35-million-units-81-3-of-plots-in-private-hands
+    - one-tonie-one-batch-small-parts-on-the-shoes-check
+    - 26-1-billion-promised-210-8-million-booked
+    - three-days-of-tokens-australias-biggest-pension
+    - 28-2-englands-one-off-meningitis-b-jab-for-school
+    - 200-plus-critical-medicines-under-the-microscope
+    - false-flags-hidden-numbers-239-names-on-a-list-the
+    - mapped-not-yet-attacked-norways-security-service
+    - 40-billion-120-billion-or-no-text-at-all-the-three
+    - 72-harvested-17-points-behind-iowas-corn-waits-for
+  updates: []

@@ -1,0 +1,8 @@
+# Inside Desk chart data: amr-england-13nov
+"# Source: UK Health Security Agency, 'Over 400 antibiotic-resistant infections each week in 2025' (ESPAUR report 2025 to 2026), published 12 Nov 2026; retrieved 13 Nov 2026 · Contains public sector information licensed under the Open Government Licence v3.0"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+2019,18086,no,baseline year
+2023,18732,no,
+2024,20468,no,+9.3% on 2023
+2025,21129,no,+3.2% on 2024; 406 a week

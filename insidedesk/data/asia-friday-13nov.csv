@@ -1,0 +1,8 @@
+# Inside Desk chart data: asia-friday-13nov
+"# Source: AFP, 'Tech firms extend rally in Asia as traders look past Huang's downfall', published 13 Nov 2026; Nikkei at the Tokyo midday break (11:30 Tokyo time, 03:30 CET); intraday snapshot, not closing levels; retrieved 13 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nikkei 225 (Japan) rise,1.6,no,"61,816.72"
+Kospi (South Korea) rise,1.3,no,"5,410.58"
+Shanghai Composite rise,0.2,no,"3,662.84"
+Hang Seng (Hong Kong) fall,-0.6,no,"23,874.05"

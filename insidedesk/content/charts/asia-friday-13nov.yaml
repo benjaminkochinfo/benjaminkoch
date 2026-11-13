@@ -1,0 +1,15 @@
+id: asia-friday-13nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Friday morning in Asia: Tokyo and Seoul up, Hong Kong down, the morning after Nvidia's chief executive resigned"
+subtitle: "Percentage change on selected Asia-Pacific indexes, Friday session, 13 November 2026, snapshot at the Tokyo lunch break (11:30 Tokyo time, 03:30 CET), per AFP"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Nikkei 225 (Japan) rise", value: 1.6, note: "61,816.72"}
+  - {label: "Kospi (South Korea) rise", value: 1.3, note: "5,410.58"}
+  - {label: "Shanghai Composite rise", value: 0.2, note: "3,662.84"}
+  - {label: "Hang Seng (Hong Kong) fall", value: -0.6, note: "23,874.05"}
+licence: reported
+source_line: "AFP, 'Tech firms extend rally in Asia as traders look past Huang's downfall', published 13 Nov 2026; Nikkei at the Tokyo midday break (11:30 Tokyo time, 03:30 CET); intraday snapshot, not closing levels; retrieved 13 Nov 2026 · reported figures"
+alt: "Bar chart of Friday 13 November 2026 percentage changes in Asia at the Tokyo midday break, about 03:30 CET, per AFP: Nikkei 225 up 1.6 percent to 61,816.72, Kospi up 1.3 percent to 5,410.58, Shanghai Composite up 0.2 percent to 3,662.84 and Hang Seng down 0.6 percent to 23,874.05. These are intraday snapshot levels, not closes."
