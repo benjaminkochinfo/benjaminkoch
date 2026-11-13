@@ -102,7 +102,11 @@ epaper:
   - 250-mm-in-tofino-already-a-typhoons-remnants-reach
   - 3-18-a-kilo-at-the-mill-gate-spains-new-olive-oil
   - 0-13-points-for-a-record-21-93-short-of-one
+  - fifty-points-up-on-the-dow-and-a-chip-sell-off-underneath
   updates:
   - time: '2026-11-13T19:35:36+01:00'
     text: 'Markets: Stoxx 600 record close, DAX ends the week up 3.6%'
     piece: 0-13-points-for-a-record-21-93-short-of-one
+  - time: '2026-11-13T22:02:55+01:00'
+    text: 'Money: Wall Street closes mixed, Nvidia below $4 trillion'
+    piece: fifty-points-up-on-the-dow-and-a-chip-sell-off-underneath
