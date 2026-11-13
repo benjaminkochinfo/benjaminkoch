@@ -98,6 +98,13 @@ describes the latest value. `--fetch id1,id2` narrows the fetch; `--fetch-all` r
     clipped, and shifts the plot down; a title that needs wrapping still fails validation — shorten it.
   - Charts published before this rule whose titles exceed the budget are grandfathered in the
     validator (`HEADLINE_GRANDFATHERED` in `charts.py`). Do not copy their titles.
+* **Source line vs the wordmark** (13 Nov 2026). The plate footer draws `source_line` in 11px
+  JetBrains Mono after the word "SOURCE", on the same baseline as the INSIDE DESK wordmark.
+  A long source used to run into the wordmark. The renderer now truncates with an ellipsis so
+  the source stops 8px short of the amber square at x=w−140 (780px budget on a 960px plate);
+  `validate.py` checks that the fitted line stays inside that budget. The full source stays in
+  the figcaption and the CSV. Prefer a source_line that already fits, but a long one will not
+  fail the build — it will be ellipsised.
 * Rules: a chart only where it carries the argument; no projections drawn as data; no Yahoo/Bloomberg/index-vendor
   data or anything whose terms forbid redistribution; never restyle per article — change `charts.py` once.
 * Quantity: at least one chart per edition, usually 2–3 (see "Writing an edition"). The coordinator or a writer may add

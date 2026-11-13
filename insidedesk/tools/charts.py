@@ -213,8 +213,63 @@ def _header(w, spec):
     extra = extra_t + extra_s + (8 if extra_s or extra_t else 0)
     return "".join(parts), extra
 
+# ---- Source line vs the INSIDE DESK wordmark (Desk Plate footer)
+# JetBrains Mono is 0.6em wide (6.6px at 11px). The wordmark's amber square sits at
+# x=w-140 (820 on a 960px plate). A long source_line used to run into the wordmark
+# (e.g. "...(Friday 13 Nov €1...INSIDE DESK...r 12"). The renderer truncates with
+# an ellipsis so the source never reaches the square; the full line stays in the
+# figcaption and the CSV. Wrapping would change the plate height, so we ellipsis.
+SOURCE_SIZE = 11
+SOURCE_PREFIX = "SOURCE "
+MONO_ADVANCE = 0.6          # em, JetBrains Mono
+WORDMARK_SQUARE = 140       # square at x=w-140
+SOURCE_GAP = 8              # px between the source and the square
+
+def mono_width(text, size=SOURCE_SIZE):
+    """Pixel width of JetBrains Mono `text` at `size` (default 11px). No kerning."""
+    return len(text) * MONO_ADVANCE * size
+
+def source_max_px(w=960):
+    """Rightmost width allowed for 'SOURCE ' + source text, left inset 32px."""
+    return (w - WORDMARK_SQUARE) - SOURCE_GAP - 32  # 780 on a 960px plate
+
+def fit_source_line(src, w=960):
+    """Source text as drawn after 'SOURCE '. Unchanged when it already fits
+    (so published plates with a short source stay byte-identical); otherwise
+    truncated at a word boundary and ended with an ellipsis."""
+    src = src or ""
+    avail = source_max_px(w)
+    if mono_width(SOURCE_PREFIX + src) <= avail:
+        return src
+    ell = "…"
+    # Characters of src that leave room for the prefix and the ellipsis.
+    n = int((avail - mono_width(SOURCE_PREFIX + ell)) / (MONO_ADVANCE * SOURCE_SIZE))
+    n = max(0, min(n, len(src)))
+    cut = src[:n]
+    # Walk back only when the cut is mid-word, so a source that lands on a
+    # boundary keeps the last whole word (e.g. "Friday 13 Nov…" not "Friday 13…").
+    mid_word = n < len(src) and cut and cut[-1] not in " ,;:·|/" and src[n] not in " ,;:·|/"
+    if mid_word:
+        for i in range(len(cut) - 1, int(n * 0.6), -1):
+            if cut[i] in " ,;:·|/":
+                cut = cut[:i]
+                break
+    return cut.rstrip(" ,;:·|/") + ell
+
+def source_line_problems(spec, w=960):
+    """Validator: the fitted footer source must never reach the wordmark."""
+    cid = spec.get("id", "?")
+    fitted = fit_source_line(spec.get("source_line") or "", w)
+    width = mono_width(SOURCE_PREFIX + fitted)
+    avail = source_max_px(w)
+    if width > avail:
+        return [f"chart {cid}: fitted source line is {width:.0f}px (budget {avail}px) and would collide with the INSIDE DESK wordmark."]
+    return []
+
 def _footer(w, h, spec):
-    src = _e(spec.get("source_line", ""))
+    raw = spec.get("source_line", "") or ""
+    fitted = fit_source_line(raw, w)
+    src = _e(fitted)
     return (f'<line x1="32" x2="{w-32}" y1="{h-44}" y2="{h-44}" stroke="{RULE}"/>'
             f'<text x="32" y="{h-22}" font-family="{MONO}" font-size="11" fill="{MUTED}"><tspan fill="{FAINT}">SOURCE </tspan>{src}</text>'
             f'<rect x="{w-140}" y="{h-31}" width="8" height="8" fill="{SIGNAL}"/>'

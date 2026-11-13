@@ -74,6 +74,7 @@ for f in os.listdir(cd):
         _spec = None
     if _spec:
         problems.extend(charts.headline_problems(_spec))
+        problems.extend(charts.source_line_problems(_spec))
     if cid not in _used: _ready.append(cid); continue   # prepared spec (may carry a seed CSV), not used by any piece yet
     for (ext, d), ok in zip(files, have):
         if not ok: problems.append(f"chart {cid}: missing {d}/{cid}{ext}")
