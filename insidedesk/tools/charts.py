@@ -16,6 +16,134 @@ PALETTE = ["#F2A93B", "#4CC9B0", "#FF7A5C", "#A99BFF", "#C9D1D9", "#7FB2FF"]
 SERIF = "Newsreader, 'Iowan Old Style', Georgia, serif"
 SANS = "'Familjen Grotesk', 'Helvetica Neue', Arial, sans-serif"
 MONO = "'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace"
+
+# ---- Chart headline budget (Desk Plate, 960px wide)
+# The title is drawn at 30px Newsreader SemiBold, x=32. A title wider than the
+# plate used to clip mid-word (e.g. "a working week that more than ha").
+# Writers: at most TITLE_MAX_CHARS characters, and at most TITLE_MAX_PX pixels.
+# The renderer wraps as a last-resort safety net so nothing is ever clipped;
+# a title that needs wrapping still fails validate.py — shorten it.
+TITLE_MAX_CHARS = 60
+TITLE_MAX_PX = 900          # 30px Newsreader SemiBold; 32px left, 28px right pad
+TITLE_CLIP_PX = 928         # wrap only when a line would run past this (near the edge)
+TITLE_SIZE = 30
+TITLE_LINE = 36             # line-height when a title wraps
+SUB_SIZE = 15
+SUB_LINE = 20
+# Charts published before the 13 Nov 2026 headline rule, whose titles exceed
+# the budget. Their already-published plates are left unchanged. Do not copy
+# these titles; new specs (and any revision of today's charts) must pass.
+HEADLINE_GRANDFATHERED = frozenset({
+    # Already published before 13 Nov 2026; titles may exceed the budget or
+    # (in a few cases) clip on the plate. Do not copy these titles.
+    "asia-monday-open-09nov",
+    "asia-thursday-12nov",
+    "asia-wednesday-11nov",
+    "china-pmi-falls-02nov",
+    "de-october-mix-29pm",
+    "de-power-day-ahead-08nov",
+    "de-power-day-ahead-09nov",
+    "de-power-day-ahead-10pm",
+    "de-power-day-ahead-11pm",
+    "de-power-day-ahead-22oct",
+    "europe-results-movers-12pm",
+    "europe-sectors-11pm",
+    "madeira-rain-6h-11nov",
+    "measles-infant-seropositive-23oct",
+    "us-poll-closings-03nov",
+    "ust-vote-vs-october-05nov",
+})
+
+# Newsreader SemiBold (wght 600, opsz 30) advance widths at 30px, in CSS pixels.
+# Packed as "codepoint:width,..." so the validator and the renderer share one ruler.
+_NW30 = {int(k): float(v) for k, v in (p.split(":") for p in """32:6.42,33:8.21,34:11.29,35:18.11,36:18.11,37:24.55,38:21.99,39:6.0,40:8.46,41:8.46,42:12.54,43:15.49,44:7.35,45:10.32,46:7.18,47:11.73,48:18.11,49:18.11,50:18.11,51:18.11,52:18.11,53:18.11,54:18.11,55:18.11,56:18.11,57:18.11,58:7.88,59:8.14,60:15.49,61:15.49,62:15.49,63:13.74,64:26.62,65:22.12,66:20.32,67:21.15,68:23.25,69:19.8,70:18.25,71:22.79,72:24.7,73:10.81,74:13.44,75:22.91,76:18.77,77:30.32,78:22.86,79:23.5,80:19.21,81:23.5,82:20.7,83:17.1,84:20.82,85:23.2,86:21.36,87:30.36,88:22.2,89:21.3,90:19.44,91:9.24,92:11.73,93:9.24,94:15.49,95:12.3,96:15.0,97:14.38,98:16.75,99:13.53,100:17.04,101:14.12,102:10.96,103:15.21,104:17.25,105:8.76,106:8.04,107:16.91,108:8.47,109:25.48,110:17.55,111:16.0,112:17.16,113:16.71,114:12.6,115:11.85,116:11.1,117:16.75,118:16.11,119:23.07,120:15.66,121:16.18,122:13.54,123:9.11,124:6.86,125:9.11,126:15.49,163:18.11,165:18.11,171:14.7,176:11.21,177:15.49,181:17.67,183:7.58,187:15.39,192:22.12,193:22.12,195:22.12,196:22.12,197:22.12,198:30.61,200:19.8,201:19.8,204:10.81,205:10.81,210:23.5,211:23.5,213:23.5,214:23.5,215:15.49,216:23.86,217:23.2,218:23.2,220:23.2,223:19.39,224:14.38,225:14.38,226:14.38,227:14.38,228:14.38,229:14.38,230:21.52,231:13.53,232:14.12,233:14.12,234:14.12,235:14.12,237:8.76,238:8.76,239:8.76,241:17.55,243:16.0,244:16.0,245:16.0,246:16.0,247:15.49,248:16.48,249:16.75,250:16.75,251:16.75,252:16.75,338:32.31,339:24.48,8211:14.89,8212:19.84,8216:7.21,8217:7.26,8220:13.21,8221:13.24,8226:12.18,8230:20.67,8240:36.15,8364:18.11,8722:15.49""".split(","))}
+_NW_FALLBACK = 30.36  # capital W; used for a missing glyph (conservative)
+
+def title_width(text, size=TITLE_SIZE):
+    """Pixel width of `text` at Newsreader SemiBold `size` (default 30px), no kerning.
+    A 2% safety margin is applied so we do not under-estimate against Chrome."""
+    if not text:
+        return 0.0
+    raw = sum(_NW30.get(ord(ch), _NW_FALLBACK) for ch in text) * (size / TITLE_SIZE)
+    return raw * 1.02
+
+def wrap_headline(text, max_px=TITLE_MAX_PX, size=TITLE_SIZE):
+    """Word-wrap `text` so each line is at most max_px wide. A single overlong
+    word is placed on its own line (the validator then fails it)."""
+    words = text.split()
+    if not words:
+        return [""]
+    lines, cur = [], words[0]
+    for w_ in words[1:]:
+        trial = cur + " " + w_
+        if title_width(trial, size) <= max_px:
+            cur = trial
+        else:
+            lines.append(cur)
+            cur = w_
+    lines.append(cur)
+    return lines
+
+def headline_problems(spec):
+    """Return a list of validator messages; empty if the title is within budget.
+    Grandfathered published charts are skipped. The pixel check is the one that
+    matches what the plate actually clips."""
+    cid = spec.get("id", "?")
+    if cid in HEADLINE_GRANDFATHERED:
+        return []
+    title = spec.get("title") or ""
+    out = []
+    n = len(title)
+    w = title_width(title)
+    if n > TITLE_MAX_CHARS:
+        out.append(
+            f"chart {cid}: title is {n} characters (budget {TITLE_MAX_CHARS}). "
+            "Shorten the headline so it still carries the key message; put extra context in the subtitle."
+        )
+    if w > TITLE_MAX_PX:
+        out.append(
+            f"chart {cid}: title is {w:.0f}px wide at 30px Newsreader SemiBold "
+            f"(budget {TITLE_MAX_PX}px) and would be truncated on the plate. Shorten it."
+        )
+    lines = wrap_headline(title, TITLE_MAX_PX)
+    if len(lines) > 2:
+        out.append(f"chart {cid}: title would need {len(lines)} lines on the plate (maximum 2). Shorten it.")
+    for ln in lines:
+        if title_width(ln) > TITLE_CLIP_PX:
+            out.append(f"chart {cid}: a word in the title is too wide to fit on the plate without clipping ({ln!r}).")
+    return out
+
+# Dark (terminal) colours are the defaults baked into every plate. The paper
+# (light) variant is a recolour of the same SVG, used for -paper.svg / -paper.png
+# and switched with the reader's theme. Values match --pl-* in desk.css.
+PAPER_MAP = {
+    "#0D1015": "#FFFCF6",
+    "#141922": "#F3ECDF",
+    "rgba(236,231,220,0.11)": "rgba(28,26,22,0.12)",
+    "rgba(236,231,220,0.28)": "rgba(28,26,22,0.30)",
+    "#ECE7DC": "#1A1A1D",
+    "#9AA3AE": "#4A4F57",
+    "#6B7480": "#62676F",
+    "#F2A93B": "#A45A00",
+    "#4CC9B0": "#0A7564",
+    "#FF7A5C": "#C2401B",
+    "#A99BFF": "#6A4FC9",
+    "#C9D1D9": "#3F4752",
+    "#7FB2FF": "#1F5FAF",
+}
+
+def recolour(svg, theme="paper"):
+    """Return a copy of a terminal-palette SVG recoloured for `theme` ('paper').
+    Longer colour strings are replaced first so they cannot be partially matched."""
+    if theme != "paper":
+        return svg
+    out = svg
+    for src, dst in sorted(PAPER_MAP.items(), key=lambda kv: -len(kv[0])):
+        out = out.replace(src, dst)
+        out = out.replace(src.upper(), dst)
+        out = out.replace(src.lower(), dst)
+    return out
+
 MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
 def _e(s): return escape(str(s), {'"': "&quot;"})
@@ -54,11 +182,36 @@ def month_ticks(d0, d1):
     return out
 
 def _header(w, spec):
+    """Kicker, title and subtitle. Returns (svg, extra_height).
+
+    When the title and subtitle each fit on one line, the markup and the
+    height are byte-identical to the original single-line header, so already
+    published plates are not redrawn. Longer text is wrapped (never clipped)
+    and the plot is shifted down by extra_height.
+    """
     k = _e(spec.get("kicker", "CHART").upper())
-    return (f'<rect x="32" y="22" width="36" height="3" fill="{SIGNAL}"/>'
-            f'<text x="80" y="27" font-family="{MONO}" font-size="11" letter-spacing="1.6" fill="{SIGNAL}">{k}</text>'
-            f'<text x="32" y="66" font-family="{SERIF}" font-weight="600" font-size="30" fill="{TEXT}">{_e(spec["title"])}</text>'
-            f'<text x="32" y="94" font-family="{SANS}" font-size="15" fill="{MUTED}">{_e(spec.get("subtitle",""))}</text>')
+    title = spec["title"]
+    sub = spec.get("subtitle", "") or ""
+    t_lines = wrap_headline(title, TITLE_CLIP_PX, TITLE_SIZE)
+    s_lines = wrap_headline(sub, TITLE_CLIP_PX, SUB_SIZE) if sub else [""]
+    # Single-line path: keep the exact historical markup.
+    if len(t_lines) == 1 and len(s_lines) <= 1:
+        return ((f'<rect x="32" y="22" width="36" height="3" fill="{SIGNAL}"/>'
+                 f'<text x="80" y="27" font-family="{MONO}" font-size="11" letter-spacing="1.6" fill="{SIGNAL}">{k}</text>'
+                 f'<text x="32" y="66" font-family="{SERIF}" font-weight="600" font-size="30" fill="{TEXT}">{_e(title)}</text>'
+                 f'<text x="32" y="94" font-family="{SANS}" font-size="15" fill="{MUTED}">{_e(sub)}</text>'), 0)
+    parts = [f'<rect x="32" y="22" width="36" height="3" fill="{SIGNAL}"/>',
+             f'<text x="80" y="27" font-family="{MONO}" font-size="11" letter-spacing="1.6" fill="{SIGNAL}">{k}</text>']
+    for i, ln in enumerate(t_lines):
+        parts.append(f'<text x="32" y="{66 + i * TITLE_LINE}" font-family="{SERIF}" font-weight="600" font-size="30" fill="{TEXT}">{_e(ln)}</text>')
+    extra_t = (len(t_lines) - 1) * TITLE_LINE
+    sub_y = 94 + extra_t
+    for i, ln in enumerate(s_lines):
+        parts.append(f'<text x="32" y="{sub_y + i * SUB_LINE}" font-family="{SANS}" font-size="15" fill="{MUTED}">{_e(ln)}</text>')
+    extra_s = max(0, (len(s_lines) - 1) * SUB_LINE)
+    # A little air between a wrapped subtitle and the plot.
+    extra = extra_t + extra_s + (8 if extra_s or extra_t else 0)
+    return "".join(parts), extra
 
 def _footer(w, h, spec):
     src = _e(spec.get("source_line", ""))
@@ -107,9 +260,11 @@ def _spread_labels(items, top, bottom, gap):
 def line_chart(spec, data, uid="c"):
     """data: {series_key: [(date, value), ...]}"""
     series = spec["series"]; panel = spec.get("panel")
-    w = spec.get("width", 960); h = spec.get("height", 600 if panel else 540)
+    w = spec.get("width", 960)
+    hdr, extra = _header(w, spec)
+    h = spec.get("height", 600 if panel else 540) + extra
     x0, x1 = 32, w - 168
-    y_top = 132; y_bot = h - (230 if panel else 92)
+    y_top = 132 + extra; y_bot = h - (230 if panel else 92)
     unit = spec.get("unit", "")
     all_pts = [p for s in series for p in data[s["key"]]]
     d0 = min(_d(p[0]) for p in all_pts); d1 = max(_d(p[0]) for p in all_pts)
@@ -122,7 +277,7 @@ def line_chart(spec, data, uid="c"):
     span = (d1 - d0).days or 1
     X = lambda d: x0 + (_d(d) - d0).days / span * (x1 - x0) if isinstance(d, str) else x0 + (d - d0).days / span * (x1 - x0)
     Y = lambda v: y_bot - (v - ylo) / (yhi - ylo) * (y_bot - y_top)
-    o = [_open(w, h, spec, uid), _header(w, spec)]
+    o = [_open(w, h, spec, uid), hdr]
     for t in ticks:
         y = Y(t); zero = abs(t) < 1e-9
         o.append(f'<line x1="{x0}" x2="{x1}" y1="{y:.1f}" y2="{y:.1f}" stroke="{RULE2 if zero else RULE}"/>')
@@ -194,12 +349,13 @@ def line_chart(spec, data, uid="c"):
 def hbar_chart(spec, rows, uid="c"):
     """rows: [{label, value, derived?, color?, note?}]"""
     w = spec.get("width", 960); n = len(rows)
-    row_h = 74; top = 140; h = spec.get("height", top + n * row_h + 70)
+    hdr, extra = _header(w, spec)
+    row_h = 74; top = 140 + extra; h = spec.get("height", 140 + n * row_h + 70) + extra
     lab_w = 0; x0 = 32; x1 = w - 120
     vmax = max(r["value"] for r in rows) * 1.05
     ticks, step = nice_ticks(0, vmax, 4)
     X = lambda v: x0 + v / ticks[-1] * (x1 - x0)
-    o = [_open(w, h, spec, uid), _header(w, spec)]
+    o = [_open(w, h, spec, uid), hdr]
     for t in ticks:
         x = X(t)
         o.append(f'<line x1="{x:.1f}" x2="{x:.1f}" y1="{top-6}" y2="{top + n*row_h - 14}" stroke="{RULE2 if t==0 else RULE}"/>')

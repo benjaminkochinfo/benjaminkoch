@@ -6,7 +6,8 @@
   // theme (same key as earlier versions: it.theme)
   var root=document.documentElement, meta=$('meta[name="theme-color"]');
   function applyTheme(t,save){root.dataset.theme=t;if(meta)meta.content=t==="paper"?"#F6F1E7":"#0D1015";
-    if(save){try{localStorage.setItem("it.theme",t)}catch(e){}}}
+    if(save){try{localStorage.setItem("it.theme",t)}catch(e){}}
+    $$("[data-theme-asset]").forEach(function(a){var href=t==="paper"?a.getAttribute("data-paper"):a.getAttribute("data-term");if(href)a.setAttribute("href",href)})}
   applyTheme(root.dataset.theme==="paper"?"paper":"terminal",false);
   $$("[data-theme-toggle]").forEach(function(b){b.addEventListener("click",function(){applyTheme(root.dataset.theme==="paper"?"terminal":"paper",true)})});
   // follow the system setting until the reader chooses

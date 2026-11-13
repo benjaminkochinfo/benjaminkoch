@@ -29,6 +29,8 @@ Health & Care · Security & Order · Climate & Weather. Shape: **one lead + ten 
   story (never decoration). Pick from `/workspace/insidedesk/charts-ready.md` or the existing dated specs
   (`*-21oct` style), or create a new open-data spec. Prefer a **new dated id** (`rates-fed-ecb-21oct`) over refreshing
   a shared one, because refreshing a shared id redraws every published page that uses it.
+  Chart headlines (`title` in the spec) are at most 60 characters and must fit on one line (see
+  "Chart headlines" under Charts below). `validate.py` fails the build if a new title would be truncated.
 * Notes: 3–6 short paragraphs each. A quiet desk still gets a brief note: brief is fine, empty is not.
 * Rotating depth: the lead desk rotates (the scaffold picks one by date and slot; override with a third argument),
   so each desk leads about once a week (eleven desks, two weekday slots). Give one or two notes extra depth per edition, preferably
@@ -79,8 +81,23 @@ describes the latest value. `--fetch id1,id2` narrows the fetch; `--fetch-all` r
 * Sources (`tools/sources.py`): `fred` (only public-domain originators such as EIA, Treasury, Fed H.15),
   `ecb`, `eurostat`, `worldbank`, `static` (reported figures, with attribution). Each spec names a `licence` key; the
   licence text is printed under the chart and written into the CSV header.
-* Output: `insidedesk/charts/<id>.svg` (standalone, fonts embedded by URL), `<id>.png` (2×), `insidedesk/data/<id>.csv`.
-  In articles the SVG is inlined with `<title>/<desc>`, a written description, a values table and download links.
+* Output: `insidedesk/charts/<id>.svg` and `<id>.png` (2×) are the dark (terminal) plate; `<id>-paper.svg` and
+  `<id>-paper.png` are the light (paper) plate, written for charts in the latest edition. In articles the SVG is
+  inlined with CSS variables so it follows the reader's theme live; download links switch to the matching file.
+  Each plate has a written description, a values table and CSV/SVG/PNG links.
+* **Chart headlines** (13 Nov 2026). The `title` is the headline on the Desk Plate, drawn as one line of
+  Newsreader SemiBold 30px on a 960px plate (32px left inset, 28px right padding: 900px of usable width).
+  Longer titles used to clip mid-word (for example "a working week that more than ha"). Write a short
+  headline that still carries the chart's key message:
+  - At most **60 characters**.
+  - Must fit on one line: at most **900px** at 30px Newsreader SemiBold. `validate.py` measures this and
+    fails the build if a new title would be truncated or is over the character budget.
+  - Prefer the key figures and the movement. Put extra context in the `subtitle` or the `alt` text, not
+    in the title.
+  - The renderer wraps a too-long title or subtitle as a last-resort safety net so nothing is ever
+    clipped, and shifts the plot down; a title that needs wrapping still fails validation — shorten it.
+  - Charts published before this rule whose titles exceed the budget are grandfathered in the
+    validator (`HEADLINE_GRANDFATHERED` in `charts.py`). Do not copy their titles.
 * Rules: a chart only where it carries the argument; no projections drawn as data; no Yahoo/Bloomberg/index-vendor
   data or anything whose terms forbid redistribution; never restyle per article — change `charts.py` once.
 * Quantity: at least one chart per edition, usually 2–3 (see "Writing an edition"). The coordinator or a writer may add

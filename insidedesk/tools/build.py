@@ -143,8 +143,9 @@ def write_hbar_csv(spec):
         for r in spec["rows"]:
             w.writerow([r["label"], r["value"], "yes" if r.get("derived") else "no", r.get("note", "")])
 
-def render_chart(spec):
-    """Returns (svg, summary_rows) and writes insidedesk/charts/<id>.svg"""
+def render_chart(spec, paper=False):
+    """Returns (svg, summary_rows) and writes insidedesk/charts/<id>.svg.
+    When paper=True, also writes the light-theme <id>-paper.svg."""
     if spec["kind"] == "hbar":
         write_hbar_csv(spec)
         svg = charts.hbar_chart({**spec, "alt_full": spec["alt"]}, spec["rows"], uid=spec["id"])
@@ -165,6 +166,9 @@ def render_chart(spec):
                                         '@font-face{font-family:"Familjen Grotesk";src:url(../assets/fonts/familjen.woff2) format("woff2")}'
                                         '@font-face{font-family:"JetBrains Mono";src:url(../assets/fonts/jetbrains-mono.woff2) format("woff2")}</style>', 1)
     write(f"insidedesk/charts/{spec['id']}.svg", '<?xml version="1.0" encoding="UTF-8"?>\n' + standalone)
+    if paper:
+        paper_standalone = charts.recolour(standalone, "paper")
+        write(f"insidedesk/charts/{spec['id']}-paper.svg", '<?xml version="1.0" encoding="UTF-8"?>\n' + paper_standalone)
     return svg, table
 
 FONT_CSS_FILE = None
@@ -191,16 +195,19 @@ def chrome_shot(html_text, out_path, w, h, scale=1):
         shutil.rmtree(work, ignore_errors=True)
     return os.path.exists(out_path)
 
-def chart_png(spec, svg, force=False):
+def chart_png(spec, svg, force=False, theme="terminal"):
     """Rasterise the SVG. Skipped when the PNG is already present and still matches this SVG (sha sidecar),
-    so a release does not relaunch Chrome ~40 times for unchanged older charts."""
-    out = os.path.join(DESK, "charts", spec["id"] + ".png")
+    so a release does not relaunch Chrome ~40 times for unchanged older charts.
+    theme='paper' writes <id>-paper.png against a light ground."""
+    suffix = "" if theme == "terminal" else "-paper"
+    out = os.path.join(DESK, "charts", spec["id"] + suffix + ".png")
     hf = out + ".sha256"
-    dig = hashlib.sha256(svg.encode()).hexdigest()
+    dig = hashlib.sha256((("paper:" if theme == "paper" else "") + svg).encode()).hexdigest()
     if not force and os.path.exists(out) and os.path.exists(hf) and open(hf).read().strip() == dig:
         return False
     m = re.search(r'viewBox="0 0 (\d+) (\d+)"', svg); w, h = int(m.group(1)), int(m.group(2))
-    page = f'<!doctype html><meta charset=utf-8><style>{font_css_abs()}html,body{{margin:0;background:#0D1015}}svg{{display:block}}</style>{svg}'
+    bg = "#0D1015" if theme == "terminal" else "#FFFCF6"
+    page = f'<!doctype html><meta charset=utf-8><style>{font_css_abs()}html,body{{margin:0;background:{bg}}}svg{{display:block}}</style>{svg}'
     ok = chrome_shot(page, out, w, h, scale=2)
     if ok: open(hf, "w").write(dig + "\n")
     return ok
@@ -430,6 +437,15 @@ def themeable(svg):
         return t[:-len(end)] + f' style="{";".join(props)}"' + end
     return re.sub(r"<(?!/)[a-zA-Z][^>]*>", tag, svg)
 
+def theme_asset(page, cid, ext, label):
+    """A download link that follows the reader's theme when a -paper variant exists."""
+    term = rel(page, f"insidedesk/charts/{cid}.{ext}")
+    paper_rel = f"insidedesk/charts/{cid}-paper.{ext}"
+    if os.path.exists(os.path.join(ROOT, paper_rel)):
+        paper = rel(page, paper_rel)
+        return f'<a href="{term}" data-theme-asset data-term="{term}" data-paper="{paper}">{label}</a>'
+    return f'<a href="{term}">{label}</a>'
+
 def figure_html(page, spec, svg, table):
     cid = spec["id"]
     lic = sources.LICENCES[spec["licence"]] + (" " + sources.LICENCES[spec["licence_extra"]] if spec.get("licence_extra") else "")
@@ -439,7 +455,7 @@ def figure_html(page, spec, svg, table):
   <figcaption>
     <p class="plate-alt">{e(spec["alt"])}</p>
     <p class="plate-src"><span>Source</span> {e(spec["source_line"])}. {e(lic)}</p>
-    <p class="plate-dl"><a href="{rel(page, f'insidedesk/data/{cid}.csv')}" download>Data (CSV)</a> · <a href="{rel(page, f'insidedesk/charts/{cid}.svg')}">SVG</a> · <a href="{rel(page, f'insidedesk/charts/{cid}.png')}">PNG</a></p>
+    <p class="plate-dl"><a href="{rel(page, f'insidedesk/data/{cid}.csv')}" download>Data (CSV)</a> · {theme_asset(page, cid, "svg", "SVG")} · {theme_asset(page, cid, "png", "PNG")}</p>
     <details><summary>Latest values as a table</summary><div class="tbl"><table>{rows}</table></div></details>
   </figcaption>
 </figure>'''
@@ -660,7 +676,7 @@ def edition_data_html(page, ed, rendered):
     cs = edition_charts(ed)
     if not cs: return ""
     rows = "".join(f'''<li><b>{e(rendered[c][0]["title"])}</b> <small>in <a href="{rel(page, a.path)}">{e(a.title)}</a></small><br>
-      <a href="{rel(page, f"insidedesk/charts/{c}.svg")}">SVG</a> · <a href="{rel(page, f"insidedesk/charts/{c}.png")}">PNG</a> · <a href="{rel(page, f"insidedesk/data/{c}.csv")}">CSV</a></li>'''
+      {theme_asset(page, c, "svg", "SVG")} · {theme_asset(page, c, "png", "PNG")} · <a href="{rel(page, f"insidedesk/data/{c}.csv")}">CSV</a></li>'''
                    for c in cs for a in [next(x for x in ed["arts"] if c in x.charts)])
     return f'<section class="ed-data" aria-labelledby="data-h"><h2 id="data-h" class="section-h">Charts and data in this edition</h2><ul class="ed-data-list">{rows}</ul></section>'
 
@@ -1068,9 +1084,13 @@ def main():
                 if not os.path.exists(os.path.join(DESK, "data", cid + ".csv")):
                     raise SystemExit(f"  ! fetch failed for {cid} and there is no saved CSV to fall back on: {ex!r}")
                 print(f"  ! WARNING: fetch failed for {cid} ({type(ex).__name__}: {ex}); using the last saved CSV")
-        svg, table = render_chart(spec)
+        newest_here = cid in newest
+        svg, table = render_chart(spec, paper=newest_here)
         rendered[cid] = (spec, svg, table)
-        if not args.no_png: chart_png(spec, svg)
+        if not args.no_png:
+            chart_png(spec, svg)
+            if newest_here:
+                chart_png(spec, charts.recolour(svg, "paper"), theme="paper")
         print("  chart", cid)
     cfg = dict(TZ=TZ, CONTENT=CONTENT, DESK=DESK, ROOT=ROOT, BASE=BASE, HOME=HOME, DESKS=DESKS, rel=rel, write=write, specs=specs, EDS=eds + embargo)
     for ed in sorted(eds + embargo, key=lambda x: x["pub"]):
@@ -1079,8 +1099,11 @@ def main():
         iss["web_live"] = ed in eds
         for c in epaper.DATA_SPREAD + epaper.SPREAD_FALLBACK + [c for a in ed["arts"] for c in a.charts]:
             if c not in rendered and c in specs and os.path.exists(os.path.join(DESK, "data", c + ".csv")):
-                svg, table = render_chart(specs[c]); rendered[c] = (specs[c], svg, table)
-                if not args.no_png: chart_png(specs[c], svg)
+                svg, table = render_chart(specs[c], paper=(c in newest)); rendered[c] = (specs[c], svg, table)
+                if not args.no_png:
+                    chart_png(specs[c], svg)
+                    if c in newest:
+                        chart_png(specs[c], charts.recolour(svg, "paper"), theme="paper")
         iss["args"] = (se if ed["slot"] == "sun" else None, iss["web_live"], now)
         iss["html"], iss["json"], iss["meta"] = epaper.render_issue(iss, cfg, *iss["args"])
         iss["last"] = max([iss["avail"]] + [x["pub"] for x in iss["extras"]] + [u["t"] for u in iss["updates"]])
@@ -1135,8 +1158,12 @@ def main():
                 if over: print("  ! ePaper overflow (px by page):", over)
                 write(iss["dir"] + "/fit.sha256", pre + "\n")
             print("  epaper", iss["dir"], f'{iss["meta"]["pages"]} pages, {iss["meta"]["pieces"]} pieces')
-            if not args.no_png:
+            if not args.no_png and not kept:
+                # Locked published issues keep their PDF and thumbnails. Shared CSS/JS
+                # updates apply on the next live visit; they must not remake a finished issue.
                 epaper.render_assets(iss, iss["html"], iss["json"], cfg, iss["meta"]["pages"])
+            elif kept:
+                print("  ePaper", iss["dir"], "locked — PDF and thumbs kept")
         write("insidedesk/epaper/index.html", epaper_index_page())
         if not args.no_png:   # PDF size for the feed enclosure, now that it exists
             for iss in EP.values(): iss["pdf_size"] = os.path.getsize(os.path.join(ROOT, iss["dir"], iss["pdf"]))

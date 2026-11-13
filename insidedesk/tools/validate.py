@@ -8,6 +8,7 @@ feed.xml, sitemap.xml and the edition page; the front page links the latest and 
 import json, os, re, sys, xml.dom.minidom
 from html.parser import HTMLParser
 from urllib.parse import urlparse, unquote
+import charts
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 problems = []
 class P(HTMLParser):
@@ -60,11 +61,19 @@ for _dp, _dn, _fn in os.walk(os.path.join(ROOT, "insidedesk", "content")):
                 _c = re.search(r"^charts:\s*\[([^\]]*)\]", _m.group(1), re.M)
                 if _c: _used |= {x.strip().strip("'\"") for x in _c.group(1).split(",") if x.strip()}
 _ready = []
+import yaml as _chart_yaml
 for f in os.listdir(cd):
     if not f.endswith(".yaml"): continue
     cid = f[:-5]
     files = [(ext, d) for ext, d in ((".svg", "charts"), (".png", "charts"), (".csv", "data"))]
     have = [os.path.exists(os.path.join(ROOT, "insidedesk", d, cid + ext)) for ext, d in files]
+    try:
+        _spec = _chart_yaml.safe_load(open(os.path.join(cd, f), encoding="utf-8"))
+    except Exception as ex:
+        problems.append(f"chart {cid}: YAML unreadable ({ex})")
+        _spec = None
+    if _spec:
+        problems.extend(charts.headline_problems(_spec))
     if cid not in _used: _ready.append(cid); continue   # prepared spec (may carry a seed CSV), not used by any piece yet
     for (ext, d), ok in zip(files, have):
         if not ok: problems.append(f"chart {cid}: missing {d}/{cid}{ext}")
@@ -206,5 +215,19 @@ if os.path.exists(ser):
         ap = f"insidedesk/{d:%Y/%m/%d}/{fm['slug']}.html"
         for label, ok in (("archive.html", ap in arch), ("feed.xml", BASE + ap in feed_links), ("sitemap.xml", BASE + ap in smap), ("page", os.path.exists(os.path.join(ROOT, ap)))):
             if not ok: problems.append(f"ledger {ap}: missing from {label}")
+# Light (paper) SVG/PNG are required for charts in the latest due edition, so the
+# theme toggle has a file to switch to. Older plates keep their published dark files.
+if latest:
+    for name in due_eds:
+        _ed = yaml.safe_load(open(os.path.join(ed_root, name, "edition.yaml"), encoding="utf-8"))
+        if str(_ed["published"]) != str(latest[1]):
+            continue
+        for _slug in _ed["articles"]:
+            for _c in (_fm(os.path.join(ed_root, name, _slug + ".md")).get("charts") or []):
+                for _suffix in ("-paper.svg", "-paper.png"):
+                    if not os.path.exists(os.path.join(ROOT, "insidedesk", "charts", _c + _suffix)):
+                        problems.append(f"chart {_c}: missing charts/{_c}{_suffix} (light/paper variant for the latest edition)")
+        break
+
 print("\n".join(problems) if problems else f"✓ validate ok — {len(pages)} pages checked · {n_eds} edition(s) complete in archive, feed and sitemap · ePaper checked" + (f" · {len(_ready)} chart spec(s) prepared, not used yet: {', '.join(sorted(_ready))}" if _ready else ""))
 sys.exit(1 if problems else 0)

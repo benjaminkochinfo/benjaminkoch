@@ -164,6 +164,10 @@ kbd{font:600 12px var(--mono);border:1px solid var(--rule2);border-radius:4px;pa
 .ic-kicker{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
 .ic-title{font:600 24px/1.15 var(--serif)} .ic-sub{font:500 13px var(--sans);color:var(--ink3)}
 .ic-plot{position:relative;min-height:220px}
+.ic-static{display:block;width:100%;height:auto}
+.ic-static.ic-paper{display:none}
+html[data-theme="paper"] .ic-static.ic-paper{display:block}
+html[data-theme="paper"] .ic-static.ic-term{display:none}
 .ichart-cover .ic-plot{min-height:600px} .ichart-l .ic-plot{min-height:360px} .ichart-ds .ic-plot{min-height:330px} .ichart-r .ic-plot{min-height:300px}
 .ic-src{margin:0;font:500 11.5px var(--sans);color:var(--ink3)}
 .ic-ctrl{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}

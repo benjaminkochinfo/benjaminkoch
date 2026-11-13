@@ -163,9 +163,12 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
     def chart_fig(cid, size="m"):
         if cid not in charts and cid not in bars: return ""
         c = charts.get(cid) or bars[cid]
+        term = R(f"insidedesk/charts/{cid}.svg")
+        paper = R(f"insidedesk/charts/{cid}-paper.svg")
+        paper_attr = f' <img class="ic-static ic-paper" src="{paper}" alt="" loading="lazy" decoding="async">' if os.path.exists(os.path.join(cfg["ROOT"], f"insidedesk/charts/{cid}-paper.svg")) else ""
         return f'''<figure class="ichart ichart-{size}" data-chart="{e(cid)}">
   <figcaption><span class="ic-kicker">{e(c["kicker"])}</span><b class="ic-title">{e(c["title"])}</b><span class="ic-sub">{e(c["subtitle"])}</span></figcaption>
-  <div class="ic-plot" role="img" aria-label="{e(c["alt"])}"><img class="ic-static" src="{R(f"insidedesk/charts/{cid}.svg")}" alt="" loading="lazy" decoding="async"><p class="ic-nojs">{e(c["alt"])}</p></div>
+  <div class="ic-plot" role="img" aria-label="{e(c["alt"])}"><img class="ic-static ic-term" src="{term}" alt="" loading="lazy" decoding="async">{paper_attr}<p class="ic-nojs">{e(c["alt"])}</p></div>
   <p class="ic-src">Source: {e(c["source"])} · <a href="{e(c["csv"])}">CSV</a></p>
 </figure>'''
 
