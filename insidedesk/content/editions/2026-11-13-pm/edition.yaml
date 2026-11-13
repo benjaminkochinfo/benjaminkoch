@@ -77,28 +77,32 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 2-5-million-at-a-e-almost-66-within-18-weeks
   - 309-to-190-germanys-intelligence-services-get
   - 6-to-10-degrees-down-up-to-40-mm-of-snow-chinas
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-13T17:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-13T17:30:00+01:00"
   extras:
-    - four-billion-euros-one-line-in-the-budget-and
-    - 18-4-million-barrels-a-day-out-of-the-gulf-and
-    - 6-5-at-the-factory-gate-and-diesel-7-9-cheaper
-    - sixty-per-cent-off-the-january-high-and-a-lender
-    - shenzhen-18-to-19-november-apec-and-a-three-way
-    - 1-198-drones-one-refinery-six-reservoirs-ukraine
-    - please-no-surprises-merzs-message-to-washington
-    - 8-2-billion-loan-20-billion-owed-the-job-agencys
-    - within-72-hours-of-trauma-a-video-call-about
-    - spirals-rings-and-straight-lines-24-brains-and
-    - cannot-guarantee-and-71-economists-out-of-71-who
-    - about-1-105-for-your-euro-and-a-third-losing-week
-    - 1-949-for-e10-2-188-for-diesel-and-a-pump-price
-    - 74-billion-promised-one-county-hearing-to-go
-    - potentially-infeasible-in-public-possible-in
-    - not-only-in-hospital-the-bundestag-changes-where
-    - 86-of-326-most-volunteer-firefighters-in-texas
-    - readiness-to-contribute-the-kremlin-puts-a
-    - twelve-regions-without-power-a-kyiv-hospital-on
-    - 250-mm-in-tofino-already-a-typhoons-remnants-reach
-    - 3-18-a-kilo-at-the-mill-gate-spains-new-olive-oil
-  updates: []
+  - four-billion-euros-one-line-in-the-budget-and
+  - 18-4-million-barrels-a-day-out-of-the-gulf-and
+  - 6-5-at-the-factory-gate-and-diesel-7-9-cheaper
+  - sixty-per-cent-off-the-january-high-and-a-lender
+  - shenzhen-18-to-19-november-apec-and-a-three-way
+  - 1-198-drones-one-refinery-six-reservoirs-ukraine
+  - please-no-surprises-merzs-message-to-washington
+  - 8-2-billion-loan-20-billion-owed-the-job-agencys
+  - within-72-hours-of-trauma-a-video-call-about
+  - spirals-rings-and-straight-lines-24-brains-and
+  - cannot-guarantee-and-71-economists-out-of-71-who
+  - about-1-105-for-your-euro-and-a-third-losing-week
+  - 1-949-for-e10-2-188-for-diesel-and-a-pump-price
+  - 74-billion-promised-one-county-hearing-to-go
+  - potentially-infeasible-in-public-possible-in
+  - not-only-in-hospital-the-bundestag-changes-where
+  - 86-of-326-most-volunteer-firefighters-in-texas
+  - readiness-to-contribute-the-kremlin-puts-a
+  - twelve-regions-without-power-a-kyiv-hospital-on
+  - 250-mm-in-tofino-already-a-typhoons-remnants-reach
+  - 3-18-a-kilo-at-the-mill-gate-spains-new-olive-oil
+  - 0-13-points-for-a-record-21-93-short-of-one
+  updates:
+  - time: '2026-11-13T19:35:36+01:00'
+    text: 'Markets: Stoxx 600 record close, DAX ends the week up 3.6%'
+    piece: 0-13-points-for-a-record-21-93-short-of-one
