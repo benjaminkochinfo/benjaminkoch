@@ -14,7 +14,7 @@ window.WMT_CONFIG = {
     pro:       { label: "€1,490", per: "/ year" }
   },
   /* Payments (Stripe only): Stripe Payment Link (https://buy.stripe.com/...) per tier.
-     Empty = button falls back to the waitlist form. No backend required. */
+     Empty = button links to the free weekly signal form (#subscribe). No backend required. */
   PAYMENT_LINKS: {
     weekly: "https://buy.stripe.com/eVq7sMahEdQrc1a4Oocs800",
     weekly_yearly: "https://buy.stripe.com/00w7sM3Tg13Ffdm3Kkcs801",
@@ -26,11 +26,11 @@ window.WMT_CONFIG = {
   },
   /* Stripe customer portal (login): manage or cancel a subscription. */
   PORTAL_URL: "https://billing.stripe.com/p/login/eVq7sMahEdQrc1a4Oocs800",
-  /* Newsletter / waitlist: Brevo embedded form. Paste the form's action URL from
+  /* Free weekly signal: Brevo embedded form (field EMAIL). Paste the form's action URL from
      Brevo > Contacts > Forms > (your form) > Share > HTML code, e.g.
      "https://xxxxxxxx.sibforms.com/serve/MUIFA...". Empty = form stays disconnected (preview).
-     Double opt-in is configured on the Brevo side. CADENCE_FIELD must match a Brevo contact
-     attribute name (create a text attribute "CADENCE"), or set it to "" to omit. */
+     Double opt-in is configured on the Brevo side. CADENCE_FIELD is no longer used
+     (the cadence selector was removed); kept empty for compatibility. */
   NEWSLETTER: {
     provider: "brevo",
     formAction: "https://39e981b8.sibforms.com/serve/MUIFAHWzkV1-LBO8X8eOZ8mZDRtvzGYJx8rYo9pRpIeAZZfQQLjU8UsnSLZRBPzRiFon0JS3Ntz8XwVpKzkHKswBDGNSR9w0z0WNnyuQEqIOpbCPliFN1DG5D1OcdLaWXhNItB7Oic_HcHmvwG-hFV1XTTD1FpS6HTtua00EO20WxF5NLW8zk86ri2oXKMcg1H0Hnn9Wqrq9bpoznA==",

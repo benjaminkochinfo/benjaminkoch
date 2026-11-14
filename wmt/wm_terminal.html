@@ -296,7 +296,7 @@
       </div>
       <p class="mono small mute reports-legal reports-consent">By subscribing you accept the <a href="landing/terms.html">Terms</a> and agree that delivery begins immediately; you acknowledge that your right of withdrawal expires once delivery has started (§ 356 (5) BGB).</p>
       <p class="mono small mute reports-legal">Already subscribed? <a href="https://billing.stripe.com/p/login/eVq7sMahEdQrc1a4Oocs800" target="_blank" rel="noopener" data-portal>Manage or cancel your subscription.</a></p>
-      <p class="mono small mute reports-legal">Paid subscriptions are offered under the <a href="landing/terms.html">Terms</a>. The waitlist and free weekly signal are covered by the <a href="landing/privacy.html">privacy notice</a>.</p>
+      <p class="mono small mute reports-legal">Paid subscriptions are offered under the <a href="landing/terms.html">Terms</a>. The free weekly signal is covered by the <a href="landing/privacy.html">privacy notice</a>.</p>
       <div class="cover-row">
         <div class="cover" aria-label="Sample report cover">
           <div class="cover-top"><span>WMT · WEEKLY READ</span><span>2026-W46</span></div>
@@ -314,9 +314,14 @@
         </div>
       </div>
       <form class="subscribe" id="subscribe" method="POST" target="_blank" novalidate>
-        <span class="label">WAITLIST &amp; FREE WEEKLY SIGNAL</span>
-        <div class="sub-row"><input type="email" name="EMAIL" required autocomplete="email" placeholder="you@organisation.org" aria-label="Email"/><select id="subCadence" aria-label="Cadence"><option value="weekly">Weekly</option><option value="monthly" selected>Monthly</option><option value="quarterly">Quarterly</option><option value="enterprise">Enterprise / Government</option></select><input type="hidden" id="subCadenceField" name="CADENCE" value="monthly"/><input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true"/><input type="hidden" name="locale" value="en"/><button class="btn btn-solid" type="submit" id="subBtn">Notify me</button></div>
-        <label class="consent small"><input type="checkbox" id="subConsent" required/> I agree to receive ISOLINE emails and can unsubscribe at any time. You will get a confirmation email first (double opt-in). <a href="landing/privacy.html">See the privacy notice</a>.</label>
+        <div class="sub-pitch">
+          <span class="label amber">FREE WEEKLY SIGNAL · EVERY SATURDAY</span>
+          <h3 class="sub-h">The world in one email, <em>free.</em></h3>
+          <p class="sub-sub">A short read from the WMT desk, in your inbox every Saturday morning. No cost, no card, unsubscribe in one click.</p>
+          <ul class="sub-list"><li><b>KMRI</b> Friday close and the change on the week</li><li><b>Top mover</b> of the model suite, read in plain language</li><li><b>One chart</b> that explains the week</li><li><b>Link</b> to the full paid Weekly for the deeper read</li></ul>
+        </div>
+        <div class="sub-row"><input type="email" name="EMAIL" required autocomplete="email" placeholder="you@organisation.org" aria-label="Email"/><input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true"/><input type="hidden" name="locale" value="en"/><button class="btn btn-solid" type="submit" id="subBtn">Get the free signal <span>→</span></button></div>
+        <label class="consent small"><input type="checkbox" id="subConsent" required/><span>I agree to receive the free ISOLINE weekly signal by email and can unsubscribe at any time. You will get a confirmation email first (double opt-in). <a href="landing/privacy.html">See the privacy notice</a>.</span></label>
         <p class="mono small mute" id="subNote">Preview build: this form is not connected yet.</p>
       </form>
     </div>

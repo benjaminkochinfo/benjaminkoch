@@ -190,12 +190,12 @@
     $$("[data-price]").forEach((e) => { const p = P[e.dataset.price]; if (p) e.innerHTML = `${p.label} <small>${p.per}</small>`; });
     $$("[data-pay]").forEach((a) => { const t = a.dataset.pay, link = L[t];
       if (link) { a.href = link; a.target = "_blank"; a.rel = "noopener"; if (a.classList.contains("btn")) a.textContent = "Subscribe"; }
-      else a.addEventListener("click", () => { const s = $("#subCadence"); if (s) { s.value = t; s.dispatchEvent(new Event("change")); } }); });
+      else if (a.classList.contains("btn")) a.textContent = "Get the free signal"; });
     if (portal) $$("[data-portal]").forEach((a) => { a.href = portal; a.target = "_blank"; a.rel = "noopener"; });
-    const f = $("#subscribe"), cad = $("#subCadence"), cf = $("#subCadenceField"), note = $("#subNote");
-    if (N.CADENCE_FIELD) { cf.name = N.CADENCE_FIELD; cad.addEventListener("change", () => (cf.value = cad.value)); } else cf.remove();
+    const f = $("#subscribe"), note = $("#subNote");
+    if (!f || !note) return;
     const live = !!N.formAction;
-    if (live) { f.action = N.formAction; note.textContent = "You will get a confirmation email (double opt-in)."; }
+    if (live) { f.action = N.formAction; note.textContent = "Free. You will get a confirmation email first (double opt-in); the signal arrives every Saturday."; }
     f.addEventListener("submit", (e) => {
       const em = f.querySelector('input[type=email]');
       if (!em.checkValidity() || !$("#subConsent").checked) { e.preventDefault(); note.textContent = "Please enter a valid email and tick the consent box."; return; }
