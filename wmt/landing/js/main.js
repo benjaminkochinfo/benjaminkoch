@@ -76,6 +76,14 @@
   function renderBriefs(c) {
     $("#briefEdition").innerHTML = `${esc(c.edition.label)} ${c.edition.status === "sample" ? '<span class="sample">SAMPLE EDITION</span>' : ""}<br/>Briefs are written weekly and link each claim to the models that moved.`;
     $("#briefTrack").innerHTML = c.briefs.map((b) => { const p = pct(b.lat, b.lon); const zx = Math.min(85, Math.max(15, p.x)), zy = Math.min(80, Math.max(20, p.y)); return `<a class="brief" href="landing/brief.html?id=${encodeURIComponent(b.slug || b.id)}" aria-label="Read sample brief: ${esc(b.title)}"><div class="brief-map" style="--x:50%;--y:50%;--bx:${((9 * p.x / 100 - 0.5) / 8) * 100}%;--by:${((0.5 - 10.42 * p.y / 100) / (1 - 10.42)) * 100}%">${miniMap()}<span class="ping"></span><span class="coords">${b.lat.toFixed(1)}°, ${b.lon.toFixed(1)}° · ${esc(b.region)}</span></div><div class="brief-body"><div class="brief-meta"><span>${esc(b.date)} · ${esc(b.read)}</span>${b.status === "sample" ? '<span class="sample">SAMPLE</span>' : ""}</div><h3>${esc(b.title)}</h3><p>${esc(b.dek)}</p><div class="chips">${b.models.map((m) => `<span class="chip m">${esc(m)}</span>`).join("")}</div></div></a>`; }).join("");
+    (function briefDots() { const t = $("#briefTrack"), n = t.children.length; if (n < 2) return;
+      const d = document.createElement("div"); d.className = "briefs-dots"; d.setAttribute("aria-label", "Sample editions");
+      d.innerHTML = [...Array(n)].map((_, k) => `<button type="button" aria-label="Brief ${k + 1}"${k ? "" : ' class="on"'}></button>`).join("");
+      t.after(d); const bs = [...d.children];
+      const go = (k) => t.scrollTo({ left: t.children[k].offsetLeft - t.children[0].offsetLeft, behavior: "smooth" });
+      bs.forEach((b, k) => b.addEventListener("click", () => go(k)));
+      t.addEventListener("scroll", () => { const w = t.children[0].getBoundingClientRect().width + 24, k = Math.min(n - 1, Math.round(t.scrollLeft / w)); bs.forEach((b, i) => b.classList.toggle("on", i === k)); }, { passive: true });
+    })();
   }
 
   const DAY = 864e5;

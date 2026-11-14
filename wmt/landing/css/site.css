@@ -410,3 +410,15 @@ body.subpage{background:var(--ink-0);min-height:100vh}
 .legal .cancel-row{margin:18px 0 14px}
 .legal .cancel-row .btn{text-decoration:none;border-bottom:0}
 .legal [id]{scroll-margin-top:84px}
+/* mobile/tablet: briefs become a native swipe carousel (desktop keeps the pinned GSAP scroll) */
+@media (max-width:820px){
+.briefs-track{width:auto;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-padding-left:var(--pad);touch-action:pan-x pan-y;scrollbar-width:none;padding-bottom:6px}
+.briefs-track::-webkit-scrollbar{display:none}
+.briefs-track::after{content:"";flex:0 0 1px}
+.brief{scroll-snap-align:start;width:84vw}
+.brief:hover{transform:none}
+.briefs-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.briefs-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:var(--line);cursor:pointer}
+.briefs-dots button.on{background:var(--amber);width:18px;border-radius:4px}
+}
+@media (min-width:821px){.briefs-dots{display:none}}
