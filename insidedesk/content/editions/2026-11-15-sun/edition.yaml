@@ -1,0 +1,56 @@
+date: "2026-11-15"
+slot: sun
+published: "2026-11-15T10:00:01+01:00"   # set to the actual Berlin time when it goes live
+title: "Nvidia lost $657 billion in a week. On Tuesday it sends the invoice"
+standfirst: "The chip sell-off made the noise, but the S&P 500 still gained 2.5% and the Stoxx 600 had its best week since July. German power fell from a record €351.48 to €139.70 as the wind arrived, COP31 rests before its paper week, and petrol dropped below two euros a litre: the useful numbers were the dull ones."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-15T10:00:01+01:00"
+  habit: {text: "Pick one recurring bill this week, the phone contract, the streaming service or the insurance that renews in January, and write down three things on a single line: what it costs a month, the date it renews and the date by which you would have to cancel. Do nothing else with it. The point is not to cut anything; it is to know which of your invoices runs on autopilot.", note: "A habit, not advice."}
+  went_right: {text: "Germany's statistics office counted fewer deaths this autumn than usual. On its provisional figures, published on 10 November, mortality was 2% below the median of 2022 to 2025 in August, 6% below in September and 9% below in October, after a summer in which heat waves had pushed the late-June week 36% above that median [1]. The figures are provisional and extrapolated from incomplete registrar data, which Destatis says plainly [1]. A registrar's office, a weekly count and an honest footnote: that is how a country learns it had a quieter autumn."}
+  sentence: "The week's loud numbers were about chips and oil; the quiet ones were six cents off a litre of petrol and an autumn in which fewer people died than usual."
+  euros: {text: "ADAC's survey on Wednesday put Super E10 at €1.978 a litre, about 6.3 cents cheaper than a week earlier and below two euros for the fifth day running, and diesel at €2.217, 4.3 cents cheaper [2]. On Thursday's daily average, dpa-AFX reported E10 at €1.949 and diesel at €2.188 [3]. Desk arithmetic: on a 50-litre tank, Wednesday's weekly fall is about €3.15 for petrol and €2.15 for diesel. ADAC says diesel prices are still not fully explained by wholesale prices, the fuel discount and crude, and sees room for further cuts [2].", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Median", text: "Line up all the values from smallest to largest and take the one in the middle. Statisticians like it because one extreme year, a pandemic winter or a record heat wave, cannot drag it around the way it drags an average. When Destatis says October deaths were 9% below the median of 2022 to 2025, it is comparing this October with the middle of the last four, not with their average."}
+  sources:
+    - {n: 1, title: "Evaluation of the infra-annual mortality figures since 2020", publisher: "Federal Statistical Office (Destatis)", url: "https://www.destatis.de/EN/Themes/Society-Environment/Population/Deaths-Life-Expectancy/mortality.html", date: "10 Nov 2026"}
+    - {n: 2, title: "Kraftstoffpreise: Super E10 wieder unter 2 Euro", publisher: "ADAC", url: "https://presse.adac.de/meldungen/adac-ev/verkehr/kraftstoffpreise-super-e10-wieder-unter-2-euro.html", date: "11 Nov 2026"}
+    - {n: 3, title: "Benzinpreise in Deutschland sinken", publisher: "dpa-AFX via onvista", url: "https://www.onvista.de/news/2026/11-13-benzinpreise-in-deutschland-sinken-0-10-26576094", date: "13 Nov 2026, 11:18 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - the-sunday-long-read-nvidia-lost-its-founder-and
+  - the-sunday-sequence-an-opening-a-record-a-nudge
+  - one-video-call-no-list-of-results-the-us-china
+  - 5-4-billion-or-5-2-billion-and-one-tuesday-the
+  - the-annex-390-adults-144-minutes-against-266-and-a
+  - 351-48-to-139-70-the-week-the-wind-arrived-and-the
+  - podium-vs-print-highly-probable-and-a-quarter-with
+  - ordinary-ledger-262-for-presents-1-less-than-last
+  - 252-million-who-do-not-know-and-89-000-diagnoses-a
+  - cannot-and-do-not-want-to-set-conditions-moscow
+  - not-a-draft-they-stress-antalyas-list-of-wishes
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-15T10:00:01+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  spread_chars: 1850
+  extras:
+    - 26-billion-from-its-own-suppliers-the-line-in
+    - 27-approved-13-defeated-the-data-centre-ballots
+    - four-losing-weeks-end-and-the-next-week-has-two
+    - 700-from-goldman-an-upgrade-from-citi-the-brokers
+    - minus-12-4-per-cent-to-america-plus-10-per-cent
+    - six-ships-on-a-saturday-against-a-baseline-of-84-8
+    - with-all-my-strength-hubertus-heil-runs-for-the
+    - 39-seats-against-32-mecklenburg-vorpommern-signs-a
+    - 80-per-cent-of-your-maximum-or-20-two-kinds-of
+    - twice-what-parents-see-what-young-people-report
+    - 21-80-in-two-weeks-from-fear-of-shortage-to-fear
+    - 87-99-a-tonne-for-carbon-and-lignites-quieter
+    - 44-on-goods-110-on-services-the-tariffs-europe
+    - 17-3-billion-in-5-5-billion-out-germanys-china
+    - 14-60-an-hour-and-633-a-month-the-payslip-lines
+    - eight-cents-off-since-1-november-and-still-the
+    - 64-against-45-at-two-years-a-bladder-cancer
+    - 522-million-was-enough-for-october-november-needs
+    - 25-seafarers-136-incidents-the-un-counts-the-cost
+    - the-first-time-this-issue-had-been-raised-donbas
+    - 69-then-61-then-equally-likely-the-honest-footnote
+    - 2-734-houses-under-water-and-a-coffee-belt-that
+  updates: []

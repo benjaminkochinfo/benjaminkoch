@@ -1,0 +1,9 @@
+# Inside Desk chart data: nvidia-week-15nov
+"# Source: Chip Dispatch, 'Nvidia Falls Below $4 Trillion as Chip Stocks Sink', 14 Nov 2026 (index weekly changes, citing the Associated Press for closes); CNBC, 'Nvidia stock suffers longest weekly losing streak since 2012', 13 Nov 2026 (Nvidia); retrieved 15 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+S&P 500,2.5,no,"closed at 7,561.67"
+Nasdaq Composite,2.3,no,best week since August
+Dow Jones Industrial Average,2.1,no,"closed at 52,347.55"
+Russell 2000,1.3,no,
+Nvidia,-13.0,no,"sixth weekly fall in a row, the longest streak since 2012"

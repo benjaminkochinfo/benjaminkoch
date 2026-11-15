@@ -1,0 +1,17 @@
+id: europe-week-15nov
+kind: hbar
+kicker: "Markets · The week"
+title: "DAX +3.60%, Stoxx 600 +2.44%: best week since July"
+subtitle: "Weekly percentage change to the close on Friday 13 November 2026, selected indexes and Brent crude; Stoxx 600 and DAX had their largest weekly gains since the week ending 3 July"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "DAX", value: 3.60, note: "26,749.95, second-highest close ever"}
+  - {label: "CAC 40", value: 2.82, note: "8,368.91"}
+  - {label: "S&P 500", value: 2.51, note: "7,561.67, snaps four losing weeks"}
+  - {label: "Stoxx Europe 600", value: 2.44, note: "664.14, record close"}
+  - {label: "FTSE 100", value: 2.14, note: "10,902.56, 0.07% off its record"}
+  - {label: "Brent crude (front month)", value: -2.52, note: "$95.84, second weekly fall"}
+licence: reported
+source_line: "Dow Jones Market Data/FactSet via Morningstar 'Data Talk' notes of 13 Nov 2026 (Stoxx Europe 600, DAX, CAC 40, FTSE 100, S&P 500 preliminary close, ICE Brent front-month settlement); retrieved 15 Nov 2026 · reported figures"
+alt: "Bar chart of weekly percentage changes to Friday 13 November 2026: DAX up 3.60 percent, CAC 40 up 2.82, S&P 500 up 2.51, Stoxx Europe 600 up 2.44 to a record close of 664.14, FTSE 100 up 2.14, and Brent crude down 2.52 percent to $95.84 a barrel. Source: Dow Jones Market Data via Morningstar."

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Inside Desk only. The front page https://benjaminkoch.info/InsideDesk.html lives outside /insidedesk/; submit it in Search Console. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://benjaminkoch.info/insidedesk/archive.html</loc><lastmod>2026-11-13</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/method.html</loc><lastmod>2026-11-13</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/support.html</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/archive.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/method.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/support.html</loc><lastmod>2026-11-15</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/ledger/2026.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/01/03/a-president-removed-a-barrel-unimpressed.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/02/20/the-court-sends-the-invoice-back.html</loc><lastmod>2026-10-16</lastmod></url>
@@ -15,6 +15,18 @@
   <url><loc>https://benjaminkoch.info/insidedesk/2026/08/27/six-months-five-ships-a-day.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/09/16/the-bypass-breaks-both-banks-hike.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/13/resilience-is-an-inventory.html</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/sunday.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/the-sunday-long-read-nvidia-lost-its-founder-and.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/the-sunday-sequence-an-opening-a-record-a-nudge.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/one-video-call-no-list-of-results-the-us-china.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/5-4-billion-or-5-2-billion-and-one-tuesday-the.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/the-annex-390-adults-144-minutes-against-266-and-a.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/351-48-to-139-70-the-week-the-wind-arrived-and-the.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/podium-vs-print-highly-probable-and-a-quarter-with.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/ordinary-ledger-262-for-presents-1-less-than-last.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/252-million-who-do-not-know-and-89-000-diagnoses-a.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/cannot-and-do-not-want-to-set-conditions-moscow.html</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/2026/11/15/not-a-draft-they-stress-antalyas-list-of-wishes.html</loc><lastmod>2026-11-15</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/11/13/evening.html</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/11/13/less-demand-a-dearer-saturday-the-auction-that.html</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/11/13/a-flat-friday-on-top-wise-up-9-8-acciona-down-7.html</loc><lastmod>2026-11-13</lastmod></url>
@@ -555,7 +567,7 @@
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/a-circuit-breaker-is-a-pause-not-a-verdict.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/the-slowest-emergency-has-a-known-fix.html</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/2026/10/16/el-nino-sends-its-invoices-by-river-field-and-claim-form.html</loc><lastmod>2026-10-16</lastmod></url>
-  <url><loc>https://benjaminkoch.info/insidedesk/epaper/index.html</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/epaper/index.html</loc><lastmod>2026-11-15</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/18/sunday/</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/19/morning/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/10/19/evening/</loc><lastmod>2026-10-19</lastmod></url>
@@ -600,4 +612,5 @@
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/11/12/evening/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/11/13/morning/</loc><lastmod>2026-11-13</lastmod></url>
   <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/11/13/evening/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://benjaminkoch.info/insidedesk/epaper/2026/11/15/sunday/</loc><lastmod>2026-11-15</lastmod></url>
 </urlset>
