@@ -102,7 +102,11 @@ epaper:
   - 985-hpa-and-a-pearl-lagoon-cyclone-xavier-opens
   - drier-in-abidjan-wetter-in-brazil-the-weather
   - minus-0-57-at-the-bell-the-quiet-monday-closed-on-its
+  - minus-1-89-in-new-york-the-frankfurt-dip-was-the-small
   updates:
   - time: '2026-11-16T19:28:17+01:00'
     text: 'Markets: DAX closes on its low, down 0.57%; Stoxx 600 ends five-day run'
     piece: minus-0-57-at-the-bell-the-quiet-monday-closed-on-its
+  - time: '2026-11-16T22:05:39+01:00'
+    text: 'Money: S&P 500 falls 1.89%, Nasdaq in correction ahead of Nvidia results'
+    piece: minus-1-89-in-new-york-the-frankfurt-dip-was-the-small
