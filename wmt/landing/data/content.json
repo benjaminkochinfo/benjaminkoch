@@ -1,9 +1,9 @@
 {
   "_readme": "WMT landing content. Edit weekly. Briefs marked status:'sample' render with a SAMPLE tag until replaced with real editorial. thisWeek: real scheduled events only, each with date (YYYY-MM-DD), region, related WMT models and a source URL; items render on the matching date of the current week. Elections: verify each date against the official source before publishing.",
   "edition": {
-    "week": "2026-W46",
-    "label": "Week 46 · 9–15 Nov 2026",
-    "updated": "2026-11-10",
+    "week": "2026-W47",
+    "label": "Week 47 · 16–22 Nov 2026",
+    "updated": "2026-11-16",
     "status": "sample"
   },
   "briefs": [
@@ -75,17 +75,6 @@
     }
   ],
   "elections": [
-    {
-      "date": "2026-11-15",
-      "country": "Cabo Verde",
-      "iso": "CPV",
-      "type": "Presidential, 1st round",
-      "lat": 15.1,
-      "lon": -23.6,
-      "watch": "Runoff 29 Nov if no majority · 6 candidates",
-      "source": "Presidência da República de Cabo Verde",
-      "url": "https://presidencia.cv/eleicoes-presidenciais-marcadas-para-15-de-novembro/"
-    },
     {
       "date": "2026-11-28",
       "country": "Taiwan",
@@ -202,22 +191,7 @@
   ],
   "thisWeek": [
     {
-      "date": "2026-11-09",
-      "day": "Mon",
-      "tag": "CLIMATE",
-      "region": "Global · Antalya, Türkiye",
-      "models": [
-        "ERI",
-        "WRI"
-      ],
-      "text": "COP31 opens in Antalya (9–20 Nov). Energy-security and grid day on Tue; watch transition-finance language for the ERI read.",
-      "source": {
-        "name": "UNFCCC",
-        "url": "https://unfccc.int/cop31"
-      }
-    },
-    {
-      "date": "2026-11-09",
+      "date": "2026-11-16",
       "day": "Mon",
       "tag": "MACRO",
       "region": "APAC · China",
@@ -225,145 +199,145 @@
         "CPR",
         "GSI"
       ],
-      "text": "China CPI/PPI for October (NBS). Factory-gate prices are the pass-through test for global goods inflation.",
+      "text": "China October activity data (NBS): industrial output +4.8% y/y, retail sales +0.4% y/y. Strong factories, soft consumers: the read for global goods demand.",
       "source": {
-        "name": "NBS China",
-        "url": "https://www.stats.gov.cn/sj/sjjd/202611/t20261109_1965796.html"
+        "name": "State Council / NBS",
+        "url": "https://english.www.gov.cn/archive/statistics/202611/16/content_WS6afa6dccc6d00ca5f9a0e4b3.html"
       }
     },
     {
-      "date": "2026-11-10",
+      "date": "2026-11-16",
+      "day": "Mon",
+      "tag": "SUMMIT",
+      "region": "APAC · Manila",
+      "models": [
+        "TSI",
+        "GSI"
+      ],
+      "text": "49th ASEAN Summit in Manila (16–18 Nov). East Asia Summit and ASEAN–US Special Summit on Tue; Myanmar and regional security on the table.",
+      "source": {
+        "name": "Philippine News Agency",
+        "url": "https://www.pna.gov.ph/article/19-world-leaders-confirmed-to-attend-asean-summit-in-manila-dfa"
+      }
+    },
+    {
+      "date": "2026-11-17",
       "day": "Tue",
-      "tag": "INFLATION",
+      "tag": "MACRO",
       "region": "Americas · United States",
       "models": [
         "KMRI",
         "ROR"
       ],
-      "text": "US CPI for October, 08:30 ET (14:30 Berlin). No 12-month change published (Oct 2025 data gap); m/m is the read for December Fed pricing.",
+      "text": "US retail sales for October, 08:30 ET (14:30 Berlin). Consumer-demand check after last week's CPI and ahead of December's FOMC.",
       "source": {
-        "name": "BLS",
-        "url": "https://www.bls.gov/schedule/news_release/cpi.htm"
+        "name": "US Census Bureau",
+        "url": "https://www.census.gov/retail/release_schedule.html"
       }
     },
     {
-      "date": "2026-11-10",
-      "day": "Tue",
-      "tag": "ENERGY",
-      "region": "Global",
-      "models": [
-        "ERI",
-        "CPR"
-      ],
-      "text": "EIA Short-Term Energy Outlook: crude and gas balance revisions feed the ERI baseline.",
-      "source": {
-        "name": "EIA",
-        "url": "https://www.eia.gov/outlooks/steo/release_schedule.php"
-      }
-    },
-    {
-      "date": "2026-11-11",
+      "date": "2026-11-18",
       "day": "Wed",
-      "tag": "ENERGY",
-      "region": "Global · OPEC",
-      "models": [
-        "ERI",
-        "CPR"
-      ],
-      "text": "OPEC Monthly Oil Market Report: the producer group's demand call and quota compliance read.",
-      "source": {
-        "name": "OPEC",
-        "url": "https://www.opec.org/monthly-oil-market-report.html"
-      }
-    },
-    {
-      "date": "2026-11-11",
-      "day": "Wed",
-      "tag": "SUMMIT",
-      "region": "Global · Antalya, Türkiye",
-      "models": [
-        "ERI",
-        "GSI"
-      ],
-      "text": "COP31 World Leaders Climate Action Summit, 11–12 Nov: heads of state set the political temperature for the second week.",
-      "source": {
-        "name": "COP31 Türkiye",
-        "url": "https://cop31.tr/programme-overview"
-      }
-    },
-    {
-      "date": "2026-11-12",
-      "day": "Thu",
-      "tag": "GROWTH",
+      "tag": "INFLATION",
       "region": "Europe · United Kingdom",
       "models": [
         "KMRI",
-        "SPI"
+        "CPR"
       ],
-      "text": "UK GDP first estimate, Q3 (Jul–Sep), 07:00 UK (08:00 Berlin). Growth backdrop for the BoE's next move.",
+      "text": "UK CPI for October, 07:00 UK (08:00 Berlin). Tests the energy pass-through behind the BoE's November hike.",
       "source": {
         "name": "ONS",
-        "url": "https://www.ons.gov.uk/releases/gdpfirstquarterlyestimateukjulytoseptember2026timeseries"
+        "url": "https://www.ons.gov.uk/releases/consumerpriceinflationukoctober2026"
       }
     },
     {
-      "date": "2026-11-13",
-      "day": "Fri",
-      "tag": "INFLATION",
-      "region": "Americas · United States",
-      "models": [
-        "CPR",
-        "KMRI"
-      ],
-      "text": "US PPI for October, 08:30 ET (14:30 Berlin). Pipeline pressure after Tuesday's CPI.",
-      "source": {
-        "name": "BLS",
-        "url": "https://www.bls.gov/schedule/2026/11_sched.htm"
-      }
-    },
-    {
-      "date": "2026-11-13",
-      "day": "Fri",
-      "tag": "GROWTH",
+      "date": "2026-11-18",
+      "day": "Wed",
+      "tag": "FINANCE",
       "region": "Europe · Euro area",
       "models": [
         "KMRI",
+        "ROR"
+      ],
+      "text": "ECB Financial Stability Review (November): the euro area's systemic-risk read.",
+      "source": {
+        "name": "ECB",
+        "url": "https://www.ecb.europa.eu/press/financial-stability-publications/fsr/html/index.en.html"
+      }
+    },
+    {
+      "date": "2026-11-18",
+      "day": "Wed",
+      "tag": "POLICY",
+      "region": "Americas · United States",
+      "models": [
+        "ROR",
+        "KMRI"
+      ],
+      "text": "FOMC minutes of the 27–28 Oct meeting, 14:00 ET (20:00 Berlin). How much appetite for further hikes was there before October's CPI?",
+      "source": {
+        "name": "Federal Reserve",
+        "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
+      }
+    },
+    {
+      "date": "2026-11-18",
+      "day": "Wed",
+      "tag": "SUMMIT",
+      "region": "APAC · Shenzhen, China",
+      "models": [
+        "GSI",
+        "TSI"
+      ],
+      "text": "APEC Economic Leaders' Meeting in Shenzhen (18–19 Nov), chaired by Xi. Watch trade-truce signals and sideline bilaterals.",
+      "source": {
+        "name": "MFA China",
+        "url": "https://www.mfa.gov.cn/eng/xw/wsrc/202611/t20261113_12058556.html"
+      }
+    },
+    {
+      "date": "2026-11-19",
+      "day": "Thu",
+      "tag": "RATES",
+      "region": "Africa · South Africa",
+      "models": [
+        "CPR",
         "SPI"
       ],
-      "text": "Euro area and EU GDP and employment flash, Q3 (Eurostat T+45).",
+      "text": "SARB rate decision, 15:00 SAST (14:00 Berlin). Repo at 7.25% after September's hike; fuel-price pass-through is the swing factor.",
       "source": {
-        "name": "Eurostat",
-        "url": "https://ec.europa.eu/eurostat/documents/24987/6642470/QNA_release_calendar.pdf"
+        "name": "SARB",
+        "url": "https://www.resbank.co.za/calendar-data/sarb-events/monetary-policy-committee-meeting/2026/november"
       }
     },
     {
-      "date": "2026-11-13",
-      "day": "Fri",
-      "tag": "ENERGY",
-      "region": "Global",
-      "models": [
-        "ERI",
-        "TRI"
-      ],
-      "text": "IEA Oil Market Report for November: consumer-side counterpoint to Wednesday's OPEC demand view.",
-      "source": {
-        "name": "IEA",
-        "url": "https://www.iea.org/events/oil-market-report-november-2026"
-      }
-    },
-    {
-      "date": "2026-11-13",
+      "date": "2026-11-20",
       "day": "Fri",
       "tag": "SUMMIT",
-      "region": "Europe · Dublin",
+      "region": "Europe · Brussels",
       "models": [
-        "IIS",
-        "GSI"
+        "GSI",
+        "SPI"
       ],
-      "text": "Informal meeting of EU leaders in Dublin on AI: competitiveness, sovereignty, infrastructure and clean-energy capacity.",
+      "text": "Second EU–UK summit: agri-food checks, emissions trading and youth mobility deals up for sign-off, plus security and defence.",
       "source": {
-        "name": "Council of the EU",
-        "url": "https://www.consilium.europa.eu/en/meetings/european-council/2026/11/13/"
+        "name": "GOV.UK",
+        "url": "https://www.gov.uk/government/news/prime-minister-to-attend-uk-eu-summit-in-brussels-on-20-november"
+      }
+    },
+    {
+      "date": "2026-11-20",
+      "day": "Fri",
+      "tag": "CLIMATE",
+      "region": "Global · Antalya, Türkiye",
+      "models": [
+        "ERI",
+        "WRI"
+      ],
+      "text": "COP31 scheduled to close (9–20 Nov). Final-text language on transition finance sets the ERI read.",
+      "source": {
+        "name": "UNFCCC",
+        "url": "https://unfccc.int/cop31"
       }
     }
   ],
