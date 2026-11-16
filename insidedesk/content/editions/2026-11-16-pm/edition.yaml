@@ -76,29 +76,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - one-in-six-and-42-of-183-the-who-counts-the-plans
   - 2-049-drones-one-way-17-alerts-the-other-a-record
   - third-in-three-weeks-cyclone-akvan-takes-its-name
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-16T17:31:37+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-16T17:31:37+01:00"
   extras:
-    - rheinmetall-4-6-by-midday-the-defence-trade-asks
-    - 25-4-for-early-responders-novo-nordisk-gets-a
-    - plus-0-2-on-the-month-minus-1-5-on-the-year
-    - japanese-savers-and-euro-bonds-one-sentence-from
-    - a-bread-board-a-shoulder-to-shoulder-and-nine
-    - between-350-000-and-450-000-on-letn-prague-marches
-    - in-sync-and-less-generous-59-pairs-of-strangers
-    - 68-3-against-50-8-an-app-for-mood-that-worked-as-a
-    - 57-3-full-and-falling-the-gas-stores-start-paying
-    - a-tanker-on-fire-and-gas-0-5-cheaper-ttfs-monday
-    - 5-8-billion-against-5-9-billion-the-pension-deals
-    - 11-a-year-90-million-bought-back-what-an-expensive
-    - 328-for-black-friday-and-the-30-day-price-that
-    - the-heating-bill-arrives-late-brandenburgs-advice
-    - 40-satellites-the-first-of-38-flights-and-a-queue
-    - if-this-were-a-bank-bessent-asks-about-nvidias
-    - minus-17-4-against-plus-2-2-a-weight-loss-jab-is
-    - longer-without-progression-is-not-longer-alive-the
-    - more-than-2-000-documents-carried-past-the-checks
-    - volia-rfi-reports-french-soldiers-in-ukraine-and
-    - 985-hpa-and-a-pearl-lagoon-cyclone-xavier-opens
-    - drier-in-abidjan-wetter-in-brazil-the-weather
-  updates: []
+  - rheinmetall-4-6-by-midday-the-defence-trade-asks
+  - 25-4-for-early-responders-novo-nordisk-gets-a
+  - plus-0-2-on-the-month-minus-1-5-on-the-year
+  - japanese-savers-and-euro-bonds-one-sentence-from
+  - a-bread-board-a-shoulder-to-shoulder-and-nine
+  - between-350-000-and-450-000-on-letn-prague-marches
+  - in-sync-and-less-generous-59-pairs-of-strangers
+  - 68-3-against-50-8-an-app-for-mood-that-worked-as-a
+  - 57-3-full-and-falling-the-gas-stores-start-paying
+  - a-tanker-on-fire-and-gas-0-5-cheaper-ttfs-monday
+  - 5-8-billion-against-5-9-billion-the-pension-deals
+  - 11-a-year-90-million-bought-back-what-an-expensive
+  - 328-for-black-friday-and-the-30-day-price-that
+  - the-heating-bill-arrives-late-brandenburgs-advice
+  - 40-satellites-the-first-of-38-flights-and-a-queue
+  - if-this-were-a-bank-bessent-asks-about-nvidias
+  - minus-17-4-against-plus-2-2-a-weight-loss-jab-is
+  - longer-without-progression-is-not-longer-alive-the
+  - more-than-2-000-documents-carried-past-the-checks
+  - volia-rfi-reports-french-soldiers-in-ukraine-and
+  - 985-hpa-and-a-pearl-lagoon-cyclone-xavier-opens
+  - drier-in-abidjan-wetter-in-brazil-the-weather
+  - minus-0-57-at-the-bell-the-quiet-monday-closed-on-its
+  updates:
+  - time: '2026-11-16T19:28:17+01:00'
+    text: 'Markets: DAX closes on its low, down 0.57%; Stoxx 600 ends five-day run'
+    piece: minus-0-57-at-the-bell-the-quiet-monday-closed-on-its
