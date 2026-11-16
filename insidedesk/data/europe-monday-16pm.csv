@@ -1,0 +1,15 @@
+# Inside Desk chart data: europe-monday-16pm
+"# Source: finanzen.at, 'Verluste in Frankfurt: DAX nachmittags mit Abgaben', 16 Nov 2026, 15:58 CET (DAX level at 15:42 CET via Xetra); intraday snapshot, not closing levels; retrieved 16 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Rheinmetall rise,2.77,no,defence rebound
+Deutsche Telekom rise,1.88,no,
+Daimler Truck rise,1.66,no,
+MTU Aero Engines rise,1.54,no,
+Fresenius SE rise,1.44,no,
+DAX fall,-0.05,no,"26,736.63 points"
+Zalando fall,-1.16,no,
+Symrise fall,-1.23,no,
+Siemens Energy fall,-1.51,no,AI-linked
+Infineon fall,-1.84,no,chips
+Siemens fall,-2.38,no,

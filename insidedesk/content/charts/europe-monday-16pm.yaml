@@ -1,0 +1,22 @@
+id: europe-monday-16pm
+kind: hbar
+kicker: "Markets · Germany"
+title: "DAX −0.05%: Rheinmetall +2.8%, Siemens −2.4% inside"
+subtitle: "Percentage change on the DAX and its five strongest and five weakest members, Monday 16 November 2026, Xetra snapshot at about 15:42 CET per finanzen.at; not closing levels"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Rheinmetall rise", value: 2.77, note: "defence rebound"}
+  - {label: "Deutsche Telekom rise", value: 1.88}
+  - {label: "Daimler Truck rise", value: 1.66}
+  - {label: "MTU Aero Engines rise", value: 1.54}
+  - {label: "Fresenius SE rise", value: 1.44}
+  - {label: "DAX fall", value: -0.05, note: "26,736.63 points"}
+  - {label: "Zalando fall", value: -1.16}
+  - {label: "Symrise fall", value: -1.23}
+  - {label: "Siemens Energy fall", value: -1.51, note: "AI-linked"}
+  - {label: "Infineon fall", value: -1.84, note: "chips"}
+  - {label: "Siemens fall", value: -2.38}
+licence: reported
+source_line: "finanzen.at, 'Verluste in Frankfurt: DAX nachmittags mit Abgaben', 16 Nov 2026, 15:58 CET (DAX level at 15:42 CET via Xetra); intraday snapshot, not closing levels; retrieved 16 Nov 2026 · reported figures"
+alt: "Bar chart of Monday 16 November 2026 percentage changes in the DAX at about 15:42 CET, per finanzen.at: Rheinmetall up 2.77 percent, Deutsche Telekom up 1.88, Daimler Truck up 1.66, MTU Aero Engines up 1.54, Fresenius up 1.44, the DAX down 0.05, Zalando down 1.16, Symrise down 1.23, Siemens Energy down 1.51, Infineon down 1.84 and Siemens down 2.38 percent. These are intraday snapshot figures, not closes."

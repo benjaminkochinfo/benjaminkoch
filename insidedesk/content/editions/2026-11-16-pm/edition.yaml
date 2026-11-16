@@ -1,0 +1,104 @@
+date: "2026-11-16"
+slot: pm
+published: "2026-11-16T17:31:37+01:00"   # set to the actual Berlin time when it goes live
+title: "Minus 0.05% on top, chips down underneath: Europe waits for Tuesday's invoice"
+standfirst: "The DAX barely moved, the EU answered Moscow with listings rather than speeches, and two regulators cleared UniCredit for Commerzbank on the same day. The ECB's vice-president used the morning to describe how an AI repricing would travel."
+closing:
+  title: Before you close the tab
+  published: "2026-11-16T17:31:37+01:00"
+  habit:
+    text: 'On the first Monday evening of each winter month, walk to the meters before dinner
+      and write down what they say: electricity, gas or the dipstick in the oil tank, in a small
+      notebook kept beside them. Add the date and one word about the weather that week. It takes
+      two minutes. By March the notebook will tell you, in your own handwriting, what a cold
+      week costs, which no annual statement ever quite manages.'
+    note: A habit, not advice.
+  went_right:
+    text: In Leicestershire, swifts have started to move in. A county council project run with
+      the Leicestershire and Rutland Ornithological Society installed more than 360 nest boxes
+      and 150 "swift callers", devices that play colony sounds to draw the birds in, and six
+      breeding attempts have now been confirmed, with monitoring continuing [1]. House sparrows,
+      great tits and blue tits used some of the boxes too [1]. Swifts have declined largely
+      because old nesting sites in buildings disappeared and insects grew scarcer, and they
+      usually do not breed until they are three or four, so early attempts are an encouraging
+      sign, the project team says [1]. "Conservation work often requires patience," said Adam
+      Tilbury, the council's cabinet member for the environment [1]. The money came from Natural
+      England's species recovery programme [1]. Six nests is not a recovery. It is the receipt
+      that the boxes, the ladders and the budget line were worth it.
+  sentence: The EU answered Moscow with 113 new listings, Brussels and Washington both cleared
+    UniCredit for Commerzbank, and the DAX barely moved while chips slipped ahead of Nvidia's
+    results; on Monday the paperwork did more than the podiums.
+  euros:
+    text: 'Heating oil started the week flat, and the queue is the real cost. At 12:51 CET on
+      Monday, HeizOel24''s national average for a 3,000-litre order was €166.49 per 100 litres,
+      against €164.75 at the previous close [2]. By midday prices had given back their morning
+      rise and stood at just under €1.67 a litre, back at Friday''s level, while Brent fell
+      to $95.07 from $96.29 [2]. Delivery currently takes four to five weeks on average, so
+      anyone who wants oil before the end of the year should check delivery times when ordering,
+      the site writes [2]. Desk arithmetic: 3,000 litres at €166.49 per 100 litres comes to
+      about €4,995, roughly €52 more than at the previous close.'
+    note: National average for a 3,000-litre order including VAT and delivery, as published
+      by HeizOel24 on 16 Nov 2026, 12:51 CET; your price depends on region, quantity and supplier.
+      Nothing here is advice.
+  small_words:
+    term: Complete Response Letter
+    text: 'The US Food and Drug Administration''s formal way of saying "not in this form". It
+      ends a review without approval and sets out what is missing. On Sunday Summit Therapeutics
+      said it had received one for its lung cancer antibody ivonescimab, because the trial showed
+      longer progression-free survival but no statistically significant improvement in overall
+      survival [3]. A letter is not a ban: the company says development continues in other cancers
+      [3].'
+  sources:
+  - n: 1
+    title: Breeding success for Leicestershire swift nesting project
+    publisher: BBC News
+    url: https://www.bbc.com/news/articles/c6jd75kpyd0zo
+    date: 15 Nov 2026
+  - n: 2
+    title: Ölpreise starten weicher in die Woche
+    publisher: HeizOel24
+    url: https://www.heizoel24.de/news/artikel/005394-oelpreise-starten-weicher-in-die-woche-16-11-2026
+    date: 16 Nov 2026, 12:51 CET
+  - n: 3
+    title: Summit Therapeutics Provides Update Regarding Ivonescimab Biologics License Application
+    publisher: Summit Therapeutics
+    url: https://www.smmttx.com/news/press-releases/news-details/2026/Summit-Therapeutics-Provides-Update-Regarding-Ivonescimab-Biologics-License-Application/default.aspx
+    date: 15 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - minus-0-05-on-top-a-warning-from-frankfurt
+  - one-approval-in-brussels-one-in-washington-one
+  - 113-listings-nearly-50-banks-one-ceasefire-first
+  - the-annex-22-894-ring-wearers-75-against-84-and-a
+  - 211-58-for-tuesday-the-dear-hour-moves-to
+  - podium-vs-print-abrupt-repricing-and-a-1-13-nasdaq
+  - ordinary-ledger-up-to-2-150-a-year-more-for
+  - ten-signatures-two-definitions-five-working-groups
+  - one-in-six-and-42-of-183-the-who-counts-the-plans
+  - 2-049-drones-one-way-17-alerts-the-other-a-record
+  - third-in-three-weeks-cyclone-akvan-takes-its-name
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-16T17:31:37+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - rheinmetall-4-6-by-midday-the-defence-trade-asks
+    - 25-4-for-early-responders-novo-nordisk-gets-a
+    - plus-0-2-on-the-month-minus-1-5-on-the-year
+    - japanese-savers-and-euro-bonds-one-sentence-from
+    - a-bread-board-a-shoulder-to-shoulder-and-nine
+    - between-350-000-and-450-000-on-letn-prague-marches
+    - in-sync-and-less-generous-59-pairs-of-strangers
+    - 68-3-against-50-8-an-app-for-mood-that-worked-as-a
+    - 57-3-full-and-falling-the-gas-stores-start-paying
+    - a-tanker-on-fire-and-gas-0-5-cheaper-ttfs-monday
+    - 5-8-billion-against-5-9-billion-the-pension-deals
+    - 11-a-year-90-million-bought-back-what-an-expensive
+    - 328-for-black-friday-and-the-30-day-price-that
+    - the-heating-bill-arrives-late-brandenburgs-advice
+    - 40-satellites-the-first-of-38-flights-and-a-queue
+    - if-this-were-a-bank-bessent-asks-about-nvidias
+    - minus-17-4-against-plus-2-2-a-weight-loss-jab-is
+    - longer-without-progression-is-not-longer-alive-the
+    - more-than-2-000-documents-carried-past-the-checks
+    - volia-rfi-reports-french-soldiers-in-ukraine-and
+    - 985-hpa-and-a-pearl-lagoon-cyclone-xavier-opens
+    - drier-in-abidjan-wetter-in-brazil-the-weather
+  updates: []
