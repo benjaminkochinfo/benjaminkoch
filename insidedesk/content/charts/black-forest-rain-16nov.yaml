@@ -1,0 +1,37 @@
+id: black-forest-rain-16nov
+kind: line
+kicker: "Climate & Weather · Black Forest"
+title: "Black Forest: up to 123 mm of rain forecast by Sunday"
+subtitle: "Forecast rain, running total from Monday 16 Nov, mm · two Black Forest grid points (modelled, DWD ICON via Open-Meteo)"
+unit: " mm"
+label_decimals: 1
+start: "2026-11-16"
+y_min: 0
+series:
+  - key: feldberg
+    label: "Feldberg area, 1,400 m"
+    source:
+      type: static
+      values:
+        - ['2026-11-16', 10.2]
+        - ['2026-11-17', 39.6]
+        - ['2026-11-18', 61.8]
+        - ['2026-11-19', 77.6]
+        - ['2026-11-20', 103.1]
+        - ['2026-11-21', 110.7]
+        - ['2026-11-22', 123.1]
+  - key: freudenstadt
+    label: "Freudenstadt area, 758 m"
+    source:
+      type: static
+      values:
+        - ['2026-11-16', 18.5]
+        - ['2026-11-17', 51.9]
+        - ['2026-11-18', 57.9]
+        - ['2026-11-19', 73.8]
+        - ['2026-11-20', 101.9]
+        - ['2026-11-21', 104.4]
+        - ['2026-11-22', 114.0]
+licence: reported
+source_line: "Open-Meteo forecast API (DWD ICON), daily rain at 47.87°N 8.00°E and 48.48°N 8.41°E; desk running totals; retrieved 16 Nov 2026, 05:25 CET · CC BY 4.0. Forecast, not observed."
+alt: "Line chart of forecast rainfall at two Black Forest grid points, running total from Monday 16 November 2026. The Feldberg-area point rises from 10.2 mm on Monday to 61.8 mm by Wednesday and 123.1 mm by Sunday 22 November, the latest value. The Freudenstadt-area point rises from 18.5 mm on Monday to 51.9 mm on Tuesday and 114.0 mm by Sunday. These are model forecasts retrieved at 05:25 CET, not measurements."

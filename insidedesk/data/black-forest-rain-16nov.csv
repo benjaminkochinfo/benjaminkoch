@@ -1,0 +1,12 @@
+# Inside Desk chart data: black-forest-rain-16nov
+"# Source: Open-Meteo forecast API (DWD ICON), daily rain at 47.87°N 8.00°E and 48.48°N 8.41°E; desk running totals; retrieved 16 Nov 2026, 05:25 CET · CC BY 4.0. Forecast, not observed."
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+# Retrieved: 2026-11-16T06:30+01:00
+date,feldberg,freudenstadt
+2026-11-16,10.2,18.5
+2026-11-17,39.6,51.9
+2026-11-18,61.8,57.9
+2026-11-19,77.6,73.8
+2026-11-20,103.1,101.9
+2026-11-21,110.7,104.4
+2026-11-22,123.1,114.0

@@ -1,0 +1,16 @@
+id: asia-monday-16nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Japan shrinks: Kospi -2.8%, Nikkei -1.6%, Hang Seng +0.9%"
+subtitle: "Percentage change on selected Asia-Pacific indexes, Monday session, 16 November 2026, intraday snapshot per Newsquawk at 04:49 CET"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Hang Seng (Hong Kong) rise", value: 0.9}
+  - {label: "ASX 200 (Australia) fall", value: -0.1}
+  - {label: "Shanghai Composite fall", value: -0.4}
+  - {label: "Nikkei 225 (Japan) fall", value: -1.6}
+  - {label: "Kospi (South Korea) fall", value: -2.8}
+licence: reported
+source_line: "Newsquawk, 'Asia-Pac stocks are mostly lower to start the week after disappointing data from Japan and China', published 16 Nov 2026, 04:49 CET; intraday snapshot, not closing levels; retrieved 16 Nov 2026 · reported figures"
+alt: "Bar chart of Monday 16 November 2026 percentage changes in Asia at about 04:49 CET, per Newsquawk: Hang Seng up 0.9 percent, ASX 200 down 0.1 percent, Shanghai Composite down 0.4 percent, Nikkei 225 down 1.6 percent and Kospi down 2.8 percent. These are intraday snapshot moves, not closes."

@@ -1,0 +1,9 @@
+# Inside Desk chart data: asia-monday-16nov
+"# Source: Newsquawk, 'Asia-Pac stocks are mostly lower to start the week after disappointing data from Japan and China', published 16 Nov 2026, 04:49 CET; intraday snapshot, not closing levels; retrieved 16 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Hang Seng (Hong Kong) rise,0.9,no,
+ASX 200 (Australia) fall,-0.1,no,
+Shanghai Composite fall,-0.4,no,
+Nikkei 225 (Japan) fall,-1.6,no,
+Kospi (South Korea) fall,-2.8,no,

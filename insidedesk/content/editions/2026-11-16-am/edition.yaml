@@ -1,0 +1,91 @@
+date: "2026-11-16"
+slot: am
+published: "2026-11-16T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Three crossings, 1 December: Estonia answers a failed arson with a timetable"
+standfirst: "Eight suspects at a drone factory, a border due to shut in 17 days. Also: Japan shrinks by 0.1%, China's shoppers add 0.4%, Monday power at €194.49 on eleven times the wind, a measles status lost, rain for the Black Forest and a chocolate Santa 70 cents cheaper."
+closing:
+  title: Before you close the tab
+  published: '2026-11-16T08:30:00+01:00'
+  habit:
+    text: 'This week, when the November payslip arrives, find the line for health
+      insurance and read it once, slowly: the percentage, the euro amount, the name
+      of your insurer. Then put the payslip in the same folder as last month''s. When
+      your insurer''s letter about next year comes, you will have the number it is
+      talking about in front of you.'
+    note: A habit, not advice.
+  went_right:
+    text: Green turtle nesting at the Turtle Islands in Sabah, Malaysia, has tripled
+      since the 1970s to more than 20,000 nests a year, AFP reports [1]. The islands
+      have been protected since 1977, and Sabah banned turtle meat and egg consumption
+      in 1997 [1]. On Omadal island a 20-strong women's cooperative has moved eggs
+      to a hatchery since 2012 and now funds the work itself, putting 10% of its
+      handicraft and catering revenue into turtle protection [1]. Globally, green
+      turtles have moved from endangered to "least concern" [1]. "I've done my part,"
+      said the turtle scientist Juanita Joseph [1]. Fifty years of fences, bans and
+      buckets of sand do not make headlines; they make nests.
+  sentence: A night guard stopped an arson in Estonia and a government answered with a date, Japan's economy slipped by a decimal, and on Monday the timetables said more than the speeches.
+  euros:
+    text: 'The average additional contribution to Germany''s statutory health insurance
+      for 2027 stays at 2.9%, the health ministry announced on 30 October; with the
+      general rate of 14.6% that makes a notional total of 17.5%, shared equally by
+      employee and employer [2]. On a gross monthly salary of €4,000 subject to contributions,
+      the 2.9% means €58 a month each for employee and employer [2]. But the figure
+      is a benchmark, not a price: insurers set their own rates, and the average actually
+      charged in 2026 is about 3.13%, according to the GKV-Spitzenverband [2]. Desk
+      arithmetic: on €4,000 a month, the gap between 3.13% and 2.9% is €9.20 a month,
+      of which your half is €4.60, or €55.20 a year.'
+    note: Figures as reported by krankenkasseninfo.de on 2 Nov 2026; your insurer's
+      own rate for 2027 decides what applies to you. Nothing here is advice.
+  small_words:
+    term: Zusatzbeitrag (additional contribution)
+    text: The part of the statutory health insurance rate that each insurer sets for
+      itself on top of the general 14.6%; the ministry publishes an average each autumn
+      as a benchmark, and the insurers decide their own figure [2].
+  sources:
+  - n: 1
+    title: Green turtles have been given a glimmer of hope, thanks to conservation efforts
+    publisher: The Star (AFP)
+    url: https://www.thestar.com.my/lifestyle/living/2026/11/14/green-turtles-have-been-given-a-glimmer-of-hope-thanks-to-conservation-efforts
+    date: 14 Nov 2026, 08:00 CET
+  - n: 2
+    title: 'Festgelegt: Durchschnittlicher Zusatzbeitrag 2027 bleibt bei 2,9 Prozent'
+    publisher: krankenkasseninfo.de
+    url: https://www.krankenkasseninfo.de/ratgeber/nachrichten/festgelegt-durchschnittlicher-zusatzbeitrag-2027-bleibt-bei-29-prozent-62796.html
+    date: 2 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - three-crossings-one-drone-maker-1-december-estonia
+  - minus-0-1-for-japan-minus-2-8-for-the-kospi-monday
+  - exports-up-28-7-shoppers-up-0-4-chinas-october-in
+  - podium-vs-print-only-around-100-and-a-93-line-on-a
+  - the-annex-51-speech-metrics-158-participants-and-a
+  - 194-49-for-monday-eleven-times-last-weeks-wind-and
+  - minus-0-3-at-the-till-minus-0-4-in-income-japans
+  - ordinary-ledger-99-cents-for-the-own-brand
+  - one-router-in-arkansas-17-of-22-control-centres-12
+  - two-doses-97-america-loses-its-measles-elimination
+  - up-to-40-litres-a-day-in-the-black-forest-a-week
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-16T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 161-km-h-the-speed-limit-zelensky-blames-for
+    - two-million-barrels-two-tankers-no-names-the
+    - an-external-chief-says-the-treasury-a-return-says
+    - imports-up-2-5-growth-down-0-1-japan-pays-for-its
+    - six-crossings-one-vlcc-hormuz-on-sunday-ship-by
+    - agreed-on-1-july-not-yet-tabled-klingbeil-counts
+    - tuesday-then-24-to-27-november-the-budgets-last
+    - 323-adults-two-kinds-of-humiliation-and-rumination
+    - 106-couples-14-nights-you-know-when-you-help-your
+    - 95-37-for-brent-and-the-word-traders-had-forgotten
+    - jkm-up-5-91-ttf-at-90-86-asia-pays-first-for
+    - 3-892-42-after-a-4-5-week-gold-and-the-price-of
+    - one-last-hike-in-december-says-the-poll-1-10-at
+    - 22-would-not-last-four-weeks-the-emergency-fund
+    - 58-default-suppliers-8-on-average-and-four-days
+    - 500-million-for-the-next-nvidia-tsmc-opens-a
+    - 29-990-up-front-299-a-month-or-it-does-not-move
+    - 6-4-against-3-8-per-100-000-a-vision-warning-for
+    - every-two-years-from-50-a-cancer-society-says-test
+    - breakers-up-to-35-feet-and-rain-that-is-largely
+    - 35-by-2035-antalyas-hosts-want-an-electricity
+  updates: []
