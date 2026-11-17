@@ -101,7 +101,11 @@ epaper:
   - polar-air-by-saturday-germany-trades-a-week-of
   - 10-000-families-in-aceh-floods-and-rain-warned
   - minus-2-08-at-the-bell-the-afternoon-doubled-the-bill
+  - minus-1-32-half-an-hour-before-the-bell-new-york-waits
   updates:
   - time: '2026-11-17T19:31:45+01:00'
     text: 'Markets: DAX closes 2.08% lower; Stoxx 600 has its worst day since March'
     piece: minus-2-08-at-the-bell-the-afternoon-doubled-the-bill
+  - time: '2026-11-17T22:07:26+01:00'
+    text: 'Money: Wall Street 1.3% to 1.8% lower in late trade ahead of Nvidia results'
+    piece: minus-1-32-half-an-hour-before-the-bell-new-york-waits
