@@ -1,0 +1,14 @@
+# Inside Desk chart data: europe-tuesday-17pm
+"# Source: finanzen.net, 'DAX-Handel aktuell: DAX legt am Dienstagnachmittag den Rückwärtsgang ein', 17 Nov 2026, 15:57 CET (levels at 15:40 CET via Xetra); intraday snapshot, not closing levels; retrieved 17 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Zalando rise,0.96,no,
+Deutsche Telekom rise,0.33,no,
+Siemens rise,0.29,no,
+Henkel pref. rise,0.16,no,
+DAX fall,-1.17,no,"26,286.89 points"
+GEA fall,-1.77,no,
+Scout24 fall,-1.93,no,
+RWE fall,-2.02,no,
+SAP fall,-4.26,no,software
+Deutsche Bank fall,-4.48,no,leaked files

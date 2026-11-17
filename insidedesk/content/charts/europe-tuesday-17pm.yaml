@@ -1,0 +1,21 @@
+id: europe-tuesday-17pm
+kind: hbar
+kicker: "Markets · Germany"
+title: "DAX −1.17%: Deutsche Bank −4.5%, SAP −4.3% inside"
+subtitle: "Percentage change on the DAX, its four rising members and its five weakest, Tuesday 17 November 2026, Xetra snapshot at 15:40 CET per finanzen.net; not closing levels"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Zalando rise", value: 0.96}
+  - {label: "Deutsche Telekom rise", value: 0.33}
+  - {label: "Siemens rise", value: 0.29}
+  - {label: "Henkel pref. rise", value: 0.16}
+  - {label: "DAX fall", value: -1.17, note: "26,286.89 points"}
+  - {label: "GEA fall", value: -1.77}
+  - {label: "Scout24 fall", value: -1.93}
+  - {label: "RWE fall", value: -2.02}
+  - {label: "SAP fall", value: -4.26, note: "software"}
+  - {label: "Deutsche Bank fall", value: -4.48, note: "leaked files"}
+licence: reported
+source_line: "finanzen.net, 'DAX-Handel aktuell: DAX legt am Dienstagnachmittag den Rückwärtsgang ein', 17 Nov 2026, 15:57 CET (levels at 15:40 CET via Xetra); intraday snapshot, not closing levels; retrieved 17 Nov 2026 · reported figures"
+alt: "Bar chart of Tuesday 17 November 2026 percentage changes in the DAX at 15:40 CET, per finanzen.net: Zalando up 0.96 percent, Deutsche Telekom up 0.33, Siemens up 0.29, Henkel preference shares up 0.16, the DAX down 1.17 at 26,286.89 points, GEA down 1.77, Scout24 down 1.93, RWE down 2.02, SAP down 4.26 and Deutsche Bank down 4.48 percent. These are intraday snapshot figures, not closes."
