@@ -105,6 +105,38 @@ smap = set(re.findall(r"<loc>([^<]+)</loc>", open(os.path.join(ROOT, "insidedesk
 for loc in smap | {l for l in feed_links if l.startswith(BASE + "insidedesk/")}:
     lp = loc[len(BASE):] + ("index.html" if loc.endswith("/") else "")
     if not os.path.exists(os.path.join(ROOT, lp)): problems.append(f"feed/sitemap URL has no page: {loc}")
+# Text that new_edition.py scaffolds and a writer must replace. Matched exactly (after trimming), so real copy that
+# merely shares a word never trips it.
+_ED_PLACEHOLDERS = {
+    ("title",): "EDITION HEADLINE",
+    ("standfirst",): "One or two sentences: what the day did.",
+    ("closing", "habit", "text"): "One small, calm, practical habit for the week.",
+    ("closing", "went_right", "text"): "One sourced piece of genuinely good news from data [1].",
+    ("closing", "sentence"): "The day in one line a non-expert could repeat at dinner.",
+    ("closing", "euros", "text"): "Only when the news touches prices: what it means for a household's month, from sourced figures [1].",
+    ("closing", "small_words", "term"): "A term used in this edition",
+    ("closing", "small_words", "text"): "Two or three plain sentences.",
+}
+_PIECE_PLACEHOLDERS = {"title": "Headline", "dek": "One-sentence dek in the desk voice."}
+
+def _placeholder_problems(name, ed):
+    out = []
+    for path, ph in _ED_PLACEHOLDERS.items():
+        v = ed
+        for k in path:
+            v = v.get(k) if isinstance(v, dict) else None
+        if isinstance(v, str) and (v.strip() == ph or (ph == "EDITION HEADLINE" and ph in v)):
+            out.append(f"{name}: edition.yaml {'.'.join(path)} is still the template placeholder ({ph!r})")
+    pieces = [(s, os.path.join(ed_root, name, s + ".md")) for s in ed.get("articles") or []]
+    pieces += [(f"epaper/{x}", os.path.join(ed_root, name, "epaper", x + ".md")) for x in ((ed.get("epaper") or {}).get("extras") or [])]
+    for slug, mf in pieces:
+        if not os.path.exists(mf): continue
+        fm = _fm(mf)
+        for k, ph in _PIECE_PLACEHOLDERS.items():
+            if str(fm.get(k) or "").strip() == ph:
+                out.append(f"{name}: {slug}.md {k} is still the template placeholder ({ph!r})")
+    return out
+
 ed_root = os.path.join(ROOT, "insidedesk", "content", "editions")
 known_ed_pages, n_eds = set(), 0
 editions = sorted(os.listdir(ed_root)) if os.path.isdir(ed_root) else []
@@ -113,6 +145,8 @@ for name in editions:
     yf = os.path.join(ed_root, name, "edition.yaml")
     if not os.path.exists(yf): problems.append(f"edition folder {name}: no edition.yaml"); continue
     ed = yaml.safe_load(open(yf, encoding="utf-8")); n_eds += 1
+    # ---- template placeholders from new_edition.py must never ship (17 Nov 2026: "EDITION HEADLINE" went live)
+    problems.extend(_placeholder_problems(name, ed))
     d = _dt.date.fromisoformat(str(ed["date"]))
     ep = f"insidedesk/{d:%Y/%m/%d}/{SLOT_SLUG[ed['slot']]}.html"; known_ed_pages.add(ep)
     _now = _dt.datetime.now(_dt.timezone.utc)
