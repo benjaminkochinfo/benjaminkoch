@@ -802,6 +802,57 @@
       margin: 0 0 28px;
     }
 
+    /* Practice Editions — quiet addenda */
+    .topic-col .edition-note {
+      margin: 10px 0 0;
+      padding-top: 8px;
+      border-top: 1px solid rgba(8, 20, 39, 0.08);
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .topic-col .edition-note a {
+      color: var(--gold-dim);
+      text-decoration: none;
+    }
+    .topic-col .edition-note a:hover { color: var(--navy); }
+
+    .topic-map .edition-list {
+      margin: 4px 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .topic-map .edition-list li {
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid rgba(8, 20, 39, 0.1);
+      background: rgba(255, 253, 248, 0.9);
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .topic-map .edition-list a {
+      font-family: var(--display);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--gold-dim);
+      font-weight: 600;
+    }
+    .paper .topic-map .edition-list a:hover { color: var(--navy); }
+    .topic-map .edition-sign {
+      margin: 14px 0 0;
+      font-family: var(--display);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
   </style>
 </head>
 
@@ -1064,6 +1115,9 @@
                 <li>Practical next steps</li>
                 <li>60 minutes · individual</li>
               </ul>
+              <p class="edition-note">
+                Self-study: <a href="https://practiceeditions.gumroad.com/l/clarity-decision-pack">The Clarity Decision Pack</a> — a 33-page PDF companion for one significant decision ($65).
+              </p>
             </div>
             <div class="topic-col">
               <h4>Deep Attunement</h4>
@@ -1552,6 +1606,31 @@
               Rights and timeline confirmed before start.
             </p>
           </article>
+        </div>
+
+        <p class="section-label" style="margin-top:28px">Self-study editions</p>
+        <div class="topic-map" id="practice-editions" style="margin-top:8px">
+          <h3>Practice Editions</h3>
+          <p>
+            Three written workbooks you can start on your own, without a session.
+            Education and self-reflection only — not therapy, and not legal, tax or investment advice.
+            Priced in US dollars on the purchase page.
+          </p>
+          <ul class="edition-list">
+            <li>
+              <a href="https://practiceeditions.gumroad.com/l/clarity-decision-pack">The Clarity Decision Pack</a>
+              — a self-study companion to the Clarity Attunement, for one significant decision. 33-page PDF · $65
+            </li>
+            <li>
+              <a href="https://practiceeditions.gumroad.com/l/attention-protocol">The Attention Protocol</a>
+              — a procedure for taking in news and information on purpose, then returning to your life. 22-page PDF · $33
+            </li>
+            <li>
+              <a href="https://practiceeditions.gumroad.com/l/re-entry-tax-workbook">The Re-Entry Tax Workbook</a>
+              — an organizing workbook for returning to focus after a gap, without the apology spiral. Not tax or legal advice. 27-page PDF · $39
+            </li>
+          </ul>
+          <p class="edition-sign">Dr. Benjamin Koch · Practice Editions</p>
         </div>
 
         <p class="center-note">
