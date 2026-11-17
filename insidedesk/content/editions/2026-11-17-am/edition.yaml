@@ -1,0 +1,101 @@
+date: "2026-11-17"
+slot: am
+published: "2026-11-17T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "EDITION HEADLINE"
+standfirst: "One or two sentences: what the day did."
+closing:
+  title: Before you close the tab
+  published: '2026-11-17T08:30:00+01:00'
+  habit:
+    text: 'Once this week, write one card or letter by hand to someone who still has
+      a letterbox: three sentences are enough. Address it, stamp it, and walk it to
+      the postbox rather than leaving it on the hall table. The writing takes ten
+      minutes; the walk is the part that makes it real.'
+    note: A habit, not advice.
+  went_right:
+    text: 'For the first time in more than a century, native oysters have been born
+      in the Dornoch Firth in the Scottish Highlands, Heriot-Watt University reported
+      on 16 November [1]. The firth''s oysters were probably fished to extinction in
+      the late 1800s; the restoration began in 2017 with 300 oysters from Loch Ryan,
+      and by October 2026 more than 140,000 hand-cleaned juveniles had been released
+      by scientists and volunteers [1]. Some of the new spat have already reached the
+      size of a 50p coin [1]. "This is a moment over 12 years and 140,000 oysters in
+      the making," said Professor Bill Sanderson [1]. The project now aims for around
+      four million oysters by 2031 [1]. Twelve years of scrubbing shells is not a
+      headline; it is a reef.'
+  sentence: Tokyo slipped 1.2% after Wall Street, Washington printed a rule for rented
+    chips, missiles went for the bridges people cross in Kyiv, and in Berlin and Antalya
+    the day's real work is a bill and a draft, not a speech.
+  euros:
+    text: 'Deutsche Post plans to raise the price of a standard letter on 1 January
+      from 95 cents to €1.15, and a postcard by the same amount; the Großbrief rises
+      55 cents to €2.35 and the Maxibrief €2.10 to €5 [2]. The regulator, the Bundesnetzagentur,
+      allowed letter prices to rise by up to 20.35%, and the Post uses that frame in
+      full; the final approval is still pending [2][3]. The reason is volume: 16.9
+      billion letters were sent in Germany in 2005, barely 9.4 billion in 2025 [2].
+      Desk arithmetic: 20 cents more is a rise of 21.1%; a household sending 30 standard
+      letters a year pays €6 more, and ten Großbriefe add €5.50. Desk arithmetic: the
+      2025 letter volume is about 44% below 2005, carried by the same network of postboxes
+      and branches.'
+    note: Prices as announced by Deutsche Post and reported by tagesschau on 20 Oct
+      2026, subject to final approval by the Bundesnetzagentur. Nothing here is advice.
+  small_words:
+    term: Spat
+    text: The young of oysters and other shellfish once they have finished drifting
+      in the plankton and settled, only a few millimetres across
+      at first; finding spat is how restorers know a population is breeding, not just
+      surviving [1].
+  sources:
+  - n: 1
+    title: First oysters born in Dornoch Firth for over 100 years
+    publisher: Heriot-Watt University
+    url: https://www.hw.ac.uk/news/2026/first-oysters-born-in-dornoch-firth-for-over-100-years
+    date: 16 Nov 2026
+  - n: 2
+    title: Porto für Briefe wird wohl bald teurer
+    publisher: tagesschau.de
+    url: https://www.tagesschau.de/wirtschaft/verbraucher/porto-standardbrief-100.html
+    date: 20 Oct 2026, 16:00 CET
+  - n: 3
+    title: 'Brief und Paket: Das ändert sich 2027'
+    publisher: Deutsche Post
+    url: https://www.deutschepost.de/de/a/aenderungen2027.html
+    date: 17 Nov 2026 (retrieved)
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - minus-1-2-in-tokyo-a-licence-rule-in-washington
+  - podium-vs-print-we-are-looking-into-a-law-and-a
+  - 5-4-billion-1-8-billion-about-seven-in-all-the
+  - the-annex-85-women-one-silent-night-two-playbacks
+  - 669-gwh-of-wind-for-tuesday-the-reason-the-dear
+  - 25-shares-22-00-tonight-no-guarantee-the-small
+  - ordinary-ledger-316-for-liability-cover-4-more-for
+  - 12-million-tpp-and-five-countries-washington
+  - 260-patients-one-pen-a-week-a-c5-inhibitor-leaves
+  - two-bridges-in-kyiv-one-in-kerch-eight-across-the
+  - 18-pages-144-items-120-billion-cop31s-draft-meets
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-17T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 13-240-a-tonne-and-five-losing-weeks-copper-reads
+    - 9-67-priced-in-4-78-delivered-the-options-markets
+    - two-days-in-shenzhen-one-truce-to-keep-alive-until
+    - 150-documents-in-manila-and-one-about-strategic
+    - until-23-november-belgiums-king-gives-de-wever
+    - 90-recommendations-about-500-pages-a-commissions
+    - 12-257-mothers-in-four-countries-breastfeeding-and
+    - 43-questions-617-teenagers-parents-matter-less-to
+    - 84-75-for-gas-6-8-off-in-a-day-milder-air-and
+    - 26-2-gwh-of-sun-tuesdays-solar-is-the-smallest-in
+    - 4-for-four-months-2-after-read-the-second-number
+    - six-of-nine-for-a-fifth-rise-australias-central
+    - 66-80-from-january-and-a-click-by-30-november-or
+    - 52-get-a-christmas-bonus-78-with-a-pay-agreement
+    - at-least-80-incidents-one-lawsuit-california-takes
+    - 92-billion-87-billion-88-billion-the-nvidia-line
+    - within-48-hours-if-there-is-any-nigerias
+    - five-years-of-pills-10-7-points-fewer-deaths-8-8
+    - shortly-after-4am-near-okinoshima-japan-scrambles
+    - six-months-not-a-year-signal-and-meta-tell-canadas
+    - 4-degrees-in-the-north-18-on-the-upper-rhine-one
+    - 39-9-c-in-weipa-cape-yorks-hottest-november-day
+  updates: []

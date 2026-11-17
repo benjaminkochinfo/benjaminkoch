@@ -1,0 +1,9 @@
+# Inside Desk chart data: asia-tuesday-17nov
+"# Source: Newsquawk, 'Asia-Pac stocks retreat following the continued tech rout stateside ahead of Nvidia earnings', published 17 Nov 2026, 03:41 UTC (04:41 CET); intraday snapshot, not closing levels; retrieved 17 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Shanghai Composite fall,0.2,no,
+Hang Seng (Hong Kong) fall,0.8,no,
+Kospi (South Korea) fall,0.8,no,
+Nikkei 225 (Japan) fall,1.2,no,
+ASX 200 (Australia) fall,1.6,no,

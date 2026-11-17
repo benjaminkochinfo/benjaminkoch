@@ -1,0 +1,16 @@
+id: asia-tuesday-17nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Asia pays for Nvidia's week: ASX -1.6%, Nikkei -1.2%"
+subtitle: "Size of the fall, in percent, on selected Asia-Pacific indexes, Tuesday session, 17 November 2026, intraday snapshot per Newsquawk at 04:41 CET"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Shanghai Composite fall", value: 0.2}
+  - {label: "Hang Seng (Hong Kong) fall", value: 0.8}
+  - {label: "Kospi (South Korea) fall", value: 0.8}
+  - {label: "Nikkei 225 (Japan) fall", value: 1.2}
+  - {label: "ASX 200 (Australia) fall", value: 1.6}
+licence: reported
+source_line: "Newsquawk, 'Asia-Pac stocks retreat following the continued tech rout stateside ahead of Nvidia earnings', published 17 Nov 2026, 03:41 UTC (04:41 CET); intraday snapshot, not closing levels; retrieved 17 Nov 2026 · reported figures"
+alt: "Bar chart of Tuesday 17 November 2026 percentage changes in Asia at about 04:41 CET, per Newsquawk: Shanghai Composite down 0.2 percent, Hang Seng down 0.8 percent, Kospi down 0.8 percent, Nikkei 225 down 1.2 percent and ASX 200 down 1.6 percent. These are intraday snapshot moves, not closes."
