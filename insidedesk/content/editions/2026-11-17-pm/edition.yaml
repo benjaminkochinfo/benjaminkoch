@@ -76,28 +76,32 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 419-000-requests-in-october-69-000-more-germany
   - polite-evasions-and-fictions-colby-tells-eu
   - 3-12-a-kilo-at-the-mill-a-rainy-spanish-spring
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-17T17:30:03+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-17T17:30:03+01:00"
   extras:
-    - confessionals-on-tuesday-a-package-by-december-the
-    - 276-4-million-barrels-americas-emergency-oil-stock
-    - 43-4-billion-in-sales-a-new-chief-from-the-finance
-    - 96-for-a-fed-hike-1-09-for-a-euro-the-dollars
-    - we-would-like-to-know-too-7-75-a-month-and-the
-    - 1-160-episodes-102-patients-12-weeks-an-agitation
-    - one-budget-many-settings-germanys-psychiatrists
-    - shut-by-2030-or-no-subsidy-the-small-print-for
-    - 25-kilowatts-and-under-small-rooftop-solar-keeps
-    - up-to-4-600-jobs-320-million-a-year-imperial
-    - 4-6-out-of-work-3-5-more-pay-0-2-in-real-terms
-    - a-correction-from-wiesbaden-the-gas-heating-costs
-    - 75-grams-became-50-the-fennel-tea-that-shrank
-    - 3-billion-one-new-hall-up-to-a-million-cybercabs
-    - more-than-50-to-chinese-clients-no-chips-nvidias
-    - playgrounds-bus-shelters-and-next-to-the-pram
-    - 62-lower-risk-of-progression-all-by-mouth-the-fda
-    - patriots-from-stock-1-billion-to-buy-together
-    - 700-distribution-centres-and-a-months-deadline
-    - polar-air-by-saturday-germany-trades-a-week-of
-    - 10-000-families-in-aceh-floods-and-rain-warned
-  updates: []
+  - confessionals-on-tuesday-a-package-by-december-the
+  - 276-4-million-barrels-americas-emergency-oil-stock
+  - 43-4-billion-in-sales-a-new-chief-from-the-finance
+  - 96-for-a-fed-hike-1-09-for-a-euro-the-dollars
+  - we-would-like-to-know-too-7-75-a-month-and-the
+  - 1-160-episodes-102-patients-12-weeks-an-agitation
+  - one-budget-many-settings-germanys-psychiatrists
+  - shut-by-2030-or-no-subsidy-the-small-print-for
+  - 25-kilowatts-and-under-small-rooftop-solar-keeps
+  - up-to-4-600-jobs-320-million-a-year-imperial
+  - 4-6-out-of-work-3-5-more-pay-0-2-in-real-terms
+  - a-correction-from-wiesbaden-the-gas-heating-costs
+  - 75-grams-became-50-the-fennel-tea-that-shrank
+  - 3-billion-one-new-hall-up-to-a-million-cybercabs
+  - more-than-50-to-chinese-clients-no-chips-nvidias
+  - playgrounds-bus-shelters-and-next-to-the-pram
+  - 62-lower-risk-of-progression-all-by-mouth-the-fda
+  - patriots-from-stock-1-billion-to-buy-together
+  - 700-distribution-centres-and-a-months-deadline
+  - polar-air-by-saturday-germany-trades-a-week-of
+  - 10-000-families-in-aceh-floods-and-rain-warned
+  - minus-2-08-at-the-bell-the-afternoon-doubled-the-bill
+  updates:
+  - time: '2026-11-17T19:31:45+01:00'
+    text: 'Markets: DAX closes 2.08% lower; Stoxx 600 has its worst day since March'
+    piece: minus-2-08-at-the-bell-the-afternoon-doubled-the-bill
