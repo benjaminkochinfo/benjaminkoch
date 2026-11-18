@@ -1,0 +1,74 @@
+date: '2026-11-18'
+slot: am
+published: '2026-11-18T08:30:00+01:00'
+title: '$115.8 billion and a shrug: Nvidia beats, Asia slips, Berlin talks till 2 a.m.'
+standfirst: 'Nvidia''s quarter beat its own guide by almost $8 billion and Asia still drifted lower. Also: an eight-hour coalition night over €5.4 billion, Japan''s record exports and record energy bill, Brent down a fifth while Hormuz traffic stays near zero, and the EMA''s first flu recipe for mRNA vaccines.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-18T08:30:00+01:00'
+  habit:
+    text: 'For three nights this week, pick one bedtime and one getting-up time and keep both, weekend included if you can. No app, no score: a note on the fridge is enough. The point is not more sleep but the same sleep, at the same hour, so the day starts from a known place.'
+    note: A habit, not advice.
+  went_right:
+    text: The World Health Organization has validated Eritrea's elimination of trachoma as a public health problem, making it the 34th country in the world and the 11th in WHO's African Region to do so [1]. Trachoma is the world's leading infectious cause of blindness [1]. Eritrea surveyed all 58 of its sub-zobas and used surgery, antibiotics, face-washing and better water and sanitation, with a community-led sanitation approach and limited external funding [1]. Globally, the population needing interventions against trachoma fell from about 1.5 billion in 2002 to below 100 million by November 2025, a reduction of about 94% [1]. "After two decades of determined effort, Eritrea has consigned trachoma as a public health problem to history," said Dr Tedros Adhanom Ghebreyesus [1]. Twenty years of surveys and soap is how blindness ends.
+  sentence: Nvidia sold more than anyone expected and Asia shrugged anyway, Berlin's coalition talked until 2 a.m. about who pays for cheaper electricity, and the useful news was in invoices, customs forms and a flu-strain list, not in speeches.
+  euros:
+    text: 'Germany''s electricity tax is 2.05 cents per kilowatt hour; the EU minimum for households is 0.1 cents [2]. Cutting it to the minimum would save about 2.32 cents per kWh including VAT, if suppliers pass it on in full [2]. StromAuskunft calculates about €35 a year for a single person using 1,500 kWh, €58 for two people at 2,500 kWh and €104 for a family of four at 4,500 kWh [2]. Desk arithmetic: €104 a year is about €8.67 a month, roughly the price of one cinema ticket. The finance ministry puts the cost to the state at about €5.4 billion a year [2]; whether and from when the cut comes depends on what the coalition announces this morning.'
+    note: Desk arithmetic on the cited figures.
+  small_words:
+    term: Guidance
+    text: A company's own forecast for its next quarter, published with its results. Nvidia guided to $130.0 billion of revenue, plus or minus 3%, for a quarter that has an extra week [3]. Markets often react more to the guidance than to the quarter just reported, because the quarter is already paid for and the guidance is not.
+  sources:
+  - n: 1
+    title: 'Eritrea eliminates trachoma: a major public health milestone'
+    publisher: World Health Organization
+    url: https://www.who.int/news/item/16-11-2026-eritrea-eliminates-trachoma-a-major-public-health-milestone
+    date: 16 Nov 2026
+  - n: 2
+    title: 'Stromsteuer-Senkung: So viel könnten Verbraucher sparen'
+    publisher: Stromauskunft
+    url: https://www.stromauskunft.de/service/energienachrichten/19822309.stromsteuer-senkung/
+    date: '13 Oct 2026'
+  - n: 3
+    title: NVIDIA Announces Financial Results for Third Quarter Fiscal 2027
+    publisher: NVIDIA (press release)
+    url: https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/
+    date: 17 Nov 2026
+articles:
+- 115-8-billion-delivered-and-a-shrug-nvidia-sends
+- nikkei-0-3-at-lunch-kospi-0-2-asia-takes-the
+- podium-vs-print-relatively-short-and-eight-hours
+- 11-77-trillion-yen-out-12-25-trillion-in-japan
+- 16-3-of-the-most-distressed-use-a-chatbot-for
+- 92-72-a-barrel-and-two-transits-the-oil-price
+- 35-6-expected-minus-33-2-today-the-zew-gap
+- ordinary-ledger-0-2-on-the-till-0-6-underneath
+- three-strains-for-the-mrna-flu-shot-the-ema
+- the-annex-temporary-degradation-and-a-week-of
+- 916-000-dead-in-30-years-the-climate-risk-index
+epaper:
+  available: "2026-11-18T06:30:00+01:00"
+  extras:
+    - not-a-candidate-giffey-backs-heil-and-the-spd
+    - 1-500-motions-560-9-billion-the-budget-waits
+    - 7-340-53-and-6-12-below-the-record-the-s-p-500
+    - 1-0992-the-euro-slips-under-a-dollar-ten-and-the
+    - third-meeting-this-year-trump-and-xi-in-shenzhen
+    - 49-7-for-chip-tools-japan-s-shipments-show-where
+    - 38-higher-for-the-chronically-lonely-the-word
+    - 84-against-75-sleep-regularity-and-the-mood-of
+    - 84-04-a-mwh-and-70-4-full-europe-s-gas-trades
+    - minus-4-22-for-murban-the-gulf-s-own-crude-falls
+    - corporation-tax-or-capital-gains-the-spd-s-list
+    - december-and-january-the-fed-hike-markets-are
+    - 1-25-million-expected-the-housing-starts-the
+    - permits-order-books-and-jobs-destatis-publishes
+    - 18-million-developers-one-deal-nvidia-says-the
+    - amkor-ibiden-unimicron-the-names-in-the-release
+    - 10-of-15-countries-short-clindamycin-and-the
+    - 15-12-billion-for-health-and-a-blank-line-for
+    - ten-more-settlements-ukraine-asks-for-oleshky
+    - 21-of-24-reached-khasab-one-sailor-still-missing
+    - 2-to-4-feet-in-the-sierra-california-s-storms
+    - 25-by-2035-a-buildings-compact-hides-in-item-126
+  updates: []

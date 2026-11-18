@@ -1,0 +1,8 @@
+# Inside Desk chart data: asia-wednesday-18nov
+"# Source: AFP via France 24, 'Stocks drop as booming Nvidia results drowned by spy scandal', key figures at around 02:30 GMT (03:30 CET) on 18 Nov 2026; intraday snapshot, not closing levels; retrieved 18 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Hang Seng (Hong Kong) fall,0.5,no,
+Nikkei 225 (Japan) fall,0.3,no,
+Shanghai Composite fall,0.3,no,
+Kospi (South Korea) fall,0.2,no,

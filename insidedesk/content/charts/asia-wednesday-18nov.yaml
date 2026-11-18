@@ -1,0 +1,15 @@
+id: asia-wednesday-18nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Nvidia beats, Asia shrugs: Hang Seng -0.5%, Nikkei -0.3%"
+subtitle: "Size of the fall, in percent, on selected Asia-Pacific indexes, Wednesday 18 November 2026, intraday snapshot per AFP at about 03:30 CET (Tokyo at the lunch break)"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Hang Seng (Hong Kong) fall", value: 0.5}
+  - {label: "Nikkei 225 (Japan) fall", value: 0.3}
+  - {label: "Shanghai Composite fall", value: 0.3}
+  - {label: "Kospi (South Korea) fall", value: 0.2}
+licence: reported
+source_line: "AFP via France 24, 'Stocks drop as booming Nvidia results drowned by spy scandal', key figures at around 02:30 GMT (03:30 CET) on 18 Nov 2026; intraday snapshot, not closing levels; retrieved 18 Nov 2026 · reported figures"
+alt: "Bar chart of Wednesday 18 November 2026 percentage changes in Asia at about 03:30 CET, per AFP: Hang Seng down 0.5 percent, Nikkei 225 down 0.3 percent at the lunch break, Shanghai Composite down 0.3 percent and Kospi down 0.2 percent. These are intraday snapshot moves, not closes."

@@ -1,0 +1,9 @@
+# Inside Desk chart data: nvidia-quarter-18nov
+"# Source: NVIDIA press release 'Financial Results for Third Quarter Fiscal 2027', 17 Nov 2026; CNBC (LSEG consensus, year-ago revenue), 17 Nov 2026; Investopedia (August guide), 17 Nov 2026; retrieved 18 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Same quarter a year ago,57.0,no,
+Nvidia's own guide (Aug),108.0,no,
+Analyst consensus (LSEG),109.1,no,
+"Reported, quarter to 25 Oct",115.8,no,
+Guide for next quarter (14 weeks),130.0,no,

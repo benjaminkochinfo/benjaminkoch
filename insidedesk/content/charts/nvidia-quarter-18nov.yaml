@@ -1,0 +1,16 @@
+id: nvidia-quarter-18nov
+kind: hbar
+kicker: "Tech · Invoices"
+title: "Nvidia: $115.8bn delivered, $108bn guided, $57bn a year ago"
+subtitle: "Nvidia quarterly revenue in billions of US dollars: year-ago quarter, the company's own August guide, the LSEG analyst consensus, the reported quarter to 25 Oct 2026, and the guide for the next quarter (which has an extra week)"
+unit: " bn"
+label_decimals: 1
+rows:
+  - {label: "Same quarter a year ago", value: 57.0}
+  - {label: "Nvidia's own guide (Aug)", value: 108.0}
+  - {label: "Analyst consensus (LSEG)", value: 109.1}
+  - {label: "Reported, quarter to 25 Oct", value: 115.8}
+  - {label: "Guide for next quarter (14 weeks)", value: 130.0}
+licence: reported
+source_line: "NVIDIA press release 'Financial Results for Third Quarter Fiscal 2027', 17 Nov 2026; CNBC (LSEG consensus, year-ago revenue), 17 Nov 2026; Investopedia (August guide), 17 Nov 2026; retrieved 18 Nov 2026 · reported figures"
+alt: "Bar chart of Nvidia quarterly revenue in billions of dollars: 57.0 in the same quarter a year earlier, 108.0 guided by the company in August, 109.1 expected by analysts per LSEG, 115.8 reported for the quarter to 25 October 2026, and 130.0 guided for the next quarter, which includes an extra week."
