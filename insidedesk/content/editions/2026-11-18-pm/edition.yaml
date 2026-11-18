@@ -62,29 +62,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 8-5-years-against-4-9-the-fdas-first-survival-drug
   - quite-a-stupid-thing-pistorius-and-london-answer
   - 9-51-lakh-hectares-in-the-way-cyclone-akvan-meets
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-18T17:30:04+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-18T17:30:04+01:00"
   extras:
-    - 12-765-a-tonne-lowest-since-april-copper-reads-the
-    - down-more-than-17-then-a-statement-deutz-checks-a
-    - 27-9-for-japan-9-5-for-india-brussels-puts-duties
-    - c-400-million-of-relief-canada-extends-its-trade
-    - 45-billion-repayable-once-russia-pays-brussels
-    - three-months-then-a-check-the-fuel-price-cap-the
-    - 12-weeks-on-the-bike-then-12-in-the-therapists
-    - 500-mg-did-it-800-mg-did-not-a-neurosteroid-29
-    - up-to-9-40-a-year-the-price-of-a-gas-reserve-and
-    - 294-metres-at-stade-germanys-fifth-floating-lng
-    - 5-6-in-italy-2-9-in-germany-one-euro-two-very
-    - i-am-not-without-fault-sewing-answers-and-a-data
-    - 0-9-on-the-british-food-bill-the-smallest-rise
-    - 45-67-million-at-work-57-000-fewer-than-in-spring
-    - 64-as-and-an-equals-sign-java4shell-and-the-patch
-    - 72-hours-became-two-months-gemini-keeps-your-off
-    - 40-5-against-20-5-a-psoriasis-biologic-offers
-    - 49-after-alectinib-32-after-the-rest-an
-    - 190-600-soldiers-by-october-the-bundeswehr-passes
-    - seven-drones-one-over-chisinau-moldova-summons
-    - 186-414-bags-in-new-york-vietnams-beans-in-london
-    - net-drying-near-the-coast-west-africas-cocoa
-  updates: []
+  - 12-765-a-tonne-lowest-since-april-copper-reads-the
+  - down-more-than-17-then-a-statement-deutz-checks-a
+  - 27-9-for-japan-9-5-for-india-brussels-puts-duties
+  - c-400-million-of-relief-canada-extends-its-trade
+  - 45-billion-repayable-once-russia-pays-brussels
+  - three-months-then-a-check-the-fuel-price-cap-the
+  - 12-weeks-on-the-bike-then-12-in-the-therapists
+  - 500-mg-did-it-800-mg-did-not-a-neurosteroid-29
+  - up-to-9-40-a-year-the-price-of-a-gas-reserve-and
+  - 294-metres-at-stade-germanys-fifth-floating-lng
+  - 5-6-in-italy-2-9-in-germany-one-euro-two-very
+  - i-am-not-without-fault-sewing-answers-and-a-data
+  - 0-9-on-the-british-food-bill-the-smallest-rise
+  - 45-67-million-at-work-57-000-fewer-than-in-spring
+  - 64-as-and-an-equals-sign-java4shell-and-the-patch
+  - 72-hours-became-two-months-gemini-keeps-your-off
+  - 40-5-against-20-5-a-psoriasis-biologic-offers
+  - 49-after-alectinib-32-after-the-rest-an
+  - 190-600-soldiers-by-october-the-bundeswehr-passes
+  - seven-drones-one-over-chisinau-moldova-summons
+  - 186-414-bags-in-new-york-vietnams-beans-in-london
+  - net-drying-near-the-coast-west-africas-cocoa
+  - minus-1-19-at-the-bell-the-afternoon-took-the-chips-too
+  updates:
+  - time: '2026-11-18T19:30:44+01:00'
+    text: 'Markets: settled Wednesday closes, DAX -1.19%'
+    piece: minus-1-19-at-the-bell-the-afternoon-took-the-chips-too
