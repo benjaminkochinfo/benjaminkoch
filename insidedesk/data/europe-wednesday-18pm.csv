@@ -1,0 +1,15 @@
+# Inside Desk chart data: europe-wednesday-18pm
+"# Source: finanzen.at, 'Angespannte Stimmung in Frankfurt: DAX fällt am Mittwochnachmittag', 18 Nov 2026, 15:58 CET (levels at 15:42 CET via Xetra); intraday snapshot, not closing levels; retrieved 18 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Siemens Energy rise,2.82,no,
+Vonovia rise,2.2,no,
+Infineon rise,1.57,no,chips
+MTU Aero Engines rise,1.27,no,
+Zalando rise,1.06,no,
+DAX fall,-0.65,no,"25,876.50 points"
+Fresenius Medical Care fall,-1.74,no,
+Deutsche Telekom fall,-2.18,no,
+Commerzbank fall,-2.2,no,
+Deutsche Bank fall,-2.38,no,
+SAP fall,-2.82,no,software

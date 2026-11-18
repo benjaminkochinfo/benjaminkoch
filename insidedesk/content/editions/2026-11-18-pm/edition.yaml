@@ -1,0 +1,90 @@
+date: "2026-11-18"
+slot: pm
+published: "2026-11-18T17:30:04+01:00"   # set to the actual Berlin time when it goes live
+title: "Minus 0.65% after Nvidia's beat, 0.1 cents on the power bill: Wednesday reads the terms"
+standfirst: "Europe's shares slipped by mid-afternoon as miners fell and chipmakers rose on the first full day after Nvidia's numbers. Also: a coalition deal that cuts the electricity tax for one year, Thursday's power at €224.83 a MWh, a Hamm court on DAZN's price rise, Waymo off California's freeways and a €45 billion loan proposal for Kyiv."
+closing:
+  title: Before you close the tab
+  published: "2026-11-18T17:30:04+01:00"
+  habit:
+    text: 'Before the cold arrives, write down three numbers on one sheet of paper: the gas or electricity
+      meter, the water meter, and, if you have one, the level on the oil tank. Put the date next to them
+      and pin the sheet somewhere dull, inside a cupboard door will do. Do it again in four weeks. You will
+      not need an app to see what the winter costs you; the paper will have done the counting.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Antarctic blue whales, the largest animals known to have lived, have grown from about 418 animals
+      in 1973 to an estimated 4,018, an average of 4.5% a year [1]. The International Whaling Commission
+      banned killing them in 1964, but illegal whaling went on until 1973 [1]. The estimate comes from a study
+      led by Zoe Rand at the University of Washington, which combined historical catch records, photo
+      identification and decades of line transect surveys across the Southern Ocean [1]. The species is still
+      listed as critically endangered and remains a fraction of its pre-whaling numbers [1]. A ban, a
+      logbook and fifty years of counting: recovery is mostly patience with paperwork.'
+  sentence: Nvidia beat, Europe's miners sold off and Berlin bought one cheaper year of electricity;
+    Wednesday was a day for reading the terms, not the headlines.
+  euros:
+    text: 'Heating oil kept slipping on Wednesday. Tecson put the litre at €1.65 on 18 November, down from
+      €1.70 on each of the previous four days, and esyoil at €1.60, down from €1.63 on Tuesday [2]. A year
+      earlier, in mid-November 2025, esyoil''s average was €0.95 [2]. Desk arithmetic: 3,000 litres, a
+      typical order for a detached house, cost about €4,950 at Tecson''s €1.65, some €150 less than at €1.70;
+      at esyoil''s €1.60 it is about €4,800. At last November''s €0.95 the same order would have been about
+      €2,850. An esyoil commentator quoted by the Morgenpost said an end to the high price level is "not in
+      sight" [2].'
+    note: Prices per litre as listed by Berliner Morgenpost from Tecson and esyoil, 18 Nov 2026, 10:25 CET;
+      they depend on quantity, region and supplier. Nothing here is advice.
+  small_words:
+    term: Line transect survey
+    text: 'A way of counting animals you cannot all see at once. A ship sails along straight, pre-planned
+      lines and the crew records every animal spotted and how far from the line it was. Because fewer
+      animals are seen the further away they are, statisticians use those distances to estimate how many
+      were missed, and from that the population across the whole area. It is how the Southern Ocean''s
+      blue whales were counted.'
+  sources:
+  - n: 1
+    title: This Blue Whale Population Grew 1,000% Since the End of Antarctic Whaling
+    publisher: Good News Network
+    url: https://www.goodnewsnetwork.org/this-blue-whale-population-grew-1000-since-the-end-of-whaling/
+    date: 18 Nov 2026
+  - n: 2
+    title: 'Heizölpreise heute am 18. November: Was ein Liter aktuell kostet'
+    publisher: Berliner Morgenpost
+    url: https://www.morgenpost.de/wirtschaft/article413689547/heizoelpreise-aktuell-18-november-oel-preis-heizoel-heizung-liter-heute-kaufen.html
+    date: 18 Nov 2026, 10:25 CET
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - minus-0-65-after-a-beat-europe-buys-the-chips-and
+  - a-tarmac-welcome-and-a-10-line-on-soybeans
+  - 0-1-cents-from-january-until-31-december-2027-the
+  - the-annex-376-713-britons-a-heart-or-sugar
+  - 224-83-for-thursday-the-cheapest-hour-costs-more
+  - podium-vs-print-breathing-space-now-and-diesel-at
+  - ordinary-ledger-11-99-became-29-99-and-a-court-in
+  - cones-on-the-101-freeway-rides-paused-in-15-cities
+  - 8-5-years-against-4-9-the-fdas-first-survival-drug
+  - quite-a-stupid-thing-pistorius-and-london-answer
+  - 9-51-lakh-hectares-in-the-way-cyclone-akvan-meets
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-18T17:30:04+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 12-765-a-tonne-lowest-since-april-copper-reads-the
+    - down-more-than-17-then-a-statement-deutz-checks-a
+    - 27-9-for-japan-9-5-for-india-brussels-puts-duties
+    - c-400-million-of-relief-canada-extends-its-trade
+    - 45-billion-repayable-once-russia-pays-brussels
+    - three-months-then-a-check-the-fuel-price-cap-the
+    - 12-weeks-on-the-bike-then-12-in-the-therapists
+    - 500-mg-did-it-800-mg-did-not-a-neurosteroid-29
+    - up-to-9-40-a-year-the-price-of-a-gas-reserve-and
+    - 294-metres-at-stade-germanys-fifth-floating-lng
+    - 5-6-in-italy-2-9-in-germany-one-euro-two-very
+    - i-am-not-without-fault-sewing-answers-and-a-data
+    - 0-9-on-the-british-food-bill-the-smallest-rise
+    - 45-67-million-at-work-57-000-fewer-than-in-spring
+    - 64-as-and-an-equals-sign-java4shell-and-the-patch
+    - 72-hours-became-two-months-gemini-keeps-your-off
+    - 40-5-against-20-5-a-psoriasis-biologic-offers
+    - 49-after-alectinib-32-after-the-rest-an
+    - 190-600-soldiers-by-october-the-bundeswehr-passes
+    - seven-drones-one-over-chisinau-moldova-summons
+    - 186-414-bags-in-new-york-vietnams-beans-in-london
+    - net-drying-near-the-coast-west-africas-cocoa
+  updates: []

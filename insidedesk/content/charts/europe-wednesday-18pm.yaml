@@ -1,0 +1,22 @@
+id: europe-wednesday-18pm
+kind: hbar
+kicker: "Markets · Germany"
+title: "DAX −0.65%: Siemens Energy +2.8%, SAP −2.8% inside"
+subtitle: "Percentage change on the DAX, its five strongest and five weakest members, Wednesday 18 November 2026, Xetra snapshot at 15:42 CET per finanzen.at; not closing levels"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Siemens Energy rise", value: 2.82}
+  - {label: "Vonovia rise", value: 2.20}
+  - {label: "Infineon rise", value: 1.57, note: "chips"}
+  - {label: "MTU Aero Engines rise", value: 1.27}
+  - {label: "Zalando rise", value: 1.06}
+  - {label: "DAX fall", value: -0.65, note: "25,876.50 points"}
+  - {label: "Fresenius Medical Care fall", value: -1.74}
+  - {label: "Deutsche Telekom fall", value: -2.18}
+  - {label: "Commerzbank fall", value: -2.20}
+  - {label: "Deutsche Bank fall", value: -2.38}
+  - {label: "SAP fall", value: -2.82, note: "software"}
+licence: reported
+source_line: "finanzen.at, 'Angespannte Stimmung in Frankfurt: DAX fällt am Mittwochnachmittag', 18 Nov 2026, 15:58 CET (levels at 15:42 CET via Xetra); intraday snapshot, not closing levels; retrieved 18 Nov 2026 · reported figures"
+alt: "Bar chart of Wednesday 18 November 2026 percentage changes in the DAX at 15:42 CET, per finanzen.at: Siemens Energy up 2.82 percent, Vonovia up 2.20, Infineon up 1.57, MTU Aero Engines up 1.27, Zalando up 1.06, the DAX down 0.65 at 25,876.50 points, Fresenius Medical Care down 1.74, Deutsche Telekom down 2.18, Commerzbank down 2.20, Deutsche Bank down 2.38 and SAP down 2.82 percent. These are intraday snapshot figures, not closes."
