@@ -1,0 +1,15 @@
+id: asia-thursday-19nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Hang Seng -1.8%, Kospi -1.1%, Nikkei +0.2% by Tokyo lunch"
+subtitle: "Percentage change on selected Asia-Pacific indexes, Thursday 19 November 2026, snapshot at the Tokyo lunch break (11:30 Tokyo time, 03:30 CET), per AFP"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Nikkei 225 (Japan) rise", value: 0.2, note: "59,140.87"}
+  - {label: "Shanghai Composite fall", value: -0.8, note: "3,560.01"}
+  - {label: "Kospi (South Korea) fall", value: -1.1, note: "5,013.46"}
+  - {label: "Hang Seng (Hong Kong) fall", value: -1.8, note: "22,885.38"}
+licence: reported
+source_line: "AFP, 'Asian stocks drop as Anthropic's record IPO fails to reassure', published 19 Nov 2026, 03:51; Nikkei at the Tokyo midday break (03:30 CET); intraday snapshot, not closing levels; retrieved 19 Nov 2026 · reported figures"
+alt: "Bar chart of Thursday 19 November 2026 percentage changes in Asia at the Tokyo midday break, about 03:30 CET, per AFP: Nikkei 225 up 0.2 percent to 59,140.87, Shanghai Composite down 0.8 percent to 3,560.01, Kospi down 1.1 percent to 5,013.46 and Hang Seng down 1.8 percent to 22,885.38. These are intraday snapshot levels, not closes."

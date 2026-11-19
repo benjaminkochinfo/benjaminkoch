@@ -1,0 +1,69 @@
+date: "2026-11-19"
+slot: am
+published: "2026-11-19T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: '€8 a month from Berlin, €281 at breakfast from the exchange: your power bill has two authors'
+standfirst: 'The coalition''s tax cut got its verdicts and its first sum; Thursday''s day-ahead price shows the bigger author. Also: Asia sells after Anthropic''s $83 debut, Australia''s jobless rate hits 4.9%, France rations a water pill, a red rain warning for the Black Forest, and a Podium vs Print on workers'' rights.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-19T08:30:00+01:00'
+  habit:
+    text: 'Before the cold weekend, walk once round your home with a notepad: the radiator that never gets warm, the window that whistles, the meter reading on the first of the month. Write it down, nothing more. A list made on a calm Thursday is worth more than a repair hunted for on a frozen Sunday.'
+    note: A habit, not advice.
+  went_right:
+    text: 'The US Food and Drug Administration has approved Sanofi''s Infilbray (venglustat), a once-daily pill, as the first medicine to treat the neurological manifestations of Type 3 Gaucher disease, a rare inherited disorder [1]. Until now only the disease''s effects on the body could be treated; in the phase 3 LEAP2MONO study of 43 patients, the pill beat the standard enzyme infusion on a combined test of balance, coordination and cognition after 52 weeks [1]. "The neurological manifestations remained beyond the reach of available therapies," said Dr Pramod Mistry of Yale [1]. The label carries warnings, the study was small, and that is how rare-disease progress looks: one blinded trial, one approval, a door that was shut now open.'
+  sentence: 'Berlin''s electricity-tax cut is worth about €8 a month to a family while one breakfast quarter-hour on the power exchange cost €281, Asia sold after New York''s record listing, and the useful news sat in tariff letters, rationed pills and wheat harvests, not in the verdicts.'
+  euros:
+    text: 'Fastenergy''s national average for 100 litres of heating oil was €158.62 on 18 November, against €161.64 the day before, as Brent slipped from $93.45 to $91.43 a barrel [2]. Desk arithmetic: for a household filling a 2,000-litre tank, that is €3,172.40 instead of €3,232.80, about €60 less than one day earlier. One day is not a trend, and the dealer''s quote for your street and order size is the figure that counts.'
+    note: Desk arithmetic on the cited figures.
+  small_words:
+    term: Day-ahead auction
+    text: 'Every day around noon, Europe''s power exchanges sell the next day''s electricity, hour by hour or quarter-hour by quarter-hour, in one sealed-bid auction. The result is the wholesale price you see in charts like this morning''s. Your household tariff follows it only slowly, through supplier contracts, grid fees and taxes.'
+  sources:
+  - n: 1
+    title: 'Sanofi''s Infilbray approved in the US as the first medicine to treat neurological manifestations of Type 3 Gaucher disease'
+    publisher: Sanofi (press release)
+    url: https://www.sanofi.com/en/media-room/press-releases/2026/2026-11-18-22-19-06-3406209
+    date: 18 Nov 2026
+  - n: 2
+    title: 'Heizöl-Markt aktuell: Ölpreise sinken weiter - Heizölpreise geben erneut nach'
+    publisher: fastenergy
+    url: https://www.fastenergy.de/heizoel-news/heizoel-news_2026_11_5358.htm
+    date: 18 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 8-a-month-from-berlin-281-at-08-15-from-the
+  - 83-a-share-in-new-york-minus-1-8-in-hong-kong-asia
+  - one-table-in-shenzhen-three-agendas-the-trilateral
+  - podium-vs-print-improve-workers-rights-and-four
+  - the-annex-6-in-1-000-became-24-in-1-000-and-the
+  - 4-9-in-australia-44-000-fewer-jobs-and-the-highest
+  - ordinary-ledger-50-basic-supply-tariffs-dearer-for
+  - 81-31-billion-raised-900-billion-promised
+  - capsules-made-by-the-pharmacist-france-rations
+  - nine-ruta-missiles-seven-hits-one-linkedin-post-a
+  - up-to-140-litres-a-square-metre-the-black-forests
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-19T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - from-92-70-to-81-11-in-a-week-american-lng-takes
+    - minus-45-since-late-october-ukraines-drones-reach
+    - minus-13-for-humana-minus-10-2-for-unitedhealth-an
+    - capex-up-to-81-4bn-yuan-revenue-short-by-3-5bn
+    - 12-million-tpp-about-300-top-gpus-washingtons
+    - eight-years-and-eight-months-seoul-and-beijing
+    - 3-2-billion-paid-17-recovered-the-cabinet-sets-an
+    - contact-can-be-excluded-the-biggest-reform-of
+    - 0-65-points-a-year-three-times-faster-after-2012
+    - 94-122-people-over-50-in-18-countries-loneliness
+    - 159-43-yen-to-the-dollar-ueda-tells-the-senate-the
+    - further-tighten-daly-joins-barr-and-treasuries
+    - 2-166-from-january-26-more-britains-last-price-cap
+    - 18-months-to-show-the-full-price-britains
+    - one-customer-no-name-one-process-node-intel-signs
+    - 4-5-billion-in-stock-for-open-weights-palo-alto
+    - refunds-instead-of-jabs-irelands-private-flu
+    - thirty-shipments-waiting-in-durban-south-africas
+    - 18-000-in-cash-10-addresses-30-miles-behind-one
+    - 95-million-barrels-a-year-hit-again-after-sunday
+    - 1-79-million-tonnes-the-smallest-in-eight-years-a
+    - 24-3-million-tonnes-an-unusually-cold-spring-gives
+  updates: []

@@ -1,0 +1,8 @@
+# Inside Desk chart data: asia-thursday-19nov
+"# Source: AFP, 'Asian stocks drop as Anthropic's record IPO fails to reassure', published 19 Nov 2026, 03:51; Nikkei at the Tokyo midday break (03:30 CET); intraday snapshot, not closing levels; retrieved 19 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nikkei 225 (Japan) rise,0.2,no,"59,140.87"
+Shanghai Composite fall,-0.8,no,"3,560.01"
+Kospi (South Korea) fall,-1.1,no,"5,013.46"
+Hang Seng (Hong Kong) fall,-1.8,no,"22,885.38"
