@@ -67,7 +67,11 @@ epaper:
   - up-to-250-mm-in-three-days-central-vietnam-braces
   - 2-75-for-german-hail-flood-and-storm-a-bavarian
   - minus-1-06-at-the-bell-five-days-down-and-a-two-trillion-debut
+  - a-thousand-points-off-the-dow-and-a-short-on-amd
   updates:
   - time: '2026-11-19T19:27:17+01:00'
     text: 'Markets: settled Thursday closes, DAX -1.06%, Anthropic opens at $111.50'
     piece: minus-1-06-at-the-bell-five-days-down-and-a-two-trillion-debut
+  - time: '2026-11-19T21:43:32+01:00'
+    text: 'Tech: AMD -9% on a short position, New York down 2% before the close'
+    piece: a-thousand-points-off-the-dow-and-a-short-on-amd
