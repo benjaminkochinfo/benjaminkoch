@@ -41,29 +41,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - a-sponge-on-a-string-about-100-nice-moves-the
   - we-will-not-negotiate-in-shenzhen-more-than-40
   - 46-call-outs-in-essen-a-flooded-tunnel-in-aachen
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-19T17:30:02+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+epaper:
+  available: "2026-11-19T17:30:02+01:00"
   extras:
-    - 1-050-or-450-the-fixed-term-deposit-that-renews
-    - 203-000-claims-1-763-million-still-waiting
-    - 8-000-price-rollbacks-and-a-higher-outlook-walmart
-    - 6-3-instead-of-20-philadelphias-factories-slow
-    - realities-on-the-ground-putins-yalta-line-and-an
-    - frankfurt-stays-the-address-berlin-stops-resisting
-    - freedom-is-not-self-propelling-the-l-nder-justice
-    - dismiss-the-minister-lower-saxonys-cdu-turns-a
-    - from-28-to-11-6-instead-of-13-eight-weeks-of
-    - 9-817-teenagers-one-connected-problem-heavier
-    - 34-megawatts-on-100-hydrogen-in-theory-rwes-lingen
-    - 0-8-cents-a-kilowatt-hour-or-a-bridge-to-nowhere
-    - 241-994-cancelled-policies-and-a-31-december
-    - 87-want-to-trust-the-shop-with-their-data-the
-    - 1-26-1-and-1-26-2-microsofts-agent-toolkit-on-pypi
-    - 46-up-from-23-openai-measures-how-much-of-its-own
-    - four-injections-a-year-the-fda-approves-the-first
-    - who-pays-for-the-emergency-centres-germanys
-    - 109-to-0-denmarks-parliament-ratifies-the
-    - minor-damage-no-one-hurt-a-projectile-strikes
-    - up-to-250-mm-in-three-days-central-vietnam-braces
-    - 2-75-for-german-hail-flood-and-storm-a-bavarian
-  updates: []
+  - 1-050-or-450-the-fixed-term-deposit-that-renews
+  - 203-000-claims-1-763-million-still-waiting
+  - 8-000-price-rollbacks-and-a-higher-outlook-walmart
+  - 6-3-instead-of-20-philadelphias-factories-slow
+  - realities-on-the-ground-putins-yalta-line-and-an
+  - frankfurt-stays-the-address-berlin-stops-resisting
+  - freedom-is-not-self-propelling-the-l-nder-justice
+  - dismiss-the-minister-lower-saxonys-cdu-turns-a
+  - from-28-to-11-6-instead-of-13-eight-weeks-of
+  - 9-817-teenagers-one-connected-problem-heavier
+  - 34-megawatts-on-100-hydrogen-in-theory-rwes-lingen
+  - 0-8-cents-a-kilowatt-hour-or-a-bridge-to-nowhere
+  - 241-994-cancelled-policies-and-a-31-december
+  - 87-want-to-trust-the-shop-with-their-data-the
+  - 1-26-1-and-1-26-2-microsofts-agent-toolkit-on-pypi
+  - 46-up-from-23-openai-measures-how-much-of-its-own
+  - four-injections-a-year-the-fda-approves-the-first
+  - who-pays-for-the-emergency-centres-germanys
+  - 109-to-0-denmarks-parliament-ratifies-the
+  - minor-damage-no-one-hurt-a-projectile-strikes
+  - up-to-250-mm-in-three-days-central-vietnam-braces
+  - 2-75-for-german-hail-flood-and-storm-a-bavarian
+  - minus-1-06-at-the-bell-five-days-down-and-a-two-trillion-debut
+  updates:
+  - time: '2026-11-19T19:27:17+01:00'
+    text: 'Markets: settled Thursday closes, DAX -1.06%, Anthropic opens at $111.50'
+    piece: minus-1-06-at-the-bell-five-days-down-and-a-two-trillion-debut
