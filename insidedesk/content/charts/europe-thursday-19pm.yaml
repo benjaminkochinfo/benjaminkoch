@@ -1,0 +1,23 @@
+id: europe-thursday-19pm
+kind: hbar
+kicker: "Markets · Germany"
+title: "DAX −0.55% at 16:34: SAP −4.00%, Evonik −16.44%"
+subtitle: "Percentage change on Thursday 19 November 2026 for the DAX, MDax, TecDAX and Euro Stoxx 50 and selected strongest and weakest names, per finanzen.at realtime quotes (indices 16:34–16:35 CET, shares 16:31–16:35 CET); snapshot, not closing levels"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Sartorius pref. (MDax) rise", value: 3.19}
+  - {label: "Aixtron (MDax) rise", value: 3.01, note: "chip equipment"}
+  - {label: "Deutsche Bank rise", value: 1.27}
+  - {label: "Siemens Energy rise", value: 1.23}
+  - {label: "Infineon rise", value: 0.86, note: "chips"}
+  - {label: "Euro Stoxx 50 fall", value: -0.24, note: "6,139.55 points"}
+  - {label: "TecDAX fall", value: -0.30, note: "3,940.91 points"}
+  - {label: "DAX fall", value: -0.55, note: "25,594.83 points"}
+  - {label: "MDax fall", value: -0.80, note: "29,640.91 points"}
+  - {label: "Henkel pref. fall", value: -2.05}
+  - {label: "SAP fall", value: -4.00, note: "software"}
+  - {label: "Evonik (MDax) fall", value: -16.44, note: "BASF drops bid"}
+licence: reported
+source_line: "finanzen.at realtime quote pages for DAX, MDax, TecDAX and Euro Stoxx 50, 19 Nov 2026 (indices at 16:34–16:35 CET, shares at 16:31–16:35 CET); intraday snapshot, not closing levels; retrieved 19 Nov 2026 · reported figures"
+alt: "Bar chart of Thursday 19 November 2026 percentage changes in a late-afternoon snapshot, per finanzen.at realtime quotes (indices at 16:34 to 16:35 CET, shares at 16:31 to 16:35 CET): Sartorius preference shares up 3.19 percent, Aixtron up 3.01, Deutsche Bank up 1.27, Siemens Energy up 1.23, Infineon up 0.86, the Euro Stoxx 50 down 0.24 at 6,139.55 points, the TecDAX down 0.30 at 3,940.91 points, the DAX down 0.55 at 25,594.83 points, the MDax down 0.80 at 29,640.91 points, Henkel preference shares down 2.05, SAP down 4.00 and Evonik down 16.44 percent after BASF dropped its takeover effort. These are intraday snapshot figures, not closes."

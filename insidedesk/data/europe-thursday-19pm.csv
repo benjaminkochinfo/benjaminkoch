@@ -1,0 +1,16 @@
+# Inside Desk chart data: europe-thursday-19pm
+"# Source: finanzen.at realtime quote pages for DAX, MDax, TecDAX and Euro Stoxx 50, 19 Nov 2026 (indices at 16:34–16:35 CET, shares at 16:31–16:35 CET); intraday snapshot, not closing levels; retrieved 19 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Sartorius pref. (MDax) rise,3.19,no,
+Aixtron (MDax) rise,3.01,no,chip equipment
+Deutsche Bank rise,1.27,no,
+Siemens Energy rise,1.23,no,
+Infineon rise,0.86,no,chips
+Euro Stoxx 50 fall,-0.24,no,"6,139.55 points"
+TecDAX fall,-0.3,no,"3,940.91 points"
+DAX fall,-0.55,no,"25,594.83 points"
+MDax fall,-0.8,no,"29,640.91 points"
+Henkel pref. fall,-2.05,no,
+SAP fall,-4.0,no,software
+Evonik (MDax) fall,-16.44,no,BASF drops bid

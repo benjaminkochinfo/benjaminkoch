@@ -1,0 +1,69 @@
+date: "2026-11-19"
+slot: pm
+published: "2026-11-19T17:30:02+01:00"   # set to the actual Berlin time when it goes live
+title: 'Half a point in January, 203,000 claims and €214.51 for Friday: Thursday reads the small print'
+standfirst: 'The Bundesbank says inflation waits for the fuel discount to expire, then rises about half a point. Also: the DAX down 0.55% by 16:34 as SAP and Evonik fell, Shenzhen''s pledge on refined fuel against Brent at $92.60, Karlsruhe turns down the BSW, Denmark ratifies its Greenland pact, NICE backs a £100 sponge test, and a Podium vs Print on oil.'
+closing:
+  title: Before you close the tab
+  published: "2026-11-19T17:30:02+01:00"
+  habit:
+    text: 'Before the next downpour, spend five minutes outside your front door with a pair of gloves: lift the leaves off the drain grille, look into the downpipe, check the light well of the cellar. In Essen on Wednesday night, blocked drains were behind many of the flooded streets. The cheapest flood defence in Germany is a rake used on a dry afternoon.'
+    note: A habit, not advice.
+  went_right:
+    text: 'New Zealand''s Department of Conservation says the first takahē chick has hatched at the Onetahua Restoration Project on Farewell Spit, at the top of the South Island [1]. Eight of the threatened flightless birds were moved in May into a 2,000-hectare habitat behind a 4 km predator-resistant fence; the parents were not an established pair, and the chick, hatched in October, is now about six weeks old [1]. "It''s about six weeks old now, which is great that it''s survived to this stage," said DOC''s Ross Trotter [1]. One nest washed away and one egg was infertile, and the trapping goes on [1]. Conservation rarely arrives as a breakthrough; it arrives as a fence, a trap line and one chick that made it past week six.'
+  sentence: 'On a Thursday of court rulings, summit words and central-bank arithmetic, the useful news came from the machinery underneath: a £100 sponge that shortens a hospital queue, a catastrophe bond priced below guidance, and a fire brigade clearing leaves from the drains.'
+  euros:
+    text: 'The average additional contribution rate in Germany''s statutory health insurance stays at 2.9% in 2027, unchanged from this year, as published in the Federal Gazette on 30 October; each fund sets its own rate, which may be higher or lower [2]. Desk arithmetic: on a gross salary of €3,500 a month, the employee''s half of 2.9% under the usual equal split is €50.75 a month. A fund charging 0.3 points above the average would cost the employee a further €5.25 a month, or €63 a year. The letter from your own fund in December is the figure that counts.'
+    note: Desk arithmetic on the cited figures.
+  small_words:
+    term: Expected loss
+    text: 'In a catastrophe bond, the expected loss is the modelled share of the investors'' money that disasters would eat in an average year. The spread investors are paid is set against it: tonight''s Bavarian bond pays 2.75% on an expected loss of 1.68%, about 1.6 times. When that multiple shrinks, insurance capital is plentiful and cover is cheap.'
+  sources:
+  - n: 1
+    title: 'First takahē chick hatches at Farewell Spit habitat'
+    publisher: RNZ
+    url: https://www.rnz.co.nz/news/environment/2688748/first-takahe-chick-hatches-at-farewell-spit-habitat
+    date: 19 Nov 2026, 06:56 CET
+  - n: 2
+    title: 'Sozialversicherungsrecht: Durchschnittlicher Zusatzbeitrag zur Krankenversicherung bleibt 2027 bei 2,9 Prozent'
+    publisher: BVN (Bauindustrieverband Niedersachsen-Bremen)
+    url: https://bvn.de/Mitgliederservice/Aktuell/2026/20261111_Zusatzbeitrag_Krankenversicherung.php
+    date: 11 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - half-a-point-in-january-the-bundesbank-reads-the
+  - minus-0-55-at-16-34-chips-up-sap-and-evonik-down
+  - podium-vs-print-increase-the-production-and-brent
+  - 9-529-votes-short-146-in-evidence-karlsruhe-will
+  - the-annex-the-same-distress-half-the-care-asian
+  - 214-51-for-friday-16-billion-for-the-winter-gas
+  - ordinary-ledger-almost-40-measures-two-ambassadors
+  - 3-in-15-out-and-a-periodic-table-to-choose-from
+  - a-sponge-on-a-string-about-100-nice-moves-the
+  - we-will-not-negotiate-in-shenzhen-more-than-40
+  - 46-call-outs-in-essen-a-flooded-tunnel-in-aachen
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-19T17:30:02+01:00"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  extras:
+    - 1-050-or-450-the-fixed-term-deposit-that-renews
+    - 203-000-claims-1-763-million-still-waiting
+    - 8-000-price-rollbacks-and-a-higher-outlook-walmart
+    - 6-3-instead-of-20-philadelphias-factories-slow
+    - realities-on-the-ground-putins-yalta-line-and-an
+    - frankfurt-stays-the-address-berlin-stops-resisting
+    - freedom-is-not-self-propelling-the-l-nder-justice
+    - dismiss-the-minister-lower-saxonys-cdu-turns-a
+    - from-28-to-11-6-instead-of-13-eight-weeks-of
+    - 9-817-teenagers-one-connected-problem-heavier
+    - 34-megawatts-on-100-hydrogen-in-theory-rwes-lingen
+    - 0-8-cents-a-kilowatt-hour-or-a-bridge-to-nowhere
+    - 241-994-cancelled-policies-and-a-31-december
+    - 87-want-to-trust-the-shop-with-their-data-the
+    - 1-26-1-and-1-26-2-microsofts-agent-toolkit-on-pypi
+    - 46-up-from-23-openai-measures-how-much-of-its-own
+    - four-injections-a-year-the-fda-approves-the-first
+    - who-pays-for-the-emergency-centres-germanys
+    - 109-to-0-denmarks-parliament-ratifies-the
+    - minor-damage-no-one-hurt-a-projectile-strikes
+    - up-to-250-mm-in-three-days-central-vietnam-braces
+    - 2-75-for-german-hail-flood-and-storm-a-bavarian
+  updates: []
