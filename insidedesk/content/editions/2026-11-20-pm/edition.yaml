@@ -92,7 +92,11 @@ epaper:
   - 3-7-million-tonnes-a-record-the-fao-expects-the
   - trees-down-in-jeongeup-up-to-8-cm-more-snow-south
   - minus-3-46-for-the-nasdaq-10-off-the-record-for-the-s-p-500
+  - minus-4-81-at-the-bell-the-nasdaq-ends-a-week-of-selling-chips
   updates:
   - time: '2026-11-20T19:34:34+01:00'
     text: 'Markets: New York afternoon, S&P 500 -2.1%, Nasdaq -3.5% and below where it began the year'
     piece: minus-3-46-for-the-nasdaq-10-off-the-record-for-the-s-p-500
+  - time: '2026-11-20T22:02:24+01:00'
+    text: 'Tech: New York closes, Nasdaq -4.8%, S&P 500 -3.3%'
+    piece: minus-4-81-at-the-bell-the-nasdaq-ends-a-week-of-selling-chips
