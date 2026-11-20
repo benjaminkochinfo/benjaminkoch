@@ -66,29 +66,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - plus-72-against-a-target-of-minus-5-europes
   - three-tanks-of-50-000-cubic-metres-more-than-1-000
   - minus-8-4-c-at-tulloch-bridge-and-colder-tonight
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-20T18:31:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+epaper:
+  available: "2026-11-20T18:31:00+01:00"
   extras:
-    - up-to-14-better-a-years-work-in-under-five-months
-    - from-101-to-84-euros-jpmorgan-says-ai-agents-can
-    - 200-million-of-520-million-worldline-falls-14-on-a
-    - minus-20-for-ubisoft-minus-12-for-vallourec-pariss
-    - 420-billion-then-over-450-billion-frankfurts
-    - nineteen-days-to-a-second-strike-brussels-prepares
-    - music-schools-adult-education-and-a-court-ruling
-    - 45-km-h-since-the-1990s-60-for-the-simson-the-l
-    - how-often-not-how-hard-10-460-norwegian-students
-    - no-application-needed-victims-of-serious-crime-get
-    - 88-52-on-friday-after-80-85-on-wednesday-europes
-    - concentration-risk-on-fossil-fuels-the-bundesbank
-    - too-many-carve-outs-lagardes-last-frankfurt-speech
-    - the-one-that-keeps-me-awake-lagarde-names-ai
-    - 6-375-a-month-for-health-8-850-for-pensions-the
-    - 12-equal-instalments-at-the-old-rate-what-the-new
-    - 60-7-respond-one-in-12-with-no-visible-tumour-a
-    - steroids-out-after-three-months-not-six-germany
-    - 19-000-km-over-one-city-russian-drones-flew-four
-    - lies-solely-with-the-russian-aggressor-vienna
-    - 3-7-million-tonnes-a-record-the-fao-expects-the
-    - trees-down-in-jeongeup-up-to-8-cm-more-snow-south
-  updates: []
+  - up-to-14-better-a-years-work-in-under-five-months
+  - from-101-to-84-euros-jpmorgan-says-ai-agents-can
+  - 200-million-of-520-million-worldline-falls-14-on-a
+  - minus-20-for-ubisoft-minus-12-for-vallourec-pariss
+  - 420-billion-then-over-450-billion-frankfurts
+  - nineteen-days-to-a-second-strike-brussels-prepares
+  - music-schools-adult-education-and-a-court-ruling
+  - 45-km-h-since-the-1990s-60-for-the-simson-the-l
+  - how-often-not-how-hard-10-460-norwegian-students
+  - no-application-needed-victims-of-serious-crime-get
+  - 88-52-on-friday-after-80-85-on-wednesday-europes
+  - concentration-risk-on-fossil-fuels-the-bundesbank
+  - too-many-carve-outs-lagardes-last-frankfurt-speech
+  - the-one-that-keeps-me-awake-lagarde-names-ai
+  - 6-375-a-month-for-health-8-850-for-pensions-the
+  - 12-equal-instalments-at-the-old-rate-what-the-new
+  - 60-7-respond-one-in-12-with-no-visible-tumour-a
+  - steroids-out-after-three-months-not-six-germany
+  - 19-000-km-over-one-city-russian-drones-flew-four
+  - lies-solely-with-the-russian-aggressor-vienna
+  - 3-7-million-tonnes-a-record-the-fao-expects-the
+  - trees-down-in-jeongeup-up-to-8-cm-more-snow-south
+  - minus-3-46-for-the-nasdaq-10-off-the-record-for-the-s-p-500
+  updates:
+  - time: '2026-11-20T19:34:34+01:00'
+    text: 'Markets: New York afternoon, S&P 500 -2.1%, Nasdaq -3.5% and below where it began the year'
+    piece: minus-3-46-for-the-nasdaq-10-off-the-record-for-the-s-p-500
