@@ -1,0 +1,94 @@
+date: "2026-11-20"
+slot: pm
+published: "2026-11-20T18:31:00+01:00"   # set to the actual Berlin time when it goes live
+title: '879,000 chips approved, a third hike in view: Friday reads the paperwork'
+standfirst: 'This evening''s edition: Washington''s list of AI-chip licences for China met a Friday chip sell-off, the DAX closed 7.1% down on the week, and Nagel spoke of a third hike. Also: Lagarde''s last Frankfurt speech, Ukraine''s strike on a Druzhba hub, buy-now-pay-later becomes credit, Britain''s first hard frost, and a Podium vs Print on who takes the first losses.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-20T18:31:00+01:00'
+  habit:
+    text: 'Before the first proper frost, walk once around your home with a pen: which
+      radiator stays cold at the top, which window lets in a draught, where the stopcock
+      is. Write the three answers on a card and pin it next to the fuse box. A cold
+      night is easier when you already know where things are.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Nobody had ever bred the stocky galaxias, one of Australia''s most endangered
+      alpine fish, in captivity. Researchers at Charles Sturt University did, and
+      on Friday the university reported that the captive-bred fish are thriving in
+      the wild [1]. After the largest release so far, about 250 juveniles, recapture
+      surveys found 10 healthy adults from an earlier release in the Snowy Mountains,
+      where the species had been confined to two known wild populations [1]. "To achieve
+      a world first, then take those fish and put them back into the wild and see
+      the wild population grow ... it''s incredible," said Professor Lee Baumgartner
+      [1].'
+  sentence: 'A congressional committee published how many AI chips Washington had approved for China, chip shares paid for the list, and the Bundesbank''s president said of rates: "I believe we have to do something."'
+  euros:
+    text: 'The health ministry has set the average supplementary contribution rate in
+      statutory health insurance at 2.9% for 2027, unchanged, and each fund sets its
+      own rate [2]. Desk arithmetic: on a €3,500 gross monthly salary, 2.9% is €101.50 a month;
+      split evenly between employer and employee, that is €50.75 each, or €609 a
+      year for the employee. Every 0.1 point a fund charges above or below the average
+      moves an even half-share by €1.75 a month on that salary. Worth a look when your fund announces its 2027 rate.'
+    note: Desk arithmetic on the cited figures.
+  small_words:
+    term: Alternate bearing (vecería)
+    text: Olive trees tend to swing between a heavy crop one year and a light one the
+      next. The FAO names this alternation, alongside heat, irregular rain and pests,
+      as one reason olive harvests and prices jump so much from season to season [3].
+      It is why one record year says little about the next.
+  sources:
+  - n: 1
+    title: Endangered stocky galaxias fish thriving after world-first breeding breakthrough
+    publisher: Charles Sturt University
+    url: https://news.csu.edu.au/latest-news/endangered-stocky-galaxias-fish-thriving-after-world-first-breeding-breakthrough
+    date: 20 Nov 2026
+  - n: 2
+    title: BMG legt durchschnittlichen Zusatzbeitragssatz auf 2,9 Prozent fest
+    publisher: Bundesministerium für Gesundheit
+    url: https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/zusatzbeitragssatz-gkv-2027-festgelegt
+    date: 30 Oct 2026
+  - n: 3
+    title: 'Informe de la FAO: la producción mundial de aceite de oliva podría alcanzar
+      un máximo histórico de 3,7 millones de toneladas en la campaña 2026/27'
+    publisher: Mercacei (reporting the FAO Food Outlook)
+    url: https://www.mercacei.com/noticia/66230/actualidad/informe-de-la-fao-la-produccion-mundial-de-aceite-de-oliva-podria-alcanzar-un-maximo-historico-de-37-millones-de-toneladas-en-la-campana-2026/27.html
+    date: 20 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 3-4-million-asked-879-000-approved-the-paperwork
+  - minus-2-45-at-the-frankfurt-close-minus-7-on-the
+  - podium-vs-print-public-money-taking-the-first
+  - 72-agenda-items-and-one-inaugural-speech-hendrik-w
+  - the-annex-58-5-pick-pull-or-bite-22-2-of-them-are
+  - 187-88-for-saturday-147-70-at-lunchtime-the
+  - i-believe-we-have-to-do-something-nagel-points-to
+  - ordinary-ledger-from-today-pay-later-means-a
+  - plus-72-against-a-target-of-minus-5-europes
+  - three-tanks-of-50-000-cubic-metres-more-than-1-000
+  - minus-8-4-c-at-tulloch-bridge-and-colder-tonight
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-20T18:31:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - up-to-14-better-a-years-work-in-under-five-months
+    - from-101-to-84-euros-jpmorgan-says-ai-agents-can
+    - 200-million-of-520-million-worldline-falls-14-on-a
+    - minus-20-for-ubisoft-minus-12-for-vallourec-pariss
+    - 420-billion-then-over-450-billion-frankfurts
+    - nineteen-days-to-a-second-strike-brussels-prepares
+    - music-schools-adult-education-and-a-court-ruling
+    - 45-km-h-since-the-1990s-60-for-the-simson-the-l
+    - how-often-not-how-hard-10-460-norwegian-students
+    - no-application-needed-victims-of-serious-crime-get
+    - 88-52-on-friday-after-80-85-on-wednesday-europes
+    - concentration-risk-on-fossil-fuels-the-bundesbank
+    - too-many-carve-outs-lagardes-last-frankfurt-speech
+    - the-one-that-keeps-me-awake-lagarde-names-ai
+    - 6-375-a-month-for-health-8-850-for-pensions-the
+    - 12-equal-instalments-at-the-old-rate-what-the-new
+    - 60-7-respond-one-in-12-with-no-visible-tumour-a
+    - steroids-out-after-three-months-not-six-germany
+    - 19-000-km-over-one-city-russian-drones-flew-four
+    - lies-solely-with-the-russian-aggressor-vienna
+    - 3-7-million-tonnes-a-record-the-fao-expects-the
+    - trees-down-in-jeongeup-up-to-8-cm-more-snow-south
+  updates: []

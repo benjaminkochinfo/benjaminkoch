@@ -1,0 +1,11 @@
+# Inside Desk chart data: europe-friday-20pm
+"# Source: Boursorama closing levels (DAX, MDax: Xetra close), tagesschau.de, ANSA, 20 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+MDax (Frankfurt) fall,2.54,no,
+FTSE MIB (Milan) fall,2.48,no,
+DAX (Frankfurt) fall,2.45,no,
+Stoxx Europe 600 fall,1.89,no,
+CAC 40 (Paris) fall,1.89,no,
+IBEX 35 (Madrid) fall,1.63,no,
+FTSE 100 (London) fall,1.02,no,

@@ -1,0 +1,18 @@
+id: europe-friday-20pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Friday close: MDax down 2.54%, DAX 2.45%, London 1.02%"
+subtitle: "Fall in %, main European indexes at the close, Friday 20 Nov 2026; settled closing levels (DAX and MDax at the Xetra close); every index shown ended lower"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "MDax (Frankfurt) fall", value: 2.54}
+  - {label: "FTSE MIB (Milan) fall", value: 2.48}
+  - {label: "DAX (Frankfurt) fall", value: 2.45}
+  - {label: "Stoxx Europe 600 fall", value: 1.89}
+  - {label: "CAC 40 (Paris) fall", value: 1.89}
+  - {label: "IBEX 35 (Madrid) fall", value: 1.63}
+  - {label: "FTSE 100 (London) fall", value: 1.02}
+licence: reported
+source_line: "Boursorama closing levels (DAX, MDax: Xetra close), tagesschau.de, ANSA, 20 Nov 2026 · reported figures"
+alt: "Bar chart of falls on the main European stock indexes at the close on Friday 20 November 2026, all lower on the day: Frankfurt's MDax down 2.54 percent to 28,756.57, Milan's FTSE MIB down 2.48 percent to 48,703.72, the DAX down 2.45 percent to 24,839.65 at the Xetra close, the Stoxx Europe 600 down 1.89 percent to 626.34, Paris's CAC 40 down 1.89 percent to 7,927.75, Madrid's IBEX 35 down 1.63 percent to 18,873.10 and London's FTSE 100 down 1.02 percent to 10,346.34. These are settled closing levels."
