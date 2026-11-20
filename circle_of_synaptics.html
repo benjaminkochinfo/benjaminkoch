@@ -140,6 +140,26 @@
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3),
                         0 4px 6px -4px rgb(0 0 0 / 0.3);
         }
+
+        .book-cover-frame {
+            aspect-ratio: 2 / 3;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.06),
+                0 18px 36px -16px rgba(0, 0, 0, 0.85),
+                0 8px 12px -8px rgba(0, 0, 0, 0.55);
+        }
+
+        .book-cover-frame picture,
+        .book-cover-frame img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-200 overflow-x-hidden">
@@ -438,6 +458,45 @@
                 <div class="inline-flex items-center gap-x-2 px-5 py-2 rounded-full bg-white/5 text-xs tracking-widest border border-white/10">
                     <span>THIS IS NOT BELIEF. THIS IS REMEMBRANCE THROUGH PRECISION.</span>
                 </div>
+            </div>
+
+            <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-8 md:gap-6" aria-label="Books of The Great Project">
+                <figure class="flex flex-col items-center w-full">
+                    <div class="book-cover-frame w-full">
+                        <picture>
+                            <source type="image/webp" srcset="images/books/the-clarity-system.webp">
+                            <img src="images/books/the-clarity-system.jpg" alt="Cover of The Clarity System by Dr. Benjamin Koch" width="800" height="1200" loading="lazy">
+                        </picture>
+                    </div>
+                    <figcaption class="mt-3 text-[11px] uppercase tracking-[2px] text-amber-400/70 text-center">The Clarity System</figcaption>
+                </figure>
+                <figure class="flex flex-col items-center w-full">
+                    <div class="book-cover-frame w-full">
+                        <picture>
+                            <source type="image/webp" srcset="images/books/inversion.webp">
+                            <img src="images/books/inversion.jpg" alt="Cover of INVERSION by Dr. Benjamin Koch" width="800" height="1200" loading="lazy">
+                        </picture>
+                    </div>
+                    <figcaption class="mt-3 text-[11px] uppercase tracking-[2px] text-amber-400/70 text-center">INVERSION</figcaption>
+                </figure>
+                <figure class="flex flex-col items-center w-full">
+                    <div class="book-cover-frame w-full">
+                        <picture>
+                            <source type="image/webp" srcset="images/books/synaptics.webp">
+                            <img src="images/books/synaptics.jpg" alt="Cover of Synaptics by Dr. Benjamin Koch" width="800" height="1200" loading="lazy">
+                        </picture>
+                    </div>
+                    <figcaption class="mt-3 text-[11px] uppercase tracking-[2px] text-amber-400/70 text-center">Synaptics</figcaption>
+                </figure>
+                <figure class="flex flex-col items-center w-full">
+                    <div class="book-cover-frame w-full">
+                        <picture>
+                            <source type="image/webp" srcset="images/books/the-eden-codex.webp">
+                            <img src="images/books/the-eden-codex.jpg" alt="Cover of The Eden Codex by Dr. Benjamin Koch" width="800" height="1200" loading="lazy">
+                        </picture>
+                    </div>
+                    <figcaption class="mt-3 text-[11px] uppercase tracking-[2px] text-amber-400/70 text-center">The Eden Codex</figcaption>
+                </figure>
             </div>
         </div>
     </section>
