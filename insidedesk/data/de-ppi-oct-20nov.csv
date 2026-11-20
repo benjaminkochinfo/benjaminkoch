@@ -1,0 +1,12 @@
+# Inside Desk chart data: de-ppi-oct-20nov
+"# Source: Statistisches Bundesamt (Destatis), press release no. 407, producer prices October 2026, published 20 Nov 2026, 08:00 CET; retrieved 20 Nov 2026 · dl-de/by-2-0"
+# Licence: Statistisches Bundesamt (Destatis). Datenlizenz Deutschland – Namensnennung – Version 2.0 (dl-de/by-2-0).
+label,value,derived_by_inside_desk,note
+Light heating oil rise,97.2,no,
+Mineral oil products rise,51.9,no,
+Energy rise,18.7,no,
+Electricity rise,12.6,no,
+All industrial products rise,8.1,no,
+Intermediate goods rise,6.8,no,
+All products excluding energy rise,3.6,no,
+Capital goods rise,2.4,no,

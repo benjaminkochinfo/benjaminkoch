@@ -46,7 +46,7 @@ DESKS = {
     "climate": ("Climate & Weather", "CLIMATE"),
 }
 FORMATS = {"lead": "Lead", "note": "Desk note", "podium-vs-print": "Podium vs Print", "sunday": "Sunday long-read", "annex": "The Annex"}
-SLOTS = {"am": ("Morning edition", "morning", "08:30"), "pm": ("Evening edition", "evening", "17:30"), "sun": ("Sunday long-read", "sunday", "10:00")}
+SLOTS = {"am": ("Morning edition", "morning", "08:30"), "pm": ("Evening edition", "evening", "18:30"), "sun": ("Sunday long-read", "sunday", "10:00")}
 INSIGHTS = [
     ("Price is the judge, time is the jury", "Stories are the audience. They are allowed to stay if they buy a ticket in cash flow."),
     ("Optimism is a risk limit", "Not a mood. A rule: we will not rent our nervous system to people who profit from our panic."),
@@ -330,7 +330,7 @@ def head(page, title, desc, canonical, og_image, og_type="website", jsonld=None,
 '''
 
 EP = {}   # edition key -> ePaper issue model (filled in main before any page is written)
-EP_SCHEDULE = ("Morning ePaper 06:30 (website 08:30) · Evening ePaper 17:30, updated until 22:30 · Sunday Magazine 10:00, Berlin time")
+EP_SCHEDULE = ("Morning ePaper 06:30 (website 08:30) · Evening ePaper 18:30, updated until 22:30 · Sunday Magazine 10:00, Berlin time")
 
 def ep_links(page, ed, cls="ep-link"):
     iss = EP.get(ed["key"])
@@ -618,7 +618,7 @@ def edition_block(page, ed, rendered, h1=True):
   <div class="kicker">{e(ed['slot_name'])} · {e(pretty_day(ed['d']))} · {ed['pub']:%H:%M} {tzlabel(ed['pub'])}</div>
   <{tag} id="ed-h" class="edition-title">{e(ed['title'])}</{tag}>
   <p class="lede-sub">{e(ed['standfirst'])}</p>
-  <p class="meta-line"><span data-next data-latest-slot="{LATEST_SLOT}">Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time</span></p>
+  <p class="meta-line"><span data-next data-latest-slot="{LATEST_SLOT}">Morning 08:30 · Evening 18:30 · Sunday 10:00, Berlin time</span></p>
   {f'<p class="ep-line">{ep_links(page, ed)}</p>' if ed["key"] in EP else ""}
 </section>
 <div class="layout">
@@ -630,7 +630,7 @@ def edition_block(page, ed, rendered, h1=True):
   <aside class="side">
     <div class="rail"><h2 class="rail-h">This edition</h2><ol class="toc">{''.join(f'<li><a href="{rel(page, x.path)}"><b>{e(x.title)}</b><small>{e(x.desk_name)} · {x.minutes} min</small></a></li>' for x in ed['arts'])}</ol></div>
     {support_ask(page, True)}
-    <div class="rail"><h2 class="rail-h">The rhythm</h2><ul class="rhythm"><li><b>08:30</b> Morning: order the day before the day orders you.</li><li><b>17:30</b> Evening: admit what the day actually did.</li><li><b>Sun 10:00</b> The week, without the alerts.</li></ul><p class="faint">Berlin time (CET in winter, CEST in summer). Saturday is closed.</p></div>
+    <div class="rail"><h2 class="rail-h">The rhythm</h2><ul class="rhythm"><li><b>08:30</b> Morning: order the day before the day orders you.</li><li><b>18:30</b> Evening: admit what the day actually did.</li><li><b>Sun 10:00</b> The week, without the alerts.</li></ul><p class="faint">Berlin time (CET in winter, CEST in summer). Saturday is closed.</p></div>
   </aside>
 </div>
 {closing_html(ed)}'''
@@ -732,7 +732,7 @@ def epaper_index_page():
 {latest}
 <section class="ep-sched" aria-labelledby="ep-s"><h2 id="ep-s" class="section-h">When it appears</h2><ul class="rhythm">
 <li><b>06:30</b> Morning ePaper. The website's morning edition follows at 08:30, built from the same pieces.</li>
-<li><b>17:30</b> Evening ePaper. It can be updated until 22:30; an “Updated” time and a Latest page show what changed and when.</li>
+<li><b>18:30</b> Evening ePaper. It can be updated until 22:30; an “Updated” time and a Latest page show what changed and when.</li>
 <li><b>Sun 10:00</b> The Sunday Magazine. Saturday is closed.</li></ul><p class="faint">Berlin time (CET in winter, CEST in summer). Free, like everything here. After you open an issue once, it stays readable offline on that device.</p></section>
 <section aria-labelledby="ep-a"><h2 id="ep-a" class="section-h">ePaper archive</h2>{"".join(rows)}<p class="faint">Every issue stays at its own address. The website <a href="{rel(page, "insidedesk/archive.html")}">archive</a> lists them under their day, too.</p></section>'''
     return simple_page(page, "ePaper", "The Inside Desk ePaper: every edition as pages, with interactive charts, a reading view and a PDF. Free.", inner, "epaper")
@@ -822,7 +822,7 @@ def method_page():
 <div class="thesis-grid">{theses}</div>
 <div class="prose">
 <h2>The rhythm</h2>
-<p>Morning at 08:30, evening at 17:30, Monday to Friday; the Sunday long-read at 10:00. All times are Berlin time: CET in winter, CEST in summer. Saturday is closed. Each edition carries one lead piece and a few short desk notes. Fewer pieces, more work in each.</p>
+<p>Morning at 08:30, evening at 18:30, Monday to Friday; the Sunday long-read at 10:00. All times are Berlin time: CET in winter, CEST in summer. Saturday is closed. Each edition carries one lead piece and a few short desk notes. Fewer pieces, more work in each.</p>
 <h2>Formats</h2>
 <p><strong>Lead.</strong> The one argument of the edition, with the chart that carries it. <strong>Desk note.</strong> One mechanism, one print, a few paragraphs. <strong>Podium vs Print.</strong> What was said, in the speaker’s own short words, set against what the data did. The verdict is about the gap, never about the person. <strong>Sunday long-read.</strong> The week in the order incentives actually moved.</p>
 <h2>Sources and numbers</h2>

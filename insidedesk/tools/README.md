@@ -143,7 +143,7 @@ Built by `build.py` (module `epaper.py`, assets in `tools/epaper/`) for every ed
   only re-shot for the newest edition (or when the file is missing). A full release should stay near ~3 minutes.
   Published ePapers stay locked via `fit.sha256` (unchanged issues are not re-measured or re-rendered).
 - Detached releases on this box: source `/workspace/insidedesk-release-helper.sh` (heartbeat while waiting, `ensure`
-  relaunch if a waiter is frozen after a VM fork, curl `--max-time` on the live check). The 17:25 / 06:25 safety net
+  relaunch if a waiter is frozen after a VM fork, curl `--max-time` on the live check). The 18:25 / 06:25 safety net
   must call `ensure` if the log has no `start` line by two minutes past the slot — a `sleep`ing waiter survives a
   failed writing run, but a VM fork freezes it until wall-clock resumes.
 - Charts in the ePaper are interactive: line charts (hover/tap, series toggles, ranges) and, since 21 Oct 2026, bar
@@ -159,7 +159,7 @@ Built by `build.py` (module `epaper.py`, assets in `tools/epaper/`) for every ed
 | Issue | ePaper | Website | Updates |
 |---|---|---|---|
 | Morning | 06:30 | 08:30 (same pieces) | none |
-| Evening | 17:30 | 17:30 | until 22:30, each with its real time |
+| Evening | 18:30 | 18:30 | until 22:30, each with its real time (17:30 until 19 Nov 2026) |
 | Sunday Magazine | 10:00 | 10:00 | none |
 
 Morning: set `epaper.available` to 06:30 and `published` to 08:30. Between the two, the build leaves the website

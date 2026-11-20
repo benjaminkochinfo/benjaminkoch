@@ -1,0 +1,74 @@
+date: "2026-11-20"
+slot: am
+published: "2026-11-20T12:15:00+01:00"   # set to the actual Berlin time when it goes live
+title: 'Minus 5% in Tokyo, plus 8.1% at the factory gate: Friday''s two price tags'
+standfirst: 'This morning''s edition, published late at lunchtime: Asia''s AI sell-off reached Frankfurt by noon while Destatis printed the slower number, producer prices up 8.1%. Also: TSMC halts advanced Chinese orders, Kyiv''s night of 84 cruise missiles, the Länder stop the Kita bill, Lahore''s air turns hazardous, and a Podium vs Print on who counts the costs.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-20T12:15:00+01:00'
+  habit:
+    text: 'Take one sheet of paper this weekend and write down four dates: when your identity card expires, when your passport does, when your next regular prescription runs out, and when your driving licence needs renewing. Nothing else. A list of expiry dates made on a quiet Saturday saves a queue on a busy Tuesday.'
+    note: A habit, not advice.
+  went_right:
+    text: 'Rice in Japan was 29.7% cheaper in October than a year earlier, the largest fall since comparable records began in January 1971, the internal affairs ministry''s figures show [1][2]. After last year''s shortage and panic buying, the Nikkei attributes the fall mainly to easing supply and demand and to building inventories [2]. It is how shortages usually end: not with a speech, but with full warehouses and a price index that says so.'
+  sentence: 'Asia sold the AI story hard, Frankfurt followed by lunch, and the number that will still matter next month was the one printed at 08:00: German factories paying 8.1% more than a year ago.'
+  euros:
+    text: 'The federal care-reform bill would raise the long-term care insurance surcharge for childless members by 0.3 points to 0.9% from 2027 [3]. Desk arithmetic: on a gross salary of €3,500 a month, 0.3 points is €10.50 a month, or €126 a year; on €2,500 it is €7.50 a month. Contributions stop at the ceiling, which the same bill would raise by €300 a month [3]. It is still a draft, and the Bundestag decides.'
+    note: Desk arithmetic on the cited figures.
+  small_words:
+    term: Mediation committee (Vermittlungsausschuss)
+    text: 'When the Bundestag and the Bundesrat disagree on a law, either side can call this joint committee. Its members come from both chambers; it meets behind closed doors and proposes a compromise, which both chambers then vote on. On Friday the Länder sent the Kita start-chances bill there; it is how German federalism argues without breaking.'
+  sources:
+  - n: 1
+    title: '１０月消費者物価、２．２％上昇＝電気・ガス代の補助縮小'
+    publisher: Jiji Press
+    url: https://sp.m.jiji.com/article/show/3915754
+    date: 20 Nov 2026, 02:55 CET
+  - n: 2
+    title: '10月の消費者物価2.2%上昇　電気・ガス代が押し上げ、2カ月連続2%台'
+    publisher: Nihon Keizai Shimbun (Nikkei)
+    url: https://www.nikkei.com/article/DGXZQOUA169NP0W6A111C2000000/
+    date: 20 Nov 2026, 00:31 CET
+  - n: 3
+    title: 'BundesratKOMPAKT: 1070. Sitzung am 20. November 2026 (Pflegeneuordnungsgesetz)'
+    publisher: Bundesrat
+    url: https://www.bundesrat.de/DE/plenum/bundesrat-kompakt/26/1070/1070-node.html
+    date: 20 Nov 2026
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - minus-5-in-tokyo-minus-6-in-taipei-asia-sells-the
+  - four-points-on-one-page-shenzhen-promises-more-diesel
+  - podium-vs-print-costs-overestimated-and-993-million
+  - the-annex-67-trust-them-50-fear-side-effects-84
+  - 90-67-at-noon-a-third-weekly-fall-and-a-tanker
+  - 8-1-at-the-factory-gate-97-2-for-heating-oil
+  - ordinary-ledger-10-a-month-for-12-years-an-id
+  - 16-nanometres-and-below-on-hold-tsmc-closes-the
+  - 131-euros-become-a-budget-from-grade-2-the-care
+  - 84-cruise-missiles-three-bridges-and-a-water
+  - aqi-465-in-lahore-at-7am-and-1-429-kilns-demolished
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-20T12:15:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - 0-7-more-in-the-shopping-basket-britain-stocks-up
+    - minus-3-8-for-hong-kong-tech-and-a-fifth-off-the
+    - from-phase-out-by-2027-to-notes-concerns-cop31
+    - more-than-30-central-banks-interested-lagarde-opens
+    - a-tax-law-that-started-too-early-the-bundesrat
+    - 560-9-billion-and-a-vote-next-week-the-2027
+    - 18-in-2024-14-5-in-2019-americas-teenagers-and
+    - 82-hide-how-they-feel-11-in-therapy-australias
+    - city-gas-5-3-electricity-1-6-japan-s-subsidy
+    - pellets-briquettes-and-logs-30-6-dearer-the
+    - 2-2-in-tokyo-and-rice-29-7-cheaper-the-biggest
+    - 103-9-on-the-dollar-index-and-1-097-for-the-euro
+    - no-compulsory-theory-class-no-fixed-twelve-drives
+    - stocked-up-in-october-what-britain-s-readiness
+    - bright-red-flags-california-subpoenas-nvidia
+    - chatbots-off-by-default-and-no-endless-scroll
+    - 100-000-to-350-000-people-per-centre-berlin-s-last
+    - orders-after-10-november-may-wait-pfizer-s-covid
+    - 80-storeys-seven-floors-of-windows-the-houthis
+    - 50-metres-of-camera-and-a-question-about-open
+    - nine-pages-no-fossil-fuels-and-a-panama-veto
+    - 10-to-100-millimetres-on-the-way-rain-holds-up
+  updates: []

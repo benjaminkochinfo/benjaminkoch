@@ -1,0 +1,19 @@
+id: de-ppi-oct-20nov
+kind: hbar
+kicker: "Money · Prices"
+title: "Heating oil +97.2%, all producer prices +8.1% in a year"
+subtitle: "German producer prices of industrial products (domestic sales), October 2026, change on October 2025, %"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Light heating oil rise", value: 97.2}
+  - {label: "Mineral oil products rise", value: 51.9}
+  - {label: "Energy rise", value: 18.7}
+  - {label: "Electricity rise", value: 12.6}
+  - {label: "All industrial products rise", value: 8.1}
+  - {label: "Intermediate goods rise", value: 6.8}
+  - {label: "All products excluding energy rise", value: 3.6}
+  - {label: "Capital goods rise", value: 2.4}
+licence: destatis
+source_line: "Statistisches Bundesamt (Destatis), press release no. 407, producer prices October 2026, published 20 Nov 2026, 08:00 CET; retrieved 20 Nov 2026 · dl-de/by-2-0"
+alt: "Bar chart of the change in German producer prices of industrial products between October 2025 and October 2026, per Destatis: light heating oil up 97.2 percent, mineral oil products up 51.9 percent, energy up 18.7 percent, electricity up 12.6 percent, all industrial products up 8.1 percent, intermediate goods up 6.8 percent, all products excluding energy up 3.6 percent and capital goods up 2.4 percent. Non-durable consumer goods, not shown, were 1.3 percent cheaper."

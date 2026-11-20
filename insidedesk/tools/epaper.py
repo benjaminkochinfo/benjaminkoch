@@ -345,7 +345,7 @@ def render_issue(iss, cfg, se=None, web_live=True, now=None, fit=None):
 <div class="tc-grid"><ol class="toc-list">{"".join(toc)}</ol>
 <div class="tc-side"><div class="tc-box"><h4>This issue</h4><p>{e(ed["standfirst"])}</p><p class="faint">{len(arts)} edition pieces · {len(cfg["DESKS"])} desks · {e(status)}, {d:%-d %B %Y}</p>{xline}
 {f'<p><a href="{R(ed["path"])}">The website edition</a></p>' if web_live else f'<p class="faint">The website edition follows at {ed["pub"]:%H:%M}.</p>'}</div>
-<div class="tc-box"><h4>The ePaper rhythm</h4><ul class="rhythm"><li><b>06:30</b> Morning ePaper (website edition at 08:30)</li><li><b>17:30</b> Evening ePaper, updated live until 22:30 with an “Updated” time and a Latest page</li><li><b>Sun</b> 10:00 The Sunday Magazine</li></ul><p class="faint">Berlin time. Every issue is free.</p></div>
+<div class="tc-box"><h4>The ePaper rhythm</h4><ul class="rhythm"><li><b>06:30</b> Morning ePaper (website edition at 08:30)</li><li><b>18:30</b> Evening ePaper, updated live until 22:30 with an “Updated” time and a Latest page</li><li><b>Sun</b> 10:00 The Sunday Magazine</li></ul><p class="faint">Berlin time. Every issue is free.</p></div>
 <div class="tc-box"><h4>How to read it</h4><p>Swipe, use the arrow keys or the page strip. Tap any headline for the reading view. Press <kbd>/</kbd> to search, <kbd>t</kbd> for contents, <kbd>+</kbd>/<kbd>−</kbd> to zoom. <a href="{R(iss["dir"] + "/" + iss["pdf"])}" download>Download the PDF</a>.</p></div></div></div>'''
     # ---- latest (evening)
     for p in pages:

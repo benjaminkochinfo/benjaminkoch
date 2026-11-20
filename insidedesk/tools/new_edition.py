@@ -13,9 +13,9 @@ DESKS = ["markets", "geoecon", "politics", "psych", "energy", "money", "ordinary
 date, slot = sys.argv[1], sys.argv[2]
 assert slot in ("am", "pm", "sun")
 d = dt.date.fromisoformat(date)
-hhmm = {"am": (8, 30), "pm": (17, 30), "sun": (10, 0)}[slot]
+hhmm = {"am": (8, 30), "pm": (18, 30), "sun": (10, 0)}[slot]
 pub = dt.datetime(d.year, d.month, d.day, *hhmm, tzinfo=ZoneInfo("Europe/Berlin"))
-ep_hhmm = {"am": (6, 30), "pm": (17, 30), "sun": (10, 0)}[slot]   # morning ePaper comes out two hours before the website
+ep_hhmm = {"am": (6, 30), "pm": (18, 30), "sun": (10, 0)}[slot]   # morning ePaper comes out two hours before the website
 ep_avail = dt.datetime(d.year, d.month, d.day, *ep_hhmm, tzinfo=ZoneInfo("Europe/Berlin"))
 lead = sys.argv[3] if len(sys.argv) > 3 else DESKS[(d.toordinal() * 2 + (slot == "pm")) % len(DESKS)]
 assert lead in DESKS, f"lead desk must be one of {DESKS}"
@@ -63,7 +63,7 @@ dated id (never refresh a shared id: published pages would change). Place it on 
 ''')
 extras = [f"{x}-{k}" for x in order for k in ("short", "brief")]
 open(os.path.join(root, "edition.yaml"), "a").write(f'''epaper:     # keep this block last; update_epaper.py edits it
-  available: "{ep_avail.isoformat()}"   # when the ePaper issue goes out (morning 06:30, evening 17:30, Sunday 10:00)
+  available: "{ep_avail.isoformat()}"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
   extras:
 ''' + "".join(f"    - {x}\n" for x in extras) + "  updates: []\n")
 os.makedirs(os.path.join(root, "epaper"))

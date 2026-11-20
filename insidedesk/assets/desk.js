@@ -15,7 +15,7 @@
   // Berlin clock + next edition (CET/CEST from the browser's tz database)
   var TZ="Europe/Berlin";
   function parts(d){var o={};new Intl.DateTimeFormat("en-GB",{timeZone:TZ,weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false,timeZoneName:"short"}).formatToParts(d).forEach(function(p){o[p.type]=p.value});return o}
-  // Slots: Mon–Fri 08:30 and 17:30, Sun 10:00 (Berlin wall time). Saturday closed.
+  // Slots: Mon–Fri 08:30 and 18:30, Sun 10:00 (Berlin wall time). Saturday closed.
   // A slot is skipped once an edition covering it is published (build writes data-latest-slot).
   var latestEl=$("[data-latest-slot]"), latest=latestEl?latestEl.getAttribute("data-latest-slot"):"";
   var DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -25,7 +25,7 @@
     var o=parts(d), t=ymd(d), nowKey=t[0]+"-"+pad(t[1])+"-"+pad(t[2])+" "+o.hour+":"+o.minute;
     for(var i=0;i<9;i++){
       var c=new Date(Date.UTC(t[0],t[1]-1,t[2]+i,12)), wd=c.getUTCDay(), key=c.getUTCFullYear()+"-"+pad(c.getUTCMonth()+1)+"-"+pad(c.getUTCDate());
-      var slots=wd===6?[]:wd===0?[["10:00","Sunday long-read"]]:[["08:30","Morning edition"],["17:30","Evening edition"]];
+      var slots=wd===6?[]:wd===0?[["10:00","Sunday long-read"]]:[["08:30","Morning edition"],["18:30","Evening edition"]];
       for(var k=0;k<slots.length;k++){var sk=key+" "+slots[k][0];
         if(sk<=nowKey||(latest&&sk<=latest))continue;
         var when=i===0?"today":i===1?"tomorrow":DAYS[wd];
@@ -37,7 +37,7 @@
   function tick(){
     var d=new Date(), o=parts(d), tz=o.timeZoneName||"";
     $$("[data-clock]").forEach(function(el){el.textContent=o.weekday+" "+o.hour+":"+o.minute+" "+tz});
-    $$("[data-next]").forEach(function(el){el.textContent="Next: "+nextEdition(d)+" · Morning 08:30 · Evening 17:30 · Sunday 10:00, Berlin time"});
+    $$("[data-next]").forEach(function(el){el.textContent="Next: "+nextEdition(d)+" · Morning 08:30 · Evening 18:30 · Sunday 10:00, Berlin time"});
   }
   tick(); setInterval(tick,30000);
   // copy + native share

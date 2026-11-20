@@ -1,0 +1,12 @@
+# Inside Desk chart data: asia-friday-20nov
+"# Source: RTHK (Nikkei, Kospi, Hang Seng, Shanghai, Shenzhen closes) and The Edge Asia wrap, 08:41 CET (Taiex, Topix, ASX closes, exchange data), 20 Nov 2026; retrieved 20 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Taiex (Taiwan) fall,6.23,no,"36,033.29"
+Kospi (South Korea) fall,5.21,no,"4,869.96"
+Nikkei 225 (Japan) fall,5.06,no,"56,436.65"
+Topix (Japan) fall,3.88,no,"3,674.22"
+Shenzhen Component fall,3.09,no,"10,256.39"
+Hang Seng (Hong Kong) fall,1.89,no,"22,410.80"
+S&P/ASX 200 (Australia) fall,1.58,no,"8,592.60"
+Shanghai Composite fall,1.22,no,"3,533.79"

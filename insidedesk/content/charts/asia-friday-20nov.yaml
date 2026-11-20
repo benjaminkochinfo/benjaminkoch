@@ -1,0 +1,19 @@
+id: asia-friday-20nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Friday's falls: Taiex 6.2%, Kospi 5.2%, Nikkei 5.1%"
+subtitle: "Fall at the close in %, Friday 20 Nov 2026; every index shown closed lower; level at right"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Taiex (Taiwan) fall", value: 6.23, note: "36,033.29"}
+  - {label: "Kospi (South Korea) fall", value: 5.21, note: "4,869.96"}
+  - {label: "Nikkei 225 (Japan) fall", value: 5.06, note: "56,436.65"}
+  - {label: "Topix (Japan) fall", value: 3.88, note: "3,674.22"}
+  - {label: "Shenzhen Component fall", value: 3.09, note: "10,256.39"}
+  - {label: "Hang Seng (Hong Kong) fall", value: 1.89, note: "22,410.80"}
+  - {label: "S&P/ASX 200 (Australia) fall", value: 1.58, note: "8,592.60"}
+  - {label: "Shanghai Composite fall", value: 1.22, note: "3,533.79"}
+licence: reported
+source_line: "RTHK (Nikkei, Kospi, Hang Seng, Shanghai, Shenzhen closes) and The Edge Asia wrap, 08:41 CET (Taiex, Topix, ASX closes, exchange data), 20 Nov 2026; retrieved 20 Nov 2026 · reported figures"
+alt: "Bar chart of Friday 20 November 2026 closing falls on Asia-Pacific stock indexes, every one lower on the day: Taiex down 6.23 percent to 36,033.29, Kospi down 5.21 percent to 4,869.96, Nikkei 225 down 5.06 percent to 56,436.65, Topix down 3.88 percent to 3,674.22, Shenzhen Component down 3.09 percent to 10,256.39, Hang Seng down 1.89 percent to 22,410.80, S&P/ASX 200 down 1.58 percent to 8,592.60 and Shanghai Composite down 1.22 percent to 3,533.79."
