@@ -1,0 +1,17 @@
+id: markets-week-22nov
+kind: hbar
+kicker: "Markets · The week"
+title: "Week to 20 Nov: Nasdaq −10.0%, S&P −8.6%, DAX −7.3%"
+subtitle: "Fall in % over the week to Friday 20 Nov 2026, closing basis as reported; every index shown ended the week lower, so bars show the size of the fall"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Nasdaq Composite fall", value: 10.0, note: "closed at 22,617.73; biggest weekly drop since March 2020"}
+  - {label: "S&P 500 fall", value: 8.6, note: "closed at 6,910.39; worst week since April 2025"}
+  - {label: "MSCI global stocks gauge fall", value: 8.1, note: "largest weekly decline since early 2020"}
+  - {label: "Dow Jones Industrial Average fall", value: 8.0, note: "closed at 48,147.33"}
+  - {label: "DAX fall", value: 7.3, note: "closed at 24,802.78; snaps a three-week winning streak"}
+  - {label: "Stoxx Europe 600 fall", value: 5.8, note: "closed at 625.65; off its 13 Nov record of 664.14"}
+licence: reported
+source_line: "Morningstar market wrap (S&P 500 −8.61%, Nasdaq −10.02%); Dow Jones Market Data via Morningstar (DAX −7.28%, Stoxx 600 −5.80%); CNBC and Investopedia (Dow −8%); Reuters (MSCI world −8.1%, closes); all 20 Nov 2026, retrieved 22 Nov 2026 · reported figures"
+alt: "Bar chart of weekly falls in the week to Friday 20 November 2026, all indexes lower: the Nasdaq Composite fell 10.0 percent to 22,617.73, the S&P 500 8.6 percent to 6,910.39, MSCI's gauge of stocks across the globe 8.1 percent, the Dow Jones Industrial Average 8.0 percent to 48,147.33, Germany's DAX 7.3 percent to 24,802.78 and the Stoxx Europe 600 5.8 percent to 625.65. Bars show the size of the fall."

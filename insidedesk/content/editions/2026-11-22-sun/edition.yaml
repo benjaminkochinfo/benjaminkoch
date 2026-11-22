@@ -1,0 +1,57 @@
+date: "2026-11-22"
+slot: sun
+published: "2026-11-22T10:00:00+01:00"   # set to the actual Berlin time when it goes live
+title: Ten per cent off the Nasdaq in a week, and $81 billion still waiting to be paid
+standfirst: 'The worst week for American shares since April 2025 made the noise, and the chip makers took most of it. Underneath, the dull machinery kept printing: Nvidia''s receivables, a Brent price down for a third week, cheaper petrol at the pump, Antalya''s paper and the rules for your next pension. This Sunday reads the invoices, not the speeches.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-22T10:00:00+01:00'
+  habit: {text: 'Before the first Advent candle next Sunday, gather every annual statement that has arrived this year, the pension letter, the insurance renewals, the bank''s fee notice, into one folder. Do not read them yet, and do not act on any of them. The point is only that, when January''s offers arrive, the paper they are meant to replace is already in one place.', note: 'A habit, not advice.'}
+  went_right: {text: 'Guyana has been validated by the World Health Organization as having eliminated mother-to-child transmission of HIV and syphilis as public health problems, for the period 2022 to 2025 [1]. WHO Director-General Tedros Adhanom Ghebreyesus confirmed it to Guyana''s health minister in a letter dated 16 November, after the WHO''s Global Validation Advisory Committee assessed the country''s submission on 5 November; a regional team had reviewed programmes, laboratories and data in June [1]. The certification means elimination as a public health problem, not eradication, and Guyana will be reviewed again in 2030 [1]. Antenatal screening, timely treatment, laboratory records and a second inspection already in the diary: no ribbon to cut, just a system that kept working.'}
+  sentence: The screens spent the week marking down chips; the quieter machinery spent it cutting four cents off a litre of petrol, validating a country's antenatal clinics and printing the rules for your next pension.
+  euros: {text: 'ADAC''s weekly survey on Wednesday put Super E10 at €1.938 a litre on the national average, 4.0 cents less than a week earlier, and diesel at €2.181, 3.6 cents less [2]. Brent had risen by about two dollars over the same week, to around $93 a barrel, and ADAC still sees room for further cuts, especially for diesel, which it considers too dear compared with E10 [2]. Desk arithmetic: on a 50-litre tank, the weekly fall is about €2.00 for petrol and €1.80 for diesel; the gap between the two fuels is 24.3 cents a litre, or about €12 a tank. ADAC''s own habit for the forecourt: prices are lowest in the daily cycle shortly before noon [2].', note: Desk arithmetic on the cited figures.}
+  small_words: {term: Bestandsschutz (grandfathering), text: 'When a rule changes, the people already inside the old rule are allowed to stay there. From 1 January no new Riester contracts can be signed, but existing ones run on unchanged, under the old subsidy system, for as long as their holders wish [3][4]. It is the law''s way of saying that a contract signed in good faith is not torn up by a reform; you may move, but nobody can make you.'}
+  sources:
+  - {n: 1, title: 'Press Release: Guyana makes history: WHO validates elimination of Mother-To-Child transmission of HIV and Syphilis', publisher: 'Department of Public Information, Guyana', url: 'https://dpi.gov.gy/press-release-guyana-makes-history-who-validates-elimination-of-mother-to-child-transmission-of-hiv-and-syphilis/', date: 19 Nov 2026}
+  - {n: 2, title: 'Spritpreise: Benzin und Diesel weiter gefallen', publisher: ADAC, url: 'https://presse.adac.de/meldungen/adac-ev/verkehr/spritpreise-benzin-und-diesel-weiter-gefallen.html', date: 18 Nov 2026}
+  - {n: 3, title: 'Neue Produkte in der privaten Altersvorsorge: Das ändert sich ab 2027', publisher: Federal Financial Supervisory Authority (BaFin), url: 'https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/altersvorsorge/altersvorsorge_depot/altersvorsorge_depot.html', date: retrieved 22 Nov 2026}
+  - {n: 4, title: 'Riester-Fondspolicen optimieren: Tauschen Sie schlechte gegen gute Fonds und steigern Sie die Rendite', publisher: Stiftung Warentest, url: 'https://www.test.de/Riester-Fondspolicen-optimieren-Durch-Fondswechsel-mehr-herausholen-5020719-0/', date: 20 Nov 2026}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - the-sunday-long-read-ten-per-cent-off-the-nasdaq
+  - lunch-at-diaoyutai-a-warning-from-the-treasury
+  - the-sunday-sequence-a-night-a-bill-for-2028-a
+  - the-annex-27-4-have-been-ill-almost-40-of-them-met
+  - 204-08-for-sunday-on-half-saturdays-wind-the
+  - podium-vs-print-no-reason-to-complain-and-29-253
+  - ordinary-ledger-540-a-year-from-the-state-150-to
+  - blocked-on-ios-27-detected-on-android-not-possible
+  - seven-yeses-two-refusals-upheld-67-days-to-wait
+  - 760-000-crossings-five-checkpoints-one-review-date
+  - 94-paragraphs-10-pages-no-120-billion-what
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-22T10:00:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  spread_chars: 1400
+  extras:
+    - minus-17-in-taipei-a-14-month-low-for-gold-the
+    - 824-down-58-up-the-weeks-breadth-in-one-line
+    - from-50-to-18-and-a-first-phase-in-legal-drafting
+    - 960-billion-a-year-under-review-one-senate-vote
+    - twenty-five-billion-before-the-cut-five-after
+    - 314-yes-39-no-five-abstentions-saturdays-party
+    - seven-in-ten-are-fine-six-per-cent-never-were
+    - a-pill-you-know-is-empty-freiburg-tests-open
+    - minus-25-07-in-three-weeks-brents-biggest-three
+    - 56-73-full-12-6-points-below-europe-germanys-gas
+    - 70-billion-lei-asked-a-62-debt-line-romanias
+    - 33-000-to-44-500-and-2-2-billion-for-2027-athens
+    - 12-to-more-than-200-the-toothbrush-test-that-ends
+    - about-5-on-the-market-at-most-0-15-of-a-world-etf
+    - one-webpage-every-chat-researchers-walk-through
+    - 91-6-billion-from-the-public-26-0-billion-from-the
+    - up-to-59-for-the-live-vaccine-from-12-for-the
+    - every-three-months-not-every-month-a-longer
+    - from-detection-to-defence-the-l-nder-approve
+    - 11-and-17-nautical-miles-off-khasab-two-tanker
+    - 40-minutes-before-dawn-8-000-homes-damaged-a
+    - 1-to-5-cm-on-the-alb-up-to-15-cm-by-monday-winter
+  updates: []

@@ -1,0 +1,10 @@
+# Inside Desk chart data: markets-week-22nov
+"# Source: Morningstar market wrap (S&P 500 −8.61%, Nasdaq −10.02%); Dow Jones Market Data via Morningstar (DAX −7.28%, Stoxx 600 −5.80%); CNBC and Investopedia (Dow −8%); Reuters (MSCI world −8.1%, closes); all 20 Nov 2026, retrieved 22 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nasdaq Composite fall,10.0,no,"closed at 22,617.73; biggest weekly drop since March 2020"
+S&P 500 fall,8.6,no,"closed at 6,910.39; worst week since April 2025"
+MSCI global stocks gauge fall,8.1,no,largest weekly decline since early 2020
+Dow Jones Industrial Average fall,8.0,no,"closed at 48,147.33"
+DAX fall,7.3,no,"closed at 24,802.78; snaps a three-week winning streak"
+Stoxx Europe 600 fall,5.8,no,closed at 625.65; off its 13 Nov record of 664.14
