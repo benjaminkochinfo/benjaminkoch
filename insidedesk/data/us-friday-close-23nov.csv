@@ -1,0 +1,8 @@
+# Inside Desk chart data: us-friday-close-23nov
+"# Source: CNBC market wrap, updated 21 Nov 2026, 00:46 CET (closing levels and changes, Friday 20 Nov 2026); retrieved 23 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nasdaq-100 fall,5.6,no,as reported
+Nasdaq Composite fall,5.28,no,"22,617.73"
+S&P 500 fall,3.7,no,"6,910.39"
+Dow Jones Industrial Average fall,1.93,no,"48,147.33"

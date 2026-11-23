@@ -1,0 +1,15 @@
+id: us-friday-close-23nov
+kind: hbar
+kicker: "Markets · New York"
+title: "Friday's falls: Nasdaq 5.28%, S&P 500 3.70%, Dow 1.93%"
+subtitle: "Fall at the close in %, Friday 20 Nov 2026; every index shown closed lower; closing level at right (Nasdaq-100: fall only, as reported)"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Nasdaq-100 fall", value: 5.6, note: "as reported"}
+  - {label: "Nasdaq Composite fall", value: 5.28, note: "22,617.73"}
+  - {label: "S&P 500 fall", value: 3.70, note: "6,910.39"}
+  - {label: "Dow Jones Industrial Average fall", value: 1.93, note: "48,147.33"}
+licence: reported
+source_line: "CNBC market wrap, updated 21 Nov 2026, 00:46 CET (closing levels and changes, Friday 20 Nov 2026); retrieved 23 Nov 2026 · reported figures"
+alt: "Bar chart of Friday 20 November 2026 closing falls on four US stock indexes, every one lower on the day: Nasdaq-100 down 5.6 percent, Nasdaq Composite down 5.28 percent to 22,617.73, S&P 500 down 3.70 percent to 6,910.39 and Dow Jones Industrial Average down 1.93 percent to 48,147.33."

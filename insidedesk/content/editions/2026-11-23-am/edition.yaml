@@ -1,0 +1,55 @@
+date: "2026-11-23"
+slot: am
+published: "2026-11-23T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Minus 5.28% in New York, a rulebook in Taipei: Monday starts with the paperwork"
+standfirst: "The Dow and the Nasdaq had their worst week since 2020; Asia wrote rules over the weekend. Also: €240.42 power, a flu jab's last mile, a burning ship, Antalya's empty text, and a Podium vs Print."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-23T08:30:00+01:00"
+  habit: {text: "This week, when a headline gives you a percentage, look for the date next to it before you react: when does it start, when was it measured, when does it end? A 5% that starts in 2028, a price for Monday only, a fall from a record set last month. Dates turn most alarms into timetables.", note: "A habit, not advice."}
+  went_right: {text: "BepiColombo, the joint mission of the European and Japanese space agencies, entered orbit around Mercury on Saturday after a 37-minute engine burn, more than eight years after launch; it is only the second spacecraft ever to circle the innermost planet [1]. The burn was shorter than planned because of a software issue, the team said on Sunday, but the spacecraft is safe and engineers are investigating [1]. Two agencies, one flyby of Earth, two of Venus and six of Mercury: patience, written down and executed [1]."}
+  sentence: "New York sold the AI story, Asia's regulators wrote rulebooks, and the numbers that will still matter arrive this week."
+  euros: {text: "IG Metall wants a 5% pay rise; employers offer a one-off payment next year and 1.3% from July 2028 [2]. Desk arithmetic: on a gross salary of €3,500 a month, 5% is €175 a month, or €2,100 a year; 1.3% is €45.50 a month, but only from July 2028. On €2,800 the two figures are €140 and €36.40. Gross, before tax and contributions, and only for workers in the sectors covered.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Cold progression (kalte Progression)", text: "When your pay rises only as much as prices, but the higher pay pushes you into a higher tax rate, you pay more tax without being better off. Germany has adjusted its tax schedule for this regularly since 2016; for 2027 the coalition has so far left the adjustment out, and the cost of a full one is put at about €4.2 billion [3]."}
+  sources:
+    - {n: 1, title: "European-Japanese BepiColombo mission becomes 2nd ever to arrive in orbit around Mercury", publisher: "Space.com", url: "https://www.space.com/space-exploration/missions/esa-jaxa-bepicolomobo-mission-mercury-orbit-arrival", date: "updated 22 Nov 2026, 20:00 CET"}
+    - {n: 2, title: "Germany news: IG Metall union calls for new 24-hour strike", publisher: "DW", url: "https://www.dw.com/en/germany-news-ig-metall-calls-for-new-24-hour-strike/live-80008430", date: "updated 22 Nov 2026"}
+    - {n: 3, title: "Kalte Progression: Söder signalisiert Bayerns Beteiligung – der Ausgleich wird teuer", publisher: "Merkur.de (Bild am Sonntag, dpa)", url: "https://www.merkur.de/politik/kalte-progression-2027-soeders-vorstoss-setzt-berlin-unter-druck-zr-94601949.html", date: "22 Nov 2026, 10:03 CET"}
+articles:   # lead first, then one note per remaining desk
+  - minus-5-28-on-friday-minus-4-4-in-seoul-by
+  - 12-million-tpp-30-pages-comments-until-19-january
+  - podium-vs-print-we-urgently-need-relief-and-4-2
+  - the-annex-53-waited-more-than-a-year-11-3-found
+  - 240-42-for-monday-331-13-at-17-45-the-working-week
+  - 92-for-a-december-rise-under-5-for-the-10-year-the
+  - ordinary-ledger-23-000-asked-to-strike-5-demanded
+  - 17-million-lines-four-checks-one-certificate-the
+  - 19-9-million-doses-released-and-still-none-in-the
+  - 121-metres-16-crew-two-drones-the-gulf-of-finland
+  - two-weeks-two-days-of-overtime-no-text-what
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-23T06:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - from-130-to-150-and-no-shorts-after-a-red-day
+    - three-days-of-data-in-one-thanksgiving-squeezes
+    - five-days-from-sanctions-list-to-resignation
+    - 29-november-opec-decides-2027-in-a-series-of
+    - almost-every-day-hubig-wants-the-murder-paragraph
+    - 45-years-and-an-exception-for-hard-jobs-soeder
+    - 92-countries-about-50-000-people-fine-at-home
+    - 138-studies-35-296-students-tolerance-for
+    - 165-km-north-of-jeddah-the-houthis-claim-a-hit-on
+    - 92-23-for-brent-1-0986-for-the-euro-the-two
+    - 540-a-year-from-1-january-the-states-own-fund
+    - lane-today-vujcic-twice-the-minutes-on-thursday
+    - 23-8-minutes-of-work-per-square-metre-24-4-in-2004
+    - more-than-50-poisoned-in-a-chapel-a-heaters-carbon
+    - up-76-in-a-year-hessen-blames-ai-written-filings
+    - 37-minutes-of-thrust-a-shorter-burn-than-planned
+    - 600-products-short-12-childrens-medicines-first
+    - male-mice-harder-hit-what-a-zika-study-can-and
+    - every-inch-and-a-meeting-in-brussels-today-nato
+    - drones-on-tanks-no-warheads-the-bundeswehrs-first
+    - 18-68-feet-against-17-55-in-1953-floridas-slowest
+    - up-to-10-cm-more-on-the-alpine-edge-8-c-tonight
+  updates: []
