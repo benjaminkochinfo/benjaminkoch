@@ -1,0 +1,13 @@
+# Inside Desk chart data: europe-monday-23nov-pm
+"# Source: Boursorama closing levels (DAX, MDax: Xetra close 17:30), retrieved 23 Nov 2026, 17:45–17:50 CET · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Euro Stoxx 50,2.27,no,
+DAX (Frankfurt),2.26,no,
+AEX (Amsterdam),2.22,no,
+MDax (Frankfurt),2.21,no,
+Stoxx Europe 600,1.95,no,
+IBEX 35 (Madrid),1.71,no,
+CAC 40 (Paris),1.48,no,
+FTSE 100 (London),1.35,no,
+FTSE MIB (Milan),0.58,no,

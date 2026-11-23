@@ -1,0 +1,15 @@
+id: budget-borrowing-23nov-pm
+kind: hbar
+kicker: "Politics · Budget 2027"
+title: "€210.46bn new federal debt for 2027, and a €1.8bn quarrel"
+subtitle: "2027 federal budget as passed by the budget committee, new borrowing by pot, € billion; last bar: federal share of a full cold-progression adjustment, not in the budget"
+unit: "bn"
+label_decimals: 2
+rows:
+  - {label: "Core budget net borrowing", value: 122.97}
+  - {label: "Infrastructure and climate fund", value: 57.84}
+  - {label: "Bundeswehr special fund", value: 29.65}
+  - {label: "Cold-progression adjustment, federal share", value: 1.8}
+licence: reported
+source_line: "Deutscher Bundestag, hib 939/2026 and 948/2026, via AktienCheck (23 Nov 2026); Reuters via onvista (23 Nov 2026) · reported figures"
+alt: "Bar chart of planned new federal borrowing in Germany for 2027 as passed by the Bundestag budget committee: 122.97 billion euros in the core budget, 57.84 billion in the special fund for infrastructure and climate neutrality and 29.65 billion in the Bundeswehr special fund, together 210.46 billion euros. A fourth, much smaller bar shows about 1.8 billion euros, the federal government's reported share of the cost of a full adjustment for cold progression in 2027, which is not in the budget."

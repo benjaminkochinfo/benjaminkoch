@@ -1,0 +1,8 @@
+# Inside Desk chart data: budget-borrowing-23nov-pm
+"# Source: Deutscher Bundestag, hib 939/2026 and 948/2026, via AktienCheck (23 Nov 2026); Reuters via onvista (23 Nov 2026) · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Core budget net borrowing,122.97,no,
+Infrastructure and climate fund,57.84,no,
+Bundeswehr special fund,29.65,no,
+"Cold-progression adjustment, federal share",1.8,no,

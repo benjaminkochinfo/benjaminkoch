@@ -1,0 +1,56 @@
+date: "2026-11-23"
+slot: pm
+published: "2026-11-23T18:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "€210.46 billion to borrow, a founder back by breakfast: Monday reads the fine print"
+standfirst: "Budget week opens with Söder rebuffed by his own side; Nvidia takes back its founder and markets half a week. Also: €254.15 power, NATO on Poland's missiles, California's sea walls, a Podium vs Print."
+closing:    # end-of-edition section, plain and warm; no mailbag
+  title: "Before you close the tab"
+  published: "2026-11-23T18:30:00+01:00"
+  habit: {text: "In this first cold week, call one person over 80 you know and ask two dull questions: is the heating working properly, and when was your last jab? Write the answers down. Most winter emergencies are prevented by somebody asking early, not by somebody arriving late.", note: "A habit, not advice."}
+  went_right: {text: "German factories are hiring again. In November's flash survey, manufacturing employment rose for the first time in almost three and a half years, ending what S&P Global calls the longest run of factory job cuts since its records began; firms cited piling order books and brighter prospects [1]. New orders across the private sector grew at the fastest pace in more than four and a half years [1]. Hiring is the dullest form of optimism, and the most reliable one."}
+  sentence: "Nvidia got its founder back and markets got their nerve, while Berlin argued over €1.8 billion inside a €210 billion borrowing plan, and the frost arrived on time."
+  euros: {text: "From 1 January the electricity tax falls from 2.05 to 0.1 cents a kilowatt hour for one year; Verivox puts the saving at about €35 a year for a single person using 1,500 kWh, €65 for two people using 2,800 kWh and €93 for three using 4,000 kWh [2]. Desk arithmetic: that is about €2.92, €5.42 and €7.75 a month. For comparison, Tuesday's wholesale power costs €254.15 a megawatt hour on average, about 25.4 cents a kilowatt hour before grid fees, taxes and margins [3].", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Spread", text: "The extra interest a government pays to borrow compared with a benchmark, usually Germany, measured in basis points (one basis point is 0.01 percentage points). On Monday France's ten-year bonds yielded 150 basis points, or 1.5 percentage points, more than Germany's [4]. A narrowing spread means lenders are a little less nervous."}
+  sources:
+    - {n: 1, title: "S&P Global Flash Germany PMI, November 2026", publisher: "S&P Global", url: "https://www.pmi.spglobal.com/Public/Home/PressRelease/384f4bef4bc54065adf435223d2f15a5", date: "23 Nov 2026, 09:30 CET"}
+    - {n: 2, title: "Stromsteuersenkung und Spritpreisdeckel: Was die Entlastungen im Alltag bringen könnten", publisher: "tagesschau.de (Verivox figures)", url: "https://www.tagesschau.de/inland/innenpolitik/was-bringt-stromsteuer-senkung-koalitionsausschuss-100.html", date: "18 Nov 2026, 14:36 CET"}
+    - {n: 3, title: "Day-ahead auction prices DE-LU, delivery day 24 Nov 2026", publisher: "Fraunhofer ISE Energy-Charts (data: Bundesnetzagentur | SMARD.de)", url: "https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-23&end=2026-11-25", date: "retrieved 23 Nov 2026, 17:34 CET"}
+    - {n: 4, title: "Les rendements de la zone euro reculent, la réintégration de Huang chez Nvidia redonnant confiance aux marchés", publisher: "Reuters via Boursorama", url: "https://www.boursorama.com/bourse/actualites/les-rendements-de-la-zone-euro-reculent-la-reintegration-de-huang-chez-nvidia-redonnant-confiance-aux-marches-e0a4a7886a22b76013c5b8bff4ed0724", date: "23 Nov 2026, 17:03 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 210-46-billion-to-borrow-1-8-billion-nobody-will
+  - plus-2-26-at-the-frankfurt-close-plus-32-9-for
+  - 55-0-in-germany-46-2-in-france-the-euro-area-s
+  - minus-33-plus-33-and-still-not-even-the
+  - 254-15-for-tuesday-356-69-at-five-o-clock-the
+  - 3-285-for-the-bund-4-96-for-the-treasury-relief
+  - ordinary-ledger-2-05-cents-down-to-0-1-65-a-year
+  - podium-vs-print-did-nothing-wrong-and-an
+  - 7-200-colds-per-100-000-covid-in-the-wastewater
+  - three-kh-101s-one-awacs-request-no-article-4-nato
+  - 13-to-17-feet-in-oakland-8-feet-at-sfo-california
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-23T18:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - literally-tomorrow-zelenskyy-asks-for-four-way
+    - 25-a-month-stays-wohngeld-is-frozen-what-budget
+    - plus-6-94-for-the-nasdaq-plus-3-34-for-the-dow
+    - gold-up-4-5-bitcoin-back-above-62-000-the-rebound
+    - seven-drones-2-400-km-from-the-front-ukraine
+    - brent-89-15-wti-at-its-lowest-since-august-oil-s
+    - 93-have-a-friend-in-person-37-one-online-only
+    - sri-84-against-75-an-hour-and-a-half-of-drift-and
+    - a-formula-three-months-and-exceptions-the-fuel
+    - plus-7-for-drax-a-british-power-generator-raises
+    - weather-in-the-food-forecast-rates-held-still
+    - 1-0894-for-the-euro-27-27-for-the-vix-the-evening
+    - 6-2-billion-51-bargain-hunters-1-9-billion-for
+    - 42-a-month-for-gloves-and-disinfectant-the-lander
+    - the-jewel-washington-s-megaspeed-investigation
+    - plus-10-for-asml-plus-18-for-arm-europe-s-chip
+    - doctors-may-dispense-in-the-emergency-service-the
+    - 15-2-per-100-000-among-the-over-80s-the-one-group
+    - back-to-the-stone-age-reports-say-russia-may-put
+    - a-helicopter-near-loviisa-drones-over-moldova-the
+    - 33-villages-28-875-people-an-alert-until-31
+    - 22-cm-on-the-feldberg-frost-above-500-metres-by
+  updates: []

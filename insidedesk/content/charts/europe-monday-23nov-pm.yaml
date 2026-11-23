@@ -1,0 +1,20 @@
+id: europe-monday-23nov-pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Monday close: Euro Stoxx 50 up 2.27%, DAX 2.26%, Milan 0.58%"
+subtitle: "Rise in %, main European indexes at the close, Monday 23 Nov 2026; settled closing levels (DAX and MDax at the Xetra close); every index shown ended higher"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Euro Stoxx 50", value: 2.27}
+  - {label: "DAX (Frankfurt)", value: 2.26}
+  - {label: "AEX (Amsterdam)", value: 2.22}
+  - {label: "MDax (Frankfurt)", value: 2.21}
+  - {label: "Stoxx Europe 600", value: 1.95}
+  - {label: "IBEX 35 (Madrid)", value: 1.71}
+  - {label: "CAC 40 (Paris)", value: 1.48}
+  - {label: "FTSE 100 (London)", value: 1.35}
+  - {label: "FTSE MIB (Milan)", value: 0.58}
+licence: reported
+source_line: "Boursorama closing levels (DAX, MDax: Xetra close 17:30), retrieved 23 Nov 2026, 17:45–17:50 CET · reported figures"
+alt: "Bar chart of gains on the main European stock indexes at the close on Monday 23 November 2026, all higher on the day: the Euro Stoxx 50 up 2.27 percent to 6,077.06, the DAX up 2.26 percent to 25,363.70 at the Xetra close, Amsterdam's AEX up 2.22 percent to 1,089.84, Frankfurt's MDax up 2.21 percent to 29,374.32, the Stoxx Europe 600 up 1.95 percent to 637.84, Madrid's IBEX 35 up 1.71 percent to 19,195.50, Paris's CAC 40 up 1.48 percent to 8,044.84, London's FTSE 100 up 1.35 percent to 10,486.35 and Milan's FTSE MIB up 0.58 percent to 48,984.63. These are settled closing levels."
