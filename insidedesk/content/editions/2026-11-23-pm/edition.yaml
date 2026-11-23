@@ -28,29 +28,36 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 7-200-colds-per-100-000-covid-in-the-wastewater
   - three-kh-101s-one-awacs-request-no-article-4-nato
   - 13-to-17-feet-in-oakland-8-feet-at-sfo-california
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-23T18:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+epaper:
+  available: "2026-11-23T18:30:00+01:00"
   extras:
-    - literally-tomorrow-zelenskyy-asks-for-four-way
-    - 25-a-month-stays-wohngeld-is-frozen-what-budget
-    - plus-6-94-for-the-nasdaq-plus-3-34-for-the-dow
-    - gold-up-4-5-bitcoin-back-above-62-000-the-rebound
-    - seven-drones-2-400-km-from-the-front-ukraine
-    - brent-89-15-wti-at-its-lowest-since-august-oil-s
-    - 93-have-a-friend-in-person-37-one-online-only
-    - sri-84-against-75-an-hour-and-a-half-of-drift-and
-    - a-formula-three-months-and-exceptions-the-fuel
-    - plus-7-for-drax-a-british-power-generator-raises
-    - weather-in-the-food-forecast-rates-held-still
-    - 1-0894-for-the-euro-27-27-for-the-vix-the-evening
-    - 6-2-billion-51-bargain-hunters-1-9-billion-for
-    - 42-a-month-for-gloves-and-disinfectant-the-lander
-    - the-jewel-washington-s-megaspeed-investigation
-    - plus-10-for-asml-plus-18-for-arm-europe-s-chip
-    - doctors-may-dispense-in-the-emergency-service-the
-    - 15-2-per-100-000-among-the-over-80s-the-one-group
-    - back-to-the-stone-age-reports-say-russia-may-put
-    - a-helicopter-near-loviisa-drones-over-moldova-the
-    - 33-villages-28-875-people-an-alert-until-31
-    - 22-cm-on-the-feldberg-frost-above-500-metres-by
-  updates: []
+  - literally-tomorrow-zelenskyy-asks-for-four-way
+  - 25-a-month-stays-wohngeld-is-frozen-what-budget
+  - plus-6-94-for-the-nasdaq-plus-3-34-for-the-dow
+  - gold-up-4-5-bitcoin-back-above-62-000-the-rebound
+  - seven-drones-2-400-km-from-the-front-ukraine
+  - brent-89-15-wti-at-its-lowest-since-august-oil-s
+  - 93-have-a-friend-in-person-37-one-online-only
+  - sri-84-against-75-an-hour-and-a-half-of-drift-and
+  - a-formula-three-months-and-exceptions-the-fuel
+  - plus-7-for-drax-a-british-power-generator-raises
+  - weather-in-the-food-forecast-rates-held-still
+  - 1-0894-for-the-euro-27-27-for-the-vix-the-evening
+  - 6-2-billion-51-bargain-hunters-1-9-billion-for
+  - 42-a-month-for-gloves-and-disinfectant-the-lander
+  - the-jewel-washington-s-megaspeed-investigation
+  - plus-10-for-asml-plus-18-for-arm-europe-s-chip
+  - doctors-may-dispense-in-the-emergency-service-the
+  - 15-2-per-100-000-among-the-over-80s-the-one-group
+  - back-to-the-stone-age-reports-say-russia-may-put
+  - a-helicopter-near-loviisa-drones-over-moldova-the
+  - 33-villages-28-875-people-an-alert-until-31
+  - 22-cm-on-the-feldberg-frost-above-500-metres-by
+  - no-russian-flag-60-banks-70-ships-brussels-drafts
+  updates:
+  - time: '2026-11-23T19:30:59+01:00'
+    text: 'Politics: Brussels proposes its next Russia sanctions package, from banks and ships to sport'
+    piece: no-russian-flag-60-banks-70-ships-brussels-drafts
+  - time: '2026-11-23T19:30:59+01:00'
+    text: 'Markets: corrected the dollar figures for Zscaler and Anthropic in the New York piece'
+    piece: plus-6-94-for-the-nasdaq-plus-3-34-for-the-dow
