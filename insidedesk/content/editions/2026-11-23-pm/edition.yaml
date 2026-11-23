@@ -54,6 +54,7 @@ epaper:
   - 33-villages-28-875-people-an-alert-until-31
   - 22-cm-on-the-feldberg-frost-above-500-metres-by
   - no-russian-flag-60-banks-70-ships-brussels-drafts
+  - plus-6-84-at-the-bell-the-nasdaq-is-back-above-january
   updates:
   - time: '2026-11-23T19:30:59+01:00'
     text: 'Politics: Brussels proposes its next Russia sanctions package, from banks and ships to sport'
@@ -61,3 +62,6 @@ epaper:
   - time: '2026-11-23T19:30:59+01:00'
     text: 'Markets: corrected the dollar figures for Zscaler and Anthropic in the New York piece'
     piece: plus-6-94-for-the-nasdaq-plus-3-34-for-the-dow
+  - time: '2026-11-23T22:02:09+01:00'
+    text: 'Tech: New York closes, Nasdaq +6.8%, S&P 500 +5.0%'
+    piece: plus-6-84-at-the-bell-the-nasdaq-is-back-above-january
