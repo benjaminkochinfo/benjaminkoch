@@ -1,9 +1,9 @@
 {
   "_readme": "WMT landing content. Edit weekly. Briefs marked status:'sample' render with a SAMPLE tag until replaced with real editorial. thisWeek: real scheduled events only, each with date (YYYY-MM-DD), region, related WMT models and a source URL; items render on the matching date of the current week. Elections: verify each date against the official source before publishing.",
   "edition": {
-    "week": "2026-W47",
-    "label": "Week 47 · 16–22 Nov 2026",
-    "updated": "2026-11-16",
+    "week": "2026-W48",
+    "label": "Week 48 · 23–29 Nov 2026",
+    "updated": "2026-11-23",
     "status": "sample"
   },
   "briefs": [
@@ -125,18 +125,9 @@
       "type": "General, 1st round",
       "lat": 18.54,
       "lon": -72.34,
-      "watch": "High CII country",
-      "source": "worldelect.online (NDI lists a different phase date)"
-    },
-    {
-      "date": "2026-12-22",
-      "country": "South Sudan",
-      "iso": "SSD",
-      "type": "General",
-      "lat": 4.85,
-      "lon": 31.58,
-      "watch": "Date tentative",
-      "source": "IFES ElectionGuide (tentative)"
+      "watch": "High CII country; CEP flags security caveat",
+      "source": "CEP Haïti (official calendar)",
+      "url": "https://cephaiti.ht/publication-officielle-du-calendrier-electoral-2026-2027/"
     },
     {
       "date": "2027-01-16",
@@ -149,6 +140,17 @@
       "source": "NDI / StanfordVotes"
     },
     {
+      "date": "2027-01-27",
+      "country": "Kyrgyzstan",
+      "iso": "KGZ",
+      "type": "Presidential",
+      "lat": 42.87,
+      "lon": 74.59,
+      "watch": "",
+      "source": "Jogorku Kenesh resolution via 24.kg",
+      "url": "https://24.kg/en/article/390494"
+    },
+    {
       "date": "2027-01-30",
       "country": "Germany",
       "iso": "DEU",
@@ -157,6 +159,17 @@
       "lon": 13.4,
       "watch": "Indirect",
       "source": "worldelect.online"
+    },
+    {
+      "date": "2027-02-11",
+      "country": "South Sudan",
+      "iso": "SSD",
+      "type": "General",
+      "lat": 4.85,
+      "lon": 31.58,
+      "watch": "Postponed from 22 Dec 2026",
+      "source": "National Elections Commission via QNA / Gulf Times",
+      "url": "https://www.gulf-times.com/article/738173/international/africa/south-sudan-postpones-general-election-to-february-2027"
     },
     {
       "date": "2027-02-28",
@@ -191,82 +204,82 @@
   ],
   "thisWeek": [
     {
-      "date": "2026-11-16",
+      "date": "2026-11-23",
       "day": "Mon",
       "tag": "MACRO",
-      "region": "APAC · China",
+      "region": "Global",
       "models": [
-        "CPR",
+        "KMRI",
         "GSI"
       ],
-      "text": "China October activity data (NBS): industrial output +4.8% y/y, retail sales +0.4% y/y. Strong factories, soft consumers: the read for global goods demand.",
+      "text": "November flash PMIs for the US, euro area, UK, India and Australia (Japan on Tue). First read on whether October's growth slowdown deepened as markets price December hikes.",
       "source": {
-        "name": "State Council / NBS",
-        "url": "https://english.www.gov.cn/archive/statistics/202611/16/content_WS6afa6dccc6d00ca5f9a0e4b3.html"
+        "name": "S&P Global",
+        "url": "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/11/five-things-to-watch-in-the-november-flash-pmis"
       }
     },
     {
-      "date": "2026-11-16",
+      "date": "2026-11-23",
       "day": "Mon",
-      "tag": "SUMMIT",
-      "region": "APAC · Manila",
+      "tag": "SECURITY",
+      "region": "Europe · Brussels",
       "models": [
         "TSI",
         "GSI"
       ],
-      "text": "49th ASEAN Summit in Manila (16–18 Nov). East Asia Summit and ASEAN–US Special Summit on Tue; Myanmar and regional security on the table.",
+      "text": "NATO's North Atlantic Council discusses the two Russian missiles that hit south-east Poland on 19 Nov. Warsaw wants stronger detection and surveillance.",
       "source": {
-        "name": "Philippine News Agency",
-        "url": "https://www.pna.gov.ph/article/19-world-leaders-confirmed-to-attend-asean-summit-in-manila-dfa"
+        "name": "AFP / The Straits Times",
+        "url": "https://www.straitstimes.com/world/europe/nato-will-defend-every-inch-of-polish-territory-rutte-says"
       }
     },
     {
-      "date": "2026-11-17",
+      "date": "2026-11-24",
       "day": "Tue",
+      "tag": "MACRO",
+      "region": "Europe · Germany",
+      "models": [
+        "KMRI",
+        "SPI"
+      ],
+      "text": "ifo Business Climate for November, 10:30 Berlin. October rose to 90.2 from 89.9 on brighter expectations; does the recovery carry into Q4?",
+      "source": {
+        "name": "ifo Institut",
+        "url": "https://www.ifo.de/umfrage/ifo-geschaeftsklima-deutschland"
+      }
+    },
+    {
+      "date": "2026-11-25",
+      "day": "Wed",
+      "tag": "INFLATION",
+      "region": "APAC · Australia",
+      "models": [
+        "CPR",
+        "ERI"
+      ],
+      "text": "Australia CPI for October, 11:30 AEDT (01:30 Berlin). Fuel and electricity in focus ahead of the RBA's December meeting.",
+      "source": {
+        "name": "ABS",
+        "url": "https://www.abs.gov.au/release-calendar/future-releases-calendar/202611/rcc_economy"
+      }
+    },
+    {
+      "date": "2026-11-25",
+      "day": "Wed",
       "tag": "MACRO",
       "region": "Americas · United States",
       "models": [
         "KMRI",
         "ROR"
       ],
-      "text": "US retail sales for October, 08:30 ET (14:30 Berlin). Consumer-demand check after last week's CPI and ahead of December's FOMC.",
+      "text": "US Q3 GDP (second estimate) plus October personal income and PCE prices, 08:30 ET (14:30 Berlin). Thanksgiving squeezes the week's data into one session.",
       "source": {
-        "name": "US Census Bureau",
-        "url": "https://www.census.gov/retail/release_schedule.html"
+        "name": "BEA",
+        "url": "https://www.bea.gov/news/schedule"
       }
     },
     {
-      "date": "2026-11-18",
-      "day": "Wed",
-      "tag": "INFLATION",
-      "region": "Europe · United Kingdom",
-      "models": [
-        "KMRI",
-        "CPR"
-      ],
-      "text": "UK CPI for October, 07:00 UK (08:00 Berlin). Tests the energy pass-through behind the BoE's November hike.",
-      "source": {
-        "name": "ONS",
-        "url": "https://www.ons.gov.uk/releases/consumerpriceinflationukoctober2026"
-      }
-    },
-    {
-      "date": "2026-11-18",
-      "day": "Wed",
-      "tag": "FINANCE",
-      "region": "Europe · Euro area",
-      "models": [
-        "KMRI",
-        "ROR"
-      ],
-      "text": "ECB Financial Stability Review (November): the euro area's systemic-risk read.",
-      "source": {
-        "name": "ECB",
-        "url": "https://www.ecb.europa.eu/press/financial-stability-publications/fsr/html/index.en.html"
-      }
-    },
-    {
-      "date": "2026-11-18",
+      "date": "2026-11-25",
       "day": "Wed",
       "tag": "POLICY",
       "region": "Americas · United States",
@@ -274,70 +287,70 @@
         "ROR",
         "KMRI"
       ],
-      "text": "FOMC minutes of the 27–28 Oct meeting, 14:00 ET (20:00 Berlin). How much appetite for further hikes was there before October's CPI?",
+      "text": "Fed Beige Book: the district-level read on activity and prices ahead of December's FOMC.",
       "source": {
         "name": "Federal Reserve",
         "url": "https://www.federalreserve.gov/newsevents/2026-november.htm"
       }
     },
     {
-      "date": "2026-11-18",
-      "day": "Wed",
-      "tag": "SUMMIT",
-      "region": "APAC · Shenzhen, China",
-      "models": [
-        "GSI",
-        "TSI"
-      ],
-      "text": "APEC Economic Leaders' Meeting in Shenzhen (18–19 Nov), chaired by Xi. Watch trade-truce signals and sideline bilaterals.",
-      "source": {
-        "name": "MFA China",
-        "url": "https://www.mfa.gov.cn/eng/xw/wsrc/202611/t20261113_12058556.html"
-      }
-    },
-    {
-      "date": "2026-11-19",
+      "date": "2026-11-26",
       "day": "Thu",
       "tag": "RATES",
-      "region": "Africa · South Africa",
+      "region": "APAC · South Korea",
       "models": [
-        "CPR",
-        "SPI"
+        "ROR",
+        "CPR"
       ],
-      "text": "SARB rate decision, 15:00 SAST (14:00 Berlin). Repo at 7.25% after September's hike; fuel-price pass-through is the swing factor.",
+      "text": "Bank of Korea rate decision, last of the year, with new forecasts and a dot plot. Base rate 3.00%; all 10 analysts ChosunBiz polled expect a hike to 3.25%.",
       "source": {
-        "name": "SARB",
-        "url": "https://www.resbank.co.za/calendar-data/sarb-events/monetary-policy-committee-meeting/2026/november"
+        "name": "ChosunBiz",
+        "url": "https://biz.chosun.com/en/en-policy/2026/11/23/2QYTSNB2QZHA7ECAMV2KSAY5MI/"
       }
     },
     {
-      "date": "2026-11-20",
-      "day": "Fri",
-      "tag": "SUMMIT",
-      "region": "Europe · Brussels",
+      "date": "2026-11-26",
+      "day": "Thu",
+      "tag": "POLICY",
+      "region": "Europe · Euro area",
       "models": [
-        "GSI",
-        "SPI"
+        "KMRI",
+        "ROR"
       ],
-      "text": "Second EU–UK summit: agri-food checks, emissions trading and youth mobility deals up for sign-off, plus security and defence.",
+      "text": "ECB account of the 28–29 Oct meeting (deposit rate held at 2.50%). How close was the Council to a December hike? US markets shut for Thanksgiving.",
       "source": {
-        "name": "GOV.UK",
-        "url": "https://www.gov.uk/government/news/prime-minister-to-attend-uk-eu-summit-in-brussels-on-20-november"
+        "name": "ECB",
+        "url": "https://www.ecb.europa.eu/press/accounts/html/index.en.html"
       }
     },
     {
-      "date": "2026-11-20",
+      "date": "2026-11-27",
       "day": "Fri",
-      "tag": "CLIMATE",
-      "region": "Global · Antalya, Türkiye",
+      "tag": "RATING",
+      "region": "Europe · France",
+      "models": [
+        "ROR",
+        "SPI"
+      ],
+      "text": "S&P's scheduled review of France (A+, stable since 29 May). Fitch and Moody's both carry negative outlooks; watch OAT–Bund spreads on Monday's open.",
+      "source": {
+        "name": "Agence France Trésor",
+        "url": "https://www.aft.gouv.fr/fr/calendrier-notations-france"
+      }
+    },
+    {
+      "date": "2026-11-29",
+      "day": "Sun",
+      "tag": "ENERGY",
+      "region": "Global · OPEC+",
       "models": [
         "ERI",
-        "WRI"
+        "CPR"
       ],
-      "text": "COP31 scheduled to close (9–20 Nov). Final-text language on transition finance sets the ERI read.",
+      "text": "42nd OPEC and non-OPEC Ministerial Meeting sets 2027 output policy, with capacity assessments as the reference for 2027 baselines. The ERI's main event of the week.",
       "source": {
-        "name": "UNFCCC",
-        "url": "https://unfccc.int/cop31"
+        "name": "OPEC",
+        "url": "https://www.opec.org/pr-detail/605-7-june-2026.html"
       }
     }
   ],
