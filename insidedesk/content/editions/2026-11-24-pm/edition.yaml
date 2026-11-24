@@ -29,29 +29,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 187-million-held-back-43-in-poor-health-europe-s
   - seven-sea-drones-one-sunk-corvette-one-protest
   - a-thanksgiving-storm-king-tides-and-gusts-over-50
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-24T18:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+epaper:
+  available: "2026-11-24T18:30:00+01:00"
   extras:
-    - minus-2-5-by-midday-in-new-york-the-nasdaq
-    - 103-3-up-11-4-points-american-consumers-feel
-    - 89-37-on-monday-90-54-by-tuesday-morning-oil
-    - refineries-and-for-the-first-time-electricity
-    - record-russian-barrels-for-china-and-india-the
-    - 727-million-more-by-mid-2027-the-food-agency-s
-    - verfassungsrechtlich-angreifbar-the-afd-threatens
-    - soder-then-kretschmer-two-lander-chiefs-ask-for
-    - democrats-up-sharply-republicans-slightly-down
-    - four-times-the-risk-depression-and-money-in-who
-    - 1-0968-for-the-euro-103-77-for-the-dollar-index
-    - brunnermeier-in-may-hernandez-de-cos-in-february
-    - 50-100-of-51-100-tonnes-where-germany-s-new-year
-    - no-sugar-tax-no-wohngeld-cut-what-the-2027-budget
-    - 37-of-firms-73-of-large-ones-germany-s-ai-use
-    - 42-off-the-june-high-wolfe-calls-monday-s-chip
-    - 89-promise-65-have-a-unit-one-in-five-publish
-    - cancer-by-land-to-2024-the-rki-opens-a-new
-    - 60-banks-off-swift-70-more-ships-no-entry-for-ex
-    - one-awacs-from-geilenkirchen-nato-s-answer-to
-    - snow-from-the-chimney-the-weather-service
-    - plus-2-67-c-in-the-pacific-one-of-the-strongest
-  updates: []
+  - minus-2-5-by-midday-in-new-york-the-nasdaq
+  - 103-3-up-11-4-points-american-consumers-feel
+  - 89-37-on-monday-90-54-by-tuesday-morning-oil
+  - refineries-and-for-the-first-time-electricity
+  - record-russian-barrels-for-china-and-india-the
+  - 727-million-more-by-mid-2027-the-food-agency-s
+  - verfassungsrechtlich-angreifbar-the-afd-threatens
+  - soder-then-kretschmer-two-lander-chiefs-ask-for
+  - democrats-up-sharply-republicans-slightly-down
+  - four-times-the-risk-depression-and-money-in-who
+  - 1-0968-for-the-euro-103-77-for-the-dollar-index
+  - brunnermeier-in-may-hernandez-de-cos-in-february
+  - 50-100-of-51-100-tonnes-where-germany-s-new-year
+  - no-sugar-tax-no-wohngeld-cut-what-the-2027-budget
+  - 37-of-firms-73-of-large-ones-germany-s-ai-use
+  - 42-off-the-june-high-wolfe-calls-monday-s-chip
+  - 89-promise-65-have-a-unit-one-in-five-publish
+  - cancer-by-land-to-2024-the-rki-opens-a-new
+  - 60-banks-off-swift-70-more-ships-no-entry-for-ex
+  - one-awacs-from-geilenkirchen-nato-s-answer-to
+  - snow-from-the-chimney-the-weather-service
+  - plus-2-67-c-in-the-pacific-one-of-the-strongest
+  - minus-1-45-from-minus-2-5-new-york-s-afternoon
+  updates:
+  - time: '2026-11-24T19:32:51+01:00'
+    text: 'Markets: New York''s afternoon, Nasdaq -1.45%, Dow +0.80%'
+    piece: minus-1-45-from-minus-2-5-new-york-s-afternoon
