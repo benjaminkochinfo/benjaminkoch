@@ -55,7 +55,11 @@ epaper:
   - snow-from-the-chimney-the-weather-service
   - plus-2-67-c-in-the-pacific-one-of-the-strongest
   - minus-1-45-from-minus-2-5-new-york-s-afternoon
+  - dow-above-50-000-nasdaq-minus-1-48-at-the-bell
   updates:
   - time: '2026-11-24T19:32:51+01:00'
     text: 'Markets: New York''s afternoon, Nasdaq -1.45%, Dow +0.80%'
     piece: minus-1-45-from-minus-2-5-new-york-s-afternoon
+  - time: '2026-11-24T22:16:32+01:00'
+    text: 'Tech: New York closes, Dow above 50,000, Nasdaq -1.48%'
+    piece: dow-above-50-000-nasdaq-minus-1-48-at-the-bell
