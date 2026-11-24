@@ -1,0 +1,57 @@
+date: "2026-11-24"
+slot: pm
+published: "2026-11-24T18:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "An ifo up, a DAX down: Tuesday reads two kinds of number"
+standfirst: "Also: €246.29 power, Anthropic below its issue price, a corvette sunk in Benghazi, a Thanksgiving storm and a Podium vs Print on the budget."
+closing:    # end-of-edition section, plain and warm; no mailbag
+  title: "Before you close the tab"
+  published: "2026-11-24T18:30:00+01:00"
+  habit: {text: "This week, have lunch or a coffee with one colleague you usually only email or message, and talk about the work, not the weather. Germany's new workplace study finds the strongest link with loneliness at work is simply how often people actually work with someone. It costs half an hour and nobody needs to call it a wellbeing measure.", note: "A habit, not advice."}
+  went_right: {text: "German business has now felt better for seven months in a row. The ifo business climate rose to 90.6 points in November from 90.1, its highest since the spring of 2023, as services firms rated both their current business and their prospects more highly [1][2]. The institute says the recovery still lacks breadth, because manufacturing slipped [2]. Seven small steps in the same direction are worth more than one big jump."}
+  sentence: "German firms felt better for the seventh month running while German shares fell: the economy and the market are different animals."
+  euros: {text: "Notebooks cost 14.9% more than a year ago, desktop PCs 13.1% and games consoles 13%, while televisions are 9.2% cheaper [3]. Desk arithmetic: a notebook that cost €700 in October 2025 would cost about €804 now, a €450 console about €509, and a €600 television about €545. On the power bill, Wednesday's wholesale electricity averages €246.29 a megawatt hour, about 24.6 cents a kilowatt hour before grid fees, taxes and margins [4].", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Inversion", text: "A layer of warmer air sitting on top of colder air near the ground, the reverse of the usual order. It acts like a lid: moisture, smoke and particles cannot rise and mix away. On Tuesday the weather service explained that such a lid, plus warm moist air from cooling towers, produced a strip of industrial snow near Frankfurt [5]."}
+  sources:
+    - {n: 1, title: "Ifo-Index steigt: \"Erholung der deutschen Wirtschaft kommt voran\"", publisher: "tagesschau.de", url: "https://www.tagesschau.de/wirtschaft/konjunktur/ifo-geschaeftsklima-110.html", date: "24 Nov 2026, 11:28 CET"}
+    - {n: 2, title: "ifo Geschäftsklimaindex gestiegen (November 2026)", publisher: "ifo Institut", url: "https://www.ifo.de/pressemitteilung/2026-11-24/ifo-geschaeftsklimaindex-gestiegen-november-2026", date: "24 Nov 2026"}
+    - {n: 3, title: "Festplatten 41 Prozent teurer: Auch PCs, Konsolen und Smartphones legen deutlich zu", publisher: "ComputerBase (Destatis figures)", url: "https://www.computerbase.de/news/wirtschaft/festplatten-41-prozent-teurer-auch-pcs-konsolen-und-smartphones-legen-deutlich-zu.100493/", date: "24 Nov 2026"}
+    - {n: 4, title: "Day-ahead auction prices DE-LU, delivery day 25 Nov 2026", publisher: "Fraunhofer ISE Energy-Charts (data: Bundesnetzagentur | SMARD.de)", url: "https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-24&end=2026-11-26", date: "retrieved 24 Nov 2026, 17:26 CET"}
+    - {n: 5, title: "Industrieschnee, wenn die Industrie für weiße Landschaften sorgt (Thema des Tages)", publisher: "Deutscher Wetterdienst", url: "https://www.dwd.de/DE/wetter/thema_des_tages/2026/11/24.html", date: "24 Nov 2026"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - seven-rises-for-the-ifo-a-fall-for-the-dax-the
+  - 246-29-for-wednesday-0-4-twh-short-germany-s-power
+  - sixteen-economies-one-statute-rates-unclear-washington
+  - podium-vs-print-wahnsinnig-herausfordernd-and-210
+  - 26-3-alone-at-work-1-9-lonely-quite-often-the
+  - three-seats-one-woman-a-95-bet-the-committees
+  - notebooks-up-14-9-televisions-down-9-2-the
+  - 111-50-at-the-open-below-83-by-tuesday-anthropic
+  - 187-million-held-back-43-in-poor-health-europe-s
+  - seven-sea-drones-one-sunk-corvette-one-protest
+  - a-thanksgiving-storm-king-tides-and-gusts-over-50
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-24T18:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - minus-2-5-by-midday-in-new-york-the-nasdaq
+    - 103-3-up-11-4-points-american-consumers-feel
+    - 89-37-on-monday-90-54-by-tuesday-morning-oil
+    - refineries-and-for-the-first-time-electricity
+    - record-russian-barrels-for-china-and-india-the
+    - 727-million-more-by-mid-2027-the-food-agency-s
+    - verfassungsrechtlich-angreifbar-the-afd-threatens
+    - soder-then-kretschmer-two-lander-chiefs-ask-for
+    - democrats-up-sharply-republicans-slightly-down
+    - four-times-the-risk-depression-and-money-in-who
+    - 1-0968-for-the-euro-103-77-for-the-dollar-index
+    - brunnermeier-in-may-hernandez-de-cos-in-february
+    - 50-100-of-51-100-tonnes-where-germany-s-new-year
+    - no-sugar-tax-no-wohngeld-cut-what-the-2027-budget
+    - 37-of-firms-73-of-large-ones-germany-s-ai-use
+    - 42-off-the-june-high-wolfe-calls-monday-s-chip
+    - 89-promise-65-have-a-unit-one-in-five-publish
+    - cancer-by-land-to-2024-the-rki-opens-a-new
+    - 60-banks-off-swift-70-more-ships-no-entry-for-ex
+    - one-awacs-from-geilenkirchen-nato-s-answer-to
+    - snow-from-the-chimney-the-weather-service
+    - plus-2-67-c-in-the-pacific-one-of-the-strongest
+  updates: []

@@ -1,0 +1,20 @@
+id: de-electronics-prices-24nov-pm
+kind: hbar
+kicker: "Ordinary Life · Prices"
+title: "Hard drives up 40.8%, notebooks 14.9%, all prices 2.8%"
+subtitle: "Change in consumer prices, October 2026 against October 2025, %, Germany; rises only shown. Televisions (−9.2%), cameras (−2.5%) and audio equipment (−0.9%) got cheaper"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Hard drives", value: 40.8}
+  - {label: "Storage media, USB sticks", value: 22.1}
+  - {label: "Notebooks", value: 14.9}
+  - {label: "Desktop PCs", value: 13.1}
+  - {label: "Games consoles", value: 13.0}
+  - {label: "Mobile phones (no contract)", value: 12.2}
+  - {label: "Wearables", value: 6.1}
+  - {label: "All consumer prices (CPI)", value: 2.8}
+  - {label: "E-readers, digital frames", value: 0.2}
+licence: destatis
+source_line: "Statistisches Bundesamt (Destatis), consumer price index, press release of 24 Nov 2026 as reported by ComputerBase, retrieved 24 Nov 2026, 17:30 CET · dl-de/by-2-0"
+alt: "Bar chart of the change in German consumer prices for electronic products from October 2025 to October 2026: hard drives up 40.8 percent, storage media and USB sticks up 22.1 percent, notebooks up 14.9 percent, desktop PCs up 13.1 percent, games consoles up 13.0 percent, mobile phones without contract up 12.2 percent, wearables up 6.1 percent and e-book readers and digital picture frames up 0.2 percent, against 2.8 percent for all consumer prices. Televisions fell 9.2 percent, cameras 2.5 percent and audio equipment 0.9 percent; falls are not drawn."

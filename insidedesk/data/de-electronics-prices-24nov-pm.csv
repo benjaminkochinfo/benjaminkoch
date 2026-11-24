@@ -1,0 +1,13 @@
+# Inside Desk chart data: de-electronics-prices-24nov-pm
+"# Source: Statistisches Bundesamt (Destatis), consumer price index, press release of 24 Nov 2026 as reported by ComputerBase, retrieved 24 Nov 2026, 17:30 CET · dl-de/by-2-0"
+# Licence: Statistisches Bundesamt (Destatis). Datenlizenz Deutschland – Namensnennung – Version 2.0 (dl-de/by-2-0).
+label,value,derived_by_inside_desk,note
+Hard drives,40.8,no,
+"Storage media, USB sticks",22.1,no,
+Notebooks,14.9,no,
+Desktop PCs,13.1,no,
+Games consoles,13.0,no,
+Mobile phones (no contract),12.2,no,
+Wearables,6.1,no,
+All consumer prices (CPI),2.8,no,
+"E-readers, digital frames",0.2,no,
