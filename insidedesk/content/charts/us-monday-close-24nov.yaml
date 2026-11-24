@@ -1,0 +1,14 @@
+id: us-monday-close-24nov
+kind: hbar
+kicker: "Markets · New York"
+title: "Monday's gains: Nasdaq 6.51%, S&P 500 4.73%, Dow 3.01%"
+subtitle: "Rise at the close in %, Monday 23 Nov 2026; every index shown closed higher; closing level at right"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "Nasdaq Composite", value: 6.51, note: "24,089.56"}
+  - {label: "S&P 500", value: 4.73, note: "7,237.17"}
+  - {label: "Dow Jones Industrial Average", value: 3.01, note: "49,595.31"}
+licence: reported
+source_line: "CNBC market wrap, updated 23 Nov 2026, 22:10 CET (closing levels and changes, Monday 23 Nov 2026); retrieved 24 Nov 2026 · reported figures"
+alt: "Bar chart of Monday 23 November 2026 closing gains on three US stock indexes, every one higher on the day: Nasdaq Composite up 6.51 percent to 24,089.56, S&P 500 up 4.73 percent to 7,237.17 and Dow Jones Industrial Average up 3.01 percent to 49,595.31. For the S&P 500 and the Nasdaq it was the best day since April 2025."

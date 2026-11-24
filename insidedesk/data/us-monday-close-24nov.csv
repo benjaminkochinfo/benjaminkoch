@@ -1,0 +1,7 @@
+# Inside Desk chart data: us-monday-close-24nov
+"# Source: CNBC market wrap, updated 23 Nov 2026, 22:10 CET (closing levels and changes, Monday 23 Nov 2026); retrieved 24 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Nasdaq Composite,6.51,no,"24,089.56"
+S&P 500,4.73,no,"7,237.17"
+Dow Jones Industrial Average,3.01,no,"49,595.31"

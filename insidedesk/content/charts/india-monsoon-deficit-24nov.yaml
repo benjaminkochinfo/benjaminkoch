@@ -1,0 +1,16 @@
+id: india-monsoon-deficit-24nov
+kind: hbar
+kicker: "Climate · India"
+title: "Monsoon 2026: Karnataka 35% short, India 13% short"
+subtitle: "Rainfall shortfall against normal, 2026 southwest monsoon (June to September), in %; India: 759.4 mm against a long-period average of 868.6 mm"
+unit: "%"
+label_decimals: 0
+rows:
+  - {label: "Karnataka", value: 35, note: "worst in 55 years"}
+  - {label: "Rajasthan", value: 22}
+  - {label: "Maharashtra", value: 19}
+  - {label: "Telangana", value: 17}
+  - {label: "India (national)", value: 13}
+licence: reported
+source_line: "India Meteorological Department figures as reported by Down To Earth, 23 Nov 2026; retrieved 24 Nov 2026 · reported figures"
+alt: "Bar chart of rainfall shortfalls against normal in the 2026 southwest monsoon: Karnataka 35 percent short, its worst in 55 years; Rajasthan 22 percent; Maharashtra 19 percent; Telangana 17 percent; India as a whole 13 percent, 759.4 millimetres against a long-period average of 868.6 millimetres. All bars are shortfalls."

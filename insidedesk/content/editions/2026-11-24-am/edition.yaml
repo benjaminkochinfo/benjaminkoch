@@ -1,0 +1,56 @@
+date: "2026-11-24"
+slot: am
+published: "2026-11-24T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "Plus 31.5% for a rehiring, a 19-month high for the dollar"
+standfirst: "New York bought back Friday and priced a December Fed rise in the same session. Also: oil at a three-month low, India's drought, the budget's interest bill, and a Podium vs Print."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-24T08:30:00+01:00"
+  habit: {text: "This week, when a share or an index moves a lot in one day, ask one plain question before you react: what changed on an invoice, a payroll or a delivery note? Most days the honest answer is nothing yet. Write the question down; check it again on Friday.", note: "A habit, not advice."}
+  went_right: {text: "More than four in ten US college students are now flourishing, the highest share in a decade: 43% in the 2025–26 Healthy Minds Study of 67,477 students, up from 38% a year earlier [1]. Depression symptoms fell to 34% from 37%, anxiety to 30% from 32%, and fewer students said they would think less of someone who had received treatment [1]. Slow, measured, and moving the right way [1]."}
+  sentence: "A board changed its mind and a market added a trillion dollars, while the budget, the pay round and the oil tanks kept their own calendars."
+  euros: {text: "Brent was $88.97 a barrel early on Tuesday [2], and the euro was $1.089 after Monday's fall [3]. Desk arithmetic: that is about €81.70 a barrel. A barrel holds 159 litres, so crude costs about 51 cents a litre in euros, before refining, transport, taxes and the retailer's margin. Before Monday's 0.7% fall in the euro, the same dollar price would have been about €81.12: the currency took back roughly 58 cents a barrel.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Sidecar", text: "A short, automatic pause on programme trading when an index moves sharply, used in South Korea. On Tuesday morning the Kospi's gains triggered a five-minute sidecar curb on programme buying [4]. It does not stop the market; it slows the machines for a few minutes so that people can catch up."}
+  sources:
+    - {n: 1, title: "Student Mental Health Improving, but Slowly", publisher: "Inside Higher Ed", url: "https://www.insidehighered.com/news/student-success/health-wellness/2026/11/23/student-mental-health-improving-slowly", date: "23 Nov 2026"}
+    - {n: 2, title: "Oil holds near three-month low as rising supply offsets Hormuz threat", publisher: "Reuters via Euronext Live", url: "https://live.euronext.com/en/financial-news/oil-holds-near-three-month-low-rising-supply-offsets-hormuz-threat", date: "24 Nov 2026, 03:56 CET"}
+    - {n: 3, title: "Dollar jumps on hawkish Fed bets, AI rally", publisher: "CNBC (Reuters)", url: "https://www.cnbc.com/2026/11/23/dollar-edges-off-19-month-high-after-market-rout-yen-softens.html", date: "updated 23 Nov 2026, 19:49 CET"}
+    - {n: 4, title: "Jensen Huang's Nvidia return buoys South Korea, Japan stocks", publisher: "South China Morning Post", url: "https://www.scmp.com/news/asia/east-asia/article/3375547/jensen-huangs-nvidia-return-buoys-south-korea-japan-stocks", date: "24 Nov 2026, 03:58 CET"}
+articles:   # lead first, then one note per remaining desk
+  - plus-31-5-for-nvidia-a-board-meeting-priced-at-a
+  - three-tankers-on-fire-oil-at-a-three-month-low
+  - 210-46-billion-eight-agenda-items-a-vote-on
+  - the-annex-one-student-in-four-asked-an-ai-for
+  - 88-97-for-brent-254-15-for-power-one-bill-slides
+  - podium-vs-print-100-percent-essential-and-a-3-6
+  - ordinary-ledger-340-000-out-5-asked-1-once-and-1
+  - a-compliance-chief-a-security-committee-and-a-ceo
+  - 1-352-deaths-and-256-586-suspected-cases
+  - more-than-450-schools-in-one-land-6-000-in-italy
+  - 47-2-of-india-in-drought-winter-sowing-down-11-3
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-24T06:33:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - plus-9-in-taipei-a-sidecar-in-seoul-asia-buys-the
+    - nine-of-11-sectors-up-energy-down-1-32-the-one
+    - glass-fibre-resins-nine-to-11-months-brussels
+    - 350-000-hybrids-a-year-6-a-year-more-the-euchina
+    - 41-39-billion-for-interest-11-20-billion-more
+    - spd-and-cdu-in-saarbrucken-back-hubigs-murder
+    - 43-flourishing-the-highest-in-a-decade-americas
+    - 891-000-workers-18-2-million-days-britains
+    - 52-million-barrels-in-october-sharara-flowing
+    - 1-089-for-the-euro-a-19-month-high-for-the-dollar
+    - 4-69-for-two-years-4-932-for-ten-treasury-yields
+    - 800-million-in-savings-8-000-jobs-a-two-year
+    - 15-injured-smoke-through-the-building-suspected
+    - 2-9-billion-to-8-1-billion-german-deep-tech-start
+    - 3-december-in-the-senate-orders-paused-in-china
+    - from-85-to-65-whos-chief-tours-a-darkened-cuban
+    - 15-25-to-17-10-the-health-budget-gets-its-hour
+    - 34-million-one-joint-venture-the-babka-drone
+    - the-war-must-not-spread-to-the-baltic-and-calm-on
+    - 1-85-billion-needed-241-million-in-hand-southern
+    - up-to-30-of-income-for-clean-water-14-of-the-aid
+    - we-will-clearly-maintain-our-course-schneider
+  updates: []
