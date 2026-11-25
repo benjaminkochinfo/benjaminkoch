@@ -1,0 +1,12 @@
+# Inside Desk chart data: us-tuesday-falls-25nov
+"# Source: Investing.com close-of-trade report and movers tables, 24 Nov 2026 (shares); Reuters via NBC News (index closes); retrieved 25 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Analog Devices fall,17.37,no,$312.95
+Hewlett Packard Enterprise fall,16.31,no,$40.19
+Dell Technologies fall,11.83,no,$295.28
+Micron Technology fall,11.01,no,$629.79
+Anthropic fall,6.55,no,$81.91
+Nvidia fall,5.86,no,$155.38
+Nasdaq Composite fall,1.48,no,"23,733.54"
+S&P 500 fall,0.5,no,"7,201.09"

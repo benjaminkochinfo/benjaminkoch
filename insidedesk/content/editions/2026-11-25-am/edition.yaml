@@ -1,0 +1,55 @@
+date: "2026-11-25"
+slot: am
+published: "2026-11-25T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "4.9% in Australia, 0 of 40 interceptors cleared: the arithmetic before the speeches"
+standfirst: "Two inflation prints are partly about last year, and the committees have already leaned. Also: New York sorts its AI shares, a tariff verdict waits behind its caps, a budget debate, the harvest map, and a Podium vs Print on Patriot missiles."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-25T08:30:00+01:00"
+  habit: {text: "This week, when you read an annual figure, an inflation rate, a price rise or a bill, look up the same month a year ago before you react. Ask what dropped out of the window and what came in. Two minutes, one note, and the number usually becomes smaller or clearer.", note: "A habit, not advice."}
+  went_right: {text: "America's winter wheat is in better shape than usual: 54% of the crop is rated good to excellent, against a 45% average for the time of year, Lachstock Consulting's market wire reports from US data [1]. In a week when southern Brazil is waterlogged and Russia's ports face frost, one large crop going into winter well is quietly good news for bread prices next year [1]."}
+  sentence: "Before you ask what a central bank will do about a price, ask what that price was a year ago."
+  euros: {text: "Germany's day-ahead power price for today runs from €201.83 per megawatt hour at 04:45 to €304.34 at 17:30 [2]. Desk arithmetic: that is 20.2 cents and 30.4 cents per kilowatt hour on the wholesale market. A 2 kWh load, a washing cycle for example, costs about 40 cents of wholesale power before dawn and about 61 cents at half past five: a difference of about 21 cents. Only households on a dynamic tariff see this directly, and grid fees, levies, taxes and VAT come on top.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Base effect", text: "When an annual rate rises or falls because of what happened twelve months ago rather than this month. US core prices rose only about 0.18% last October, so a rise of about 0.21% this October is enough to lift the published annual rate from 3.1% to 3.2% [3]. The month that leaves the window matters as much as the one that enters it."}
+  sources:
+    - {n: 1, title: "Daily Market Wire 24 November 2026", publisher: "Grain Central (Lachstock Consulting)", url: "https://www.graincentral.com/markets/daily-market-wire-24-november-2026/", date: "24 Nov 2026"}
+    - {n: 2, title: "Day-ahead auction prices, bidding zone DE-LU (data: Bundesnetzagentur | SMARD.de)", publisher: "Fraunhofer ISE Energy-Charts", url: "https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-24T00:00%2B01:00&end=2026-11-25T23:59%2B01:00", date: "retrieved 25 Nov 2026, 05:22 CET"}
+    - {n: 3, title: "PCE Inflation Report Wednesday Is the Last Major Inflation Release Before the Fed's December 9 Decision", publisher: "StockTitan", url: "https://www.stocktitan.net/articles/october-2026-pce-inflation-preview", date: "23 Nov 2026"}
+articles:   # lead first, then one note per remaining desk
+  - australia-4-9-america-0-21-the-base-year-votes-first
+  - minus-17-for-a-record-quarter-the-dow-rises-anyway
+  - sixteen-economies-one-statute-and-a-15-cap
+  - 560-billion-one-in-three-euros-borrowed-merz-speaks-second
+  - 49-dont-know-who-may-call-themselves-a-therapist
+  - 246-29-for-power-90-97-for-brent-four-tankers-hit
+  - ordinary-ledger-58-63-for-ten-23-68-for-the-bird
+  - 18-4-to-14-the-margin-line-that-cost-hpe-16
+  - the-annex-one-cloth-before-surgery-and-the-supply-chain-behind-it
+  - podium-vs-print-continues-that-work-and-0-of-40
+  - waterlogged-in-the-south-frozen-at-the-baltic-harvests
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-25T06:31:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - i-cannot-reopen-the-strait-lagarde-on-what-rates-can-do
+    - more-than-30-central-banks-and-a-permanent-repo-line
+    - minus-5-6-in-seoul-13-5-for-tokyo-electron-asia-sells
+    - 25-017-81-for-the-dax-seven-down-days-in-eight
+    - record-russian-barrels-for-china-and-india-and-grain-north
+    - 12-5-already-7-5-left-the-china-arithmetic
+    - thursday-at-10-00-a-euro-summit-and-a-successor
+    - 400-000-euros-a-minute-the-oppositions-number-checked
+    - 17-against-11-the-under-25s-who-feel-alone-at-work
+    - four-months-wait-19-already-ask-a-chatbot
+    - 5-4-billion-for-the-electricity-tax-paid-by-a-high-price
+    - 29-november-opec-meets-and-iraq-wants-a-bigger-number
+    - 81-72-with-ham-the-thanksgiving-table-the-survey-added
+    - 5-1-for-a-new-house-builders-pass-it-on
+    - 81-90-below-the-83-ipo-price-anthropics-first-test
+    - minus-14-5-for-advantest-the-chip-testers-morning
+    - 34-fold-since-1990-dengue-moves-onto-new-maps
+    - 165-screwworm-cases-78-in-november-alone
+    - sparta-ii-off-loviisa-how-sensitive-this-narrow-stretch-is
+    - article-51-off-benghazi-ukraines-longest-reach
+    - 91-billion-insured-lowest-since-2019-and-a-gap-that-narrowed
+    - aqi-242-in-delhi-330-at-siri-fort-a-poor-morning
+  updates: []

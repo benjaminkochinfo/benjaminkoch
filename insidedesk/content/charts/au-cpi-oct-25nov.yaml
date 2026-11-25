@@ -1,0 +1,36 @@
+id: au-cpi-oct-25nov
+kind: line
+kicker: "Money · Prices"
+title: "Australia's inflation: 1.9% in June 2025, 4.9% in October"
+subtitle: "Australia, monthly CPI, all groups, annual change in %, April 2025 to October 2026 (first month with an annual rate: April 2025)"
+unit: "%"
+label_decimals: 1
+start: "2025-04-01"
+series:
+  - key: aucpi
+    label: "CPI, annual change"
+    source:
+      type: static
+      values:
+        - ["2025-04-01", 2.4]
+        - ["2025-05-01", 2.1]
+        - ["2025-06-01", 1.9]
+        - ["2025-07-01", 3.0]
+        - ["2025-08-01", 3.2]
+        - ["2025-09-01", 3.6]
+        - ["2025-10-01", 3.8]
+        - ["2025-11-01", 3.4]
+        - ["2025-12-01", 3.8]
+        - ["2026-01-01", 3.8]
+        - ["2026-02-01", 3.7]
+        - ["2026-03-01", 4.6]
+        - ["2026-04-01", 4.2]
+        - ["2026-05-01", 4.0]
+        - ["2026-06-01", 3.8]
+        - ["2026-07-01", 3.5]
+        - ["2026-08-01", 4.0]
+        - ["2026-09-01", 4.3]
+        - ["2026-10-01", 4.9]
+licence: reported
+source_line: "Australian Bureau of Statistics (ABS), Consumer Price Index, Australia, October 2026, released 25 Nov 2026, 01:30 CET; retrieved 25 Nov 2026 · source: ABS"
+alt: "Line chart of Australia's monthly consumer price index, annual change in percent, from April 2025 to October 2026. Inflation was 2.4 percent in April 2025, fell to a low of 1.9 percent in June 2025, rose to 3.8 percent by October 2025, peaked at 4.6 percent in March 2026, eased to 3.5 percent in July 2026 and has since risen to 4.0 percent in August, 4.3 percent in September and 4.9 percent in October 2026, the latest month."
