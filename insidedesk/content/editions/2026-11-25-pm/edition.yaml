@@ -54,7 +54,11 @@ epaper:
   - troubling-the-pope-on-the-cop31-that-ended
   - 600-square-kilometres-of-smoke-ras-tanura-from
   - nvidia-down-6-the-dow-up-new-york-s-afternoon
+  - from-minus-4-6-to-minus-0-62-at-the-bell
   updates:
   - time: '2026-11-25T19:47:29+01:00'
     text: 'Tech: Nvidia -6%, but the Dow turns positive, S&P 500 -0.57%'
     piece: nvidia-down-6-the-dow-up-new-york-s-afternoon
+  - time: '2026-11-25T22:19:42+01:00'
+    text: 'Markets: at the bell, Nasdaq -0.62% after -4.6% at the low, Dow +0.33%'
+    piece: from-minus-4-6-to-minus-0-62-at-the-bell
