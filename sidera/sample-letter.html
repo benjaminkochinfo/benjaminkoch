@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sample letter · January 2027 · Clarity Path · SIDERA</title>
+<meta name="description" content="A sample SIDERA letter for January 2027: Clarity Path, Capricorn, The Turning season. Eight plates, real sky dates.">
+<meta name="theme-color" content="#060a16">
+<style>
+:root{
+  --night:#060a16;--night-2:#0a1124;--night-3:#111a33;--indigo:#1a2448;
+  --gold:#c9a227;--gold-2:#e4cc86;--gold-3:#f3e6b8;--gold-dim:#8a701c;
+  --star:#f4ecdb;--star-2:rgba(244,236,219,.78);--star-3:rgba(244,236,219,.55);--moon:#c9d0e2;
+  --paper:#f8f2e6;--paper-2:#fffdf8;--ink:#0c1424;--ink-2:#2a3346;--ink-3:#6e6654;
+  --line:rgba(201,162,39,.30);--line-soft:rgba(201,162,39,.14);--hair:rgba(244,236,219,.10);
+  --serif:"Palatino Linotype",Palatino,"Book Antiqua",P052,"Iowan Old Style",Georgia,serif;
+  --display:"Palatino Linotype",Palatino,"Book Antiqua",P052,"Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{background:var(--night);color:var(--star);font-family:var(--serif);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--gold-2);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--gold-3)}
+img,svg{max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+em{font-style:italic;color:var(--gold-2)}
+.paper em{color:var(--gold-dim)}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.eyebrow i{display:inline-block;width:28px;height:1px;background:var(--gold);opacity:.7}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;font-family:var(--display);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);color:var(--gold-2);background:transparent;transition:background .2s,color .2s,transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);color:var(--gold-3);box-shadow:0 10px 30px rgba(201,162,39,.18)}
+.btn-gold{background:linear-gradient(180deg,var(--gold-2),var(--gold));color:var(--night)}
+.btn-gold:hover{color:var(--night);filter:brightness(1.06)}
+.arr{font-family:var(--sans);letter-spacing:0}
+.sample-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);padding:3px 8px;white-space:nowrap}
+.paper .sample-tag{color:var(--gold-dim);border-color:rgba(138,112,28,.35)}
+
+/* dateline + mast */
+.dateline{background:#04070f;border-bottom:1px solid var(--line-soft);font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--star-3)}
+.dateline .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+.dateline b{color:var(--gold)}
+.mast{position:sticky;top:0;z-index:20;background:rgba(6,10,22,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.mast .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-top:14px;padding-bottom:14px}
+.mast-nav{display:flex;gap:22px;font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.mast-nav a{color:var(--star-2);text-decoration:none}
+.mast-nav a:hover{color:var(--gold-2)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--star)}
+.logo svg{width:40px;height:40px;flex:none}
+.logo-txt{display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.logo-txt b{font-family:var(--display);font-weight:500;font-size:20px;letter-spacing:.42em;margin-right:-.42em}
+.logo-txt small{font-family:var(--display);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-top:5px}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.mast-right .back{font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--star-3);text-decoration:none}
+.mast-right .btn{padding:10px 16px;font-size:11px}
+@media(max-width:960px){.mast-nav{display:none}.mast .wrap{grid-template-columns:auto 1fr}.mast-right .back{display:none}}
+@media(max-width:480px){.mast-right .btn{padding:9px 11px;font-size:10px;letter-spacing:.14em}.logo-txt b{font-size:17px}.logo svg{width:34px;height:34px}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:96px 0 0;background:radial-gradient(ellipse 80% 70% at 72% 30%,rgba(27,36,72,.95) 0%,rgba(10,17,36,.9) 45%,var(--night) 80%)}
+.sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.6rem,5.2vw,4.6rem);line-height:1.04;letter-spacing:-.01em;margin:0 0 22px}
+.hero h1 em{display:block}
+.hero h1 .thin{display:block;font-size:.34em;line-height:1.5;letter-spacing:.02em;color:var(--star-2);margin-top:22px;font-style:normal;max-width:30em}
+.hero-lede{font-size:1.08rem;color:var(--star-2);max-width:34rem;margin:0 0 28px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{margin-top:22px;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--star-3)}
+.dial{width:100%;max-width:440px;display:block;margin:0 auto}
+.dial .spin{transform-origin:220px 220px;animation:spin 240s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.dial .spin{animation:none}}
+.hero-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px;border-top:1px solid var(--line-soft)}
+.hero-strip div{padding:24px 20px 30px;border-right:1px solid var(--line-soft)}
+.hero-strip div:last-child{border-right:0}
+.hero-strip b{display:block;font-family:var(--display);font-weight:400;font-size:2.1rem;color:var(--gold-2);line-height:1}
+.hero-strip span{display:block;margin-top:8px;font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--star-3)}
+@media(max-width:900px){.hero{padding-top:56px}.hero-grid{grid-template-columns:1fr;gap:28px}.dial{max-width:300px}.hero-strip{grid-template-columns:1fr 1fr;margin-top:48px}.hero-strip div:nth-child(2){border-right:0}.hero-strip div:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}}
+
+.band{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--night-2);padding:16px 0;text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--star-3)}
+.band span{display:inline-block;margin:4px 6px}
+.band i{font-style:normal;color:var(--gold);margin:0 6px}
+
+/* sections */
+.sec{padding:110px 0;position:relative}
+.sec.alt{background:var(--night-2)}
+.sec.paper{background:var(--paper);color:var(--ink)}
+.paper .eyebrow{color:var(--gold-dim)}
+.paper .eyebrow i{background:var(--gold-dim)}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:56px}
+.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,3.6vw,3.2rem);line-height:1.08;margin:0}
+.sec-head p{margin:0;color:var(--star-2);font-size:1.06rem}
+.paper .sec-head p{color:var(--ink-2)}
+@media(max-width:900px){.sec{padding:76px 0}.sec-head{grid-template-columns:1fr;gap:18px;margin-bottom:36px}}
+
+.doctrine{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.doc{padding:34px 30px;border-right:1px solid var(--line-soft)}
+.doc:last-child{border-right:0}
+.doc .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--gold)}
+.doc h3{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:12px 0 10px}
+.doc p{margin:0;color:var(--star-2);font-size:1rem}
+@media(max-width:900px){.doctrine{grid-template-columns:1fr}.doc{border-right:0;border-bottom:1px solid var(--line-soft)}.doc:last-child{border-bottom:0}}
+.quote{font-family:var(--display);font-style:italic;font-size:clamp(1.35rem,2.4vw,1.9rem);line-height:1.4;text-align:center;color:var(--gold-3);max-width:46rem;margin:64px auto 0}
+.quote small{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.etym{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.etym div{border:1px solid var(--line-soft);padding:18px 20px;background:rgba(17,26,51,.5)}
+.etym b{display:block;font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--gold-2)}
+.etym span{display:block;font-size:.95rem;color:var(--star-2);margin-top:4px}
+@media(max-width:900px){.etym{grid-template-columns:1fr}}
+
+/* plates */
+.plates{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.plate{background:var(--night);padding:26px 24px 28px;min-height:210px}
+.sec.alt .plate{background:var(--night-2)}
+.pn{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+.pn b{font-family:var(--display);font-weight:400;font-size:2rem;color:var(--gold-2);line-height:1}
+.pn span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--star-3)}
+.plate h4{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0 0 8px}
+.plate p{margin:0;font-size:.96rem;color:var(--star-2)}
+@media(max-width:1000px){.plates{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.plates{grid-template-columns:1fr}.plate{min-height:0}}
+
+/* spread */
+.spread-wrap{margin-top:72px}
+.spread-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--star-3);margin-bottom:14px}
+.spread{display:grid;grid-template-columns:1fr 1fr;gap:0;box-shadow:0 40px 90px rgba(0,0,0,.55);border:1px solid rgba(201,162,39,.25)}
+.page{background:var(--paper);color:var(--ink);padding:38px 40px 30px;position:relative}
+.page+.page{border-left:1px solid rgba(12,20,36,.12);background:linear-gradient(90deg,rgba(12,20,36,.05),transparent 26px),var(--paper)}
+.page-h,.page-f{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.page-h{border-bottom:1px solid rgba(12,20,36,.15);padding-bottom:10px;margin-bottom:22px}
+.page-f{border-top:1px solid rgba(12,20,36,.12);padding-top:10px;margin-top:24px}
+.page h5{font-family:var(--display);font-weight:400;font-size:1.9rem;margin:0 0 6px;color:var(--ink)}
+.page h5 em{color:var(--gold-dim)}
+.page .dek{margin:0 0 18px;font-size:.98rem;color:var(--ink-2)}
+.sig-list{list-style:none;margin:0;padding:0}
+.sig-list li{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:11px 0;border-bottom:1px dashed rgba(12,20,36,.16);font-size:.95rem;line-height:1.45;color:var(--ink-2)}
+.sig-list .d{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--gold-dim);padding-top:2px}
+.sig-list b{color:var(--ink);font-weight:600}
+.sig-list small{display:block;color:var(--ink-3);font-size:.86rem;margin-top:2px}
+@media(max-width:900px){.spread{grid-template-columns:1fr}.page{padding:28px 22px 22px}.page+.page{border-left:0;border-top:1px solid rgba(12,20,36,.12)}}
+
+/* cards */
+.dcards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.dcard{border:1px solid var(--line-soft);background:linear-gradient(180deg,rgba(26,36,72,.55),rgba(10,17,36,.6));padding:22px 22px 18px;display:flex;flex-direction:column;position:relative;overflow:hidden;min-height:280px}
+.dcard .k{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--star-3);margin-bottom:18px}
+.dcard h4{font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.2;margin:0 0 10px}
+.dcard p{margin:0 0 10px;font-size:.95rem;color:var(--star-2)}
+.dcard .bot{margin-top:auto;padding-top:12px;border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.dcard.cover{background:radial-gradient(circle at 80% 10%,rgba(201,162,39,.22),transparent 55%),linear-gradient(180deg,#141f40,#070b17)}
+.dcard .line-q{font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--gold-3);line-height:1.45}
+@media(max-width:1000px){.dcards{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.dcards{grid-template-columns:1fr}.dcard{min-height:0}}
+
+/* inbox */
+.inbox-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.inbox{border:1px solid var(--line-soft);background:var(--night);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.inbox-top{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line-soft);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--star-3)}
+.mail{display:grid;grid-template-columns:86px 1fr;gap:16px;padding:16px 18px;border-bottom:1px solid var(--hair)}
+.mail:last-child{border-bottom:0}
+.mail .d{font-family:var(--mono);font-size:11px;color:var(--gold);padding-top:3px;line-height:1.5}
+.mail .d small{display:block;color:var(--star-3);font-size:10px}
+.mail b{display:block;font-weight:400;font-family:var(--display);font-size:1.04rem;color:var(--star)}
+.mail span{display:block;font-size:.9rem;color:var(--star-3);line-height:1.45;margin-top:2px}
+.mail .tier{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-soft);padding:2px 7px}
+.mail.main{background:linear-gradient(90deg,rgba(201,162,39,.09),transparent 60%)}
+.inbox-list{list-style:none;margin:0;padding:0}
+.inbox-list li{padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.inbox-list li:first-child{padding-top:0}
+.inbox-list h4{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0 0 6px;color:var(--gold-3)}
+.inbox-list p{margin:0;color:var(--star-2);font-size:1rem}
+@media(max-width:900px){.inbox-grid{grid-template-columns:1fr}.mail{grid-template-columns:70px 1fr;gap:12px}}
+
+/* paths */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.path{border:1px solid var(--line);padding:36px 34px 30px;position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(26,36,72,.65),rgba(6,10,22,.4))}
+.path .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.path h3{font-family:var(--display);font-weight:400;font-size:2.1rem;margin:10px 0 4px}
+.path .for{font-family:var(--display);font-style:italic;color:var(--star-2);margin:0 0 18px}
+.path p{color:var(--star-2);font-size:1rem;margin:0 0 16px}
+.path ul{list-style:none;margin:0 0 20px;padding:0}
+.path li{padding:8px 0 8px 22px;border-top:1px solid var(--hair);position:relative;font-size:.98rem;color:var(--star-2)}
+.path li:before{content:"";position:absolute;left:2px;top:17px;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold)}
+.path .q{font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--gold-3);border-left:1px solid var(--gold);padding-left:16px;margin:0}
+@media(max-width:900px){.paths{grid-template-columns:1fr}.path{padding:28px 22px 24px}}
+.seasons{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin-top:56px}
+.seasons div{background:var(--night);padding:18px 14px;text-align:center}
+.seasons b{display:block;font-family:var(--display);font-weight:400;font-size:1.06rem;color:var(--gold-3)}
+.seasons span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--star-3);margin-top:4px}
+.seasons-cap{font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--star-3);margin:0 0 12px;text-align:center}
+@media(max-width:900px){.seasons{grid-template-columns:repeat(2,1fr)}.seasons div:last-child{grid-column:span 2}}
+
+/* calendar */
+.cal{width:100%;border-collapse:collapse;font-size:.98rem}
+.cal th{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:0 14px 12px 0;border-bottom:1px solid rgba(12,20,36,.25)}
+.cal td{padding:14px 14px 14px 0;border-bottom:1px solid rgba(12,20,36,.12);vertical-align:top;color:var(--ink-2)}
+.cal td.m{font-family:var(--display);font-size:1.25rem;color:var(--ink);white-space:nowrap}
+.cal td.d{font-family:var(--mono);font-size:12px;color:var(--gold-dim);white-space:nowrap}
+.cal b{color:var(--ink);font-weight:600}
+.cal tr.first td{background:rgba(201,162,39,.08)}
+.cal-note{margin:18px 0 0;font-size:.9rem;color:var(--ink-3)}
+@media(max-width:700px){.cal thead{display:none}.cal,.cal tbody,.cal tr,.cal td{display:block;width:100%}.cal tr{padding:12px 0;border-bottom:1px solid rgba(12,20,36,.18)}.cal td{border:0;padding:2px 0}.cal td.m{margin-bottom:6px}}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.tier{border:1px solid var(--line-soft);background:rgba(17,26,51,.55);padding:32px 28px 28px;display:flex;flex-direction:column}
+.tier.feat{border-color:var(--gold);background:radial-gradient(circle at 50% 0%,rgba(201,162,39,.16),transparent 60%),rgba(17,26,51,.75);box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.tier .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.tier h3{font-family:var(--display);font-weight:400;font-size:1.75rem;margin:10px 0 6px}
+.tier .who{font-size:.96rem;color:var(--star-2);margin:0 0 18px;min-height:5em}
+.price{font-family:var(--display);font-size:3rem;line-height:1;color:var(--gold-2)}
+.price small{font-size:.95rem;color:var(--star-3);letter-spacing:.04em}
+.yearly{font-family:var(--mono);font-size:11.5px;color:var(--star-3);margin:10px 0 22px;letter-spacing:.02em}
+.yearly b{color:var(--gold-2);font-weight:400}
+.tier ul{list-style:none;padding:0;margin:0 0 26px;flex:1}
+.tier li{padding:9px 0 9px 22px;border-top:1px solid var(--hair);font-size:.96rem;color:var(--star-2);position:relative}
+.tier li:before{content:"";position:absolute;left:2px;top:18px;width:6px;height:6px;transform:rotate(45deg);background:var(--gold)}
+.tier .btn{width:100%}
+.tier .fine{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--star-3);text-align:center;margin:12px 0 0}
+.tiers-note{text-align:center;color:var(--star-3);font-size:.92rem;margin:28px auto 0;max-width:44rem}
+@media(max-width:1000px){.tiers{grid-template-columns:1fr}.tier .who{min-height:0}}
+
+/* privacy */
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ask-card{border:1px solid rgba(12,20,36,.14);background:var(--paper-2);padding:30px 30px 26px;box-shadow:0 14px 40px rgba(12,20,36,.06)}
+.ask-card h3{font-family:var(--display);font-weight:400;font-size:1.5rem;margin:0 0 4px;color:var(--ink)}
+.ask-card .sub{margin:0 0 18px;color:var(--ink-3);font-size:.95rem}
+.field{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(12,20,36,.1);align-items:baseline}
+.field .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim)}
+.field .v{font-size:.98rem;color:var(--ink-2)}
+.field .v i{color:var(--ink-3)}
+.never{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
+.never li{break-inside:avoid;padding:9px 0 9px 24px;border-top:1px solid rgba(12,20,36,.1);position:relative;font-size:.98rem;color:var(--ink-2)}
+.never li:before{content:"\00D7";position:absolute;left:3px;top:6px;color:var(--gold-dim);font-size:1.15rem}
+.priv-foot{margin-top:24px;font-size:.95rem;color:var(--ink-2);max-width:60rem}
+@media(max-width:900px){.ask{grid-template-columns:1fr}.field{grid-template-columns:1fr;gap:2px}.never{columns:1}.ask-card{padding:24px 20px}}
+
+/* standard */
+.standard{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.std{background:var(--night-2);padding:30px 28px}
+.std .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.std h4{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:10px 0 8px}
+.std p{margin:0;color:var(--star-2);font-size:.97rem}
+.not-line{margin:44px auto 0;max-width:52rem;text-align:center;font-family:var(--display);font-style:italic;font-size:1.12rem;line-height:1.6;color:var(--gold-3);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:24px 10px}
+@media(max-width:900px){.standard{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:52rem}
+.faq details{border-top:1px solid var(--line-soft);padding:6px 0}
+.faq details:last-child{border-bottom:1px solid var(--line-soft)}
+.faq summary{cursor:pointer;list-style:none;font-family:var(--display);font-size:1.22rem;padding:16px 36px 16px 0;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--sans);font-size:1.4rem;color:var(--gold)}
+.faq details[open] summary:after{content:"\2013"}
+.faq details p{margin:0 0 18px;color:var(--star-2);font-size:1rem;max-width:46rem}
+
+/* closing + foot */
+.closing{position:relative;overflow:hidden;padding:130px 0;text-align:center;background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(201,162,39,.12),transparent 60%),radial-gradient(ellipse 80% 80% at 50% 40%,#16204a 0%,var(--night) 70%)}
+.closing .wrap{position:relative;z-index:2}
+.closing .eyebrow{justify-content:center}
+.closing h2{font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,4.6vw,3.8rem);line-height:1.08;margin:0 0 18px}
+.closing p{color:var(--star-2);max-width:38rem;margin:0 auto 30px;font-size:1.08rem}
+.closing .hero-ctas{justify-content:center}
+.foot{background:#03060d;border-top:1px solid var(--line-soft);padding:64px 0 36px;font-size:.95rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot h5{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{padding:3px 0;color:var(--star-3)}
+.foot a{color:var(--star-2);text-decoration:none}
+.foot a:hover{color:var(--gold-2)}
+.foot p{color:var(--star-3)}
+.foot-legal{margin-top:44px;padding-top:22px;border-top:1px solid var(--hair);font-size:.85rem;color:var(--star-3)}
+.foot-legal p{margin:0 0 8px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr}}
+/* refinements */
+.mast-nav a{white-space:nowrap}
+@media(max-width:1100px){.mast-nav{display:none}.mast .wrap{grid-template-columns:auto 1fr}.mast-right .back{display:none}}
+.btn:not(.btn-gold){background:rgba(6,10,22,.55)}
+.paper .btn:not(.btn-gold){background:transparent}
+.path{background:linear-gradient(160deg,rgba(26,36,72,.92),rgba(8,13,28,.92))}
+@media(max-width:700px){
+  .dateline .wrap span:last-child{display:none}
+  .logo-txt small{letter-spacing:.14em}
+  .hero h1 .thin{font-size:clamp(1rem,.36em,1.25rem)}
+  .hero-lede{font-size:1rem}
+  .hero .sky{opacity:.55}
+  .sample-tag{white-space:normal}
+  .sec-head h2{font-size:2.1rem}
+}
+.tier .pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tier .pay .btn{width:auto;padding:13px 8px;font-size:11px;letter-spacing:.14em}
+.welcome{display:none;background:linear-gradient(90deg,#8a701c,#c9a227,#8a701c);color:#060a16;font-size:.98rem;padding:14px 0;text-align:center}
+.welcome:target{display:block}
+.welcome b{font-weight:600}
+.welcome a{color:#060a16;margin-left:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+.ribbon{background:linear-gradient(90deg,#8a701c,#c9a227,#8a701c);color:#060a16;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px}
+.ribbon a{color:#060a16}
+.l-head{position:relative;overflow:hidden;padding:84px 0 70px;text-align:center;background:radial-gradient(ellipse 70% 80% at 50% 20%,#18224a 0%,var(--night) 75%)}
+.l-head .wrap{position:relative;z-index:2;max-width:900px}
+.l-head .logo{justify-content:center;margin-bottom:34px}
+.l-head h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,5vw,4rem);line-height:1.05;margin:0 0 14px}
+.l-head .meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--star-3);line-height:1.9}
+.l-head .meta b{color:var(--gold-2);font-weight:400}
+.reader{display:inline-grid;grid-template-columns:repeat(4,auto);gap:0;margin-top:30px;border:1px solid var(--line);background:rgba(6,10,22,.6)}
+.reader div{padding:12px 20px;border-right:1px solid var(--line-soft);text-align:left}
+.reader div:last-child{border-right:0}
+.reader span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--star-3)}
+.reader b{display:block;font-family:var(--display);font-weight:400;font-size:1.05rem;color:var(--gold-3)}
+@media(max-width:640px){.reader{grid-template-columns:1fr 1fr}.reader div:nth-child(2){border-right:0}.reader div:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}}
+.toc{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin:34px auto 0;max-width:760px;font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.toc a{color:var(--star-2);text-decoration:none}
+.toc a b{color:var(--gold);font-weight:400;margin-right:6px}
+.sheets{padding:20px 0 90px;background:var(--night)}
+.sheet{max-width:880px;margin:0 auto 34px;background:var(--paper);color:var(--ink);padding:56px 64px 40px;box-shadow:0 30px 80px rgba(0,0,0,.5);position:relative}
+.sheet:before{content:"";position:absolute;inset:10px;border:1px solid rgba(138,112,28,.22);pointer-events:none}
+.sheet-h{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid rgba(12,20,36,.15);padding-bottom:10px;margin-bottom:30px}
+.plate-t{display:flex;align-items:baseline;gap:18px;margin:0 0 8px}
+.plate-t b{font-family:var(--display);font-weight:400;font-size:3rem;line-height:1;color:var(--gold-dim)}
+.plate-t h2{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.4rem);margin:0;line-height:1.1}
+.sheet .kick{font-family:var(--display);font-style:italic;color:var(--ink-3);margin:0 0 26px;font-size:1.02rem}
+.sheet p{margin:0 0 16px;color:var(--ink-2);font-size:1.04rem;line-height:1.72}
+.sheet p.first:first-letter{float:left;font-family:var(--display);font-size:4.1rem;line-height:.82;padding:6px 10px 0 0;color:var(--gold-dim)}
+.sheet h3{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:30px 0 10px;color:var(--ink)}
+.sheet h3 small{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);display:block;margin-bottom:4px}
+.the-line{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,3vw,2.05rem);line-height:1.35;color:var(--ink);border-top:1px solid rgba(138,112,28,.4);border-bottom:1px solid rgba(138,112,28,.4);padding:22px 0;margin:6px 0 30px;text-align:center}
+.the-line small{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px}
+.attn{list-style:none;margin:8px 0 0;padding:0;counter-reset:a}
+.attn li{counter-increment:a;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 0;border-top:1px solid rgba(12,20,36,.12);font-size:1.02rem;color:var(--ink-2)}
+.attn li:before{content:counter(a,upper-roman);font-family:var(--display);font-size:1.3rem;color:var(--gold-dim)}
+.attn b{color:var(--ink);font-weight:600}
+.states{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.state{border:1px solid rgba(12,20,36,.12);background:var(--paper-2);padding:16px 18px}
+.state h4{font-family:var(--display);font-weight:400;font-size:1.12rem;margin:0 0 2px;color:var(--ink)}
+.state span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.state p{font-size:.95rem;margin:0;line-height:1.55}
+.state.here{border-color:var(--gold-dim);box-shadow:inset 3px 0 0 var(--gold-dim)}
+.callout{background:#f1e7d1;border-left:2px solid var(--gold-dim);padding:18px 22px;margin:22px 0}
+.callout p{margin:0 0 8px}
+.callout p:last-child{margin:0}
+.reads{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(12,20,36,.14);margin-top:20px}
+.read{padding:18px 20px 18px 0;border-bottom:1px solid rgba(12,20,36,.12)}
+.read:nth-child(odd){border-right:1px solid rgba(12,20,36,.12)}
+.read:nth-child(even){padding-left:20px}
+.read span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.read p{font-size:.96rem;margin:0;line-height:1.6}
+.sigs{width:100%;border-collapse:collapse;margin-top:14px}
+.sigs td{vertical-align:top;padding:16px 14px 16px 0;border-top:1px solid rgba(12,20,36,.13)}
+.sigs td.d{width:128px;font-family:var(--mono);font-size:11.5px;line-height:1.5;color:var(--gold-dim)}
+.sigs td.d small{display:block;color:var(--ink-3);font-size:10.5px}
+.sigs h4{font-family:var(--display);font-weight:400;font-size:1.18rem;margin:0 0 4px;color:var(--ink)}
+.sigs p{font-size:.97rem;margin:0;line-height:1.6}
+.sigs .pr{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin:8px 0 3px}
+.sigs tr.ahead td{background:rgba(201,162,39,.08)}
+.press{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.press div{border:1px solid rgba(12,20,36,.12);background:var(--paper-2);padding:18px 20px}
+.press h4{font-family:var(--display);font-weight:400;font-size:1.2rem;margin:0 0 8px;color:var(--ink)}
+.press p{font-size:.95rem;margin:0 0 8px;line-height:1.6}
+.press p:last-child{margin:0}
+.press b{font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-right:6px}
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.pcard{background:linear-gradient(180deg,#121b39,#0a1124);color:var(--star);padding:20px 18px 16px;min-height:210px;display:flex;flex-direction:column;border:1px solid rgba(201,162,39,.35);position:relative}
+.pcard .k{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.pcard p{color:var(--star);font-family:var(--display);font-style:italic;font-size:1.05rem;line-height:1.45;margin:0}
+.pcard .t{margin-top:auto;padding-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--star-3);border-top:1px solid rgba(201,162,39,.2)}
+.log{margin-top:14px}
+.log-q{border-top:1px solid rgba(12,20,36,.16);padding:18px 0 6px}
+.log-q h4{font-family:var(--display);font-weight:400;font-size:1.15rem;margin:0 0 12px;color:var(--ink)}
+.log-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.log-cols div span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:6px}
+.log-cols i{display:block;height:26px;border-bottom:1px solid rgba(12,20,36,.18)}
+.ledger{width:100%;border-collapse:collapse;margin-top:8px;font-size:.96rem}
+.ledger th{text-align:left;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:0 12px 8px 0;border-bottom:1px solid rgba(12,20,36,.25)}
+.ledger td{padding:10px 12px 10px 0;border-bottom:1px solid rgba(12,20,36,.1);vertical-align:top;color:var(--ink-2);line-height:1.5}
+.ledger td:first-child{color:var(--ink);white-space:nowrap}
+.ledger td.mono{font-family:var(--mono);font-size:12px;white-space:nowrap;color:var(--gold-dim)}
+.sign{margin-top:34px;text-align:right}
+.sign p{margin:0;color:var(--ink-2)}
+.sign .sig{font-family:var(--display);font-style:italic;font-size:1.7rem;color:var(--ink);margin-top:6px}
+.disc{font-size:.88rem!important;color:var(--ink-3)!important;border-top:1px solid rgba(12,20,36,.15);padding-top:16px;margin-top:28px!important}
+.l-end{text-align:center;padding:10px 0 0}
+@media(max-width:760px){.sheet{padding:40px 22px 28px}.sheet:before{inset:6px}.states,.reads,.press{grid-template-columns:1fr}.read:nth-child(odd){border-right:0}.read:nth-child(even){padding-left:0}.deck{grid-template-columns:1fr}.pcard{min-height:0}.log-cols{grid-template-columns:1fr}.sigs td.d{width:92px}.ledger td:first-child{white-space:normal}.ledger td.mono{white-space:normal}}
+@media print{.ribbon,.l-head .toc{display:none}.sheet{box-shadow:none;page-break-after:always}}
+.sheet .the-line{font-family:var(--display);font-style:italic;font-size:clamp(1.5rem,3vw,2.05rem);line-height:1.35;color:var(--ink)}
+.sheet .the-line small{font-style:normal}
+.sheet p.greet{font-family:var(--display);font-style:italic;font-size:1.25rem;color:var(--ink);margin:0 0 12px}
+.press b{display:block;margin:0 0 3px}
+.callout .checks{margin:6px 0 10px;padding-left:1.2rem;color:var(--ink-2)}
+.callout .checks li{margin:4px 0}
+@media(max-width:760px){.sheets{padding:16px 10px 70px}}
+
+</style>
+</head>
+<body>
+
+<div class="ribbon">Sample letter · for illustration · example reader “Lena”: female, born 1983, Capricorn · <a href="./">Back to SIDERA</a></div>
+
+<header class="l-head">
+  <svg class="sky" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="342.7" cy="381.0" r="1.9" fill="#e4cc86" fill-opacity="0.43"/><circle cx="869.6" cy="438.0" r="0.6" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="1308.7" cy="328.5" r="0.8" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="1032.7" cy="378.7" r="1.5" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="1239.9" cy="162.3" r="0.7" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="753.4" cy="518.9" r="0.6" fill="#f4ecdb" fill-opacity="0.29"/><circle cx="1378.8" cy="30.0" r="0.5" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="388.0" cy="416.3" r="1.2" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="1326.4" cy="276.5" r="1.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="193.2" cy="255.9" r="0.5" fill="#f4ecdb" fill-opacity="0.27"/><circle cx="312.5" cy="675.8" r="1.2" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="1231.5" cy="294.8" r="1.2" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="769.1" cy="285.3" r="0.8" fill="#f4ecdb" fill-opacity="0.79"/><circle cx="982.1" cy="650.3" r="0.9" fill="#e4cc86" fill-opacity="0.84"/><circle cx="966.6" cy="114.2" r="1.0" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="1302.8" cy="398.4" r="0.8" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="1422.8" cy="187.0" r="0.6" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="1229.7" cy="692.9" r="0.6" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="95.9" cy="628.0" r="0.5" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="1107.1" cy="610.9" r="0.5" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="1096.8" cy="264.5" r="1.0" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="1327.5" cy="195.4" r="0.8" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="445.9" cy="53.9" r="0.5" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="1398.9" cy="204.1" r="1.9" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="993.2" cy="685.9" r="1.0" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1380.5" cy="627.7" r="1.2" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="1252.6" cy="270.3" r="0.6" fill="#e4cc86" fill-opacity="0.60"/><circle cx="1354.5" cy="354.9" r="1.2" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="1030.5" cy="655.5" r="1.2" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="750.4" cy="383.9" r="0.5" fill="#f4ecdb" fill-opacity="0.71"/><circle cx="1421.9" cy="220.4" r="1.2" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="910.3" cy="42.1" r="1.0" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="978.2" cy="246.8" r="0.9" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="31.9" cy="42.4" r="0.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="361.6" cy="319.4" r="1.0" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="266.8" cy="530.7" r="0.9" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="543.1" cy="540.6" r="0.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="984.6" cy="92.0" r="0.8" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="387.9" cy="229.5" r="1.2" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="139.7" cy="420.5" r="1.0" fill="#e4cc86" fill-opacity="0.63"/><circle cx="323.2" cy="566.8" r="0.7" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="1068.6" cy="152.6" r="1.5" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="1133.3" cy="23.7" r="0.8" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1204.1" cy="402.4" r="0.9" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="1192.2" cy="59.9" r="1.0" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="606.6" cy="362.9" r="0.9" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="913.2" cy="203.3" r="1.9" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="51.2" cy="289.3" r="0.8" fill="#f4ecdb" fill-opacity="0.18"/><circle cx="1358.3" cy="616.0" r="1.2" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="1419.5" cy="502.1" r="0.5" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="1204.8" cy="464.1" r="0.9" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1281.2" cy="603.1" r="0.9" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="352.1" cy="24.6" r="0.8" fill="#e4cc86" fill-opacity="0.78"/><circle cx="1295.5" cy="403.9" r="0.5" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="174.0" cy="352.2" r="0.8" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="755.9" cy="289.6" r="0.6" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="363.6" cy="603.2" r="1.5" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="88.4" cy="154.6" r="0.6" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1176.2" cy="119.9" r="0.9" fill="#f4ecdb" fill-opacity="0.80"/><circle cx="1160.7" cy="576.4" r="0.5" fill="#f4ecdb" fill-opacity="0.51"/><circle cx="822.1" cy="280.2" r="0.9" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="890.0" cy="363.8" r="0.5" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="1118.2" cy="1.3" r="0.5" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="66.5" cy="34.9" r="1.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="1230.4" cy="60.3" r="1.5" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="453.0" cy="245.9" r="1.2" fill="#e4cc86" fill-opacity="0.57"/><circle cx="519.6" cy="133.8" r="1.0" fill="#f4ecdb" fill-opacity="0.47"/><circle cx="183.8" cy="2.4" r="1.2" fill="#f4ecdb" fill-opacity="0.71"/><circle cx="816.1" cy="30.1" r="1.5" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="1127.0" cy="266.2" r="1.9" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="897.0" cy="302.1" r="1.0" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="1094.5" cy="220.5" r="1.2" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="352.9" cy="375.1" r="0.6" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="323.2" cy="91.3" r="0.5" fill="#f4ecdb" fill-opacity="0.81"/><circle cx="538.9" cy="628.5" r="0.9" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="994.4" cy="657.3" r="1.2" fill="#f4ecdb" fill-opacity="0.63"/><circle cx="1056.6" cy="394.7" r="0.6" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="1031.9" cy="331.5" r="0.8" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="63.8" cy="64.3" r="0.6" fill="#e4cc86" fill-opacity="0.62"/><circle cx="541.1" cy="573.6" r="1.0" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="174.6" cy="590.8" r="1.5" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="1371.5" cy="405.4" r="0.6" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="1105.1" cy="357.9" r="0.8" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="1078.5" cy="654.2" r="0.5" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="1252.0" cy="126.3" r="0.6" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="258.9" cy="175.0" r="1.2" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="863.2" cy="657.1" r="1.2" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="540.5" cy="164.7" r="1.2" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="1392.6" cy="290.7" r="1.5" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="577.5" cy="621.3" r="0.7" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="1077.3" cy="641.6" r="1.5" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="1235.7" cy="95.4" r="0.8" fill="#e4cc86" fill-opacity="0.28"/><circle cx="742.5" cy="654.4" r="1.9" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="774.8" cy="545.7" r="1.2" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="841.8" cy="688.6" r="0.8" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="386.1" cy="562.9" r="0.8" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="519.1" cy="225.4" r="0.7" fill="#f4ecdb" fill-opacity="0.46"/><circle cx="1004.5" cy="491.0" r="0.8" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="1201.8" cy="575.1" r="0.5" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="1037.8" cy="599.7" r="1.2" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="1269.9" cy="32.1" r="0.8" fill="#f4ecdb" fill-opacity="0.78"/><circle cx="933.5" cy="544.1" r="0.6" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="1229.6" cy="169.5" r="0.8" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="198.0" cy="435.3" r="0.5" fill="#f4ecdb" fill-opacity="0.78"/><circle cx="367.2" cy="605.6" r="1.0" fill="#e4cc86" fill-opacity="0.30"/><circle cx="131.0" cy="559.2" r="0.6" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="1200.9" cy="204.2" r="1.0" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="1057.1" cy="235.6" r="0.5" fill="#f4ecdb" fill-opacity="0.40"/><circle cx="628.2" cy="340.1" r="0.8" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="1069.0" cy="343.0" r="0.7" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="171.6" cy="192.3" r="1.2" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="1277.6" cy="636.1" r="0.6" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="1009.0" cy="474.9" r="1.0" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="425.6" cy="473.1" r="0.9" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="1360.0" cy="237.0" r="0.6" fill="#f4ecdb" fill-opacity="0.63"/><circle cx="732.5" cy="41.7" r="1.9" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="1048.2" cy="519.6" r="0.7" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="1281.5" cy="458.8" r="0.6" fill="#e4cc86" fill-opacity="0.25"/><circle cx="806.1" cy="644.6" r="1.2" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="932.4" cy="320.4" r="0.9" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="1015.9" cy="75.2" r="0.7" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="782.1" cy="517.7" r="1.0" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="390.0" cy="37.4" r="0.7" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="726.8" cy="173.0" r="1.0" fill="#f4ecdb" fill-opacity="0.77"/><circle cx="1360.9" cy="313.8" r="0.6" fill="#f4ecdb" fill-opacity="0.42"/><circle cx="1219.5" cy="78.5" r="0.9" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="981.3" cy="395.1" r="0.6" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="272.4" cy="291.7" r="1.2" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="1078.1" cy="414.3" r="0.7" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="1149.4" cy="381.3" r="0.7" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="291.0" cy="175.1" r="0.9" fill="#e4cc86" fill-opacity="0.20"/><circle cx="1156.5" cy="623.8" r="1.2" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1304.9" cy="216.7" r="1.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="988.7" cy="209.6" r="1.5" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="274.3" cy="443.8" r="0.6" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="953.2" cy="344.3" r="1.5" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="1126.3" cy="148.3" r="1.5" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="407.9" cy="460.3" r="0.7" fill="#f4ecdb" fill-opacity="0.27"/><circle cx="1141.0" cy="436.3" r="1.9" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="518.3" cy="163.4" r="0.6" fill="#f4ecdb" fill-opacity="0.51"/><circle cx="27.2" cy="237.7" r="1.0" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="1000.3" cy="94.0" r="0.5" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="1065.2" cy="240.5" r="0.8" fill="#f4ecdb" fill-opacity="0.80"/><circle cx="1240.5" cy="305.9" r="0.8" fill="#e4cc86" fill-opacity="0.50"/><circle cx="157.1" cy="29.9" r="0.6" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="1016.4" cy="274.0" r="1.5" fill="#f4ecdb" fill-opacity="0.65"/><circle cx="773.9" cy="295.5" r="1.5" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="668.7" cy="530.0" r="1.2" fill="#f4ecdb" fill-opacity="0.47"/><circle cx="655.7" cy="26.1" r="0.9" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="534.2" cy="370.5" r="1.2" fill="#f4ecdb" fill-opacity="0.33"/><path d="M835 546 L922 434 L1022 385 L1152 266 L1238 231 L1339 126" fill="none" stroke="#c9a227" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 6"/><circle cx="835" cy="546" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="922" cy="434" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1022" cy="385" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1152" cy="266" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1238" cy="231" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1339" cy="126" r="2" fill="#e4cc86" fill-opacity=".7"/></svg>
+  <div class="wrap">
+    <a class="logo" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#c9a227" stroke-width="1.2"/><circle cx="32" cy="32" r="22.5" fill="none" stroke="#f4ecdb" stroke-opacity=".22" stroke-dasharray="1.2 3"/><line x1="9" y1="50.5" x2="55" y2="12" stroke="#c9a227" stroke-width="1" stroke-dasharray="2 2.4" stroke-opacity=".85"/><circle cx="16" cy="44.6" r="1.5" fill="#f4ecdb"/><circle cx="23.5" cy="38.4" r="1" fill="#f4ecdb" fill-opacity=".7"/><circle cx="44" cy="21" r="1.1" fill="#f4ecdb" fill-opacity=".8"/><circle cx="50" cy="16.2" r="1.5" fill="#f4ecdb"/><path d="M32 18.5 L33.7 29.4 L44.5 31.2 L33.7 33 L32 44 L30.3 33 L19.5 31.2 L30.3 29.4 Z" fill="#c9a227"/><path d="M32 25 L34.3 31.2 L32 37.4 L29.7 31.2 Z" fill="#e4cc86" transform="rotate(45 32 31.2)"/><circle cx="32" cy="31.2" r="1.4" fill="#060a16"/></svg><span class="logo-txt"><b>SIDERA</b><small>By Dr. Benjamin Koch</small></span></a>
+    <div class="eyebrow" style="justify-content:center"><i></i>The Letter · Clarity Path<i></i></div>
+    <h1>January <em>2027</em></h1>
+    <div class="meta">Sent Monday, 4 January 2027 · Capricorn season · Eight plates · Twenty quiet minutes</div>
+    <div class="reader">
+      <div><span>Written for</span><b>Lena</b></div>
+      <div><span>Star sign</span><b>Capricorn</b></div>
+      <div><span>Season of life</span><b>The Turning</b></div>
+      <div><span>Path</span><b>Clarity</b></div>
+    </div>
+    <nav class="toc" aria-label="Plates">
+      <a href="#p1"><b>I</b>The Bearing</a><a href="#p2"><b>II</b>The Inner Map</a><a href="#p3"><b>III</b>Synaptic Readout</a><a href="#p4"><b>IV</b>Signposts</a><a href="#p5"><b>V</b>Pressure Points</a><a href="#p6"><b>VI</b>Practice Deck</a><a href="#p7"><b>VII</b>Reflection Log</a><a href="#p8"><b>VIII</b>The Ledger</a>
+    </nav>
+  </div>
+</header>
+
+<main class="sheets">
+
+<!-- PLATE I -->
+<article class="sheet" id="p1">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate I · p. 1</span></div>
+  <div class="plate-t"><b>I</b><h2>The Bearing</h2></div>
+  <p class="kick">The line of your month, on one page.</p>
+  <p class="the-line"><small>The line of January</small>This is the month you stop carrying<br>what you only agreed to hold.</p>
+  <p class="greet">Dear Lena,</p>
+  <p class="first">January opens in your season. The Sun has stood in Capricorn since the solstice on 21 December, and on Thursday, 7 January, the New Moon joins it there. In the old calendars this was the time of the foundation stone: the darkest stretch of the northern year, and the first, almost invisible lengthening of the days.</p>
+  <p>Capricorn is the sign of structure, of the long climb and the load carried well. At its best it is the person who builds what lasts. At its most tired it is the person who has <i>become</i> the building, holding up walls that others lean on, long after anyone asked whether you still want to.</p>
+  <p>Somewhere between the solstice and 20 January you have just had, or are about to have, a birthday: forty-three or forty-four. Either way you are in the season of life this house calls <b>the Turning</b>. It is the decade in which competence stops being the question. You have long proven that you can carry. The Turning asks something quieter and harder: <i>which of all this is actually yours?</i></p>
+  <p>So the line of your month isn't “do more”, and it isn't even “do less”. It is to sort. In your life there are commitments you chose and commitments you only agreed to hold: inherited ones, absorbed ones, ones you said yes to quickly, or out of loyalty, years ago. The first kind gives you strength. The second kind costs you strength every day, while looking exactly like the first.</p>
+  <p>Between the New Moon on the 7th and the Full Moon on the 22nd, your work is to tell them apart. Not to drop everything. To see clearly, and to set down one thing on purpose.</p>
+  <h3><small>Three lines of attention</small>For the month ahead</h3>
+  <ol class="attn">
+    <li><span><b>Until the New Moon (7 Jan).</b> Notice every time you think or say “I have to”. Count them. Don't fix any of them yet.</span></li>
+    <li><span><b>Between New Moon and Full Moon.</b> Choose one “have to” and trace it back, honestly, to the day you first agreed to it. Who asked? What did you get for saying yes?</span></li>
+    <li><span><b>After the Full Moon (22 Jan).</b> Decide, in your own words, whether it stays. Either answer is a good answer, as long as it is yours.</span></li>
+  </ol>
+</article>
+
+<!-- PLATE II -->
+<article class="sheet" id="p2">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate II · p. 2</span></div>
+  <div class="plate-t"><b>II</b><h2>The Inner Map</h2></div>
+  <p class="kick">Four inner states on two drivers, and where you are likely to sit this month.</p>
+  <p>The Clarity Path draws your map on two drivers. <b>Bearing</b> is how clearly you know your direction. <b>Charge</b> is how much energy is actually available to you, not how much you can force. Every one of the four states is a normal place to be. None is a verdict.</p>
+  <svg viewBox="0 0 520 390" role="img" aria-label="The Inner Map: four inner states on two drivers, Bearing and Charge, with the likely path for January marked"><rect x="48" y="14" width="456" height="320" fill="#fffdf8" stroke="#0c1424" stroke-opacity=".18"/><line x1="276" y1="14" x2="276" y2="334" stroke="#0c1424" stroke-opacity=".3"/><line x1="48" y1="174" x2="504" y2="174" stroke="#0c1424" stroke-opacity=".3"/><g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9.5" letter-spacing="1.6" fill="#6e6654"><text x="276" y="356" text-anchor="middle">BEARING  ·  UNCLEAR  →  CLEAR</text><text x="22" y="174" text-anchor="middle" transform="rotate(-90 22 174)">CHARGE  ·  SPENT  →  GATHERED</text></g><text x="162" y="40" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Restless Wind</text><text x="162" y="56" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">energy without a line</text><text x="390" y="40" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Lodestar</text><text x="390" y="56" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">clear and resourced</text><text x="162" y="306" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Winter Field</text><text x="162" y="322" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">fallow, not failed</text><text x="390" y="306" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Faithful Ember</text><text x="390" y="322" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">clear, on reserves</text><ellipse cx="346" cy="228" rx="84" ry="52" fill="none" stroke="#8a701c" stroke-opacity="0.18" stroke-width="1"/><ellipse cx="346" cy="228" rx="58" ry="36" fill="none" stroke="#8a701c" stroke-opacity="0.32" stroke-width="1"/><ellipse cx="346" cy="228" rx="36" ry="22" fill="none" stroke="#8a701c" stroke-opacity="0.55" stroke-width="1"/><ellipse cx="346" cy="228" rx="15" ry="9" fill="none" stroke="#8a701c" stroke-opacity="0.9" stroke-width="1.6"/><path d="M354 220 C 380 192, 396 160, 408 116" fill="none" stroke="#8a701c" stroke-width="1.4" stroke-dasharray="4 4"/><path d="M402 120 L409 108 L413 122" fill="none" stroke="#8a701c" stroke-width="1.4"/><circle cx="346" cy="228" r="3.2" fill="#8a701c"/><circle cx="410" cy="104" r="3.2" fill="none" stroke="#8a701c" stroke-width="1.4"/><g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9" letter-spacing="1" fill="#8a701c"><text x="438" y="232">EARLY JAN</text><text x="420" y="98">BY 22 JAN</text></g></svg>
+  <div class="states">
+    <div class="state"><span>Clear · gathered</span><h4>The Lodestar</h4><p>You know your direction and you have the energy to walk it. Decisions feel light. The task here is simply not to give it away.</p></div>
+    <div class="state"><span>Unclear · gathered</span><h4>The Restless Wind</h4><p>Plenty of energy and no line for it. You start many things. The task here is to choose one direction before you spend the wind.</p></div>
+    <div class="state here"><span>Clear · on reserves · your likely start</span><h4>The Faithful Ember</h4><p>You know the way and you keep going, but on reserves. It often feels like virtue. The task here is to find what is drawing the charge.</p></div>
+    <div class="state"><span>Unclear · spent</span><h4>The Winter Field</h4><p>No clear direction and little energy. This is fallow time, not failure. The task here is rest first, decisions later.</p></div>
+  </div>
+  <h3><small>Where you are likely to sit</small>The Faithful Ember, moving towards the Lodestar</h3>
+  <p>A Capricorn in the Turning usually begins January as the Faithful Ember. The direction is clear, because you rarely lack a plan, but the charge is low after the year's end. If the sorting in Plate I happens, the month tends to move up and to the right: towards the Lodestar by the Full Moon. That isn't because you add energy. It is because you stop spending it on what isn't yours.</p>
+  <div class="callout">
+    <p><b>How to tell where you actually are.</b> Three quick checks, any morning this month:</p>
+    <ul class="checks"><li>Do I know what matters most this week? <i>(Bearing)</i></li><li>After a normal day, is there anything left for me? <i>(Charge)</i></li><li>Which of the four names made me exhale when I read it?</li></ul>
+    <p><i>“Likely” is not “certain”. Plate VII is where you record where you really were.</i></p>
+  </div>
+</article>
+
+<!-- PLATE III -->
+<article class="sheet" id="p3">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate III · p. 3</span></div>
+  <div class="plate-t"><b>III</b><h2>Synaptic Readout</h2></div>
+  <p class="kick">The pattern the frameworks bring forward this month.</p>
+  <p class="the-line"><small>This month's pattern</small>The Load-Bearing Self</p>
+  <p><b>In one sentence:</b> when you have been reliable for long enough, reliability starts to replace preference, and you stop noticing the difference. Each framework sees this pattern from its own side. Read them as six lights on one object.</p>
+  <div class="reads">
+    <div class="read"><span>The Clarity System</span><p>Observation, duplication, acknowledgment. Observe one duty exactly as it is, not as you describe it to others. Duplicate it: say it back plainly. Acknowledge it: “This is what I am carrying.” Much of the weight is static, and it is heavy because no one has ever looked at it directly.</p></div>
+    <div class="read"><span>Inversion</span><p>Turn the question round. Not “how do I make 2027 different?” but “how would I guarantee that 2027 feels exactly like 2026?” Your honest answers will name the load-bearing habits more precisely than any plan could.</p></div>
+    <div class="read"><span>Synaptics</span><p>Pathways strengthen where attention repeats. Twenty years of “I'll handle it” is a well-worn path, and it fires before you choose. The freedom here isn't effort. It is half a second of noticing before the yes.</p></div>
+    <div class="read"><span>Happiness by Design</span><p>Happiness is an architecture. A building made only of obligations has walls and no rooms. The design question for January: where in your week is the room that belongs to you?</p></div>
+    <div class="read"><span>The Eden Codex</span><p>The Codex speaks of covering and continuity: layers that settle until the self speaks from somewhere else. The duties you only agreed to hold are such a covering. Underneath it is continuity, the person you were before the roles. You don't have to build her. You only have to notice the covering.</p></div>
+    <div class="read"><span>The attention practice</span><p>Where your attention goes first in the morning sets the tone of the day. For the Load-Bearing Self, the first attention usually goes to someone else's need. For one week, give the first minute of attention each day to one thing of your own.</p></div>
+  </div>
+</article>
+
+<!-- PLATE IV -->
+<article class="sheet" id="p4">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate IV · p. 4</span></div>
+  <div class="plate-t"><b>IV</b><h2>Signposts</h2></div>
+  <p class="kick">The real sky of January, each date with one small practice. Times in UTC and US Eastern.</p>
+  <table class="sigs">
+    <tr><td class="d">SUN 3 JAN<small>00:00 UTC<br>Sat 2 Jan, 7 pm ET</small></td><td><h4>Earth at perihelion</h4><p>In the darkest stretch of the northern year, the Earth passes closest to the Sun. What is nearest is often what we see least.</p><span class="pr">Practice · The Nearest Light</span><p>Ten minutes. Write down five things in your life that are already close and good, and that you've stopped noticing because they are reliable. You may recognise the feeling.</p></td></tr>
+    <tr><td class="d">THU 7 JAN<small>20:24 UTC<br>3:24 pm ET</small></td><td><h4>New Moon in Capricorn</h4><p>The New Moon falls in your own sign, the one New Moon of the year that belongs to you. A dark sky and a clean beginning.</p><span class="pr">Practice · Clean Ground</span><p>Write every “I have to” you have counted since Monday on a single page. Circle one to examine this month: not to drop, only to examine. Then close the page and leave it until the Full Moon.</p></td></tr>
+    <tr><td class="d">FRI 15 JAN<small>20:34 UTC<br>3:34 pm ET</small></td><td><h4>First Quarter Moon</h4><p>Half lit, half in shadow. The halfway mark between beginning and fullness.</p><span class="pr">Practice · The Half-Light Check</span><p>Take the commitment you circled and draw two columns: the part that is truly mine, and the part I inherited or absorbed. Be generous to both columns.</p></td></tr>
+    <tr><td class="d">WED 20 JAN<small>07:26 UTC<br>2:26 am ET</small></td><td><h4>Sun enters Aquarius · your season closes</h4><p>Capricorn season ends and Aquarius begins: from structure to the open view.</p><span class="pr">Practice · Handing Over the Season</span><p>Three sentences, no more: what this season of mine built, what it cost me, and what I carry into the next month by choice.</p></td></tr>
+    <tr><td class="d">FRI 22 JAN<small>12:17 UTC<br>7:17 am ET</small></td><td><h4>Full Moon in Leo</h4><p>The Full Moon lights the sign of the heart and of being seen, opposite your quiet, structural Sun.</p><span class="pr">Practice · What Wants to Be Seen</span><p>Ask: which part of me has been working in the dark? Show it to one person this week, in a small way: a sentence, a sketch, a song you love.</p></td></tr>
+    <tr><td class="d">FRI 29 JAN<small>10:55 UTC<br>5:55 am ET</small></td><td><h4>Last Quarter Moon</h4><p>The waning half: the natural moment to let something go.</p><span class="pr">Practice · The Release List</span><p>Make your decision about the commitment you examined. Write it in one sentence, in your own words, and date it. If it stays, it now stays by choice.</p></td></tr>
+    <tr class="ahead"><td class="d">SAT 6 FEB<small>15:56 UTC<br>10:56 am ET</small></td><td><h4>Looking ahead · New Moon in Aquarius, with an annular eclipse of the Sun</h4><p>A ring of sunlight, visible from parts of South America and West Africa. Your February letter arrives on Monday, 1 February, and it begins here.</p></td></tr>
+  </table>
+</article>
+
+<!-- PLATE V -->
+<article class="sheet" id="p5">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate V · p. 5</span></div>
+  <div class="plate-t"><b>V</b><h2>Pressure Points</h2></div>
+  <p class="kick">Where friction tends to gather this month, and what helps. Tendencies, not warnings.</p>
+  <div class="press">
+    <div><h4>Relationships</h4><p><b>Where it presses</b>The people who rely on you notice first when you begin to sort, often before you have changed anything. Expect a gentle “Is everything all right?”</p><p><b>What helps</b>Tell the truth in a small size: “I'm looking at what I take on. Nothing is wrong.” That sentence is usually enough.</p></div>
+    <div><h4>Work</h4><p><b>Where it presses</b>Planning for the new year invites a Capricorn to volunteer for structure. You may be handed the next big thing, because you are good at it.</p><p><b>What helps</b>A twenty-four-hour rule for every new commitment this month. A yes that is still a yes tomorrow is yours.</p></div>
+    <div><h4>Body</h4><p><b>Where it presses</b>Midwinter asks for more sleep and warmth, and Capricorn tends to overrule it. Carried things often show up in the shoulders and the jaw.</p><p><b>What helps</b>Small, ordinary care: daylight before noon when you can, and one evening a week that ends early. Notice the shoulders when you do.</p></div>
+    <div><h4>Rest</h4><p><b>Where it presses</b>Rest feels like something you earn once the work is done, and the work is never done. Sunday evenings are the usual pressure point.</p><p><b>What helps</b>Once this month, rest before you have earned it. Schedule it like a meeting. Then simply notice what happens.</p></div>
+  </div>
+</article>
+
+<!-- PLATE VI -->
+<article class="sheet" id="p6">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate VI · p. 6</span></div>
+  <div class="plate-t"><b>VI</b><h2>Practice Deck</h2></div>
+  <p class="kick">Six prompts for the month. Choose the ones that call you. The three marked &#9670; return in February's Reflection Log.</p>
+  <div class="deck">
+    <div class="pcard"><div class="k"><span>Question</span><span>&#9670;</span></div><p>If no one were watching how well you carry it, which weight would you put down first?</p><div class="t">Inversion</div></div>
+    <div class="pcard"><div class="k"><span>Exercise</span><span></span></div><p>Take one duty. Describe it out loud, exactly as it is, in one plain sentence, three times. Notice what changes in the third telling.</p><div class="t">The Clarity System</div></div>
+    <div class="pcard"><div class="k"><span>Question</span><span>&#9670;</span></div><p>Which hour of your week belongs to no one? If there is none, which hour could?</p><div class="t">Happiness by Design</div></div>
+    <div class="pcard"><div class="k"><span>Exercise</span><span></span></div><p>For three mornings, notice the first “yes” of the day. Don't change it. Just notice it half a second earlier.</p><div class="t">Synaptics · attention</div></div>
+    <div class="pcard"><div class="k"><span>Question</span><span></span></div><p>Who were you at nineteen, before the first role you agreed to play? What did she already know?</p><div class="t">The Eden Codex</div></div>
+    <div class="pcard"><div class="k"><span>Question</span><span>&#9670;</span></div><p>What would you choose this year if you trusted you would still be loved without the carrying?</p><div class="t">Clarity Path</div></div>
+  </div>
+</article>
+
+<!-- PLATE VII -->
+<article class="sheet" id="p7">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate VII · p. 7</span></div>
+  <div class="plate-t"><b>VII</b><h2>Reflection Log</h2></div>
+  <p class="kick">Last month's questions return. You note what held.</p>
+  <p>This is your first letter, so the Log opens with the three solstice questions every new reader receives. From February on, the three &#9670; prompts from the previous month's Practice Deck return here. Print this page, or copy the questions into a notebook. Over a year it becomes a quiet record of who you became.</p>
+  <div class="log">
+    <div class="log-q"><h4>1 · What did the past year ask of you that you gave gladly?</h4><div class="log-cols"><div><span>What held</span><i></i><i></i></div><div><span>What didn't</span><i></i><i></i></div><div><span>What I noticed</span><i></i><i></i></div></div></div>
+    <div class="log-q"><h4>2 · What did it ask of you that you gave out of habit?</h4><div class="log-cols"><div><span>What held</span><i></i><i></i></div><div><span>What didn't</span><i></i><i></i></div><div><span>What I noticed</span><i></i><i></i></div></div></div>
+    <div class="log-q"><h4>3 · What do you want more of, now that the light is returning?</h4><div class="log-cols"><div><span>What held</span><i></i><i></i></div><div><span>What didn't</span><i></i><i></i></div><div><span>What I noticed</span><i></i><i></i></div></div></div>
+  </div>
+  <p style="margin-top:22px"><i>Nothing you write here is ever sent to us. The Log is yours alone.</i></p>
+</article>
+
+<!-- PLATE VIII -->
+<article class="sheet" id="p8">
+  <div class="sheet-h"><span>SIDERA · Clarity Path · Capricorn</span><span>January 2027 · Plate VIII · p. 8</span></div>
+  <div class="plate-t"><b>VIII</b><h2>The Ledger</h2></div>
+  <p class="kick">What this letter draws on, named plainly.</p>
+  <h3><small>Frameworks</small>Where each one appears</h3>
+  <table class="ledger">
+    <thead><tr><th>Framework</th><th>Plates</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td>The Clarity System</td><td>I · III · VI</td><td>Observation, duplication and acknowledgment of a single duty</td></tr>
+      <tr><td>Inversion</td><td>III · VI</td><td>The inverted year question; the weight you would put down first</td></tr>
+      <tr><td>Synaptics</td><td>III · VI</td><td>Repeated attention as a pathway; the half-second before the yes</td></tr>
+      <tr><td>Happiness by Design</td><td>III · V · VI</td><td>A week with rooms in it, not only walls</td></tr>
+      <tr><td>The Eden Codex</td><td>III · VI</td><td>Covering and continuity; the self before the roles</td></tr>
+      <tr><td>Attention practice</td><td>III · VI</td><td>The first minute of attention each morning</td></tr>
+    </tbody>
+  </table>
+  <h3><small>The sky</small>Dates used in this letter</h3>
+  <table class="ledger">
+    <thead><tr><th>Event</th><th>Date and time (UTC)</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>December solstice · Sun enters Capricorn</td><td class="mono">21 Dec 2026 · 20:50</td><td>Start of your season</td></tr>
+      <tr><td>Earth at perihelion</td><td class="mono">3 Jan 2027 · 00:00</td><td>2 January, evening, in the Americas</td></tr>
+      <tr><td>New Moon</td><td class="mono">7 Jan 2027 · 20:24</td><td>Moon at 17° Capricorn</td></tr>
+      <tr><td>First Quarter Moon</td><td class="mono">15 Jan 2027 · 20:34</td><td></td></tr>
+      <tr><td>Sun enters Aquarius</td><td class="mono">20 Jan 2027 · 07:26</td><td>End of your season</td></tr>
+      <tr><td>Full Moon</td><td class="mono">22 Jan 2027 · 12:17</td><td>Moon at 2° Leo</td></tr>
+      <tr><td>Last Quarter Moon</td><td class="mono">29 Jan 2027 · 10:55</td><td></td></tr>
+      <tr><td>New Moon · annular solar eclipse</td><td class="mono">6 Feb 2027 · 15:56</td><td>Next month</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:16px;font-size:.92rem">Times are calculated from a standard astronomical ephemeris and rounded to the minute; they can be checked against any public almanac. Zodiac signs follow the familiar tropical convention. Your season of life, the Turning (ages 43 to 49), comes from the year of birth you gave us, 1983.</p>
+  <div class="sign">
+    <p>Under the same sky,</p>
+    <p class="sig">Dr. Benjamin Koch</p>
+    <p style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:6px">Your February letter · Monday, 1 February 2027</p>
+  </div>
+  <p class="disc">SIDERA is for reflection and self-development. It is not a forecast, and it is not medical, psychological, financial or legal advice. If you are in crisis or need care, please turn to a qualified professional. This is a sample letter, written for an example reader to show the format.</p>
+</article>
+
+<div class="l-end"><a class="btn btn-gold" href="./#subscribe">Choose your letter <span class="arr">&rarr;</span></a></div>
+</main>
+
+</body>
+</html>

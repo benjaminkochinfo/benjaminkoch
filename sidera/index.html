@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SIDERA · Inner intelligence house by Dr. Benjamin Koch</title>
+<meta name="description" content="SIDERA: a monthly letter of eight plates for your star sign and your season of life, drawn from Dr. Benjamin Koch's frameworks: The Clarity System, Synaptics, Inversion, Happiness by Design and The Eden Codex. Reflection, not prediction.">
+<meta name="theme-color" content="#060a16">
+<style>
+:root{
+  --night:#060a16;--night-2:#0a1124;--night-3:#111a33;--indigo:#1a2448;
+  --gold:#c9a227;--gold-2:#e4cc86;--gold-3:#f3e6b8;--gold-dim:#8a701c;
+  --star:#f4ecdb;--star-2:rgba(244,236,219,.78);--star-3:rgba(244,236,219,.55);--moon:#c9d0e2;
+  --paper:#f8f2e6;--paper-2:#fffdf8;--ink:#0c1424;--ink-2:#2a3346;--ink-3:#6e6654;
+  --line:rgba(201,162,39,.30);--line-soft:rgba(201,162,39,.14);--hair:rgba(244,236,219,.10);
+  --serif:"Palatino Linotype",Palatino,"Book Antiqua",P052,"Iowan Old Style",Georgia,serif;
+  --display:"Palatino Linotype",Palatino,"Book Antiqua",P052,"Times New Roman",serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{background:var(--night);color:var(--star);font-family:var(--serif);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--gold-2);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--gold-3)}
+img,svg{max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+em{font-style:italic;color:var(--gold-2)}
+.paper em{color:var(--gold-dim)}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.eyebrow i{display:inline-block;width:28px;height:1px;background:var(--gold);opacity:.7}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;font-family:var(--display);font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);color:var(--gold-2);background:transparent;transition:background .2s,color .2s,transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);color:var(--gold-3);box-shadow:0 10px 30px rgba(201,162,39,.18)}
+.btn-gold{background:linear-gradient(180deg,var(--gold-2),var(--gold));color:var(--night)}
+.btn-gold:hover{color:var(--night);filter:brightness(1.06)}
+.arr{font-family:var(--sans);letter-spacing:0}
+.sample-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);padding:3px 8px;white-space:nowrap}
+.paper .sample-tag{color:var(--gold-dim);border-color:rgba(138,112,28,.35)}
+
+/* dateline + mast */
+.dateline{background:#04070f;border-bottom:1px solid var(--line-soft);font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--star-3)}
+.dateline .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:9px;padding-bottom:9px;flex-wrap:wrap}
+.dateline b{color:var(--gold)}
+.mast{position:sticky;top:0;z-index:20;background:rgba(6,10,22,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.mast .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-top:14px;padding-bottom:14px}
+.mast-nav{display:flex;gap:22px;font-family:var(--display);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.mast-nav a{color:var(--star-2);text-decoration:none}
+.mast-nav a:hover{color:var(--gold-2)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--star)}
+.logo svg{width:40px;height:40px;flex:none}
+.logo-txt{display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.logo-txt b{font-family:var(--display);font-weight:500;font-size:20px;letter-spacing:.42em;margin-right:-.42em}
+.logo-txt small{font-family:var(--display);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-top:5px}
+.mast-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.mast-right .back{font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--star-3);text-decoration:none}
+.mast-right .btn{padding:10px 16px;font-size:11px}
+@media(max-width:960px){.mast-nav{display:none}.mast .wrap{grid-template-columns:auto 1fr}.mast-right .back{display:none}}
+@media(max-width:480px){.mast-right .btn{padding:9px 11px;font-size:10px;letter-spacing:.14em}.logo-txt b{font-size:17px}.logo svg{width:34px;height:34px}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:96px 0 0;background:radial-gradient(ellipse 80% 70% at 72% 30%,rgba(27,36,72,.95) 0%,rgba(10,17,36,.9) 45%,var(--night) 80%)}
+.sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.6rem,5.2vw,4.6rem);line-height:1.04;letter-spacing:-.01em;margin:0 0 22px}
+.hero h1 em{display:block}
+.hero h1 .thin{display:block;font-size:.34em;line-height:1.5;letter-spacing:.02em;color:var(--star-2);margin-top:22px;font-style:normal;max-width:30em}
+.hero-lede{font-size:1.08rem;color:var(--star-2);max-width:34rem;margin:0 0 28px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{margin-top:22px;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--star-3)}
+.dial{width:100%;max-width:440px;display:block;margin:0 auto}
+.dial .spin{transform-origin:220px 220px;animation:spin 240s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.dial .spin{animation:none}}
+.hero-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px;border-top:1px solid var(--line-soft)}
+.hero-strip div{padding:24px 20px 30px;border-right:1px solid var(--line-soft)}
+.hero-strip div:last-child{border-right:0}
+.hero-strip b{display:block;font-family:var(--display);font-weight:400;font-size:2.1rem;color:var(--gold-2);line-height:1}
+.hero-strip span{display:block;margin-top:8px;font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--star-3)}
+@media(max-width:900px){.hero{padding-top:56px}.hero-grid{grid-template-columns:1fr;gap:28px}.dial{max-width:300px}.hero-strip{grid-template-columns:1fr 1fr;margin-top:48px}.hero-strip div:nth-child(2){border-right:0}.hero-strip div:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}}
+
+.band{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--night-2);padding:16px 0;text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--star-3)}
+.band span{display:inline-block;margin:4px 6px}
+.band i{font-style:normal;color:var(--gold);margin:0 6px}
+
+/* sections */
+.sec{padding:110px 0;position:relative}
+.sec.alt{background:var(--night-2)}
+.sec.paper{background:var(--paper);color:var(--ink)}
+.paper .eyebrow{color:var(--gold-dim)}
+.paper .eyebrow i{background:var(--gold-dim)}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:56px}
+.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(2.1rem,3.6vw,3.2rem);line-height:1.08;margin:0}
+.sec-head p{margin:0;color:var(--star-2);font-size:1.06rem}
+.paper .sec-head p{color:var(--ink-2)}
+@media(max-width:900px){.sec{padding:76px 0}.sec-head{grid-template-columns:1fr;gap:18px;margin-bottom:36px}}
+
+.doctrine{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.doc{padding:34px 30px;border-right:1px solid var(--line-soft)}
+.doc:last-child{border-right:0}
+.doc .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--gold)}
+.doc h3{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:12px 0 10px}
+.doc p{margin:0;color:var(--star-2);font-size:1rem}
+@media(max-width:900px){.doctrine{grid-template-columns:1fr}.doc{border-right:0;border-bottom:1px solid var(--line-soft)}.doc:last-child{border-bottom:0}}
+.quote{font-family:var(--display);font-style:italic;font-size:clamp(1.35rem,2.4vw,1.9rem);line-height:1.4;text-align:center;color:var(--gold-3);max-width:46rem;margin:64px auto 0}
+.quote small{display:block;margin-top:16px;font-style:normal;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.etym{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.etym div{border:1px solid var(--line-soft);padding:18px 20px;background:rgba(17,26,51,.5)}
+.etym b{display:block;font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--gold-2)}
+.etym span{display:block;font-size:.95rem;color:var(--star-2);margin-top:4px}
+@media(max-width:900px){.etym{grid-template-columns:1fr}}
+
+/* plates */
+.plates{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.plate{background:var(--night);padding:26px 24px 28px;min-height:210px}
+.sec.alt .plate{background:var(--night-2)}
+.pn{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+.pn b{font-family:var(--display);font-weight:400;font-size:2rem;color:var(--gold-2);line-height:1}
+.pn span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--star-3)}
+.plate h4{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0 0 8px}
+.plate p{margin:0;font-size:.96rem;color:var(--star-2)}
+@media(max-width:1000px){.plates{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.plates{grid-template-columns:1fr}.plate{min-height:0}}
+
+/* spread */
+.spread-wrap{margin-top:72px}
+.spread-cap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--star-3);margin-bottom:14px}
+.spread{display:grid;grid-template-columns:1fr 1fr;gap:0;box-shadow:0 40px 90px rgba(0,0,0,.55);border:1px solid rgba(201,162,39,.25)}
+.page{background:var(--paper);color:var(--ink);padding:38px 40px 30px;position:relative}
+.page+.page{border-left:1px solid rgba(12,20,36,.12);background:linear-gradient(90deg,rgba(12,20,36,.05),transparent 26px),var(--paper)}
+.page-h,.page-f{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.page-h{border-bottom:1px solid rgba(12,20,36,.15);padding-bottom:10px;margin-bottom:22px}
+.page-f{border-top:1px solid rgba(12,20,36,.12);padding-top:10px;margin-top:24px}
+.page h5{font-family:var(--display);font-weight:400;font-size:1.9rem;margin:0 0 6px;color:var(--ink)}
+.page h5 em{color:var(--gold-dim)}
+.page .dek{margin:0 0 18px;font-size:.98rem;color:var(--ink-2)}
+.sig-list{list-style:none;margin:0;padding:0}
+.sig-list li{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:11px 0;border-bottom:1px dashed rgba(12,20,36,.16);font-size:.95rem;line-height:1.45;color:var(--ink-2)}
+.sig-list .d{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--gold-dim);padding-top:2px}
+.sig-list b{color:var(--ink);font-weight:600}
+.sig-list small{display:block;color:var(--ink-3);font-size:.86rem;margin-top:2px}
+@media(max-width:900px){.spread{grid-template-columns:1fr}.page{padding:28px 22px 22px}.page+.page{border-left:0;border-top:1px solid rgba(12,20,36,.12)}}
+
+/* cards */
+.dcards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.dcard{border:1px solid var(--line-soft);background:linear-gradient(180deg,rgba(26,36,72,.55),rgba(10,17,36,.6));padding:22px 22px 18px;display:flex;flex-direction:column;position:relative;overflow:hidden;min-height:280px}
+.dcard .k{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--star-3);margin-bottom:18px}
+.dcard h4{font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.2;margin:0 0 10px}
+.dcard p{margin:0 0 10px;font-size:.95rem;color:var(--star-2)}
+.dcard .bot{margin-top:auto;padding-top:12px;border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.dcard.cover{background:radial-gradient(circle at 80% 10%,rgba(201,162,39,.22),transparent 55%),linear-gradient(180deg,#141f40,#070b17)}
+.dcard .line-q{font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--gold-3);line-height:1.45}
+@media(max-width:1000px){.dcards{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.dcards{grid-template-columns:1fr}.dcard{min-height:0}}
+
+/* inbox */
+.inbox-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.inbox{border:1px solid var(--line-soft);background:var(--night);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.inbox-top{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line-soft);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--star-3)}
+.mail{display:grid;grid-template-columns:86px 1fr;gap:16px;padding:16px 18px;border-bottom:1px solid var(--hair)}
+.mail:last-child{border-bottom:0}
+.mail .d{font-family:var(--mono);font-size:11px;color:var(--gold);padding-top:3px;line-height:1.5}
+.mail .d small{display:block;color:var(--star-3);font-size:10px}
+.mail b{display:block;font-weight:400;font-family:var(--display);font-size:1.04rem;color:var(--star)}
+.mail span{display:block;font-size:.9rem;color:var(--star-3);line-height:1.45;margin-top:2px}
+.mail .tier{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-soft);padding:2px 7px}
+.mail.main{background:linear-gradient(90deg,rgba(201,162,39,.09),transparent 60%)}
+.inbox-list{list-style:none;margin:0;padding:0}
+.inbox-list li{padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.inbox-list li:first-child{padding-top:0}
+.inbox-list h4{font-family:var(--display);font-weight:400;font-size:1.3rem;margin:0 0 6px;color:var(--gold-3)}
+.inbox-list p{margin:0;color:var(--star-2);font-size:1rem}
+@media(max-width:900px){.inbox-grid{grid-template-columns:1fr}.mail{grid-template-columns:70px 1fr;gap:12px}}
+
+/* paths */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.path{border:1px solid var(--line);padding:36px 34px 30px;position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(26,36,72,.65),rgba(6,10,22,.4))}
+.path .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.path h3{font-family:var(--display);font-weight:400;font-size:2.1rem;margin:10px 0 4px}
+.path .for{font-family:var(--display);font-style:italic;color:var(--star-2);margin:0 0 18px}
+.path p{color:var(--star-2);font-size:1rem;margin:0 0 16px}
+.path ul{list-style:none;margin:0 0 20px;padding:0}
+.path li{padding:8px 0 8px 22px;border-top:1px solid var(--hair);position:relative;font-size:.98rem;color:var(--star-2)}
+.path li:before{content:"";position:absolute;left:2px;top:17px;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold)}
+.path .q{font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--gold-3);border-left:1px solid var(--gold);padding-left:16px;margin:0}
+@media(max-width:900px){.paths{grid-template-columns:1fr}.path{padding:28px 22px 24px}}
+.seasons{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin-top:56px}
+.seasons div{background:var(--night);padding:18px 14px;text-align:center}
+.seasons b{display:block;font-family:var(--display);font-weight:400;font-size:1.06rem;color:var(--gold-3)}
+.seasons span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--star-3);margin-top:4px}
+.seasons-cap{font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--star-3);margin:0 0 12px;text-align:center}
+@media(max-width:900px){.seasons{grid-template-columns:repeat(2,1fr)}.seasons div:last-child{grid-column:span 2}}
+
+/* calendar */
+.cal{width:100%;border-collapse:collapse;font-size:.98rem}
+.cal th{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:0 14px 12px 0;border-bottom:1px solid rgba(12,20,36,.25)}
+.cal td{padding:14px 14px 14px 0;border-bottom:1px solid rgba(12,20,36,.12);vertical-align:top;color:var(--ink-2)}
+.cal td.m{font-family:var(--display);font-size:1.25rem;color:var(--ink);white-space:nowrap}
+.cal td.d{font-family:var(--mono);font-size:12px;color:var(--gold-dim);white-space:nowrap}
+.cal b{color:var(--ink);font-weight:600}
+.cal tr.first td{background:rgba(201,162,39,.08)}
+.cal-note{margin:18px 0 0;font-size:.9rem;color:var(--ink-3)}
+@media(max-width:700px){.cal thead{display:none}.cal,.cal tbody,.cal tr,.cal td{display:block;width:100%}.cal tr{padding:12px 0;border-bottom:1px solid rgba(12,20,36,.18)}.cal td{border:0;padding:2px 0}.cal td.m{margin-bottom:6px}}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.tier{border:1px solid var(--line-soft);background:rgba(17,26,51,.55);padding:32px 28px 28px;display:flex;flex-direction:column}
+.tier.feat{border-color:var(--gold);background:radial-gradient(circle at 50% 0%,rgba(201,162,39,.16),transparent 60%),rgba(17,26,51,.75);box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.tier .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.tier h3{font-family:var(--display);font-weight:400;font-size:1.75rem;margin:10px 0 6px}
+.tier .who{font-size:.96rem;color:var(--star-2);margin:0 0 18px;min-height:5em}
+.price{font-family:var(--display);font-size:3rem;line-height:1;color:var(--gold-2)}
+.price small{font-size:.95rem;color:var(--star-3);letter-spacing:.04em}
+.yearly{font-family:var(--mono);font-size:11.5px;color:var(--star-3);margin:10px 0 22px;letter-spacing:.02em}
+.yearly b{color:var(--gold-2);font-weight:400}
+.tier ul{list-style:none;padding:0;margin:0 0 26px;flex:1}
+.tier li{padding:9px 0 9px 22px;border-top:1px solid var(--hair);font-size:.96rem;color:var(--star-2);position:relative}
+.tier li:before{content:"";position:absolute;left:2px;top:18px;width:6px;height:6px;transform:rotate(45deg);background:var(--gold)}
+.tier .btn{width:100%}
+.tier .fine{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--star-3);text-align:center;margin:12px 0 0}
+.tiers-note{text-align:center;color:var(--star-3);font-size:.92rem;margin:28px auto 0;max-width:44rem}
+@media(max-width:1000px){.tiers{grid-template-columns:1fr}.tier .who{min-height:0}}
+
+/* privacy */
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ask-card{border:1px solid rgba(12,20,36,.14);background:var(--paper-2);padding:30px 30px 26px;box-shadow:0 14px 40px rgba(12,20,36,.06)}
+.ask-card h3{font-family:var(--display);font-weight:400;font-size:1.5rem;margin:0 0 4px;color:var(--ink)}
+.ask-card .sub{margin:0 0 18px;color:var(--ink-3);font-size:.95rem}
+.field{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 0;border-top:1px solid rgba(12,20,36,.1);align-items:baseline}
+.field .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim)}
+.field .v{font-size:.98rem;color:var(--ink-2)}
+.field .v i{color:var(--ink-3)}
+.never{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
+.never li{break-inside:avoid;padding:9px 0 9px 24px;border-top:1px solid rgba(12,20,36,.1);position:relative;font-size:.98rem;color:var(--ink-2)}
+.never li:before{content:"\00D7";position:absolute;left:3px;top:6px;color:var(--gold-dim);font-size:1.15rem}
+.priv-foot{margin-top:24px;font-size:.95rem;color:var(--ink-2);max-width:60rem}
+@media(max-width:900px){.ask{grid-template-columns:1fr}.field{grid-template-columns:1fr;gap:2px}.never{columns:1}.ask-card{padding:24px 20px}}
+
+/* standard */
+.standard{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.std{background:var(--night-2);padding:30px 28px}
+.std .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.std h4{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:10px 0 8px}
+.std p{margin:0;color:var(--star-2);font-size:.97rem}
+.not-line{margin:44px auto 0;max-width:52rem;text-align:center;font-family:var(--display);font-style:italic;font-size:1.12rem;line-height:1.6;color:var(--gold-3);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:24px 10px}
+@media(max-width:900px){.standard{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:52rem}
+.faq details{border-top:1px solid var(--line-soft);padding:6px 0}
+.faq details:last-child{border-bottom:1px solid var(--line-soft)}
+.faq summary{cursor:pointer;list-style:none;font-family:var(--display);font-size:1.22rem;padding:16px 36px 16px 0;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:4px;top:12px;font-family:var(--sans);font-size:1.4rem;color:var(--gold)}
+.faq details[open] summary:after{content:"\2013"}
+.faq details p{margin:0 0 18px;color:var(--star-2);font-size:1rem;max-width:46rem}
+
+/* closing + foot */
+.closing{position:relative;overflow:hidden;padding:130px 0;text-align:center;background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(201,162,39,.12),transparent 60%),radial-gradient(ellipse 80% 80% at 50% 40%,#16204a 0%,var(--night) 70%)}
+.closing .wrap{position:relative;z-index:2}
+.closing .eyebrow{justify-content:center}
+.closing h2{font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,4.6vw,3.8rem);line-height:1.08;margin:0 0 18px}
+.closing p{color:var(--star-2);max-width:38rem;margin:0 auto 30px;font-size:1.08rem}
+.closing .hero-ctas{justify-content:center}
+.foot{background:#03060d;border-top:1px solid var(--line-soft);padding:64px 0 36px;font-size:.95rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot h5{font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.foot ul{list-style:none;margin:0;padding:0}
+.foot li{padding:3px 0;color:var(--star-3)}
+.foot a{color:var(--star-2);text-decoration:none}
+.foot a:hover{color:var(--gold-2)}
+.foot p{color:var(--star-3)}
+.foot-legal{margin-top:44px;padding-top:22px;border-top:1px solid var(--hair);font-size:.85rem;color:var(--star-3)}
+.foot-legal p{margin:0 0 8px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr}}
+/* refinements */
+.mast-nav a{white-space:nowrap}
+@media(max-width:1100px){.mast-nav{display:none}.mast .wrap{grid-template-columns:auto 1fr}.mast-right .back{display:none}}
+.btn:not(.btn-gold){background:rgba(6,10,22,.55)}
+.paper .btn:not(.btn-gold){background:transparent}
+.path{background:linear-gradient(160deg,rgba(26,36,72,.92),rgba(8,13,28,.92))}
+@media(max-width:700px){
+  .dateline .wrap span:last-child{display:none}
+  .logo-txt small{letter-spacing:.14em}
+  .hero h1 .thin{font-size:clamp(1rem,.36em,1.25rem)}
+  .hero-lede{font-size:1rem}
+  .hero .sky{opacity:.55}
+  .sample-tag{white-space:normal}
+  .sec-head h2{font-size:2.1rem}
+}
+.tier .pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tier .pay .btn{width:auto;padding:13px 8px;font-size:11px;letter-spacing:.14em}
+.welcome{display:none;background:linear-gradient(90deg,#8a701c,#c9a227,#8a701c);color:#060a16;font-size:.98rem;padding:14px 0;text-align:center}
+.welcome:target{display:block}
+.welcome b{font-weight:600}
+.welcome a{color:#060a16;margin-left:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+</style>
+</head>
+<body>
+
+<div class="welcome" id="welcome" role="status"><div class="wrap"><b>Thank you. Your SIDERA subscription is active.</b> Your receipt is on its way. Your welcome email follows shortly and asks for your path and the name to write to; then your first letter is written for you. <a href="#top">Close</a></div></div>
+
+<div class="dateline"><div class="wrap"><span><b>&#9679;</b>&nbsp; First letter: Monday, 4 January 2027 · The January Bearing · Capricorn season</span><span>Beside the Clarity Institute &amp; The Circle of Synaptics</span></div></div>
+
+<header class="mast">
+  <div class="wrap">
+    <nav class="mast-nav" aria-label="Primary">
+      <a href="#letter">The Letter</a><a href="#paths">Paths</a><a href="#calendar">Calendar</a><a href="#subscribe">Subscribe</a><a href="#privacy">Privacy</a>
+    </nav>
+    <a class="logo" href="#top" aria-label="SIDERA home"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#c9a227" stroke-width="1.2"/><circle cx="32" cy="32" r="22.5" fill="none" stroke="#f4ecdb" stroke-opacity=".22" stroke-dasharray="1.2 3"/><line x1="9" y1="50.5" x2="55" y2="12" stroke="#c9a227" stroke-width="1" stroke-dasharray="2 2.4" stroke-opacity=".85"/><circle cx="16" cy="44.6" r="1.5" fill="#f4ecdb"/><circle cx="23.5" cy="38.4" r="1" fill="#f4ecdb" fill-opacity=".7"/><circle cx="44" cy="21" r="1.1" fill="#f4ecdb" fill-opacity=".8"/><circle cx="50" cy="16.2" r="1.5" fill="#f4ecdb"/><path d="M32 18.5 L33.7 29.4 L44.5 31.2 L33.7 33 L32 44 L30.3 33 L19.5 31.2 L30.3 29.4 Z" fill="#c9a227"/><path d="M32 25 L34.3 31.2 L32 37.4 L29.7 31.2 Z" fill="#e4cc86" transform="rotate(45 32 31.2)"/><circle cx="32" cy="31.2" r="1.4" fill="#060a16"/></svg><span class="logo-txt"><b>SIDERA</b><small>By Dr. Benjamin Koch</small></span></a>
+    <div class="mast-right">
+      <a class="back" href="../circle_of_synaptics.html">The Circle</a>
+      <a class="btn btn-gold" href="#subscribe">Subscribe <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="sky" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="466.3" cy="135.8" r="1.9" fill="#e4cc86" fill-opacity="0.62"/><circle cx="104.3" cy="482.3" r="1.0" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="1310.0" cy="193.2" r="0.6" fill="#f4ecdb" fill-opacity="0.47"/><circle cx="100.6" cy="81.6" r="1.2" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="814.3" cy="852.7" r="0.5" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="571.2" cy="878.6" r="0.5" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="191.8" cy="377.2" r="0.6" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="806.8" cy="613.8" r="0.6" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="920.0" cy="335.2" r="0.6" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="891.4" cy="446.8" r="1.2" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="670.5" cy="831.1" r="1.0" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="1143.9" cy="629.1" r="0.8" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="432.4" cy="445.6" r="1.0" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="414.6" cy="882.2" r="0.6" fill="#e4cc86" fill-opacity="0.52"/><circle cx="237.5" cy="307.9" r="1.5" fill="#f4ecdb" fill-opacity="0.46"/><circle cx="1385.3" cy="69.9" r="1.0" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="504.3" cy="447.0" r="1.5" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="134.8" cy="242.9" r="0.6" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="1010.1" cy="582.4" r="1.5" fill="#f4ecdb" fill-opacity="0.37"/><circle cx="555.5" cy="601.8" r="0.5" fill="#f4ecdb" fill-opacity="0.81"/><circle cx="511.9" cy="549.8" r="1.5" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="1106.3" cy="116.4" r="0.8" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="1320.2" cy="446.9" r="0.7" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="791.2" cy="795.0" r="1.9" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="1244.1" cy="250.6" r="1.2" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="983.1" cy="342.4" r="0.8" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="253.8" cy="208.8" r="0.8" fill="#e4cc86" fill-opacity="0.19"/><circle cx="1196.8" cy="164.1" r="0.9" fill="#f4ecdb" fill-opacity="0.18"/><circle cx="603.3" cy="332.3" r="1.0" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="994.3" cy="463.9" r="0.5" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="1254.2" cy="856.7" r="1.2" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="567.5" cy="433.4" r="1.2" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="97.0" cy="187.9" r="0.7" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="865.0" cy="92.1" r="0.7" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1366.5" cy="552.4" r="0.6" fill="#f4ecdb" fill-opacity="0.77"/><circle cx="884.3" cy="133.7" r="0.9" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="867.3" cy="426.7" r="0.6" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="1430.1" cy="419.4" r="1.5" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="207.5" cy="674.7" r="0.9" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="996.6" cy="464.7" r="0.8" fill="#e4cc86" fill-opacity="0.82"/><circle cx="760.7" cy="131.9" r="0.5" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="429.2" cy="578.6" r="0.6" fill="#f4ecdb" fill-opacity="0.65"/><circle cx="376.0" cy="330.0" r="0.7" fill="#f4ecdb" fill-opacity="0.42"/><circle cx="320.8" cy="487.4" r="1.0" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="883.0" cy="709.6" r="0.8" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="1178.4" cy="665.9" r="0.8" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="709.6" cy="657.9" r="1.9" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="1137.8" cy="425.0" r="0.8" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="1377.4" cy="402.5" r="1.0" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="525.1" cy="198.4" r="0.8" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="486.3" cy="434.4" r="0.5" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="940.3" cy="719.7" r="0.6" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="172.7" cy="349.7" r="0.8" fill="#e4cc86" fill-opacity="0.50"/><circle cx="257.1" cy="710.2" r="1.0" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="1362.5" cy="649.6" r="1.5" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="1363.4" cy="652.3" r="0.7" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="39.7" cy="531.7" r="1.5" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="210.5" cy="743.9" r="1.5" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="504.6" cy="493.8" r="0.7" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="1151.1" cy="653.7" r="0.6" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="1344.4" cy="390.4" r="0.8" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="303.9" cy="226.7" r="0.9" fill="#f4ecdb" fill-opacity="0.52"/><circle cx="1099.7" cy="293.4" r="1.2" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="87.7" cy="665.9" r="1.5" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="1173.7" cy="465.1" r="0.7" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="753.8" cy="16.8" r="1.5" fill="#e4cc86" fill-opacity="0.70"/><circle cx="876.3" cy="698.4" r="0.7" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="681.8" cy="652.7" r="0.5" fill="#f4ecdb" fill-opacity="0.40"/><circle cx="746.4" cy="499.9" r="0.6" fill="#f4ecdb" fill-opacity="0.77"/><circle cx="81.8" cy="172.2" r="1.9" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="140.8" cy="407.0" r="0.5" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="1314.0" cy="398.9" r="0.8" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="651.4" cy="480.0" r="1.5" fill="#f4ecdb" fill-opacity="0.52"/><circle cx="356.6" cy="470.9" r="0.9" fill="#f4ecdb" fill-opacity="0.80"/><circle cx="1285.6" cy="182.3" r="1.5" fill="#f4ecdb" fill-opacity="0.27"/><circle cx="175.1" cy="397.9" r="0.6" fill="#f4ecdb" fill-opacity="0.63"/><circle cx="616.8" cy="191.4" r="0.9" fill="#f4ecdb" fill-opacity="0.71"/><circle cx="1291.7" cy="139.0" r="1.0" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="1271.3" cy="870.8" r="0.8" fill="#e4cc86" fill-opacity="0.68"/><circle cx="135.5" cy="796.4" r="0.7" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="1198.7" cy="145.3" r="1.2" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="581.5" cy="379.1" r="1.0" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1039.9" cy="17.5" r="1.5" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="26.0" cy="298.3" r="0.9" fill="#f4ecdb" fill-opacity="0.52"/><circle cx="92.6" cy="886.6" r="0.8" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="150.9" cy="239.0" r="0.5" fill="#f4ecdb" fill-opacity="0.79"/><circle cx="261.4" cy="680.2" r="1.2" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="973.4" cy="851.4" r="1.2" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="1323.6" cy="513.5" r="1.0" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="82.8" cy="619.4" r="1.2" fill="#f4ecdb" fill-opacity="0.78"/><circle cx="387.2" cy="15.1" r="0.6" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="120.6" cy="770.6" r="0.6" fill="#e4cc86" fill-opacity="0.36"/><circle cx="175.2" cy="10.4" r="1.9" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="601.6" cy="823.9" r="0.7" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="1021.7" cy="844.3" r="0.7" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="260.9" cy="839.0" r="0.9" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="296.5" cy="401.1" r="0.7" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="1157.3" cy="895.0" r="0.5" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="1055.6" cy="495.9" r="0.8" fill="#f4ecdb" fill-opacity="0.52"/><circle cx="353.8" cy="402.3" r="1.2" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="786.1" cy="799.9" r="0.9" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="1414.7" cy="308.4" r="0.7" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="500.5" cy="48.9" r="0.7" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="900.6" cy="791.9" r="1.2" fill="#f4ecdb" fill-opacity="0.29"/><circle cx="121.7" cy="757.1" r="0.9" fill="#e4cc86" fill-opacity="0.58"/><circle cx="997.5" cy="40.7" r="0.7" fill="#f4ecdb" fill-opacity="0.29"/><circle cx="642.0" cy="236.9" r="1.0" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="787.8" cy="220.0" r="0.9" fill="#f4ecdb" fill-opacity="0.33"/><circle cx="263.5" cy="301.8" r="0.6" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="724.0" cy="180.9" r="0.5" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="1176.5" cy="129.5" r="0.5" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="431.5" cy="566.7" r="0.6" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="762.0" cy="675.5" r="1.2" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="1037.8" cy="444.8" r="0.9" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="926.2" cy="39.4" r="1.2" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="1169.6" cy="125.4" r="1.9" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="726.3" cy="751.4" r="0.5" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="841.0" cy="803.5" r="0.8" fill="#e4cc86" fill-opacity="0.24"/><circle cx="60.3" cy="573.4" r="0.6" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="650.0" cy="45.7" r="0.5" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="980.2" cy="440.4" r="0.5" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="101.0" cy="839.3" r="0.6" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="95.1" cy="663.1" r="0.9" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="1218.4" cy="211.3" r="0.8" fill="#f4ecdb" fill-opacity="0.33"/><circle cx="935.9" cy="414.3" r="1.2" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="1311.1" cy="258.6" r="0.5" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="925.6" cy="69.7" r="0.7" fill="#f4ecdb" fill-opacity="0.40"/><circle cx="938.2" cy="623.6" r="0.7" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="87.4" cy="241.9" r="0.6" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="973.0" cy="261.8" r="0.9" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="671.5" cy="106.7" r="0.8" fill="#e4cc86" fill-opacity="0.39"/><circle cx="123.6" cy="425.7" r="0.9" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="1180.7" cy="871.3" r="1.5" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="557.1" cy="824.9" r="0.8" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="130.0" cy="672.7" r="0.9" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="191.0" cy="738.2" r="0.9" fill="#f4ecdb" fill-opacity="0.77"/><circle cx="1012.8" cy="208.2" r="1.5" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="229.1" cy="855.0" r="1.5" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="1047.1" cy="374.6" r="1.9" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="174.1" cy="298.2" r="1.0" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="1208.3" cy="108.0" r="0.8" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="1298.3" cy="260.8" r="1.0" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="561.8" cy="783.0" r="0.6" fill="#f4ecdb" fill-opacity="0.42"/><circle cx="616.4" cy="247.6" r="0.5" fill="#e4cc86" fill-opacity="0.37"/><circle cx="74.3" cy="595.8" r="0.7" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="382.6" cy="459.9" r="0.8" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="1130.6" cy="385.0" r="0.5" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="908.5" cy="822.1" r="0.8" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="71.2" cy="659.1" r="1.5" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="199.5" cy="782.5" r="1.5" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="1334.6" cy="114.6" r="1.5" fill="#f4ecdb" fill-opacity="0.46"/><circle cx="405.7" cy="230.2" r="0.9" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="343.7" cy="434.9" r="1.2" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="926.2" cy="67.7" r="1.5" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="652.3" cy="299.6" r="1.5" fill="#f4ecdb" fill-opacity="0.47"/><circle cx="788.8" cy="219.7" r="0.7" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="131.2" cy="215.2" r="0.9" fill="#e4cc86" fill-opacity="0.72"/><circle cx="291.1" cy="18.1" r="1.2" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="1074.0" cy="189.0" r="0.9" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="89.4" cy="249.8" r="1.0" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="724.9" cy="566.7" r="0.8" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="1291.4" cy="346.1" r="1.9" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="621.8" cy="280.8" r="0.5" fill="#f4ecdb" fill-opacity="0.27"/><circle cx="612.3" cy="687.3" r="1.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="705.3" cy="65.8" r="1.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="357.8" cy="98.1" r="0.7" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="1399.5" cy="98.0" r="1.5" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="1118.7" cy="1.2" r="0.7" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="1324.7" cy="581.0" r="0.9" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="902.1" cy="475.4" r="1.2" fill="#e4cc86" fill-opacity="0.65"/><circle cx="161.5" cy="63.3" r="0.8" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="322.0" cy="541.0" r="0.5" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1434.8" cy="250.7" r="1.0" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="1272.6" cy="427.8" r="0.8" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="42.2" cy="370.6" r="0.9" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="279.5" cy="796.4" r="1.2" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="328.1" cy="381.9" r="1.0" fill="#f4ecdb" fill-opacity="0.33"/><circle cx="49.1" cy="304.2" r="1.2" fill="#f4ecdb" fill-opacity="0.42"/><circle cx="570.8" cy="6.1" r="0.9" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="727.0" cy="184.7" r="0.8" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1180.8" cy="207.7" r="0.8" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="1280.6" cy="98.1" r="1.5" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="1290.9" cy="436.5" r="0.5" fill="#e4cc86" fill-opacity="0.82"/><circle cx="210.8" cy="354.1" r="0.8" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="858.4" cy="373.8" r="1.9" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="265.1" cy="404.7" r="1.0" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="1436.4" cy="838.4" r="1.0" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="939.6" cy="472.3" r="1.5" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="956.8" cy="340.8" r="1.0" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="637.1" cy="98.1" r="0.6" fill="#f4ecdb" fill-opacity="0.37"/><circle cx="506.1" cy="860.0" r="0.6" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="1092.7" cy="342.1" r="0.9" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="622.7" cy="44.3" r="1.5" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="779.8" cy="401.7" r="1.0" fill="#f4ecdb" fill-opacity="0.42"/><circle cx="1291.7" cy="27.3" r="1.2" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="900.6" cy="364.3" r="1.2" fill="#e4cc86" fill-opacity="0.20"/><circle cx="90.1" cy="828.1" r="0.9" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="90.5" cy="545.1" r="1.0" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="1379.1" cy="555.3" r="0.9" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="993.0" cy="831.8" r="0.9" fill="#f4ecdb" fill-opacity="0.18"/><path d="M835 702 L922 558 L1022 495 L1152 342 L1238 297 L1339 162" fill="none" stroke="#c9a227" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 6"/><circle cx="835" cy="702" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="922" cy="558" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1022" cy="495" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1152" cy="342" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1238" cy="297" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1339" cy="162" r="2" fill="#e4cc86" fill-opacity=".7"/></svg>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><i></i>Inner intelligence house · Monthly</div>
+        <h1>Find your line<em>among the stars.</em><span class="thin">One letter a month, written for your star sign and your season of life. Real sky, precise frameworks, nothing invented.</span></h1>
+        <p class="hero-lede">SIDERA is the inner house beside the Clarity Institute and The Circle of Synaptics. On the first Monday of every month it sends you a letter of eight plates, drawn from the full matrix of Dr. Benjamin Koch's work: The Clarity System, Synaptics, Inversion, Happiness by Design, the attention practice and The Eden Codex. It isn't a horoscope or a card spread. It is a precise, quiet instrument for knowing yourself a little better each month, and for meeting the month on purpose.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-gold" href="#subscribe">Choose your letter <span class="arr">&rarr;</span></a>
+          <a class="btn" href="sample-letter.html">Read a sample letter</a>
+        </div>
+        <div class="hero-meta">Written and signed by Dr. Benjamin Koch</div>
+      </div>
+      <div><svg class="dial" viewBox="0 0 440 440" role="img" aria-label="A star dial: the twelve signs, the phases of the moon, and one guiding line"><defs><radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e4cc86" stop-opacity=".35"/><stop offset=".45" stop-color="#c9a227" stop-opacity=".08"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></radialGradient></defs><circle cx="220" cy="220" r="120" fill="url(#glow)"/><g class="spin"><circle cx="220" cy="220" r="208" fill="none" stroke="#f4ecdb" stroke-opacity=".16"/><circle cx="220" cy="220" r="178" fill="none" stroke="#f4ecdb" stroke-opacity=".16"/><line x1="398.0" y1="220.0" x2="408.0" y2="220.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="397.3" y1="235.5" x2="401.3" y2="235.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="395.3" y1="250.9" x2="399.2" y2="251.6" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="391.9" y1="266.1" x2="395.8" y2="267.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="387.3" y1="280.9" x2="391.0" y2="282.2" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="381.3" y1="295.2" x2="384.9" y2="296.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="374.2" y1="309.0" x2="382.8" y2="314.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="365.8" y1="322.1" x2="369.1" y2="324.4" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="356.4" y1="334.4" x2="359.4" y2="337.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="345.9" y1="345.9" x2="348.7" y2="348.7" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="334.4" y1="356.4" x2="337.0" y2="359.4" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="322.1" y1="365.8" x2="324.4" y2="369.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="309.0" y1="374.2" x2="314.0" y2="382.8" stroke="#c9a227" stroke-opacity="0.7"/><line x1="295.2" y1="381.3" x2="296.9" y2="384.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="280.9" y1="387.3" x2="282.2" y2="391.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="266.1" y1="391.9" x2="267.1" y2="395.8" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="250.9" y1="395.3" x2="251.6" y2="399.2" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="235.5" y1="397.3" x2="235.9" y2="401.3" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="220.0" y1="398.0" x2="220.0" y2="408.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="204.5" y1="397.3" x2="204.1" y2="401.3" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="189.1" y1="395.3" x2="188.4" y2="399.2" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="173.9" y1="391.9" x2="172.9" y2="395.8" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="159.1" y1="387.3" x2="157.8" y2="391.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="144.8" y1="381.3" x2="143.1" y2="384.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="131.0" y1="374.2" x2="126.0" y2="382.8" stroke="#c9a227" stroke-opacity="0.7"/><line x1="117.9" y1="365.8" x2="115.6" y2="369.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="105.6" y1="356.4" x2="103.0" y2="359.4" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="94.1" y1="345.9" x2="91.3" y2="348.7" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="83.6" y1="334.4" x2="80.6" y2="337.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="74.2" y1="322.1" x2="70.9" y2="324.4" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="65.8" y1="309.0" x2="57.2" y2="314.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="58.7" y1="295.2" x2="55.1" y2="296.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="52.7" y1="280.9" x2="49.0" y2="282.2" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="48.1" y1="266.1" x2="44.2" y2="267.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="44.7" y1="250.9" x2="40.8" y2="251.6" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="42.7" y1="235.5" x2="38.7" y2="235.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="42.0" y1="220.0" x2="32.0" y2="220.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="42.7" y1="204.5" x2="38.7" y2="204.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="44.7" y1="189.1" x2="40.8" y2="188.4" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="48.1" y1="173.9" x2="44.2" y2="172.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="52.7" y1="159.1" x2="49.0" y2="157.8" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="58.7" y1="144.8" x2="55.1" y2="143.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="65.8" y1="131.0" x2="57.2" y2="126.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="74.2" y1="117.9" x2="70.9" y2="115.6" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="83.6" y1="105.6" x2="80.6" y2="103.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="94.1" y1="94.1" x2="91.3" y2="91.3" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="105.6" y1="83.6" x2="103.0" y2="80.6" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="117.9" y1="74.2" x2="115.6" y2="70.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="131.0" y1="65.8" x2="126.0" y2="57.2" stroke="#c9a227" stroke-opacity="0.7"/><line x1="144.8" y1="58.7" x2="143.1" y2="55.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="159.1" y1="52.7" x2="157.8" y2="49.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="173.9" y1="48.1" x2="172.9" y2="44.2" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="189.1" y1="44.7" x2="188.4" y2="40.8" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="204.5" y1="42.7" x2="204.1" y2="38.7" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="220.0" y1="42.0" x2="220.0" y2="32.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="235.5" y1="42.7" x2="235.9" y2="38.7" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="250.9" y1="44.7" x2="251.6" y2="40.8" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="266.1" y1="48.1" x2="267.1" y2="44.2" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="280.9" y1="52.7" x2="282.2" y2="49.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="295.2" y1="58.7" x2="296.9" y2="55.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="309.0" y1="65.8" x2="314.0" y2="57.2" stroke="#c9a227" stroke-opacity="0.7"/><line x1="322.1" y1="74.2" x2="324.4" y2="70.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="334.4" y1="83.6" x2="337.0" y2="80.6" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="345.9" y1="94.1" x2="348.7" y2="91.3" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="356.4" y1="105.6" x2="359.4" y2="103.0" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="365.8" y1="117.9" x2="369.1" y2="115.6" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="374.2" y1="131.0" x2="382.8" y2="126.0" stroke="#c9a227" stroke-opacity="0.7"/><line x1="381.3" y1="144.8" x2="384.9" y2="143.1" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="387.3" y1="159.1" x2="391.0" y2="157.8" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="391.9" y1="173.9" x2="395.8" y2="172.9" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="395.3" y1="189.1" x2="399.2" y2="188.4" stroke="#f4ecdb" stroke-opacity="0.25"/><line x1="397.3" y1="204.5" x2="401.3" y2="204.1" stroke="#f4ecdb" stroke-opacity="0.25"/><text x="270.5" y="31.6" transform="rotate(15.0 270.5 31.6)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">ARIES</text><text x="357.9" y="82.1" transform="rotate(45.0 357.9 82.1)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">TAURUS</text><text x="408.4" y="169.5" transform="rotate(75.0 408.4 169.5)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">GEMINI</text><text x="408.4" y="270.5" transform="rotate(105.0 408.4 270.5)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">CANCER</text><text x="357.9" y="357.9" transform="rotate(135.0 357.9 357.9)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">LEO</text><text x="270.5" y="408.4" transform="rotate(165.0 270.5 408.4)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">VIRGO</text><text x="169.5" y="408.4" transform="rotate(195.0 169.5 408.4)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">LIBRA</text><text x="82.1" y="357.9" transform="rotate(225.0 82.1 357.9)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">SCORPIO</text><text x="31.6" y="270.5" transform="rotate(255.0 31.6 270.5)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">SAGITTARIUS</text><text x="31.6" y="169.5" transform="rotate(285.0 31.6 169.5)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#e4cc86" fill-opacity="1">CAPRICORN</text><text x="82.1" y="82.1" transform="rotate(315.0 82.1 82.1)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">AQUARIUS</text><text x="169.5" y="31.6" transform="rotate(345.0 169.5 31.6)" text-anchor="middle" dominant-baseline="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="8.5" letter-spacing="2" fill="#f4ecdb" fill-opacity="0.5">PISCES</text></g><circle cx="220" cy="220" r="146" fill="none" stroke="#f4ecdb" stroke-opacity=".22" stroke-dasharray="2 6"/><circle cx="220.0" cy="74.0" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><circle cx="323.2" cy="116.8" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><path d="M323.2 108.3 A8.5 8.5 0 0 1 323.2 125.3 A4.25 8.5 0 0 0 323.2 108.3 Z" fill="#f4ecdb" fill-opacity=".92"/><circle cx="366.0" cy="220.0" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><path d="M366.0 211.5 A8.5 8.5 0 0 1 366.0 228.5 A0.00 8.5 0 0 0 366.0 211.5 Z" fill="#f4ecdb" fill-opacity=".92"/><circle cx="323.2" cy="323.2" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><path d="M323.2 314.7 A8.5 8.5 0 0 1 323.2 331.7 A4.25 8.5 0 0 1 323.2 314.7 Z" fill="#f4ecdb" fill-opacity=".92"/><circle cx="220.0" cy="366.0" r="8.5" fill="#f4ecdb" fill-opacity=".92"/><circle cx="116.8" cy="323.2" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><path d="M116.8 314.7 A8.5 8.5 0 0 0 116.8 331.7 A4.25 8.5 0 0 0 116.8 314.7 Z" fill="#f4ecdb" fill-opacity=".92"/><circle cx="74.0" cy="220.0" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><path d="M74.0 211.5 A8.5 8.5 0 0 0 74.0 228.5 A0.00 8.5 0 0 1 74.0 211.5 Z" fill="#f4ecdb" fill-opacity=".92"/><circle cx="116.8" cy="116.8" r="8.5" fill="#060a16" stroke="#f4ecdb" stroke-opacity=".55" stroke-width=".8"/><path d="M116.8 108.3 A8.5 8.5 0 0 0 116.8 125.3 A4.25 8.5 0 0 1 116.8 108.3 Z" fill="#f4ecdb" fill-opacity=".92"/><circle cx="220" cy="220" r="96" fill="none" stroke="#f4ecdb" stroke-opacity=".2"/><circle cx="220" cy="220" r="62" fill="none" stroke="#c9a227" stroke-opacity=".75"/><line x1="40" y1="372" x2="400" y2="68" stroke="#c9a227" stroke-width="1.1" stroke-dasharray="3 4" stroke-opacity=".9"/><circle cx="68.8" cy="347.7" r="2.2" fill="#f4ecdb"/><circle cx="119.2" cy="305.1" r="1.6" fill="#f4ecdb"/><circle cx="162.4" cy="268.6" r="1.3" fill="#f4ecdb"/><circle cx="277.6" cy="171.4" r="1.3" fill="#f4ecdb"/><circle cx="328.0" cy="128.8" r="1.8" fill="#f4ecdb"/><circle cx="374.8" cy="89.3" r="2.6" fill="#f4ecdb"/><path d="M220 174 L226 214 L266 220 L226 226 L220 266 L214 226 L174 220 L214 214 Z" fill="#e4cc86"/><path d="M220 198 L224 220 L220 242 L216 220 Z" fill="#c9a227" transform="rotate(45 220 220)"/><circle cx="220" cy="220" r="4" fill="#060a16" stroke="#e4cc86"/></svg></div>
+    </div>
+    <div class="hero-strip">
+      <div><b>8</b><span>Plates in every letter</span></div>
+      <div><b>12</b><span>Letters a year, one per month</span></div>
+      <div><b>5</b><span>Answers for your letter. That's all.</span></div>
+      <div><b>0</b><span>Predictions. Ever.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true">
+  <span>The Bearing</span><i>&#10022;</i><span>The Inner Map</span><i>&#10022;</i><span>Synaptic Readout</span><i>&#10022;</i><span>Signposts</span><i>&#10022;</i><span>Pressure Points</span><i>&#10022;</i><span>Practice Deck</span><i>&#10022;</i><span>Reflection Log</span><i>&#10022;</i><span>The Ledger</span>
+</div>
+
+<!-- THE NAME -->
+<section class="sec" id="name">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>The name</div><h2>Sidera. The stars, <em>and the line between them.</em></h2></div>
+      <p><i>Sidera</i> is Latin for “the stars”. Two everyday words are traditionally traced back to it: <i>consider</i>, to look closely, as if with the stars, and <i>desire</i>, to miss the stars you once steered by. SIDERA lives between the two. Each month it helps you look closely at your life, and it helps you find again what you were steering by before the noise.</p>
+    </div>
+    <div class="doctrine">
+      <div class="doc"><span class="n">I · LIGHT</span><h3>Reflection, not prediction.</h3><p>We don't tell you what will happen. We give you a clear frame for what is already moving in you, and the days on which to stop and look.</p></div>
+      <div class="doc"><span class="n">II · LINE</span><h3>Real sky, precise work.</h3><p>Every date in the letter is a real event in the sky, calculated, never invented. Every insight comes from a named framework, not from mood.</p></div>
+      <div class="doc"><span class="n">III · STILLNESS</span><h3>No fear, no fate.</h3><p>No warnings, no dark omens, no “do this or else”. Each letter is written to leave you calmer and clearer than it found you.</p></div>
+    </div>
+    <div class="etym">
+      <div><b>con · siderare</b><span>To look closely, with the stars. Plates I to V.</span></div>
+      <div><b>de · siderare</b><span>To miss the stars and turn back to them. Plates VI and VII.</span></div>
+      <div><b>sidera</b><span>The stars themselves: real dates, plainly sourced. Plates IV and VIII.</span></div>
+    </div>
+    <p class="quote">“The sky does not tell you what will happen. It gives you a date on which to stop and see what is.”<small>The SIDERA house rule</small></p>
+  </div>
+</section>
+
+<!-- THE LETTER -->
+<section class="sec alt" id="letter">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>The signature format</div><h2>The Letter, <em>in eight plates.</em></h2></div>
+      <p>Every month the letter has the same eight plates in the same order, so you always know where to look and can lay one month beside the next. Each letter is written for you individually, after you subscribe, for your sign, your season of life and your path. You read it in twenty quiet minutes on the first Monday, and you live with it for the rest of the month.</p>
+    </div>
+    <div class="plates">
+<div class="plate"><div class="pn"><b>I</b><span>Plate I</span></div><h4>The Bearing</h4><p>The line of your month, for your sign and your season of life, on one page.</p></div>
+<div class="plate"><div class="pn"><b>II</b><span>Plate II</span></div><h4>The Inner Map</h4><p>Four inner states on two drivers, and where you are likely to sit this month.</p></div>
+<div class="plate"><div class="pn"><b>III</b><span>Plate III</span></div><h4>Synaptic Readout</h4><p>The one pattern the frameworks bring forward for you this month, and why.</p></div>
+<div class="plate"><div class="pn"><b>IV</b><span>Plate IV</span></div><h4>Signposts</h4><p>The real dates in this month's sky: new and full moon, your sign's season, solstice and equinox. Each one comes with a practice.</p></div>
+<div class="plate"><div class="pn"><b>V</b><span>Plate V</span></div><h4>Pressure Points</h4><p>Where friction tends to gather this month: relationships, work, body and rest. With what helps.</p></div>
+<div class="plate"><div class="pn"><b>VI</b><span>Plate VI</span></div><h4>Practice Deck</h4><p>Questions and small exercises for the month. Prompts, not instructions.</p></div>
+<div class="plate"><div class="pn"><b>VII</b><span>Plate VII</span></div><h4>Reflection Log</h4><p>Last month's questions return. You note what held, what didn't and what you noticed.</p></div>
+<div class="plate"><div class="pn"><b>VIII</b><span>Plate VIII</span></div><h4>The Ledger</h4><p>Which frameworks and which sky dates this letter draws on, named plainly.</p></div>
+    </div>
+
+    <div class="spread-wrap">
+      <div class="spread-cap"><span>Inside a letter · Plates II and IV</span><span class="sample-tag">Sample · Clarity Path · Capricorn · January 2027</span></div>
+      <div class="spread">
+        <div class="page">
+          <div class="page-h"><span>SIDERA · Clarity Path</span><span>January 2027 · Plate II</span></div>
+          <h5>The Inner <em>Map</em></h5>
+          <p class="dek">Four inner states on two drivers. The contour shows where a Capricorn in the Turning season is most likely to begin the month.</p>
+          <svg viewBox="0 0 520 390" role="img" aria-label="The Inner Map: four inner states on two drivers, Bearing and Charge, with the likely path for January marked"><rect x="48" y="14" width="456" height="320" fill="#fffdf8" stroke="#0c1424" stroke-opacity=".18"/><line x1="276" y1="14" x2="276" y2="334" stroke="#0c1424" stroke-opacity=".3"/><line x1="48" y1="174" x2="504" y2="174" stroke="#0c1424" stroke-opacity=".3"/><g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9.5" letter-spacing="1.6" fill="#6e6654"><text x="276" y="356" text-anchor="middle">BEARING  ·  UNCLEAR  →  CLEAR</text><text x="22" y="174" text-anchor="middle" transform="rotate(-90 22 174)">CHARGE  ·  SPENT  →  GATHERED</text></g><text x="162" y="40" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Restless Wind</text><text x="162" y="56" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">energy without a line</text><text x="390" y="40" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Lodestar</text><text x="390" y="56" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">clear and resourced</text><text x="162" y="306" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Winter Field</text><text x="162" y="322" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">fallow, not failed</text><text x="390" y="306" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-size="16" fill="#0c1424">The Faithful Ember</text><text x="390" y="322" text-anchor="middle" font-family="Palatino Linotype,Palatino,Book Antiqua,P052,Georgia,serif" font-style="italic" font-size="11.5" fill="#6e6654">clear, on reserves</text><ellipse cx="346" cy="228" rx="84" ry="52" fill="none" stroke="#8a701c" stroke-opacity="0.18" stroke-width="1"/><ellipse cx="346" cy="228" rx="58" ry="36" fill="none" stroke="#8a701c" stroke-opacity="0.32" stroke-width="1"/><ellipse cx="346" cy="228" rx="36" ry="22" fill="none" stroke="#8a701c" stroke-opacity="0.55" stroke-width="1"/><ellipse cx="346" cy="228" rx="15" ry="9" fill="none" stroke="#8a701c" stroke-opacity="0.9" stroke-width="1.6"/><path d="M354 220 C 380 192, 396 160, 408 116" fill="none" stroke="#8a701c" stroke-width="1.4" stroke-dasharray="4 4"/><path d="M402 120 L409 108 L413 122" fill="none" stroke="#8a701c" stroke-width="1.4"/><circle cx="346" cy="228" r="3.2" fill="#8a701c"/><circle cx="410" cy="104" r="3.2" fill="none" stroke="#8a701c" stroke-width="1.4"/><g font-family="ui-monospace,Menlo,Consolas,monospace" font-size="9" letter-spacing="1" fill="#8a701c"><text x="438" y="232">EARLY JAN</text><text x="420" y="98">BY 22 JAN</text></g></svg>
+          <div class="page-f"><span>Sample letter</span><span>p. 2</span></div>
+        </div>
+        <div class="page">
+          <div class="page-h"><span>SIDERA · Clarity Path</span><span>January 2027 · Plate IV</span></div>
+          <h5>Signposts, <em>dated</em></h5>
+          <p class="dek">The real sky of January. Each date comes with one small practice.</p>
+          <ul class="sig-list">
+            <li><span class="d">SUN 3 JAN</span><span><b>Earth at perihelion</b>, nearest the Sun for the year.<small>Practice: The Nearest Light, ten minutes on what is already close and good.</small></span></li>
+            <li><span class="d">THU 7 JAN</span><span><b>New Moon in Capricorn</b>, in your own sign.<small>Practice: Clean Ground, one commitment set down on purpose.</small></span></li>
+            <li><span class="d">FRI 15 JAN</span><span><b>First Quarter Moon.</b><small>Practice: The Half-Light Check, what has actually begun?</small></span></li>
+            <li><span class="d">WED 20 JAN</span><span><b>Sun enters Aquarius</b>; your season closes.<small>Practice: Handing Over the Season.</small></span></li>
+            <li><span class="d">FRI 22 JAN</span><span><b>Full Moon in Leo.</b><small>Practice: What Wants to Be Seen.</small></span></li>
+            <li><span class="d">FRI 29 JAN</span><span><b>Last Quarter Moon.</b><small>Practice: The Release List.</small></span></li>
+          </ul>
+          <div class="page-f"><span>Sample letter</span><span>p. 4</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dcards">
+      <div class="dcard cover">
+        <div class="k"><span>Cover</span><span class="sample-tag">Sample</span></div>
+        <h4>The January <em>Letter</em></h4>
+        <p>Clarity Path · Capricorn · The Turning season · Eight plates</p>
+        <div class="bot">Written and signed by Dr. Benjamin Koch</div>
+      </div>
+      <div class="dcard">
+        <div class="k"><span>Plate I · The Bearing</span><span class="sample-tag">Sample</span></div>
+        <p class="line-q">“This is the month you stop carrying what you only agreed to hold.”</p>
+        <p>One line for the month, then a single page on what it asks of you.</p>
+        <div class="bot">One page · read first</div>
+      </div>
+      <div class="dcard">
+        <div class="k"><span>Plate VI · Practice Deck</span><span class="sample-tag">Sample</span></div>
+        <p class="line-q">“If no one were watching how well you carry it, which weight would you put down first?”</p>
+        <p>Six prompts for the month. You choose which ones to work with.</p>
+        <div class="bot">Prompts, not instructions</div>
+      </div>
+      <div class="dcard">
+        <div class="k"><span>Plate VII · Reflection Log</span><span class="sample-tag">Sample</span></div>
+        <h4>What held?</h4>
+        <p>Last month's three questions return, with room for your own notes. Over a year it becomes a quiet record of who you became.</p>
+        <div class="bot">Your record, kept by you</div>
+      </div>
+    </div>
+    <p style="text-align:center;margin:40px 0 0"><a class="btn" href="sample-letter.html">Read the full sample letter <span class="arr">&rarr;</span></a></p>
+  </div>
+</section>
+
+<!-- INBOX -->
+<section class="sec" id="inbox">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>What lands in your inbox</div><h2>A month, <em>in quiet instalments.</em></h2></div>
+      <p>No app, no feed, no account to check. Everything arrives as a plain, beautiful letter in your inbox, timed to the real sky. Here is January for a reader on the Weekly Signposts subscription.</p>
+    </div>
+    <div class="inbox-grid">
+      <div class="inbox" aria-label="Sample inbox for January 2027">
+        <div class="inbox-top"><span>Inbox · SIDERA</span><span>January 2027</span></div>
+        <div class="mail main"><div class="d">MON 4 JAN<small>morning</small></div><div><b>Your January Letter · Capricorn · Clarity Path</b><span>The Bearing: this is the month you stop carrying what you only agreed to hold…</span><em class="tier">All subscriptions</em></div></div>
+        <div class="mail"><div class="d">WED 6 JAN<small>morning</small></div><div><b>Signpost · New Moon in your sign, Thursday</b><span>Clean Ground: before Thursday evening, choose one commitment to set down on purpose…</span><em class="tier">Weekly Signposts &amp; Inner Circle</em></div></div>
+        <div class="mail"><div class="d">THU 14 JAN<small>morning</small></div><div><b>Signpost · First Quarter, Friday</b><span>The Half-Light Check: a week after the New Moon, what has actually begun?</span><em class="tier">Weekly Signposts &amp; Inner Circle</em></div></div>
+        <div class="mail"><div class="d">TUE 19 JAN<small>morning</small></div><div><b>Signpost · Your season closes tomorrow</b><span>Handing Over the Season: three sentences to close Capricorn season well…</span><em class="tier">Weekly Signposts &amp; Inner Circle</em></div></div>
+        <div class="mail"><div class="d">THU 21 JAN<small>morning</small></div><div><b>Signpost · Full Moon in Leo, Friday</b><span>What Wants to Be Seen: the part of you that has been working in the dark…</span><em class="tier">Weekly Signposts &amp; Inner Circle</em></div></div>
+        <div class="mail"><div class="d">DAILY<small>morning</small></div><div><b>Morning line</b><span>“Notice the first thing you reach for today. Then reach for it a little more slowly.”</span><em class="tier">Inner Circle</em></div></div>
+      </div>
+      <ul class="inbox-list">
+        <li><h4>The Letter, first Monday of the month</h4><p>All eight plates, written for you: your sign, your season of life and your path. Read it in your inbox or print it.</p></li>
+        <li><h4>Signpost notes, the day before</h4><p>A short note before each real sky date, about four a month, each with one practice you can do in a few minutes.</p></li>
+        <li><h4>The morning line, every day</h4><p>One sentence each morning, readable in ten seconds and carried for the whole day.</p></li>
+        <li><h4>Your birthday-year dossier</h4><p>Once a year, at the start of your sign's season, a longer letter on the year of life that lies ahead of you.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PATHS -->
+<section class="sec alt" id="paths">
+  <svg class="sky" viewBox="0 0 1440 1100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="651.4" cy="615.7" r="1.9" fill="#e4cc86" fill-opacity="0.80"/><circle cx="670.5" cy="558.6" r="0.8" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="737.1" cy="692.9" r="0.7" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="436.9" cy="99.7" r="0.5" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="570.5" cy="498.3" r="0.7" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="1197.7" cy="69.5" r="0.5" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="348.4" cy="33.1" r="1.5" fill="#f4ecdb" fill-opacity="0.40"/><circle cx="851.0" cy="214.9" r="0.8" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="719.7" cy="728.7" r="1.5" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="585.8" cy="606.4" r="0.6" fill="#f4ecdb" fill-opacity="0.65"/><circle cx="454.0" cy="252.6" r="0.9" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="810.9" cy="118.7" r="0.6" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="556.6" cy="1053.8" r="0.5" fill="#f4ecdb" fill-opacity="0.32"/><circle cx="1334.9" cy="57.6" r="1.2" fill="#e4cc86" fill-opacity="0.84"/><circle cx="572.3" cy="80.3" r="0.8" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="388.5" cy="95.9" r="1.0" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="590.5" cy="1015.1" r="0.7" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="145.5" cy="65.9" r="1.5" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="805.4" cy="492.2" r="0.8" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="1108.1" cy="461.2" r="1.2" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="605.9" cy="234.2" r="0.9" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="1403.8" cy="652.0" r="0.5" fill="#f4ecdb" fill-opacity="0.32"/><circle cx="567.8" cy="939.8" r="0.6" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="210.8" cy="485.7" r="1.9" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="878.9" cy="913.3" r="1.2" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="129.8" cy="641.0" r="0.8" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="530.9" cy="684.4" r="0.7" fill="#e4cc86" fill-opacity="0.82"/><circle cx="696.6" cy="632.0" r="1.2" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="222.0" cy="999.3" r="0.8" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="228.2" cy="691.9" r="0.8" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="559.0" cy="530.8" r="0.6" fill="#f4ecdb" fill-opacity="0.46"/><circle cx="149.5" cy="42.6" r="0.9" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="1014.6" cy="282.7" r="1.5" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="252.6" cy="792.4" r="0.6" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="690.2" cy="718.9" r="0.6" fill="#f4ecdb" fill-opacity="0.37"/><circle cx="1321.0" cy="224.4" r="0.5" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="592.5" cy="274.0" r="0.5" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="531.1" cy="629.4" r="0.7" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="199.3" cy="495.4" r="1.0" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="995.4" cy="642.9" r="0.7" fill="#e4cc86" fill-opacity="0.58"/><circle cx="1330.0" cy="522.3" r="1.0" fill="#f4ecdb" fill-opacity="0.65"/><circle cx="1386.4" cy="23.4" r="0.6" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="1051.9" cy="350.8" r="0.6" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="786.4" cy="810.7" r="0.7" fill="#f4ecdb" fill-opacity="0.71"/><circle cx="1317.6" cy="387.0" r="1.5" fill="#f4ecdb" fill-opacity="0.78"/><circle cx="1254.4" cy="458.9" r="0.5" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="824.8" cy="687.5" r="1.9" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="839.1" cy="669.8" r="0.6" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="166.4" cy="282.9" r="1.2" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="559.3" cy="808.5" r="1.5" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="1207.3" cy="92.2" r="0.5" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="126.3" cy="24.5" r="0.6" fill="#f4ecdb" fill-opacity="0.51"/><circle cx="884.9" cy="1012.5" r="0.9" fill="#e4cc86" fill-opacity="0.78"/><circle cx="529.8" cy="157.5" r="0.8" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="1085.4" cy="376.8" r="1.5" fill="#f4ecdb" fill-opacity="0.51"/><circle cx="347.7" cy="445.2" r="0.9" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="620.5" cy="886.6" r="0.8" fill="#f4ecdb" fill-opacity="0.77"/><circle cx="553.6" cy="641.4" r="1.0" fill="#f4ecdb" fill-opacity="0.32"/><circle cx="193.8" cy="385.8" r="0.5" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="1368.0" cy="304.5" r="0.7" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="678.7" cy="1018.3" r="1.2" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="748.8" cy="739.4" r="1.5" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1193.4" cy="305.9" r="0.5" fill="#f4ecdb" fill-opacity="0.63"/><circle cx="404.7" cy="389.6" r="0.5" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="583.5" cy="208.9" r="0.9" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="202.9" cy="51.6" r="0.6" fill="#e4cc86" fill-opacity="0.48"/><circle cx="907.1" cy="720.5" r="1.0" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="985.7" cy="219.3" r="1.5" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="1028.5" cy="830.6" r="0.5" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="392.2" cy="380.3" r="1.9" fill="#f4ecdb" fill-opacity="0.65"/><circle cx="749.4" cy="675.9" r="0.7" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="1140.4" cy="996.9" r="0.6" fill="#f4ecdb" fill-opacity="0.46"/><circle cx="1285.4" cy="426.8" r="1.5" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="900.8" cy="1001.0" r="1.2" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="939.9" cy="552.9" r="1.0" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="937.9" cy="225.4" r="0.6" fill="#f4ecdb" fill-opacity="0.32"/><circle cx="1296.0" cy="1078.5" r="0.9" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1138.7" cy="352.4" r="0.5" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="119.2" cy="485.0" r="1.2" fill="#e4cc86" fill-opacity="0.69"/><circle cx="701.9" cy="31.3" r="0.6" fill="#f4ecdb" fill-opacity="0.47"/><circle cx="50.6" cy="586.4" r="0.7" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="1439.7" cy="990.6" r="1.5" fill="#f4ecdb" fill-opacity="0.81"/><circle cx="709.3" cy="1044.1" r="0.6" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="632.8" cy="614.7" r="0.7" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="1214.8" cy="616.0" r="0.9" fill="#f4ecdb" fill-opacity="0.63"/><circle cx="1374.9" cy="957.1" r="0.8" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="203.3" cy="599.2" r="0.9" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="289.4" cy="589.5" r="0.5" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="40.0" cy="1066.3" r="1.2" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1424.7" cy="134.1" r="0.6" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="94.9" cy="592.6" r="1.2" fill="#f4ecdb" fill-opacity="0.80"/><circle cx="1152.6" cy="444.6" r="0.8" fill="#e4cc86" fill-opacity="0.50"/><circle cx="182.8" cy="477.0" r="1.9" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="1296.8" cy="524.2" r="1.0" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="604.1" cy="32.4" r="0.9" fill="#f4ecdb" fill-opacity="0.27"/><circle cx="1122.2" cy="25.1" r="0.8" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="17.0" cy="312.5" r="1.0" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="718.3" cy="549.6" r="0.6" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="897.9" cy="789.5" r="1.2" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="911.5" cy="907.7" r="0.7" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="1243.9" cy="587.4" r="0.8" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="1225.8" cy="672.9" r="0.7" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="1066.7" cy="891.6" r="0.7" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="453.6" cy="1015.0" r="0.8" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="280.1" cy="106.5" r="0.8" fill="#e4cc86" fill-opacity="0.27"/><circle cx="126.9" cy="426.7" r="1.2" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="607.1" cy="868.9" r="0.7" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="904.3" cy="878.7" r="0.6" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="982.6" cy="1002.5" r="1.0" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="728.2" cy="834.0" r="0.8" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="694.2" cy="26.7" r="1.5" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="265.7" cy="224.3" r="0.7" fill="#f4ecdb" fill-opacity="0.84"/><circle cx="1334.7" cy="104.8" r="0.5" fill="#f4ecdb" fill-opacity="0.27"/><circle cx="980.6" cy="85.4" r="0.6" fill="#f4ecdb" fill-opacity="0.40"/><circle cx="672.4" cy="566.8" r="1.2" fill="#f4ecdb" fill-opacity="0.32"/><circle cx="537.3" cy="697.4" r="1.9" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="288.4" cy="448.8" r="1.0" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="583.6" cy="214.6" r="0.7" fill="#e4cc86" fill-opacity="0.24"/><circle cx="1141.0" cy="356.1" r="0.6" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="1014.7" cy="946.8" r="1.2" fill="#f4ecdb" fill-opacity="0.56"/><path d="M835 858 L922 682 L1022 605 L1152 418 L1238 363 L1339 198" fill="none" stroke="#c9a227" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 6"/><circle cx="835" cy="858" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="922" cy="682" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1022" cy="605" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1152" cy="418" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1238" cy="363" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1339" cy="198" r="2" fill="#e4cc86" fill-opacity=".7"/></svg>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>Two paths</div><h2>One sky. <em>Two ways to walk under it.</em></h2></div>
+      <p>Both paths use the same real sky and the same eight plates. They differ in the questions they ask. Choose the one that matches where you already are with the work, or take both with the Inner Circle.</p>
+    </div>
+    <div class="paths">
+      <article class="path">
+        <div class="k">Path I · For readers of the Clarity Institute</div>
+        <h3>The Clarity Path</h3>
+        <p class="for">Decisions, purpose, direction.</p>
+        <p>For the months when life asks you to choose. The Clarity Path reads your month through The Clarity System and Inversion: what is signal, what is static, and which decision is actually yours to make.</p>
+        <ul>
+          <li>The Bearing turns on one direction for the month</li>
+          <li>The Inner Map is drawn on Bearing and Charge</li>
+          <li>The Practice Deck holds decision and inversion prompts</li>
+        </ul>
+        <p class="q">“Which choice would I still make if no one ever found out I made it?”</p>
+      </article>
+      <article class="path">
+        <div class="k">Path II · For The Circle of Synaptics</div>
+        <h3>The Synaptic Path</h3>
+        <p class="for">Attention, consciousness, remembrance.</p>
+        <p>For the months when life asks you to wake up. The Synaptic Path reads your month through Synaptics, the attention practice and The Eden Codex: where the static gathers, where attention leaks, and what you begin to remember when it settles.</p>
+        <ul>
+          <li>The Bearing turns on one quality of attention for the month</li>
+          <li>The Inner Map is drawn on Presence and Charge</li>
+          <li>The Practice Deck holds attention and remembrance exercises</li>
+        </ul>
+        <p class="q">“What did I know quite clearly before I learned to be busy?”</p>
+      </article>
+    </div>
+    <p class="seasons-cap" style="margin-top:64px">Your season of life, from your year of birth</p>
+    <div class="seasons" style="margin-top:0">
+      <div><b>The Rising</b><span>to 27</span></div>
+      <div><b>The First Reckoning</b><span>28 – 35</span></div>
+      <div><b>The Building</b><span>36 – 42</span></div>
+      <div><b>The Turning</b><span>43 – 49</span></div>
+      <div><b>The Harvest</b><span>50 – 59</span></div>
+      <div><b>The Widening</b><span>60 – 69</span></div>
+      <div><b>The Lantern</b><span>70 and on</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section class="sec paper" id="calendar">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>Release calendar</div><h2>The first season, <em>dated.</em></h2></div>
+      <p>Letters arrive on the first Monday of each month. Signpost notes arrive the day before each date. These are the real sky dates for the first quarter of 2027, calculated from an astronomical ephemeris.</p>
+    </div>
+    <table class="cal">
+      <thead><tr><th>Month</th><th>Letter</th><th>Signposts in the sky</th></tr></thead>
+      <tbody>
+        <tr class="first"><td class="m">January</td><td class="d">MON 4 JAN</td><td>3 Jan <b>Earth at perihelion</b> · 7 Jan <b>New Moon in Capricorn</b> · 15 Jan First Quarter · 20 Jan <b>Sun enters Aquarius</b> · 22 Jan <b>Full Moon in Leo</b> · 29 Jan Last Quarter</td></tr>
+        <tr><td class="m">February</td><td class="d">MON 1 FEB</td><td>6 Feb <b>New Moon in Aquarius</b>, with an annular eclipse of the Sun · 18 Feb <b>Sun enters Pisces</b> · 20 Feb <b>Full Moon in Virgo</b>, with a penumbral eclipse of the Moon</td></tr>
+        <tr><td class="m">March</td><td class="d">MON 1 MAR</td><td>8 Mar <b>New Moon in Pisces</b> · 20 Mar <b>March equinox</b>, Sun enters Aries · 22 Mar <b>Full Moon in Libra</b></td></tr>
+      </tbody>
+    </table>
+    <p class="cal-note">Dates are given for the Americas and Europe. Where an event falls close to midnight, the letter names the date for both. The zodiac signs are the familiar (tropical) ones used in every newspaper.</p>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="sec" id="subscribe">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>Subscriptions</div><h2>Choose your <em>letter.</em></h2></div>
+      <p>Three subscriptions, monthly or yearly. Yearly gives you two months free. Prices in US dollars, final. Your letter is written for you after you subscribe. Cancel any time; the letters you have received stay yours.</p>
+    </div>
+    <div class="tiers">
+      <article class="tier">
+        <div class="k">I · The monthly letter</div>
+        <h3>Monthly Bearing</h3>
+        <p class="who">The full eight-plate letter on one path, on the first Monday of every month.</p>
+        <div class="price">$12 <small>/ month</small></div>
+        <div class="yearly">or <b>$120 / year</b> · two months free</div>
+        <ul>
+          <li>The eight-plate letter, every month</li>
+          <li>One path: Clarity or Synaptic</li>
+          <li>Written for your sign and season of life</li>
+          <li>Your Reflection Log, carried month to month</li>
+        </ul>
+        <div class="pay">
+          <a class="btn" href="https://buy.stripe.com/14A9AU61ocMnfdm1Cccs80j">Monthly · $12</a>
+          <a class="btn" href="https://buy.stripe.com/7sY14ogG227JghqcgQcs80k">Yearly · $120</a>
+        </div>
+        <p class="fine">Secure checkout · Cancel any time</p>
+      </article>
+      <article class="tier feat">
+        <div class="k">II · The letter, and the rhythm</div>
+        <h3>Weekly Signposts</h3>
+        <p class="who">The letter, plus a short note the day before each real sky date, about four a month.</p>
+        <div class="price">$24 <small>/ month</small></div>
+        <div class="yearly">or <b>$240 / year</b> · two months free</div>
+        <ul>
+          <li>Everything in Monthly Bearing</li>
+          <li>A signpost note before every new moon, full moon, quarter and season change</li>
+          <li>One practice with every note, a few minutes each</li>
+          <li>Switch paths at the start of any month</li>
+        </ul>
+        <div class="pay">
+          <a class="btn btn-gold" href="https://buy.stripe.com/7sY28s2PcaEf3uE5Sscs80l">Monthly · $24</a>
+          <a class="btn" href="https://buy.stripe.com/eVq3cw61o8w75CMcgQcs80m">Yearly · $240</a>
+        </div>
+        <p class="fine">Secure checkout · Cancel any time</p>
+      </article>
+      <article class="tier">
+        <div class="k">III · The whole house</div>
+        <h3>Inner Circle</h3>
+        <p class="who">Both paths, every signpost note, a line for each morning and your birthday-year dossier.</p>
+        <div class="price">$49 <small>/ month</small></div>
+        <div class="yearly">or <b>$490 / year</b> · two months free</div>
+        <ul>
+          <li>Both letters: Clarity Path and Synaptic Path</li>
+          <li>All signpost notes</li>
+          <li>The morning line, every morning</li>
+          <li>Your birthday-year dossier, once a year at the start of your sign's season</li>
+        </ul>
+        <div class="pay">
+          <a class="btn" href="https://buy.stripe.com/4gM14o0H4bIj0is4Oocs80n">Monthly · $49</a>
+          <a class="btn" href="https://buy.stripe.com/cNi14oexUfYz1mwcgQcs80o">Yearly · $490</a>
+        </div>
+        <p class="fine">Secure checkout · Cancel any time</p>
+      </article>
+    </div>
+    <p class="tiers-note">Subscribe before Monday 4 January 2027 and your first letter is the January Letter. If you join mid-month, your letter for the current month is written for you and arrives within a few days. Payment is handled securely by Stripe.</p>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="sec paper" id="privacy">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>Privacy by design</div><h2>Five questions. <em>Nothing more.</em></h2></div>
+      <p>Your letter needs only five answers, and a nickname is welcome. We don't ask for your birth date, your birth time or your story, and we never will. Three answers are given at checkout, two in your welcome email.</p>
+    </div>
+    <div class="ask">
+      <div class="ask-card">
+        <h3>What we ask</h3>
+        <p class="sub">Once. You can change any answer at any time.</p>
+        <div class="field"><span class="l">Name</span><span class="v">First name or nickname <i>(“Lena”, “North”, anything you like). In your welcome email, with your path.</i></span></div>
+        <div class="field"><span class="l">Email</span><span class="v">Where your letters arrive. A private alias works too. <i>At checkout.</i></span></div>
+        <div class="field"><span class="l">Male or female</span><span class="v">So the letter can address you rightly. <i>At checkout.</i></span></div>
+        <div class="field"><span class="l">Year of birth</span><span class="v">For your season of life. Only the year, never the day. <i>At checkout.</i></span></div>
+        <div class="field"><span class="l">Star sign</span><span class="v">Your familiar sun sign, for example Capricorn. <i>At checkout.</i></span></div>
+      </div>
+      <div class="ask-card">
+        <h3>What we never ask</h3>
+        <p class="sub">Not for your letter, not later, not in any letter.</p>
+        <ul class="never">
+          <li>Your date of birth</li>
+          <li>Your birth time or place</li>
+          <li>Your home address</li>
+          <li>Your phone number</li>
+          <li>Photos of you</li>
+          <li>Your social profiles</li>
+          <li>Your health history</li>
+          <li>Your relationships</li>
+          <li>Your income or work details</li>
+          <li>Your story, unless you choose to write back</li>
+        </ul>
+      </div>
+    </div>
+    <p class="priv-foot">Payment runs through Stripe's secure checkout, which asks only for what the card needs: your email, the card details, the name on the card and, depending on your country, your country and postcode. No home address is required. Those details stay with the payment under Stripe's terms: SIDERA never sees your card, and payment details are never used to write your letter. This page uses no cookies, no trackers and no third-party scripts. Your five answers are used for one thing only: writing your letter. They are never sold, shared or used for advertising.</p>
+  </div>
+</section>
+
+<!-- STANDARD -->
+<section class="sec alt" id="standard">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow"><i></i>The SIDERA standard</div><h2>Trust is <em>the light.</em></h2></div>
+      <p>No testimonials we can't verify, no promises about your future. Instead, six house rules, published here, and every letter is held to them.</p>
+    </div>
+    <div class="standard">
+      <div class="std"><span class="k">Rule 1</span><h4>Reflection, never prediction</h4><p>We don't forecast events, people or outcomes. We offer a frame for looking at your month, and you draw the conclusions.</p></div>
+      <div class="std"><span class="k">Rule 2</span><h4>Real sky, never invented</h4><p>Every date is a real astronomical event, calculated and listed in The Ledger. No “energies” on dates where nothing happens.</p></div>
+      <div class="std"><span class="k">Rule 3</span><h4>Prompts, not instructions</h4><p>The letter asks; it doesn't command. You are the authority on your own life, and the letter is written that way.</p></div>
+      <div class="std"><span class="k">Rule 4</span><h4>No fear, no fate</h4><p>No warnings, no omens, no “difficult months”. Pressure Points name where friction tends to show up, and always what helps.</p></div>
+      <div class="std"><span class="k">Rule 5</span><h4>Nothing sold inside a letter</h4><p>No upsells, no affiliate links, no “book a session” banners. The letter is the whole product.</p></div>
+      <div class="std"><span class="k">Rule 6</span><h4>Five answers, and you can leave</h4><p>Privacy by design. Cancel at any time through the billing portal, and on request we delete your five answers.</p></div>
+    </div>
+    <p class="not-line">SIDERA is for reflection and self-development. It is not a forecast, and it is not medical, psychological, financial or legal advice. If you are in crisis or need care, please turn to a qualified professional.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow"><i></i>Questions</div><h2>Before you <em>subscribe.</em></h2></div><p></p></div>
+    <div class="faq">
+      <details open><summary>Is SIDERA astrology?</summary><p>It uses the sky the way people have always used it: as a calendar for turning inward. Your sign and the real dates of the month give the letter its rhythm and its symbolic frame. The substance comes from Dr. Benjamin Koch's frameworks, so you don't need to believe in astrology to get a great deal out of it.</p></details>
+      <details><summary>How is it different from a horoscope or a card reading?</summary><p>A horoscope tells you what might happen to you. SIDERA helps you see what is already happening in you. There is no forecast and no draw of chance. Instead you get a fixed eight-plate format, real dates, named frameworks, and a Reflection Log that lets you see your own change over the year.</p></details>
+      <details><summary>Can I stay anonymous?</summary><p>In your letters, yes. They are written to the nickname you choose, and a private email alias works fine. We never ask for your date of birth, your birth time or your story. Stripe's checkout asks only for what your card needs (no home address); those details stay with the payment and never appear in, or shape, your letter.</p></details>
+      <details><summary>When does my first letter arrive?</summary><p>The first letters go out on Monday, 4 January 2027, and then on the first Monday of every month. Each one is written for you after you subscribe. If you join mid-month, your letter for the current month arrives within a few days. Your welcome email asks which path you would like and what name to write to.</p></details>
+      <details><summary>Which path should I choose?</summary><p>If you came here from the Clarity Institute, or your questions are about decisions and direction, start with the Clarity Path. If you came from The Circle of Synaptics, or your questions are about attention and inner life, start with the Synaptic Path. You can switch at the start of any month, or take both with the Inner Circle.</p></details>
+      <details><summary>Do I need to know the books or the frameworks?</summary><p>No. Each letter explains what it draws on in plain words, and The Ledger names its sources. If you know the work already, you will recognise it on every page.</p></details>
+      <details><summary>Is this therapy or advice?</summary><p>No. SIDERA is for reflection and self-development. It is not medical, psychological, financial or legal advice, and it does not replace care from a qualified professional.</p></details>
+      <details><summary>How do I cancel?</summary><p>Any time, through the secure billing portal linked in your welcome email. There is no minimum term on monthly subscriptions. Yearly subscriptions run to the end of the year you paid for.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <svg class="sky" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="897.0" cy="519.3" r="1.9" fill="#e4cc86" fill-opacity="0.71"/><circle cx="1357.1" cy="517.9" r="0.5" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="1117.4" cy="174.3" r="0.5" fill="#f4ecdb" fill-opacity="0.78"/><circle cx="163.0" cy="328.3" r="0.8" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="146.8" cy="174.5" r="0.8" fill="#f4ecdb" fill-opacity="0.45"/><circle cx="262.2" cy="607.2" r="1.2" fill="#f4ecdb" fill-opacity="0.29"/><circle cx="1147.9" cy="97.1" r="1.5" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="2.6" cy="610.0" r="0.8" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="1382.6" cy="116.1" r="0.7" fill="#f4ecdb" fill-opacity="0.37"/><circle cx="1384.5" cy="377.5" r="0.8" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="1394.7" cy="137.8" r="1.2" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="520.1" cy="116.2" r="0.7" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="477.9" cy="572.2" r="0.5" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="1019.1" cy="46.2" r="1.0" fill="#e4cc86" fill-opacity="0.73"/><circle cx="692.3" cy="221.1" r="1.5" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="253.6" cy="179.3" r="0.5" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="515.0" cy="283.0" r="1.2" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="833.1" cy="6.4" r="0.5" fill="#f4ecdb" fill-opacity="0.65"/><circle cx="898.1" cy="668.1" r="0.6" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="1338.7" cy="659.4" r="1.0" fill="#f4ecdb" fill-opacity="0.52"/><circle cx="1285.5" cy="175.6" r="1.5" fill="#f4ecdb" fill-opacity="0.25"/><circle cx="1077.7" cy="558.1" r="0.9" fill="#f4ecdb" fill-opacity="0.20"/><circle cx="1362.0" cy="63.8" r="1.0" fill="#f4ecdb" fill-opacity="0.52"/><circle cx="522.2" cy="103.7" r="1.9" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="1011.8" cy="64.5" r="1.0" fill="#f4ecdb" fill-opacity="0.39"/><circle cx="1150.2" cy="438.8" r="0.9" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="232.6" cy="34.0" r="1.2" fill="#e4cc86" fill-opacity="0.20"/><circle cx="1066.4" cy="240.7" r="0.9" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="607.3" cy="39.0" r="0.5" fill="#f4ecdb" fill-opacity="0.72"/><circle cx="481.2" cy="144.9" r="0.7" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="1134.7" cy="74.6" r="1.2" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="84.6" cy="294.5" r="0.7" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="1439.0" cy="596.6" r="1.5" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="991.9" cy="222.4" r="0.9" fill="#f4ecdb" fill-opacity="0.37"/><circle cx="581.5" cy="102.6" r="1.2" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="765.7" cy="125.6" r="1.5" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="259.4" cy="344.3" r="1.0" fill="#f4ecdb" fill-opacity="0.22"/><circle cx="1145.0" cy="249.0" r="0.5" fill="#f4ecdb" fill-opacity="0.69"/><circle cx="523.3" cy="493.1" r="0.9" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="381.4" cy="686.7" r="0.9" fill="#e4cc86" fill-opacity="0.82"/><circle cx="489.7" cy="125.1" r="0.5" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="1114.2" cy="228.1" r="0.9" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="1176.0" cy="453.2" r="1.0" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="927.5" cy="516.5" r="1.2" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="1213.7" cy="608.9" r="1.5" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="1377.4" cy="362.7" r="0.7" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="521.3" cy="597.7" r="1.9" fill="#f4ecdb" fill-opacity="0.37"/><circle cx="113.5" cy="469.6" r="1.2" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="1123.7" cy="406.6" r="1.2" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="796.6" cy="607.0" r="0.9" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="39.8" cy="112.0" r="1.5" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="260.3" cy="531.3" r="0.7" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="60.3" cy="330.1" r="0.8" fill="#e4cc86" fill-opacity="0.29"/><circle cx="1284.2" cy="77.6" r="0.7" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="789.6" cy="290.8" r="1.0" fill="#f4ecdb" fill-opacity="0.43"/><circle cx="881.0" cy="413.1" r="0.8" fill="#f4ecdb" fill-opacity="0.66"/><circle cx="538.6" cy="245.4" r="0.9" fill="#f4ecdb" fill-opacity="0.75"/><circle cx="1247.6" cy="482.2" r="1.0" fill="#f4ecdb" fill-opacity="0.83"/><circle cx="791.9" cy="211.0" r="0.9" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="488.7" cy="406.6" r="1.0" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="603.5" cy="569.1" r="1.0" fill="#f4ecdb" fill-opacity="0.49"/><circle cx="225.8" cy="267.9" r="1.5" fill="#f4ecdb" fill-opacity="0.82"/><circle cx="1393.9" cy="426.0" r="1.0" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="952.8" cy="267.3" r="1.0" fill="#f4ecdb" fill-opacity="0.56"/><circle cx="885.8" cy="98.5" r="1.2" fill="#f4ecdb" fill-opacity="0.47"/><circle cx="1406.4" cy="345.4" r="1.5" fill="#e4cc86" fill-opacity="0.83"/><circle cx="546.9" cy="672.8" r="0.7" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="374.1" cy="686.7" r="1.5" fill="#f4ecdb" fill-opacity="0.35"/><circle cx="28.3" cy="661.6" r="0.9" fill="#f4ecdb" fill-opacity="0.51"/><circle cx="412.4" cy="333.9" r="1.9" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="895.2" cy="310.4" r="0.9" fill="#f4ecdb" fill-opacity="0.21"/><circle cx="196.5" cy="274.7" r="1.5" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="394.3" cy="654.7" r="0.5" fill="#f4ecdb" fill-opacity="0.34"/><circle cx="385.5" cy="108.3" r="0.9" fill="#f4ecdb" fill-opacity="0.38"/><circle cx="875.6" cy="332.2" r="0.6" fill="#f4ecdb" fill-opacity="0.19"/><circle cx="181.5" cy="197.6" r="1.0" fill="#f4ecdb" fill-opacity="0.59"/><circle cx="1053.0" cy="18.6" r="1.0" fill="#f4ecdb" fill-opacity="0.42"/><circle cx="1072.8" cy="413.6" r="0.5" fill="#f4ecdb" fill-opacity="0.18"/><circle cx="796.6" cy="480.0" r="0.6" fill="#e4cc86" fill-opacity="0.77"/><circle cx="785.7" cy="10.2" r="1.2" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="992.2" cy="667.3" r="1.5" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="1211.3" cy="333.0" r="0.8" fill="#f4ecdb" fill-opacity="0.78"/><circle cx="669.7" cy="530.7" r="0.9" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="1000.3" cy="303.0" r="0.9" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="680.3" cy="217.7" r="0.7" fill="#f4ecdb" fill-opacity="0.50"/><circle cx="790.7" cy="348.4" r="1.0" fill="#f4ecdb" fill-opacity="0.54"/><circle cx="612.8" cy="379.0" r="0.5" fill="#f4ecdb" fill-opacity="0.23"/><circle cx="331.2" cy="573.7" r="0.6" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="36.8" cy="505.8" r="0.6" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="1009.8" cy="34.2" r="0.6" fill="#f4ecdb" fill-opacity="0.33"/><circle cx="929.9" cy="666.6" r="0.7" fill="#f4ecdb" fill-opacity="0.85"/><circle cx="1016.3" cy="306.6" r="0.7" fill="#e4cc86" fill-opacity="0.59"/><circle cx="596.1" cy="112.8" r="1.9" fill="#f4ecdb" fill-opacity="0.60"/><circle cx="62.7" cy="75.8" r="1.2" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="403.0" cy="399.8" r="0.6" fill="#f4ecdb" fill-opacity="0.68"/><circle cx="1265.0" cy="94.0" r="1.2" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="987.1" cy="342.6" r="1.0" fill="#f4ecdb" fill-opacity="0.81"/><circle cx="538.8" cy="39.0" r="0.9" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="909.1" cy="354.1" r="0.8" fill="#f4ecdb" fill-opacity="0.36"/><circle cx="794.4" cy="177.9" r="0.9" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="192.6" cy="164.1" r="1.0" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="560.0" cy="91.8" r="0.5" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="122.8" cy="467.6" r="0.6" fill="#f4ecdb" fill-opacity="0.76"/><circle cx="729.3" cy="317.5" r="1.2" fill="#f4ecdb" fill-opacity="0.77"/><circle cx="691.9" cy="226.3" r="0.5" fill="#e4cc86" fill-opacity="0.54"/><circle cx="553.9" cy="593.8" r="1.2" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="321.2" cy="81.3" r="1.5" fill="#f4ecdb" fill-opacity="0.73"/><circle cx="201.3" cy="437.4" r="1.0" fill="#f4ecdb" fill-opacity="0.74"/><circle cx="417.3" cy="651.4" r="1.0" fill="#f4ecdb" fill-opacity="0.71"/><circle cx="544.5" cy="505.9" r="1.0" fill="#f4ecdb" fill-opacity="0.61"/><circle cx="1158.5" cy="303.4" r="1.0" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="853.4" cy="401.3" r="0.7" fill="#f4ecdb" fill-opacity="0.44"/><circle cx="139.7" cy="23.2" r="0.8" fill="#f4ecdb" fill-opacity="0.31"/><circle cx="705.6" cy="656.0" r="1.0" fill="#f4ecdb" fill-opacity="0.18"/><circle cx="677.1" cy="622.8" r="1.2" fill="#f4ecdb" fill-opacity="0.40"/><circle cx="665.1" cy="134.1" r="1.9" fill="#f4ecdb" fill-opacity="0.62"/><circle cx="102.5" cy="608.3" r="1.5" fill="#f4ecdb" fill-opacity="0.28"/><circle cx="365.9" cy="194.2" r="0.7" fill="#e4cc86" fill-opacity="0.68"/><circle cx="967.7" cy="23.2" r="0.5" fill="#f4ecdb" fill-opacity="0.41"/><circle cx="1082.9" cy="221.2" r="0.5" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="970.3" cy="330.2" r="0.7" fill="#f4ecdb" fill-opacity="0.26"/><circle cx="962.7" cy="203.8" r="0.8" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="235.0" cy="140.7" r="0.5" fill="#f4ecdb" fill-opacity="0.57"/><circle cx="945.3" cy="432.3" r="1.0" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="265.6" cy="253.0" r="0.6" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="1033.8" cy="114.3" r="0.8" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="300.6" cy="30.7" r="1.2" fill="#f4ecdb" fill-opacity="0.67"/><circle cx="389.8" cy="323.3" r="1.5" fill="#f4ecdb" fill-opacity="0.70"/><circle cx="590.6" cy="31.5" r="1.0" fill="#f4ecdb" fill-opacity="0.81"/><circle cx="1031.8" cy="165.9" r="1.5" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="678.6" cy="478.0" r="0.5" fill="#e4cc86" fill-opacity="0.51"/><circle cx="1125.4" cy="33.5" r="1.2" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="922.3" cy="612.6" r="0.8" fill="#f4ecdb" fill-opacity="0.30"/><circle cx="732.4" cy="281.7" r="0.8" fill="#f4ecdb" fill-opacity="0.24"/><circle cx="452.0" cy="75.6" r="0.7" fill="#f4ecdb" fill-opacity="0.58"/><circle cx="1233.7" cy="150.1" r="0.5" fill="#f4ecdb" fill-opacity="0.48"/><circle cx="515.0" cy="296.2" r="1.2" fill="#f4ecdb" fill-opacity="0.53"/><circle cx="191.1" cy="8.6" r="0.9" fill="#f4ecdb" fill-opacity="0.64"/><circle cx="1283.8" cy="699.8" r="1.9" fill="#f4ecdb" fill-opacity="0.55"/><circle cx="199.8" cy="338.3" r="0.9" fill="#f4ecdb" fill-opacity="0.73"/><path d="M835 546 L922 434 L1022 385 L1152 266 L1238 231 L1339 126" fill="none" stroke="#c9a227" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 6"/><circle cx="835" cy="546" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="922" cy="434" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1022" cy="385" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1152" cy="266" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1238" cy="231" r="2" fill="#e4cc86" fill-opacity=".7"/><circle cx="1339" cy="126" r="2" fill="#e4cc86" fill-opacity=".7"/></svg>
+  <div class="wrap">
+    <div class="eyebrow"><i></i>First letter · Monday, 4 January 2027<i></i></div>
+    <h2>Begin with the darkest month<br><em>and the newest moon.</em></h2>
+    <p>The January Letter arrives on the first Monday of the year, written for you. Three days later, on Thursday 7 January, the New Moon falls in Capricorn. Choose your letter now and meet it ready.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#subscribe">Choose your letter <span class="arr">&rarr;</span></a>
+      <a class="btn" href="sample-letter.html">Read a sample letter</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top" style="justify-content:flex-start"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#c9a227" stroke-width="1.2"/><circle cx="32" cy="32" r="22.5" fill="none" stroke="#f4ecdb" stroke-opacity=".22" stroke-dasharray="1.2 3"/><line x1="9" y1="50.5" x2="55" y2="12" stroke="#c9a227" stroke-width="1" stroke-dasharray="2 2.4" stroke-opacity=".85"/><circle cx="16" cy="44.6" r="1.5" fill="#f4ecdb"/><circle cx="23.5" cy="38.4" r="1" fill="#f4ecdb" fill-opacity=".7"/><circle cx="44" cy="21" r="1.1" fill="#f4ecdb" fill-opacity=".8"/><circle cx="50" cy="16.2" r="1.5" fill="#f4ecdb"/><path d="M32 18.5 L33.7 29.4 L44.5 31.2 L33.7 33 L32 44 L30.3 33 L19.5 31.2 L30.3 29.4 Z" fill="#c9a227"/><path d="M32 25 L34.3 31.2 L32 37.4 L29.7 31.2 Z" fill="#e4cc86" transform="rotate(45 32 31.2)"/><circle cx="32" cy="31.2" r="1.4" fill="#060a16"/></svg><span class="logo-txt" style="align-items:flex-start"><b>SIDERA</b><small>By Dr. Benjamin Koch</small></span></a>
+        <p>An inner intelligence house. The secondary layer beside the Clarity Institute and The Circle of Synaptics.</p>
+      </div>
+      <div><h5>The house</h5><ul><li><a href="#letter">The Letter</a></li><li><a href="#paths">Two paths</a></li><li><a href="#calendar">Release calendar</a></li><li><a href="#subscribe">Subscriptions</a></li><li><a href="#privacy">Privacy by design</a></li><li><a href="sample-letter.html">Sample letter</a></li></ul></div>
+      <div><h5>Also by Dr. Benjamin Koch</h5><ul><li><a href="../practice-clarity-institute.html">The Clarity Institute</a></li><li><a href="../circle_of_synaptics.html">The Circle of Synaptics</a></li></ul></div>
+    </div>
+    <div class="foot-legal">
+      <p>For reflection and self-development. Not a forecast, and not medical, psychological, financial or legal advice. Sky dates are calculated from an astronomical ephemeris; zodiac signs follow the familiar tropical convention.</p>
+      <p>No cookies · No trackers · <a href="../practice-legal.html">Imprint</a> · <a href="../practice-privacy.html">Privacy</a></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
