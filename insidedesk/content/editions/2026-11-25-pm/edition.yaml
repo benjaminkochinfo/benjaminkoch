@@ -28,29 +28,33 @@ articles:   # lead first, then one note per remaining desk. Rename slugs to the 
   - 20-2-million-doses-1-7-million-more-than-2025-the
   - five-regions-dark-one-gas-field-ablaze-the-war
   - 5-to-15-cm-for-south-east-bavaria-glaze-for-the
-epaper:     # keep this block last; update_epaper.py edits it
-  available: "2026-11-25T18:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+epaper:
+  available: "2026-11-25T18:30:00+01:00"
   extras:
-    - a-power-plant-halted-a-gas-site-on-fire-ukraine-s
-    - 126-000-barrels-the-stock-count-that-did-not-move
-    - minus-2-7-for-the-s-p-500-by-new-york-s-morning
-    - plus-2-for-aroundtown-the-landlord-that-raised-its
-    - 20-now-40-if-the-truce-fails-china-s-two-rates
-    - full-silos-hungry-ports-the-food-agency-s-political
-    - ausgabensucht-unserios-kahlschlag-three-replies
-    - 12-december-puigdemont-names-a-date-after-spain-s
-    - 52-2-stopped-or-delayed-the-cost-of-the-second
-    - 45-of-men-against-26-of-women-who-think-the
-    - 0-1-not-0-2-germany-s-summer-quarter-is-revised
-    - 0-7-for-income-0-0-for-real-spending-america-s
-    - 800-a-round-trip-and-4-1-more-on-buses-trains-and
-    - 42-cents-a-kilowatt-hour-the-charging-point-holds
-    - software-led-the-revision-ai-spending-shows-up-in
-    - for-what-the-attorney-general-on-nvidia-s-chief
-    - 68-barrels-five-tons-iowa-s-controlled-blast
-    - an-epidemic-alert-for-meningitis-in-gaza
-    - two-tankers-two-mines-one-unverified-claim-in-the
-    - a-mistake-to-violate-libya-s-sovereignty-rome
-    - troubling-the-pope-on-the-cop31-that-ended
-    - 600-square-kilometres-of-smoke-ras-tanura-from
-  updates: []
+  - a-power-plant-halted-a-gas-site-on-fire-ukraine-s
+  - 126-000-barrels-the-stock-count-that-did-not-move
+  - minus-2-7-for-the-s-p-500-by-new-york-s-morning
+  - plus-2-for-aroundtown-the-landlord-that-raised-its
+  - 20-now-40-if-the-truce-fails-china-s-two-rates
+  - full-silos-hungry-ports-the-food-agency-s-political
+  - ausgabensucht-unserios-kahlschlag-three-replies
+  - 12-december-puigdemont-names-a-date-after-spain-s
+  - 52-2-stopped-or-delayed-the-cost-of-the-second
+  - 45-of-men-against-26-of-women-who-think-the
+  - 0-1-not-0-2-germany-s-summer-quarter-is-revised
+  - 0-7-for-income-0-0-for-real-spending-america-s
+  - 800-a-round-trip-and-4-1-more-on-buses-trains-and
+  - 42-cents-a-kilowatt-hour-the-charging-point-holds
+  - software-led-the-revision-ai-spending-shows-up-in
+  - for-what-the-attorney-general-on-nvidia-s-chief
+  - 68-barrels-five-tons-iowa-s-controlled-blast
+  - an-epidemic-alert-for-meningitis-in-gaza
+  - two-tankers-two-mines-one-unverified-claim-in-the
+  - a-mistake-to-violate-libya-s-sovereignty-rome
+  - troubling-the-pope-on-the-cop31-that-ended
+  - 600-square-kilometres-of-smoke-ras-tanura-from
+  - nvidia-down-6-the-dow-up-new-york-s-afternoon
+  updates:
+  - time: '2026-11-25T19:47:29+01:00'
+    text: 'Tech: Nvidia -6%, but the Dow turns positive, S&P 500 -0.57%'
+    piece: nvidia-down-6-the-dow-up-new-york-s-afternoon
