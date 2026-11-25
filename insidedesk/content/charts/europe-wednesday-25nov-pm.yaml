@@ -1,0 +1,20 @@
+id: europe-wednesday-25nov-pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Wednesday: Madrid down 2.00%, DAX 1.14%, London 0.32%"
+subtitle: "Fall in %, main European indexes after the cash close, Wednesday 25 Nov 2026, levels as shown by Boursorama at 17:50 CET; falls shown as positive bars"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "IBEX 35 (Madrid)", value: 2.00}
+  - {label: "FTSE MIB (Milan)", value: 1.74}
+  - {label: "Euro Stoxx 50", value: 1.68}
+  - {label: "AEX (Amsterdam)", value: 1.17}
+  - {label: "DAX (Frankfurt)", value: 1.14}
+  - {label: "CAC 40 (Paris)", value: 0.75}
+  - {label: "MDax (Frankfurt)", value: 0.46}
+  - {label: "SMI (Zurich)", value: 0.39}
+  - {label: "FTSE 100 (London)", value: 0.32}
+licence: reported
+source_line: "Boursorama index levels after the cash close, retrieved 25 Nov 2026, 17:50 CET · reported figures"
+alt: "Bar chart of the size of the falls on the main European stock indexes after the cash close on Wednesday 25 November 2026, drawn as positive bars: IBEX 35 (Madrid) down 2.00 percent to 18,635.80, FTSE MIB (Milan) down 1.74 percent to 47,282.29, Euro Stoxx 50 down 1.68 percent to 5,902.64, AEX (Amsterdam) down 1.17 percent to 1,064.82, DAX (Frankfurt) down 1.14 percent to 24,733.22, CAC 40 (Paris) down 0.75 percent to 7,980.57, MDax (Frankfurt) down 0.46 percent to 28,659.53, SMI (Zurich) down 0.39 percent to 14,675.89, FTSE 100 (London) down 0.32 percent to 10,433.66. These are index levels as shown by Boursorama at 17:50 CET, shortly after the close of the main cash markets."

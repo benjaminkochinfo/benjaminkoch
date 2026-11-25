@@ -1,0 +1,56 @@
+date: "2026-11-25"
+slot: pm
+published: "2026-11-25T18:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: "€291.77 for power, smoke over Ras Tanura: Wednesday prices fear and frost"
+standfirst: "Also: the DAX below 25,000, Washington's tariff caps for 14 economies, a Podium vs Print on the budget, America's 4.3% and 3.8%, and a Thanksgiving ledger."
+closing:    # end-of-edition section, plain and warm; no mailbag
+  title: "Before you close the tab"
+  published: "2026-11-25T18:30:00+01:00"
+  habit: {text: "This week, write tomorrow's three most important tasks on paper before you finish today, and leave the list where you will see it first. Germany's depression barometer finds that deliberately structuring the day is the self-help measure people with depression use most, and that such classic measures are rated more helpful than digital ones [1]. It costs two minutes and needs no app.", note: "A habit, not advice."}
+  went_right: {text: "American households got a real raise in October. Real disposable income rose 0.5% after a 0.2% fall in September, and the saving rate was 4.1%, according to the Bureau of Economic Analysis [2]. Part of it came from one-off Medicare premium rebates, so it will not repeat every month. But people who received extra money mostly kept it, which is the sensible thing to do with a windfall."}
+  sentence: "German power got dearer because it is cold, oil got dearer because of a claim, and only the cold is certain."
+  euros: {text: "Thursday's wholesale electricity averages €291.77 a megawatt hour, about 29.2 cents a kilowatt hour before grid fees, taxes and margins, against €246.29 for Wednesday [3]. Desk arithmetic: a household on a dynamic tariff that uses 8 kWh on Thursday pays about €2.33 for the energy part at the day's average, against about €1.97 at Wednesday's. Moving a 1 kWh dishwasher run from 17:45 (€388.02 per MWh) to 03:45 (€195.81) saves about 19 cents [3]. On a fixed tariff none of this changes your bill this week.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Risk premium", text: "The extra amount a price carries because something might go wrong, not because it has. On Wednesday an oil analyst used the phrase for Brent's rise after the Houthi claim against Ras Tanura [4]. A risk premium can vanish as fast as it appears, once the facts arrive."}
+  sources:
+    - {n: 1, title: "Deutschland-Barometer Depression: Sport, Entspannung und KI", publisher: "Stiftung Deutsche Depressionshilfe und Suizidprävention via idw", url: "https://idw-online.de/en/news881421", date: "24 Nov 2026"}
+    - {n: 2, title: "Personal Income and Outlays, October 2026", publisher: "U.S. Bureau of Economic Analysis", url: "https://www.bea.gov/news/2026/personal-income-and-outlays-october-2026", date: "25 Nov 2026, 14:30 CET"}
+    - {n: 3, title: "Day-ahead auction prices DE-LU, delivery days 25 and 26 Nov 2026", publisher: "Fraunhofer ISE Energy-Charts (data: Bundesnetzagentur | SMARD.de)", url: "https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-25&end=2026-11-27", date: "retrieved 25 Nov 2026, 17:31 CET"}
+    - {n: 4, title: "Oil prices rise over 1% after Houthis say they attacked Saudi refinery", publisher: "Reuters via Euronext", url: "https://live.euronext.com/en/financial-news/oil-prices-rise-over-1-after-houthis-say-they-attacked-saudi-refinery", date: "25 Nov 2026, 15:54 CET"}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - 291-77-for-thursday-smoke-over-ras-tanura-the-cold
+  - below-25-000-again-the-dax-pays-for-tariffs-and-chips
+  - 35-25-20-15-washington-prices-overcapacity-by-the
+  - podium-vs-print-keinen-schonheitspreis-and-210
+  - 54-structure-the-day-41-do-sport-what-people-with
+  - 4-3-growth-3-8-inflation-america-hands-the-fed-two
+  - ordinary-ledger-3-5866-a-gallon-800-a-ticket-81-5
+  - 10-of-12-counts-a-brooklyn-jury-convicts-huawei
+  - 20-2-million-doses-1-7-million-more-than-2025-the
+  - five-regions-dark-one-gas-field-ablaze-the-war
+  - 5-to-15-cm-for-south-east-bavaria-glaze-for-the
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-25T18:30:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - a-power-plant-halted-a-gas-site-on-fire-ukraine-s
+    - 126-000-barrels-the-stock-count-that-did-not-move
+    - minus-2-7-for-the-s-p-500-by-new-york-s-morning
+    - plus-2-for-aroundtown-the-landlord-that-raised-its
+    - 20-now-40-if-the-truce-fails-china-s-two-rates
+    - full-silos-hungry-ports-the-food-agency-s-political
+    - ausgabensucht-unserios-kahlschlag-three-replies
+    - 12-december-puigdemont-names-a-date-after-spain-s
+    - 52-2-stopped-or-delayed-the-cost-of-the-second
+    - 45-of-men-against-26-of-women-who-think-the
+    - 0-1-not-0-2-germany-s-summer-quarter-is-revised
+    - 0-7-for-income-0-0-for-real-spending-america-s
+    - 800-a-round-trip-and-4-1-more-on-buses-trains-and
+    - 42-cents-a-kilowatt-hour-the-charging-point-holds
+    - software-led-the-revision-ai-spending-shows-up-in
+    - for-what-the-attorney-general-on-nvidia-s-chief
+    - 68-barrels-five-tons-iowa-s-controlled-blast
+    - an-epidemic-alert-for-meningitis-in-gaza
+    - two-tankers-two-mines-one-unverified-claim-in-the
+    - a-mistake-to-violate-libya-s-sovereignty-rome
+    - troubling-the-pope-on-the-cop31-that-ended
+    - 600-square-kilometres-of-smoke-ras-tanura-from
+  updates: []

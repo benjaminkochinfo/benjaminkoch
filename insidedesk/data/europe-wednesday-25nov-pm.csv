@@ -1,0 +1,13 @@
+# Inside Desk chart data: europe-wednesday-25nov-pm
+"# Source: Boursorama index levels after the cash close, retrieved 25 Nov 2026, 17:50 CET · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+IBEX 35 (Madrid),2.0,no,
+FTSE MIB (Milan),1.74,no,
+Euro Stoxx 50,1.68,no,
+AEX (Amsterdam),1.17,no,
+DAX (Frankfurt),1.14,no,
+CAC 40 (Paris),0.75,no,
+MDax (Frankfurt),0.46,no,
+SMI (Zurich),0.39,no,
+FTSE 100 (London),0.32,no,

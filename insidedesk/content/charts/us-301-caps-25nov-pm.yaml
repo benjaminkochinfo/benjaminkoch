@@ -1,0 +1,25 @@
+id: us-301-caps-25nov-pm
+kind: hbar
+kicker: "Geoeconomics · Tariffs"
+title: "Proposed caps: Vietnam 35%, India 25%, China 20%, EU 15%"
+subtitle: "Maximum additional US tariff proposed by USTR on 25 Nov 2026 under Section 301 (excess capacity), %, upper bound per economy; proposals only, hearing 25 Jan 2027"
+unit: "%"
+label_decimals: 0
+rows:
+  - {label: "Vietnam", value: 35}
+  - {label: "India", value: 25}
+  - {label: "China", value: 20}
+  - {label: "Singapore", value: 20}
+  - {label: "Bangladesh", value: 18}
+  - {label: "Cambodia", value: 18}
+  - {label: "Indonesia", value: 18}
+  - {label: "Malaysia", value: 18}
+  - {label: "Thailand", value: 18}
+  - {label: "European Union", value: 15}
+  - {label: "Japan", value: 15}
+  - {label: "Korea", value: 15}
+  - {label: "Switzerland", value: 15}
+  - {label: "Taiwan", value: 15}
+licence: reported
+source_line: "Office of the US Trade Representative, press release of 25 Nov 2026 · reported figures"
+alt: "Bar chart of the maximum additional US tariffs proposed on 25 November 2026 under Section 301 for 14 economies: Vietnam up to 35 percent, India up to 25 percent, China and Singapore up to 20 percent, Bangladesh, Cambodia, Indonesia, Malaysia and Thailand up to 18 percent, and the European Union, Japan, Korea, Switzerland and Taiwan up to 15 percent. These are proposals open for comment, with exemptions, netted against some existing duties; none is in force."
