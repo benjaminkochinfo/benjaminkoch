@@ -1,7 +1,7 @@
 # Inside Desk chart data: de-power-day-ahead-26nov
 "# Source: Bundesnetzagentur | SMARD.de day-ahead DE-LU daily averages of quarter-hourly prices, 1 Sep to 19 Nov and 22 Nov 2026 retrieved 22 Nov 2026; 20, 21 Nov retrieved 23 Nov; 23 to 25 Nov via Fraunhofer ISE Energy-Charts (data: Bundesnetzagentur | SMARD.de), retrieved 25 Nov 2026, 05:22 CET; 26 Nov via Energy-Charts, retrieved 26 Nov 2026, 05:21 CET · CC BY 4.0"
 "# Licence: Bundesnetzagentur | SMARD.de, market data. CC BY 4.0."
-# Retrieved: 2026-11-26T06:31+01:00
+# Retrieved: 2026-11-26T08:30+01:00
 date,dayahead
 2026-09-01,143.8
 2026-09-02,163.74
