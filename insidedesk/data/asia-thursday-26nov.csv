@@ -1,0 +1,10 @@
+# Inside Desk chart data: asia-thursday-26nov
+"# Source: Minutes market tracker (Nikkei, Hang Seng and Shanghai midday levels); CNBC TV18 (Taiex); ABC News markets blog (ASX 200); Handelsblatt (Kospi); retrieved 26 Nov 2026 · reported intraday figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Taiex (Taipei) rise,3.05,no,02:43 CET
+Hang Seng (Hong Kong) rise,1.88,no,"22,378.44 · 05:00 CET"
+Nikkei 225 (Tokyo) rise,1.49,no,"57,863.12 · 03:30 CET"
+S&P/ASX 200 (Sydney) rise,0.9,no,"8,770 · 04:14 CET"
+Kospi (Seoul) rise,0.8,no,"4,736 · about 04:00 CET"
+Shanghai Composite rise,0.22,no,"3,484.17 · 04:30 CET"

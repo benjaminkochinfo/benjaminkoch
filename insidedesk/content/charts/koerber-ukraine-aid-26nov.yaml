@@ -1,0 +1,15 @@
+id: koerber-ukraine-aid-26nov
+kind: hbar
+kicker: "Politics · Germany"
+title: "Military aid to Ukraine: 59% for in 2025, 46% in 2026"
+subtitle: "Share of eligible voters in Germany for and against German military support for Ukraine, in %, Körber-Stiftung Berlin Pulse (Forsa), surveys of 2025 and September 2026"
+unit: "%"
+label_decimals: 0
+rows:
+  - {label: "For, 2025", value: 59}
+  - {label: "For, 2026", value: 46}
+  - {label: "Against, 2025", value: 39}
+  - {label: "Against, 2026", value: 53}
+licence: reported
+source_line: "Körber-Stiftung, The Berlin Pulse 2026/27, Forsa survey of 1,501 eligible voters, September 2026, press release of 24 Nov 2026, retrieved 26 Nov 2026 · reported figures"
+alt: "Bar chart of German opinion on military support for Ukraine in the Körber-Stiftung Berlin Pulse survey: in favour 59 percent in 2025 and 46 percent in September 2026; against 39 percent in 2025 and 53 percent in September 2026. The latest survey, of 1,501 eligible voters by Forsa, shows a narrow majority of 53 percent against."

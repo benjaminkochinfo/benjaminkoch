@@ -1,0 +1,11 @@
+# Inside Desk chart data: uk-under-attack-26nov
+"# Source: Clinical Partners, survey of 2,033 UK adults conducted by PF Global, published 25 Nov 2026, retrieved 26 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Misunderstood,66,no,
+Judged,64,no,
+Ignored,63,no,
+Powerless,63,no,
+Not believed,60,no,
+Hopeless,60,no,
+Unfairly treated,56,no,

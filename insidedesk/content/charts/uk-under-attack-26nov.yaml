@@ -1,0 +1,18 @@
+id: uk-under-attack-26nov
+kind: hbar
+kicker: "Psych · United Kingdom"
+title: "Debate leaves 66% misunderstood, 64% judged, 60% disbelieved"
+subtitle: "How recent headlines and public debate have left UK adults with lived experience of mental-health or neurodevelopmental conditions feeling, in %, Clinical Partners survey by PF Global of 2,033 UK adults"
+unit: "%"
+label_decimals: 0
+rows:
+  - {label: "Misunderstood", value: 66}
+  - {label: "Judged", value: 64}
+  - {label: "Ignored", value: 63}
+  - {label: "Powerless", value: 63}
+  - {label: "Not believed", value: 60}
+  - {label: "Hopeless", value: 60}
+  - {label: "Unfairly treated", value: 56}
+licence: reported
+source_line: "Clinical Partners, survey of 2,033 UK adults conducted by PF Global, published 25 Nov 2026, retrieved 26 Nov 2026 · reported figures"
+alt: "Bar chart of how UK adults with lived experience of mental-health or neurodevelopmental conditions say recent headlines and public debate have left them feeling: misunderstood 66 percent, judged 64 percent, ignored 63 percent, powerless 63 percent, not believed 60 percent, hopeless 60 percent and unfairly treated 56 percent, from a Clinical Partners survey of 2,033 UK adults published on 25 November 2026."

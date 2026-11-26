@@ -1,0 +1,55 @@
+date: "2026-11-26"
+slot: am
+published: "2026-11-26T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: 'Minus 1,100 at the low, €291.77 for power: the invoices under a holiday'
+standfirst: 'New York climbed out of a 1,100-point hole on thin pre-holiday trade and shuts for Thanksgiving today. Also: what Thursday''s power price is made of, Asia answering the tariff drafts in three registers, a Fed that decides on October, a one-tablet gonorrhoea option, California''s king tides, and a Podium vs Print on Ukraine aid.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-26T08:30:00+01:00'
+  habit: {text: 'Today, before the first thing you do with a screen, check one quiet gauge in your own life: the meter, the boiler pressure, the tyre in the cold, the date on a prescription. Write the number down. A number you noted in calm is a number you will not have to guess in a hurry.', note: 'A habit, not advice.'}
+  went_right: {text: 'The world''s first deliveries of generic lenacapavir, a twice-yearly HIV prevention injection that the Global Fund calls nearly 100% effective, arrived in Zambia on Wednesday, with Uganda expected in the coming days and Zimbabwe in early 2027 [1]. It comes just one year after the originator product reached sub-Saharan Africa; more than 189,000 people in 10 early-adopter countries have already had a first dose, and the Global Fund plans four times this year''s volume in 2027 [1]. Licences, pooled procurement and regulators did this: the dull machinery, moving fast.'}
+  sentence: Preparation is invisible when it works; that is not a reason to stop paying for it.
+  euros: {text: 'Germany''s day-ahead power price for today runs from €195.81 per megawatt hour in the quarter hour from 03:45 to €388.02 from 17:45 [2]. Desk arithmetic: that is 19.6 cents and 38.8 cents per kilowatt hour on the wholesale market, almost exactly double. A 2 kWh load, a washing cycle for example, costs about 39 cents of wholesale power before dawn and about 78 cents at a quarter to six in the evening: a difference of about 39 cents. Only households on a dynamic tariff see this directly, and grid fees, levies, taxes and VAT come on top.', note: Desk arithmetic on the cited figures.}
+  small_words: {term: King tide, text: 'The season''s naturally high tides [3]. On their own they are a calendar event; this autumn El Niño has added a foot or more to them on the US West Coast, enough, with surf, to flood roads and some homes [3]. Low-pressure storm systems add to it too [3].'}
+  sources:
+  - {n: 1, title: First Deliveries of Generic Lenacapavir for HIV Prevention Arrive in Countries, publisher: The Global Fund, url: 'https://www.theglobalfund.org/en/news/2026/2026-11-25-first-deliveries-generic-lenacapavir-hiv-prevention-arrive/', date: 25 Nov 2026}
+  - {n: 2, title: 'Day-ahead auction prices, bidding zone DE-LU (data: Bundesnetzagentur | SMARD.de)', publisher: Fraunhofer ISE Energy-Charts, url: 'https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-26T00:00%2B01:00&end=2026-11-26T23:59%2B01:00', date: 'retrieved 26 Nov 2026, 05:21 CET'}
+  - {n: 3, title: 'Flood, drought: Western Washington''s got it all', publisher: KUOW, url: 'https://www.kuow.org/environment/2026-11-25/flood-drought-western-washingtons-got-it-all', date: '26 Nov 2026, 02:34 CET'}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - minus-1-100-at-the-low-plus-164-at-the-bell-new
+  - very-disappointed-regrettable-confident-asia
+  - podium-vs-print-wir-sch-tzen-uns-auch-selbst-and
+  - the-annex-73-say-support-by-need-66-of-those
+  - 781-gwh-from-gas-and-coal-536-from-wind-what
+  - 97-8-for-9-december-and-the-next-pce-on-the-23rd
+  - ordinary-ledger-6-2-billion-for-two-days-51-going
+  - thousands-of-b300s-for-sale-40-weeks-for-a-new
+  - one-3-g-tablet-up-to-16-resistance-to-the-jab-who
+  - five-dead-in-pavlohrad-missiles-on-kyiv-fire-at-a
+  - 8-21-ft-in-santa-barbara-8-19-in-los-angeles
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-26T06:31:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - plus-11-2-for-softbank-flat-for-tsmc-asias
+    - minus-16-for-seoul-in-november-the-hole-beneath
+    - 50-billion-6-for-every-1-brussels-drafts-a-fund-it
+    - nine-of-47-the-quantum-parts-europe-cannot-buy-at
+    - first-visit-since-2015-budapest-and-kyiv-sign-the
+    - nobody-has-presented-us-with-one-kushner-asks
+    - 40-hours-and-inefficient-worse-than-66-hours-and
+    - 76-see-too-few-providers-19-very-confident-rhode
+    - 418-9-million-barrels-and-two-mines-the-week-oil
+    - 55-9-full-138-3-twh-stored-the-gas-regulators-calm
+    - 3-25-in-seoul-five-votes-to-two-the-bank-of-korea
+    - 206-billion-down-from-384-billion-profits-grew
+    - 1-866-for-e10-2-085-for-diesel-and-a-17-cent
+    - plus-0-1-the-household-that-bought-less-food-and
+    - 22-6-billion-in-brazos-county-354-million-asked
+    - gaming-waits-for-the-data-centre-rtx-60-may-slip
+    - very-rare-but-serious-health-canada-adds-vision
+    - 80-to-65-6-fewer-american-newborns-get-the
+    - three-mig-31s-two-su-34s-and-622-million-of-f-16
+    - 490-334-the-russian-war-dead-in-the-states-own
+    - salt-water-on-highway-101-half-the-rain-in-the
+    - up-to-15-cm-at-the-alpine-edge-frost-almost
+  updates: []
