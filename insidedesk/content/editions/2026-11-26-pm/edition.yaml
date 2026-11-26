@@ -1,0 +1,55 @@
+date: "2026-11-26"
+slot: pm
+published: "2026-11-26T18:30:00+01:00"
+title: "A new name, an old warning: Thursday the ECB showed its hand"
+standfirst: "Also: the DAX back above 25,000 without New York, a Podium vs Print on the EU budget, €301.82 for Friday power, Europe’s antibiotic midpoint, and a diesel tanker off Ibiza."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-26T18:30:00+01:00"
+  habit: {text: "This week, before you buy anything for a store cupboard, take one minute to look at what is already there and move the oldest tin to the front. Germany's civil protection office recommends buying food you regularly eat and using older supplies first, and the UK's Be Ready campaign suggests checking dates every six months [1]. It is calm, it is cheap, and it turns a worry into a routine.", note: "A habit, not advice."}
+  went_right: {text: "Europe has already met one of its 2030 targets against antibiotic resistance years early: the incidence of MRSA bloodstream infections, according to the OECD and European Commission [2]. Veterinary antimicrobial sales fell 24% between 2018 and 2024, keeping a 50% reduction target broadly within reach [2]. Nobody held a press conference for the hand-washing. It worked anyway."}
+  sentence: "The ECB got a new name and published an old warning, Europe bought back what it sold on Wednesday, and Friday's electricity costs a little more because it is cold."
+  euros: {text: "Friday's wholesale electricity averages €301.82 a megawatt hour, about 30.2 cents a kilowatt hour before grid fees, taxes and margins, against €291.77 for Thursday [3]. Desk arithmetic: a household on a dynamic tariff that uses 8 kWh on Friday pays about €2.41 for the energy part at the day's average, against about €2.33 at Thursday's. Moving a 1 kWh dishwasher run from 08:15 (€426.32 per MWh) to 23:45 (€203.35) saves about 22 cents [3]. On a fixed tariff none of this changes your bill this week.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Account", text: "The ECB's word for the minutes of a rate meeting, published about four weeks later without names attached to views. Thursday's account of the October meeting records that members wanted to signal 'another rate hike would likely be necessary unless the inflation outlook improved significantly' [4]. A press conference gives you the tone. The account gives you the argument."}
+  sources:
+    - {n: 1, title: "Doomsday fears are fuelling panic-buying. Could it worsen global food waste?", publisher: "Euronews (AFP)", url: "https://www.euronews.com/2026/11/26/doomsday-fears-are-fuelling-panic-buying-could-it-worsen-global-food-waste", date: "26 Nov 2026"}
+    - {n: 2, title: "Health at a Glance: Europe 2026, chapter 2: Antimicrobial resistance in the EU", publisher: "OECD / European Commission", url: "https://www.oecd.org/en/publications/health-at-a-glance-europe-2026_64707ff8-en/full-report/antimicrobial-resistance-in-the-eu-uneven-progress-towards-key-2030-targets_d491bcc5.html", date: "25 Nov 2026"}
+    - {n: 3, title: "Day-ahead auction prices DE-LU, delivery days 26 and 27 Nov 2026", publisher: "Fraunhofer ISE Energy-Charts (data: Bundesnetzagentur | SMARD.de)", url: "https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-26&end=2026-11-28", date: "retrieved 26 Nov 2026, 17:33 CET"}
+    - {n: 4, title: "Account of the monetary policy meeting of the Governing Council, 28-29 October 2026", publisher: "European Central Bank", url: "https://www.ecb.europa.eu/press/accounts/2026/html/ecb.mg261126~ccf28c8071.en.html", date: "26 Nov 2026"}
+articles:
+  - one-name-one-account-the-ecb-picks-a-president-and-publishes-its-doubts
+  - plus-2-08-without-new-york-the-dax-climbs-back-over-25-000
+  - 15-agreed-15-proposed-brussels-rejects-the-premise-not-the-number
+  - podium-vs-print-light-years-away-and-1-6-trillion
+  - the-annex-3-6-million-children-7-595-exposed-and-no-added-risk
+  - ordinary-ledger-minus-30-2-600-shops-and-a-14-day-return
+  - refunds-reviews-and-no-forced-games-temu-signs-the-dull-rules
+  - one-target-met-five-behind-europe-s-antibiotic-midpoint
+  - 113-drones-87-down-and-250-bodies-home-thursday-s-war-ledger
+  - 301-82-for-friday-the-cold-week-gets-a-little-dearer
+  - 7-000-tonnes-of-diesel-25-miles-from-ibiza-and-a-sheen-not-a-slick
+epaper:
+  available: "2026-11-26T18:30:00+01:00"
+  extras:
+  - taiex-plus-2-50-shenzhen-minus-3-45-asia-did-not-agree
+  - autos-plus-3-18-food-plus-0-05-the-shape-of-a-rebound
+  - boone-and-brunnermeier-the-two-names-under-the-headline
+  - 4-5-for-january-what-the-markets-priced-into-the-pause
+  - 88-to-97-dollars-an-analyst-s-range-for-a-nervous-barrel
+  - a-refinery-a-pipeline-station-a-power-plant-the-energy-front
+  - unacceptable-brazil-gets-its-own-tariff-file
+  - 0-04-kroner-a-share-the-jet-fuel-bill-reaches-an-airline
+  - 16-8-billion-for-the-interior-the-budget-votes-start-to-land
+  - 27-december-serbia-sets-a-date-to-choose-vucic-s-successor
+  - misinformation-prevails-in-an-information-vacuum-the-pantry-panic
+  - absurd-amodei-on-free-will-and-the-machines
+  - 592-to-35-europe-votes-to-make-its-own-medicines
+  - 35-000-deaths-and-11-7-billion-a-year-the-price-of-resistance
+  - pull-back-all-military-aggression-trump-s-new-sentence
+  - the-conflict-should-not-spread-berlin-on-the-libya-strike
+  - jetzt-wegen-des-preises-buying-chips-on-price-not-faith
+  - 2-trillion-at-the-peak-the-ipo-behind-the-free-will-row
+  - buy-what-you-eat-use-the-oldest-first-a-sensible-pantry
+  - 15-6-the-saving-instinct-eases-for-a-second-month
+  - 1-to-3-cm-in-eastern-saxony-friday-s-frost-map
+  - 58-million-tonnes-the-climate-cost-of-a-full-cupboard

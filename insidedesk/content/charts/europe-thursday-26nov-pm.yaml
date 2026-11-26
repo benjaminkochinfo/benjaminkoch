@@ -1,0 +1,19 @@
+id: europe-thursday-26nov-pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Thursday: Milan up 2.36%, DAX 2.08%, Zurich 1.04%"
+subtitle: "Rise in %, main European indexes after the cash close, Thursday 26 Nov 2026 (US markets closed for Thanksgiving); DAX official close via dpa-AFX, others as shown by Boursorama at 17:54 CET"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "FTSE MIB (Milan)", value: 2.36}
+  - {label: "IBEX 35 (Madrid)", value: 2.26}
+  - {label: "Euro Stoxx 50", value: 2.11}
+  - {label: "DAX (Frankfurt)", value: 2.08}
+  - {label: "AEX (Amsterdam)", value: 1.86}
+  - {label: "FTSE 100 (London)", value: 1.75}
+  - {label: "CAC 40 (Paris)", value: 1.61}
+  - {label: "SMI (Zurich)", value: 1.04}
+licence: reported
+source_line: "DAX: official close reported by dpa-AFX via wallstreet:online, 26 Nov 2026, 17:44 CET; other indexes: Boursorama levels after the cash close, retrieved 26 Nov 2026, 17:54 CET · reported figures"
+alt: "Bar chart of the rises on the main European stock indexes after the cash close on Thursday 26 November 2026, a day when US markets were closed for Thanksgiving: FTSE MIB (Milan) up 2.36 percent to 48,362.35, IBEX 35 (Madrid) up 2.26 percent to 19,057.90, Euro Stoxx 50 up 2.11 percent to 6,018.65, DAX (Frankfurt) up 2.08 percent to 25,215.52 at the official close, AEX (Amsterdam) up 1.86 percent to 1,083.26, FTSE 100 (London) up 1.75 percent to 10,609.30, CAC 40 (Paris) up 1.61 percent to 8,108.74, SMI (Zurich) up 1.04 percent to 14,817.68. DAX figure as reported by dpa-AFX; the others as shown by Boursorama at 17:54 CET."

@@ -1,0 +1,12 @@
+# Inside Desk chart data: europe-thursday-26nov-pm
+"# Source: DAX: official close reported by dpa-AFX via wallstreet:online, 26 Nov 2026, 17:44 CET; other indexes: Boursorama levels after the cash close, retrieved 26 Nov 2026, 17:54 CET · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+FTSE MIB (Milan),2.36,no,
+IBEX 35 (Madrid),2.26,no,
+Euro Stoxx 50,2.11,no,
+DAX (Frankfurt),2.08,no,
+AEX (Amsterdam),1.86,no,
+FTSE 100 (London),1.75,no,
+CAC 40 (Paris),1.61,no,
+SMI (Zurich),1.04,no,
