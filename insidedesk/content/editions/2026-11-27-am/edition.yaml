@@ -1,0 +1,55 @@
+date: "2026-11-27"
+slot: am
+published: "2026-11-27T08:30:00+01:00"   # set to the actual Berlin time when it goes live
+title: 'Seven wounded in Kyiv, 2.9% in Tokyo: the week''s quieter ledgers'
+standfirst: 'Zelenskyy warns of a new mass strike while envoys brief Putin and Brussels counts 24 of 27. Also: Europe rallying without New York, Nvidia''s halted boxes, Tokyo''s subsidy-free prices, Friday''s breakfast-priced power, Germany''s flu season at the door, an El Niño dry season for the Caribbean, and two Podium vs Print pieces.'
+closing:
+  title: Before you close the tab
+  published: '2026-11-27T08:30:00+01:00'
+  habit: {text: 'Before the weekend, send one invitation you have been meaning to send: a walk, a coffee, a call at a fixed time. Put it in both calendars. Loneliness is common enough that the other person is quite possibly waiting for exactly that message.', note: 'A habit, not advice.'}
+  went_right: {text: 'In Western Australia, RSV cases have fallen by 40 to 60% over the past three years, according to Perth paediatrician Peter Richmond, after the state offered infant antibody injections from 2024 and Australia added maternal RSV vaccination to its national programme in February 2025 [1]. "No introduction of a vaccine has had a bigger impact on my day-to-day work as a pediatrician," he said in Seoul on Thursday [1]. Public programmes, procurement and patient record checks did this: the dull machinery of prevention.'}
+  sentence: The shooting keeps one calendar and the diplomats another; trust the one that comes with signatures.
+  euros: {text: 'Germany''s day-ahead power price for Friday runs from €203.35 per megawatt hour in the quarter hour from 23:45 to €426.32 from 08:15 [2]. Desk arithmetic: that is 20.3 cents and 42.6 cents per kilowatt hour on the wholesale market. A 2 kWh load, a dishwasher cycle for example, costs about 85 cents of wholesale power at a quarter past eight in the morning and about 41 cents just before midnight: a difference of about 44 cents. Only households on a dynamic tariff see this directly, and grid fees, levies, taxes and VAT come on top.', note: Desk arithmetic on the cited figures.}
+  small_words: {term: Sentinel sample, text: 'A swab taken from a patient with a respiratory illness at one of a fixed network of doctors'' practices and sent to the national reference laboratory [3]. Because the network stays the same week after week, the share of samples with influenza, 9% in the week to 22 November, shows the trend even when most sick people are never tested [3].'}
+  sources:
+  - {n: 1, title: 'Pfizer brings 1st maternal RSV vaccine to Korea, challenging antibody shots', publisher: Korea Biomedical Review, url: 'https://www.koreabiomed.com/news/articleView.html?idxno=34008', date: '27 Nov 2026, 02:07 CET'}
+  - {n: 2, title: 'Day-ahead auction prices, bidding zone DE-LU (data: Bundesnetzagentur | SMARD.de)', publisher: Fraunhofer ISE Energy-Charts, url: 'https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-27T00:00%2B01:00&end=2026-11-27T23:59%2B01:00', date: 'retrieved 27 Nov 2026, 05:22 CET'}
+  - {n: 3, title: ARE-Wochenbericht des RKI KW47 (16.11. bis 22.11.2026), publisher: Robert Koch-Institut, url: 'https://edoc.rki.de/handle/176904/14084', date: 26 Nov 2026}
+articles:   # lead first, then one note per remaining desk. Rename slugs to the headline. Every desk is required.
+  - seven-wounded-in-kyiv-envoys-in-moscow-a-war-with
+  - plus-2-08-on-a-holiday-a-half-day-today-europe
+  - 104-billion-through-singapore-90-days-to-comply
+  - podium-vs-print-27-not-23-or-24-and-24-signatures
+  - the-annex-37-lonely-most-of-the-week-and-a-ratio
+  - 426-32-at-breakfast-203-35-at-midnight-friday-s
+  - gas-13-7-power-9-5-tokyo-prints-2-9-and-the-boj
+  - ordinary-ledger-82-5-billion-before-the-turkey-12
+  - two-shares-vs-5-two-ways-to-hand-out-the-ai-boom
+  - 9-of-samples-h1n1-rising-germany-s-flu-season
+  - fewer-rains-more-heat-the-caribbean-s-el-ni-o-dry
+epaper:     # keep this block last; update_epaper.py edits it
+  available: "2026-11-27T06:31:00+01:00"   # when the ePaper issue goes out (morning 06:30, evening 18:30, Sunday 10:00)
+  extras:
+    - kn-23s-on-hold-8-500-not-50-000-kyiv-s-reading-of
+    - eleven-wounded-the-tallest-tower-twice-riyadh-s
+    - nine-of-ten-seats-one-chair-unicredit-asks-for
+    - minus-8-4-for-the-month-plus-2-7-for-the-week
+    - 1-4-trillion-and-seven-subsidiaries-what-russia-s
+    - 24-of-china-s-ai-compute-rented-abroad-the
+    - 65-against-65-in-a-130-seat-house-new-zealand
+    - 556-billion-210-billion-borrowed-the-bundestag
+    - 70-disconnected-on-at-least-one-measure-12-on-all
+    - 93-vs-37-the-friend-in-the-room-still-wins
+    - 16-of-saudi-refining-6-5-million-barrels-of
+    - 96-14-and-up-3-9-for-the-week-down-18-for-the
+    - print-vs-print-50-basis-points-or-99-for-25
+    - 103-8-and-a-third-monthly-gain-the-dollar-as-a
+    - bento-44-rice-33-8-the-tokyo-price-list
+    - 6-4-expected-at-09-55-the-labour-number-that
+    - 2-december-two-new-bans-in-the-ai-act-and-a
+    - 127-ai-is-now-sending-shoppers-to-the-till
+    - 6-039-cases-9-deaths-or-14-america-s-measles-count
+    - 82-4-at-90-days-korea-gets-a-maternal-rsv-vaccine
+    - a-50-million-in-a-hail-line-the-mallee-harvest
+    - 0-7-metres-of-surge-cedar-evacuated-british
+  updates: []

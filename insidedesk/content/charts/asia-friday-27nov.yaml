@@ -1,0 +1,15 @@
+id: asia-friday-27nov
+kind: hbar
+kicker: "Markets · Asia"
+title: "Asia's Friday: Kospi +1.9%, Nikkei +1.2% by 03:30 CET"
+subtitle: "Rise in % during Friday 27 Nov 2026 trading, at about 03:30 CET (02:30 GMT), with index level; every index shown was higher. Intraday figures, not closes"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Kospi (Seoul) rise", value: 1.9, note: "4,798.76"}
+  - {label: "Nikkei 225 (Tokyo) rise", value: 1.2, note: "58,172.04 · midday break"}
+  - {label: "Hang Seng (Hong Kong) rise", value: 0.6, note: "22,366.38"}
+  - {label: "Shanghai Composite rise", value: 0.3, note: "3,485.65"}
+licence: reported
+source_line: "AFP, Asian stocks mostly rise as markets calm after tech rout, key figures at around 02:30 GMT, retrieved 27 Nov 2026 · reported intraday figures"
+alt: "Bar chart of Asian index rises during Friday 27 November 2026 trading at about 03:30 CET, every one higher: the Kospi up 1.9 percent at 4,798.76, the Nikkei 225 up 1.2 percent at 58,172.04 at its midday break, the Hang Seng up 0.6 percent at 22,366.38 and the Shanghai Composite up 0.3 percent at 3,485.65. These are intraday figures reported by AFP, not closes."

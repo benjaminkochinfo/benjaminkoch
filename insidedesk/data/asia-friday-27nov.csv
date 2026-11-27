@@ -1,0 +1,8 @@
+# Inside Desk chart data: asia-friday-27nov
+"# Source: AFP, Asian stocks mostly rise as markets calm after tech rout, key figures at around 02:30 GMT, retrieved 27 Nov 2026 · reported intraday figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+Kospi (Seoul) rise,1.9,no,"4,798.76"
+Nikkei 225 (Tokyo) rise,1.2,no,"58,172.04 · midday break"
+Hang Seng (Hong Kong) rise,0.6,no,"22,366.38"
+Shanghai Composite rise,0.3,no,"3,485.65"

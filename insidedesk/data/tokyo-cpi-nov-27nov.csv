@@ -1,0 +1,11 @@
+# Inside Desk chart data: tokyo-cpi-nov-27nov
+"# Source: Ministry of Internal Affairs and Communications, Tokyo-area CPI for November 2026, as reported by Nikkei, 27 Nov 2026, retrieved 27 Nov 2026 · reported figures"
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+City gas,13.7,no,
+Electricity,9.5,no,
+Hotel charges,3.6,no,
+Food excl. fresh food,3.1,no,
+Core (excl. fresh food),2.9,no,
+Excl. fresh food and energy,2.5,no,
+Private rents,1.9,no,

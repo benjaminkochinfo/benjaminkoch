@@ -1,0 +1,18 @@
+id: tokyo-cpi-nov-27nov
+kind: hbar
+kicker: "Money · Japan"
+title: "Tokyo November: gas +13.7%, power +9.5%, core 2.9%"
+subtitle: "Tokyo 23 wards consumer prices, November 2026 mid-month preliminary, % change on a year earlier. Rice, down 33.8%, is not shown (bars show rises only)"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "City gas", value: 13.7}
+  - {label: "Electricity", value: 9.5}
+  - {label: "Hotel charges", value: 3.6}
+  - {label: "Food excl. fresh food", value: 3.1}
+  - {label: "Core (excl. fresh food)", value: 2.9}
+  - {label: "Excl. fresh food and energy", value: 2.5}
+  - {label: "Private rents", value: 1.9}
+licence: reported
+source_line: "Ministry of Internal Affairs and Communications, Tokyo-area CPI for November 2026, as reported by Nikkei, 27 Nov 2026, retrieved 27 Nov 2026 · reported figures"
+alt: "Bar chart of year-on-year price rises in Tokyo's 23 wards in November 2026: city gas up 13.7 percent, electricity up 9.5 percent, hotel charges up 3.6 percent, food excluding fresh food up 3.1 percent, core prices excluding fresh food up 2.9 percent, prices excluding fresh food and energy up 2.5 percent and private rents up 1.9 percent. Rice prices fell 33.8 percent, the largest fall since January 1971, and are not shown."
