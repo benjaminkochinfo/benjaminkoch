@@ -1,0 +1,56 @@
+date: "2026-11-27"
+slot: pm
+published: "2026-11-27T18:30:00+01:00"
+title: "3.2% and 4.1%: Europe’s prices cooled faster than the forecasts"
+standfirst: "Also: every European index up into the weekend, a $149.5 billion US trade gap built from AI machines, a Podium vs Print on the EU budget, England’s early flu, €191.77 for Saturday power, and a drought counted in reservoirs."
+closing:
+  title: "Before you close the tab"
+  published: "2026-11-27T18:30:00+01:00"
+  habit: {text: "This weekend, when a shop tells you 'only two left', leave the item in the basket overnight and look again in the morning. Singapore's competition regulator warned on Friday that AI can personalise false scarcity messages to your own browsing [1]. A night's sleep is the cheapest filter there is.", note: "A habit, not advice."}
+  went_right: {text: "Malaria vaccination is now part of routine immunisation in 25 African countries, and three-dose coverage has reached 70% on average where it is being rolled out, Gavi reported on Friday [2]. A new grant of up to $214 million would, if Gavi's board approves it in December, restore support to 85% of eligible children in high-transmission areas [2]. One of the fastest vaccine rollouts in Gavi's history is being run by clinics, schedules and cold boxes."}
+  sentence: "France and Spain printed cooler prices than anyone forecast, Europe's markets closed the week higher, and Brussels set a date in December for the budget it could not agree on Thursday."
+  euros: {text: "Saturday's German wholesale electricity averages €191.77 a megawatt hour, about 19.2 cents a kilowatt hour before grid fees, taxes and margins, against €301.82 for Friday [3]. Desk arithmetic: a household on a dynamic tariff that uses 8 kWh pays about €1.53 for the energy part at Saturday's average, against about €2.41 at Friday's. Moving a 1 kWh washing-machine run from 17:30 on Saturday (€232.03 per MWh) to 23:45 (€138.91) saves about 9 cents [3]. On a fixed tariff none of this changes your bill this week.", note: "Desk arithmetic on the cited figures."}
+  small_words: {term: "Flash estimate", text: "An early reading of a month's inflation, published before the month's full price data are in and confirmed or revised later. Spain's statistics office calls its November figure 'a preview of the final data that will be published next month' [4]. A flash tells you the direction early. The final figure tells you the size."}
+  sources:
+    - {n: 1, title: "CCS Releases Findings on Singapore's Artificial Intelligence Market and Sets Out Guiding Principles", publisher: "Competition and Consumer Commission of Singapore", url: "https://www.ccs.gov.sg/media-and-events/newsroom/announcements-and-media-releases/ccs-releases-findings-on-singapore-s-artificial-intelligence-market-and-sets-out-guiding-principles-to-safeguard-competition-and-consumers/", date: "27 Nov 2026"}
+    - {n: 2, title: "Major new funding announced for Gavi's malaria vaccine programme", publisher: "Gavi, the Vaccine Alliance", url: "https://www.gavi.org/news/media-room/major-new-funding-announced-gavis-malaria-vaccine-programme", date: "27 Nov 2026"}
+    - {n: 3, title: "Day-ahead auction prices DE-LU, delivery days 27 and 28 Nov 2026", publisher: "Fraunhofer ISE Energy-Charts (data: Bundesnetzagentur | SMARD.de)", url: "https://api.energy-charts.info/price?bzn=DE-LU&start=2026-11-27&end=2026-11-29", date: "retrieved 27 Nov 2026, 17:26 CET"}
+    - {n: 4, title: "Flash estimate of the Consumer Price Index (CPI) and HICP, November 2026", publisher: "INE (Instituto Nacional de Estadística)", url: "https://www.ine.es/dyngs/Prensa/en/adIPC1126.htm", date: "27 Nov 2026"}
+articles:
+  - 3-2-and-4-1-europe-s-prices-cooled-faster-than-the-forecasts
+  - milan-and-frankfurt-up-a-quiet-friday-close
+  - 149-5-billion-the-ai-boom-arrives-through-the-port
+  - podium-vs-print-a-strategic-mistake-and-1-582-trillion
+  - the-annex-4-8-13-loneliness-by-the-front-door
+  - ordinary-ledger-7-1-billion-on-the-holiday-0-9-in-the-warehouse
+  - eight-principles-and-100-fake-reviewed-shops-singapore-reads-the-ai-market
+  - almost-80-in-a-week-england-s-flu-arrives-early
+  - 155-drones-110-down-and-no-power-to-export
+  - 191-77-for-saturday-the-cold-week-s-bill-comes-down
+  - 60-2-full-and-120-needed-england-s-drought-outlasts-the-autumn
+epaper:
+  available: "2026-11-27T18:30:00+01:00"
+  extras:
+  - 2-6-the-core-number-spain-did-not-expect
+  - monday-14-00-tuesday-11-00-the-two-dates-that-follow
+  - new-york-trades-a-short-friday
+  - selektiv-und-nicht-zu-jedem-preis-the-buyers-condition
+  - 20-to-40-the-tariff-menu-for-14-partners
+  - minus-3-21-points-what-trade-took-from-the-quarter
+  - 12-hours-four-walk-outs-and-a-date-in-december
+  - she-has-not-been-elected-macron-answers-le-pen
+  - february-2027-a-spanish-economist-for-frankfurt
+  - 7-8-against-6-9-life-satisfaction-by-tenure
+  - 94-82-75-who-likes-the-place-they-live
+  - 87-and-40-the-shopper-who-pays-later
+  - 15-1-billion-why-monday-still-wins
+  - false-scarcity-made-personal-the-dark-pattern-problem
+  - 80-0-a-year-the-machines-behind-the-chatbots
+  - 214-million-for-malaria-vaccines-and-70-coverage
+  - a-third-of-toddlers-the-gap-in-england-s-flu-defence
+  - nearly-500-strikes-beyond-500-km-the-long-war
+  - a-blood-bath-and-a-strong-possibility-the-truth-social-diplomacy
+  - 96-60-and-four-days-up-the-barrel-turns
+  - 1-000-strikes-on-a-grid-ukraine-imports-its-light
+  - 82-mph-in-mantoloking-the-flood-after-the-feast
+  - 386-licences-restricted-the-farm-side-of-a-dry-year

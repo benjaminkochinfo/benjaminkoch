@@ -1,0 +1,10 @@
+# Inside Desk chart data: hicp-flash-27pm
+# Source: INE flash estimate CPI/HICP November 2026 (27 Nov 2026); INSEE preliminary November 2026 as reported by Reuters (27 Nov 2026); Spain core October value as reported by FinanzaOnline · reported figures
+# Licence: Figures as reported by the named organisations; facts cited with attribution.
+label,value,derived_by_inside_desk,note
+"Spain HICP, October",4.9,no,
+"Spain HICP, November flash",4.1,no,
+"France HICP, October",3.7,no,
+"France HICP, November flash",3.2,no,
+"Spain core CPI, October",3.1,no,
+"Spain core CPI, November flash",2.6,no,

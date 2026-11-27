@@ -1,0 +1,17 @@
+id: hicp-flash-27pm
+kind: hbar
+kicker: "Money · Inflation"
+title: "France 3.7%→3.2%, Spain 4.9%→4.1%: November cools"
+subtitle: "Annual inflation, %, harmonised index (HICP) unless stated: October 2026 final figure and November 2026 flash estimate, France (INSEE) and Spain (INE)"
+unit: "%"
+label_decimals: 1
+rows:
+  - {label: "Spain HICP, October", value: 4.9}
+  - {label: "Spain HICP, November flash", value: 4.1}
+  - {label: "France HICP, October", value: 3.7}
+  - {label: "France HICP, November flash", value: 3.2}
+  - {label: "Spain core CPI, October", value: 3.1}
+  - {label: "Spain core CPI, November flash", value: 2.6}
+licence: reported
+source_line: "INE flash estimate CPI/HICP November 2026 (27 Nov 2026); INSEE preliminary November 2026 as reported by Reuters (27 Nov 2026); Spain core October value as reported by FinanzaOnline · reported figures"
+alt: "Bar chart of annual inflation in October and the November 2026 flash estimate. Spain's harmonised inflation falls from 4.9 percent in October to 4.1 percent in November; France's from 3.7 percent to 3.2 percent; Spain's core inflation, excluding unprocessed food and energy, from 3.1 percent to 2.6 percent. Analysts had expected 3.6 percent for France and 4.7 percent for Spain."

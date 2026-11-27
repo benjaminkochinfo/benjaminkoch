@@ -1,0 +1,19 @@
+id: europe-friday-27pm
+kind: hbar
+kicker: "Markets · Europe"
+title: "Friday: Milan up 1.89%, DAX 0.86%"
+subtitle: "Rise in %, main European indexes after the cash close, Friday 27 Nov 2026, as shown by Boursorama at 17:54 CET"
+unit: "%"
+label_decimals: 2
+rows:
+  - {label: "FTSE MIB (Milan)", value: 1.89}
+  - {label: "IBEX 35 (Madrid)", value: 1.72}
+  - {label: "AEX (Amsterdam)", value: 1.24}
+  - {label: "Euro Stoxx 50", value: 1.18}
+  - {label: "DAX (Frankfurt)", value: 0.86}
+  - {label: "FTSE 100 (London)", value: 0.84}
+  - {label: "CAC 40 (Paris)", value: 0.58}
+  - {label: "SMI (Zurich)", value: 0.58}
+licence: reported
+source_line: "Boursorama index levels after the cash close, retrieved 27 Nov 2026, 17:54 CET · reported figures"
+alt: "Bar chart of the rises on the main European stock indexes after the cash close on Friday 27 November 2026: FTSE MIB (Milan) up 1.89 percent to 49,275.60, IBEX 35 (Madrid) up 1.72 percent to 19,386.60, AEX (Amsterdam) up 1.24 percent to 1,096.67, Euro Stoxx 50 up 1.18 percent to 6,085.87, DAX (Frankfurt) up 0.86 percent to 25,431.29, FTSE 100 (London) up 0.84 percent to 10,698.81, CAC 40 (Paris) up 0.58 percent to 8,156.09, SMI (Zurich) up 0.58 percent to 14,903.71. Levels as shown by Boursorama at 17:54 CET."
